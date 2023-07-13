@@ -1,0 +1,498 @@
+{
+	"name": "@xhzy-anime/axis-linechart",
+	"version": "0.0.5",
+	"dependencies": {
+		"bcore": "0.0.19",
+		"jquery": "^3.3.1",
+		"lodash": "^4.17.11",
+		"vizz": "^0.2.56"
+	},
+	"datav": {
+		"cn_name": "双折线图(移动轴)",
+		"icon": "//resource.datav.aliyun.com/cube/com/@xhzy-anime/axis-linechart/0.0.5/icons/cover.png",
+		"protocol": 2,
+		"type": [
+			"regular_line"
+		],
+		"supportTheme": true,
+		"view": {
+			"width": 1000,
+			"height": 500,
+			"minWidth": 500,
+			"minHeight": 200
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"date": {
+						"description": "名称"
+					},
+					"x": {
+						"description": "值1"
+					},
+					"y": {
+						"description": "值2"
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"chart": {
+						"name": "图表",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"grid": {
+								"name": "边距",
+								"type": "group",
+								"children": {
+									"top": {
+										"name": "顶部",
+										"type": "number",
+										"default": 30
+									},
+									"bottom": {
+										"name": "底部",
+										"type": "number",
+										"default": 60
+									},
+									"left": {
+										"name": "左侧",
+										"type": "number",
+										"default": 50
+									},
+									"right": {
+										"name": "右侧",
+										"type": "number",
+										"default": 100
+									}
+								}
+							}
+						}
+					},
+					"axis": {
+						"name": "坐标轴",
+						"type": "menuChild",
+						"mode": "multiple",
+						"children": {
+							"xAxis": {
+								"name": "x轴",
+								"type": "group",
+								"children": {
+									"label": {
+										"name": "轴标签",
+										"type": "group",
+										"children": {
+											"text": {
+												"name": "文本",
+												"type": "font",
+												"default": {
+													"fontSize": 28,
+													"fontWeight": "normal",
+													"color": "rgb(81, 81, 81)"
+												}
+											},
+											"padding": {
+												"name": "位移",
+												"type": "number",
+												"default": 12
+											},
+											"interval": {
+												"name": "间隔",
+												"type": "number",
+												"default": 3,
+												"step": 1,
+												"min": 0
+											},
+											"rotate": {
+												"name": "角度",
+												"type": "number",
+												"default": 0,
+												"min": -90,
+												"max": 90,
+												"range": [
+													-90,
+													90
+												]
+											}
+										}
+									},
+									"line": {
+										"name": "轴线",
+										"type": "group",
+										"children": {
+											"show": {
+												"name": "显示",
+												"type": "boolean",
+												"default": false
+											},
+											"lineWidth": {
+												"name": "宽度",
+												"type": "number",
+												"default": 1,
+												"min": 0
+											},
+											"stroke": {
+												"name": "颜色",
+												"type": "color",
+												"default": "rgba(255,255,255,0.2)"
+											}
+										}
+									}
+								}
+							},
+							"yAxis": {
+								"name": "y轴",
+								"type": "group",
+								"children": {
+									"show": {
+										"name": "显示",
+										"type": "boolean",
+										"default": true
+									},
+									"fill": {
+										"name": "背景填充",
+										"type": "color",
+										"default": "#080830"
+									},
+									"label": {
+										"name": "轴标签",
+										"type": "group",
+										"children": {
+											"text": {
+												"name": "文本",
+												"type": "font",
+												"default": {
+													"fontSize": 60,
+													"color": "#171e51",
+													"fontWeight": "normal"
+												}
+											},
+											"padding": {
+												"name": "位移",
+												"type": "number",
+												"default": 12
+											},
+											"rotate": {
+												"name": "角度",
+												"type": "number",
+												"default": 0,
+												"min": -90,
+												"max": 90,
+												"range": [
+													-90,
+													90
+												]
+											}
+										}
+									},
+									"line": {
+										"name": "轴线",
+										"type": "group",
+										"children": {
+											"show": {
+												"name": "显示",
+												"type": "boolean",
+												"default": false
+											},
+											"lineWidth": {
+												"name": "宽度",
+												"type": "number",
+												"default": 1,
+												"min": 0
+											},
+											"stroke": {
+												"name": "颜色",
+												"type": "color",
+												"default": "rgba(255,255,255,0.2)"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"series": {
+						"name": "系列",
+						"type": "menuChild",
+						"mode": "multiple",
+						"children": {
+							"line1": {
+								"name": "系列1",
+								"type": "group",
+								"children": {
+									"labelText": {
+										"hasVisibility": "true",
+										"visible": "true",
+										"type": "text",
+										"name": "系列名",
+										"default": "折线1"
+									},
+									"lineWidth": {
+										"name": "宽度",
+										"type": "number",
+										"default": 2,
+										"min": 0
+									},
+									"stroke": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#4567f1"
+									},
+									"label": {
+										"name": "标签",
+										"type": "group",
+										"children": {
+											"text": {
+												"name": "文字",
+												"type": "font",
+												"default": {
+													"fontSize": 40,
+													"fontWeight": "normal",
+													"color": "#4567f1"
+												}
+											},
+											"padding": {
+												"name": "位移",
+												"type": "number",
+												"default": 0
+											}
+										}
+									}
+								}
+							},
+							"line2": {
+								"name": "系列2",
+								"type": "group",
+								"children": {
+									"labelText": {
+										"hasVisibility": "true",
+										"visible": "true",
+										"type": "text",
+										"name": "系列名",
+										"default": "折线2"
+									},
+									"lineWidth": {
+										"name": "宽度",
+										"type": "number",
+										"default": 3,
+										"min": 0
+									},
+									"stroke": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#24fef1"
+									},
+									"label": {
+										"name": "标签",
+										"type": "group",
+										"children": {
+											"text": {
+												"name": "文字",
+												"type": "font",
+												"default": {
+													"fontSize": 40,
+													"fontWeight": "normal",
+													"color": "#24fef1"
+												}
+											},
+											"padding": {
+												"name": "位移",
+												"type": "number",
+												"default": 0
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"others": {
+						"name": "其它",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"animation": {
+								"name": "动画",
+								"type": "group",
+								"children": {
+									"animationDuration": {
+										"name": "动画时间",
+										"type": "number",
+										"default": 10,
+										"min": 0,
+										"suffix": "s"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"date": 1990,
+					"y": 3608.6,
+					"x": 59795.9
+				},
+				{
+					"date": 1991,
+					"y": 3833.7,
+					"x": 61740.4
+				},
+				{
+					"date": 1992,
+					"y": 4269.2,
+					"x": 65393
+				},
+				{
+					"date": 1993,
+					"y": 4447.3,
+					"x": 68787.2
+				},
+				{
+					"date": 1994,
+					"y": 5643.2,
+					"x": 73087.6
+				},
+				{
+					"date": 1995,
+					"y": 7345.5,
+					"x": 76640.6
+				},
+				{
+					"date": 1996,
+					"y": 8637.5,
+					"x": 81002
+				},
+				{
+					"date": 1997,
+					"y": 9616,
+					"x": 86085.1
+				},
+				{
+					"date": 1998,
+					"y": 10290.4,
+					"x": 90891.7
+				},
+				{
+					"date": 1999,
+					"y": 10940,
+					"x": 96606.2
+				},
+				{
+					"date": 2000,
+					"y": 12113.5,
+					"x": 102847.8
+				},
+				{
+					"date": 2001,
+					"y": 13394,
+					"x": 106218.2
+				},
+				{
+					"date": 2002,
+					"y": 14705.5,
+					"x": 109775.1
+				},
+				{
+					"date": 2003,
+					"y": 16602.9,
+					"x": 115106.7
+				},
+				{
+					"date": 2004,
+					"y": 19553.5,
+					"x": 122749.3
+				},
+				{
+					"date": 2005,
+					"y": 22859.7,
+					"x": 130937.3
+				},
+				{
+					"date": 2006,
+					"y": 27521.3,
+					"x": 138558.9
+				},
+				{
+					"date": 2007,
+					"y": 35521.8,
+					"x": 144776.4
+				},
+				{
+					"date": 2008,
+					"y": 45982.1,
+					"x": 147185.8
+				},
+				{
+					"date": 2009,
+					"y": 51099.5,
+					"x": 144187.4
+				},
+				{
+					"date": 2010,
+					"y": 61006.2,
+					"x": 149643.7
+				},
+				{
+					"date": 2011,
+					"y": 75725.5,
+					"x": 155179.3
+				},
+				{
+					"date": 2012,
+					"y": 85605.5,
+					"x": 161552.5
+				},
+				{
+					"date": 2013,
+					"y": 96072.2,
+					"x": 166915.2
+				},
+				{
+					"date": 2014,
+					"y": 104823.7,
+					"x": 174276.1
+				},
+				{
+					"date": 2015,
+					"y": 110646.7,
+					"x": 181207.1
+				},
+				{
+					"date": 2016,
+					"y": 111909.9,
+					"x": 186244.8
+				},
+				{
+					"date": 2017,
+					"y": 122377,
+					"x": 193906
+				}
+			]
+		},
+		"events": {
+			"finish": {
+				"name": "动画结束",
+				"type": "object",
+				"description": "动画结束事件",
+				"fields": {
+					"data": {
+						"type": "array",
+						"name": "数据",
+						"optional": true,
+						"description": "数据"
+					}
+				}
+			}
+		}
+	}
+}

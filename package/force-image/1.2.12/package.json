@@ -1,0 +1,460 @@
+{
+	"name": "force-image",
+	"version": "1.2.12",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"dchart-force-image": "0.1.5"
+	},
+	"datav": {
+		"cn_name": "关系网络",
+		"icon": "//img.alicdn.com/tfs/TB1i4nmlUH1gK0jSZSyXXXtlpXa-370-208.png",
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"network_force",
+			"DataV-6:regular_relation_network"
+		],
+		"view": {
+			"width": "300",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"nodes": {
+						"description": "节点",
+						"type": "array",
+						"children": {
+							"imgPath": {
+								"description": "图片路径",
+								"type": "string",
+								"optional": true
+							},
+							"name": {
+								"description": "名称",
+								"type": "string"
+							},
+							"type": {
+								"description": "系列",
+								"type": "string"
+							}
+						}
+					},
+					"links": {
+						"description": "连接线",
+						"type": "array",
+						"children": {
+							"source": {
+								"description": "源节点",
+								"type": "string"
+							},
+							"target": {
+								"description": "目标节点",
+								"type": "string"
+							},
+							"value": {
+								"description": "值",
+								"type": "number"
+							}
+						}
+					}
+				}
+			}
+		},
+		"config": {
+			"background-color": {
+				"name": "背景色",
+				"type": "color",
+				"default": "#000"
+			},
+			"force": {
+				"type": "group",
+				"name": "力引导图",
+				"children": {
+					"margin": {
+						"type": "group",
+						"name": "边距",
+						"children": {
+							"top": {
+								"name": "上边距",
+								"type": "number",
+								"default": 20
+							},
+							"bottom": {
+								"name": "下边距",
+								"type": "number",
+								"default": 20
+							},
+							"left": {
+								"name": "左边距",
+								"type": "number",
+								"default": 20
+							},
+							"right": {
+								"name": "右边距",
+								"type": "number",
+								"default": 20
+							}
+						}
+					},
+					"charge": {
+						"name": "电荷强度,引力/斥力",
+						"type": "number",
+						"default": -400
+					},
+					"chargeDistance": {
+						"name": "电荷距离",
+						"type": "number",
+						"default": 100
+					},
+					"gravity": {
+						"name": "重力",
+						"type": "number",
+						"default": 0.1
+					},
+					"friction": {
+						"name": "摩擦系数",
+						"type": "number",
+						"default": 0.1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.1
+					}
+				}
+			},
+			"label": {
+				"type": "group",
+				"name": "文字标签配置",
+				"children": {
+					"fill": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "rgba(255,255,255,0.8)"
+					},
+					"font-size": {
+						"name": "字号",
+						"type": "number",
+						"default": 12,
+						"range": [
+							10,
+							30
+						],
+						"step": 1
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					},
+					"align": {
+						"name": "字体居中",
+						"type": "boolean",
+						"default": false
+					}
+				}
+			},
+			"link": {
+				"type": "group",
+				"name": "连接线配置",
+				"children": {
+					"stroke": {
+						"name": "连接线颜色",
+						"type": "color",
+						"default": "#666666"
+					},
+					"stroke-width": {
+						"name": "连接线粗细",
+						"type": "number",
+						"default": 2,
+						"range": [
+							0,
+							15
+						],
+						"step": 1
+					},
+					"distanceDefault": {
+						"name": "连接线长度",
+						"type": "number",
+						"default": 100
+					},
+					"distanceRangeMin": {
+						"name": "连接线最小值",
+						"type": "number",
+						"default": 50
+					},
+					"distanceRangeMax": {
+						"name": "连接线最大值",
+						"type": "number",
+						"default": 100
+					}
+				}
+			},
+			"node": {
+				"name": "节点默认配置",
+				"type": "group",
+				"children": {
+					"className": {
+						"name": "标签类别名",
+						"type": "string",
+						"default": "default"
+					},
+					"radius": {
+						"name": "节点半径",
+						"type": "number",
+						"default": 10,
+						"range": [
+							0,
+							50
+						],
+						"step": 1
+					},
+					"fill": {
+						"name": "节点填充色",
+						"type": "color",
+						"default": "#ededed"
+					},
+					"stroke": {
+						"name": "节点描边色",
+						"type": "color",
+						"default": "#ededed"
+					},
+					"stroke-width": {
+						"name": "节点描边粗细",
+						"type": "number",
+						"default": 2,
+						"range": [
+							0,
+							15
+						],
+						"step": 1
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "自定义节点属性",
+				"default": [
+					{
+						"className": "group1",
+						"radius": 10,
+						"fill": "#00baff",
+						"stroke": "#00baff",
+						"stroke-width": 2
+					},
+					{
+						"className": "group2",
+						"radius": 10,
+						"fill": "#3de7c9",
+						"stroke": "#3de7c9",
+						"stroke-width": 2
+					}
+				],
+				"child": {
+					"name": "节点系列<%= i + 1%>",
+					"type": "object",
+					"child": {
+						"className": {
+							"name": "标签类别名",
+							"type": "string",
+							"default": "group1"
+						},
+						"radius": {
+							"name": "节点半径",
+							"type": "number",
+							"default": 10,
+							"range": [
+								0,
+								50
+							],
+							"step": 1
+						},
+						"fill": {
+							"name": "填充色",
+							"type": "color",
+							"default": "#FF7900"
+						},
+						"stroke": {
+							"name": "描边色",
+							"type": "color",
+							"default": "#FF7900"
+						},
+						"stroke-width": {
+							"name": "描边粗细",
+							"type": "number",
+							"default": 2,
+							"range": [
+								0,
+								15
+							],
+							"step": 1
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"nodes": [
+						{
+							"imgPath": "",
+							"name": "hello1",
+							"type": "group"
+						},
+						{
+							"imgPath": "",
+							"name": "hello2",
+							"type": "group1"
+						},
+						{
+							"imgPath": "",
+							"name": "hello3",
+							"type": "group1"
+						},
+						{
+							"imgPath": "",
+							"name": "hello4",
+							"type": "group2"
+						},
+						{
+							"imgPath": "",
+							"name": "hello5",
+							"type": "group2"
+						},
+						{
+							"imgPath": "",
+							"name": "hello6",
+							"type": "group2"
+						},
+						{
+							"imgPath": "",
+							"name": "hello7",
+							"type": "group2"
+						},
+						{
+							"imgPath": "",
+							"name": "hello8",
+							"type": "group2"
+						},
+						{
+							"imgPath": "",
+							"name": "hello9",
+							"type": "group2"
+						}
+					],
+					"links": [
+						{
+							"source": "hello1",
+							"target": "hello2",
+							"value": 10
+						},
+						{
+							"source": "hello1",
+							"target": "hello3",
+							"value": 15
+						},
+						{
+							"source": "hello3",
+							"target": "hello4",
+							"value": 12
+						},
+						{
+							"source": "hello1",
+							"target": "hello4",
+							"value": 15
+						},
+						{
+							"source": "hello1",
+							"target": "hello5",
+							"value": 10
+						},
+						{
+							"source": "hello1",
+							"target": "hello6",
+							"value": 2
+						},
+						{
+							"source": "hello1",
+							"target": "hello7",
+							"value": 8
+						},
+						{
+							"source": "hello1",
+							"target": "hello8",
+							"value": 9
+						},
+						{
+							"source": "hello1",
+							"target": "hello9",
+							"value": 10
+						}
+					]
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1bozllUY1gK0jSZFMXXaWcVXa-162-116.png"
+	}
+}

@@ -1,0 +1,390 @@
+{
+	"name": "datav-slider",
+	"version": "0.0.8",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"private": true,
+		"cn_name": "滑块",
+		"icon": "",
+		"protocol": 2,
+		"type": [
+			"decorate"
+		],
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"preText": {
+						"description": "起始值"
+					},
+					"sufText": {
+						"description": "终点值"
+					}
+				}
+			}
+		},
+		"config": {
+			"callbackCfg": {
+				"type": "group",
+				"name": "回调配置",
+				"children": {
+					"onCallback": {
+						"type": "boolean",
+						"name": "开启回调",
+						"default": true
+					},
+					"callbackId": {
+						"type": "string",
+						"name": "回调ID",
+						"default": "date",
+						"show": [
+							[
+								"onCallback",
+								"$eq",
+								true
+							]
+						]
+					},
+					"format": {
+						"type": "string",
+						"name": "回调格式",
+						"default": "yyyy-MM-dd HH:mm:ss",
+						"show": [
+							[
+								"onCallback",
+								"$eq",
+								true
+							]
+						]
+					}
+				}
+			},
+			"slider": {
+				"type": "group",
+				"name": "滑轨",
+				"children": {
+					"stepNum": {
+						"type": "number",
+						"name": "分段数",
+						"default": 20
+					},
+					"height": {
+						"type": "number",
+						"name": "滑轨高度",
+						"default": 18
+					},
+					"margin-left": {
+						"type": "number",
+						"name": "左边距",
+						"default": 20
+					},
+					"margin-right": {
+						"type": "number",
+						"name": "右边距",
+						"default": 20
+					},
+					"color": {
+						"type": "color",
+						"name": "填充色",
+						"default": "#f5f5f5"
+					},
+					"border-color": {
+						"type": "color",
+						"name": "边线颜色",
+						"default": "#c5c5c5"
+					}
+				}
+			},
+			"button": {
+				"type": "group",
+				"name": "滑块",
+				"children": {
+					"radius": {
+						"type": "number",
+						"name": "半径",
+						"default": 16
+					},
+					"color": {
+						"type": "color",
+						"name": "填充色",
+						"default": "#ededed"
+					},
+					"border-color": {
+						"type": "color",
+						"name": "边线颜色",
+						"default": "#c5c5c5"
+					}
+				}
+			},
+			"preText": {
+				"type": "group",
+				"name": "前缀文案",
+				"children": {
+					"context": {
+						"type": "string",
+						"name": "文案",
+						"default": "2015-01-01 00:00:00"
+					},
+					"format": {
+						"type": "string",
+						"name": "文本格式",
+						"default": "yyyy-MM-dd"
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#fff"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									0,
+									100
+								],
+								"default": 18,
+								"min": 0,
+								"max": 100,
+								"step": 1
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "search",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					}
+				}
+			},
+			"sufText": {
+				"type": "group",
+				"name": "后缀文案",
+				"children": {
+					"context": {
+						"type": "string",
+						"name": "文案",
+						"default": "2018-01-01 00:00:00"
+					},
+					"format": {
+						"type": "string",
+						"name": "文本格式",
+						"default": "yyyy-MM-dd"
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#fff"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									0,
+									100
+								],
+								"default": 18,
+								"min": 0,
+								"max": 100,
+								"step": 1
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "search",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					}
+				}
+			},
+			"tip": {
+				"type": "group",
+				"name": "标签",
+				"children": {
+					"format": {
+						"type": "string",
+						"name": "文本格式",
+						"default": "yyyy-MM-dd"
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#fff"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									0,
+									100
+								],
+								"default": 18,
+								"min": 0,
+								"max": 100,
+								"step": 1
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "search",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"preText": "2005-11-11 11:11:11",
+					"sufText": "2017-11-11 11:11:11"
+				}
+			]
+		}
+	}
+}

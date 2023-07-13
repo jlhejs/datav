@@ -1,0 +1,421 @@
+{
+	"name": "map2d-layer-heatmap",
+	"version": "0.0.8",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"ldmap": "0.1.29"
+	},
+	"datav": {
+		"cn_name": "点热力图层",
+		"protocol": 2,
+		"type": [
+			"map2d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		},
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "热力图",
+				"fields": {
+					"lat": {
+						"description": "纬度"
+					},
+					"lng": {
+						"description": "经度"
+					},
+					"value": {
+						"description": "权重值"
+					}
+				}
+			}
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"color": {
+				"name": "色带",
+				"type": "group",
+				"children": {
+					"colorStop1": {
+						"name": "颜色1",
+						"type": "color",
+						"default": "rgb(0,0,255)"
+					},
+					"colorStop2": {
+						"name": "颜色2",
+						"type": "color",
+						"default": "rgb(0,255,255)"
+					},
+					"colorStop3": {
+						"name": "颜色3",
+						"type": "color",
+						"default": "rgb(0,255,0)"
+					},
+					"colorStop4": {
+						"name": "颜色4",
+						"type": "color",
+						"default": "rgb(255,255,0)"
+					},
+					"colorStop5": {
+						"name": "颜色5",
+						"type": "color",
+						"default": "rgb(255,0,0)"
+					}
+				}
+			},
+			"opacity": {
+				"name": "透明度",
+				"type": "number",
+				"default": 0.9,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			},
+			"size": {
+				"name": "半径",
+				"type": "number",
+				"default": 110,
+				"step": 1,
+				"range": [
+					0,
+					200
+				]
+			},
+			"intensity": {
+				"name": "强度",
+				"type": "number",
+				"default": 0.1,
+				"min": 0,
+				"max": 1,
+				"step": 0.01
+			},
+			"alphaEnd": {
+				"name": "模糊",
+				"type": "number",
+				"default": 0.2,
+				"min": 0,
+				"max": 1,
+				"step": 0.01
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"lat": 30.968,
+					"lng": 121.525,
+					"value": 1
+				},
+				{
+					"lat": 31.128,
+					"lng": 121.421,
+					"value": 1
+				},
+				{
+					"lat": 31.128,
+					"lng": 121.262,
+					"value": 1
+				},
+				{
+					"lat": 31.015,
+					"lng": 121.371,
+					"value": 1
+				},
+				{
+					"lat": 31.283,
+					"lng": 121.295,
+					"value": 1
+				},
+				{
+					"lat": 31.316,
+					"lng": 121.41,
+					"value": 1
+				},
+				{
+					"lat": 31.288,
+					"lng": 121.492,
+					"value": 1
+				},
+				{
+					"lat": 31.222,
+					"lng": 121.355,
+					"value": 1
+				},
+				{
+					"lat": 31.142,
+					"lng": 121.52,
+					"value": 1
+				},
+				{
+					"lat": 31.508,
+					"lng": 120.663,
+					"value": 1
+				},
+				{
+					"lat": 32.055,
+					"lng": 118.702,
+					"value": 1
+				},
+				{
+					"lat": 32.008,
+					"lng": 118.724,
+					"value": 1
+				},
+				{
+					"lat": 32.069,
+					"lng": 118.806,
+					"value": 1
+				},
+				{
+					"lat": 32.041,
+					"lng": 118.564,
+					"value": 1
+				},
+				{
+					"lat": 31.943,
+					"lng": 118.795,
+					"value": 1
+				},
+				{
+					"lat": 32.273,
+					"lng": 118.757,
+					"value": 1
+				},
+				{
+					"lat": 31.92,
+					"lng": 118.746,
+					"value": 1
+				},
+				{
+					"lat": 33.188,
+					"lng": 120.405,
+					"value": 1
+				},
+				{
+					"lat": 33.119,
+					"lng": 120.399,
+					"value": 1
+				},
+				{
+					"lat": 33.624,
+					"lng": 118.965,
+					"value": 1
+				},
+				{
+					"lat": 33.615,
+					"lng": 119.009,
+					"value": 1
+				},
+				{
+					"lat": 33.601,
+					"lng": 119.048,
+					"value": 1
+				},
+				{
+					"lat": 33.583,
+					"lng": 119.064,
+					"value": 1
+				},
+				{
+					"lat": 33.56,
+					"lng": 119.026,
+					"value": 1
+				},
+				{
+					"lat": 32.556,
+					"lng": 117.07,
+					"value": 1
+				},
+				{
+					"lat": 31.171,
+					"lng": 121.349,
+					"value": 1
+				},
+				{
+					"lat": 31.246,
+					"lng": 121.418,
+					"value": 1
+				},
+				{
+					"lat": 31.203,
+					"lng": 121.451,
+					"value": 1
+				},
+				{
+					"lat": 30.293,
+					"lng": 120.144,
+					"value": 1
+				},
+				{
+					"lat": 30.273,
+					"lng": 120.167,
+					"value": 1
+				},
+				{
+					"lat": 30.256,
+					"lng": 120.179,
+					"value": 1
+				},
+				{
+					"lat": 30.246,
+					"lng": 120.192,
+					"value": 1
+				},
+				{
+					"lat": 30.227,
+					"lng": 120.193,
+					"value": 1
+				},
+				{
+					"lat": 30.212,
+					"lng": 120.189,
+					"value": 1
+				},
+				{
+					"lat": 30.2,
+					"lng": 120.181,
+					"value": 1
+				},
+				{
+					"lat": 30.303,
+					"lng": 120.131,
+					"value": 1
+				},
+				{
+					"lat": 30.286,
+					"lng": 120.135,
+					"value": 1
+				},
+				{
+					"lat": 30.295,
+					"lng": 120.107,
+					"value": 1
+				},
+				{
+					"lat": 30.175,
+					"lng": 120.178,
+					"value": 1
+				},
+				{
+					"lat": 30.185,
+					"lng": 120.221,
+					"value": 1
+				},
+				{
+					"lat": 30.181,
+					"lng": 120.157,
+					"value": 1
+				},
+				{
+					"lat": 30.164,
+					"lng": 120.201,
+					"value": 1
+				},
+				{
+					"lat": 30.305,
+					"lng": 120.166,
+					"value": 1
+				},
+				{
+					"lat": 30.271,
+					"lng": 120.152,
+					"value": 1
+				},
+				{
+					"lat": 30.168,
+					"lng": 120.225,
+					"value": 1
+				},
+				{
+					"lat": 30.165,
+					"lng": 120.238,
+					"value": 1
+				},
+				{
+					"lat": 30.155,
+					"lng": 120.251,
+					"value": 1
+				},
+				{
+					"lat": 39.758,
+					"lng": 116.147,
+					"value": 1
+				},
+				{
+					"lat": 39.724,
+					"lng": 116.345,
+					"value": 1
+				},
+				{
+					"lat": 39.64,
+					"lng": 115.972,
+					"value": 1
+				},
+				{
+					"lat": 39.673,
+					"lng": 116.301,
+					"value": 1
+				},
+				{
+					"lat": 39.623,
+					"lng": 116.279,
+					"value": 1
+				},
+				{
+					"lat": 39.589,
+					"lng": 115.862,
+					"value": 1
+				},
+				{
+					"lat": 39.572,
+					"lng": 116.104,
+					"value": 1
+				},
+				{
+					"lat": 39.64,
+					"lng": 116.587,
+					"value": 1
+				},
+				{
+					"lat": 34.705,
+					"lng": 113.906,
+					"value": 1
+				},
+				{
+					"lat": 34.724,
+					"lng": 113.687,
+					"value": 1
+				},
+				{
+					"lat": 34.579,
+					"lng": 113.796,
+					"value": 1
+				},
+				{
+					"lat": 34.543,
+					"lng": 113.95,
+					"value": 1
+				},
+				{
+					"lat": 34.597,
+					"lng": 114.17,
+					"value": 1
+				}
+			]
+		}
+	}
+}

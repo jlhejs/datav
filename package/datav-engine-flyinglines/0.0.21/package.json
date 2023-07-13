@@ -1,0 +1,228 @@
+{
+	"name": "datav-engine-flyinglines",
+	"version": "0.0.21",
+	"main": "index.js",
+	"dependencies": {
+		"three": "0.94.0",
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "动态轨迹线层",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"isAnim": {
+				"name": "动效",
+				"type": "boolean",
+				"default": true
+			},
+			"textureUrl": {
+				"name": "贴图",
+				"type": "hidden",
+				"default": "https://img.alicdn.com/tfs/TB19tCkOXXXXXXKXVXXXXXXXXXX-36-157.png"
+			},
+			"lineArcType": {
+				"name": "飞线类型",
+				"type": "options",
+				"default": "strLine",
+				"options": [
+					{
+						"name": "曲线",
+						"value": "jumpLine"
+					},
+					{
+						"name": "直线",
+						"value": "strLine"
+					}
+				]
+			},
+			"offsetHeight": {
+				"show": [
+					[
+						"lineArcType",
+						"$eq",
+						"jumpLine"
+					]
+				],
+				"name": "弧线高度",
+				"type": "number",
+				"default": 50,
+				"range": [
+					0,
+					1000
+				],
+				"step": 0.01
+			},
+			"animType": {
+				"name": "动画类型",
+				"type": "options",
+				"default": 1,
+				"options": [
+					{
+						"name": "分段",
+						"value": 0
+					},
+					{
+						"name": "整体",
+						"value": 1
+					}
+				]
+			},
+			"sizeAttenuation": {
+				"name": "是否固定宽度",
+				"type": "boolean",
+				"default": true
+			},
+			"blendingType": {
+				"name": "叠加模式",
+				"type": "options",
+				"default": "AdditiveBlending",
+				"options": [
+					{
+						"name": "添加模式",
+						"value": "AdditiveBlending"
+					},
+					{
+						"name": "正常模式",
+						"value": "NormalBlending"
+					},
+					{
+						"name": "无叠加",
+						"value": "NoBlending"
+					}
+				]
+			},
+			"speed": {
+				"name": "飞线速度",
+				"type": "number",
+				"default": 0.02,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.001
+			},
+			"length": {
+				"name": "飞线长度",
+				"type": "number",
+				"default": 0.4,
+				"range": [
+					0.01,
+					1
+				],
+				"step": 0.001
+			},
+			"lineWidth": {
+				"name": "飞线宽度",
+				"type": "number",
+				"default": 5,
+				"range": [
+					0.1,
+					400
+				],
+				"step": 0.01
+			},
+			"lineColor": {
+				"type": "color",
+				"name": "颜色",
+				"default": "RGBA(176, 245, 102, 1.00)"
+			}
+		},
+		"api_data": {
+			"flyingline": [
+				[
+					{
+						"x": 0,
+						"y": 0,
+						"z": 0
+					},
+					{
+						"x": 100,
+						"y": 0,
+						"z": 300
+					},
+					{
+						"x": 200,
+						"y": 0,
+						"z": -10
+					},
+					{
+						"x": -200,
+						"y": 0,
+						"z": 10
+					}
+				]
+			]
+		},
+		"apis": {
+			"flyingline": {
+				"handler": "setData",
+				"description": "动态轨迹",
+				"fields": {}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1y5HUACrqK1RjSZK9XXXyypXa-180-180.png"
+	}
+}

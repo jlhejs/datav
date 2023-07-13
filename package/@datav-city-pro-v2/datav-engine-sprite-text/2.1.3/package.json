@@ -1,0 +1,749 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-sprite-text",
+	"version": "2.1.3",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "文字标签",
+		"protocol": 2,
+		"level": 0,
+		"supportTheme": true,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"fold": false,
+						"children": {
+							"blendingType": {
+								"name": "混合模式",
+								"type": "select",
+								"options": [
+									{
+										"label": "添加模式",
+										"value": "AdditiveBlending"
+									},
+									{
+										"label": "正常模式",
+										"value": "NormalBlending"
+									}
+								]
+							},
+							"depthTest": {
+								"name": "深度测试",
+								"type": "switch",
+								"statusText": true
+							},
+							"depthWrite": {
+								"name": "深度写入",
+								"type": "switch",
+								"statusText": true
+							},
+							"fixedSize": {
+								"name": "固定尺寸",
+								"type": "switch",
+								"statusText": true,
+								"description": "开启时应将标签尺寸调小"
+							},
+							"size": {
+								"name": "标签尺寸",
+								"type": "slider",
+								"min": 0.0001,
+								"max": 100,
+								"step": 0.0001,
+								"showRange": true
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"fold": false,
+						"children": {
+							"icon": {
+								"type": "group",
+								"name": "主图标",
+								"children": {
+									"paddingF": {
+										"type": "slider",
+										"name": "与文本间距",
+										"min": 0,
+										"max": 128,
+										"precision": 1,
+										"step": 1,
+										"showRange": true
+									},
+									"icon": {
+										"name": "图标贴图",
+										"type": "image"
+									},
+									"iconSize": {
+										"name": "图标尺寸",
+										"type": "suite",
+										"children": {
+											"width": {
+												"type": "slider",
+												"name": "宽度",
+												"min": 0,
+												"max": 512,
+												"precision": 1,
+												"step": 1,
+												"showRange": true
+											},
+											"height": {
+												"type": "slider",
+												"name": "高度",
+												"min": 0,
+												"max": 512,
+												"precision": 1,
+												"step": 1,
+												"showRange": true
+											}
+										}
+									}
+								}
+							},
+							"line": {
+								"type": "group",
+								"name": "指示线",
+								"children": {
+									"align": {
+										"name": "对齐方式",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"value": "left",
+												"label": "左对齐"
+											},
+											{
+												"value": "center",
+												"label": "居中对齐"
+											},
+											{
+												"value": "right",
+												"label": "右对齐"
+											}
+										]
+									},
+									"paddingG": {
+										"type": "slider",
+										"name": "与主体间距",
+										"min": 0,
+										"max": 128,
+										"precision": 1,
+										"step": 1,
+										"showRange": true
+									},
+									"lineStyle": {
+										"name": "指示线样式",
+										"type": "suite",
+										"children": {
+											"length": {
+												"type": "slider",
+												"name": "长度",
+												"min": 1,
+												"max": 1000,
+												"precision": 1,
+												"step": 1,
+												"showRange": true
+											},
+											"width": {
+												"type": "slider",
+												"name": "宽度",
+												"min": 1,
+												"max": 100,
+												"precision": 1,
+												"step": 1,
+												"showRange": true
+											},
+											"color": {
+												"type": "fill",
+												"name": "颜色",
+												"components": [
+													"linearGradient"
+												]
+											}
+										}
+									},
+									"icon": {
+										"name": "顶端图标",
+										"type": "image"
+									},
+									"iconSize": {
+										"name": "图标尺寸",
+										"type": "suite",
+										"children": {
+											"width": {
+												"type": "slider",
+												"name": "宽度",
+												"min": 0,
+												"max": 512,
+												"precision": 1,
+												"step": 1,
+												"showRange": true
+											},
+											"height": {
+												"type": "slider",
+												"name": "高度",
+												"min": 0,
+												"max": 512,
+												"precision": 1,
+												"step": 1,
+												"showRange": true
+											}
+										}
+									}
+								}
+							},
+							"title": {
+								"type": "group",
+								"name": "主标题",
+								"children": {
+									"titleFont": {
+										"name": "文本样式",
+										"type": "suite",
+										"children": {
+											"fontFamily": {
+												"name": "字体",
+												"type": "search",
+												"range": [
+													{
+														"微软雅黑": "Microsoft Yahei"
+													},
+													{
+														"宋体": "SimSun"
+													},
+													{
+														"黑体": "SimHei"
+													},
+													{
+														"隶书": "LiSu"
+													},
+													{
+														"幼圆": "YouYuan"
+													},
+													"tahoma",
+													"arial",
+													"sans-serif"
+												],
+												"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+											},
+											"fontWeight": {
+												"name": "文字粗细",
+												"type": "search",
+												"searches": [
+													"normal",
+													"bold",
+													"bolder",
+													"lighter",
+													100,
+													200,
+													300,
+													400,
+													500,
+													600,
+													700,
+													800,
+													900
+												]
+											},
+											"fontSize": {
+												"type": "slider",
+												"name": "字号",
+												"min": 1,
+												"max": 128,
+												"precision": 1,
+												"step": 1,
+												"suffix": "px",
+												"showRange": true
+											},
+											"fontColor": {
+												"type": "fill",
+												"name": "颜色"
+											}
+										}
+									},
+									"paddingE": {
+										"type": "slider",
+										"name": "文本间距",
+										"description": "标题内容垂直间距",
+										"min": 0,
+										"max": 128,
+										"precision": 1,
+										"step": 1,
+										"showRange": true
+									}
+								}
+							},
+							"content": {
+								"type": "group",
+								"name": "主内容",
+								"children": {
+									"fontFamily": {
+										"name": "字体",
+										"type": "search",
+										"range": [
+											{
+												"微软雅黑": "Microsoft Yahei"
+											},
+											{
+												"宋体": "SimSun"
+											},
+											{
+												"黑体": "SimHei"
+											},
+											{
+												"隶书": "LiSu"
+											},
+											{
+												"幼圆": "YouYuan"
+											},
+											"tahoma",
+											"arial",
+											"sans-serif"
+										],
+										"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+									},
+									"fontWeight": {
+										"name": "粗细",
+										"type": "search",
+										"searches": [
+											"normal",
+											"bold",
+											"bolder",
+											"lighter",
+											100,
+											200,
+											300,
+											400,
+											500,
+											600,
+											700,
+											800,
+											900
+										]
+									},
+									"fontSize": {
+										"type": "slider",
+										"name": "字号",
+										"min": 1,
+										"max": 128,
+										"precision": 1,
+										"step": 1,
+										"showRange": true
+									},
+									"fontColor": {
+										"type": "fill",
+										"name": "颜色"
+									}
+								}
+							},
+							"background": {
+								"type": "group",
+								"name": "背景框",
+								"children": {
+									"bgType": {
+										"name": "样式类型",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"name": "图片",
+												"value": "image"
+											},
+											{
+												"name": "自定义",
+												"value": "basic"
+											}
+										]
+									},
+									"bgImage": {
+										"showInPanel": {
+											"conditions": [
+												[
+													".bgType",
+													"$eq",
+													"image"
+												]
+											]
+										},
+										"name": "图片",
+										"type": "image"
+									},
+									"color": {
+										"showInPanel": {
+											"conditions": [
+												[
+													".bgType",
+													"$eq",
+													"basic"
+												]
+											]
+										},
+										"type": "fill",
+										"name": "背景颜色",
+										"components": [
+											"linearGradient"
+										]
+									},
+									"outline": {
+										"name": "边框样式",
+										"type": "suite",
+										"showInPanel": {
+											"conditions": [
+												[
+													".bgType",
+													"$eq",
+													"basic"
+												]
+											]
+										},
+										"children": {
+											"outlineRadius": {
+												"type": "slider",
+												"name": "圆角",
+												"min": 0,
+												"max": 128,
+												"precision": 1,
+												"step": 1,
+												"showRange": true
+											},
+											"outlineWidth": {
+												"type": "slider",
+												"name": "线宽",
+												"min": 0,
+												"max": 128,
+												"precision": 1,
+												"step": 1,
+												"showRange": true
+											},
+											"outlineColor": {
+												"type": "fill",
+												"name": "颜色"
+											}
+										}
+									},
+									"layout": {
+										"type": "padding",
+										"name": "内容边距",
+										"min": 0,
+										"max": 128
+									}
+								}
+							}
+						}
+					},
+					"interactive": {
+						"name": "交互",
+						"fold": false,
+						"children": {
+							"enableInteractive": {
+								"name": "鼠标交互",
+								"type": "switch"
+							},
+							"interactiveColor": {
+								"show": [
+									[
+										"enableInteractive",
+										"$eq",
+										true
+									]
+								],
+								"name": "点击颜色",
+								"type": "fill"
+							}
+						}
+					}
+				},
+				"default": {
+					"general": {
+						"blendingType": "NormalBlending",
+						"depthTest": false,
+						"depthWrite": false,
+						"fixedSize": false,
+						"size": 0.25
+					},
+					"graph": {
+						"icon": {
+							"paddingF": 0,
+							"icon": "//img.alicdn.com/tfs/TB10vjWSQL0gK0jSZFtXXXQCXXa-68-68.png",
+							"iconSize": {
+								"width": 0,
+								"height": 0
+							}
+						},
+						"line": {
+							"align": "left",
+							"paddingG": 5,
+							"lineStyle": {
+								"length": 10,
+								"width": 2,
+								"color": {
+									"stops": [
+										{
+											"offset": 0,
+											"color": "rgba(255, 255, 255, 0)"
+										},
+										{
+											"offset": 100,
+											"color": "rgba(94, 191, 255, 0)"
+										}
+									],
+									"angle": 90
+								}
+							},
+							"icon": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/8318116852e77a6c3d116de5c0cfd443.png",
+							"iconSize": {
+								"width": 40,
+								"height": 40
+							}
+						},
+						"title": {
+							"titleFont": {
+								"fontFamily": "Microsoft Yahei",
+								"fontWeight": "normal",
+								"fontSize": 16,
+								"fontColor": "#fff"
+							},
+							"paddingE": 8
+						},
+						"content": {
+							"fontFamily": "SimHei",
+							"fontWeight": "bold",
+							"fontSize": 16,
+							"fontColor": "#ff9700"
+						},
+						"background": {
+							"bgType": "basic",
+							"bgImage": "//img.alicdn.com/tfs/TB1Q0qSkj39YK4jSZPcXXXrUFXa-1024-266.png",
+							"color": {
+								"stops": [
+									{
+										"offset": 0,
+										"color": "#000000"
+									},
+									{
+										"offset": 100,
+										"color": "rgba(0, 0, 0, 0.95)"
+									}
+								],
+								"angle": 90
+							},
+							"outline": {
+								"outlineRadius": 4,
+								"outlineWidth": 1,
+								"outlineColor": "#000000"
+							},
+							"layout": {
+								"top": 6,
+								"bottom": 3,
+								"left": 12,
+								"right": 16
+							}
+						}
+					},
+					"interactive": {
+						"enableInteractive": true,
+						"interactiveColor": "rgba(251, 117, 65, 1.00)"
+					}
+				}
+			}
+		},
+		"keyframeConfig": {
+			"size": {
+				"type": "slider",
+				"name": "标签尺寸",
+				"default": 8,
+				"min": 0,
+				"max": 100,
+				"step": 0.0001
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"id": 0,
+					"lng": 120.13152394104004,
+					"lat": 30.26614700786203,
+					"altitude": 5,
+					"title": "title",
+					"content": ""
+				},
+				{
+					"id": 1,
+					"lng": 120.13352394104005,
+					"lat": 30.26614700786203,
+					"altitude": 5,
+					"title": "title",
+					"content": "正文1"
+				},
+				{
+					"id": 2,
+					"lng": 120.1359912109375,
+					"lat": 30.266448679969866,
+					"altitude": 5,
+					"title": "标题2",
+					"content": "正文第一行\n正文第二行"
+				}
+			]
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"errorHandler": "errorRender",
+				"format": "geo_point",
+				"description": "数据接口",
+				"fields": {
+					"id": {
+						"description": "id",
+						"type": "number|string",
+						"optional": true
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number",
+						"optional": false
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number",
+						"optional": false
+					},
+					"altitude": {
+						"description": "高程",
+						"type": "number",
+						"optional": false
+					},
+					"title": {
+						"description": "标题文本",
+						"type": "string",
+						"optional": true
+					},
+					"content": {
+						"description": "内容文本",
+						"type": "string",
+						"optional": false
+					},
+					"iconUrl": {
+						"description": "图标图片链接",
+						"type": "string",
+						"optional": true
+					},
+					"bgImgUrl": {
+						"description": "背景图片链接",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"events": {
+			"leftClick": {
+				"name": "左键点击",
+				"description": "左键点击时",
+				"type": "object",
+				"fields": {
+					"clickPosition": {
+						"name": "点击屏幕坐标",
+						"description": "点击屏幕坐标",
+						"type": "object",
+						"children": {
+							"x": {
+								"name": "x坐标",
+								"description": "x坐标",
+								"type": "number"
+							},
+							"y": {
+								"name": "y坐标",
+								"description": "y坐标",
+								"type": "number"
+							}
+						}
+					},
+					"data": {
+						"name": "数据项",
+						"description": "被点击图元对应的数据项",
+						"type": "object",
+						"children": {
+							"lng": {
+								"name": "经度",
+								"description": "经度",
+								"type": "number"
+							},
+							"lat": {
+								"name": "纬度",
+								"description": "纬度",
+								"type": "number"
+							},
+							"altitude": {
+								"name": "高程",
+								"description": "高程",
+								"type": "number"
+							},
+							"title": {
+								"name": "标题文本",
+								"description": "标题文本",
+								"type": "string"
+							},
+							"content": {
+								"name": "内容文本",
+								"description": "内容文本",
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			},
+			"highlight": {
+				"name": "高亮",
+				"description": "高亮指定id对应的文字标签",
+				"type": "object",
+				"fields": {
+					"ids": {
+						"name": "高亮标签id数组",
+						"description": "高亮标签id数组",
+						"type": "array"
+					}
+				}
+			},
+			"unhighlight": {
+				"name": "取消高亮",
+				"description": "取消当前高亮的文字标签"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/tfs/TB1J9T7AxTpK1RjSZFMXXbG_VXa-180-180.png"
+	}
+}

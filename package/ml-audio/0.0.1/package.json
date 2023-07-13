@@ -1,0 +1,138 @@
+{
+	"name": "ml-audio",
+	"version": "0.0.1",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "音频",
+		"icon": "//img.alicdn.com/imgextra/i4/O1CN01z4BjYM1PtKNf8TSIz_!!6000000001898-2-tps-368-208.png",
+		"thumbnail": "//img.alicdn.com/imgextra/i4/O1CN01WYxJIH1C8zIiDPIAu_!!6000000000037-2-tps-332-144.png",
+		"protocol": 2,
+		"level": 1,
+		"type": [
+			"media_audio",
+			"DataV-6:media"
+		],
+		"view": {
+			"width": "400",
+			"height": "55",
+			"minWidth": "100",
+			"minHeight": "10"
+		},
+		"analysis": {
+			"apis": "source"
+		},
+		"apis": {
+			"source": {
+				"name": "音频接口",
+				"handler": "render",
+				"description": "音频接口",
+				"fields": {
+					"source": {
+						"name": "音频资源",
+						"description": "音频资源",
+						"type": "string",
+						"optional": false
+					}
+				}
+			}
+		},
+		"config": {
+			"source": {
+				"name": "音频链接",
+				"type": "text",
+				"description": "支持从数据中获取音频内容，详见数据面板",
+				"default": "//player.alicdn.com/video/editor.mp4"
+			},
+			"playSet": {
+				"name": "播放设置",
+				"type": "suite",
+				"children": {
+					"autoPlay": {
+						"type": "boolean",
+						"default": true,
+						"name": "自动播放",
+						"col": 12,
+						"description": "由于浏览器协议限制，用户和组件发生交互行为时才会自动播放；"
+					},
+					"isLoop": {
+						"type": "boolean",
+						"default": true,
+						"name": "循环播放",
+						"col": 12
+					},
+					"playbackRate": {
+						"name": "播放速度",
+						"type": "stepper",
+						"suffix": "倍",
+						"default": 1,
+						"step": 0.1,
+						"col": 12
+					},
+					"currentTime": {
+						"name": "跳转",
+						"type": "stepper",
+						"default": 10,
+						"step": 1,
+						"suffix": "s",
+						"description": "可以设置音频跳转到哪一秒；",
+						"col": 12,
+						"min": 0
+					}
+				}
+			},
+			"volumeSet": {
+				"name": "音量设置",
+				"type": "suite",
+				"children": {
+					"isMuted": {
+						"name": "是否静音",
+						"type": "boolean",
+						"default": false,
+						"col": 12
+					},
+					"volume": {
+						"type": "stepper",
+						"default": 50,
+						"name": "音量",
+						"suffix": "%",
+						"step": 1,
+						"col": 12,
+						"min": 0,
+						"max": 100
+					}
+				}
+			},
+			"download": {
+				"name": "能否下载",
+				"type": "boolean",
+				"default": true,
+				"description": "右侧更多按钮中的下载设置"
+			}
+		},
+		"publicHandler": {
+			"play": {
+				"name": "开始播放",
+				"type": "null"
+			},
+			"pause": {
+				"name": "暂停播放",
+				"type": "null"
+			},
+			"end": {
+				"name": "结束播放",
+				"type": "null"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"source": ""
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,198 @@
+{
+	"name": "pie-comparison-with-image",
+	"version": "0.0.5",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "~2.1.4",
+		"lodash": "*"
+	},
+	"datav": {
+		"cn_name": "带图片的对比饼图",
+		"protocol": 2,
+		"type": [
+			"regular",
+			"pie"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "对比饼图接口",
+				"fields": {
+					"x": {
+						"description": "类目",
+						"type": "string"
+					},
+					"y": {
+						"description": "值",
+						"type": "int"
+					}
+				}
+			}
+		},
+		"config": {
+			"title": {
+				"type": "group",
+				"name": "标题",
+				"children": {
+					"value": {
+						"type": "text",
+						"name": "标题名",
+						"default": "我是标题"
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字体",
+						"min": 10,
+						"default": 20,
+						"max": 100
+					},
+					"text-align": {
+						"name": "对齐方式",
+						"type": "select",
+						"options": [
+							{
+								"name": "左对齐",
+								"value": "left"
+							},
+							{
+								"name": "右对齐",
+								"value": "right"
+							},
+							{
+								"name": "居中对齐",
+								"value": "center"
+							}
+						],
+						"default": "center"
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "#fff"
+					},
+					"background-color": {
+						"name": "背景",
+						"type": "color",
+						"default": "#000"
+					}
+				}
+			},
+			"chart": {
+				"type": "group",
+				"name": "图表",
+				"children": {
+					"dx": {
+						"default": 20,
+						"name": "标签距离中心点水平距离",
+						"type": "number",
+						"range": [
+							5,
+							30
+						]
+					},
+					"image": {
+						"name": "图片",
+						"type": "image",
+						"default": "http://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/e44066b3c8d5f1c419a6baf756776d5b.png"
+					}
+				}
+			},
+			"series": {
+				"type": "group",
+				"name": "数据系列",
+				"children": {
+					"serie1": {
+						"type": "group",
+						"name": "系列一",
+						"children": {
+							"serie-color": {
+								"type": "color",
+								"default": "#4DD3E2",
+								"name": "颜色"
+							},
+							"label-font-size": {
+								"type": "number",
+								"default": 16,
+								"name": "类目字号",
+								"range": [
+									12,
+									100
+								]
+							},
+							"label-color": {
+								"type": "color",
+								"default": "#fff",
+								"name": "类目颜色"
+							},
+							"value-font-size": {
+								"type": "number",
+								"default": 30,
+								"name": "百分比字号",
+								"range": [
+									12,
+									100
+								]
+							},
+							"value-color": {
+								"type": "color",
+								"default": "#fff",
+								"name": "百分比颜色"
+							}
+						}
+					},
+					"serie2": {
+						"type": "group",
+						"name": "系列二",
+						"children": {
+							"serie-color": {
+								"type": "color",
+								"default": "#fff",
+								"name": "颜色"
+							},
+							"label-font-size": {
+								"type": "number",
+								"default": 16,
+								"name": "类目字号",
+								"range": [
+									12,
+									100
+								]
+							},
+							"label-color": {
+								"type": "color",
+								"default": "#fff",
+								"name": "类目颜色"
+							},
+							"value-font-size": {
+								"type": "number",
+								"default": 30,
+								"name": "百分比字号",
+								"range": [
+									12,
+									100
+								]
+							},
+							"value-color": {
+								"type": "color",
+								"default": "#fff",
+								"name": "百分比颜色"
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "老用户",
+					"y": 2325
+				},
+				{
+					"x": "新用户",
+					"y": 6422
+				}
+			]
+		}
+	}
+}

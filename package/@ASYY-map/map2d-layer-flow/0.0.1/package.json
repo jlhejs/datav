@@ -1,0 +1,106 @@
+{
+	"name": "map2d-layer-flow",
+	"version": "0.0.1",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"ldmap": "0.1.6"
+	},
+	"datav": {
+		"cn_name": "2d流场",
+		"protocol": 2,
+		"type": [
+			"subcom"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		},
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "流场数据",
+				"fields": {
+					"lat": {
+						"description": "纬度"
+					},
+					"lng": {
+						"description": "经度"
+					},
+					"u": {
+						"description": "水平速度"
+					},
+					"v": {
+						"description": "垂直速度"
+					}
+				}
+			}
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"start_color": {
+				"name": "最小值颜色",
+				"type": "color",
+				"default": "rgba(0, 255, 255, 0.5)"
+			},
+			"end_color": {
+				"name": "最小值颜色",
+				"type": "color",
+				"default": "rgba(255, 30, 219, 0.5)"
+			},
+			"velocityScale": {
+				"name": "速度比率",
+				"type": "number",
+				"default": 0.9,
+				"min": 0,
+				"max": 5,
+				"step": 0.1
+			},
+			"fade": {
+				"name": "消失速率",
+				"type": "number",
+				"default": 0.5,
+				"min": 0,
+				"max": 1,
+				"step": 0.1
+			},
+			"life": {
+				"name": "生命周期",
+				"type": "number",
+				"default": 80,
+				"min": 1,
+				"max": 100,
+				"step": 1
+			},
+			"particles_factor": {
+				"name": "粒子数目比率",
+				"type": "number",
+				"default": 0.5,
+				"min": 0,
+				"max": 1,
+				"step": 0.1
+			},
+			"lineWidth": {
+				"name": "线宽",
+				"type": "number",
+				"default": 2,
+				"min": 0,
+				"max": 5,
+				"step": 0.1
+			}
+		},
+		"api_data": {
+			"source": "./data.json"
+		}
+	}
+}

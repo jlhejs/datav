@@ -1,0 +1,366 @@
+{
+	"name": "@ChJ.limit_free/horizontal-positive-negative-bar-chart",
+	"version": "0.2.2",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"echarts": "^3.7.2",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "水平正负柱状图",
+		"icon": {
+			"316x238": "//resource.datav.aliyun.com/cube/com/@ChJ.limit_free/horizontal-positive-negative-bar-chart/0.2.2/icons/316x238icon.png?time=1541142278860"
+		},
+		"protocol": 2,
+		"type": [
+			"regular_bar"
+		],
+		"view": {
+			"width": "800",
+			"height": "500",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"x": {
+						"description": "类目"
+					},
+					"y": {
+						"description": "数值"
+					},
+					"s": {
+						"description": "系列"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"name": "全局样式",
+				"type": "group",
+				"children": {
+					"showTooltip": {
+						"name": "显示提示框",
+						"type": "boolean",
+						"default": true
+					},
+					"bgcolor": {
+						"name": "背景颜色",
+						"type": "color",
+						"default": "rgba(255,255,255,0)"
+					},
+					"barWidth": {
+						"name": "柱状宽度",
+						"type": "number",
+						"default": "20",
+						"min": 1,
+						"max": 100,
+						"range": {
+							"min": 1,
+							"max": 100
+						}
+					}
+				}
+			},
+			"legend": {
+				"name": "图例",
+				"type": "group",
+				"children": {
+					"show": {
+						"type": "boolean",
+						"name": "显示",
+						"default": true
+					},
+					"textColor": {
+						"name": "文本颜色",
+						"type": "color",
+						"default": "white"
+					},
+					"icon": {
+						"type": "select",
+						"name": "图例样式",
+						"options": [
+							{
+								"name": "圆角矩形",
+								"value": "roundRect"
+							},
+							{
+								"name": "圆形",
+								"value": "circle"
+							},
+							{
+								"name": "矩形",
+								"value": "rect"
+							},
+							{
+								"name": "三角形",
+								"value": "triangle"
+							},
+							{
+								"name": "菱形",
+								"value": "diamond"
+							}
+						],
+						"default": "roundRect"
+					},
+					"orient": {
+						"type": "select",
+						"name": "排列方式",
+						"options": [
+							{
+								"name": "垂直排列",
+								"value": "vertical"
+							},
+							{
+								"name": "水平排列",
+								"value": "horizontal"
+							}
+						],
+						"default": "horizontal"
+					},
+					"xAxis": {
+						"type": "select",
+						"name": "水平对齐",
+						"options": [
+							{
+								"name": "左对齐",
+								"value": "left"
+							},
+							{
+								"name": "右对齐",
+								"value": "right"
+							},
+							{
+								"name": "居中",
+								"value": "center"
+							}
+						],
+						"default": "center"
+					},
+					"yAxis": {
+						"type": "select",
+						"name": "垂直对齐",
+						"options": [
+							{
+								"name": "上对齐",
+								"value": "top"
+							},
+							{
+								"name": "下对齐",
+								"value": "bottom"
+							},
+							{
+								"name": "居中",
+								"value": "center"
+							}
+						],
+						"default": "top"
+					},
+					"selectedMode": {
+						"type": "boolean",
+						"name": "交互",
+						"default": true
+					}
+				},
+				"fold": false
+			},
+			"xAxis": {
+				"name": "x轴",
+				"type": "group",
+				"children": {
+					"show": {
+						"name": "显示",
+						"type": "boolean",
+						"default": true
+					},
+					"splitLineShow": {
+						"name": "分隔线",
+						"type": "boolean",
+						"default": true
+					},
+					"labelColor": {
+						"name": "标签颜色",
+						"type": "color",
+						"default": "white"
+					},
+					"labelFontSize": {
+						"name": "字体大小",
+						"type": "number",
+						"default": "12"
+					},
+					"axisColor": {
+						"name": "坐标轴颜色",
+						"type": "color",
+						"default": "#0055bd"
+					}
+				}
+			},
+			"yAxis": {
+				"name": "y轴",
+				"type": "group",
+				"children": {
+					"show": {
+						"name": "显示",
+						"type": "boolean",
+						"default": true
+					},
+					"splitLineShow": {
+						"name": "分隔线",
+						"type": "boolean",
+						"default": true
+					},
+					"labelColor": {
+						"name": "标签颜色",
+						"type": "color",
+						"default": "white"
+					},
+					"labelFontSize": {
+						"name": "字体大小",
+						"type": "number",
+						"default": "12"
+					}
+				}
+			},
+			"array": {
+				"name": "数据系列",
+				"type": "array",
+				"default": [
+					{
+						"name": "项目一",
+						"value": "1",
+						"color": {
+							"style": "double",
+							"value": "#ff3e8b",
+							"from": "#ef00ff",
+							"to": "#ba00ff",
+							"angle": 0
+						}
+					},
+					{
+						"name": "项目二",
+						"value": "2",
+						"color": {
+							"style": "double",
+							"value": "#00baff",
+							"from": "#2846ff",
+							"to": "#00baff",
+							"angle": 0
+						}
+					}
+				],
+				"child": {
+					"name": "系列<%=i+1%>",
+					"type": "object",
+					"child": {
+						"name": {
+							"name": "系列名",
+							"type": "text",
+							"default": "类目"
+						},
+						"value": {
+							"name": "系列值",
+							"type": "text",
+							"default": "1"
+						},
+						"color": {
+							"name": "颜色",
+							"type": "multicolor",
+							"default": {
+								"style": "double",
+								"value": "#00baff",
+								"from": "#2846ff",
+								"to": "#00baff",
+								"angle": 0
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "周一",
+					"y": 276,
+					"s": "1"
+				},
+				{
+					"x": "周一",
+					"y": 340,
+					"s": "2"
+				},
+				{
+					"x": "周二",
+					"y": 295,
+					"s": "1"
+				},
+				{
+					"x": "周二",
+					"y": 370,
+					"s": "2"
+				},
+				{
+					"x": "周三",
+					"y": 210,
+					"s": "1"
+				},
+				{
+					"x": "周三",
+					"y": 280,
+					"s": "2"
+				},
+				{
+					"x": "周四",
+					"y": 175,
+					"s": "1"
+				},
+				{
+					"x": "周四",
+					"y": 210,
+					"s": "2"
+				},
+				{
+					"x": "周五",
+					"y": 194,
+					"s": "1"
+				},
+				{
+					"x": "周五",
+					"y": 240,
+					"s": "2"
+				},
+				{
+					"x": "周六",
+					"y": 180,
+					"s": "1"
+				},
+				{
+					"x": "周六",
+					"y": 221,
+					"s": "2"
+				},
+				{
+					"x": "周日",
+					"y": 200,
+					"s": "1"
+				},
+				{
+					"x": "周日",
+					"y": 240,
+					"s": "2"
+				},
+				{
+					"x": "周日",
+					"y": 240,
+					"s": "3"
+				}
+			]
+		}
+	}
+}

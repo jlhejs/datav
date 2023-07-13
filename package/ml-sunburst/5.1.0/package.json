@@ -1,0 +1,2072 @@
+{
+	"name": "ml-sunburst",
+	"version": "5.1.0",
+	"dependencies": {
+		"@antv/g2plot": "^2.4.20",
+		"alibabacloud-datav-tool-gui-utils": "1.0.0",
+		"bcore": "0.0.22",
+		"d3-format": "3.1.0",
+		"lodash": "4.17.11",
+		"moment": "2.27.0"
+	},
+	"datav": {
+		"cn_name": "旭日图",
+		"icon": "//img.alicdn.com/imgextra/i2/O1CN01tGwK441WrDvlxc52m_!!6000000002841-2-tps-368-208.png",
+		"thumbnail": "//img.alicdn.com/imgextra/i2/O1CN01OloTL21Yo8UclBFyq_!!6000000003105-2-tps-332-144.png",
+		"protocol": 2,
+		"level": 1,
+		"supportTheme": false,
+		"type": [
+			"DataV-6:regular_relation_sunburst"
+		],
+		"view": {
+			"width": "500",
+			"height": "300",
+			"minWidth": "40",
+			"minHeight": "20"
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "options.chart.fill",
+					"apiPath": "source.colorField"
+				}
+			],
+			"conditionalStyle": [
+				{
+					"configPath": "options.condition.customStyle",
+					"ruleKey": "rules"
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"name": "旭日图接口",
+				"handler": "render",
+				"description": "旭日图接口",
+				"fields": {
+					"name": {
+						"name": "名称",
+						"description": "名称",
+						"type": "string | number",
+						"optional": false
+					},
+					"value": {
+						"name": "数值",
+						"description": "数值",
+						"type": "string | number",
+						"optional": false
+					},
+					"colorField": {
+						"name": "系列",
+						"description": "系列",
+						"type": "string | number",
+						"optional": false
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"chart": {
+						"name": "图形",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"margin": {
+								"type": "margin",
+								"name": "图表边距",
+								"default": {
+									"top": 40,
+									"bottom": 30,
+									"left": 30,
+									"right": 20
+								},
+								"children": {
+									"show": {
+										"default": false
+									}
+								},
+								"enableHide": true
+							},
+							"fill": {
+								"name": "旭日颜色",
+								"type": "colorMapping",
+								"fixedComponents": [
+									"flat",
+									"linearGradient"
+								],
+								"scaleTypes": [
+									"ordinal"
+								],
+								"default": {
+									"mapping": true,
+									"fixed": {
+										"type": "flat",
+										"value": "#2483ff"
+									},
+									"scale": {
+										"type": "ordinal",
+										"scheme": "cat-3",
+										"custom": false,
+										"range": [
+											"#2362EB",
+											"#2AA1EB",
+											"#31E0F2"
+										],
+										"domain": [],
+										"excepted": "yellow",
+										"abnormal": "transparent",
+										"pin": [
+											false,
+											false,
+											false
+										]
+									}
+								}
+							},
+							"graduallyColor": {
+								"name": "透明度降低",
+								"description": "子级透明度逐级降低",
+								"type": "slider",
+								"step": 0.01,
+								"min": 0,
+								"max": 1,
+								"suffix": "α",
+								"showCurrentRange": true,
+								"default": 0.85
+							},
+							"radiiWrap": {
+								"name": "旭日半径",
+								"type": "suite",
+								"children": {
+									"show": {
+										"default": true
+									},
+									"radii": {
+										"name": "旭日半径",
+										"type": "slider",
+										"mode": "double",
+										"step": 1,
+										"min": 0,
+										"max": 100,
+										"suffix": "%",
+										"showCurrentRange": true,
+										"default": [
+											10,
+											100
+										]
+									},
+									"ignoreParentValue": {
+										"description": "自动计算父级权重开启时，将忽略父级的 value，由子级节点自动计算得出父级权重",
+										"caption": "自动计算父级权重",
+										"type": "switch",
+										"default": true
+									}
+								}
+							},
+							"sunburstLine": {
+								"name": "描边样式",
+								"type": "suite",
+								"children": {
+									"lineStyle": {
+										"name": "线型",
+										"caption": "线型",
+										"type": "select",
+										"default": "solid",
+										"col": 9,
+										"options": [
+											{
+												"name": "实线",
+												"value": "solid"
+											},
+											{
+												"name": "虚线",
+												"value": "dashed"
+											},
+											{
+												"name": "点线",
+												"value": "dotted"
+											}
+										]
+									},
+									"lineWidth": {
+										"name": "粗细",
+										"caption": "粗细",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 1,
+										"col": 9
+									},
+									"lineColor": {
+										"name": "颜色",
+										"caption": "颜色",
+										"style": "simple",
+										"type": "fill",
+										"default": "rgba(0, 0, 0, 0.25)",
+										"col": 6
+									},
+									"dashedLength": {
+										"name": "长度",
+										"caption": "长度",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 3,
+										"col": 12,
+										"showInPanel": {
+											"conditions": [
+												[
+													".lineStyle",
+													"$eq",
+													"dashed"
+												]
+											]
+										}
+									},
+									"dashedSpace": {
+										"name": "间距",
+										"caption": "间距",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 8,
+										"col": 12,
+										"showInPanel": {
+											"conditions": [
+												[
+													".lineStyle",
+													"$eq",
+													"dashed"
+												]
+											]
+										}
+									},
+									"dottedLength": {
+										"name": "长度",
+										"caption": "长度",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 2,
+										"col": 12,
+										"showInPanel": {
+											"conditions": [
+												[
+													".lineStyle",
+													"$eq",
+													"dotted"
+												]
+											]
+										}
+									},
+									"dottedSpace": {
+										"name": "间距",
+										"caption": "间距",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 4,
+										"col": 12,
+										"showInPanel": {
+											"conditions": [
+												[
+													".lineStyle",
+													"$eq",
+													"dotted"
+												]
+											]
+										}
+									}
+								}
+							},
+							"label": {
+								"name": "旭日标注",
+								"type": "group",
+								"children": {
+									"show": {
+										"default": false
+									},
+									"labelField": {
+										"name": "标注字段",
+										"type": "select",
+										"optionCol": 12,
+										"default": "value",
+										"options": [
+											{
+												"value": "name",
+												"name": "name"
+											},
+											{
+												"value": "value",
+												"name": "value"
+											},
+											{
+												"value": "name + value",
+												"name": "name + value"
+											}
+										]
+									},
+									"nameDescribe": {
+										"name": "name",
+										"type": "suite",
+										"children": {
+											"prefix": {
+												"name": "前缀",
+												"type": "text",
+												"default": "",
+												"col": 12
+											},
+											"suffix": {
+												"name": "后缀",
+												"type": "text",
+												"default": "",
+												"col": 12
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".labelField",
+													"$eq",
+													"name"
+												],
+												[
+													".labelField",
+													"$eq",
+													"name + value"
+												]
+											],
+											"logicalType": "$or"
+										}
+									},
+									"valueDescribe": {
+										"name": "value",
+										"type": "suite",
+										"children": {
+											"prefix": {
+												"name": "前缀",
+												"type": "text",
+												"default": "",
+												"col": 12
+											},
+											"suffix": {
+												"name": "后缀",
+												"type": "text",
+												"default": "",
+												"col": 12
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".labelField",
+													"$eq",
+													"value"
+												],
+												[
+													".labelField",
+													"$eq",
+													"name + value"
+												]
+											],
+											"logicalType": "$or"
+										}
+									},
+									"valueFormat": {
+										"name": "数值格式",
+										"type": "select",
+										"default": "d",
+										"description": "参考文档：https://github.com/d3/d3-format/blob/v3.1.0/README.md#format",
+										"options": [
+											{
+												"value": "",
+												"name": "默认"
+											},
+											{
+												"value": "d",
+												"name": "11(整数)"
+											},
+											{
+												"value": ".1f",
+												"name": "11.1(浮点数)"
+											},
+											{
+												"value": ".2f",
+												"name": "11.11(浮点数)"
+											},
+											{
+												"value": ".0%",
+												"name": "11%(百分比)"
+											},
+											{
+												"value": ".1%",
+												"name": "11.1%(百分比)"
+											},
+											{
+												"value": ",.0f",
+												"name": "1,111(千分位)"
+											},
+											{
+												"value": ",.1f",
+												"name": "1,111.1(千分位)"
+											}
+										],
+										"filterable": true,
+										"allowCustom": true,
+										"showInPanel": {
+											"conditions": [
+												[
+													".labelField",
+													"$ne",
+													"name"
+												]
+											]
+										}
+									},
+									"percentFormat": {
+										"name": "占比格式",
+										"type": "select",
+										"default": ".2%",
+										"description": "占比显示格式",
+										"options": [
+											{
+												"value": ".0%",
+												"name": "11%"
+											},
+											{
+												"value": ".1%",
+												"name": "11.1%"
+											},
+											{
+												"value": ".2%",
+												"name": "11.11%"
+											}
+										],
+										"filterable": true,
+										"allowCustom": true,
+										"showInPanel": {
+											"conditions": [
+												[
+													".valueField",
+													"$eq",
+													"percent"
+												],
+												[
+													".labelField",
+													"$ne",
+													"type"
+												]
+											]
+										}
+									},
+									"isEllipsis": {
+										"name": "省略号",
+										"type": "boolean",
+										"default": false,
+										"description": "字符太长时, 开启省略号",
+										"showInPanel": {
+											"conditions": [
+												[
+													".labelField",
+													"$ne",
+													"value"
+												]
+											]
+										}
+									},
+									"ellipsisLen": {
+										"name": "省略长度",
+										"type": "stepper",
+										"default": 5,
+										"step": 1,
+										"suffix": "px",
+										"showInPanel": {
+											"conditions": [
+												[
+													".isEllipsis",
+													"$eq",
+													true
+												],
+												[
+													".labelField",
+													"$ne",
+													"value"
+												]
+											]
+										}
+									},
+									"isBreak": {
+										"name": "是否折行",
+										"type": "boolean",
+										"default": false,
+										"description": "当展示两个标签值时，可以折行展示;",
+										"showInPanel": {
+											"conditions": [
+												[
+													".labelField",
+													"$eq",
+													"name + value"
+												]
+											]
+										}
+									},
+									"lineHeight": {
+										"name": "行高",
+										"type": "stepper",
+										"default": 16,
+										"step": 1,
+										"suffix": "px",
+										"showInPanel": {
+											"conditions": [
+												[
+													".isBreak",
+													"$eq",
+													true
+												],
+												[
+													".labelField",
+													"$eq",
+													"name + value"
+												]
+											]
+										}
+									},
+									"offset": {
+										"name": "相对偏移",
+										"type": "suite",
+										"children": {
+											"offsetX": {
+												"name": "水平",
+												"type": "stepper",
+												"default": 0,
+												"suffix": "px",
+												"step": 1,
+												"col": 12
+											},
+											"offsetY": {
+												"name": "垂直",
+												"type": "stepper",
+												"default": 0,
+												"step": 1,
+												"suffix": "px",
+												"col": 12
+											}
+										}
+									},
+									"textStyle": {
+										"type": "font",
+										"name": "文本样式",
+										"default": {
+											"fontSize": 10,
+											"color": "#dddddd",
+											"fontWeight": "normal",
+											"fontFamily": "Arial"
+										}
+									},
+									"stroke": {
+										"name": "文本描边",
+										"type": "suite",
+										"children": {
+											"lineWidth": {
+												"name": "粗细",
+												"type": "stepper",
+												"step": 1,
+												"suffix": "px",
+												"default": 0,
+												"col": 12
+											},
+											"strokeColor": {
+												"name": "颜色",
+												"type": "color",
+												"default": "#000",
+												"col": 12
+											}
+										}
+									}
+								},
+								"enableHide": true
+							},
+							"pattern": {
+								"name": "贴图",
+								"type": "group",
+								"children": {
+									"show": {
+										"default": false,
+										"_simplified_show": true
+									},
+									"type": {
+										"name": "类型",
+										"type": "buttonRadio",
+										"default": "dot",
+										"options": [
+											{
+												"name": "点形",
+												"value": "dot"
+											},
+											{
+												"name": "线形",
+												"value": "line"
+											},
+											{
+												"name": "正方形",
+												"value": "square"
+											}
+										]
+									},
+									"patternFill": {
+										"name": "填充样式",
+										"type": "suite",
+										"children": {
+											"fill": {
+												"name": "填充色",
+												"type": "fill",
+												"default": "rgba(255,255,255,0.5)"
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".type",
+													"$eq",
+													"dot"
+												],
+												[
+													".type",
+													"$eq",
+													"square"
+												]
+											],
+											"logicalType": "$or"
+										}
+									},
+									"lineFill": {
+										"name": "填充样式",
+										"type": "suite",
+										"children": {
+											"stroke": {
+												"name": "填充色",
+												"type": "fill",
+												"default": "rgba(255,255,255,0.5)",
+												"col": 12
+											},
+											"lineWidth": {
+												"name": "宽度",
+												"type": "stepper",
+												"suffix": "px",
+												"step": 1,
+												"default": 1,
+												"min": 0,
+												"col": 12
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".type",
+													"$eq",
+													"line"
+												]
+											]
+										}
+									},
+									"patternStroke": {
+										"name": "描边样式",
+										"type": "suite",
+										"children": {
+											"show": {
+												"default": false
+											},
+											"stroke": {
+												"name": "描边色",
+												"type": "fill",
+												"default": "rgba(255,255,255,0.5)",
+												"col": 12
+											},
+											"lineWidth": {
+												"name": "描边粗细",
+												"type": "stepper",
+												"suffix": "px",
+												"step": 1,
+												"default": 1,
+												"min": 0,
+												"col": 12
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".type",
+													"$ne",
+													"line"
+												]
+											]
+										},
+										"enableHide": true
+									},
+									"dotCfg": {
+										"name": "额外样式",
+										"type": "suite",
+										"children": {
+											"size": {
+												"name": "图形尺寸",
+												"type": "number",
+												"default": 6,
+												"suffix": "px",
+												"min": 0,
+												"col": 12
+											},
+											"padding": {
+												"name": "图形间距",
+												"type": "number",
+												"default": 2,
+												"suffix": "px",
+												"min": 0,
+												"col": 12
+											},
+											"rotation": {
+												"name": "旋转角度",
+												"type": "number",
+												"default": 0,
+												"suffix": "°",
+												"col": 12
+											},
+											"isStagger": {
+												"name": "是否交错",
+												"type": "switch",
+												"default": true,
+												"col": 12
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".type",
+													"$ne",
+													"line"
+												]
+											]
+										}
+									},
+									"lineCfg": {
+										"name": "额外样式",
+										"type": "suite",
+										"children": {
+											"spacing": {
+												"name": "线间距",
+												"type": "number",
+												"default": 5,
+												"suffix": "px",
+												"min": 0,
+												"col": 12
+											},
+											"rotation": {
+												"name": "旋转角度",
+												"type": "number",
+												"default": 45,
+												"suffix": "°",
+												"min": 0,
+												"col": 12
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".type",
+													"$eq",
+													"line"
+												]
+											]
+										}
+									}
+								},
+								"enableHide": true
+							}
+						}
+					},
+					"animation": {
+						"name": "动画",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"isShow": {
+								"type": "switch",
+								"name": "动画开关",
+								"default": true
+							},
+							"animationEasing": {
+								"name": "动画效果",
+								"type": "select",
+								"options": [
+									{
+										"value": "zoom-in",
+										"name": "缩放渐入"
+									},
+									{
+										"value": "wave-in",
+										"name": "划动进入"
+									},
+									{
+										"value": "scale-in-x",
+										"name": "水平生长"
+									},
+									{
+										"value": "scale-in-y",
+										"name": "垂直生长"
+									}
+								],
+								"default": "wave-in",
+								"filterable": true,
+								"allowCustom": true,
+								"showInPanel": {
+									"conditions": [
+										[
+											".isShow",
+											"$eq",
+											true
+										]
+									]
+								}
+							},
+							"duration": {
+								"name": "动画时长",
+								"type": "stepper",
+								"step": 1,
+								"default": 1000,
+								"min": 0,
+								"suffix": "ms",
+								"showInPanel": {
+									"conditions": [
+										[
+											".isShow",
+											"$eq",
+											true
+										]
+									]
+								}
+							}
+						}
+					},
+					"tooltip": {
+						"name": "交互",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"tooltipSet": {
+								"name": "提示框",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"trigger": {
+										"name": "触发方式",
+										"type": "buttonRadio",
+										"default": "mouseover",
+										"options": [
+											{
+												"name": "点击",
+												"value": "click"
+											},
+											{
+												"name": "悬浮",
+												"value": "mouseover"
+											}
+										]
+									},
+									"titleSpace": {
+										"name": "标题间距",
+										"type": "stepper",
+										"step": 1,
+										"default": 16,
+										"suffix": "px"
+									},
+									"titleText": {
+										"name": "提示框标题",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": true
+											},
+											"con": {
+												"type": "text",
+												"default": "标题"
+											}
+										}
+									},
+									"titleTextStyle": {
+										"name": "标题样式",
+										"type": "font",
+										"default": {
+											"fontFamily": "Arial",
+											"fontWeight": "normal",
+											"fontSize": 14,
+											"color": "#fff"
+										}
+									},
+									"series": {
+										"type": "tabs",
+										"name": "内容显示",
+										"defaultViewMode": "column",
+										"default": [
+											{
+												"columnName": "name",
+												"displayName": "名称"
+											}
+										],
+										"template": {
+											"type": "object",
+											"name": "系列<%= i + 1%>",
+											"children": {
+												"columnName": {
+													"name": "字段名",
+													"type": "string",
+													"description": "需要与数据中字段匹配"
+												},
+												"displayName": {
+													"name": "显示名",
+													"type": "string",
+													"description": "提示框显示名称"
+												},
+												"prefixSuffix": {
+													"type": "suite",
+													"name": "前后缀",
+													"children": {
+														"prefix": {
+															"name": "前缀",
+															"caption": "前缀",
+															"type": "text",
+															"default": "",
+															"col": 12
+														},
+														"suffix": {
+															"name": "后缀",
+															"caption": "后缀",
+															"type": "text",
+															"default": "",
+															"col": 12
+														}
+													}
+												}
+											}
+										}
+									},
+									"valueFormat": {
+										"name": "数值格式",
+										"type": "select",
+										"default": "d",
+										"description": "对value字段生效",
+										"options": [
+											{
+												"value": "null",
+												"name": "默认"
+											},
+											{
+												"value": "d",
+												"name": "11(整数)"
+											},
+											{
+												"value": ".1f",
+												"name": "11.1(浮点数)"
+											},
+											{
+												"value": ".2f",
+												"name": "11.11(浮点数)"
+											},
+											{
+												"value": ".0%",
+												"name": "11%"
+											},
+											{
+												"value": ".1%",
+												"label": "11.1%"
+											},
+											{
+												"value": ".2%",
+												"label": "11.11%"
+											},
+											{
+												"value": "th",
+												"label": "1,111(千分位)"
+											},
+											{
+												"value": ".1t",
+												"label": "1,111.1(千分位)"
+											},
+											{
+												"value": ".2t",
+												"label": "1,111.11(千分位)"
+											}
+										],
+										"filterable": true,
+										"allowCustom": true
+									},
+									"contentSpace": {
+										"name": "内容间距",
+										"type": "stepper",
+										"step": 1,
+										"default": 14,
+										"suffix": "px"
+									},
+									"contentTextStyle": {
+										"name": "内容文本",
+										"type": "font",
+										"default": {
+											"fontFamily": "Arial",
+											"fontWeight": "normal",
+											"fontSize": 14,
+											"color": "#fff"
+										}
+									},
+									"bgBox": {
+										"name": "弹窗背景",
+										"type": "group",
+										"children": {
+											"padding": {
+												"name": "背景边距",
+												"type": "suite",
+												"children": {
+													"paddingX": {
+														"name": "水平",
+														"caption": "水平",
+														"type": "stepper",
+														"default": 10,
+														"step": 1,
+														"suffix": "px",
+														"col": 12
+													},
+													"paddingY": {
+														"name": "垂直",
+														"caption": "垂直",
+														"type": "stepper",
+														"default": 10,
+														"step": 1,
+														"suffix": "px",
+														"col": 12
+													}
+												}
+											},
+											"backgroundColor": {
+												"name": "背景颜色",
+												"type": "fill",
+												"default": "rgba(0, 0, 0, 0.65)"
+											},
+											"border": {
+												"name": "边框样式",
+												"type": "suite",
+												"children": {
+													"borderStyle": {
+														"name": "线型",
+														"caption": "线型",
+														"type": "select",
+														"default": "solid",
+														"col": 12,
+														"options": [
+															{
+																"name": "实线",
+																"value": "solid"
+															},
+															{
+																"name": "虚线",
+																"value": "dashed"
+															},
+															{
+																"name": "点线",
+																"value": "dotted"
+															}
+														]
+													},
+													"borderRadius": {
+														"name": "圆角",
+														"caption": "圆角",
+														"type": "stepper",
+														"min": 0,
+														"step": 1,
+														"default": 4,
+														"col": 12
+													},
+													"borderWidth": {
+														"name": "线宽",
+														"caption": "线宽",
+														"type": "stepper",
+														"step": 1,
+														"min": 0,
+														"default": 1,
+														"col": 12
+													},
+													"borderColor": {
+														"name": "颜色",
+														"caption": "颜色",
+														"type": "color",
+														"default": "rgba(0,0,0,0.25)",
+														"col": 12
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"active": {
+								"name": "选中态",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"trigger": {
+										"name": "触发方式",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"label": "点击",
+												"value": "click"
+											},
+											{
+												"label": "悬浮",
+												"value": "hover"
+											}
+										],
+										"default": "click"
+									},
+									"selectType": {
+										"name": "选中方式",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"label": "单选",
+												"value": "single"
+											},
+											{
+												"label": "多选",
+												"value": "multi"
+											}
+										],
+										"default": "single"
+									},
+									"slider": {
+										"name": "透明度",
+										"type": "slider",
+										"step": 0.1,
+										"default": 1,
+										"min": 0,
+										"max": 1,
+										"suffix": "α",
+										"showRange": true
+									},
+									"fillWrap": {
+										"name": "旭日颜色",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false
+											},
+											"fill": {
+												"type": "fill",
+												"components": [
+													"flat",
+													"linearGradient"
+												],
+												"default": {
+													"type": "linearGradient",
+													"value": {
+														"angle": 90,
+														"stops": [
+															{
+																"offset": 0,
+																"color": "#00ff95"
+															},
+															{
+																"offset": 100,
+																"color": "rgba(88, 142, 233, 0.5)"
+															}
+														]
+													}
+												},
+												"enableHide": true
+											}
+										}
+									},
+									"line": {
+										"name": "旭日描边",
+										"type": "suite",
+										"children": {
+											"lineStyle": {
+												"name": "线型",
+												"caption": "线型",
+												"type": "select",
+												"default": "solid",
+												"col": 9,
+												"options": [
+													{
+														"name": "实线",
+														"value": "solid"
+													},
+													{
+														"name": "虚线",
+														"value": "dashed"
+													},
+													{
+														"name": "点线",
+														"value": "dotted"
+													}
+												]
+											},
+											"lineWidth": {
+												"name": "粗细",
+												"caption": "粗细",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 1,
+												"col": 9
+											},
+											"lineColor": {
+												"name": "颜色",
+												"caption": "颜色",
+												"type": "color",
+												"style": "simple",
+												"default": "#fff",
+												"col": 6
+											},
+											"dashedLength": {
+												"name": "长度",
+												"caption": "长度",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 3,
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".lineStyle",
+															"$eq",
+															"dashed"
+														]
+													]
+												}
+											},
+											"dashedSpace": {
+												"name": "间距",
+												"caption": "间距",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 8,
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".lineStyle",
+															"$eq",
+															"dashed"
+														]
+													]
+												}
+											},
+											"dottedLength": {
+												"name": "长度",
+												"caption": "长度",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 2,
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".lineStyle",
+															"$eq",
+															"dotted"
+														]
+													]
+												}
+											},
+											"dottedSpace": {
+												"name": "间距",
+												"caption": "间距",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 4,
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".lineStyle",
+															"$eq",
+															"dotted"
+														]
+													]
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"condition": {
+						"name": "条件",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"customStyle": {
+								"name": "数据条件系列",
+								"type": "tabs",
+								"fold": false,
+								"default": [
+									{
+										"rules": {
+											"operator": "OR",
+											"enabled": false,
+											"expressions": [
+												{
+													"operator": "AND",
+													"expressions": [
+														[
+															"value",
+															"gt",
+															3
+														]
+													]
+												}
+											]
+										},
+										"fill": {
+											"type": "flat",
+											"show": true,
+											"value": "#f00"
+										}
+									}
+								],
+								"template": {
+									"type": "object",
+									"name": "条件样式<%= i + 1%>",
+									"children": {
+										"rules": {
+											"type": "logicalTree",
+											"default": {
+												"enabled": false,
+												"operator": "OR",
+												"expressions": [
+													{
+														"operator": "AND",
+														"expressions": [
+															[
+																"y",
+																"gt",
+																12
+															]
+														]
+													}
+												]
+											}
+										},
+										"fill": {
+											"name": "旭日颜色",
+											"type": "suite",
+											"enableHide": true,
+											"children": {
+												"value": {
+													"type": "fill",
+													"default": "yellow",
+													"components": [
+														"flat",
+														"linearGradient"
+													]
+												}
+											},
+											"showInPanel": {
+												"conditions": [
+													[
+														".rules.enabled",
+														"$eq",
+														true
+													]
+												]
+											}
+										},
+										"sunburstLineStyle": {
+											"name": "描边样式",
+											"type": "suite",
+											"enableHide": true,
+											"children": {
+												"lineStyle": {
+													"name": "线型",
+													"caption": "线型",
+													"type": "select",
+													"default": "solid",
+													"col": 9,
+													"options": [
+														{
+															"name": "实线",
+															"value": "solid"
+														},
+														{
+															"name": "虚线",
+															"value": "dashed"
+														},
+														{
+															"name": "点线",
+															"value": "dotted"
+														}
+													]
+												},
+												"lineWidth": {
+													"name": "粗细",
+													"caption": "粗细",
+													"type": "stepper",
+													"step": 1,
+													"min": 0,
+													"default": 1,
+													"col": 9
+												},
+												"lineColor": {
+													"name": "颜色",
+													"caption": "颜色",
+													"style": "simple",
+													"type": "fill",
+													"default": "rgba(233, 228, 228, 0.25)",
+													"col": 6
+												},
+												"dashedLength": {
+													"name": "长度",
+													"caption": "长度",
+													"type": "stepper",
+													"step": 1,
+													"min": 0,
+													"default": 3,
+													"col": 12,
+													"showInPanel": {
+														"conditions": [
+															[
+																".lineStyle",
+																"$eq",
+																"dashed"
+															]
+														]
+													}
+												},
+												"dashedSpace": {
+													"name": "间距",
+													"caption": "间距",
+													"type": "stepper",
+													"step": 1,
+													"min": 0,
+													"default": 8,
+													"col": 12,
+													"showInPanel": {
+														"conditions": [
+															[
+																".lineStyle",
+																"$eq",
+																"dashed"
+															]
+														]
+													}
+												},
+												"dottedLength": {
+													"name": "长度",
+													"caption": "长度",
+													"type": "stepper",
+													"step": 1,
+													"min": 0,
+													"default": 2,
+													"col": 12,
+													"showInPanel": {
+														"conditions": [
+															[
+																".lineStyle",
+																"$eq",
+																"dotted"
+															]
+														]
+													}
+												},
+												"dottedSpace": {
+													"name": "间距",
+													"caption": "间距",
+													"type": "stepper",
+													"step": 1,
+													"min": 0,
+													"default": 4,
+													"col": 12,
+													"showInPanel": {
+														"conditions": [
+															[
+																".lineStyle",
+																"$eq",
+																"dotted"
+															]
+														]
+													}
+												}
+											},
+											"showInPanel": {
+												"conditions": [
+													[
+														".rules.enabled",
+														"$eq",
+														true
+													]
+												]
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "root",
+					"children": [
+						{
+							"name": "类别 1",
+							"colorField": "类别一",
+							"children": [
+								{
+									"name": "类别 1.1",
+									"colorField": "类别一",
+									"children": [
+										{
+											"name": "类别 1.1.1",
+											"colorField": "类别一",
+											"children": [
+												{
+													"name": "类别 1.1.1.1",
+													"colorField": "类别一",
+													"children": [
+														{
+															"name": "类别 1.1.1.1.1",
+															"colorField": "类别一",
+															"value": 1
+														}
+													],
+													"value": 1
+												}
+											],
+											"value": 1
+										}
+									],
+									"value": 1
+								}
+							],
+							"value": 1
+						},
+						{
+							"name": "类别 2",
+							"colorField": "类别二",
+							"children": [
+								{
+									"name": "类别 2.1",
+									"colorField": "类别二",
+									"children": [
+										{
+											"name": "类别 2.1.1",
+											"colorField": "类别二",
+											"children": [
+												{
+													"name": "类别 2.1.1.1",
+													"colorField": "类别二",
+													"children": [
+														{
+															"name": "类别 2.1.1.1.1",
+															"colorField": "类别二",
+															"children": [
+																{
+																	"name": "类别 2.1.1.1.1.1",
+																	"colorField": "类别二",
+																	"value": 1
+																},
+																{
+																	"name": "类别 2.1.1.1.1.2",
+																	"colorField": "类别二",
+																	"value": 1
+																}
+															],
+															"value": 3
+														}
+													],
+													"value": 4
+												},
+												{
+													"name": "类别 2.1.1.2",
+													"colorField": "类别二",
+													"value": 1
+												}
+											],
+											"value": 5
+										},
+										{
+											"name": "类别 2.1.2",
+											"colorField": "类别二",
+											"children": [
+												{
+													"name": "类别 2.1.2.1",
+													"colorField": "类别二",
+													"value": 1
+												},
+												{
+													"name": "类别 2.1.2.2",
+													"colorField": "类别二",
+													"children": [
+														{
+															"name": "类别 2.1.2.2.1",
+															"colorField": "类别二",
+															"value": 1
+														}
+													],
+													"value": 1
+												}
+											],
+											"value": 2
+										},
+										{
+											"name": "类别 2.1.3",
+											"colorField": "类别二",
+											"children": [
+												{
+													"name": "类别 2.1.3.1",
+													"colorField": "类别二",
+													"value": 1
+												}
+											],
+											"value": 1
+										},
+										{
+											"name": "类别 2.1.4",
+											"colorField": "类别二",
+											"children": [
+												{
+													"name": "类别 2.1.4.1",
+													"colorField": "类别二",
+													"value": 2
+												}
+											],
+											"value": 2
+										},
+										{
+											"name": "类别 2.1.5",
+											"colorField": "类别二",
+											"value": 1
+										}
+									],
+									"value": 12
+								},
+								{
+									"name": "类别 2.2",
+									"colorField": "类别二",
+									"children": [
+										{
+											"name": "类别 2.2.1",
+											"colorField": "类别二",
+											"value": 1
+										}
+									],
+									"value": 2
+								},
+								{
+									"name": "类别 2.3",
+									"colorField": "类别二",
+									"value": 1
+								},
+								{
+									"name": "类别 2.4",
+									"colorField": "类别二",
+									"children": [
+										{
+											"name": "类别 2.4.1",
+											"colorField": "类别二",
+											"children": [
+												{
+													"name": "类别 2.4.1.1",
+													"colorField": "类别二",
+													"value": 1
+												}
+											],
+											"value": 1
+										}
+									],
+									"value": 1
+								},
+								{
+									"name": "类别 2.5",
+									"colorField": "类别二",
+									"children": [
+										{
+											"name": "类别 2.5.1",
+											"colorField": "类别二",
+											"value": 3
+										}
+									],
+									"value": 3
+								}
+							],
+							"value": 20
+						},
+						{
+							"name": "类别 3",
+							"colorField": "类别三",
+							"children": [
+								{
+									"name": "类别 3.1",
+									"colorField": "类别三",
+									"children": [
+										{
+											"name": "类别 3.1.1",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.1.1.1",
+													"colorField": "类别三",
+													"children": [
+														{
+															"name": "类别 3.1.1.1.1",
+															"colorField": "类别三",
+															"children": [
+																{
+																	"name": "类别 3.1.1.1.1.1",
+																	"colorField": "类别三",
+																	"value": 1
+																}
+															],
+															"value": 1
+														}
+													],
+													"value": 1
+												},
+												{
+													"name": "类别 3.1.1.2",
+													"colorField": "类别三",
+													"children": [
+														{
+															"name": "类别 3.1.1.2.1",
+															"colorField": "类别三",
+															"children": [
+																{
+																	"name": "类别 3.1.1.2.1.1",
+																	"colorField": "类别三",
+																	"value": 2
+																}
+															],
+															"value": 2
+														}
+													],
+													"value": 3
+												}
+											],
+											"value": 4
+										},
+										{
+											"name": "类别 3.1.2",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.1.2.1",
+													"colorField": "类别三",
+													"value": 3
+												},
+												{
+													"name": "类别 3.1.2.2",
+													"colorField": "类别三",
+													"children": [
+														{
+															"_id": "数据产品&运营",
+															"name": "数据产品&运营",
+															"value": 1
+														}
+													],
+													"value": 1
+												}
+											],
+											"value": 4
+										}
+									],
+									"value": 8
+								},
+								{
+									"name": "类别 3.2",
+									"colorField": "类别三",
+									"children": [
+										{
+											"name": "类别 3.2.1",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.2.1.1",
+													"colorField": "类别三",
+													"value": 1
+												},
+												{
+													"name": "类别 3.2.1.2",
+													"colorField": "类别三",
+													"children": [
+														{
+															"name": "类别 3.2.1.2.1",
+															"colorField": "类别三",
+															"value": 1
+														},
+														{
+															"name": "类别 3.2.1.2.2",
+															"colorField": "类别三",
+															"children": [
+																{
+																	"_id": "城市民生运营",
+																	"name": "城市民生运营",
+																	"value": 1
+																}
+															],
+															"value": 1
+														}
+													],
+													"value": 3
+												}
+											],
+											"value": 4
+										}
+									],
+									"value": 4
+								},
+								{
+									"name": "类别 3.3",
+									"colorField": "类别三",
+									"children": [
+										{
+											"name": "类别 3.3.1",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.3.1.1",
+													"colorField": "类别三",
+													"value": 1
+												}
+											],
+											"value": 1
+										}
+									],
+									"value": 2
+								},
+								{
+									"name": "类别 3.4",
+									"colorField": "类别三",
+									"children": [
+										{
+											"name": "类别 3.4.1",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.4.1.1",
+													"colorField": "类别三",
+													"value": 1
+												},
+												{
+													"name": "3.4.1.2",
+													"value": 1
+												}
+											],
+											"value": 2
+										},
+										{
+											"name": "类别 3.4.2",
+											"colorField": "类别三",
+											"value": 1
+										},
+										{
+											"name": "类别 3.4.3",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.4.3.1",
+													"colorField": "类别三",
+													"value": 1
+												}
+											],
+											"value": 1
+										}
+									],
+									"value": 4
+								},
+								{
+									"name": "类别 3.5",
+									"colorField": "类别三",
+									"children": [
+										{
+											"name": "类别 3.5.1",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.5.1.1",
+													"colorField": "类别三",
+													"value": 2
+												}
+											],
+											"value": 2
+										},
+										{
+											"name": "类别 3.5.2",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.5.2.1",
+													"colorField": "类别三",
+													"value": 1
+												}
+											],
+											"value": 1
+										}
+									],
+									"value": 3
+								},
+								{
+									"name": "类别 3.6",
+									"colorField": "类别三",
+									"children": [
+										{
+											"name": "类别 3.6.1",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.6.1.1",
+													"colorField": "类别三",
+													"value": 1
+												},
+												{
+													"name": "类别 3.6.1.2",
+													"colorField": "类别三",
+													"value": 1
+												}
+											],
+											"value": 2
+										}
+									],
+									"value": 3
+								},
+								{
+									"name": "类别 3.7",
+									"colorField": "类别三",
+									"children": [
+										{
+											"name": "类别 3.7.1",
+											"colorField": "类别三",
+											"children": [
+												{
+													"name": "类别 3.7.1.1",
+													"colorField": "类别三",
+													"children": [
+														{
+															"name": "类别 3.7.1.1.1",
+															"colorField": "类别三",
+															"value": 1
+														}
+													],
+													"value": 1
+												}
+											],
+											"value": 1
+										}
+									],
+									"value": 1
+								}
+							],
+							"value": 25
+						}
+					]
+				}
+			]
+		},
+		"publicHandler": {
+			"highlight": {
+				"name": "高亮",
+				"fields": {
+					"data": {
+						"name": "数据",
+						"type": "object",
+						"optional": true,
+						"description": "需要高亮的数据项，单个高亮：{ 'name': '慈悲' }；批量高亮：[{ 'name': '慈悲'}, { 'name': '痛点', 'value': 10 }]",
+						"children": {
+							"name": {
+								"name": "名称",
+								"description": "名称",
+								"type": "string | number",
+								"optional": false
+							},
+							"value": {
+								"name": "数值",
+								"description": "数值",
+								"type": "string | number",
+								"optional": false
+							},
+							"colorField": {
+								"name": "系列",
+								"description": "系列",
+								"type": "string | number",
+								"optional": false
+							}
+						}
+					},
+					"style": {
+						"name": "样式",
+						"type": "object",
+						"optional": true,
+						"description": "选中样式，如：fillStyle、stroke、opacity等; 高亮样式不传入时，使用默认样式(配置中选中态的样式)",
+						"children": {
+							"fillStyle": {
+								"name": "填充色",
+								"type": "string",
+								"default": "#f00",
+								"optional": true
+							}
+						}
+					}
+				},
+				"type": "object"
+			},
+			"reset": {
+				"name": "重置选择项"
+			}
+		},
+		"events": {
+			"itemSelect": {
+				"name": "当数据项选中时",
+				"type": [
+					"object"
+				],
+				"description": "当数据项选中时",
+				"fields": {
+					"name": {
+						"name": "名称",
+						"description": "名称",
+						"type": "string | number",
+						"optional": false
+					},
+					"value": {
+						"name": "数值",
+						"description": "数值",
+						"type": "string | number",
+						"optional": false
+					},
+					"colorField": {
+						"name": "系列",
+						"description": "系列",
+						"type": "string | number",
+						"optional": false
+					}
+				}
+			}
+		}
+	}
+}

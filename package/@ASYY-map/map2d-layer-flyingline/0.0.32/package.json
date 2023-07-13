@@ -1,0 +1,591 @@
+{
+	"name": "map2d-layer-flyingline",
+	"version": "0.0.32",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"ldmap": "0.1.45"
+	},
+	"datav": {
+		"cn_name": "飞线一",
+		"protocol": 2,
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "飞线数据",
+				"fields": {
+					"from": {
+						"description": "飞线出发位置"
+					},
+					"to": {
+						"description": "飞线结束位置"
+					},
+					"fromInfo": {
+						"description": "飞线出发信息(可选)",
+						"optional": true
+					},
+					"toInfo": {
+						"description": "飞线结束信息(可选)",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isCache": {
+				"name": "缓存",
+				"type": "boolean",
+				"default": true
+			},
+			"updateStepDataPool": {
+				"name": "触发速率",
+				"step": 1,
+				"type": "number",
+				"range": [
+					1,
+					10
+				],
+				"default": 10
+			},
+			"kHeight": {
+				"name": "高度",
+				"step": 0.001,
+				"type": "number",
+				"range": [
+					0.01,
+					2
+				],
+				"default": 0.313
+			},
+			"lifeSpeed": {
+				"name": "飞行速度",
+				"step": 0.01,
+				"type": "number",
+				"range": [
+					0.01,
+					0.2
+				],
+				"default": 0.03
+			},
+			"displayLine": {
+				"type": "group",
+				"name": "飞线样式",
+				"children": {
+					"weight": {
+						"name": "飞线粗细",
+						"step": 0.01,
+						"type": "number",
+						"range": [
+							0.01,
+							20
+						],
+						"default": 0.93
+					},
+					"colorFrom": {
+						"type": "color",
+						"default": "rgba(0, 255, 174, 0.63)",
+						"name": "起点颜色"
+					},
+					"colorTo": {
+						"type": "color",
+						"default": "rgb(0, 252, 255)",
+						"name": "终点颜色"
+					},
+					"colorNormal": {
+						"type": "color",
+						"default": "rgba(250, 250, 250, 0)",
+						"name": "垫底颜色"
+					}
+				}
+			},
+			"fromMarker": {
+				"type": "group",
+				"name": "起点信息",
+				"children": {
+					"display": {
+						"name": "显示",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"fontFamily": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "字号",
+						"step": 1,
+						"min": 5,
+						"type": "number",
+						"max": 40,
+						"default": 10
+					},
+					"fontColor": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"type": "color",
+						"default": "rgba(0,0,0,1)",
+						"name": "字体颜色"
+					},
+					"backgroundColor": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"type": "color",
+						"default": "rgba(0, 255, 174, 0.96)",
+						"name": "背景颜色"
+					},
+					"fadeInTime": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "渐现时间",
+						"type": "number",
+						"min": 0.1,
+						"step": 0.1,
+						"max": 5,
+						"default": 0.5
+					},
+					"keepTime": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "停留时间",
+						"type": "number",
+						"min": 0.1,
+						"step": 0.1,
+						"max": 5,
+						"default": 0.5
+					},
+					"fadeOutTime": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "消失时间",
+						"type": "number",
+						"min": 0.1,
+						"step": 0.1,
+						"max": 5,
+						"default": 1
+					}
+				}
+			},
+			"toMarker": {
+				"type": "group",
+				"name": "终点信息",
+				"children": {
+					"display": {
+						"name": "显示",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"fontFamily": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "字号",
+						"step": 1,
+						"min": 5,
+						"type": "number",
+						"max": 40,
+						"default": 10
+					},
+					"fontColor": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"type": "color",
+						"default": "rgba(0,0,0,1)",
+						"name": "字体颜色"
+					},
+					"backgroundColor": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"type": "color",
+						"default": "rgba(0,252,255,1)",
+						"name": "背景颜色"
+					},
+					"fadeInTime": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "渐现时间",
+						"type": "number",
+						"min": 0.1,
+						"step": 0.1,
+						"max": 5,
+						"default": 0.5
+					},
+					"keepTime": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "停留时间",
+						"type": "number",
+						"min": 0.1,
+						"step": 0.1,
+						"max": 5,
+						"default": 0.3
+					},
+					"fadeOutTime": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "消失时间",
+						"type": "number",
+						"min": 0.1,
+						"step": 0.1,
+						"max": 5,
+						"default": 1
+					}
+				}
+			},
+			"toRippleMarker": {
+				"type": "group",
+				"name": "落地效果",
+				"children": {
+					"display": {
+						"name": "显示",
+						"type": "boolean",
+						"default": true,
+						"options": [
+							false,
+							true
+						]
+					},
+					"r": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "半径",
+						"step": 1,
+						"range": [
+							5,
+							40
+						],
+						"type": "number",
+						"default": 15
+					},
+					"strokeWidth": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "边线粗细",
+						"step": 0.1,
+						"range": [
+							0.1,
+							10
+						],
+						"type": "number",
+						"default": 1.5
+					},
+					"color": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"type": "color",
+						"default": "#00FCFF",
+						"name": "颜色"
+					},
+					"fadeInTime": {
+						"show": [
+							[
+								"display",
+								"$eq",
+								true
+							]
+						],
+						"name": "持续时间",
+						"type": "number",
+						"min": 0.1,
+						"step": 0.1,
+						"max": 5,
+						"default": 0.5
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"from": "116.85059,31.69078",
+					"to": "118.69629,36.20882",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "120.89355,37.09024",
+					"to": "116.93848,31.61597",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "121.28906,29.34388",
+					"to": "117.20215,31.12820",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "118.16895,31.57854",
+					"to": "119.79492,32.47270",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.76270,33.35806",
+					"to": "116.49902,38.95941",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.41113,30.93992",
+					"to": "114.78516,26.58853",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "115.83984,32.13841",
+					"to": "97.47070,37.54458",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.27930,32.36140",
+					"to": "114.08203,36.27971",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "103.66699,25.79989",
+					"to": "116.05957,31.54109",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "112.14844,24.40714",
+					"to": "116.71875,33.21112",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.93848,31.65338",
+					"to": "118.34473,26.62782",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "90.70313,42.26105",
+					"to": "116.23535,32.32428",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.41113,30.82678",
+					"to": "114.87305,36.94989",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.45508,30.78904",
+					"to": "118.91602,28.57487",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.01562,40.07807",
+					"to": "116.71875,31.69078",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.71875,31.72817",
+					"to": "108.45703,40.24599",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "117.99316,40.84706",
+					"to": "116.85059,31.69078",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "118.30078,36.56260",
+					"to": "117.24609,40.97990",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "119.35547,26.86328",
+					"to": "120.41016,32.28713",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "113.07129,31.42866",
+					"to": "106.04004,31.31610",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				},
+				{
+					"from": "116.85059,31.31610",
+					"to": "110.43457,32.76880",
+					"fromInfo": "起点",
+					"toInfo": "终点"
+				}
+			]
+		},
+		"type": [
+			"map2d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		}
+	}
+}

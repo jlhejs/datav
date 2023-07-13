@@ -1,0 +1,146 @@
+{
+	"name": "map3d-earth-scenecontrol",
+	"version": "0.0.14",
+	"main": "index.js",
+	"dependencies": {
+		"async": "2.5.0",
+		"eventemitter3": "2.0.3"
+	},
+	"datav": {
+		"cn_name": "场景管理器",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isWork": {
+				"name": "启用",
+				"type": "boolean",
+				"default": false
+			},
+			"tweenMode": {
+				"name": "轮播模式",
+				"type": "options",
+				"default": "once",
+				"options": [
+					{
+						"name": "单次轮播",
+						"value": "once"
+					},
+					{
+						"name": "循环轮播",
+						"value": "repeat"
+					}
+				]
+			},
+			"duration": {
+				"type": "number",
+				"name": "持续时间",
+				"default": 3000,
+				"range": [
+					0,
+					30000
+				],
+				"step": 1
+			},
+			"delay": {
+				"type": "number",
+				"name": "延迟时间",
+				"default": 3000,
+				"range": [
+					0,
+					30000
+				],
+				"step": 1
+			},
+			"callbackId": {
+				"type": "text",
+				"name": "回调 ID",
+				"default": ""
+			}
+		},
+		"events": {
+			"map3d-earth-scene-loop-completed": {
+				"description": "轮播完成触发",
+				"fields": {
+					"id": {
+						"description": "区域关联id"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"scenecontrol": [
+				{
+					"id": "1",
+					"name": "beijing",
+					"position": {
+						"fov": 50,
+						"lat": 39,
+						"lng": 115,
+						"distance": 400
+					},
+					"duration": 3000,
+					"delay": 3000
+				},
+				{
+					"id": "2",
+					"name": "shanghai",
+					"position": {
+						"fov": 30,
+						"lat": 30,
+						"lng": 120,
+						"distance": 300
+					},
+					"duration": 3000,
+					"delay": 3000
+				},
+				{
+					"id": "3",
+					"name": "guangzhou",
+					"position": {
+						"fov": 50,
+						"lat": 23,
+						"lng": 113,
+						"distance": 400
+					},
+					"duration": 3000,
+					"delay": 3000
+				}
+			]
+		},
+		"apis": {
+			"scenecontrol": {
+				"handler": "setData",
+				"description": "场景管理器",
+				"fields": {
+					"name": {
+						"description": "名称"
+					},
+					"position": {
+						"description": "位置点"
+					},
+					"duration": {
+						"description": "持续时间",
+						"optional": true
+					},
+					"delay": {
+						"description": "延迟时间",
+						"optional": true
+					}
+				}
+			}
+		},
+		"type": [
+			"map3d-earth-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1utn4ACzqK1RjSZFjXXblCFXa-180-180.png"
+	}
+}

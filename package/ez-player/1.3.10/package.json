@@ -1,0 +1,127 @@
+{
+	"name": "ez-player",
+	"version": "1.3.10",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "萤石云播放器",
+		"protocol": 2,
+		"level": 1,
+		"type": [
+			"media_video",
+			"DataV-6:media"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"icon": "//img.alicdn.com/tfs/TB1T6PqlHH1gK0jSZFwXXc7aXXa-370-208.png",
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"source": {
+						"description": "视频流地址",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"source": {
+				"name": "视频流地址",
+				"type": "string",
+				"default": "http://ivi.bupt.edu.cn/hls/cctv1hd.m3u8",
+				"dataField": "source"
+			},
+			"sourceType": {
+				"name": "视频流类型",
+				"type": "select",
+				"default": "application/x-mpegURL",
+				"dataField": true,
+				"options": [
+					{
+						"name": "rtmp",
+						"value": "rtmp/mp4"
+					},
+					{
+						"name": "hls",
+						"value": "application/x-mpegURL"
+					}
+				]
+			},
+			"isLoop": {
+				"name": "循环播放",
+				"type": "boolean",
+				"default": false
+			},
+			"isMuted": {
+				"name": "静音",
+				"type": "boolean",
+				"default": false
+			},
+			"hideControl": {
+				"name": "隐藏控制条",
+				"type": "boolean",
+				"default": false
+			},
+			"jqueryJS": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/jquery.min.js"
+			},
+			"swf": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/ckplayer.swf"
+			},
+			"m3u8": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/m3u8.swf"
+			},
+			"ckplayerJS": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/ckplayer.js"
+			},
+			"flv_js": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/flv.min.js"
+			},
+			"hlsJS": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/hls.light.min.js"
+			},
+			"mpegJS": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/jsmpeg.min.js"
+			},
+			"wav": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/wav-audio-encoder.js"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"source": ""
+				}
+			]
+		},
+		"publicHandler": {
+			"clear": {
+				"name": "清空",
+				"description": "清空视频",
+				"type": "null"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1hTYnlQY2gK0jSZFgXXc5OFXa-334-144.png"
+	}
+}

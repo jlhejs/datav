@@ -1,0 +1,250 @@
+{
+	"name": "map3d-earth-area",
+	"version": "0.1.5",
+	"main": "index.js",
+	"dependencies": {
+		"earcut": "2.1.2",
+		"gl-vec2": "1.0.0",
+		"chroma-js": "1.3.4",
+		"as-number": "1.0.0",
+		"safely-merge": "1.0.1",
+		"geojson-bbox": "0.0.0",
+		"eventemitter3": "2.0.3",
+		"polyline-miter-util": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "区域热力层",
+		"level": 0,
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"chinaGeoJsonApi": {
+				"name": "默认中国地理数据",
+				"type": "hidden",
+				"default": "//geo.datav.aliyun.com/areas_v3/bound/330000_full.json",
+				"default0": "http://cdn.dtwave.com/waveview-public/jiujiang/%E4%B8%96%E7%95%8C-%E6%A0%BC%E6%9E%97%E5%85%B0%E5%B7%A6%E4%B8%8A.json"
+			},
+			"height": {
+				"type": "number",
+				"name": "高度",
+				"default": 2,
+				"range": [
+					0,
+					20
+				],
+				"step": 0.01
+			},
+			"isStokeOnly": {
+				"name": "只显示边界",
+				"type": "boolean",
+				"default": false
+			},
+			"minFillColor": {
+				"show": [
+					[
+						"isStokeOnly",
+						"$eq",
+						false
+					]
+				],
+				"name": "最小值",
+				"type": "color",
+				"default": "#33C9FB"
+			},
+			"maxFillColor": {
+				"show": [
+					[
+						"isStokeOnly",
+						"$eq",
+						false
+					]
+				],
+				"name": "最大值",
+				"type": "color",
+				"default": "#1F68A7"
+			},
+			"defaultFillColor": {
+				"show": [
+					[
+						"isStokeOnly",
+						"$eq",
+						false
+					]
+				],
+				"name": "无值",
+				"type": "color",
+				"default": "#676767"
+			},
+			"fillOpacity": {
+				"show": [
+					[
+						"isStokeOnly",
+						"$eq",
+						false
+					]
+				],
+				"type": "number",
+				"name": "面透明度",
+				"default": 1,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			},
+			"strokeColor": {
+				"default": "#E7EE98",
+				"name": "边线颜色",
+				"type": "color"
+			},
+			"strokeOpacity": {
+				"type": "number",
+				"name": "边线透明度",
+				"default": 0.8,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			},
+			"strokeWidth": {
+				"type": "number",
+				"name": "边线宽度",
+				"default": 0.05,
+				"range": [
+					0,
+					0.2
+				],
+				"step": 0.01
+			},
+			"enableInteractive": {
+				"name": "交互开关",
+				"type": "switch",
+				"default": false
+			},
+			"activeColor": {
+				"name": "点击颜色",
+				"type": "fill",
+				"default": "#ff0000",
+				"show": [
+					[
+						"enableInteractive",
+						"$eq",
+						true
+					]
+				]
+			}
+		},
+		"api_data": {
+			"geojson": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"area": [
+				{
+					"adcode": "330500",
+					"value": 0.774761951295659
+				},
+				{
+					"adcode": "330100",
+					"value": 0.7794583269860595
+				},
+				{
+					"adcode": "330800",
+					"value": 0.6869565532542765
+				},
+				{
+					"adcode": "330300",
+					"value": 0.9352621990256011
+				},
+				{
+					"adcode": "330400",
+					"value": 0.8719353775959462
+				},
+				{
+					"adcode": "330500",
+					"value": 0.20899744261987507
+				},
+				{
+					"adcode": "330600",
+					"value": 0.22816960071213543
+				},
+				{
+					"adcode": "330700",
+					"value": 0.8665573971811682
+				},
+				{
+					"adcode": "331100",
+					"value": 0.8985264701768756
+				},
+				{
+					"adcode": "331000",
+					"value": 0.442098643630743
+				},
+				{
+					"adcode": "330200",
+					"value": 0.1820987407118082
+				},
+				{
+					"adcode": "330900",
+					"value": 0.3555776213761419
+				}
+			]
+		},
+		"apis": {
+			"geojson": {
+				"handler": "setGeojson",
+				"description": "地理边界geojson数据接口",
+				"type": "object",
+				"fields": {}
+			},
+			"area": {
+				"handler": "setData",
+				"description": "区域面数据接口 ",
+				"fields": {
+					"adcode": {
+						"description": "地理id",
+						"type": "string"
+					},
+					"value": {
+						"description": "值",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"events": {
+			"active": {
+				"name": "区域激活",
+				"description": "区域激活时",
+				"type": "any"
+			},
+			"inactive": {
+				"name": "激活恢复",
+				"description": "激活恢复时",
+				"type": "any"
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"type": [
+			"map3d-earth-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1X7v9AAzoK1RjSZFlXXai4VXa-180-180.png"
+	}
+}

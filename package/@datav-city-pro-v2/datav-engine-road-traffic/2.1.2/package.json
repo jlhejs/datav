@@ -1,0 +1,333 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-road-traffic",
+	"version": "2.1.2",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "路况层",
+		"protocol": 2,
+		"level": 1,
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"fold": false,
+						"children": {
+							"blending": {
+								"type": "select",
+								"name": "混合模式",
+								"default": "NormalBlending",
+								"options": [
+									{
+										"value": "NormalBlending",
+										"label": "正常模式"
+									},
+									{
+										"value": "AdditiveBlending",
+										"label": "添加模式"
+									},
+									{
+										"value": "NoBlending",
+										"label": "无叠加模式"
+									}
+								]
+							},
+							"depthTest": {
+								"type": "switch",
+								"name": "深度测试",
+								"default": false
+							},
+							"depthWrite": {
+								"name": "深度写入",
+								"type": "switch",
+								"default": false
+							},
+							"sizeAttenuation": {
+								"type": "switch",
+								"name": "随距衰减",
+								"description": "近大远小",
+								"default": false
+							},
+							"blurWidthRatio": {
+								"name": "边缘模糊",
+								"type": "slider",
+								"description": "虚化宽度比例，抗锯齿",
+								"default": 0.7,
+								"step": 0.01,
+								"min": 0,
+								"max": 1
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"fold": false,
+						"children": {
+							"baseWidth": {
+								"type": "slider",
+								"name": "基准宽度",
+								"step": 0.1,
+								"min": 0,
+								"max": 500,
+								"default": 6
+							},
+							"altitude": {
+								"type": "slider",
+								"name": "高程",
+								"step": 0.1,
+								"min": -500,
+								"max": 5000,
+								"default": 0
+							},
+							"color0": {
+								"type": "fill",
+								"name": "严重拥堵",
+								"default": "#ba0b0d"
+							},
+							"color1": {
+								"type": "fill",
+								"name": "拥堵",
+								"default": "#f67e24"
+							},
+							"color2": {
+								"type": "fill",
+								"name": "一般",
+								"default": "#fecb03"
+							},
+							"color3": {
+								"type": "fill",
+								"name": "通畅",
+								"default": "#14d127"
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"geometry_data": [
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.207465,
+								30.280314
+							],
+							[
+								120.207676,
+								30.269546
+							],
+							[
+								120.207888,
+								30.258958
+							],
+							[
+								120.204718,
+								30.248735
+							],
+							[
+								120.198589,
+								30.240885
+							],
+							[
+								120.187176,
+								30.230295
+							],
+							[
+								120.179146,
+								30.220799
+							],
+							[
+								120.164352,
+								30.214772
+							],
+							[
+								120.142584,
+								30.208745
+							],
+							[
+								120.13096,
+								30.213311
+							],
+							[
+								120.124197,
+								30.22719
+							],
+							[
+								120.123774,
+								30.238511
+							]
+						]
+					},
+					"id": "road0"
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.127218,
+								30.275947
+							],
+							[
+								120.14814,
+								30.275582
+							],
+							[
+								120.16061,
+								30.264813
+							],
+							[
+								120.169486,
+								30.253313
+							],
+							[
+								120.169909,
+								30.241994
+							],
+							[
+								120.157228,
+								30.232682
+							],
+							[
+								120.145393,
+								30.224099
+							],
+							[
+								120.136939,
+								30.235786
+							]
+						]
+					},
+					"id": "road1"
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.130934,
+								30.249971
+							],
+							[
+								120.147208,
+								30.253075
+							],
+							[
+								120.159677,
+								30.25271
+							],
+							[
+								120.173414,
+								30.249789
+							],
+							[
+								120.18546,
+								30.247598
+							],
+							[
+								120.193068,
+								30.254535
+							],
+							[
+								120.190744,
+								30.268043
+							],
+							[
+								120.185249,
+								30.276074
+							],
+							[
+								120.174259,
+								30.276074
+							]
+						]
+					},
+					"id": "road2"
+				}
+			],
+			"state_data": [
+				{
+					"id": "road0",
+					"state": 0
+				},
+				{
+					"id": "road1",
+					"state": 1
+				},
+				{
+					"id": "road2",
+					"state": 2
+				}
+			]
+		},
+		"apis": {
+			"geometry_data": {
+				"handler": "setGeoData",
+				"format": "geo_lineString",
+				"description": "地理数据",
+				"fields": {
+					"id": {
+						"description": "道路id",
+						"type": "string",
+						"optional": false
+					},
+					"geometry": {
+						"description": "线坐标串",
+						"type": "object",
+						"optional": false
+					}
+				}
+			},
+			"state_data": {
+				"handler": "setStateData",
+				"format": "array",
+				"description": "路况数据",
+				"fields": {
+					"id": {
+						"description": "道路id",
+						"type": "string",
+						"optional": false
+					},
+					"state": {
+						"description": "道路拥堵等级",
+						"type": "number",
+						"optional": false
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/imgextra/i3/O1CN01rkm6iz1DeQBWf496G_!!6000000000241-2-tps-360-360.png"
+	}
+}

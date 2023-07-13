@@ -1,0 +1,417 @@
+{
+	"name": "@ChJ.limit_free/line-bar-chart",
+	"version": "0.2.0",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"echarts": "^3.7.2"
+	},
+	"datav": {
+		"cn_name": "折线柱图",
+		"icon": {
+			"316x238": "//resource.datav.aliyun.com/cube/com/@ChJ.limit_free/line-bar-chart/0.2.0/icons/316x238icon.png?time=1513585888239"
+		},
+		"protocol": 2,
+		"type": [
+			"regular_bar"
+		],
+		"view": {
+			"width": "700",
+			"height": "550",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"x": {
+						"description": "横坐标",
+						"type": "string"
+					},
+					"y": {
+						"description": "值",
+						"type": "string"
+					},
+					"s": {
+						"description": "系列",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"legend": {
+				"name": "图例",
+				"type": "group",
+				"children": {
+					"show": {
+						"name": "显示",
+						"type": "boolean",
+						"default": true
+					},
+					"textColor": {
+						"name": "文本颜色",
+						"type": "color",
+						"default": "white"
+					}
+				}
+			},
+			"xAxis": {
+				"name": "x轴",
+				"type": "group",
+				"children": {
+					"show": {
+						"name": "显示",
+						"type": "boolean",
+						"default": true
+					},
+					"splitLineShow": {
+						"name": "分隔线",
+						"type": "boolean",
+						"default": true
+					},
+					"labelColor": {
+						"name": "标签颜色",
+						"type": "color",
+						"default": "white"
+					},
+					"axisColor": {
+						"name": "坐标轴颜色",
+						"type": "color",
+						"default": "#0055bd"
+					},
+					"labelFontSize": {
+						"name": "字体大小",
+						"type": "number",
+						"default": "12"
+					}
+				}
+			},
+			"yAxis": {
+				"name": "y轴",
+				"type": "group",
+				"children": {
+					"show": {
+						"name": "显示",
+						"type": "boolean",
+						"default": true
+					},
+					"splitLineShow": {
+						"name": "分隔线",
+						"type": "boolean",
+						"default": true
+					},
+					"labelColor": {
+						"name": "标签颜色",
+						"type": "color",
+						"default": "white"
+					},
+					"labelFontSize": {
+						"name": "字体大小",
+						"type": "number",
+						"default": "12"
+					},
+					"axisColor": {
+						"name": "坐标轴颜色",
+						"type": "color",
+						"default": "#0055bd"
+					},
+					"unit_01": {
+						"name": "左侧y轴单位",
+						"type": "text",
+						"default": "ml"
+					},
+					"unit_02": {
+						"name": "右侧y轴单位",
+						"type": "text",
+						"default": "°C"
+					}
+				}
+			},
+			"series": {
+				"name": "系列",
+				"type": "group",
+				"children": {
+					"a": {
+						"name": "系列一",
+						"type": "group",
+						"children": {
+							"series_name": {
+								"name": "系列名",
+								"type": "text",
+								"default": "类目一"
+							},
+							"value": {
+								"name": "系列值",
+								"type": "text",
+								"default": "1"
+							},
+							"width": {
+								"name": "宽度",
+								"type": "number",
+								"default": "15"
+							},
+							"color": {
+								"name": "颜色",
+								"type": "multicolor",
+								"default": {
+									"style": "double",
+									"value": "#2846ff",
+									"from": "#2846ff",
+									"to": "#229dfb",
+									"angle": 0
+								}
+							}
+						}
+					},
+					"b": {
+						"name": "系列二",
+						"type": "group",
+						"children": {
+							"series_name": {
+								"name": "系列名",
+								"type": "text",
+								"default": "类目二"
+							},
+							"value": {
+								"name": "系列值",
+								"type": "text",
+								"default": "2"
+							},
+							"width": {
+								"name": "宽度",
+								"type": "number",
+								"default": "15"
+							},
+							"color": {
+								"name": "颜色",
+								"type": "multicolor",
+								"default": {
+									"style": "double",
+									"value": "#ff05c4",
+									"from": "#ff05c4",
+									"to": "#ff69fa",
+									"angle": 0
+								}
+							}
+						}
+					},
+					"c": {
+						"name": "系列三",
+						"type": "group",
+						"children": {
+							"series_name": {
+								"name": "系列名",
+								"type": "text",
+								"default": "类目三"
+							},
+							"value": {
+								"name": "系列值",
+								"type": "text",
+								"default": "3"
+							},
+							"lineWidth": {
+								"name": "线宽",
+								"type": "number",
+								"default": "2.5"
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#11dddc"
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "1月",
+					"y": 175,
+					"s": "1"
+				},
+				{
+					"x": "1月",
+					"y": 210,
+					"s": "2"
+				},
+				{
+					"x": "1月",
+					"y": 23,
+					"s": "3"
+				},
+				{
+					"x": "2月",
+					"y": 125,
+					"s": "1"
+				},
+				{
+					"x": "2月",
+					"y": 140,
+					"s": "2"
+				},
+				{
+					"x": "2月",
+					"y": 17.5,
+					"s": "3"
+				},
+				{
+					"x": "3月",
+					"y": 98,
+					"s": "1"
+				},
+				{
+					"x": "3月",
+					"y": 120,
+					"s": "2"
+				},
+				{
+					"x": "3月",
+					"y": 15,
+					"s": "3"
+				},
+				{
+					"x": "4月",
+					"y": 120,
+					"s": "1"
+				},
+				{
+					"x": "4月",
+					"y": 140,
+					"s": "2"
+				},
+				{
+					"x": "4月",
+					"y": 12,
+					"s": "3"
+				},
+				{
+					"x": "5月",
+					"y": 50,
+					"s": "1"
+				},
+				{
+					"x": "5月",
+					"y": 60,
+					"s": "2"
+				},
+				{
+					"x": "5月",
+					"y": 8,
+					"s": "3"
+				},
+				{
+					"x": "6月",
+					"y": 60,
+					"s": "1"
+				},
+				{
+					"x": "6月",
+					"y": 70,
+					"s": "2"
+				},
+				{
+					"x": "6月",
+					"y": 7,
+					"s": "3"
+				},
+				{
+					"x": "7月",
+					"y": 50,
+					"s": "1"
+				},
+				{
+					"x": "7月",
+					"y": 60,
+					"s": "2"
+				},
+				{
+					"x": "7月",
+					"y": 6,
+					"s": "3"
+				},
+				{
+					"x": "8月",
+					"y": 50,
+					"s": "1"
+				},
+				{
+					"x": "8月",
+					"y": 55,
+					"s": "2"
+				},
+				{
+					"x": "8月",
+					"y": 5,
+					"s": "3"
+				},
+				{
+					"x": "9月",
+					"y": 50,
+					"s": "1"
+				},
+				{
+					"x": "9月",
+					"y": 55,
+					"s": "2"
+				},
+				{
+					"x": "9月",
+					"y": 5,
+					"s": "3"
+				},
+				{
+					"x": "10月",
+					"y": 50,
+					"s": "1"
+				},
+				{
+					"x": "10月",
+					"y": 60,
+					"s": "2"
+				},
+				{
+					"x": "10月",
+					"y": 5,
+					"s": "3"
+				},
+				{
+					"x": "11月",
+					"y": 40,
+					"s": "1"
+				},
+				{
+					"x": "11月",
+					"y": 48,
+					"s": "2"
+				},
+				{
+					"x": "11月",
+					"y": 5,
+					"s": "3"
+				},
+				{
+					"x": "12月",
+					"y": 25,
+					"s": "1"
+				},
+				{
+					"x": "12月",
+					"y": 30,
+					"s": "2"
+				},
+				{
+					"x": "12月",
+					"y": 4,
+					"s": "3"
+				}
+			]
+		}
+	}
+}

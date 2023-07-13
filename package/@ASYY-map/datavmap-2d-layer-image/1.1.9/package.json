@@ -1,0 +1,207 @@
+{
+	"name": "datavmap-2d-layer-image",
+	"version": "1.1.9",
+	"description": "datav-map 背景层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-2d-layer-image.git"
+	},
+	"keywords": [
+		"datav",
+		"image"
+	],
+	"author": "shuke",
+	"dependencies": {
+		"bcore": "0.0.21"
+	},
+	"datav": {
+		"cn_name": "背景层",
+		"level": 0,
+		"icon": "https://img.alicdn.com/tfs/TB1cUz4ArrpK1RjSZTEXXcWAVXa-180-180.png",
+		"protocol": 2,
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "150"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "图片数据接口",
+				"fields": {
+					"url": {
+						"description": "图片url",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"CRSType": {
+				"name": "坐标参考系",
+				"type": "options",
+				"default": "EPSG3857",
+				"options": [
+					{
+						"name": "EPSG3857",
+						"value": "EPSG3857"
+					},
+					{
+						"name": "Simple",
+						"value": "Simple"
+					}
+				]
+			},
+			"options3857": {
+				"show": [
+					[
+						"CRSType",
+						"$eq",
+						"EPSG3857"
+					]
+				],
+				"type": "group",
+				"name": "EPSG3857",
+				"children": {
+					"bboxlbX": {
+						"type": "number",
+						"default": 85,
+						"name": "左下角X",
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.000001
+					},
+					"bboxlbY": {
+						"type": "number",
+						"default": 10,
+						"name": "左下角Y",
+						"range": [
+							-90,
+							90
+						],
+						"step": 0.000001
+					},
+					"bboxrtX": {
+						"type": "number",
+						"default": 140,
+						"name": "右上角X",
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.000001
+					},
+					"bboxrtY": {
+						"type": "number",
+						"default": 45,
+						"name": "右上角Y",
+						"range": [
+							-90,
+							90
+						],
+						"step": 0.000001
+					}
+				}
+			},
+			"optionsSimple": {
+				"show": [
+					[
+						"CRSType",
+						"$eq",
+						"Simple"
+					]
+				],
+				"type": "group",
+				"name": "Simple",
+				"children": {
+					"bboxlbX": {
+						"type": "number",
+						"default": 0,
+						"name": "左下角X",
+						"range": [
+							-200,
+							200
+						],
+						"step": 0.000001
+					},
+					"bboxlbY": {
+						"type": "number",
+						"default": 0,
+						"name": "左下角Y",
+						"range": [
+							-200,
+							200
+						],
+						"step": 0.000001
+					},
+					"bboxrtX": {
+						"type": "number",
+						"default": 100,
+						"name": "右上角X",
+						"range": [
+							-200,
+							200
+						],
+						"step": 0.000001
+					},
+					"bboxrtY": {
+						"type": "number",
+						"default": 100,
+						"name": "右上角Y",
+						"range": [
+							-200,
+							200
+						],
+						"step": 0.000001
+					}
+				}
+			},
+			"bgImageUrl": {
+				"type": "image",
+				"name": "自定义背景",
+				"default": "https://img.alicdn.com/tps/TB1guWTPVXXXXXCaXXXXXXXXXXX-3840-2160.jpg"
+			},
+			"opacity": {
+				"type": "number",
+				"name": "透明",
+				"default": 1,
+				"max": 1,
+				"min": 0,
+				"step": 0.01
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"url": ""
+				}
+			]
+		},
+		"type": [
+			"datavmap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavmap"
+			],
+			"supportNames": []
+		}
+	}
+}

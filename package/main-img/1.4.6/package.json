@@ -1,0 +1,232 @@
+{
+	"name": "main-img",
+	"version": "1.4.6",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"xss": "0.3.4"
+	},
+	"datav": {
+		"cn_name": "单张图片",
+		"protocol": 2,
+		"level": 0,
+		"analysis": {
+			"apis": "source"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"img": {
+						"description": "可以为空,从配置读取",
+						"optional": true,
+						"name": "图片路径",
+						"type": "string"
+					},
+					"url": {
+						"description": "超链接地址",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"events": {
+			"handleClick": {
+				"description": "当点击图片时",
+				"fields": {
+					"img": {
+						"type": "string | number",
+						"name": "当前图片路径",
+						"optional": true,
+						"description": "当前图片路径"
+					},
+					"url": {
+						"type": "string | number",
+						"name": "图片超链接",
+						"optional": true,
+						"description": "图片超链接"
+					}
+				}
+			},
+			"mouseEnter": {
+				"description": "当鼠标移入时",
+				"fields": {
+					"img": {
+						"type": "string | number",
+						"name": "当前图片路径",
+						"optional": true,
+						"description": "当前图片路径"
+					},
+					"url": {
+						"type": "string | number",
+						"name": "图片超链接",
+						"optional": true,
+						"description": "图片超链接"
+					}
+				}
+			},
+			"mouseLeave": {
+				"description": "当鼠标移出时",
+				"fields": {
+					"img": {
+						"type": "string | number",
+						"name": "当前图片路径",
+						"optional": true,
+						"description": "当前图片路径"
+					},
+					"url": {
+						"type": "string | number",
+						"name": "图片超链接",
+						"optional": true,
+						"description": "图片超链接"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"refresh": {
+				"name": "刷新",
+				"description": "刷新动图",
+				"fields": {}
+			}
+		},
+		"config": {
+			"imageType": {
+				"type": "buttonRadio",
+				"name": "图片类型",
+				"default": "bitmap",
+				"options": [
+					{
+						"label": "位图",
+						"value": "bitmap"
+					},
+					{
+						"label": "矢量图",
+						"value": "vector"
+					}
+				]
+			},
+			"background-image": {
+				"type": "image",
+				"name": "背景图",
+				"default": "https://img.alicdn.com/tfs/TB1J3GkgeH2gK0jSZJnXXaT1FXa-600-360.png",
+				"dataField": "img",
+				"showInPanel": [
+					[
+						"imageType",
+						"$eq",
+						"bitmap"
+					]
+				]
+			},
+			"vectorImage": {
+				"type": "image",
+				"name": "矢量图",
+				"default": "https://img.alicdn.com/tfs/TB1nCWxMbH1gK0jSZFwXXc7aXXa-251-64.svg",
+				"showInPanel": [
+					[
+						"imageType",
+						"$eq",
+						"vector"
+					]
+				]
+			},
+			"vectorFill": {
+				"type": "fill",
+				"name": "填充色",
+				"components": [
+					"flat",
+					"linearGradient"
+				],
+				"default": "#2483FF",
+				"showInPanel": [
+					[
+						"imageType",
+						"$eq",
+						"vector"
+					]
+				]
+			},
+			"repeat": {
+				"name": "图片重复",
+				"type": "select",
+				"default": "no-repeat",
+				"options": [
+					{
+						"name": "不重复，拉伸满",
+						"value": "no-repeat"
+					},
+					{
+						"name": "水平和垂直重复",
+						"value": "repeat"
+					},
+					{
+						"name": "水平重复",
+						"value": "repeat-x"
+					},
+					{
+						"name": "垂直重复",
+						"value": "repeat-y"
+					}
+				]
+			},
+			"radius": {
+				"name": "圆角",
+				"type": "number",
+				"default": 0
+			},
+			"inner-style": {
+				"type": "hidden",
+				"name": "内联样式",
+				"default": {}
+			},
+			"urlConfig": {
+				"name": "超链接配置",
+				"type": "group",
+				"description": "点击图片区域可跳转至设定的超链接",
+				"children": {
+					"url": {
+						"name": "超链接",
+						"type": "string",
+						"default": "",
+						"dataField": "url"
+					},
+					"ifBlank": {
+						"name": "是否新开窗口",
+						"type": "boolean",
+						"default": false
+					}
+				}
+			},
+			"cursor": {
+				"name": "手势光标",
+				"type": "boolean",
+				"default": true
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"img": "",
+					"url": ""
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 110
+		},
+		"type": [
+			"media_image",
+			"DataV-6:media"
+		],
+		"icon": "//img.alicdn.com/tfs/TB1x.gRk1bviK0jSZFNXXaApXXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1pImNlF67gK0jSZPfXXahhFXa-334-144.png"
+	}
+}

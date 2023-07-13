@@ -1,0 +1,277 @@
+{
+	"name": "@datav-3d/datav-engine-particle",
+	"version": "0.0.20",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "粒子",
+		"protocol": 2,
+		"level": 0,
+		"supportTheme": true,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"blendingType": {
+				"name": "叠加模式",
+				"type": "options",
+				"default": "NormalBlending",
+				"options": [
+					{
+						"name": "添加模式",
+						"value": "AdditiveBlending"
+					},
+					{
+						"name": "正常模式",
+						"value": "NormalBlending"
+					}
+				]
+			},
+			"interactive": {
+				"fold": true,
+				"type": "group",
+				"name": "点击交互",
+				"children": {
+					"enableInteractive": {
+						"name": "启用",
+						"type": "boolean",
+						"default": false
+					},
+					"callbackId": {
+						"show": [
+							[
+								"enableInteractive",
+								"$eq",
+								true
+							]
+						],
+						"type": "text",
+						"name": "回调ID",
+						"fold": true,
+						"default": ""
+					},
+					"color": {
+						"show": [
+							[
+								"enableInteractive",
+								"$eq",
+								true
+							]
+						],
+						"name": "选中颜色",
+						"type": "color",
+						"default": "rgb(255, 0, 0)"
+					},
+					"opacity": {
+						"show": [
+							[
+								"enableInteractive",
+								"$eq",
+								true
+							]
+						],
+						"type": "number",
+						"name": "选中透明度",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.001
+					}
+				}
+			},
+			"defaultStyle": {
+				"type": "group",
+				"name": "默认样式",
+				"children": {
+					"color": {
+						"type": "color",
+						"name": "颜色",
+						"default": "#003a8c"
+					},
+					"opacity": {
+						"type": "number",
+						"name": "透明度",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.001
+					},
+					"icon": {
+						"name": "图标",
+						"type": "image",
+						"default": "https://img.alicdn.com/tfs/TB1A_3Ru1L2gK0jSZPhXXahvXXa-297-297.png"
+					},
+					"size": {
+						"type": "number",
+						"name": "大小",
+						"default": 100,
+						"range": [
+							0,
+							10000
+						],
+						"step": 1
+					}
+				}
+			},
+			"style": {
+				"type": "array",
+				"name": "样式配置",
+				"default": [
+					{
+						"particleType": "ok",
+						"icon": "https://img.alicdn.com/tfs/TB1A_3Ru1L2gK0jSZPhXXahvXXa-297-297.png",
+						"color": "#003a8c",
+						"size": 100,
+						"opacity": 1
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "类型<%=i%>",
+					"child": {
+						"particleType": {
+							"type": "string",
+							"name": "type",
+							"default": "ok"
+						},
+						"color": {
+							"type": "color",
+							"name": "颜色",
+							"default": "#fff"
+						},
+						"opacity": {
+							"type": "number",
+							"name": "透明度",
+							"default": 1,
+							"range": [
+								0,
+								1
+							],
+							"step": 0.001
+						},
+						"icon": {
+							"name": "图标",
+							"type": "image",
+							"default": "https://img.alicdn.com/tfs/TB1fv41g.H1gK0jSZSyXXXtlpXa-160-160.png"
+						},
+						"size": {
+							"type": "number",
+							"name": "大小",
+							"default": 1,
+							"range": [
+								0,
+								10000
+							],
+							"step": 0.01
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"x": 120.16284129812314,
+					"y": 30.246818853372467,
+					"z": 105.05491280950007,
+					"type": "class1"
+				},
+				{
+					"x": 120.12895624513345,
+					"y": 30.268143132424214,
+					"z": 32.35087875695697,
+					"type": "class1"
+				}
+			]
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"description": "数据接口",
+				"fields": {
+					"x": {
+						"description": "经度",
+						"type": "number",
+						"optional": false
+					},
+					"y": {
+						"description": "纬度",
+						"type": "number",
+						"optional": false
+					},
+					"z": {
+						"description": "高程",
+						"type": "number",
+						"optional": false
+					},
+					"type": {
+						"description": "类型",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"events": {
+			"interactive": {
+				"name": "点击事件",
+				"description": "点击时触发",
+				"type": "object",
+				"fields": {
+					"data": {
+						"name": "数据项",
+						"description": "数据项",
+						"type": "object"
+					},
+					"clickPosition": {
+						"name": "点击位置",
+						"description": "点击位置坐标",
+						"type": "object",
+						"children": {
+							"x": {
+								"name": "x坐标",
+								"description": "点击位置x坐标",
+								"type": "number",
+								"default": 0
+							},
+							"y": {
+								"name": "y坐标",
+								"description": "点击位置y坐标",
+								"type": "number",
+								"default": 0
+							}
+						}
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_lite_subcoms",
+			"map_3d_city_lite_subcoms_add"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_lite"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1iSb3AyrpK1RjSZFhXXXSdXXa-180-180.png"
+	}
+}

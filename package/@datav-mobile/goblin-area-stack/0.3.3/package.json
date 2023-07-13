@@ -1,0 +1,1969 @@
+{
+	"name": "@datav-mobile/goblin-area-stack",
+	"version": "0.3.3",
+	"dependencies": {
+		"datav-goblin-adaptor": "0.0.3",
+		"bcore": "0.0.18",
+		"d3-color": "1.4.0",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "堆叠区域图",
+		"icon": "https://img.alicdn.com/tfs/TB1CKfIobj1gK0jSZFOXXc7GpXa-370-208.png",
+		"thumbnail": "https://img.alicdn.com/tfs/TB1EKLDohD1gK0jSZFsXXbldVXa-332-144.png",
+		"platform": "mobile",
+		"protocol": 3,
+		"level": 0,
+		"type": [
+			"regular_line",
+			"DataV-6:mobile_area",
+			"DataV-6:regular_area"
+		],
+		"supportTheme": true,
+		"view": {
+			"width": "400",
+			"height": "300",
+			"minWidth": "40",
+			"minHeight": "20"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "堆叠区域图接口描述",
+				"fields": {
+					"x": {
+						"description": "x坐标轴值"
+					},
+					"y": {
+						"description": "y坐标轴值"
+					},
+					"s": {
+						"description": "系列值",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"chart": {
+						"type": "menuChild",
+						"mode": "single",
+						"name": "图表",
+						"children": {
+							"padding": {
+								"type": "suite",
+								"enableHide": true,
+								"name": "自定义边距",
+								"children": {
+									"show": {
+										"default": false
+									},
+									"top": {
+										"name": "顶部",
+										"type": "stepper",
+										"min": 0,
+										"suffix": "px",
+										"step": 1,
+										"default": 30,
+										"col": 12
+									},
+									"bottom": {
+										"name": "底部",
+										"type": "stepper",
+										"min": 0,
+										"suffix": "px",
+										"step": 1,
+										"default": 30,
+										"col": 12
+									},
+									"left": {
+										"name": "左侧",
+										"type": "stepper",
+										"min": 0,
+										"suffix": "px",
+										"step": 1,
+										"default": 50,
+										"col": 12
+									},
+									"right": {
+										"name": "右侧",
+										"type": "stepper",
+										"min": 0,
+										"suffix": "px",
+										"step": 1,
+										"default": 30,
+										"col": 12
+									}
+								}
+							},
+							"point": {
+								"type": "group",
+								"fold": true,
+								"enableHide": true,
+								"name": "数据点",
+								"children": {
+									"shape": {
+										"type": "select",
+										"options": [
+											{
+												"value": "circle",
+												"label": "实心圆"
+											},
+											{
+												"value": "rect",
+												"label": "正方形"
+											}
+										],
+										"default": "circle",
+										"name": "形状"
+									},
+									"size": {
+										"type": "stepper",
+										"step": 1,
+										"default": 3,
+										"name": "大小"
+									},
+									"style": {
+										"type": "suite",
+										"fold": true,
+										"enableHide": false,
+										"name": "描边",
+										"children": {
+											"stroke": {
+												"type": "fill",
+												"default": "#E8E8E8",
+												"name": "颜色",
+												"col": 12
+											},
+											"lineWidth": {
+												"type": "stepper",
+												"step": 1,
+												"default": 1,
+												"name": "宽度",
+												"col": 12
+											}
+										}
+									},
+									"show": {
+										"default": false
+									}
+								}
+							},
+							"legend": {
+								"type": "group",
+								"fold": true,
+								"enableHide": true,
+								"name": "图例",
+								"children": {
+									"clickable": {
+										"type": "switch",
+										"default": true,
+										"name": "点击过滤"
+									},
+									"unCheckColor": {
+										"type": "fill",
+										"default": "#90a0ae",
+										"name": "未选择颜色",
+										"showInPanel": [
+											[
+												".clickable",
+												"$eq",
+												true
+											]
+										]
+									},
+									"layout": {
+										"name": "布局",
+										"type": "suite",
+										"enableHide": false,
+										"children": {
+											"position": {
+												"type": "select",
+												"options": [
+													{
+														"value": "top",
+														"label": "顶部"
+													},
+													{
+														"value": "bottom",
+														"label": "底部"
+													},
+													{
+														"value": "left",
+														"label": "左侧"
+													},
+													{
+														"value": "right",
+														"label": "右侧"
+													}
+												],
+												"default": "top",
+												"name": "位置",
+												"col": 12
+											},
+											"align": {
+												"type": "select",
+												"options": [
+													{
+														"value": "left",
+														"label": "左对齐"
+													},
+													{
+														"value": "center",
+														"label": "居中对齐"
+													},
+													{
+														"value": "right",
+														"label": "右对齐"
+													}
+												],
+												"default": "left",
+												"name": "对齐方式",
+												"showInPanel": {
+													"conditions": [
+														[
+															".position",
+															"$eq",
+															"top"
+														],
+														[
+															".position",
+															"$eq",
+															"bottom"
+														]
+													],
+													"logicalType": "$or"
+												},
+												"col": 12
+											},
+											"verticalAlign": {
+												"type": "select",
+												"options": [
+													{
+														"value": "top",
+														"label": "顶部对齐"
+													},
+													{
+														"value": "middle",
+														"label": "居中对齐"
+													},
+													{
+														"value": "bottom",
+														"label": "底部对齐"
+													}
+												],
+												"default": "middle",
+												"name": "对齐方式",
+												"showInPanel": {
+													"conditions": [
+														[
+															".position",
+															"$eq",
+															"left"
+														],
+														[
+															".position",
+															"$eq",
+															"right"
+														]
+													],
+													"logicalType": "$or"
+												},
+												"col": 12
+											}
+										}
+									},
+									"marker": {
+										"type": "select",
+										"options": [
+											{
+												"value": "circle",
+												"label": "圆形"
+											},
+											{
+												"value": "square",
+												"label": "方形"
+											}
+										],
+										"default": "circle",
+										"name": "标记形状"
+									},
+									"textStyle": {
+										"type": "suite",
+										"name": "文本",
+										"children": {
+											"fontSize": {
+												"type": "stepper",
+												"step": 1,
+												"default": 12,
+												"name": "字号",
+												"col": 12
+											},
+											"fontWeight": {
+												"type": "select",
+												"options": [
+													"normal",
+													"bold",
+													"bolder",
+													"lighter",
+													100,
+													200,
+													300,
+													400,
+													500,
+													600,
+													700,
+													800,
+													900
+												],
+												"default": "normal",
+												"name": "文字粗细",
+												"col": 12
+											},
+											"fill": {
+												"type": "fill",
+												"default": "#90a0ae",
+												"name": "颜色",
+												"col": 12
+											},
+											"textAlign": {
+												"type": "select",
+												"options": [
+													{
+														"value": "center",
+														"label": "居中对齐"
+													},
+													{
+														"value": "left",
+														"label": "左对齐"
+													},
+													{
+														"value": "right",
+														"label": "右对齐"
+													}
+												],
+												"default": "left",
+												"name": "对齐方式",
+												"col": 12
+											}
+										}
+									},
+									"show": {
+										"default": false
+									}
+								}
+							}
+						}
+					},
+					"axis": {
+						"type": "menuChild",
+						"mode": "multiple",
+						"name": "坐标轴",
+						"children": {
+							"xAxis": {
+								"name": "x轴",
+								"children": {
+									"_show": {
+										"type": "switch",
+										"default": true,
+										"name": "显示"
+									},
+									"_type": {
+										"type": "select",
+										"options": [
+											{
+												"value": "linear",
+												"label": "数值型"
+											},
+											{
+												"value": "cat",
+												"label": "类目型"
+											},
+											{
+												"value": "timeCat",
+												"label": "时间型"
+											}
+										],
+										"default": "linear",
+										"name": "类型"
+									},
+									"tickCount": {
+										"type": "stepper",
+										"step": 1,
+										"default": 12,
+										"name": "刻度数量"
+									},
+									"nice": {
+										"type": "switch",
+										"default": true,
+										"name": "优化刻度",
+										"showInPanel": {
+											"conditions": [
+												[
+													"._type",
+													"$eq",
+													"linear"
+												]
+											]
+										}
+									},
+									"custom": {
+										"name": "自定义",
+										"type": "suite",
+										"enableHide": false,
+										"showInPanel": {
+											"conditions": [
+												[
+													"._type",
+													"$eq",
+													"linear"
+												],
+												[
+													".nice",
+													"$eq",
+													false
+												]
+											],
+											"logicalType": "$and"
+										},
+										"children": {
+											"min": {
+												"type": "stepper",
+												"step": 1,
+												"default": null,
+												"name": "最小值",
+												"showInPanel": null,
+												"col": 12
+											},
+											"max": {
+												"type": "stepper",
+												"step": 1,
+												"default": null,
+												"name": "最大值",
+												"showInPanel": null,
+												"col": 12
+											}
+										}
+									},
+									"_range": {
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.05,
+										"default": [
+											0,
+											1
+										],
+										"name": "留白",
+										"mode": "double"
+									},
+									"label": {
+										"type": "group",
+										"fold": false,
+										"enableHide": true,
+										"name": "轴标签",
+										"children": {
+											"formatter": {
+												"type": "select",
+												"options": [
+													{
+														"value": null,
+														"label": "原始值"
+													},
+													{
+														"value": "%function%round",
+														"label": "11(整数)"
+													},
+													{
+														"value": "%function%float_1",
+														"label": "11.1(浮点数)"
+													},
+													{
+														"value": "%function%float_2",
+														"label": "11.11(浮点数)"
+													}
+												],
+												"default": null,
+												"name": "显示格式",
+												"showInPanel": {
+													"conditions": [
+														[
+															"options.axis.xAxis._type",
+															"$eq",
+															"linear"
+														]
+													]
+												}
+											},
+											"mask": {
+												"type": "select",
+												"options": [
+													{
+														"value": "YYYY年",
+														"label": "2016年"
+													},
+													{
+														"value": "YYYY",
+														"label": "2016(年份)"
+													},
+													{
+														"value": "MM月DD日",
+														"label": "01月01日"
+													},
+													{
+														"value": "MM/DD",
+														"label": "01/01(月/日)"
+													},
+													{
+														"value": "HH:mm:ss",
+														"label": "02:30:00(24时制)"
+													},
+													{
+														"value": "hh:mm:ss",
+														"label": "02:30:00(12时制)"
+													},
+													{
+														"value": "HH:mm",
+														"label": "02:30(24时制)"
+													},
+													{
+														"value": "hh:mm",
+														"label": "02:30(12时制)"
+													},
+													{
+														"value": "YYYY/MM/DD HH:mm",
+														"label": "2016/01/01 02:30"
+													},
+													{
+														"value": "YYYY/MM/DD",
+														"label": "2016/01/01"
+													},
+													{
+														"value": "YYYY-MM-DD",
+														"label": "2016-01-01"
+													},
+													{
+														"value": "MM/DD HH:mm",
+														"label": "01/01 02:30"
+													},
+													{
+														"value": "MM月",
+														"label": "1月"
+													},
+													{
+														"value": "DD日",
+														"label": "2日"
+													},
+													{
+														"value": "HHh",
+														"label": "02h"
+													},
+													{
+														"value": "HH",
+														"label": "02(时)"
+													},
+													{
+														"value": "MM-DD",
+														"label": "01-01"
+													},
+													{
+														"value": "MM.DD",
+														"label": "01.01"
+													}
+												],
+												"default": "YYYY-MM-DD",
+												"name": "显示格式",
+												"showInPanel": {
+													"conditions": [
+														[
+															".._type",
+															"$eq",
+															"timeCat"
+														]
+													]
+												}
+											},
+											"labelOffset": {
+												"type": "stepper",
+												"step": 0.5,
+												"default": 7.5,
+												"name": "标签偏移"
+											},
+											"show": {
+												"default": true
+											},
+											"font": {
+												"type": "suite",
+												"name": "文本",
+												"children": {
+													"fontSize": {
+														"type": "stepper",
+														"step": 1,
+														"default": 12,
+														"name": "字号",
+														"col": 12
+													},
+													"fontWeight": {
+														"type": "select",
+														"options": [
+															"normal",
+															"bold",
+															"bolder",
+															"lighter",
+															100,
+															200,
+															300,
+															400,
+															500,
+															600,
+															700,
+															800,
+															900
+														],
+														"default": "normal",
+														"name": "文字粗细",
+														"col": 12
+													},
+													"fill": {
+														"type": "fill",
+														"default": "#90a0ae",
+														"name": "颜色",
+														"col": 12
+													},
+													"textAlign": {
+														"type": "select",
+														"options": [
+															{
+																"value": "center",
+																"label": "居中对齐"
+															},
+															{
+																"value": "left",
+																"label": "左对齐"
+															},
+															{
+																"value": "right",
+																"label": "右对齐"
+															},
+															{
+																"value": "justify",
+																"label": "两端对齐"
+															}
+														],
+														"default": "center",
+														"name": "对齐方式",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"grid": {
+										"type": "group",
+										"fold": true,
+										"enableHide": true,
+										"name": "网格",
+										"children": {
+											"_type": {
+												"type": "select",
+												"options": [
+													{
+														"value": "line",
+														"label": "直线网格"
+													},
+													{
+														"value": "arc",
+														"label": "弧线网格"
+													}
+												],
+												"default": "line",
+												"name": "类型",
+												"showInPanel": {
+													"conditions": [
+														[
+															"options.chart.coord._type",
+															"$eq",
+															"polar"
+														]
+													]
+												}
+											},
+											"show": {
+												"default": false
+											},
+											"style": {
+												"type": "suite",
+												"name": "样式",
+												"children": {
+													"stroke": {
+														"type": "fill",
+														"default": "#E8E8E8",
+														"name": "颜色",
+														"col": 24
+													},
+													"lineWidth": {
+														"type": "stepper",
+														"step": 1,
+														"default": 1,
+														"name": "宽度",
+														"col": 12
+													},
+													"lineDash": {
+														"type": "select",
+														"options": [
+															{
+																"value": "line",
+																"label": "实线"
+															},
+															{
+																"value": "dash",
+																"label": "虚线"
+															},
+															{
+																"value": "dot",
+																"label": "点线"
+															}
+														],
+														"default": "dot",
+														"name": "线型",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"line": {
+										"type": "group",
+										"fold": false,
+										"enableHide": true,
+										"name": "轴线",
+										"children": {
+											"show": {
+												"default": true
+											},
+											"style": {
+												"type": "suite",
+												"name": "样式",
+												"children": {
+													"stroke": {
+														"type": "fill",
+														"default": "rgba(255, 255, 255, 0.1)",
+														"name": "颜色",
+														"col": 24
+													},
+													"lineWidth": {
+														"type": "stepper",
+														"step": 1,
+														"default": 1,
+														"name": "宽度",
+														"col": 12
+													},
+													"lineDash": {
+														"type": "select",
+														"options": [
+															{
+																"value": "line",
+																"label": "实线"
+															},
+															{
+																"value": "dash",
+																"label": "虚线"
+															},
+															{
+																"value": "dot",
+																"label": "点线"
+															}
+														],
+														"default": "line",
+														"name": "线型",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"tickLine": {
+										"type": "group",
+										"fold": true,
+										"enableHide": true,
+										"name": "刻度线",
+										"children": {
+											"show": {
+												"default": false
+											},
+											"style": {
+												"type": "suite",
+												"name": "样式",
+												"children": {
+													"stroke": {
+														"type": "fill",
+														"default": "#E8E8E8",
+														"name": "颜色",
+														"col": 12
+													},
+													"lineDash": {
+														"type": "select",
+														"options": [
+															{
+																"value": "line",
+																"label": "实线"
+															},
+															{
+																"value": "dash",
+																"label": "虚线"
+															},
+															{
+																"value": "dot",
+																"label": "点线"
+															}
+														],
+														"default": "line",
+														"name": "线型",
+														"col": 12
+													},
+													"lineWidth": {
+														"type": "stepper",
+														"step": 1,
+														"default": 1,
+														"name": "宽度",
+														"col": 12
+													},
+													"length": {
+														"type": "stepper",
+														"step": 1,
+														"default": 5,
+														"name": "长度",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"show": {
+										"default": true
+									}
+								}
+							},
+							"yAxis": {
+								"name": "y轴",
+								"children": {
+									"_show": {
+										"type": "switch",
+										"default": true,
+										"name": "显示"
+									},
+									"_type": {
+										"type": "hidden",
+										"default": "linear",
+										"name": "类型"
+									},
+									"tickCount": {
+										"type": "stepper",
+										"step": 1,
+										"default": 5,
+										"name": "刻度数量"
+									},
+									"nice": {
+										"type": "switch",
+										"default": true,
+										"name": "优化刻度",
+										"showInPanel": {
+											"conditions": [
+												[
+													"._type",
+													"$eq",
+													"linear"
+												]
+											]
+										}
+									},
+									"custom": {
+										"name": "自定义",
+										"type": "suite",
+										"enableHide": false,
+										"showInPanel": {
+											"conditions": [
+												[
+													"._type",
+													"$eq",
+													"linear"
+												],
+												[
+													".nice",
+													"$eq",
+													false
+												]
+											],
+											"logicalType": "$and"
+										},
+										"children": {
+											"min": {
+												"type": "stepper",
+												"step": 1,
+												"default": null,
+												"name": "最小值",
+												"showInPanel": null,
+												"col": 12
+											},
+											"max": {
+												"type": "stepper",
+												"step": 1,
+												"default": null,
+												"name": "最大值",
+												"showInPanel": null,
+												"col": 12
+											}
+										}
+									},
+									"_range": {
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.05,
+										"default": [
+											0,
+											1
+										],
+										"name": "留白",
+										"mode": "double"
+									},
+									"label": {
+										"type": "group",
+										"fold": false,
+										"enableHide": true,
+										"name": "轴标签",
+										"children": {
+											"formatter": {
+												"type": "select",
+												"options": [
+													{
+														"value": null,
+														"label": "原始值"
+													},
+													{
+														"value": "%function%round",
+														"label": "11(整数)"
+													},
+													{
+														"value": "%function%float_1",
+														"label": "11.1(浮点数)"
+													},
+													{
+														"value": "%function%float_2",
+														"label": "11.11(浮点数)"
+													}
+												],
+												"default": null,
+												"name": "显示格式",
+												"showInPanel": {
+													"conditions": [
+														[
+															"options.axis.yAxis._type",
+															"$eq",
+															"linear"
+														]
+													]
+												}
+											},
+											"mask": {
+												"type": "select",
+												"options": [
+													{
+														"value": "YYYY年",
+														"label": "2016年"
+													},
+													{
+														"value": "YYYY",
+														"label": "2016(年份)"
+													},
+													{
+														"value": "MM月DD日",
+														"label": "01月01日"
+													},
+													{
+														"value": "MM/DD",
+														"label": "01/01(月/日)"
+													},
+													{
+														"value": "HH:mm:ss",
+														"label": "02:30:00(24时制)"
+													},
+													{
+														"value": "hh:mm:ss",
+														"label": "02:30:00(12时制)"
+													},
+													{
+														"value": "HH:mm",
+														"label": "02:30(24时制)"
+													},
+													{
+														"value": "hh:mm",
+														"label": "02:30(12时制)"
+													},
+													{
+														"value": "YYYY/MM/DD HH:mm",
+														"label": "2016/01/01 02:30"
+													},
+													{
+														"value": "YYYY/MM/DD",
+														"label": "2016/01/01"
+													},
+													{
+														"value": "YYYY-MM-DD",
+														"label": "2016-01-01"
+													},
+													{
+														"value": "MM/DD HH:mm",
+														"label": "01/01 02:30"
+													},
+													{
+														"value": "MM月",
+														"label": "1月"
+													},
+													{
+														"value": "DD日",
+														"label": "2日"
+													},
+													{
+														"value": "HHh",
+														"label": "02h"
+													},
+													{
+														"value": "HH",
+														"label": "02(时)"
+													},
+													{
+														"value": "MM-DD",
+														"label": "01-01"
+													},
+													{
+														"value": "MM.DD",
+														"label": "01.01"
+													}
+												],
+												"default": "YYYY-MM-DD",
+												"name": "显示格式",
+												"showInPanel": {
+													"conditions": [
+														[
+															"options.axis.yAxis._type",
+															"$eq",
+															"timeCat"
+														]
+													]
+												}
+											},
+											"labelOffset": {
+												"type": "stepper",
+												"step": 0.5,
+												"default": 15,
+												"name": "标签偏移"
+											},
+											"show": {
+												"default": true
+											},
+											"font": {
+												"type": "suite",
+												"name": "文本",
+												"children": {
+													"fontSize": {
+														"type": "stepper",
+														"step": 1,
+														"default": 12,
+														"name": "字号",
+														"col": 12
+													},
+													"fontWeight": {
+														"type": "select",
+														"options": [
+															"normal",
+															"bold",
+															"bolder",
+															"lighter",
+															100,
+															200,
+															300,
+															400,
+															500,
+															600,
+															700,
+															800,
+															900
+														],
+														"default": "normal",
+														"name": "文字粗细",
+														"col": 12
+													},
+													"fill": {
+														"type": "fill",
+														"default": "#90a0ae",
+														"name": "颜色",
+														"col": 12
+													},
+													"textAlign": {
+														"type": "select",
+														"options": [
+															{
+																"value": "center",
+																"label": "居中对齐"
+															},
+															{
+																"value": "left",
+																"label": "左对齐"
+															},
+															{
+																"value": "right",
+																"label": "右对齐"
+															}
+														],
+														"default": "center",
+														"name": "对齐方式",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"grid": {
+										"type": "group",
+										"fold": false,
+										"enableHide": true,
+										"name": "网格",
+										"children": {
+											"_type": {
+												"type": "select",
+												"options": [
+													{
+														"value": "line",
+														"label": "直线网格"
+													},
+													{
+														"value": "arc",
+														"label": "弧线网格"
+													}
+												],
+												"default": "line",
+												"name": "类型",
+												"showInPanel": {
+													"conditions": [
+														[
+															"options.chart.coord._type",
+															"$eq",
+															"polar"
+														]
+													]
+												}
+											},
+											"show": {
+												"default": true
+											},
+											"style": {
+												"type": "suite",
+												"name": "样式",
+												"children": {
+													"stroke": {
+														"type": "fill",
+														"default": "rgba(255, 255, 255, 0.1)",
+														"name": "颜色",
+														"col": 24
+													},
+													"lineWidth": {
+														"type": "stepper",
+														"step": 1,
+														"default": 1,
+														"name": "宽度",
+														"col": 12
+													},
+													"lineDash": {
+														"type": "select",
+														"options": [
+															{
+																"value": "line",
+																"label": "实线"
+															},
+															{
+																"value": "dash",
+																"label": "虚线"
+															},
+															{
+																"value": "dot",
+																"label": "点线"
+															}
+														],
+														"default": "dot",
+														"name": "线型",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"line": {
+										"type": "group",
+										"fold": true,
+										"enableHide": true,
+										"name": "轴线",
+										"children": {
+											"show": {
+												"default": false
+											},
+											"style": {
+												"type": "suite",
+												"name": "样式",
+												"children": {
+													"stroke": {
+														"type": "fill",
+														"default": "#E8E8E8",
+														"name": "颜色",
+														"col": 24
+													},
+													"lineWidth": {
+														"type": "stepper",
+														"step": 1,
+														"default": 1,
+														"name": "宽度",
+														"col": 12
+													},
+													"lineDash": {
+														"type": "select",
+														"options": [
+															{
+																"value": "line",
+																"label": "实线"
+															},
+															{
+																"value": "dash",
+																"label": "虚线"
+															},
+															{
+																"value": "dot",
+																"label": "点线"
+															}
+														],
+														"default": "line",
+														"name": "线型",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"tickLine": {
+										"type": "group",
+										"fold": true,
+										"enableHide": true,
+										"name": "刻度线",
+										"children": {
+											"show": {
+												"default": false
+											},
+											"style": {
+												"type": "suite",
+												"name": "样式",
+												"children": {
+													"stroke": {
+														"type": "fill",
+														"default": "#E8E8E8",
+														"name": "颜色",
+														"col": 12
+													},
+													"lineDash": {
+														"type": "select",
+														"options": [
+															{
+																"value": "line",
+																"label": "实线"
+															},
+															{
+																"value": "dash",
+																"label": "虚线"
+															},
+															{
+																"value": "dot",
+																"label": "点线"
+															}
+														],
+														"default": "line",
+														"name": "线型",
+														"col": 12
+													},
+													"lineWidth": {
+														"type": "stepper",
+														"step": 1,
+														"default": 1,
+														"name": "宽度",
+														"col": 12
+													},
+													"length": {
+														"type": "stepper",
+														"step": 1,
+														"default": 5,
+														"name": "长度",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"show": {
+										"default": true
+									}
+								}
+							}
+						}
+					},
+					"series": {
+						"type": "menuChild",
+						"mode": "single",
+						"name": "系列",
+						"children": {
+							"series": {
+								"type": "tabs",
+								"addable": true,
+								"default": [
+									{
+										"area": {
+											"color": {
+												"type": "linearGradient",
+												"value": {
+													"stops": [
+														{
+															"offset": 2,
+															"color": "rgba(121, 218, 255, 0.6)"
+														},
+														{
+															"offset": 97,
+															"color": "rgba(121, 218, 255, 0)"
+														}
+													],
+													"angle": 90
+												}
+											}
+										},
+										"line": {
+											"color": "rgb(121, 218, 255)",
+											"size": 3
+										}
+									},
+									{
+										"area": {
+											"color": {
+												"type": "linearGradient",
+												"value": {
+													"stops": [
+														{
+															"offset": 0,
+															"color": "rgba(61, 171, 255, 0.6)"
+														},
+														{
+															"offset": 97,
+															"color": "rgba(61, 171, 255, 0)"
+														}
+													],
+													"angle": 90
+												}
+											}
+										},
+										"line": {
+											"color": "rgb(61, 171, 255)",
+											"size": 3
+										}
+									},
+									{
+										"area": {
+											"color": {
+												"type": "linearGradient",
+												"value": {
+													"stops": [
+														{
+															"offset": 0,
+															"color": "rgba(10, 115, 255, 0.6)"
+														},
+														{
+															"offset": 98,
+															"color": "rgba(10, 115, 255, 0)"
+														}
+													],
+													"angle": 0
+												}
+											}
+										},
+										"line": {
+											"color": "rgb(10, 115, 255)",
+											"size": 3
+										}
+									}
+								],
+								"template": {
+									"type": "object",
+									"name": "系列<%= i + 1%>",
+									"children": {
+										"shape": {
+											"type": "switch",
+											"name": "平滑曲线",
+											"default": false
+										},
+										"area": {
+											"type": "suite",
+											"fold": false,
+											"children": {
+												"color": {
+													"type": "fill",
+													"default": {
+														"type": "flat",
+														"value": "#1890FF"
+													},
+													"components": [
+														"flat",
+														"linearGradient"
+													],
+													"name": "颜色"
+												}
+											},
+											"enableHide": false,
+											"name": "区域样式"
+										},
+										"line": {
+											"type": "suite",
+											"fold": true,
+											"children": {
+												"color": {
+													"type": "fill",
+													"default": "#1890FF",
+													"name": "颜色"
+												},
+												"size": {
+													"type": "stepper",
+													"step": 1,
+													"default": 2,
+													"name": "宽度"
+												}
+											},
+											"enableHide": false,
+											"name": "线样式"
+										}
+									}
+								},
+								"fold": false,
+								"name": "数据系列"
+							}
+						}
+					},
+					"others": {
+						"type": "menuChild",
+						"mode": "single",
+						"name": "其它",
+						"children": {
+							"animate": {
+								"type": "group",
+								"fold": false,
+								"enableHide": true,
+								"name": "缓动动画",
+								"children": {
+									"easing": {
+										"type": "select",
+										"options": [
+											{
+												"value": "linear",
+												"label": "linear"
+											},
+											{
+												"value": "quadraticIn",
+												"label": "quadraticIn"
+											},
+											{
+												"value": "quadraticOut",
+												"label": "quadraticOut"
+											},
+											{
+												"value": "quadraticInOut",
+												"label": "quadraticInOut"
+											},
+											{
+												"value": "cubicIn",
+												"label": "cubicIn"
+											},
+											{
+												"value": "cubicOut",
+												"label": "cubicOut"
+											},
+											{
+												"value": "cubicInOut",
+												"label": "cubicInOut"
+											},
+											{
+												"value": "quarticIn",
+												"label": "quarticIn"
+											},
+											{
+												"value": "quarticOut",
+												"label": "quarticOut"
+											},
+											{
+												"value": "quarticInOut",
+												"label": "quarticInOut"
+											},
+											{
+												"value": "quinticIn",
+												"label": "quinticIn"
+											},
+											{
+												"value": "quinticOut",
+												"label": "quinticOut"
+											},
+											{
+												"value": "quinticInOut",
+												"label": "quinticInOut"
+											},
+											{
+												"value": "sinusoidalIn",
+												"label": "sinusoidalIn"
+											},
+											{
+												"value": "sinusoidalOut",
+												"label": "sinusoidalOut"
+											},
+											{
+												"value": "sinusoidalInOut",
+												"label": "sinusoidalInOut"
+											},
+											{
+												"value": "exponentialIn",
+												"label": "exponentialIn"
+											},
+											{
+												"value": "exponentialOut",
+												"label": "exponentialOut"
+											},
+											{
+												"value": "exponentialInOut",
+												"label": "exponentialInOut"
+											},
+											{
+												"value": "circularIn",
+												"label": "circularIn"
+											},
+											{
+												"value": "circularOut",
+												"label": "circularOut"
+											},
+											{
+												"value": "circularInOut",
+												"label": "circularInOut"
+											},
+											{
+												"value": "elasticIn",
+												"label": "elasticIn"
+											},
+											{
+												"value": "elasticOut",
+												"label": "elasticOut"
+											},
+											{
+												"value": "elasticInOut",
+												"label": "elasticInOut"
+											},
+											{
+												"value": "backIn",
+												"label": "backIn"
+											},
+											{
+												"value": "backOut",
+												"label": "backOut"
+											},
+											{
+												"value": "backInOut",
+												"label": "backInOut"
+											},
+											{
+												"value": "bounceIn",
+												"label": "bounceIn"
+											},
+											{
+												"value": "bounceOut",
+												"label": "bounceOut"
+											},
+											{
+												"value": "bounceInOut",
+												"label": "bounceInOut"
+											}
+										],
+										"default": "cubicOut",
+										"name": "缓动效果"
+									},
+									"show": {
+										"default": true
+									},
+									"duration": {
+										"type": "suite",
+										"name": "时长",
+										"children": {
+											"enterDuration": {
+												"type": "stepper",
+												"step": 1,
+												"default": 1000,
+												"name": "入场动画",
+												"suffix": "ms",
+												"col": 12
+											},
+											"updateDuration": {
+												"type": "stepper",
+												"step": 1,
+												"default": 300,
+												"name": "更新动画",
+												"suffix": "ms",
+												"col": 12
+											}
+										}
+									}
+								}
+							},
+							"tooltip": {
+								"type": "group",
+								"fold": false,
+								"enableHide": true,
+								"name": "提示框",
+								"children": {
+									"nameStyle": {
+										"type": "suite",
+										"fold": true,
+										"enableHide": false,
+										"name": "系列名",
+										"children": {
+											"fontSize": {
+												"type": "stepper",
+												"step": 1,
+												"default": 10,
+												"name": "字号",
+												"col": 12
+											},
+											"fill": {
+												"type": "fill",
+												"default": "#fff",
+												"name": "颜色",
+												"col": 12
+											}
+										}
+									},
+									"valueStyle": {
+										"type": "suite",
+										"fold": true,
+										"enableHide": false,
+										"name": "数据值",
+										"children": {
+											"fontSize": {
+												"type": "stepper",
+												"step": 1,
+												"default": 10,
+												"name": "字号",
+												"col": 12
+											},
+											"fill": {
+												"type": "fill",
+												"default": "#fff",
+												"name": "颜色",
+												"col": 12
+											}
+										}
+									},
+									"crosshairsStyle": {
+										"type": "suite",
+										"fold": true,
+										"enableHide": true,
+										"name": "辅助线",
+										"children": {
+											"lineWidth": {
+												"type": "stepper",
+												"step": 1,
+												"default": 1,
+												"name": "宽度",
+												"col": 12
+											},
+											"lineDash": {
+												"type": "select",
+												"options": [
+													{
+														"value": "line",
+														"label": "实线"
+													},
+													{
+														"value": "dash",
+														"label": "虚线"
+													},
+													{
+														"value": "dot",
+														"label": "点线"
+													}
+												],
+												"default": "line",
+												"name": "线型",
+												"col": 12
+											},
+											"stroke": {
+												"type": "fill",
+												"default": "rgba(255, 255, 255, 0.2)",
+												"name": "颜色",
+												"col": 24
+											},
+											"show": {
+												"default": true
+											}
+										}
+									},
+									"background": {
+										"type": "suite",
+										"fold": true,
+										"enableHide": false,
+										"name": "背景框",
+										"children": {
+											"radius": {
+												"type": "stepper",
+												"step": 1,
+												"default": 1,
+												"name": "圆角",
+												"col": 12
+											},
+											"fill": {
+												"type": "fill",
+												"default": "rgba(144, 160, 174, 0.8)",
+												"name": "颜色",
+												"col": 12
+											}
+										}
+									},
+									"show": {
+										"default": true
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"events": {
+			"click": {
+				"name": "当点击数据项时",
+				"type": "object",
+				"description": "当点击数据项时",
+				"fields": {
+					"data": {
+						"type": "array",
+						"name": "系列数据数组",
+						"description": "多系列数据",
+						"children": {
+							"x": {
+								"type": "string | number",
+								"name": "x",
+								"description": "x坐标轴值"
+							},
+							"y": {
+								"type": "number",
+								"name": "y",
+								"description": "y坐标轴值"
+							},
+							"s": {
+								"type": "string",
+								"name": "s",
+								"description": "系列值"
+							}
+						}
+					},
+					"x": {
+						"type": "string | number",
+						"name": "x",
+						"description": "x坐标轴值"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": 12,
+					"y": 7,
+					"s": "tokyo"
+				},
+				{
+					"x": 1,
+					"y": 6.9,
+					"s": "tokyo"
+				},
+				{
+					"x": 2,
+					"y": 9.5,
+					"s": "tokyo"
+				},
+				{
+					"x": 3,
+					"y": 14.5,
+					"s": "tokyo"
+				},
+				{
+					"x": 4,
+					"y": 18.2,
+					"s": "tokyo"
+				},
+				{
+					"x": 5,
+					"y": 21.5,
+					"s": "tokyo"
+				},
+				{
+					"x": 6,
+					"y": 25.2,
+					"s": "tokyo"
+				},
+				{
+					"x": 7,
+					"y": 26.5,
+					"s": "tokyo"
+				},
+				{
+					"x": 8,
+					"y": 23.3,
+					"s": "tokyo"
+				},
+				{
+					"x": 9,
+					"y": 18.3,
+					"s": "tokyo"
+				},
+				{
+					"x": 10,
+					"y": 13.9,
+					"s": "tokyo"
+				},
+				{
+					"x": 11,
+					"y": 9.6,
+					"s": "tokyo"
+				},
+				{
+					"x": 12,
+					"y": 0,
+					"s": "newYork"
+				},
+				{
+					"x": 1,
+					"y": 0.8,
+					"s": "newYork"
+				},
+				{
+					"x": 2,
+					"y": 5.7,
+					"s": "newYork"
+				},
+				{
+					"x": 3,
+					"y": 11.3,
+					"s": "newYork"
+				},
+				{
+					"x": 4,
+					"y": 17,
+					"s": "newYork"
+				},
+				{
+					"x": 5,
+					"y": 22,
+					"s": "newYork"
+				},
+				{
+					"x": 6,
+					"y": 24.8,
+					"s": "newYork"
+				},
+				{
+					"x": 7,
+					"y": 24.1,
+					"s": "newYork"
+				},
+				{
+					"x": 8,
+					"y": 20.1,
+					"s": "newYork"
+				},
+				{
+					"x": 9,
+					"y": 14.1,
+					"s": "newYork"
+				},
+				{
+					"x": 10,
+					"y": 8.6,
+					"s": "newYork"
+				},
+				{
+					"x": 11,
+					"y": 2.5,
+					"s": "newYork"
+				},
+				{
+					"x": 12,
+					"y": 2,
+					"s": "berlin"
+				},
+				{
+					"x": 1,
+					"y": 0.6,
+					"s": "berlin"
+				},
+				{
+					"x": 2,
+					"y": 3.5,
+					"s": "berlin"
+				},
+				{
+					"x": 3,
+					"y": 8.4,
+					"s": "berlin"
+				},
+				{
+					"x": 4,
+					"y": 13.5,
+					"s": "berlin"
+				},
+				{
+					"x": 5,
+					"y": 17,
+					"s": "berlin"
+				},
+				{
+					"x": 6,
+					"y": 18.6,
+					"s": "berlin"
+				},
+				{
+					"x": 7,
+					"y": 17.9,
+					"s": "berlin"
+				},
+				{
+					"x": 8,
+					"y": 14.3,
+					"s": "berlin"
+				},
+				{
+					"x": 9,
+					"y": 9,
+					"s": "berlin"
+				},
+				{
+					"x": 10,
+					"y": 3.9,
+					"s": "berlin"
+				},
+				{
+					"x": 11,
+					"y": 1,
+					"s": "berlin"
+				}
+			]
+		}
+	}
+}

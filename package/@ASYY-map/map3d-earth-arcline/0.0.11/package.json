@@ -1,0 +1,287 @@
+{
+	"name": "map3d-earth-arcline",
+	"version": "0.0.11",
+	"main": "index.js",
+	"dependencies": {
+		"three": "0.88.0",
+		"eventemitter3": "2.0.3",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "弧线层",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"flyingline": {
+				"type": "group",
+				"name": "飞线样式",
+				"children": {
+					"radius": {
+						"type": "number",
+						"name": "半径",
+						"default": 0.4,
+						"range": [
+							0.01,
+							2
+						],
+						"step": 0.01
+					},
+					"dashRatio": {
+						"type": "number",
+						"name": "虚线实线比",
+						"default": 4,
+						"range": [
+							0.1,
+							10
+						],
+						"step": 0.1
+					},
+					"dashSliceCount": {
+						"type": "number",
+						"name": "间断数",
+						"default": 40,
+						"range": [
+							10,
+							500
+						],
+						"step": 1
+					},
+					"speed": {
+						"type": "number",
+						"name": "速度",
+						"default": 0.001,
+						"range": [
+							0.0001,
+							0.1
+						],
+						"step": 0.0001
+					},
+					"height": {
+						"type": "number",
+						"name": "高度",
+						"default": 0.1,
+						"range": [
+							0.1,
+							16
+						],
+						"step": 0.1
+					},
+					"lineArc": {
+						"type": "number",
+						"name": "弧度",
+						"default": 3.14,
+						"range": [
+							0.99,
+							5
+						],
+						"step": 0.01
+					},
+					"opacity": {
+						"type": "number",
+						"name": "最大透明度",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"defaulColor": {
+						"type": "color",
+						"name": "默认颜色",
+						"default": "#0AF32B"
+					},
+					"flyinglineTypeSeries": {
+						"type": "array",
+						"name": "类型",
+						"fold": false,
+						"default": [
+							{
+								"flyinglineType": "type1",
+								"flyinglineColor": "#0AF32B"
+							},
+							{
+								"flyinglineType": "type2",
+								"flyinglineColor": "#FF0B00"
+							}
+						],
+						"child": {
+							"type": "object",
+							"name": "类型<%= i+1 %>",
+							"child": {
+								"flyinglineType": {
+									"type": "string",
+									"name": "type",
+									"default": "type1"
+								},
+								"flyinglineColor": {
+									"type": "color",
+									"name": "颜色",
+									"default": "#E7EE98"
+								}
+							}
+						}
+					}
+				}
+			},
+			"marker": {
+				"type": "group",
+				"name": "图标样式",
+				"children": {
+					"mapUrl": {
+						"type": "image",
+						"name": "自定义贴图",
+						"default": "https://img.alicdn.com/tfs/TB14LWbkER1BeNjy0FmXXb0wVXa-20-10.png"
+					},
+					"height": {
+						"type": "number",
+						"name": "高度",
+						"default": 10,
+						"range": [
+							0,
+							40
+						],
+						"step": 0.1
+					},
+					"size": {
+						"type": "number",
+						"name": "大小",
+						"default": 15,
+						"range": [
+							0.1,
+							100
+						],
+						"step": 0.01
+					},
+					"speed": {
+						"type": "number",
+						"name": "速度",
+						"default": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.0001
+					}
+				}
+			}
+		},
+		"api_data": {
+			"flyingline": [
+				{
+					"from": "116.40717,39.90469",
+					"to": "135.4297234,34.6332068",
+					"type": 1
+				},
+				{
+					"from": "113.26436,23.12908",
+					"to": "-3.7480742,40.236221",
+					"type": 1
+				},
+				{
+					"from": "100.75009,13.586577",
+					"to": "114.05956,22.54286",
+					"type": 1
+				},
+				{
+					"from": "121.4737,31.23037",
+					"to": "174.8201408,-36.9227234",
+					"type": 2
+				},
+				{
+					"from": "120.15515,30.27415",
+					"to": "55.6520743,37.8878377",
+					"type": 2
+				},
+				{
+					"to": "48.9577222,2.3692212",
+					"from": "113.26436,23.12908",
+					"type": 2
+				},
+				{
+					"from": "113.26436,23.12908",
+					"to": "106.850457,-6.4172491",
+					"type": 3
+				},
+				{
+					"from": "121.4737,31.23037",
+					"to": "-117.8611635,34.0046923",
+					"type": 3
+				},
+				{
+					"to": "55.6520743,37.887837",
+					"from": "116.40717,39.90469",
+					"type": 3
+				},
+				{
+					"from": "116.40717,39.90469",
+					"to": "151.2195772,-33.9605978",
+					"type": 4
+				},
+				{
+					"from": "120.15515,30.27415",
+					"to": "103.9086882,1.3691942",
+					"type": 4
+				},
+				{
+					"to": "55.6520743,37.887837",
+					"from": "113.26436,23.12908",
+					"type": 4
+				},
+				{
+					"from": "120.15515,30.27415",
+					"to": "101.597015,3.03198",
+					"type": 5
+				},
+				{
+					"from": "114.05956,22.54286",
+					"to": "52.36218322,4.872436523",
+					"type": 5
+				},
+				{
+					"to": "8.7910385,50.0168619",
+					"from": "121.4737,31.23037",
+					"type": 5
+				}
+			]
+		},
+		"apis": {
+			"flyingline": {
+				"handler": "setData",
+				"description": "飞线",
+				"fields": {
+					"from": {
+						"description": "飞线出发位置"
+					},
+					"to": {
+						"description": "飞线结束位置"
+					},
+					"type": {
+						"description": "飞线类型"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map3d-earth-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1O725Aq6qK1RjSZFmXXX0PFXa-180-180.png"
+	}
+}

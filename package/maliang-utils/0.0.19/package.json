@@ -1,0 +1,25 @@
+{
+	"name": "maliang-utils",
+	"version": "0.0.19",
+	"description": "utils for maliang coms",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "elvira.zy",
+	"license": "ISC",
+	"datav": {
+		"cn_name": "马良工具",
+		"private": true,
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"tools"
+		],
+		"view": {},
+		"icon": ""
+	},
+	"dependencies": {
+		"lodash": "4.13.1"
+	}
+}

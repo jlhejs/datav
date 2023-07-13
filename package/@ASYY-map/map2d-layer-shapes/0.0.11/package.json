@@ -1,0 +1,257 @@
+{
+	"name": "map2d-layer-shapes",
+	"version": "0.0.11",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"ldmap": "0.1.29"
+	},
+	"datav": {
+		"cn_name": "路径|圆|多边形层",
+		"protocol": 2,
+		"type": [
+			"map2d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		},
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"type": {
+						"description": "几何类型"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isClickZoom": {
+				"name": "点击缩放",
+				"type": "boolean",
+				"default": true
+			},
+			"clickZoom": {
+				"type": "group",
+				"name": "点击配置",
+				"children": {
+					"paddingTopBottom": {
+						"type": "number",
+						"name": "上下距离",
+						"min": 0,
+						"max": 500,
+						"step": 1,
+						"default": 10
+					},
+					"paddingLeftRight": {
+						"type": "number",
+						"name": "左右距离",
+						"min": 0,
+						"max": 500,
+						"step": 1,
+						"default": 10
+					}
+				}
+			},
+			"shape": {
+				"name": "形体样式",
+				"fold": false,
+				"type": "group",
+				"children": {
+					"normal": {
+						"type": "group",
+						"name": "面样式",
+						"children": {
+							"color": {
+								"name": "边颜色",
+								"type": "color",
+								"default": "#05824E"
+							},
+							"opacity": {
+								"type": "number",
+								"name": "边透明度",
+								"range": [
+									0,
+									1
+								],
+								"step": 0.01,
+								"default": 0.8
+							},
+							"weight": {
+								"type": "number",
+								"name": "边粗细",
+								"range": [
+									0,
+									20
+								],
+								"step": 1,
+								"default": 2
+							},
+							"dashArray": {
+								"type": "select",
+								"name": "边样式",
+								"default": "2,2,4",
+								"options": {
+									"- - -": "2,2",
+									"- - --": "2,2,4",
+									"-  --": "2,4,4",
+									"-----": "2,0"
+								}
+							},
+							"fillColor": {
+								"name": "填充颜色",
+								"type": "color",
+								"default": "#56CCA1"
+							},
+							"fillOpacity": {
+								"type": "number",
+								"name": "透明度",
+								"range": [
+									0,
+									1
+								],
+								"step": 0.01,
+								"default": 0.25
+							}
+						}
+					},
+					"hover": {
+						"name": "鼠标滑入",
+						"fold": true,
+						"type": "group",
+						"children": {
+							"fillOpacity": {
+								"type": "number",
+								"name": "透明度",
+								"range": [
+									0,
+									1
+								],
+								"step": 0.01,
+								"default": 0.5
+							},
+							"opacity": {
+								"type": "number",
+								"name": "边透明度",
+								"range": [
+									0,
+									1
+								],
+								"step": 0.01,
+								"default": 0.6
+							},
+							"weight": {
+								"type": "number",
+								"name": "边粗细",
+								"range": [
+									0,
+									10
+								],
+								"step": 1,
+								"default": 3
+							}
+						}
+					}
+				}
+			},
+			"point": {
+				"type": "group",
+				"name": "点样式",
+				"children": {
+					"fillOpacity": {
+						"type": "number",
+						"name": "边透明度",
+						"max": 1,
+						"min": 0,
+						"default": 1
+					},
+					"weightRatio": {
+						"type": "number",
+						"name": "半径",
+						"max": 10,
+						"min": 1,
+						"default": 5
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"type": "polygon",
+					"id": 1,
+					"latlngs": [
+						{
+							"lat": 30,
+							"lng": 120
+						},
+						{
+							"lat": 32,
+							"lng": 122
+						},
+						{
+							"lat": 29,
+							"lng": 115
+						},
+						{
+							"lat": 29.5,
+							"lng": 119
+						},
+						{
+							"lat": 30,
+							"lng": 120
+						}
+					]
+				},
+				{
+					"type": "circle",
+					"id": 2,
+					"center": {
+						"lat": 40,
+						"lng": 110
+					},
+					"radius": 1000000
+				},
+				{
+					"type": "polyline",
+					"id": 3,
+					"latlngs": [
+						{
+							"lat": 50,
+							"lng": 100
+						},
+						{
+							"lat": 51,
+							"lng": 112
+						},
+						{
+							"lat": 55,
+							"lng": 120
+						},
+						{
+							"lat": 56.5,
+							"lng": 123
+						},
+						{
+							"lat": 60,
+							"lng": 130
+						}
+					]
+				}
+			]
+		}
+	}
+}

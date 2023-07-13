@@ -1,0 +1,648 @@
+{
+	"name": "datav-2dmap-china-border",
+	"version": "3.0.10",
+	"description": "中国国家边界组件",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datav-2dmap-china-border.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww (yunyi.zww@alibaba-inc.com)",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "中国国家边界",
+		"level": 0,
+		"protocol": 2,
+		"icon": "https://img.alicdn.com/imgextra/i3/O1CN01JhW3gm1gJSrFbWjRO_!!6000000004121-2-tps-360-360.png",
+		"type": [
+			"datav-2dmap-v3_subcoms_centerlayer",
+			"DataV-6:analysis"
+		],
+		"analysis": {
+			"apis": "dataSource"
+		},
+		"parent": {
+			"supportTypes": [
+				"map_datav-2dmap-v3"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"defaultActive": "graph",
+				"children": {
+					"general": {
+						"name": "通用",
+						"type": "group",
+						"fold": false,
+						"children": {
+							"zoomRange": {
+								"name": "可见级别",
+								"type": "slider",
+								"description": "级别表示地图的缩放层级，子组件在设置范围内将显示，范围外将隐藏。",
+								"caption": "范围 [0, 22]",
+								"mode": "double",
+								"default": [
+									0,
+									18
+								],
+								"min": 0,
+								"max": 22,
+								"step": 0.1,
+								"suffix": "级"
+							},
+							"opacity": {
+								"name": "不透明度",
+								"type": "number",
+								"caption": "范围 [0, 100]",
+								"default": 53,
+								"range": [
+									0,
+									100
+								],
+								"step": 1,
+								"suffix": "%"
+							}
+						}
+					},
+					"graph": {
+						"type": "group",
+						"name": "图形",
+						"children": {
+							"defaultArea": {
+								"name": "默认中国区域数据",
+								"type": "hidden",
+								"default": "https://geo.datav.aliyun.com/areas_v2/bound/100000_full.json"
+							},
+							"defaultBorder": {
+								"name": "默认中国边界数据",
+								"type": "hidden",
+								"default": "https://geo.datav.aliyun.com/areas_v2/bound/100000_boundary.json"
+							},
+							"colorMapping": {
+								"name": "填充颜色",
+								"type": "colorMapping",
+								"fixedComponents": [
+									"flat"
+								],
+								"default": {
+									"mapping": false,
+									"fixed": "rgba(77, 77, 77, 0.5)",
+									"scale": {
+										"type": "ordinal",
+										"scheme": "cat-1",
+										"custom": false,
+										"range": [
+											"#12939A",
+											"#DDB27C",
+											"#88572C",
+											"#FF991F",
+											"#F15C17"
+										],
+										"domain": [],
+										"excepted": "rgba(255,0,0,0)",
+										"abnormal": "rgba(255,0,0,0)"
+									}
+								}
+							},
+							"lineStyle": {
+								"type": "group",
+								"name": "边界样式",
+								"fold": false,
+								"children": {
+									"guojieColor": {
+										"name": "国界颜色",
+										"type": "color",
+										"default": "rgba(255, 255, 255, 0.8)"
+									},
+									"guojieWeight": {
+										"type": "number",
+										"name": "国界粗细",
+										"caption": "范围 [0, 20]",
+										"default": 1.8,
+										"min": 0,
+										"max": 20,
+										"step": 0.1,
+										"suffix": "px"
+									},
+									"shengjieColor": {
+										"name": "省界颜色",
+										"type": "color",
+										"default": "rgba(255, 255, 255, 0.6)"
+									},
+									"shengjieWeight": {
+										"type": "number",
+										"name": "省界粗细",
+										"caption": "范围 [0, 20]",
+										"default": 1,
+										"min": 0,
+										"max": 20,
+										"step": 0.1,
+										"suffix": "px"
+									},
+									"haianxianColor": {
+										"name": "海岸线颜色",
+										"type": "color",
+										"default": "#444444"
+									},
+									"haianxianWeight": {
+										"type": "number",
+										"name": "海岸线粗细",
+										"caption": "范围 [0, 20]",
+										"default": 2,
+										"min": 0,
+										"max": 20,
+										"step": 0.1,
+										"suffix": "px"
+									}
+								}
+							},
+							"labelStyle": {
+								"type": "group",
+								"name": "地理标注",
+								"fold": false,
+								"children": {
+									"show": {
+										"type": "boolean",
+										"name": "显示",
+										"default": true
+									},
+									"iconColor": {
+										"type": "color",
+										"name": "图标颜色",
+										"default": "#ffffff"
+									},
+									"textStyle": {
+										"show": [
+											[
+												"show",
+												"$eq",
+												true
+											]
+										],
+										"type": "font",
+										"name": "文本样式",
+										"fold": false,
+										"children": {
+											"fontFamily": {
+												"type": "search",
+												"name": "字体",
+												"default": "Microsoft Yahei",
+												"range": [
+													{
+														"微软雅黑": "Microsoft Yahei"
+													},
+													{
+														"宋体": "SimSun"
+													},
+													{
+														"黑体": "SimHei"
+													},
+													{
+														"隶书": "LiSu"
+													},
+													{
+														"幼圆": "YouYuan"
+													},
+													"tahoma",
+													"arial",
+													"sans-serif"
+												],
+												"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+											},
+											"fontSize": {
+												"type": "number",
+												"name": "字号",
+												"default": 12,
+												"min": 10,
+												"max": 100,
+												"step": 1
+											},
+											"color": {
+												"type": "color",
+												"name": "颜色",
+												"default": "rgba(255, 255, 255, 0.8)"
+											},
+											"fontWeight": {
+												"type": "search",
+												"name": "粗细",
+												"default": "normal",
+												"searches": [
+													"normal",
+													"bold",
+													"bolder",
+													"lighter",
+													100,
+													200,
+													300,
+													400,
+													500,
+													600,
+													700,
+													800,
+													900
+												]
+											},
+											"shadowColor": {
+												"type": "color",
+												"name": "阴影色",
+												"default": "rgba(0, 0, 0, 0.85)",
+												"col": 12
+											},
+											"shadowBlur": {
+												"type": "hidden",
+												"name": "阴影模糊",
+												"default": 5,
+												"min": 0,
+												"max": 20,
+												"step": 1
+											}
+										}
+									}
+								}
+							},
+							"minMap": {
+								"type": "group",
+								"name": "南海附图",
+								"fold": false,
+								"enableHide": true,
+								"default": {
+									"show": true,
+									"scale": 1,
+									"margiBottom": 20,
+									"weight": 20
+								},
+								"children": {
+									"iconColor": {
+										"name": "图标颜色",
+										"type": "hidden",
+										"default": "#ec4d4c"
+									},
+									"textColor": {
+										"name": "文字颜色",
+										"type": "hidden",
+										"default": "#fff"
+									},
+									"landColor": {
+										"name": "陆地颜色",
+										"type": "color",
+										"default": "#2a2a2a"
+									},
+									"oceanColor": {
+										"name": "海洋颜色",
+										"type": "color",
+										"default": "#181818"
+									},
+									"borderColor": {
+										"name": "边框颜色",
+										"type": "color",
+										"default": "#b4b9bc"
+									},
+									"borderWeight": {
+										"type": "number",
+										"name": "边框粗细",
+										"caption": "范围 [1, 20]",
+										"default": 2,
+										"range": [
+											1,
+											20
+										],
+										"step": 1,
+										"suffix": "px"
+									},
+									"marginRight": {
+										"type": "number",
+										"name": "右侧距离",
+										"caption": "范围 [0, 500]",
+										"default": 8,
+										"range": [
+											0,
+											500
+										],
+										"step": 1,
+										"suffix": "px"
+									},
+									"marginBottom": {
+										"type": "number",
+										"name": "底部距离",
+										"caption": "范围 [0, 500]",
+										"default": 8,
+										"range": [
+											0,
+											500
+										],
+										"step": 1,
+										"suffix": "px"
+									},
+									"ctxScale": {
+										"type": "number",
+										"name": "缩放比例",
+										"caption": "范围 [0.1, 10]",
+										"default": 1,
+										"range": [
+											0.1,
+											10
+										],
+										"step": 0.1
+									}
+								}
+							}
+						}
+					},
+					"condition": {
+						"type": "group",
+						"name": "条件",
+						"children": {
+							"condition": {
+								"name": "条件样式",
+								"type": "tabs",
+								"fold": false,
+								"description": "",
+								"default": [
+									{
+										"rules": {
+											"title": "条件名称",
+											"enabled": false,
+											"operator": "AND",
+											"expressions": [
+												{
+													"operator": "AND",
+													"expressions": [
+														[
+															"colorField",
+															"gt",
+															500
+														]
+													]
+												}
+											]
+										},
+										"fillColor": {
+											"show": true,
+											"value": "rgba(36, 155, 255, 0.65)"
+										}
+									}
+								],
+								"template": {
+									"name": "样式<%= i + 1%>",
+									"children": {
+										"rules": {
+											"type": "logicalTree",
+											"default": {
+												"title": "条件名称",
+												"enabled": true,
+												"operator": "OR",
+												"expressions": []
+											},
+											"relationalExprDefault": [
+												"colorField",
+												"gt",
+												500
+											]
+										},
+										"fillColor": {
+											"showInPanel": [
+												[
+													".rules.enabled",
+													"$eq",
+													true
+												]
+											],
+											"name": "填充颜色",
+											"type": "suite",
+											"enableHide": true,
+											"default": {
+												"show": false
+											},
+											"children": {
+												"value": {
+													"name": "填充颜色",
+													"type": "fill",
+													"default": "rgba(36, 155, 255, 0.65)"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "options.graph.colorMapping",
+					"apiPath": "dataSource.colorField"
+				}
+			],
+			"conditionalStyle": [
+				{
+					"configPath": "options.condition.condition",
+					"ruleKey": "rules"
+				}
+			]
+		},
+		"apis": {
+			"dataSource": {
+				"description": "热力值数据接口",
+				"handler": "render",
+				"fields": {
+					"adcode": {
+						"description": "区域编号",
+						"type": "string",
+						"optional": false
+					},
+					"name": {
+						"description": "名称",
+						"type": "string",
+						"optional": true
+					},
+					"value": {
+						"description": "数值",
+						"type": "number",
+						"optional": true
+					},
+					"colorField": {
+						"description": "颜色映射字段",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"api_data": {
+			"dataSource": [
+				{
+					"adcode": "110000",
+					"name": "北京市",
+					"colorField": 1200
+				},
+				{
+					"adcode": "120000",
+					"name": "天津市",
+					"colorField": 800
+				},
+				{
+					"adcode": "130000",
+					"name": "河北省",
+					"colorField": 700
+				},
+				{
+					"adcode": "140000",
+					"name": "山西省",
+					"colorField": 400
+				},
+				{
+					"adcode": "150000",
+					"colorField": 500
+				},
+				{
+					"adcode": "210000",
+					"colorField": 378
+				},
+				{
+					"adcode": "220000",
+					"colorField": 491
+				},
+				{
+					"adcode": "230000",
+					"colorField": 249
+				},
+				{
+					"adcode": "310000",
+					"colorField": 273
+				},
+				{
+					"adcode": "320000",
+					"colorField": 656
+				},
+				{
+					"adcode": "330000",
+					"colorField": 388
+				},
+				{
+					"adcode": "340000",
+					"colorField": 157
+				},
+				{
+					"adcode": "350000",
+					"colorField": 764
+				},
+				{
+					"adcode": "360000",
+					"colorField": 797
+				},
+				{
+					"adcode": "370000",
+					"colorField": 337
+				},
+				{
+					"adcode": "410000",
+					"colorField": 32
+				},
+				{
+					"adcode": "420000",
+					"colorField": 225
+				},
+				{
+					"adcode": "430000",
+					"colorField": 693
+				},
+				{
+					"adcode": "440000",
+					"colorField": 10
+				},
+				{
+					"adcode": "450000",
+					"colorField": 141
+				},
+				{
+					"adcode": "460000",
+					"colorField": 906
+				},
+				{
+					"adcode": "500000",
+					"name": "重庆市",
+					"colorField": 904
+				},
+				{
+					"adcode": "510000",
+					"name": "四川省",
+					"colorField": 404
+				},
+				{
+					"adcode": "520000",
+					"name": "贵州省",
+					"colorField": 204
+				},
+				{
+					"adcode": "530000",
+					"name": "云南省",
+					"colorField": 504
+				},
+				{
+					"adcode": "540000",
+					"name": "西藏自治区",
+					"colorField": 600
+				},
+				{
+					"adcode": "610000",
+					"name": "陕西省",
+					"colorField": 404
+				},
+				{
+					"adcode": "620000",
+					"name": "甘肃省",
+					"colorField": 504
+				},
+				{
+					"adcode": "630000",
+					"name": "青海省",
+					"colorField": 104
+				},
+				{
+					"adcode": "640000",
+					"colorField": 84
+				},
+				{
+					"adcode": "650000",
+					"colorField": 904
+				},
+				{
+					"adcode": "710000",
+					"colorField": 64
+				},
+				{
+					"adcode": "810000",
+					"colorField": 526
+				},
+				{
+					"adcode": "820000",
+					"colorField": 40
+				}
+			]
+		}
+	}
+}

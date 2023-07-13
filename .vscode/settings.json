@@ -1,0 +1,10 @@
+{
+    "i18n-ally.localesPaths": [
+        "src/locales",
+        "src/locales/lang"
+    ],
+    "search.exclude": {
+        "**/package": true
+    },
+    "vetur.validation.script": false
+}

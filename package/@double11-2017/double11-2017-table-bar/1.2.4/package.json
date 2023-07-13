@@ -1,0 +1,365 @@
+{
+	"name": "@double11-2017/double11-2017-table-bar",
+	"version": "1.2.4",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"chroma-js": "1.3.4",
+		"jquery": "2.1.4",
+		"lodash": "4.17.4",
+		"web-animations-js": "2.3.2"
+	},
+	"datav": {
+		"level": 1,
+		"cn_name": "双11轮播列表柱状图",
+		"icon": "//img.alicdn.com/tfs/TB14EbmlRv0gK0jSZKbXXbK2FXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"regular_bar",
+			"DataV-6:regular_bar"
+		],
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"description": "值",
+						"type": "number"
+					},
+					"content": {
+						"description": "内容",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"name": "全局样式",
+				"type": "group",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"top": {
+						"name": "顶部间距",
+						"type": "number",
+						"default": 10
+					},
+					"left": {
+						"name": "左侧边距",
+						"type": "number",
+						"default": 10
+					},
+					"padding": {
+						"name": "行间距",
+						"type": "number",
+						"default": 12
+					},
+					"quantity": {
+						"name": "数量",
+						"type": "number",
+						"default": 6,
+						"step": 1
+					},
+					"height": {
+						"name": "高度",
+						"type": "number",
+						"default": 22
+					},
+					"isFlip": {
+						"name": "翻页",
+						"type": "boolean",
+						"default": true
+					},
+					"flipTime": {
+						"name": "翻页动画时间 (ms)",
+						"type": "number",
+						"default": 600
+					},
+					"flipStopTime": {
+						"name": "翻页暂停时间 (ms)",
+						"type": "number",
+						"default": 8000
+					},
+					"playBackNext": {
+						"name": "下一帧",
+						"type": "number",
+						"default": 0.3,
+						"step": 0.01
+					},
+					"playPad": {
+						"name": "每帧叠快",
+						"type": "number",
+						"default": 0.02,
+						"step": 0.01
+					}
+				}
+			},
+			"index": {
+				"type": "group",
+				"name": "序列号",
+				"children": {
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": true
+					},
+					"textarea": {
+						"type": "group",
+						"name": "文本",
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 14,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgba(255, 255, 255, 0.6)"
+							},
+							"marginRight": {
+								"name": "间隔",
+								"type": "number",
+								"default": 10
+							},
+							"width": {
+								"type": "number",
+								"name": "宽度",
+								"default": 24
+							},
+							"borderRadius": {
+								"name": "圆角",
+								"type": "text",
+								"default": "0px"
+							}
+						}
+					},
+					"background": {
+						"name": "背景色",
+						"type": "color",
+						"default": "#0a73ff"
+					},
+					"format": {
+						"name": "样式",
+						"type": "select",
+						"range": [
+							{
+								"name": "1",
+								"value": "1"
+							},
+							{
+								"name": "No.1",
+								"value": "2"
+							},
+							{
+								"name": "(1)",
+								"value": "3"
+							}
+						],
+						"default": "1"
+					}
+				}
+			},
+			"content": {
+				"type": "group",
+				"name": "内容",
+				"children": {
+					"textarea": {
+						"type": "group",
+						"name": "文本",
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgba(255, 255, 255, 0.6)"
+							}
+						}
+					},
+					"marquee": {
+						"type": "group",
+						"name": "跑马灯",
+						"children": {
+							"show": {
+								"name": "开启/关闭",
+								"type": "boolean",
+								"default": true
+							},
+							"duration": {
+								"name": "动画时间 (ms)",
+								"type": "number",
+								"default": 8000
+							}
+						}
+					}
+				}
+			},
+			"bar": {
+				"type": "group",
+				"name": "柱状图",
+				"children": {
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": true
+					},
+					"colors": {
+						"name": "颜色",
+						"type": "array",
+						"default": [
+							{
+								"pos": 0.5,
+								"color": "rgb(10, 115, 255)"
+							},
+							{
+								"pos": 1,
+								"color": "#79daff"
+							}
+						],
+						"child": {
+							"name": "颜色<%= i+1 %>",
+							"type": "object",
+							"child": {
+								"pos": {
+									"name": "位置",
+									"type": "number",
+									"range": [
+										0,
+										1
+									],
+									"default": 0
+								},
+								"color": {
+									"name": "颜色",
+									"type": "color",
+									"default": "#fff"
+								}
+							}
+						}
+					},
+					"borderRadius": {
+						"name": "圆角",
+						"type": "text",
+						"default": "0px"
+					},
+					"colorMap": {
+						"name": "颜色渐变范围",
+						"type": "select",
+						"options": [
+							{
+								"name": "局部渐变",
+								"value": "all"
+							},
+							{
+								"name": "全局渐变",
+								"value": "notAll"
+							}
+						],
+						"default": "all"
+					}
+				}
+			},
+			"light": {
+				"name": "流光",
+				"type": "group",
+				"children": {
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": true
+					},
+					"duration": {
+						"name": "动画时间 (ms)",
+						"type": "number",
+						"default": 1000
+					},
+					"stopTime": {
+						"name": "暂停时间 (ms)",
+						"type": "number",
+						"default": 8000
+					}
+				}
+			},
+			"background": {
+				"name": "背景",
+				"type": "group",
+				"children": {
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "rgba(55,33,82,0)"
+					},
+					"borderRadius": {
+						"name": "圆角",
+						"type": "text",
+						"default": "0px"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": "314529403.31",
+					"content": "这是一个非常长的字符串，可能会导致选框动画生效"
+				},
+				{
+					"value": "293711093.03",
+					"content": "这是一个略短的字符串，但它仍可能会使动画生效"
+				},
+				{
+					"value": "293691138.91",
+					"content": "这是一个更短的字符串"
+				},
+				{
+					"value": "193711093.03",
+					"content": "这是一个字符串"
+				},
+				{
+					"value": "193120534.18",
+					"content": "字符串"
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1gPnmlUT1gK0jSZFrXXcNCXXa-332-144.png"
+	}
+}

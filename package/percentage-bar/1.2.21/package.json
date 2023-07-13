@@ -1,0 +1,333 @@
+{
+	"name": "percentage-bar",
+	"version": "1.2.21",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "~4.6.1"
+	},
+	"datav": {
+		"cn_name": "进度条",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB1IxrrlQT2gK0jSZFkXXcIQFXa-370-208.png",
+		"protocol": 2,
+		"type": [
+			"text_label",
+			"DataV-6:control_data"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"view": {
+			"width": "300",
+			"height": "64",
+			"minWidth": "50",
+			"minHeight": "50",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"type": "number",
+						"description": "值"
+					},
+					"sum": {
+						"type": "number",
+						"description": "总值"
+					}
+				}
+			}
+		},
+		"config": {
+			"component": {
+				"type": "group",
+				"name": "全局样式",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"barPadding": {
+						"name": "两边间距",
+						"type": "number",
+						"range": [
+							0,
+							100
+						],
+						"step": 1,
+						"default": 0
+					},
+					"paddingBottom": {
+						"name": "提示框底部间距",
+						"type": "number",
+						"default": 10,
+						"range": [
+							0,
+							50
+						]
+					}
+				}
+			},
+			"tip": {
+				"type": "group",
+				"name": "提示框",
+				"fold": true,
+				"handler": "updateTooltip",
+				"children": {
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"default": 16,
+						"min": 10,
+						"max": 100,
+						"range": [
+							10,
+							100
+						]
+					},
+					"color": {
+						"type": "color",
+						"default": "#fff",
+						"name": "颜色"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					},
+					"trueValue": {
+						"name": "显示真实值",
+						"type": "boolean",
+						"default": false
+					},
+					"sufUnit": {
+						"name": "值单位",
+						"type": "text",
+						"default": "",
+						"show": [
+							[
+								"trueValue",
+								"$eq",
+								true
+							]
+						]
+					},
+					"border": {
+						"name": "边框样式",
+						"type": "group",
+						"children": {
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": true
+							},
+							"borderColor": {
+								"name": "边框颜色",
+								"type": "color",
+								"default": "rgb(57, 65, 77)"
+							}
+						}
+					},
+					"decimal": {
+						"type": "group",
+						"name": "小数点",
+						"fold": true,
+						"show": [
+							[
+								"trueValue",
+								"$eq",
+								false
+							]
+						],
+						"children": {
+							"decimalPoint": {
+								"name": "是否需要小数点",
+								"type": "boolean",
+								"default": false
+							},
+							"decimalNum": {
+								"type": "number",
+								"name": "保留小数位",
+								"default": 1,
+								"min": 1,
+								"max": 4,
+								"step": 1,
+								"range": [
+									1,
+									4
+								],
+								"show": [
+									[
+										"decimalPoint",
+										"$eq",
+										true
+									]
+								]
+							}
+						}
+					}
+				}
+			},
+			"percentageBar": {
+				"type": "group",
+				"name": "百分比条",
+				"fold": true,
+				"handler": "updateBar",
+				"children": {
+					"gradientRange": {
+						"name": "渐变范围",
+						"type": "select",
+						"options": [
+							{
+								"name": "全局渐变",
+								"value": "all"
+							},
+							{
+								"name": "局部渐变",
+								"value": "notAll"
+							}
+						],
+						"default": "notAll"
+					},
+					"startColor": {
+						"name": "开始颜色",
+						"type": "color",
+						"default": "rgb(10, 115, 255)"
+					},
+					"endColor": {
+						"name": "结束颜色",
+						"type": "color",
+						"default": "rgb(121, 218, 255)"
+					},
+					"density": {
+						"type": "number",
+						"name": "密度",
+						"default": 32,
+						"min": 1,
+						"max": 50,
+						"range": [
+							1,
+							50
+						]
+					},
+					"border": {
+						"name": "边框样式",
+						"type": "group",
+						"children": {
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": true
+							},
+							"borderColor": {
+								"name": "边框颜色",
+								"type": "color",
+								"default": "rgb(57, 65, 77)"
+							}
+						}
+					}
+				}
+			},
+			"sum": {
+				"type": "number",
+				"name": "总值",
+				"description": "百分值为(value/(sum or 总值))，其中数据中sum优先级高于总值",
+				"default": 100
+			},
+			"emptyUpdate": {
+				"name": "空值更新",
+				"default": false,
+				"type": "switch",
+				"description": "数据为[]或异常时组件是否更新，开启时将设置异常情况进度为0"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": 75,
+					"sum": 100
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1hHjllFT7gK0jSZFpXXaTkpXa-332-144.png"
+	}
+}

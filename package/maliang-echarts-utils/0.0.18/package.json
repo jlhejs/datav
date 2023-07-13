@@ -1,0 +1,20 @@
+{
+	"name": "maliang-echarts-utils",
+	"version": "0.0.18",
+	"description": "utils for maliang coms",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "elvira.zy",
+	"license": "ISC",
+	"datav": {
+		"cn_name": "马良Echarts工具",
+		"private": true,
+		"icon": ""
+	},
+	"dependencies": {
+		"echarts": "3.4.0",
+		"lodash": "4.13.1"
+	}
+}

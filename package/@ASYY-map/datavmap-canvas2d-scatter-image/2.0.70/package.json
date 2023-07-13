@@ -1,0 +1,1338 @@
+{
+	"name": "datavmap-canvas2d-scatter-image",
+	"version": "2.0.70",
+	"description": "图标散点层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-canvas2d-scatter-image.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww (yunyi.zww@alibaba-inc.com)",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"rbush": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "图标散点层",
+		"level": 0,
+		"icon": "https://img.alicdn.com/tfs/TB1fkeEtbY1gK0jSZTEXXXDQVXa-180-180.png",
+		"protocol": 2,
+		"type": [
+			"datavmap-canvas2d_subcoms_canvas-layer"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavmap-canvas2d"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"events": {
+			"click": {
+				"description": "当点击点时",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					}
+				}
+			},
+			"mouseover": {
+				"description": "当鼠标移入时",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"apis": {
+			"dataSource": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"type": {
+						"description": "数据分类",
+						"type": "string",
+						"optional": true
+					},
+					"name": {
+						"description": "名称",
+						"type": "string",
+						"optional": true
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					},
+					"value": {
+						"description": "配置项勾选数据映射时用于数据映射的值，缺失则按无数据配置渲染",
+						"type": "number",
+						"optional": true
+					},
+					"info": {
+						"description": "浮层内容",
+						"type": "string",
+						"optional": true
+					},
+					"iconUrl": {
+						"description": "自定义图标路径",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"zoomRange": {
+				"name": "可见级别",
+				"type": "slider",
+				"mode": "double",
+				"default": [
+					0,
+					18
+				],
+				"min": 0,
+				"max": 22,
+				"step": 0.1
+			},
+			"scatterStyle": {
+				"type": "group",
+				"name": "图标配置",
+				"fold": false,
+				"children": {
+					"type": {
+						"type": "hidden",
+						"name": "默认图标",
+						"default": "default"
+					},
+					"iconUrl": {
+						"type": "image",
+						"name": "图片路径",
+						"default": "https://img.alicdn.com/tfs/TB1G_1Jtlr0gK0jSZFnXXbRRXXa-80-80.png"
+					},
+					"iconSize": {
+						"type": "suite",
+						"name": "图片尺寸",
+						"children": {
+							"width": {
+								"type": "number",
+								"name": "宽度",
+								"caption": "宽度 [0, 400]",
+								"default": 24,
+								"range": [
+									0,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"height": {
+								"type": "number",
+								"name": "高度",
+								"caption": "高度 [0, 400]",
+								"default": 24,
+								"range": [
+									0,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					},
+					"position": {
+						"name": "相对位置",
+						"type": "iconRadio",
+						"optionCol": 6,
+						"default": "bottom",
+						"options": [
+							{
+								"label": "底部",
+								"value": "bottom",
+								"src": "position-bottom"
+							},
+							{
+								"label": "中心",
+								"value": "center",
+								"src": "position-center"
+							}
+						]
+					},
+					"offset": {
+						"type": "suite",
+						"name": "偏移量",
+						"children": {
+							"x": {
+								"type": "number",
+								"name": "水平方向",
+								"caption": "水平方向 [-400, 400]",
+								"default": 0,
+								"range": [
+									-400,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"y": {
+								"type": "number",
+								"name": "垂直方向",
+								"caption": "垂直方向 [-400, 400]",
+								"default": 0,
+								"range": [
+									-400,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "系列配置",
+				"fold": true,
+				"default": [
+					{
+						"type": "ok",
+						"iconUrl": "https://img.alicdn.com/tfs/TB1cBSGtbH1gK0jSZFwXXc7aXXa-80-80.png",
+						"iconSize": {
+							"width": 20,
+							"height": 20
+						},
+						"position": "center",
+						"offset": {
+							"x": 0,
+							"y": 0
+						}
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "类型<%= i+1 %>",
+					"child": {
+						"type": {
+							"type": "text",
+							"name": "类型过滤值",
+							"default": "ok"
+						},
+						"iconUrl": {
+							"type": "image",
+							"name": "图片路径",
+							"default": "http://datav-data-inner.cn-hangzhou.oss-cdn.aliyun-inc.com/uploads/images/9f47469e448247b809b65d8f7dabbd11.png"
+						},
+						"iconSize": {
+							"type": "suite",
+							"name": "图片尺寸",
+							"children": {
+								"width": {
+									"type": "number",
+									"name": "宽度",
+									"caption": "宽度 [0, 400]",
+									"default": 20,
+									"range": [
+										0,
+										400
+									],
+									"step": 1,
+									"suffix": "px"
+								},
+								"height": {
+									"type": "number",
+									"name": "高度",
+									"caption": "高度 [0, 400]",
+									"default": 20,
+									"range": [
+										0,
+										400
+									],
+									"step": 1,
+									"suffix": "px"
+								}
+							}
+						},
+						"position": {
+							"name": "相对位置",
+							"type": "iconRadio",
+							"optionCol": 6,
+							"default": "center",
+							"options": [
+								{
+									"label": "底部",
+									"value": "bottom",
+									"src": "position-bottom"
+								},
+								{
+									"label": "中心",
+									"value": "center",
+									"src": "position-center"
+								}
+							]
+						},
+						"offset": {
+							"type": "suite",
+							"name": "偏移量",
+							"children": {
+								"x": {
+									"type": "number",
+									"name": "水平方向",
+									"caption": "水平方向 [-400, 400]",
+									"default": 0,
+									"range": [
+										-400,
+										400
+									],
+									"step": 1,
+									"suffix": "px"
+								},
+								"y": {
+									"type": "number",
+									"name": "垂直方向",
+									"caption": "垂直方向 [-400, 400]",
+									"default": 0,
+									"range": [
+										-400,
+										400
+									],
+									"step": 1,
+									"suffix": "px"
+								}
+							}
+						}
+					}
+				}
+			},
+			"labelStyle": {
+				"type": "group",
+				"name": "标注",
+				"fold": false,
+				"children": {
+					"show": {
+						"type": "boolean",
+						"name": "显示",
+						"default": false
+					},
+					"fieldName": {
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"type": "text",
+						"name": "显示字段",
+						"default": "name",
+						"description": "需要与地理数据中字段名称匹配"
+					},
+					"textStyle": {
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"type": "font",
+						"name": "文本样式",
+						"fold": false,
+						"children": {
+							"fontFamily": {
+								"type": "search",
+								"name": "字体",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 12,
+								"range": [
+									12,
+									100
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"type": "search",
+								"name": "粗细",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							},
+							"shadowColor": {
+								"type": "color",
+								"name": "阴影色",
+								"default": "rgba(0, 0, 0, 0.85)",
+								"col": 12
+							}
+						}
+					},
+					"position": {
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"type": "iconRadio",
+						"name": "相对位置",
+						"default": "top",
+						"evenlySplit": true,
+						"options": [
+							{
+								"label": "左侧",
+								"value": "left",
+								"src": "position-left"
+							},
+							{
+								"label": "中心",
+								"value": "center",
+								"src": "position-center"
+							},
+							{
+								"label": "右侧",
+								"value": "right",
+								"src": "position-right"
+							},
+							{
+								"label": "顶部",
+								"value": "top",
+								"src": "position-top"
+							},
+							{
+								"label": "底部",
+								"value": "bottom",
+								"src": "position-bottom"
+							}
+						]
+					},
+					"offset": {
+						"type": "suite",
+						"name": "偏移量",
+						"children": {
+							"x": {
+								"type": "number",
+								"name": "水平方向",
+								"caption": "水平方向 [-100, 100]",
+								"default": 0,
+								"range": [
+									-100,
+									100
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"y": {
+								"type": "number",
+								"name": "垂直方向",
+								"caption": "垂直方向 [-100, 100]",
+								"default": 0,
+								"range": [
+									-100,
+									100
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					}
+				}
+			},
+			"popupStyle": {
+				"type": "group",
+				"name": "弹框",
+				"description": "弹窗功能需先设置info字段！",
+				"fold": true,
+				"children": {
+					"show": {
+						"type": "boolean",
+						"name": "显示",
+						"default": true
+					},
+					"infoField": {
+						"type": "boolean",
+						"name": "info字段",
+						"description": "请设置info字段作为弹窗内容，info支持配置html标签；如不选，则兼容name和value作为弹窗内容！",
+						"default": false
+					},
+					"eventType": {
+						"name": "事件类型",
+						"type": "radio",
+						"optionCol": 12,
+						"default": "click",
+						"options": [
+							{
+								"value": "click",
+								"label": "点击"
+							},
+							{
+								"value": "mouseover",
+								"label": "鼠标移入"
+							}
+						]
+					},
+					"styleType": {
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"name": "配置选项",
+						"type": "buttonRadio",
+						"default": "parent",
+						"options": [
+							{
+								"value": "parent",
+								"label": "父容器默认"
+							},
+							{
+								"value": "custom",
+								"label": "自定义配置"
+							}
+						]
+					},
+					"textStyle": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "font",
+						"name": "文本样式",
+						"fold": false,
+						"children": {
+							"fontFamily": {
+								"type": "search",
+								"name": "字体",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 12,
+								"range": [
+									12,
+									100
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"type": "search",
+								"name": "粗细",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					},
+					"lineHeight": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "number",
+						"name": "行高比例",
+						"caption": "范围 [0.5, 5]",
+						"default": 1.4,
+						"range": [
+							0.5,
+							5
+						],
+						"step": 0.1
+					},
+					"borderRadius": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "圆角半径",
+						"type": "number",
+						"caption": "范围 [0, 20]",
+						"default": 5,
+						"range": [
+							0,
+							20
+						],
+						"step": 1,
+						"suffix": "px"
+					},
+					"margin": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "外边距",
+						"type": "margin",
+						"default": {
+							"top": 10,
+							"right": 20,
+							"bottom": 10,
+							"left": 20
+						}
+					},
+					"backgroundColor": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "背景色",
+						"type": "color",
+						"default": "rgba(6, 75, 199, 0.8)"
+					},
+					"closeBtn": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "suite",
+						"name": "关闭按钮",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"size": {
+								"name": "大小",
+								"type": "number",
+								"caption": "大小 [12, 60]",
+								"default": 12,
+								"range": [
+									12,
+									60
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"top": {
+								"name": "顶部距离",
+								"type": "number",
+								"caption": "顶部距离 [0, 100]",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							},
+							"right": {
+								"name": "右侧距离",
+								"type": "number",
+								"caption": "右侧距离 [0, 100]",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							}
+						}
+					}
+				}
+			},
+			"interactive": {
+				"type": "group",
+				"name": "交互配置",
+				"fold": true,
+				"children": {
+					"isHover": {
+						"type": "suite",
+						"name": "悬停样式",
+						"enableHide": true,
+						"default": {
+							"show": true,
+							"hoverScale": 1.5
+						},
+						"children": {
+							"hoverScale": {
+								"type": "number",
+								"name": "悬停缩放比",
+								"caption": "悬停缩放比 [1, 2]",
+								"default": 1.5,
+								"range": [
+									1,
+									2
+								],
+								"step": 0.1
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"dataSource": [
+				{
+					"dotid": 0,
+					"lat": 31.8998,
+					"lng": 102.2212,
+					"value": 8,
+					"info": "描述信息0",
+					"type": "error",
+					"name": "点0"
+				},
+				{
+					"dotid": 1,
+					"lat": 28.6542,
+					"lng": 120.079,
+					"value": 21,
+					"info": "描述信息1",
+					"type": "ok",
+					"name": "点1"
+				},
+				{
+					"dotid": 2,
+					"lat": 24.0554,
+					"lng": 114.207,
+					"value": 4,
+					"info": "描述信息2",
+					"type": "suspend",
+					"name": "点2"
+				},
+				{
+					"dotid": 3,
+					"lat": 40.634,
+					"lng": 122.5059,
+					"value": 13,
+					"info": "描述信息3",
+					"type": "error",
+					"name": "点3"
+				},
+				{
+					"dotid": 4,
+					"lat": 25.6879,
+					"lng": 114.3073,
+					"value": 9,
+					"info": "描述信息4",
+					"type": "ok",
+					"name": "点4"
+				},
+				{
+					"dotid": 5,
+					"lat": 34.6948,
+					"lng": 110.6911,
+					"value": 14,
+					"info": "描述信息5",
+					"type": "suspend",
+					"name": "点5"
+				},
+				{
+					"dotid": 6,
+					"lat": 23.9505,
+					"lng": 117.3409,
+					"value": 20,
+					"info": "描述信息6",
+					"type": "error",
+					"name": "点6"
+				},
+				{
+					"dotid": 7,
+					"lat": 28.2145,
+					"lng": 110.2144,
+					"value": 19,
+					"info": "描述信息7",
+					"type": "ok",
+					"name": "点7"
+				},
+				{
+					"dotid": 8,
+					"lat": 37.6866,
+					"lng": 116.2584,
+					"value": 19,
+					"info": "描述信息8",
+					"type": "suspend",
+					"name": "点8"
+				},
+				{
+					"dotid": 9,
+					"lat": 29.4432,
+					"lng": 111.6456,
+					"value": 19,
+					"info": "描述信息9",
+					"type": "error",
+					"name": "点9"
+				},
+				{
+					"dotid": 10,
+					"lat": 43.7928,
+					"lng": 87.6177,
+					"value": 9,
+					"info": "描述信息10",
+					"type": "ok",
+					"name": "点10"
+				},
+				{
+					"dotid": 11,
+					"lat": 33.5807,
+					"lng": 119.0305,
+					"value": 6,
+					"info": "描述信息11",
+					"type": "suspend",
+					"name": "点11"
+				},
+				{
+					"dotid": 12,
+					"lat": 39.563,
+					"lng": 118.1108,
+					"value": 21,
+					"info": "描述信息12",
+					"type": "error",
+					"name": "点12"
+				},
+				{
+					"dotid": 13,
+					"lat": 41.8993,
+					"lng": 114.0101,
+					"value": 13,
+					"info": "描述信息13",
+					"type": "ok",
+					"name": "点13"
+				},
+				{
+					"dotid": 14,
+					"lat": 30.3096,
+					"lng": 114.0812,
+					"value": 8,
+					"info": "描述信息14",
+					"type": "suspend",
+					"name": "点14"
+				},
+				{
+					"dotid": 15,
+					"lat": 40.0905,
+					"lng": 113.3014,
+					"value": 29,
+					"info": "描述信息15",
+					"type": "error",
+					"name": "点15"
+				},
+				{
+					"dotid": 16,
+					"lat": 28.6396,
+					"lng": 102.5089,
+					"value": 25,
+					"info": "描述信息16",
+					"type": "ok",
+					"name": "点16"
+				},
+				{
+					"dotid": 17,
+					"lat": 29.6045,
+					"lng": 114.4932,
+					"value": 7,
+					"info": "描述信息17",
+					"type": "suspend",
+					"name": "点17"
+				},
+				{
+					"dotid": 18,
+					"lat": 29.4145,
+					"lng": 112.1723,
+					"value": 23,
+					"info": "描述信息18",
+					"type": "error",
+					"name": "点18"
+				},
+				{
+					"dotid": 19,
+					"lat": 21.2749,
+					"lng": 110.365,
+					"value": 20,
+					"info": "描述信息19",
+					"type": "ok",
+					"name": "点19"
+				},
+				{
+					"dotid": 20,
+					"lat": 24.7743,
+					"lng": 115.0327,
+					"value": 10,
+					"info": "描述信息20",
+					"type": "suspend",
+					"name": "点20"
+				},
+				{
+					"dotid": 21,
+					"lat": 47.2529,
+					"lng": 130.2362,
+					"value": 5,
+					"info": "描述信息21",
+					"type": "error",
+					"name": "点21"
+				},
+				{
+					"dotid": 22,
+					"lat": 26.8721,
+					"lng": 100.233,
+					"value": 24,
+					"info": "描述信息22",
+					"type": "ok",
+					"name": "点22"
+				},
+				{
+					"dotid": 23,
+					"lat": 37.4934,
+					"lng": 118.2489,
+					"value": 29,
+					"info": "描述信息23",
+					"type": "suspend",
+					"name": "点23"
+				},
+				{
+					"dotid": 24,
+					"lat": 36.0634,
+					"lng": 113.8238,
+					"value": 5,
+					"info": "描述信息24",
+					"type": "error",
+					"name": "点24"
+				},
+				{
+					"dotid": 25,
+					"lat": 31.3431,
+					"lng": 104.2002,
+					"value": 11,
+					"info": "描述信息25",
+					"type": "ok",
+					"name": "点25"
+				},
+				{
+					"dotid": 26,
+					"lat": 40.4375,
+					"lng": 113.1635,
+					"value": 14,
+					"info": "描述信息26",
+					"type": "suspend",
+					"name": "点26"
+				},
+				{
+					"dotid": 27,
+					"lat": 42.8655,
+					"lng": 90.2127,
+					"value": 4,
+					"info": "描述信息27",
+					"type": "error",
+					"name": "点27"
+				},
+				{
+					"dotid": 28,
+					"lat": 47.4794,
+					"lng": 129.3114,
+					"value": 29,
+					"info": "描述信息28",
+					"type": "ok",
+					"name": "点28"
+				},
+				{
+					"dotid": 29,
+					"lat": 28.7602,
+					"lng": 104.6308,
+					"value": 8,
+					"info": "描述信息29",
+					"type": "suspend",
+					"name": "点29"
+				},
+				{
+					"dotid": 30,
+					"lat": 42.287,
+					"lng": 119.9065,
+					"value": 23,
+					"info": "描述信息30",
+					"type": "error",
+					"name": "点30"
+				},
+				{
+					"dotid": 31,
+					"lat": 29.9456,
+					"lng": 122.302,
+					"value": 23,
+					"info": "描述信息31",
+					"type": "ok",
+					"name": "点31"
+				},
+				{
+					"dotid": 32,
+					"lat": 42.5421,
+					"lng": 124.0456,
+					"value": 5,
+					"info": "描述信息32描述信息32<br/>描述信息32",
+					"type": "suspend",
+					"name": "点32"
+				},
+				{
+					"dotid": 33,
+					"lat": 26.7025,
+					"lng": 107.5135,
+					"value": 18,
+					"info": "描述信息33",
+					"type": "error",
+					"name": "点33"
+				},
+				{
+					"dotid": 34,
+					"lat": 31.355,
+					"lng": 107.7223,
+					"value": 28,
+					"info": "描述信息34",
+					"type": "ok",
+					"name": "点34"
+				},
+				{
+					"dotid": 35,
+					"lat": 32.9397,
+					"lng": 117.3632,
+					"value": 26,
+					"info": "描述信息35",
+					"type": "suspend",
+					"name": "点35"
+				},
+				{
+					"dotid": 36,
+					"lat": 40.1243,
+					"lng": 124.383,
+					"value": 16,
+					"info": "描述信息36",
+					"type": "error",
+					"name": "点36"
+				},
+				{
+					"dotid": 37,
+					"lat": 32.8671,
+					"lng": 117.5625,
+					"value": 29,
+					"info": "描述信息37",
+					"type": "ok",
+					"name": "点37"
+				},
+				{
+					"dotid": 38,
+					"lat": 34.2134,
+					"lng": 108.9266,
+					"value": 26,
+					"info": "描述信息38",
+					"type": "suspend",
+					"name": "点38"
+				},
+				{
+					"dotid": 39,
+					"lat": 31.464,
+					"lng": 104.7417,
+					"value": 27,
+					"info": "描述信息39",
+					"type": "error",
+					"name": "点39"
+				},
+				{
+					"dotid": 40,
+					"lat": 25.1118,
+					"lng": 99.1671,
+					"value": 4,
+					"info": "描述信息40",
+					"type": "ok",
+					"name": "点40"
+				},
+				{
+					"dotid": 41,
+					"lat": 32.7054,
+					"lng": 116.7228,
+					"value": 5,
+					"info": "描述信息41",
+					"type": "suspend",
+					"name": "点41"
+				},
+				{
+					"dotid": 42,
+					"lat": 36.5329,
+					"lng": 113.0501,
+					"value": 10,
+					"info": "描述信息42",
+					"type": "error",
+					"name": "点42"
+				},
+				{
+					"dotid": 43,
+					"lat": 26.2233,
+					"lng": 111.6263,
+					"value": 24,
+					"info": "描述信息43",
+					"type": "ok",
+					"name": "点43"
+				},
+				{
+					"dotid": 44,
+					"lat": 32.3932,
+					"lng": 119.421,
+					"value": 24,
+					"info": "描述信息44",
+					"type": "suspend",
+					"name": "点44"
+				},
+				{
+					"dotid": 45,
+					"lat": 38.7257,
+					"lng": 113.259,
+					"value": 21,
+					"info": "描述信息45",
+					"type": "error",
+					"name": "点45"
+				},
+				{
+					"dotid": 46,
+					"lat": 24.041,
+					"lng": 104.1944,
+					"value": 17,
+					"info": "描述信息46",
+					"type": "ok",
+					"name": "点46"
+				},
+				{
+					"dotid": 47,
+					"lat": 37.13,
+					"lng": 114.6845,
+					"value": 10,
+					"info": "描述信息47",
+					"type": "suspend",
+					"name": "点47"
+				},
+				{
+					"dotid": 48,
+					"lat": 35.6638,
+					"lng": 103.3896,
+					"value": 11,
+					"info": "描述信息48",
+					"type": "error",
+					"name": "点48"
+				},
+				{
+					"dotid": 49,
+					"lat": 36.146,
+					"lng": 112.2514,
+					"value": 5,
+					"info": "描述信息49",
+					"type": "ok",
+					"name": "点49"
+				},
+				{
+					"dotid": 50,
+					"lat": 46.8096,
+					"lng": 130.3618,
+					"value": 25,
+					"info": "描述信息50",
+					"type": "suspend",
+					"name": "点50"
+				},
+				{
+					"dotid": 51,
+					"lat": 22.1328,
+					"lng": 108.4491,
+					"value": 19,
+					"info": "描述信息51",
+					"type": "error",
+					"name": "点51"
+				},
+				{
+					"dotid": 52,
+					"lat": 43.252,
+					"lng": 94.6928,
+					"value": 1,
+					"info": "描述信息52",
+					"type": "ok",
+					"name": "点52"
+				},
+				{
+					"dotid": 53,
+					"lat": 34.6777,
+					"lng": 107.7966,
+					"value": 4,
+					"info": "描述信息53",
+					"type": "suspend",
+					"name": "点53"
+				},
+				{
+					"dotid": 54,
+					"lat": 30.0966,
+					"lng": 117.0215,
+					"value": 28,
+					"info": "描述信息54",
+					"type": "error",
+					"name": "点54"
+				},
+				{
+					"dotid": 55,
+					"lat": 46.9931,
+					"lng": 89.525,
+					"value": 20,
+					"info": "描述信息55",
+					"type": "ok",
+					"name": "点55"
+				},
+				{
+					"dotid": 56,
+					"lat": 34.1544,
+					"lng": 113.4713,
+					"value": 6,
+					"info": "描述信息56",
+					"type": "suspend",
+					"name": "点56"
+				},
+				{
+					"dotid": 57,
+					"lat": 25.2916,
+					"lng": 117.4207,
+					"value": 25,
+					"info": "描述信息57",
+					"type": "error",
+					"name": "点57"
+				},
+				{
+					"dotid": 58,
+					"lat": 30.6676,
+					"lng": 104.0557,
+					"value": 14,
+					"info": "描述信息58",
+					"name": "点58"
+				},
+				{
+					"dotid": 59,
+					"lat": 47.413,
+					"lng": 129.4359,
+					"value": 26,
+					"info": "描述信息59",
+					"name": "点59"
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "@datav-mobile/goblin-utils",
+	"version": "0.2.1",
+	"description": "移动端goblin组件工具包",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "jane.zkj",
+	"license": "ISC",
+	"datav": {
+		"cn_name": "移动端goblin组件工具",
+		"private": true,
+		"icon": ""
+	},
+	"dependencies": {
+		"lodash": "4.17.15"
+	}
+}

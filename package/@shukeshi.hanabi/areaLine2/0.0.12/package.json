@@ -1,0 +1,147 @@
+{
+	"name": "@shukeshi.hanabi/areaLine2",
+	"version": "0.0.12",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"d3": "5.5.0"
+	},
+	"datav": {
+		"cn_name": "指标面积图",
+		"icon": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/fdd963dda8105de0caea3efa3b5b5bb5.png",
+		"protocol": 2,
+		"type": [
+			"regular"
+		],
+		"supportTheme": true,
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"values": {
+						"description": "数值列表"
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"number": {
+						"name": "数字",
+						"type": "menuChild",
+						"children": {
+							"font": {
+								"type": "font",
+								"name": "文字",
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontWeight": "normal",
+									"fontSize": 60,
+									"color": "#6784F7"
+								}
+							},
+							"position": {
+								"type": "select",
+								"name": "文字位置",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "left"
+									},
+									{
+										"name": "右对齐",
+										"value": "right"
+									}
+								],
+								"default": "left"
+							}
+						}
+					},
+					"chart": {
+						"name": "图表",
+						"type": "menuChild",
+						"children": {
+							"margin": {
+								"type": "margin",
+								"name": "边距",
+								"default": {
+									"top": 80,
+									"right": 15,
+									"bottom": 15,
+									"left": 15
+								}
+							},
+							"line": {
+								"name": "线",
+								"type": "suite",
+								"children": {
+									"color": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#6784F7",
+										"col": 12
+									},
+									"width": {
+										"name": "线宽",
+										"type": "number",
+										"default": 2,
+										"col": 12
+									}
+								}
+							},
+							"point": {
+								"name": "点",
+								"type": "suite",
+								"children": {
+									"color": {
+										"name": "边线颜色",
+										"type": "color",
+										"default": "#fff",
+										"col": 12
+									},
+									"width": {
+										"name": "边线宽",
+										"type": "number",
+										"default": 2,
+										"col": 12
+									},
+									"size": {
+										"name": "点大小",
+										"type": "number",
+										"default": 4,
+										"col": 12
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"values": [
+						17,
+						59,
+						77,
+						72,
+						105,
+						69,
+						1105
+					]
+				}
+			]
+		}
+	}
+}

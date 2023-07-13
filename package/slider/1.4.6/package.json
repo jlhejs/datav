@@ -1,0 +1,591 @@
+{
+	"name": "slider",
+	"version": "1.4.6",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "轮播图",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB1kfbnlHr1gK0jSZFDXXb9yVXa-370-208.png",
+		"protocol": 2,
+		"type": [
+			"media_image",
+			"DataV-6:media"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "description",
+					"apiPath": "source.description"
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 110
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"url": {
+						"type": "string",
+						"description": "图片地址"
+					},
+					"description": {
+						"type": "string",
+						"description": "图片描述",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"component": {
+				"type": "group",
+				"name": "全局样式",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"default": 18,
+						"min": 10,
+						"max": 100,
+						"range": [
+							10,
+							100
+						]
+					}
+				}
+			},
+			"animate": {
+				"type": "group",
+				"name": "动画",
+				"fold": true,
+				"children": {
+					"isLoop": {
+						"name": "自动轮播",
+						"type": "boolean",
+						"default": true
+					},
+					"interval": {
+						"type": "number",
+						"name": "停顿(ms)",
+						"default": 2500,
+						"show": [
+							[
+								"isLoop",
+								"$eq",
+								true
+							]
+						]
+					},
+					"speed": {
+						"type": "number",
+						"name": "速度(ms)",
+						"default": 500,
+						"show": [
+							[
+								"isLoop",
+								"$eq",
+								true
+							]
+						]
+					},
+					"direction": {
+						"type": "select",
+						"name": "特效",
+						"options": [
+							{
+								"name": "水平滚动",
+								"value": "horrible"
+							},
+							{
+								"name": "垂直滚动",
+								"value": "vertical"
+							},
+							{
+								"name": "淡入淡出",
+								"value": "opacity"
+							},
+							{
+								"name": "马赛克",
+								"value": "mosaic"
+							}
+						],
+						"default": "horrible",
+						"show": [
+							[
+								"isLoop",
+								"$eq",
+								true
+							]
+						]
+					},
+					"cols": {
+						"type": "number",
+						"name": "横向密度",
+						"default": 6,
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"show": [
+							[
+								"direction",
+								"$eq",
+								"mosaic"
+							]
+						]
+					},
+					"rows": {
+						"type": "number",
+						"name": "纵向密度",
+						"default": 4,
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"show": [
+							[
+								"direction",
+								"$eq",
+								"mosaic"
+							]
+						]
+					}
+				}
+			},
+			"slideImage": {
+				"type": "group",
+				"name": "图片",
+				"fold": true,
+				"handler": "updateSlideImage",
+				"children": {
+					"defaultImage": {
+						"name": "默认图片",
+						"type": "image",
+						"default": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/e1e31ecf321a299b65e8ae61c7645fd0.png",
+						"description": "数据中图片为空时，显示的图片",
+						"handler": "updateSlideImage"
+					},
+					"fillType": {
+						"type": "select",
+						"name": "填充方式",
+						"options": [
+							{
+								"name": "拉伸以充满容器",
+								"value": "cover"
+							},
+							{
+								"name": "充满容器",
+								"value": "contain"
+							},
+							{
+								"name": "居中",
+								"value": "center"
+							}
+						],
+						"default": "contain",
+						"handler": "updateSlideImage"
+					}
+				}
+			},
+			"description": {
+				"handler": "updateDescription",
+				"type": "group",
+				"name": "描述",
+				"fold": true,
+				"children": {
+					"show": {
+						"type": "boolean",
+						"default": false,
+						"name": "显示",
+						"handler": "updateDescription"
+					},
+					"background": {
+						"type": "group",
+						"name": "背景颜色",
+						"fold": true,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"children": {
+							"style": {
+								"type": "select",
+								"name": "颜色样式",
+								"options": [
+									{
+										"name": "单色",
+										"value": "single"
+									},
+									{
+										"name": "渐变",
+										"value": "linearGradient"
+									}
+								],
+								"default": "linearGradient",
+								"handler": "updateDescription"
+							},
+							"single": {
+								"type": "color",
+								"default": "#000",
+								"name": "颜色",
+								"show": [
+									[
+										"style",
+										"$eq",
+										"single"
+									]
+								],
+								"handler": "updateDescription"
+							},
+							"startColor": {
+								"type": "color",
+								"default": "rgba(19,68,88,0.25)",
+								"name": "开始颜色",
+								"show": [
+									[
+										"style",
+										"$eq",
+										"linearGradient"
+									]
+								],
+								"handler": "updateDescription"
+							},
+							"endColor": {
+								"type": "color",
+								"default": "rgba(231,229,229,0.9)",
+								"name": "结束颜色",
+								"show": [
+									[
+										"style",
+										"$eq",
+										"linearGradient"
+									]
+								],
+								"handler": "updateDescription"
+							},
+							"degree": {
+								"type": "number",
+								"name": "角度",
+								"default": 90,
+								"min": 0,
+								"max": 360,
+								"step": 1,
+								"handler": "updateDescription"
+							}
+						},
+						"handler": "updateDescription"
+					},
+					"color": {
+						"type": "color",
+						"default": "#ffffff",
+						"name": "文字颜色",
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDescription"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						],
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDescription"
+					},
+					"width": {
+						"type": "number",
+						"name": "长度(%)",
+						"default": 100,
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDescription"
+					},
+					"height": {
+						"type": "number",
+						"name": "高度(%)",
+						"default": 10,
+						"min": 1,
+						"max": 100,
+						"step": 1,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDescription"
+					},
+					"top": {
+						"type": "number",
+						"name": "上边距",
+						"default": 0,
+						"step": 10,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDescription"
+					},
+					"left": {
+						"type": "number",
+						"name": "左边距",
+						"default": 0,
+						"step": 10,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDescription"
+					},
+					"align": {
+						"type": "select",
+						"name": "对齐方式",
+						"options": [
+							{
+								"name": "向左",
+								"value": "left"
+							},
+							{
+								"name": "居中",
+								"value": "center"
+							},
+							{
+								"name": "向右",
+								"value": "right"
+							}
+						],
+						"default": "left",
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDescription"
+					}
+				}
+			},
+			"dot": {
+				"handler": "updateDot",
+				"type": "group",
+				"name": "圆点",
+				"fold": true,
+				"children": {
+					"show": {
+						"type": "boolean",
+						"default": true,
+						"name": "显示",
+						"handler": "updateDot"
+					},
+					"color": {
+						"type": "color",
+						"default": "#ffffff",
+						"name": "圆点颜色",
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDot"
+					},
+					"current": {
+						"type": "color",
+						"default": "#70b075",
+						"name": "当前颜色",
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"handler": "updateDot"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"description": "这是第一张图片的描述",
+					"url": "https://img.alicdn.com/tfs/TB1yDd8jVP7gK0jSZFjXXc5aXXa-300-180.png"
+				},
+				{
+					"description": "这是第二张图片的描述",
+					"url": "https://img.alicdn.com/tfs/TB1dip_j7L0gK0jSZFAXXcA9pXa-300-180.png"
+				}
+			]
+		},
+		"events": {
+			"click-image": {
+				"description": "当点击图片时",
+				"fields": {
+					"description": {
+						"description": "当前图片描述",
+						"type": "string"
+					},
+					"url": {
+						"description": "当前图片地址",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"startLoop": {
+				"name": "开始轮播",
+				"type": "object",
+				"fields": {
+					"index": {
+						"name": "序号",
+						"type": "number",
+						"default": 0
+					}
+				}
+			},
+			"stopLoop": {
+				"name": "停止轮播",
+				"type": "null"
+			},
+			"prev": {
+				"name": "翻到上一页",
+				"type": "null"
+			},
+			"next": {
+				"name": "翻到下一页",
+				"type": "null"
+			},
+			"turnTo": {
+				"name": "翻到某一页",
+				"fields": {
+					"index": {
+						"name": "页码"
+					}
+				}
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB17pTqlND1gK0jSZFKXXcJrVXa-334-144.png"
+	}
+}

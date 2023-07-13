@@ -1,0 +1,408 @@
+{
+	"name": "datavmap-3d-layer-basemap",
+	"version": "0.0.27",
+	"description": "基于datav.gl的底图层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-3d-layer-basemap.git"
+	},
+	"keywords": [
+		"datav.gl",
+		"mapbox",
+		"basemap"
+	],
+	"author": "wandergis",
+	"dependencies": {
+		"eventemitter3": "2.0.3",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "基础底图",
+		"level": 1,
+		"icon": "//img.alicdn.com/tfs/TB1Y826ApzqK1RjSZFCXXbbxVXa-180-180.png",
+		"protocol": 2,
+		"type": [
+			"datavgl_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavgl"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"tileurl": {
+				"handler": "render",
+				"description": "栅格瓦片地址",
+				"fields": {
+					"url": {
+						"description": "栅格瓦片地址"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"tileType": {
+				"name": "瓦片类型",
+				"type": "options",
+				"default": "raster",
+				"options": [
+					{
+						"name": "栅格瓦片",
+						"value": "raster"
+					},
+					{
+						"name": "矢量瓦片",
+						"value": "vector"
+					},
+					{
+						"name": "静态背景图片",
+						"value": "image"
+					}
+				]
+			},
+			"rasterOptions": {
+				"type": "group",
+				"show": [
+					[
+						"tileType",
+						"$eq",
+						"raster"
+					]
+				],
+				"name": "栅格瓦片配置",
+				"children": {
+					"url": {
+						"description": "删除内容即可下拉选择预定义的地图或者填写自定义的瓦片地址",
+						"name": "栅格瓦片",
+						"type": "search",
+						"default": "NormalAMap",
+						"searches": [
+							{
+								"name": "高德电子地图",
+								"value": "NormalAMap"
+							},
+							{
+								"name": "高德卫星图",
+								"value": "SatelliteAMap"
+							}
+						]
+					},
+					"maxzoom": {
+						"name": "最大缩放",
+						"type": "number",
+						"default": 18,
+						"range": [
+							8,
+							22
+						],
+						"step": 1
+					},
+					"raster-opacity": {
+						"name": "透明度",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.1
+					},
+					"mask-color": {
+						"type": "color",
+						"name": "蒙版颜色",
+						"default": "rgba(0,0,0,0)"
+					},
+					"filter": {
+						"name": "滤镜",
+						"type": "boolean",
+						"default": false
+					},
+					"raster-hue-rotate": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "色相",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							360
+						],
+						"step": 0.1
+					},
+					"raster-brightness-min": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "最小亮度",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"raster-brightness-max": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "最大亮度",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"raster-saturation": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "饱和度",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"raster-contrast": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "对比度",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					}
+				}
+			},
+			"vectorOptions": {
+				"type": "group",
+				"show": [
+					[
+						"tileType",
+						"$eq",
+						"vector"
+					]
+				],
+				"name": "矢量瓦片配置",
+				"children": {
+					"mapbox_accesstoken": {
+						"description": "请输入您在mapbox网站的accesstoken",
+						"name": "mapbox密钥",
+						"type": "text",
+						"default": "pk.eyJ1Ijoid2FuZGVyZ2lzIiwiYSI6ImNqNmJsb2FidjE4OHEzMm85dTh4eWR3Z3EifQ.uue412NiWqkvgkqoqWbA4A"
+					},
+					"style_url": {
+						"description": "请输入您在mapbox网站的style地址",
+						"name": "样式地址",
+						"type": "text",
+						"default": "http://mapbox.oss-cn-hangzhou.aliyuncs.com/dark-v9/dark-v9.json"
+					}
+				}
+			},
+			"imageOptions": {
+				"type": "group",
+				"show": [
+					[
+						"tileType",
+						"$eq",
+						"image"
+					]
+				],
+				"name": "背景图片配置",
+				"children": {
+					"url": {
+						"type": "image",
+						"name": "背景图片",
+						"default": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/4c884456fad2b50fb515f455e5129a04.png"
+					},
+					"minLng": {
+						"type": "number",
+						"default": 62.97,
+						"name": "最小经度",
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.000001
+					},
+					"maxLng": {
+						"type": "number",
+						"default": 140.43,
+						"name": "最大经度",
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.000001
+					},
+					"minLat": {
+						"type": "number",
+						"default": 13.04,
+						"name": "最小纬度",
+						"range": [
+							-90,
+							90
+						],
+						"step": 0.000001
+					},
+					"maxLat": {
+						"type": "number",
+						"default": 58.4,
+						"name": "最大纬度",
+						"range": [
+							-90,
+							90
+						],
+						"step": 0.000001
+					},
+					"raster-opacity": {
+						"name": "透明度",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.1
+					},
+					"filter": {
+						"name": "滤镜",
+						"type": "boolean",
+						"default": false
+					},
+					"raster-hue-rotate": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "色相",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							360
+						],
+						"step": 0.1
+					},
+					"raster-brightness-min": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "最小亮度",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"raster-brightness-max": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "最大亮度",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"raster-saturation": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "饱和度",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"raster-contrast": {
+						"show": [
+							[
+								"filter",
+								"$eq",
+								true
+							]
+						],
+						"name": "对比度",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					}
+				}
+			}
+		},
+		"api_data": {
+			"tileurl": []
+		}
+	}
+}

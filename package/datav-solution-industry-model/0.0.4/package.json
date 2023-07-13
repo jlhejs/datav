@@ -1,0 +1,414 @@
+{
+	"name": "datav-solution-industry-model",
+	"version": "0.0.4",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "工业模型展示组件",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"visible": {
+				"name": "显示",
+				"type": "boolean",
+				"default": true
+			},
+			"model": {
+				"type": "group",
+				"name": "模型",
+				"children": {
+					"url": {
+						"type": "string",
+						"name": "模型地址",
+						"default": "http://sh-conf.oss-cn-shanghai.aliyuncs.com/datav-solution/industry/gl.gltf"
+					},
+					"position": {
+						"type": "group",
+						"name": "位置",
+						"children": {
+							"x": {
+								"name": "x轴坐标",
+								"type": "number",
+								"range": [
+									-20000,
+									20000
+								],
+								"step": 0.000001,
+								"default": 0
+							},
+							"y": {
+								"name": "y轴坐标",
+								"type": "number",
+								"range": [
+									-20000,
+									20000
+								],
+								"step": 0.000001,
+								"default": 0
+							},
+							"z": {
+								"name": "z轴坐标",
+								"type": "number",
+								"range": [
+									-20000,
+									20000
+								],
+								"step": 0.000001,
+								"default": 0
+							}
+						}
+					},
+					"envMap": {
+						"type": "group",
+						"name": "环境贴图",
+						"children": {
+							"envMapIntensity": {
+								"type": "number",
+								"name": "强度",
+								"default": 1,
+								"range": [
+									0,
+									10
+								],
+								"step": 0.01
+							},
+							"url": {
+								"type": "group",
+								"name": "贴图地址",
+								"children": {
+									"prefix": {
+										"type": "string",
+										"name": "目录",
+										"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/hdr/pisaHDR/"
+									},
+									"postfix": {
+										"type": "string",
+										"name": "后缀名",
+										"default": ".hdr"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"component": {
+				"name": "部件",
+				"type": "group",
+				"children": {
+					"status": {
+						"type": "group",
+						"name": "状态",
+						"children": {
+							"threshold": {
+								"type": "number",
+								"name": "阈值",
+								"default": 1,
+								"range": [
+									-100,
+									100
+								],
+								"step": 0.01
+							},
+							"click": {
+								"type": "group",
+								"name": "点击",
+								"children": {
+									"color": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#50f0fc"
+									},
+									"opacity": {
+										"type": "number",
+										"name": "透明度",
+										"default": 0.2,
+										"range": [
+											0,
+											1
+										],
+										"step": 0.01
+									}
+								}
+							},
+							"alert": {
+								"type": "group",
+								"name": "报警",
+								"children": {
+									"icon": {
+										"type": "group",
+										"name": "图标",
+										"children": {
+											"url": {
+												"type": "string",
+												"name": "地址",
+												"default": "https://img.alicdn.com/tfs/TB1oBH3o7voK1RjSZFDXXXY3pXa-258-258.png"
+											},
+											"size": {
+												"type": "number",
+												"name": "尺寸",
+												"default": 1,
+												"range": [
+													0,
+													100
+												],
+												"step": 0.01
+											}
+										}
+									},
+									"color": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#ff0000"
+									},
+									"opacity": {
+										"type": "number",
+										"name": "透明度",
+										"default": 0.2,
+										"range": [
+											0,
+											1
+										],
+										"step": 0.01
+									}
+								}
+							}
+						}
+					},
+					"label": {
+						"type": "group",
+						"name": "文字标签",
+						"children": {
+							"font": {
+								"type": "group",
+								"name": "字体",
+								"children": {
+									"size": {
+										"type": "number",
+										"name": "大小",
+										"default": 32,
+										"range": [
+											1,
+											128
+										],
+										"step": 1
+									},
+									"color": {
+										"type": "color",
+										"name": "颜色",
+										"default": "#ffffff"
+									},
+									"weight": {
+										"type": "number",
+										"name": "粗细",
+										"default": 100,
+										"range": [
+											100,
+											900
+										],
+										"step": 100
+									}
+								}
+							},
+							"padding": {
+								"type": "group",
+								"name": "间距",
+								"children": {
+									"top": {
+										"type": "number",
+										"name": "上",
+										"default": 12,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									},
+									"bottom": {
+										"type": "number",
+										"name": "下",
+										"default": 12,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									},
+									"font": {
+										"type": "number",
+										"name": "字体",
+										"default": 8,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									},
+									"left": {
+										"type": "number",
+										"name": "左",
+										"default": 24,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									},
+									"right": {
+										"type": "number",
+										"name": "右",
+										"default": 24,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									}
+								}
+							},
+							"background": {
+								"type": "group",
+								"name": "背景",
+								"children": {
+									"color": {
+										"type": "color",
+										"name": "颜色",
+										"default": "rgba(255, 255, 255, 0.2)"
+									}
+								}
+							},
+							"outline": {
+								"type": "group",
+								"name": "边框",
+								"children": {
+									"width": {
+										"type": "number",
+										"name": "宽度",
+										"default": 4,
+										"range": [
+											0,
+											10
+										],
+										"step": 1
+									},
+									"color": {
+										"type": "color",
+										"name": "颜色",
+										"default": "rgba(255, 255, 255, 0.8)"
+									}
+								}
+							},
+							"size": {
+								"type": "number",
+								"name": "大小",
+								"default": 0.5,
+								"range": [
+									0,
+									50
+								],
+								"step": 0.01
+							}
+						}
+					}
+				}
+			},
+			"callbackId": {
+				"type": "text",
+				"name": "回调ID",
+				"default": "id"
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"id": "air1",
+					"value": 0.9,
+					"text": [
+						{
+							"key": "一次风",
+							"value": "NoData Nm³/h"
+						}
+					]
+				},
+				{
+					"id": "air2",
+					"value": 0.5,
+					"text": [
+						{
+							"key": "二次风",
+							"value": "NoData Nm³/h"
+						}
+					]
+				},
+				{
+					"id": "coal_bunker",
+					"value": 0.1,
+					"text": [
+						{
+							"key": "燃料量",
+							"value": "NoData t/h"
+						}
+					]
+				},
+				{
+					"id": "coal_bunker",
+					"value": 0.2,
+					"text": [
+						{
+							"key": "蒸汽流量",
+							"value": "NoData t/h"
+						},
+						{
+							"key": "蒸汽温度",
+							"value": "NoData ℃"
+						},
+						{
+							"key": "蒸汽压力",
+							"value": "NoData MPa"
+						}
+					]
+				},
+				{
+					"id": "hearth",
+					"value": 0.4,
+					"text": [
+						{
+							"key": "床温",
+							"value": "NoData ℃"
+						}
+					]
+				},
+				{
+					"id": "economizer",
+					"value": 0.9,
+					"text": [
+						{
+							"key": "氧量",
+							"value": "NoData %"
+						}
+					]
+				}
+			]
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"description": "数据信息",
+				"fields": {}
+			}
+		},
+		"type": [
+			"map_3d_industry_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_industry"
+			],
+			"supportNames": []
+		},
+		"icon": ""
+	}
+}

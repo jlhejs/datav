@@ -1,0 +1,860 @@
+{
+	"name": "datavmap-canvas2d-label",
+	"version": "2.0.31",
+	"description": "文字标注层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-canvas2d-label.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww (yunyi.zww@alibaba-inc.com)",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"rbush": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "文字标注层",
+		"level": 0,
+		"icon": "https://img.alicdn.com/tfs/TB1wRf6subviK0jSZFNXXaApXXa-180-180.png",
+		"protocol": 2,
+		"type": [
+			"datavmap-canvas2d_subcoms_canvas-layer"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavmap-canvas2d"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"events": {
+			"click": {
+				"description": "当点击点时",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					}
+				}
+			},
+			"mouseover": {
+				"description": "当鼠标移入时",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"apis": {
+			"dataSource": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"name": {
+						"description": "名称",
+						"type": "string",
+						"optional": true
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					},
+					"value": {
+						"description": "值",
+						"type": "number",
+						"optional": true
+					},
+					"info": {
+						"description": "弹窗内容",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"zoomRange": {
+				"name": "可见级别",
+				"type": "slider",
+				"mode": "double",
+				"default": [
+					0,
+					22
+				],
+				"min": 0,
+				"max": 22,
+				"step": 0.1
+			},
+			"labelStyle": {
+				"type": "group",
+				"name": "标注样式",
+				"fold": false,
+				"children": {
+					"fieldName": {
+						"type": "text",
+						"name": "显示字段",
+						"default": "name",
+						"description": "需要与地理数据中字段名称匹配"
+					},
+					"textStyle": {
+						"type": "font",
+						"name": "文本样式",
+						"fold": false,
+						"children": {
+							"fontFamily": {
+								"type": "search",
+								"name": "字体",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 12,
+								"range": [
+									12,
+									100
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "rgb(255, 255, 255)"
+							},
+							"fontWeight": {
+								"type": "search",
+								"name": "粗细",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							},
+							"shadowColor": {
+								"type": "color",
+								"name": "阴影色",
+								"default": "rgba(0, 0, 0, 0.85)",
+								"col": 12
+							}
+						}
+					}
+				}
+			},
+			"popupStyle": {
+				"type": "group",
+				"name": "弹框",
+				"description": "弹窗功能需先设置info字段！",
+				"fold": true,
+				"children": {
+					"show": {
+						"type": "boolean",
+						"name": "显示",
+						"default": false
+					},
+					"infoField": {
+						"type": "boolean",
+						"name": "info字段",
+						"description": "请设置info字段作为弹窗内容，info支持配置html标签；如不选，则兼容name和value作为弹窗内容！",
+						"default": false
+					},
+					"eventType": {
+						"name": "事件类型",
+						"type": "radio",
+						"optionCol": 12,
+						"default": "click",
+						"options": [
+							{
+								"value": "click",
+								"label": "点击"
+							},
+							{
+								"value": "mouseover",
+								"label": "鼠标移入"
+							}
+						]
+					},
+					"styleType": {
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"name": "配置选项",
+						"type": "buttonRadio",
+						"default": "parent",
+						"options": [
+							{
+								"value": "parent",
+								"label": "父容器默认"
+							},
+							{
+								"value": "custom",
+								"label": "自定义配置"
+							}
+						]
+					},
+					"textStyle": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "font",
+						"name": "文本样式",
+						"fold": false,
+						"children": {
+							"fontFamily": {
+								"type": "search",
+								"name": "字体",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 12,
+								"range": [
+									12,
+									100
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"type": "search",
+								"name": "粗细",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					},
+					"lineHeight": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "number",
+						"name": "行高比例",
+						"caption": "范围 [0.5, 5]",
+						"default": 1.4,
+						"range": [
+							0.5,
+							5
+						],
+						"step": 0.1
+					},
+					"borderRadius": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "圆角半径",
+						"type": "number",
+						"caption": "范围 [0, 20]",
+						"default": 5,
+						"range": [
+							0,
+							20
+						],
+						"step": 1,
+						"suffix": "px"
+					},
+					"margin": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "外边距",
+						"type": "margin",
+						"default": {
+							"top": 10,
+							"right": 20,
+							"bottom": 10,
+							"left": 20
+						}
+					},
+					"backgroundColor": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "背景色",
+						"type": "color",
+						"default": "rgba(6, 75, 199, 0.8)"
+					},
+					"closeBtn": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "suite",
+						"name": "关闭按钮",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"size": {
+								"name": "大小",
+								"type": "number",
+								"caption": "大小 [12, 60]",
+								"default": 12,
+								"range": [
+									12,
+									60
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"top": {
+								"name": "顶部距离",
+								"type": "number",
+								"caption": "顶部距离 [0, 100]",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							},
+							"right": {
+								"name": "右侧距离",
+								"type": "number",
+								"caption": "右侧距离 [0, 100]",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							}
+						}
+					}
+				}
+			},
+			"interactive": {
+				"type": "group",
+				"name": "交互配置",
+				"fold": true,
+				"children": {
+					"isHover": {
+						"type": "suite",
+						"name": "悬停样式",
+						"enableHide": true,
+						"default": {
+							"show": true,
+							"hoverScale": 1.5
+						},
+						"children": {
+							"hoverScale": {
+								"type": "number",
+								"name": "悬停缩放比",
+								"caption": "悬停缩放比 [1, 2]",
+								"default": 1.5,
+								"range": [
+									1,
+									2
+								],
+								"step": 0.1
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"mappingData": [
+				{
+					"type": "ok",
+					"vectorType": "圆",
+					"isDataBind": true,
+					"defaultStyle": {
+						"radius": 5,
+						"fillColor": "rgba(212,20,159,0.8)",
+						"color": "#fff",
+						"weight": 1
+					},
+					"dataBindStyle": {
+						"radius": {
+							"minValue": 9,
+							"maxValue": 25,
+							"defaultValue": 5
+						},
+						"fillColor": {
+							"minColor": "rgba(255,194,0,0.67)",
+							"maxColor": "rgba(0,255,15,0.57)",
+							"defaultColor": "rgba(212,20,159,0.8)"
+						},
+						"color": {
+							"minColor": "rgba(0,221,255,0.59)",
+							"maxColor": "#ffffff",
+							"defaultColor": "#fff"
+						},
+						"weight": {
+							"minValue": 1,
+							"maxValue": 2,
+							"defaultValue": 1
+						}
+					}
+				},
+				{
+					"type": "error",
+					"vectorType": "圆",
+					"isDataBind": true,
+					"defaultStyle": {
+						"radius": 5,
+						"fillColor": "rgba(212,20,159,0.8)",
+						"color": "#fff",
+						"weight": 1
+					},
+					"dataBindStyle": {
+						"radius": {
+							"minValue": 9,
+							"maxValue": 25,
+							"defaultValue": 5
+						},
+						"fillColor": {
+							"minColor": "rgba(255,194,0,0.67)",
+							"maxColor": "rgba(0,255,15,0.57)",
+							"defaultColor": "rgba(212,20,159,0.8)"
+						},
+						"color": {
+							"minColor": "rgba(0,221,255,0.59)",
+							"maxColor": "#ffffff",
+							"defaultColor": "#fff"
+						},
+						"weight": {
+							"minValue": 1,
+							"maxValue": 2,
+							"defaultValue": 1
+						}
+					}
+				}
+			],
+			"dataSource": [
+				{
+					"lat": 31.8998,
+					"lng": 102.2212,
+					"name": "点0"
+				},
+				{
+					"lat": 28.6542,
+					"lng": 120.079,
+					"name": "点1"
+				},
+				{
+					"lat": 24.0554,
+					"lng": 114.207,
+					"name": "点2"
+				},
+				{
+					"lat": 40.634,
+					"lng": 122.5059,
+					"name": "点3"
+				},
+				{
+					"lat": 25.6879,
+					"lng": 114.3073,
+					"name": "点4"
+				},
+				{
+					"lat": 34.6948,
+					"lng": 110.6911,
+					"name": "点5"
+				},
+				{
+					"lat": 23.9505,
+					"lng": 117.3409,
+					"name": "点6"
+				},
+				{
+					"lat": 28.2145,
+					"lng": 110.2144,
+					"name": "点7"
+				},
+				{
+					"lat": 37.6866,
+					"lng": 116.2584,
+					"name": "点8"
+				},
+				{
+					"lat": 29.4432,
+					"lng": 111.6456,
+					"name": "点9"
+				},
+				{
+					"lat": 43.7928,
+					"lng": 87.6177,
+					"name": "点10"
+				},
+				{
+					"lat": 33.5807,
+					"lng": 119.0305,
+					"name": "点11"
+				},
+				{
+					"lat": 39.563,
+					"lng": 118.1108,
+					"name": "点12"
+				},
+				{
+					"lat": 41.8993,
+					"lng": 114.0101,
+					"name": "点13"
+				},
+				{
+					"lat": 30.3096,
+					"lng": 114.0812,
+					"name": "点14"
+				},
+				{
+					"lat": 40.0905,
+					"lng": 113.3014,
+					"name": "点15"
+				},
+				{
+					"lat": 28.6396,
+					"lng": 102.5089,
+					"name": "点16"
+				},
+				{
+					"lat": 29.6045,
+					"lng": 114.4932,
+					"name": "点17"
+				},
+				{
+					"lat": 29.4145,
+					"lng": 112.1723,
+					"name": "点18"
+				},
+				{
+					"lat": 21.2749,
+					"lng": 110.365,
+					"name": "点19"
+				},
+				{
+					"lat": 24.7743,
+					"lng": 115.0327,
+					"name": "点20"
+				},
+				{
+					"lat": 47.2529,
+					"lng": 130.2362,
+					"name": "点21"
+				},
+				{
+					"lat": 26.8721,
+					"lng": 100.233,
+					"name": "点22"
+				},
+				{
+					"lat": 37.4934,
+					"lng": 118.2489,
+					"name": "点23"
+				},
+				{
+					"lat": 36.0634,
+					"lng": 113.8238,
+					"name": "点24"
+				},
+				{
+					"lat": 31.3431,
+					"lng": 104.2002,
+					"name": "点25"
+				},
+				{
+					"lat": 40.4375,
+					"lng": 113.1635,
+					"name": "点26"
+				},
+				{
+					"lat": 42.8655,
+					"lng": 90.2127,
+					"name": "点27"
+				},
+				{
+					"lat": 47.4794,
+					"lng": 129.3114,
+					"name": "点28"
+				},
+				{
+					"lat": 28.7602,
+					"lng": 104.6308,
+					"name": "点29"
+				},
+				{
+					"lat": 42.287,
+					"lng": 119.9065,
+					"name": "点30"
+				},
+				{
+					"lat": 29.9456,
+					"lng": 122.302,
+					"name": "点31"
+				},
+				{
+					"lat": 42.5421,
+					"lng": 124.0456,
+					"name": "点32"
+				},
+				{
+					"lat": 26.7025,
+					"lng": 107.5135,
+					"name": "点33"
+				},
+				{
+					"lat": 31.355,
+					"lng": 107.7223,
+					"name": "点34"
+				},
+				{
+					"lat": 32.9397,
+					"lng": 117.3632,
+					"name": "点35"
+				},
+				{
+					"lat": 40.1243,
+					"lng": 124.383,
+					"name": "点36"
+				},
+				{
+					"lat": 32.8671,
+					"lng": 117.5625,
+					"name": "点37"
+				},
+				{
+					"lat": 34.2134,
+					"lng": 108.9266,
+					"name": "点38"
+				},
+				{
+					"lat": 31.464,
+					"lng": 104.7417,
+					"name": "点39"
+				},
+				{
+					"lat": 25.1118,
+					"lng": 99.1671,
+					"name": "点40"
+				},
+				{
+					"lat": 32.7054,
+					"lng": 116.7228,
+					"name": "点41"
+				},
+				{
+					"lat": 36.5329,
+					"lng": 113.0501,
+					"name": "点42"
+				},
+				{
+					"lat": 26.2233,
+					"lng": 111.6263,
+					"name": "点43"
+				},
+				{
+					"lat": 32.3932,
+					"lng": 119.421,
+					"name": "点44"
+				},
+				{
+					"lat": 38.7257,
+					"lng": 113.259,
+					"name": "点45"
+				},
+				{
+					"lat": 24.041,
+					"lng": 104.1944,
+					"name": "点46"
+				},
+				{
+					"lat": 37.13,
+					"lng": 114.6845,
+					"name": "点47"
+				},
+				{
+					"lat": 35.6638,
+					"lng": 103.3896,
+					"name": "点48"
+				},
+				{
+					"lat": 36.146,
+					"lng": 112.2514,
+					"name": "点49"
+				},
+				{
+					"lat": 46.8096,
+					"lng": 130.3618,
+					"name": "点50"
+				},
+				{
+					"lat": 22.1328,
+					"lng": 108.4491,
+					"name": "点51"
+				},
+				{
+					"lat": 43.252,
+					"lng": 94.6928,
+					"name": "点52"
+				},
+				{
+					"lat": 34.6777,
+					"lng": 107.7966,
+					"name": "点53"
+				},
+				{
+					"lat": 30.0966,
+					"lng": 117.0215,
+					"name": "点54"
+				},
+				{
+					"lat": 46.9931,
+					"lng": 89.525,
+					"name": "点55"
+				},
+				{
+					"lat": 34.1544,
+					"lng": 113.4713,
+					"name": "点56"
+				},
+				{
+					"lat": 25.2916,
+					"lng": 117.4207,
+					"name": "点57"
+				},
+				{
+					"lat": 30.6676,
+					"lng": 104.0557,
+					"name": "点58"
+				},
+				{
+					"lat": 47.413,
+					"lng": 129.4359,
+					"name": "点59"
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,193 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-water-realistic",
+	"version": "2.1.1",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "水体L2",
+		"protocol": 2,
+		"level": 2,
+		"cityBaseLevel": 2,
+		"hooks": {
+			"editBeforeModify": true
+		},
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"selectedArea": {
+				"name": "当前区域",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": {}
+			},
+			"dataParams": {
+				"name": "数据参数",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": {}
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"graphic": {
+						"type": "group",
+						"name": "图形",
+						"children": {
+							"color": {
+								"name": "水体颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"map": {
+								"type": "image",
+								"name": "颜色贴图",
+								"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-WaterL1-Tex-DIF.jpeg"
+							},
+							"normalMap": {
+								"name": "法线贴图",
+								"type": "image",
+								"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-WaterL1-Tex-NORM.png"
+							},
+							"wave": {
+								"name": "波纹",
+								"type": "group",
+								"children": {
+									"lowFreqSize": {
+										"name": "低频尺寸",
+										"type": "slider",
+										"min": 0,
+										"max": 100,
+										"step": 0.0001,
+										"precision": 0.0001,
+										"showRange": true,
+										"default": 5
+									},
+									"highFreqSize": {
+										"name": "高频尺寸",
+										"type": "slider",
+										"min": 0,
+										"max": 100,
+										"step": 0.0001,
+										"precision": 0.0001,
+										"showRange": true,
+										"default": 20
+									},
+									"density": {
+										"name": "密度",
+										"type": "hidden",
+										"min": 0,
+										"max": 100,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": true,
+										"default": 5
+									}
+								}
+							}
+						}
+					},
+					"animate": {
+						"type": "group",
+						"name": "动效",
+						"children": {
+							"flowDirection": {
+								"name": "流向",
+								"type": "group",
+								"children": {
+									"x": {
+										"name": "水平",
+										"type": "switch",
+										"default": false,
+										"statusText": true
+									},
+									"y": {
+										"name": "垂直",
+										"type": "switch",
+										"default": false,
+										"statusText": true
+									}
+								}
+							},
+							"speed": {
+								"name": "流速",
+								"type": "slider",
+								"min": 0,
+								"max": 100,
+								"step": 0.1,
+								"precision": 0.1,
+								"showRange": true,
+								"default": 5
+							}
+						}
+					}
+				}
+			}
+		},
+		"keyframeConfig": {
+			"color": {
+				"name": "水体颜色",
+				"type": "fill",
+				"default": "#546974"
+			},
+			"speed": {
+				"name": "流速",
+				"type": "slider",
+				"min": 0,
+				"max": 100,
+				"step": 0.1,
+				"precision": 0.1,
+				"showRange": true,
+				"default": 90
+			}
+		},
+		"api_data": {
+			"data": {
+				"url": ""
+			}
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"errorHandler": "errorRender",
+				"description": "数据接口",
+				"hidden": true,
+				"format": "geo_water",
+				"fields": {}
+			}
+		},
+		"events": {
+			"rendered": {
+				"name": "渲染完成",
+				"description": "渲染完成",
+				"type": "any"
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_citybase_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/imgextra/i2/O1CN01sv9vB81KqVxSlxUWU_!!6000000001215-2-tps-360-360.png"
+	}
+}

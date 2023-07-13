@@ -1,0 +1,523 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-geofence",
+	"version": "2.2.5",
+	"main": "index.js",
+	"dependencies": {
+		"alibabacloud-datav-tool-gui-utils": "^1.0.2",
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "地理围栏",
+		"protocol": 2,
+		"level": 1,
+		"supportTheme": true,
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"fold": false,
+						"children": {
+							"blendingType": {
+								"name": "混合模式",
+								"type": "select",
+								"options": [
+									{
+										"label": "添加模式",
+										"value": "AdditiveBlending"
+									},
+									{
+										"label": "正常模式",
+										"value": "NormalBlending"
+									},
+									{
+										"label": "无叠加模式",
+										"value": "NoBlending"
+									}
+								]
+							},
+							"depthTest": {
+								"name": "深度测试",
+								"type": "switch"
+							},
+							"depthWrite": {
+								"name": "深度写入",
+								"type": "switch"
+							},
+							"geofenceHeight": {
+								"name": "拉伸高度",
+								"type": "slider",
+								"min": 0.2,
+								"max": 2000,
+								"step": 0.1,
+								"showRange": true
+							},
+							"offsetHeight": {
+								"name": "起始高度",
+								"type": "slider",
+								"min": -2000,
+								"max": 2000,
+								"step": 0.1,
+								"showRange": true
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"fold": false,
+						"children": {
+							"isTop": {
+								"name": "显示顶面",
+								"type": "switch"
+							},
+							"topColor": {
+								"showInPanel": [
+									[
+										".isTop",
+										"$eq",
+										true
+									],
+									[
+										".sideColor.mapping",
+										"$eq",
+										false
+									]
+								],
+								"name": "顶面颜色",
+								"type": "fill"
+							},
+							"sideColor": {
+								"name": "侧面颜色",
+								"handler": "updateSideColor",
+								"type": "colorMapping",
+								"fold": false,
+								"fixedComponents": [
+									"flat"
+								],
+								"scaleTypes": [
+									"ordinal"
+								],
+								"noCustom": false
+							},
+							"isGradient": {
+								"name": "侧面渐变",
+								"type": "switch"
+							},
+							"sideTexture": {
+								"name": "侧面贴图",
+								"type": "group",
+								"fold": true,
+								"children": {
+									"sideTextureUrl": {
+										"name": "贴图样式",
+										"type": "image",
+										"handler": "sideTextureUrlHandler"
+									},
+									"sideTexColor": {
+										"name": "贴图颜色",
+										"type": "fill"
+									},
+									"uvScale1": {
+										"name": "UV平铺值",
+										"type": "group",
+										"children": {
+											"x": {
+												"name": "x",
+												"type": "slider",
+												"min": 0,
+												"max": 100,
+												"step": 0.01,
+												"precision": 0.01,
+												"showRange": true
+											},
+											"y": {
+												"name": "y",
+												"type": "slider",
+												"min": 0,
+												"max": 100,
+												"step": 0.01,
+												"precision": 0.01,
+												"showRange": true
+											}
+										}
+									}
+								}
+							},
+							"sideAddTexture": {
+								"name": "侧面叠加贴图",
+								"type": "group",
+								"fold": true,
+								"children": {
+									"sideAddTextureUrl": {
+										"name": "贴图样式",
+										"type": "image",
+										"handler": "sideAddTextureUrlHandler"
+									},
+									"uvScale2": {
+										"name": "UV平铺值",
+										"type": "group",
+										"children": {
+											"x": {
+												"name": "x",
+												"type": "slider",
+												"min": 0,
+												"max": 100,
+												"step": 0.01,
+												"precision": 0.01,
+												"showRange": true
+											},
+											"y": {
+												"name": "y",
+												"type": "slider",
+												"min": 0,
+												"max": 100,
+												"step": 0.01,
+												"precision": 0.01,
+												"showRange": true
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"animate": {
+						"name": "动效",
+						"fold": false,
+						"children": {
+							"animType": {
+								"name": "动画模式",
+								"type": "select",
+								"options": [
+									{
+										"label": "水平",
+										"value": "horizontal"
+									},
+									{
+										"label": "垂直",
+										"value": "vertical"
+									}
+								]
+							},
+							"speed": {
+								"name": "运动速度",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"speed1": {
+										"name": "侧面贴图",
+										"type": "slider",
+										"min": 0,
+										"max": 0.5,
+										"step": 0.01,
+										"showRange": true
+									},
+									"speed2": {
+										"name": "侧面叠加贴图",
+										"type": "slider",
+										"min": 0,
+										"max": 0.5,
+										"step": 0.01,
+										"showRange": true
+									}
+								}
+							}
+						}
+					},
+					"interaction": {
+						"name": "交互",
+						"fold": false,
+						"children": {
+							"enableInteractive": {
+								"name": "鼠标点击",
+								"type": "switch",
+								"handler": "enableInteractiveHandler"
+							},
+							"interactiveColor": {
+								"showInPanel": [
+									[
+										".enableInteractive",
+										"$eq",
+										true
+									]
+								],
+								"name": "高亮颜色",
+								"type": "fill",
+								"handler": "interactiveColorHandler"
+							},
+							"callBackId": {
+								"showInPanel": [
+									[
+										".enableInteractive",
+										"$eq",
+										true
+									]
+								],
+								"type": "text",
+								"name": "回调 ID"
+							}
+						}
+					}
+				},
+				"default": {
+					"general": {
+						"blendingType": "AdditiveBlending",
+						"depthTest": true,
+						"depthWrite": false,
+						"geofenceHeight": 110,
+						"offsetHeight": 0
+					},
+					"graph": {
+						"isTop": false,
+						"topColor": "#002766",
+						"sideColor": {
+							"mapping": false,
+							"fixed": "#001c9b",
+							"scale": {
+								"type": "ordinal",
+								"scheme": "cat-2",
+								"custom": true,
+								"range": [
+									"#6ADDC3",
+									"#4DCD4E",
+									"#D9BA46"
+								],
+								"domain": [],
+								"excepted": "#ffff00",
+								"abnormal": "#ff0000"
+							}
+						},
+						"isGradient": true,
+						"sideTexture": {
+							"sideTextureUrl": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/6ebffcffa6d9d9dae2ae59f664164212.png",
+							"sideTexColor": "#86f4ff",
+							"uvScale1": {
+								"x": 0.5,
+								"y": 2
+							}
+						},
+						"sideAddTexture": {
+							"sideAddTextureUrl": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/6ebffcffa6d9d9dae2ae59f664164212.png",
+							"uvScale2": {
+								"x": 0.1,
+								"y": 1
+							}
+						}
+					},
+					"animate": {
+						"animType": "vertical",
+						"speed": {
+							"speed1": 0.008,
+							"speed2": 0.008
+						}
+					},
+					"interaction": {
+						"enableInteractive": true,
+						"interactiveColor": "#0b3034",
+						"callBackId": ""
+					}
+				}
+			}
+		},
+		"keyframeConfig": {
+			"sideColor": {
+				"name": "侧面颜色",
+				"type": "color",
+				"default": "RGBA(251, 117, 65, 1.00)"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"id": 0,
+					"callback": 123,
+					"colorField": "color0",
+					"geometry": {
+						"type": "Polygon",
+						"coordinates": [
+							[
+								[
+									120.15292167663574,
+									30.25654652128185
+								],
+								[
+									120.14820098876953,
+									30.252913659996945
+								],
+								[
+									120.15403747558594,
+									30.24802020591123
+								],
+								[
+									120.1585865020752,
+									30.251430820861604
+								],
+								[
+									120.15292167663574,
+									30.25654652128185
+								]
+							]
+						]
+					}
+				},
+				{
+					"id": 1,
+					"colorField": "color1",
+					"geometry": {
+						"type": "Polygon",
+						"coordinates": [
+							[
+								[
+									120.13961791992188,
+									30.239641453517258
+								],
+								[
+									120.14107704162598,
+									30.234302406842193
+								],
+								[
+									120.1512050628662,
+									30.239567302077095
+								],
+								[
+									120.15249252319335,
+									30.246240707632953
+								],
+								[
+									120.1431369781494,
+									30.24750118890914
+								],
+								[
+									120.13927459716795,
+									30.24616656117196
+								],
+								[
+									120.13961791992188,
+									30.239641453517258
+								]
+							]
+						]
+					}
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"errorHandler": "errorRender",
+				"format": "geo_polygon",
+				"description": "数据接口",
+				"fields": {
+					"id": {
+						"description": "id",
+						"type": "number|string",
+						"optional": true
+					},
+					"callback": {
+						"description": "回调ID",
+						"type": "number",
+						"optional": true
+					},
+					"geometry": {
+						"description": "几何坐标",
+						"type": "object",
+						"optional": false
+					},
+					"colorField": {
+						"name": "颜色映射",
+						"description": "颜色",
+						"type": "string | number",
+						"optional": true
+					}
+				}
+			}
+		},
+		"events": {
+			"leftClick": {
+				"name": "左键点击",
+				"description": "左键点击",
+				"type": "object",
+				"fields": {
+					"clickPosition": {
+						"name": "点击屏幕坐标",
+						"description": "点击屏幕坐标",
+						"type": "object",
+						"children": {
+							"x": {
+								"name": "x坐标",
+								"description": "x坐标",
+								"type": "number"
+							},
+							"y": {
+								"name": "y坐标",
+								"description": "y坐标",
+								"type": "number"
+							}
+						}
+					},
+					"data": {
+						"name": "数据项",
+						"description": "被点击图元对应的数据项",
+						"type": "object",
+						"children": {
+							"geojson": {
+								"name": "geojson数据",
+								"description": "被点击围栏对应的geojson数据",
+								"type": "object"
+							},
+							"center": {
+								"name": "中心点",
+								"description": "被点击围栏的中心点",
+								"type": "array"
+							}
+						}
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			},
+			"highlight": {
+				"name": "高亮",
+				"description": "高亮指定id对应的围栏",
+				"type": "object",
+				"fields": {
+					"ids": {
+						"name": "高亮区域id数组",
+						"description": "高亮区域id数组",
+						"type": "array"
+					}
+				}
+			},
+			"unhighlight": {
+				"name": "取消高亮",
+				"description": "取消当前高亮的围栏"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/tfs/TB14Bx7Y7L0gK0jSZFAXXcA9pXa-180-180.png"
+	}
+}

@@ -1,0 +1,256 @@
+{
+	"name": "@double11-2017/double11-2017-icon-chart",
+	"version": "0.2.3",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"level": 1,
+		"cn_name": "双11图标占比图",
+		"icon": "//img.alicdn.com/tfs/TB1RdrmlQL0gK0jSZFtXXXQCXXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"regular_number",
+			"DataV-6:info"
+		],
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"name": {
+						"description": "名称",
+						"type": "string"
+					},
+					"value": {
+						"description": "值",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"config": {
+			"men": {
+				"name": "图标1",
+				"type": "image",
+				"default": "https://img.alicdn.com/tfs/TB1uv_vk4D1gK0jSZFKXXcJrVXa-420-490.png"
+			},
+			"women": {
+				"name": "图标2",
+				"type": "image",
+				"default": "https://img.alicdn.com/tfs/TB1xALrk8v0gK0jSZKbXXbK2FXa-420-490.png"
+			},
+			"menLabel": {
+				"name": "标签1",
+				"type": "text",
+				"default": "男",
+				"show": [
+					[
+						"direction",
+						"$eq",
+						"horizontal"
+					]
+				]
+			},
+			"womenLabel": {
+				"name": "标签2",
+				"type": "text",
+				"default": "女",
+				"show": [
+					[
+						"direction",
+						"$eq",
+						"horizontal"
+					]
+				]
+			},
+			"direction": {
+				"name": "排列",
+				"type": "select",
+				"default": "vertical",
+				"options": [
+					{
+						"name": "竖向",
+						"value": "vertical"
+					},
+					{
+						"name": "横向",
+						"value": "horizontal"
+					}
+				]
+			},
+			"style": {
+				"name": "样式",
+				"type": "group",
+				"children": {
+					"iconWidth": {
+						"name": "图标宽度",
+						"type": "number",
+						"default": 80,
+						"range": [
+							0,
+							1000
+						],
+						"step": 1
+					},
+					"iconHeight": {
+						"name": "图标高度",
+						"type": "number",
+						"default": 90,
+						"range": [
+							0,
+							1000
+						],
+						"step": 1
+					},
+					"fontSize": {
+						"name": "文本字号",
+						"type": "number",
+						"default": 16,
+						"range": [
+							0,
+							100
+						],
+						"step": 1
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "rgb(144, 160, 174)"
+					},
+					"iconPosition": {
+						"name": "图标偏移值",
+						"type": "number",
+						"default": 52,
+						"range": [
+							0,
+							1000
+						]
+					}
+				}
+			},
+			"textDis": {
+				"name": "图标文本间距",
+				"type": "number",
+				"default": 38,
+				"step": 1,
+				"range": [
+					0,
+					1000
+				],
+				"show": [
+					[
+						"direction",
+						"$eq",
+						"vertical"
+					]
+				]
+			},
+			"textDistance": {
+				"name": "图标文本间距",
+				"type": "number",
+				"default": 40,
+				"step": 1,
+				"range": [
+					0,
+					1000
+				],
+				"show": [
+					[
+						"direction",
+						"$eq",
+						"horizontal"
+					]
+				]
+			},
+			"textPadding": {
+				"name": "文本间距",
+				"type": "number",
+				"default": 5,
+				"step": 1,
+				"range": [
+					0,
+					20
+				],
+				"show": [
+					[
+						"direction",
+						"$eq",
+						"horizontal"
+					]
+				]
+			},
+			"iconDistance": {
+				"name": "文本间距",
+				"type": "number",
+				"default": 70,
+				"step": 1,
+				"range": [
+					0,
+					1000
+				],
+				"show": [
+					[
+						"direction",
+						"$eq",
+						"vertical"
+					]
+				]
+			},
+			"decimal": {
+				"name": "小数位数",
+				"type": "number",
+				"default": 1,
+				"step": 1,
+				"min": 0
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "men",
+					"value": 0.55
+				},
+				{
+					"name": "women",
+					"value": 0.45
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1gcDqlHH1gK0jSZFwXXc7aXXa-160-116.png"
+	}
+}

@@ -1,0 +1,151 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-bim-v2",
+	"version": "2.1.1",
+	"description": "BIM 查看器",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"keywords": [],
+	"author": "shuke.ft",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "BIM 查看器",
+		"protocol": 2,
+		"level": 2,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"hooks": {
+			"editBeforeModify": true
+		},
+		"config": {
+			"fold": true,
+			"selectedArea": {
+				"name": "当前区域",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": {}
+			},
+			"clipAreaMap": {
+				"name": "裁剪区域",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": {}
+			},
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"interactiveColor": {
+				"name": "高亮颜色",
+				"type": "fill",
+				"default": "RGBA(79, 240, 252, 0.2)"
+			},
+			"envMapIntensityFactor": {
+				"name": "环境贴图强度系数",
+				"type": "slider",
+				"min": 0,
+				"max": 1,
+				"step": 0.1,
+				"precision": 0.1,
+				"showRange": true,
+				"default": 1
+			}
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"hidden": true,
+				"description": "模型层",
+				"format": "geo_bim",
+				"fields": {}
+			}
+		},
+		"api_data": {
+			"source": []
+		},
+		"events": {
+			"tree_data": {
+				"name": "空间树加载完成",
+				"description": "空间树加载完成",
+				"type": "object"
+			},
+			"interactive": {
+				"name": "点击",
+				"description": "点击",
+				"type": "number"
+			},
+			"prop_data": {
+				"name": "属性数据",
+				"description": "属性数据",
+				"type": "object"
+			}
+		},
+		"publicHandler": {
+			"updateOptions": {
+				"name": "更新配置",
+				"description": "更新配置",
+				"type": "object",
+				"fields": {}
+			},
+			"setData": {
+				"name": "更新数据",
+				"description": "更新数据",
+				"type": "array",
+				"fields": {}
+			},
+			"onCheck": {
+				"name": "点击复选框",
+				"description": "点击复选框",
+				"type": "object",
+				"fields": {}
+			},
+			"setVisibility": {
+				"name": "设置构件显隐",
+				"description": "设置构件显隐",
+				"type": "array",
+				"fields": {}
+			},
+			"remove": {
+				"name": "组件销毁",
+				"description": "组件销毁",
+				"type": "null"
+			},
+			"show": {
+				"name": "显示组件",
+				"description": "显示组件",
+				"type": "null"
+			},
+			"hide": {
+				"name": "隐藏组件",
+				"description": "隐藏组件",
+				"type": "null"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_citybase_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/tfs/TB1GX5XY7Y2gK0jSZFgXXc5OFXa-180-180.png"
+	}
+}

@@ -1,0 +1,312 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-heatmap",
+	"version": "2.1.2",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "热力层",
+		"protocol": 2,
+		"level": 0,
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"fold": false,
+						"children": {
+							"depthWrite": {
+								"name": "深度写入",
+								"type": "switch",
+								"default": false
+							},
+							"depthTest": {
+								"name": "深度测试",
+								"type": "switch",
+								"default": true
+							},
+							"offset": {
+								"name": "底部高程",
+								"type": "slider",
+								"min": -1000,
+								"max": 10000,
+								"step": 0.1,
+								"showRange": true,
+								"default": 50
+							},
+							"rotation": {
+								"name": "方位旋转",
+								"type": "suite",
+								"children": {
+									"rotationX": {
+										"name": "X轴旋转",
+										"type": "slider",
+										"min": -1,
+										"max": 1,
+										"step": 0.001,
+										"default": -0.5,
+										"suffix": "PI",
+										"showRange": true
+									},
+									"rotationY": {
+										"name": "Y轴旋转",
+										"type": "slider",
+										"min": -1,
+										"max": 1,
+										"step": 0.001,
+										"default": 1,
+										"suffix": "PI",
+										"showRange": true
+									},
+									"rotationZ": {
+										"name": "Z轴旋转",
+										"type": "slider",
+										"min": -1,
+										"max": 1,
+										"step": 0.001,
+										"default": 0,
+										"suffix": "PI",
+										"showRange": true
+									}
+								}
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"fold": false,
+						"children": {
+							"radius": {
+								"name": "热力半径",
+								"type": "slider",
+								"min": 0,
+								"max": 1000,
+								"step": 0.05,
+								"showRange": true,
+								"default": 150
+							},
+							"zScale": {
+								"name": "拉升高度",
+								"type": "slider",
+								"min": 0,
+								"max": 3000,
+								"step": 0.01,
+								"showRange": true,
+								"default": 200
+							},
+							"blur": {
+								"name": "热力模糊",
+								"type": "slider",
+								"min": 0,
+								"max": 3000,
+								"step": 0.001,
+								"showRange": true,
+								"default": 800
+							},
+							"seg": {
+								"name": "网格设置",
+								"type": "suite",
+								"children": {
+									"widthSeg": {
+										"name": "横向网格数",
+										"type": "slider",
+										"min": 10,
+										"max": 1000,
+										"step": 1,
+										"showRange": true,
+										"default": 100
+									},
+									"heightSeg": {
+										"name": "纵向网格数",
+										"type": "slider",
+										"min": 10,
+										"max": 1000,
+										"step": 1,
+										"showRange": true,
+										"default": 100
+									},
+									"gridWidth": {
+										"name": "网格间距",
+										"type": "slider",
+										"min": 0,
+										"max": 0.005,
+										"step": 0.0001,
+										"showRange": true,
+										"default": 0
+									}
+								}
+							},
+							"color": {
+								"name": "热力颜色",
+								"type": "suite",
+								"children": {
+									"startColor": {
+										"name": "高值颜色",
+										"type": "fill",
+										"default": "RGBA(253, 182, 62, 1.00)"
+									},
+									"endColor": {
+										"name": "低值颜色",
+										"type": "fill",
+										"default": "RGBA(204, 128, 157, 1.00)"
+									}
+								}
+							},
+							"opacitys": {
+								"name": "不透明度",
+								"type": "suite",
+								"children": {
+									"minOpacity": {
+										"name": "起始不透明度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.001,
+										"showRange": true,
+										"default": 0
+									},
+									"opacity": {
+										"name": "整体不透明度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.001,
+										"showRange": true,
+										"default": 1
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"lng": 120.15519618988039,
+					"lat": 30.257287905035877,
+					"value": 1
+				},
+				{
+					"lng": 120.15635490417479,
+					"lat": 30.255619783719773,
+					"value": 1
+				},
+				{
+					"lng": 120.15880107879639,
+					"lat": 30.255174946584194,
+					"value": 1
+				},
+				{
+					"lng": 120.15742778778076,
+					"lat": 30.254507687103583,
+					"value": 1
+				},
+				{
+					"lng": 120.15837192535399,
+					"lat": 30.25220931419848,
+					"value": 1
+				},
+				{
+					"lng": 120.15523910522461,
+					"lat": 30.255174946584194,
+					"value": 1
+				},
+				{
+					"lng": 120.15944480895996,
+					"lat": 30.250985964756484,
+					"value": 1
+				},
+				{
+					"lng": 120.15892982482909,
+					"lat": 30.250207461725378,
+					"value": 1
+				},
+				{
+					"lng": 120.13833045959473,
+					"lat": 30.233968706796645,
+					"value": 1
+				},
+				{
+					"lng": 120.13425350189209,
+					"lat": 30.244312881464246,
+					"value": 1
+				},
+				{
+					"lng": 120.13455390930176,
+					"lat": 30.24268161439657,
+					"value": 1
+				},
+				{
+					"lng": 120.13463973999022,
+					"lat": 30.24208841965843,
+					"value": 1
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"format": "geo_point",
+				"description": "热力层数据接口",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number",
+						"optional": true
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number",
+						"optional": true
+					},
+					"value": {
+						"description": "值",
+						"type": "number",
+						"optional": true
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			},
+			"setOffset": {
+				"description": "设置底部高程",
+				"type": "object",
+				"fields": {
+					"h": {
+						"name": "底部高程",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/tfs/TB1rVNYYYY1gK0jSZTEXXXDQVXa-180-180.png"
+	}
+}

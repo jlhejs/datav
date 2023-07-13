@@ -1,0 +1,567 @@
+{
+	"name": "datav-engine-models",
+	"version": "0.0.28",
+	"description": "模型加载器",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"keywords": [],
+	"author": "shuke.ft",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "模型加载器",
+		"protocol": 2,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"playAnimation": {
+				"name": "启用动画",
+				"type": "boolean",
+				"default": true
+			},
+			"modelUrl": {
+				"name": "模型地址",
+				"type": "string",
+				"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/city/city.gltf"
+			},
+			"style": {
+				"fold": true,
+				"type": "group",
+				"name": "样式配置",
+				"children": {
+					"materialType": {
+						"name": "模型显示",
+						"type": "options",
+						"default": "source",
+						"options": [
+							{
+								"name": "贴图",
+								"value": "source"
+							},
+							{
+								"name": "白模",
+								"value": "white"
+							}
+						]
+					},
+					"isEnvMap": {
+						"name": "环境贴图",
+						"type": "boolean",
+						"default": true
+					},
+					"envMapType": {
+						"name": "贴图类型",
+						"type": "options",
+						"default": "cube",
+						"options": [
+							{
+								"name": "立方体",
+								"value": "cube"
+							},
+							{
+								"name": "球形",
+								"value": "sphere"
+							}
+						]
+					},
+					"envMapIntensity": {
+						"show": [
+							[
+								"isEnvMap",
+								"$eq",
+								true
+							]
+						],
+						"name": "环境贴图强度",
+						"type": "number",
+						"range": [
+							0,
+							10
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"sphereEnvMapUrl": {
+						"show": [
+							[
+								"isEnvMap",
+								"$eq",
+								true
+							],
+							[
+								"envMapType",
+								"$eq",
+								"sphere"
+							]
+						],
+						"name": "贴图地址",
+						"type": "string",
+						"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/datav.engine/hdr/museum_of_ethnography_1k.hdr"
+					},
+					"hdr_nx": {
+						"show": [
+							[
+								"isEnvMap",
+								"$eq",
+								true
+							],
+							[
+								"envMapType",
+								"$eq",
+								"cube"
+							]
+						],
+						"name": "贴图地址 nx",
+						"type": "string",
+						"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/hdr/pisaHDR/nx.hdr"
+					},
+					"hdr_ny": {
+						"show": [
+							[
+								"isEnvMap",
+								"$eq",
+								true
+							],
+							[
+								"envMapType",
+								"$eq",
+								"cube"
+							]
+						],
+						"name": "贴图地址 ny",
+						"type": "string",
+						"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/hdr/pisaHDR/ny.hdr"
+					},
+					"hdr_nz": {
+						"show": [
+							[
+								"isEnvMap",
+								"$eq",
+								true
+							],
+							[
+								"envMapType",
+								"$eq",
+								"cube"
+							]
+						],
+						"name": "贴图地址 nz",
+						"type": "string",
+						"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/hdr/pisaHDR/nz.hdr"
+					},
+					"hdr_px": {
+						"show": [
+							[
+								"isEnvMap",
+								"$eq",
+								true
+							],
+							[
+								"envMapType",
+								"$eq",
+								"cube"
+							]
+						],
+						"name": "贴图地址 px",
+						"type": "string",
+						"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/hdr/pisaHDR/px.hdr"
+					},
+					"hdr_py": {
+						"show": [
+							[
+								"isEnvMap",
+								"$eq",
+								true
+							],
+							[
+								"envMapType",
+								"$eq",
+								"cube"
+							]
+						],
+						"name": "贴图地址 py",
+						"type": "string",
+						"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/hdr/pisaHDR/py.hdr"
+					},
+					"hdr_pz": {
+						"show": [
+							[
+								"isEnvMap",
+								"$eq",
+								true
+							],
+							[
+								"envMapType",
+								"$eq",
+								"cube"
+							]
+						],
+						"name": "贴图地址 pz",
+						"type": "string",
+						"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/hdr/pisaHDR/pz.hdr"
+					},
+					"depthWrite": {
+						"name": "深度测试",
+						"type": "boolean",
+						"default": true
+					},
+					"isWireFrame": {
+						"name": "显示线框",
+						"type": "boolean",
+						"default": false
+					},
+					"opacity": {
+						"name": "透明度",
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"scaleX": {
+						"name": "X缩放",
+						"type": "number",
+						"range": [
+							0.001,
+							100
+						],
+						"step": 0.0001,
+						"default": 1
+					},
+					"scaleY": {
+						"name": "Y缩放",
+						"type": "number",
+						"range": [
+							0.001,
+							100
+						],
+						"step": 0.0001,
+						"default": 1
+					},
+					"scaleZ": {
+						"name": "Z缩放",
+						"type": "number",
+						"range": [
+							0.001,
+							100
+						],
+						"step": 0.0001,
+						"default": 1
+					}
+				}
+			},
+			"interactiveStyle": {
+				"fold": true,
+				"type": "group",
+				"name": "点击事件",
+				"children": {
+					"enableInteractive": {
+						"name": "点击",
+						"type": "boolean",
+						"default": false
+					},
+					"interactiveColor": {
+						"show": [
+							[
+								"enableInteractive",
+								"$eq",
+								true
+							]
+						],
+						"name": "颜色",
+						"type": "color",
+						"default": "RGBA(79, 240, 252, 0.2)"
+					}
+				}
+			},
+			"explosionEffect": {
+				"fold": true,
+				"type": "group",
+				"name": "爆炸效果",
+				"children": {
+					"isExplode": {
+						"name": "爆炸",
+						"type": "boolean",
+						"default": false
+					},
+					"explodeLevel": {
+						"show": [
+							[
+								"isExplode",
+								"$eq",
+								true
+							]
+						],
+						"name": "爆炸系数",
+						"type": "number",
+						"range": [
+							0,
+							100
+						],
+						"step": 0.01,
+						"default": 0
+					}
+				}
+			},
+			"clippingEffect": {
+				"fold": true,
+				"type": "group",
+				"name": "切割效果",
+				"children": {
+					"isCliped": {
+						"name": "切割",
+						"type": "boolean",
+						"default": false
+					},
+					"clipX": {
+						"show": [
+							[
+								"isCliped",
+								"$eq",
+								true
+							]
+						],
+						"name": "切割面X",
+						"type": "number",
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.01,
+						"default": 0
+					},
+					"clipY": {
+						"show": [
+							[
+								"isCliped",
+								"$eq",
+								true
+							]
+						],
+						"name": "切割面Y",
+						"type": "number",
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.01,
+						"default": -1
+					},
+					"clipZ": {
+						"show": [
+							[
+								"isCliped",
+								"$eq",
+								true
+							]
+						],
+						"name": "切割面Z",
+						"type": "number",
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.01,
+						"default": 0
+					},
+					"clipConstant": {
+						"show": [
+							[
+								"isCliped",
+								"$eq",
+								true
+							]
+						],
+						"name": "切割面高度",
+						"type": "number",
+						"range": [
+							-1000,
+							1000
+						],
+						"step": 0.01,
+						"default": 0
+					}
+				}
+			},
+			"position": {
+				"fold": true,
+				"type": "group",
+				"name": "位置配置",
+				"children": {
+					"offsetX": {
+						"name": "X轴坐标(经度)",
+						"type": "number",
+						"range": [
+							-20000,
+							20000
+						],
+						"step": 0.000001,
+						"default": 120.1746811289
+					},
+					"offsetY": {
+						"name": "Y轴坐标(纬度)",
+						"type": "number",
+						"range": [
+							-20000,
+							20000
+						],
+						"step": 0.000001,
+						"default": 30.25752775
+					},
+					"offsetZ": {
+						"name": "Z轴坐标(高度)",
+						"type": "number",
+						"range": [
+							-20000,
+							20000
+						],
+						"step": 0.000001,
+						"default": 0
+					},
+					"rotationX": {
+						"name": "X轴旋转",
+						"type": "number",
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.001,
+						"default": 0
+					},
+					"rotationY": {
+						"name": "Y轴旋转",
+						"type": "number",
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.001,
+						"default": 0
+					},
+					"rotationZ": {
+						"name": "Z轴旋转",
+						"type": "number",
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.001,
+						"default": 0
+					}
+				}
+			}
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"description": "模型层",
+				"fields": {
+					"modelUrl": {
+						"description": "模型地址"
+					},
+					"data": {
+						"description": "模型配置数据"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": {
+				"modelUrl": "",
+				"data": [
+					{
+						"type": "source",
+						"id": "Group1983825993",
+						"color": "#F78AE0",
+						"opacity": 0.9,
+						"visible": true
+					},
+					{
+						"type": "white",
+						"id": "Group1983825994",
+						"color": "#FFFD49",
+						"opacity": 0.7,
+						"visible": true
+					}
+				]
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1hpz6ACzqK1RjSZFpXXakSXXa-180-180.png"
+	}
+}

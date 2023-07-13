@@ -1,0 +1,337 @@
+{
+	"name": "line-with-dot",
+	"version": "1.0.9",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"dchart-line-with-point": "0.2.6",
+		"d3": "~3.5.6"
+	},
+	"datav": {
+		"cn_name": "折线拐点图",
+		"icon": {
+			"110x61": "",
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/273142ab3b989e1662c1fc91fab5df49.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/273142ab3b989e1662c1fc91fab5df49.png"
+		},
+		"protocol": 2,
+		"private": true,
+		"type": [
+			"regular_line"
+		],
+		"view": {
+			"width": "600",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "折线拐点图接口",
+				"fields": {
+					"x": {
+						"description": "类目"
+					},
+					"y": {
+						"description": "值"
+					},
+					"s": {
+						"description": "系列(可选)",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"chart": {
+				"type": "group",
+				"name": "图表样式",
+				"children": {
+					"distance": {
+						"type": "group",
+						"name": "边距",
+						"children": {
+							"top": {
+								"type": "number",
+								"name": "上边距",
+								"range": [
+									-500,
+									500
+								],
+								"default": 50
+							},
+							"bottom": {
+								"type": "number",
+								"name": "下边距",
+								"range": [
+									-500,
+									500
+								],
+								"default": 50
+							},
+							"left": {
+								"type": "number",
+								"name": "左边距",
+								"range": [
+									-500,
+									500
+								],
+								"default": 50
+							},
+							"right": {
+								"type": "number",
+								"name": "右边距",
+								"range": [
+									-500,
+									500
+								],
+								"default": 50
+							}
+						}
+					},
+					"xaxis": {
+						"name": "x轴样式",
+						"type": "group",
+						"children": {
+							"stroke-color": {
+								"type": "color",
+								"name": "线条色",
+								"default": "rgba(45, 123, 197, 1)"
+							},
+							"text-color": {
+								"type": "color",
+								"name": "文字色",
+								"default": "rgba(45, 123, 197, 1)"
+							},
+							"font-size": {
+								"type": "number",
+								"name": "文字大小",
+								"range": [
+									0,
+									100
+								],
+								"default": 12
+							},
+							"label": {
+								"type": "string",
+								"name": "标签",
+								"default": "xLabel"
+							},
+							"date-axis": {
+								"type": "group",
+								"name": "时间轴配置",
+								"children": {
+									"isDateAxis": {
+										"type": "boolean",
+										"name": "是否为时间轴",
+										"default": true
+									},
+									"min": {
+										"type": "string",
+										"name": "最小值,不需要则填 --",
+										"default": "--"
+									},
+									"max": {
+										"type": "string",
+										"name": "最大值,不需要则填 --",
+										"default": "--"
+									},
+									"dateTickFormat": {
+										"type": "string",
+										"name": "时间格式化,不需要则填 --",
+										"default": "%H"
+									}
+								}
+							}
+						}
+					},
+					"yaxis": {
+						"name": "y轴样式",
+						"type": "group",
+						"children": {
+							"stroke-color": {
+								"type": "color",
+								"name": "线条色",
+								"default": "rgba(45, 123, 197, 1)"
+							},
+							"text-color": {
+								"type": "color",
+								"name": "文字色",
+								"default": "rgba(45, 123, 197, 1)"
+							},
+							"font-size": {
+								"type": "number",
+								"name": "文字大小",
+								"range": [
+									0,
+									100
+								],
+								"default": 12
+							},
+							"min": {
+								"type": "string",
+								"name": "最小值，不需要则填 --",
+								"default": "--"
+							},
+							"max": {
+								"type": "string",
+								"name": "最大值，不需要则填 --",
+								"default": "--"
+							},
+							"label": {
+								"type": "string",
+								"name": "标签",
+								"default": "yLabel"
+							}
+						}
+					}
+				}
+			},
+			"default-serie": {
+				"name": "默认数据系列",
+				"type": "group",
+				"children": {
+					"stroke-color": {
+						"type": "color",
+						"name": "线条色",
+						"default": "rgba(44, 252, 248, 1)"
+					},
+					"stroke-width": {
+						"type": "number",
+						"name": "线条粗细",
+						"range": [
+							1,
+							10
+						],
+						"default": 2
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "数据系列",
+				"default": [
+					{
+						"value": "1",
+						"serie-name": "系列1",
+						"stroke-color": "rgba(247, 2, 63, 1)",
+						"stroke-width": 2
+					},
+					{
+						"value": "2",
+						"serie-name": "系列2",
+						"stroke-color": "rgba(44, 252, 248, 1)",
+						"stroke-width": 2
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "系列<%= i+ 1%>",
+					"child": {
+						"value": {
+							"type": "text",
+							"name": "系列值",
+							"default": "3"
+						},
+						"serie-name": {
+							"type": "text",
+							"name": "系列名",
+							"default": "系列3"
+						},
+						"stroke-color": {
+							"type": "color",
+							"name": "线条色",
+							"default": "rgba(44, 252, 248, 1)"
+						},
+						"stroke-width": {
+							"type": "number",
+							"name": "线条粗细",
+							"range": [
+								1,
+								10
+							],
+							"default": 2
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "2015/05/01 00:00:00",
+					"y": 10,
+					"s": "1"
+				},
+				{
+					"x": "2015/05/01 00:00:00",
+					"y": 10,
+					"s": "2"
+				},
+				{
+					"x": "2015/05/01 13:00:00",
+					"y": 100,
+					"s": "1"
+				},
+				{
+					"x": "2015/05/01 13:00:00",
+					"y": 50,
+					"s": "2"
+				},
+				{
+					"x": "2015/05/01 14:00:00",
+					"y": 150,
+					"s": "1"
+				},
+				{
+					"x": "2015/05/01 14:00:00",
+					"y": 180,
+					"s": "2"
+				},
+				{
+					"x": "2015/05/01 15:00:00",
+					"y": 170,
+					"s": "1"
+				},
+				{
+					"x": "2015/05/01 15:00:00",
+					"y": 180,
+					"s": "2"
+				},
+				{
+					"x": "2015/05/01 16:00:00",
+					"y": 280,
+					"s": "1"
+				},
+				{
+					"x": "2015/05/01 16:00:00",
+					"y": 290,
+					"s": "2"
+				},
+				{
+					"x": "2015/05/01 17:00:00",
+					"y": 290,
+					"s": "1"
+				},
+				{
+					"x": "2015/05/01 17:00:00",
+					"y": 300,
+					"s": "2"
+				},
+				{
+					"x": "2015/05/01 18:00:00",
+					"y": 380,
+					"s": "1"
+				},
+				{
+					"x": "2015/05/01 18:00:00",
+					"y": 400,
+					"s": "2"
+				}
+			]
+		}
+	}
+}

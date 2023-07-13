@@ -1,0 +1,666 @@
+{
+	"name": "pie",
+	"version": "4.1.13",
+	"dependencies": {
+		"bcore": "0.0.22",
+		"lodash": "4.17.11",
+		"datav-g2plot-adaptor": "1.1.22",
+		"datav-g2plot-util": "0.2.4",
+		"jquery": "2.1.4"
+	},
+	"datav": {
+		"cn_name": "环图",
+		"level": 0,
+		"supportTheme": true,
+		"icon": "//img.alicdn.com/tfs/TB1XbsWmGL7gK0jSZFBXXXZZpXa-368-208.png",
+		"protocol": 3,
+		"type": [
+			"regular_pie",
+			"DataV-6:regular_pie"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "环图接口",
+				"fields": {
+					"name": {
+						"description": "类目"
+					},
+					"value": {
+						"description": "值"
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"chart": {
+						"name": "图表",
+						"children": {
+							"renderer": {
+								"name": "渲染引擎",
+								"type": "select",
+								"default": "canvas",
+								"options": [
+									{
+										"name": "canvas",
+										"value": "canvas"
+									},
+									{
+										"name": "svg",
+										"value": "svg"
+									}
+								],
+								"showInPanel": {
+									"conditions": [
+										[
+											".配置项展示失效专用",
+											"$eq",
+											true
+										]
+									]
+								}
+							},
+							"margin": {
+								"type": "margin",
+								"name": "自定义边距",
+								"default": {
+									"top": 20,
+									"bottom": 0,
+									"left": 0,
+									"right": 0
+								},
+								"children": {
+									"show": {
+										"default": true
+									}
+								},
+								"enableHide": true
+							},
+							"pieStyle": {
+								"name": "饼图样式",
+								"type": "suite",
+								"children": {
+									"stroke": {
+										"name": "描边颜色",
+										"type": "fill",
+										"default": "#fff",
+										"col": 12
+									},
+									"lineWidth": {
+										"name": "描边粗细",
+										"type": "stepper",
+										"default": 0,
+										"step": 1,
+										"col": 12,
+										"suffix": "px"
+									}
+								}
+							},
+							"numericalLabel": {
+								"name": "值标签",
+								"type": "group",
+								"children": {
+									"show": {
+										"default": false
+									},
+									"position": {
+										"name": "位置",
+										"type": "select",
+										"default": "inner",
+										"options": [
+											{
+												"name": "内部",
+												"value": "inner"
+											},
+											{
+												"name": "外部",
+												"value": "outer"
+											},
+											{
+												"name": "蜘蛛布局",
+												"value": "spider"
+											}
+										]
+									},
+									"spiderStyle": {
+										"name": "引导线样式",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": true
+											},
+											"stroke": {
+												"name": "颜色",
+												"type": "color",
+												"default": "#ddd",
+												"col": 12
+											},
+											"lineWidth": {
+												"name": "宽度",
+												"type": "stepper",
+												"default": "1",
+												"suffix": "px",
+												"col": 12
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.chart.numericalLabel.position",
+													"$eq",
+													"spider"
+												]
+											]
+										}
+									},
+									"textStyle": {
+										"type": "font",
+										"name": "文本样式",
+										"default": {
+											"fontSize": 10,
+											"color": "#ddd",
+											"fontWeight": "normal",
+											"fontFamily": "Microsoft Yahei"
+										}
+									}
+								},
+								"enableHide": true
+							},
+							"statisticLabel": {
+								"name": "指标卡",
+								"type": "group",
+								"enableHide": true,
+								"description": "Tips:指标卡选项打开时，提示框无效",
+								"children": {
+									"show": {
+										"default": true
+									},
+									"triggerOn": {
+										"name": "触发方式",
+										"type": "iconRadio",
+										"default": "mouseenter",
+										"options": [
+											{
+												"value": "mouseenter",
+												"label": "悬浮",
+												"src": "hover"
+											},
+											{
+												"value": "mousedown",
+												"label": "点击",
+												"src": "click"
+											}
+										],
+										"col": 12
+									},
+									"labelStyle": {
+										"name": "标题样式",
+										"type": "font",
+										"default": {
+											"color": "#fff",
+											"fontWeight": 300,
+											"fontFamily": "Microsoft Yahei",
+											"fontSize": 12
+										}
+									},
+									"numStyle": {
+										"name": "数值样式",
+										"type": "font",
+										"default": {
+											"color": "#fff",
+											"fontWeight": "bolder",
+											"fontFamily": "Microsoft Yahei",
+											"fontSize": 18
+										}
+									}
+								}
+							},
+							"legend": {
+								"name": "图例",
+								"type": "group",
+								"fold": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"flipPage": {
+										"name": "允许翻页",
+										"type": "switch",
+										"default": true
+									},
+									"layout": {
+										"name": "布局",
+										"type": "suite",
+										"children": {
+											"loc": {
+												"name": "位置",
+												"type": "iconRadio",
+												"default": "top-right",
+												"options": [
+													{
+														"value": "top-left",
+														"src": "top-left",
+														"label": "顶部居左"
+													},
+													{
+														"value": "top-center",
+														"src": "top-center",
+														"label": "顶部居中"
+													},
+													{
+														"value": "top-right",
+														"src": "top-right",
+														"label": "顶部居右"
+													},
+													{
+														"value": "bottom-left",
+														"src": "bottom-left",
+														"label": "底部居左"
+													},
+													{
+														"value": "bottom-center",
+														"src": "bottom-center",
+														"label": "底部居中"
+													},
+													{
+														"value": "bottom-right",
+														"src": "bottom-right",
+														"label": "底部居右"
+													}
+												]
+											}
+										}
+									},
+									"marker": {
+										"name": "图例标记",
+										"type": "suite",
+										"children": {
+											"show": {
+												"default": true
+											},
+											"shape": {
+												"name": "图例形状",
+												"type": "select",
+												"default": "circle",
+												"options": [
+													{
+														"value": "hyphen",
+														"label": "连字符"
+													},
+													{
+														"name": "圆点",
+														"value": "circle"
+													},
+													{
+														"name": "方形",
+														"value": "square"
+													},
+													{
+														"name": "三角形",
+														"value": "triangle"
+													},
+													{
+														"value": "diamond",
+														"name": "菱形"
+													},
+													{
+														"value": "hexagon",
+														"label": "六角形"
+													},
+													{
+														"value": "bowtie",
+														"label": "蝶形"
+													},
+													{
+														"value": "cross",
+														"label": "交叉"
+													},
+													{
+														"value": "tick",
+														"label": "记号"
+													},
+													{
+														"value": "plus",
+														"label": "正号"
+													},
+													{
+														"value": "line",
+														"label": "竖线"
+													}
+												],
+												"col": 12
+											},
+											"size": {
+												"name": "图例大小",
+												"type": "stepper",
+												"default": 4,
+												"step": 1,
+												"suffix": "px",
+												"col": 12
+											}
+										}
+									},
+									"textStyle": {
+										"type": "font",
+										"name": "图例文本",
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontWeight": "normal",
+											"fontSize": 12,
+											"color": "rgb(144, 160, 174)"
+										}
+									}
+								},
+								"enableHide": true
+							}
+						},
+						"type": "menuChild",
+						"mode": "single"
+					},
+					"axis": {
+						"name": "坐标轴",
+						"type": "menuChild",
+						"mode": "multiple",
+						"children": {
+							"radiusAxis": {
+								"name": "径向轴",
+								"children": {
+									"innerRadius": {
+										"name": "内半径",
+										"type": "slider",
+										"default": 0.7,
+										"min": 0,
+										"max": 1,
+										"precision": 3,
+										"step": 0.001,
+										"suffix": "%"
+									},
+									"outerRadius": {
+										"name": "外半径",
+										"type": "slider",
+										"default": 0.85,
+										"min": 0,
+										"max": 1,
+										"precision": 3,
+										"step": 0.001,
+										"suffix": "%"
+									}
+								}
+							}
+						}
+					},
+					"series": {
+						"type": "menuChild",
+						"name": "系列",
+						"children": {
+							"series": {
+								"type": "tabs",
+								"name": "数据系列",
+								"default": [
+									{
+										"color": "#79daff",
+										"mapping": {
+											"fieldValue": "设备",
+											"serieName": "设备1"
+										}
+									},
+									{
+										"color": "#3dabff",
+										"mapping": {
+											"fieldValue": "建材",
+											"serieName": "建材1"
+										}
+									},
+									{
+										"color": "#0a73ff",
+										"mapping": {
+											"fieldValue": "食品",
+											"serieName": "食品1"
+										}
+									}
+								],
+								"template": {
+									"type": "object",
+									"name": "系列<%= i + 1%>",
+									"children": {
+										"mapping": {
+											"name": "映射字段",
+											"type": "suite",
+											"children": {
+												"fieldValue": {
+													"name": "name字段值",
+													"type": "text",
+													"default": "",
+													"col": 12
+												},
+												"serieName": {
+													"name": "显示名称",
+													"type": "text",
+													"default": "",
+													"col": 12
+												}
+											},
+											"showInPanel": {
+												"conditions": [
+													[
+														"...seriesMapping",
+														"$eq",
+														true
+													]
+												]
+											}
+										},
+										"color": {
+											"name": "颜色",
+											"type": "fill",
+											"default": "#342432"
+										}
+									}
+								}
+							},
+							"seriesMapping": {
+								"name": "类型映射",
+								"type": "switch",
+								"default": false,
+								"description": "通过映射字段设置特定类型的颜色"
+							}
+						}
+					},
+					"others": {
+						"name": "其它",
+						"children": {
+							"tooltip": {
+								"name": "提示框",
+								"type": "group",
+								"fold": true,
+								"description": "Tips:指标卡选项打开时，提示框无效",
+								"children": {
+									"show": {
+										"default": false
+									},
+									"textStyle": {
+										"name": "文本样式",
+										"type": "font",
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontWeight": "normal",
+											"fontSize": 14,
+											"color": "#fff"
+										},
+										"children": {
+											"show": {
+												"default": false
+											}
+										},
+										"enableHide": true
+									},
+									"textStyleList": {
+										"name": "文本样式",
+										"type": "font",
+										"show": false,
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontWeight": "normal",
+											"fontSize": 14,
+											"color": "#fff"
+										}
+									},
+									"textStyleValue": {
+										"name": "文本样式",
+										"type": "font",
+										"show": false,
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontWeight": "normal",
+											"fontSize": 14,
+											"color": "#fff"
+										}
+									},
+									"bgBox": {
+										"name": "背景框样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "fill",
+												"default": "rgba(0, 0, 0, 0.65)"
+											},
+											"padding": {
+												"name": "内边距",
+												"type": "stepper",
+												"default": 10,
+												"step": 1,
+												"suffix": "px"
+											},
+											"border": {
+												"type": "suite",
+												"name": "边框",
+												"children": {
+													"borderWidth": {
+														"name": "边框粗细",
+														"type": "stepper",
+														"step": 1,
+														"default": 0,
+														"col": 12,
+														"suffix": "px"
+													},
+													"borderColor": {
+														"name": "边框颜色",
+														"type": "fill",
+														"default": "#333",
+														"col": 12
+													}
+												}
+											}
+										}
+									}
+								},
+								"enableHide": true
+							}
+						},
+						"type": "menuChild",
+						"mode": "single"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "设备",
+					"value": 12
+				},
+				{
+					"name": "建材",
+					"value": 22
+				},
+				{
+					"name": "食品",
+					"value": 20
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "30",
+			"minHeight": "20",
+			"z-index": 1010
+		},
+		"publicHandler": {
+			"highlight": {
+				"name": "高亮",
+				"fields": {
+					"data": {
+						"name": "数据",
+						"description": "需要高亮的数据项，如{name: '内蒙古'}",
+						"type": "object"
+					},
+					"style": {
+						"name": "样式",
+						"type": "object",
+						"optional": true,
+						"description": "高亮样式，如：fillStyle、stroke、opacity等",
+						"children": {
+							"fillStyle": {
+								"name": "填充色",
+								"type": "string",
+								"default": "#f00",
+								"optional": true
+							}
+						}
+					}
+				},
+				"type": "object"
+			},
+			"cancelHighlight": {
+				"name": "取消高亮"
+			}
+		},
+		"events": {
+			"click": {
+				"name": "当点击数据项时",
+				"type": "object",
+				"description": "当点击数据项时",
+				"fields": {
+					"name": {
+						"type": "string | number",
+						"name": "类目",
+						"optional": true,
+						"description": "当前分类值"
+					},
+					"value": {
+						"type": "number",
+						"name": "数值",
+						"optional": true,
+						"description": "数值"
+					}
+				}
+			},
+			"onLegendClick": {
+				"name": "当点击图例时",
+				"type": "object",
+				"description": "当点击图例时",
+				"fields": {
+					"value": {
+						"type": "string",
+						"name": "选中系列值",
+						"optional": true,
+						"description": "选中系列值"
+					},
+					"checked": {
+						"type": "boolean",
+						"name": "选中状态",
+						"optional": true,
+						"description": "选中状态"
+					}
+				}
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1VDc4mUY1gK0jSZFCXXcwqXXa-160-116.png"
+	}
+}

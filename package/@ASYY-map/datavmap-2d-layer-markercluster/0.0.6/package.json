@@ -1,0 +1,648 @@
+{
+	"name": "datavmap-2d-layer-markercluster",
+	"version": "0.0.6",
+	"description": "基于datav-map的点聚合组件",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-2d-layer-markercluster.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "点聚合",
+		"level": 0,
+		"icon": "https://img.alicdn.com/tfs/TB1Rq6ZAwTqK1RjSZPhXXXfOFXa-180-180.png",
+		"protocol": 2,
+		"type": [
+			"datavmap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavmap"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"events": {
+			"markercluster-map-click": {
+				"description": "点被点击触发",
+				"fields": {
+					"id": {
+						"description": "编号"
+					},
+					"value": {
+						"description": "值"
+					}
+				}
+			}
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "散点数据接口",
+				"fields": {
+					"id": {
+						"description": "编号",
+						"optional": true
+					},
+					"lng": {
+						"description": "经度"
+					},
+					"lat": {
+						"description": "纬度"
+					},
+					"value": {
+						"description": "用于数据映射,可不填",
+						"optional": true
+					},
+					"info": {
+						"description": "浮层内容",
+						"optional": true
+					},
+					"iconUrl": {
+						"description": "自定义图标的地址",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"icon": {
+				"type": "group",
+				"name": "图标配置",
+				"fold": false,
+				"children": {
+					"size": {
+						"type": "number",
+						"name": "图标大小",
+						"default": 40,
+						"step": 1,
+						"range": [
+							0,
+							400
+						]
+					},
+					"iconUrl": {
+						"type": "image",
+						"name": "图标图片",
+						"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/c63f68415294721030bf248bb156e47f.gif"
+					}
+				}
+			},
+			"circle": {
+				"type": "group",
+				"name": "圆圈配置",
+				"fold": false,
+				"children": {
+					"radius": {
+						"type": "number",
+						"name": "内圆半径",
+						"default": 20,
+						"step": 1,
+						"range": [
+							0,
+							100
+						]
+					},
+					"color": {
+						"name": "内圈颜色",
+						"type": "color",
+						"default": "RGBA(45,203,18,0.65)"
+					},
+					"outRadius": {
+						"type": "number",
+						"name": "外圆半径",
+						"default": 30,
+						"step": 1,
+						"range": [
+							0,
+							100
+						]
+					},
+					"outColor": {
+						"name": "外圆颜色",
+						"type": "color",
+						"default": "RGBA(45,203,18,0.2)"
+					}
+				}
+			},
+			"popupStyle": {
+				"type": "group",
+				"name": "弹框样式",
+				"children": {
+					"fontSize": {
+						"name": "字号",
+						"type": "number",
+						"default": 14,
+						"range": [
+							10,
+							100
+						]
+					},
+					"color": {
+						"type": "color",
+						"name": "字体颜色",
+						"default": "#FFFFFF"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "search",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						]
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"id": 0,
+					"lng": 102.2212,
+					"lat": 31.8998,
+					"value": 8,
+					"info": "描述信息0"
+				},
+				{
+					"id": 1,
+					"lng": 120.079,
+					"lat": 28.6542,
+					"value": 21,
+					"info": "描述信息1"
+				},
+				{
+					"id": 2,
+					"lng": 114.207,
+					"lat": 24.0554,
+					"value": 4,
+					"info": "描述信息2"
+				},
+				{
+					"id": 3,
+					"lng": 122.5059,
+					"lat": 40.634,
+					"value": 13,
+					"info": "描述信息3"
+				},
+				{
+					"id": 4,
+					"lng": 114.3073,
+					"lat": 25.6879,
+					"value": 9,
+					"info": "描述信息4"
+				},
+				{
+					"id": 5,
+					"lng": 110.6911,
+					"lat": 34.6948,
+					"value": 14,
+					"info": "描述信息5"
+				},
+				{
+					"id": 6,
+					"lng": 117.3409,
+					"lat": 23.9505,
+					"value": 20,
+					"info": "描述信息6"
+				},
+				{
+					"id": 7,
+					"lng": 110.2144,
+					"lat": 28.2145,
+					"value": 19,
+					"info": "描述信息7"
+				},
+				{
+					"id": 8,
+					"lng": 116.2584,
+					"lat": 37.6866,
+					"value": 19,
+					"info": "描述信息8"
+				},
+				{
+					"id": 9,
+					"lng": 111.6456,
+					"lat": 29.4432,
+					"value": 19,
+					"info": "描述信息9"
+				},
+				{
+					"id": 10,
+					"lng": 87.6177,
+					"lat": 43.7928,
+					"value": 9,
+					"info": "描述信息10"
+				},
+				{
+					"id": 11,
+					"lng": 119.0305,
+					"lat": 33.5807,
+					"value": 6,
+					"info": "描述信息11"
+				},
+				{
+					"id": 12,
+					"lng": 118.1108,
+					"lat": 39.563,
+					"value": 21,
+					"info": "描述信息12"
+				},
+				{
+					"id": 13,
+					"lng": 114.0101,
+					"lat": 41.8993,
+					"value": 13,
+					"info": "描述信息13"
+				},
+				{
+					"id": 14,
+					"lng": 114.0812,
+					"lat": 30.3096,
+					"value": 8,
+					"info": "描述信息14"
+				},
+				{
+					"id": 15,
+					"lng": 113.3014,
+					"lat": 40.0905,
+					"value": 29,
+					"info": "描述信息15"
+				},
+				{
+					"id": 16,
+					"lng": 102.5089,
+					"lat": 28.6396,
+					"value": 25,
+					"info": "描述信息16"
+				},
+				{
+					"id": 17,
+					"lng": 114.4932,
+					"lat": 29.6045,
+					"value": 7,
+					"info": "描述信息17"
+				},
+				{
+					"id": 18,
+					"lng": 112.1723,
+					"lat": 29.4145,
+					"value": 23,
+					"info": "描述信息18"
+				},
+				{
+					"id": 19,
+					"lng": 110.365,
+					"lat": 21.2749,
+					"value": 20,
+					"info": "描述信息19"
+				},
+				{
+					"id": 20,
+					"lng": 115.0327,
+					"lat": 24.7743,
+					"value": 10,
+					"info": "描述信息20"
+				},
+				{
+					"id": 21,
+					"lng": 130.2362,
+					"lat": 47.2529,
+					"value": 5,
+					"info": "描述信息21"
+				},
+				{
+					"id": 22,
+					"lng": 100.233,
+					"lat": 26.8721,
+					"value": 24,
+					"info": "描述信息22"
+				},
+				{
+					"id": 23,
+					"lng": 118.2489,
+					"lat": 37.4934,
+					"value": 29,
+					"info": "描述信息23"
+				},
+				{
+					"id": 24,
+					"lng": 113.8238,
+					"lat": 36.0634,
+					"value": 5,
+					"info": "描述信息24"
+				},
+				{
+					"id": 25,
+					"lng": 104.2002,
+					"lat": 31.3431,
+					"value": 11,
+					"info": "描述信息25"
+				},
+				{
+					"id": 26,
+					"lng": 113.1635,
+					"lat": 40.4375,
+					"value": 14,
+					"info": "描述信息26"
+				},
+				{
+					"id": 27,
+					"lng": 90.2127,
+					"lat": 42.8655,
+					"value": 4,
+					"info": "描述信息27"
+				},
+				{
+					"id": 28,
+					"lng": 129.3114,
+					"lat": 47.4794,
+					"value": 29,
+					"info": "描述信息28"
+				},
+				{
+					"id": 29,
+					"lng": 104.6308,
+					"lat": 28.7602,
+					"value": 8,
+					"info": "描述信息29"
+				},
+				{
+					"id": 30,
+					"lng": 119.9065,
+					"lat": 42.287,
+					"value": 23,
+					"info": "描述信息30"
+				},
+				{
+					"id": 31,
+					"lng": 122.302,
+					"lat": 29.9456,
+					"value": 23,
+					"info": "描述信息31"
+				},
+				{
+					"id": 32,
+					"lng": 124.0456,
+					"lat": 42.5421,
+					"value": 5,
+					"info": "描述信息32"
+				},
+				{
+					"id": 33,
+					"lng": 107.5135,
+					"lat": 26.7025,
+					"value": 18,
+					"info": "描述信息33"
+				},
+				{
+					"id": 34,
+					"lng": 107.7223,
+					"lat": 31.355,
+					"value": 28,
+					"info": "描述信息34"
+				},
+				{
+					"id": 35,
+					"lng": 117.3632,
+					"lat": 32.9397,
+					"value": 26,
+					"info": "描述信息35"
+				},
+				{
+					"id": 36,
+					"lng": 124.383,
+					"lat": 40.1243,
+					"value": 16,
+					"info": "描述信息36"
+				},
+				{
+					"id": 37,
+					"lng": 117.5625,
+					"lat": 32.8671,
+					"value": 29,
+					"info": "描述信息37"
+				},
+				{
+					"id": 38,
+					"lng": 108.9266,
+					"lat": 34.2134,
+					"value": 26,
+					"info": "描述信息38"
+				},
+				{
+					"id": 39,
+					"lng": 104.7417,
+					"lat": 31.464,
+					"value": 27,
+					"info": "描述信息39"
+				},
+				{
+					"id": 40,
+					"lng": 99.1671,
+					"lat": 25.1118,
+					"value": 4,
+					"info": "描述信息40"
+				},
+				{
+					"id": 41,
+					"lng": 116.7228,
+					"lat": 32.7054,
+					"value": 5,
+					"info": "描述信息41"
+				},
+				{
+					"id": 42,
+					"lng": 113.0501,
+					"lat": 36.5329,
+					"value": 10,
+					"info": "描述信息42"
+				},
+				{
+					"id": 43,
+					"lng": 111.6263,
+					"lat": 26.2233,
+					"value": 24,
+					"info": "描述信息43"
+				},
+				{
+					"id": 44,
+					"lng": 119.421,
+					"lat": 32.3932,
+					"value": 24,
+					"info": "描述信息44"
+				},
+				{
+					"id": 45,
+					"lng": 113.259,
+					"lat": 38.7257,
+					"value": 21,
+					"info": "描述信息45"
+				},
+				{
+					"id": 46,
+					"lng": 104.1944,
+					"lat": 24.041,
+					"value": 17,
+					"info": "描述信息46"
+				},
+				{
+					"id": 47,
+					"lng": 114.6845,
+					"lat": 37.13,
+					"value": 10,
+					"info": "描述信息47"
+				},
+				{
+					"id": 48,
+					"lng": 103.3896,
+					"lat": 35.6638,
+					"value": 11,
+					"info": "描述信息48"
+				},
+				{
+					"id": 49,
+					"lng": 112.2514,
+					"lat": 36.146,
+					"value": 5,
+					"info": "描述信息49"
+				},
+				{
+					"id": 50,
+					"lng": 130.3618,
+					"lat": 46.8096,
+					"value": 25,
+					"info": "描述信息50"
+				},
+				{
+					"id": 51,
+					"lng": 108.4491,
+					"lat": 22.1328,
+					"value": 19,
+					"info": "描述信息51"
+				},
+				{
+					"id": 52,
+					"lng": 94.6928,
+					"lat": 43.252,
+					"value": 1,
+					"info": "描述信息52"
+				},
+				{
+					"id": 53,
+					"lng": 107.7966,
+					"lat": 34.6777,
+					"value": 4,
+					"info": "描述信息53"
+				},
+				{
+					"id": 54,
+					"lng": 117.0215,
+					"lat": 30.0966,
+					"value": 28,
+					"info": "描述信息54"
+				},
+				{
+					"id": 55,
+					"lng": 89.525,
+					"lat": 46.9931,
+					"value": 20,
+					"info": "描述信息55"
+				},
+				{
+					"id": 56,
+					"lng": 113.4713,
+					"lat": 34.1544,
+					"value": 6,
+					"info": "描述信息56"
+				},
+				{
+					"id": 57,
+					"lng": 117.4207,
+					"lat": 25.2916,
+					"value": 25,
+					"info": "描述信息57"
+				},
+				{
+					"id": 58,
+					"lng": 104.0557,
+					"lat": 30.6676,
+					"value": 14,
+					"info": "描述信息58"
+				},
+				{
+					"id": 59,
+					"lng": 129.4359,
+					"lat": 47.413,
+					"value": 26,
+					"info": "描述信息59"
+				}
+			]
+		}
+	}
+}

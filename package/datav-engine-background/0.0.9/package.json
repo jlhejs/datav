@@ -1,0 +1,190 @@
+{
+	"name": "datav-engine-background",
+	"version": "0.0.9",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "背景层",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"width": {
+				"name": "宽度",
+				"type": "number",
+				"range": [
+					10,
+					10000
+				],
+				"step": 0.01,
+				"default": 400
+			},
+			"height": {
+				"name": "长度",
+				"type": "number",
+				"range": [
+					10,
+					10000
+				],
+				"step": 0.01,
+				"default": 400
+			},
+			"textureUrl": {
+				"type": "image",
+				"name": "自定义贴图",
+				"default": "https://img.alicdn.com/tfs/TB1qKnZGuuSBuNjy1XcXXcYjFXa-2546-2546.png"
+			},
+			"color": {
+				"name": "颜色",
+				"type": "color",
+				"default": "rgba(0,255,0,1)"
+			},
+			"repeatX": {
+				"name": "S轴重复",
+				"type": "number",
+				"default": 1,
+				"range": [
+					1,
+					100
+				],
+				"step": 1
+			},
+			"repeatY": {
+				"name": "T轴重复",
+				"type": "number",
+				"default": 1,
+				"range": [
+					1,
+					100
+				],
+				"step": 1
+			},
+			"offsetX": {
+				"name": "X轴坐标(经度)",
+				"type": "number",
+				"range": [
+					-20000,
+					20000
+				],
+				"step": 0.000001,
+				"default": 120.17468112895
+			},
+			"offsetY": {
+				"name": "Y轴坐标(纬度)",
+				"type": "number",
+				"range": [
+					-20000,
+					20000
+				],
+				"step": 0.000001,
+				"default": 30.25752775
+			},
+			"offsetZ": {
+				"name": "Z轴坐标(高度)",
+				"type": "number",
+				"range": [
+					-20000,
+					20000
+				],
+				"step": 0.000001,
+				"default": 0
+			},
+			"rotationX": {
+				"name": "X轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.001,
+				"default": -0.5
+			},
+			"rotationY": {
+				"name": "Y轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.001,
+				"default": 0
+			},
+			"rotationZ": {
+				"name": "Z轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.001,
+				"default": -0.5
+			}
+		},
+		"api_data": {},
+		"apis": {},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB15D2TAzDpK1RjSZFrXXa78VXa-180-180.png"
+	}
+}

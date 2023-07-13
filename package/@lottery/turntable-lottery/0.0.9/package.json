@@ -1,0 +1,310 @@
+{
+	"name": "@lottery/turntable-lottery",
+	"version": "0.0.9",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "转盘抽奖",
+		"icon": "//img.alicdn.com/imgextra/i1/O1CN01iszfI226GscVlimpO_!!6000000007635-2-tps-368-208.png",
+		"thumbnail": "//img.alicdn.com/imgextra/i1/O1CN01MBOFTA1EjHw2RkcPV_!!6000000000387-2-tps-332-144.png",
+		"level": 0,
+		"protocol": 2,
+		"type": [
+			"decorate",
+			"DataV-6:info"
+		],
+		"view": {
+			"width": "480",
+			"height": "480",
+			"minWidth": "100",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"name": {
+						"description": "奖品名称"
+					},
+					"imgSrc": {
+						"description": "奖品图片"
+					}
+				}
+			}
+		},
+		"config": {
+			"time": {
+				"name": "转动时间",
+				"type": "stepper",
+				"default": 2000,
+				"suffix": "ms",
+				"step": 1
+			},
+			"turns": {
+				"name": "转动圈数",
+				"type": "stepper",
+				"default": 10,
+				"suffix": "圈",
+				"step": 1,
+				"description": "在转动时间内，转动的圈数设置"
+			},
+			"button": {
+				"name": "按钮",
+				"type": "group",
+				"children": {
+					"buttonSize": {
+						"name": "按钮尺寸",
+						"type": "suite",
+						"children": {
+							"width": {
+								"name": "宽",
+								"type": "stepper",
+								"default": 42,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							},
+							"height": {
+								"name": "高",
+								"type": "stepper",
+								"default": 74,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							}
+						}
+					},
+					"verticalSpace": {
+						"name": "垂直间距",
+						"type": "stepper",
+						"default": -16,
+						"step": 1,
+						"suffix": "px"
+					},
+					"buttonImg": {
+						"name": "按钮图片",
+						"type": "image",
+						"default": "https://img.alicdn.com/imgextra/i2/O1CN01XWlEd61tNfTxg2RX3_!!6000000005890-2-tps-78-142.png"
+					}
+				}
+			},
+			"turntable": {
+				"name": "转盘",
+				"type": "group",
+				"children": {
+					"textStyle": {
+						"name": "文本样式",
+						"type": "font",
+						"default": {
+							"fontFamily": "Arial",
+							"fontWeight": "normal",
+							"fontSize": 20,
+							"color": "#ffffff"
+						}
+					},
+					"textSpace": {
+						"name": "文本间距",
+						"type": "stepper",
+						"default": 50,
+						"step": 1,
+						"suffix": "px"
+					},
+					"lineHeight": {
+						"name": "行高",
+						"type": "stepper",
+						"default": 30,
+						"step": 1,
+						"suffix": "px",
+						"description": "当文字换行时的行高"
+					},
+					"textWrapNum": {
+						"name": "折行字数",
+						"type": "stepper",
+						"default": 6,
+						"step": 1,
+						"suffix": "个",
+						"description": "当文字个数大于设置值时，折行处理"
+					},
+					"colors": {
+						"type": "tabs",
+						"name": "扇形颜色",
+						"default": [
+							{
+								"color": "#0a73ff"
+							},
+							{
+								"color": "#3dabff"
+							},
+							{
+								"color": "#0a73ff"
+							},
+							{
+								"color": "#3dabff"
+							},
+							{
+								"color": "#0a73ff"
+							},
+							{
+								"color": "#3dabff"
+							},
+							{
+								"color": "#0a73ff"
+							},
+							{
+								"color": "#3dabff"
+							}
+						],
+						"template": {
+							"type": "object",
+							"name": "颜色<%= i + 1%>",
+							"children": {
+								"color": {
+									"name": "颜色",
+									"type": "fill",
+									"default": "#0a73ff"
+								}
+							}
+						}
+					},
+					"isShowImg": {
+						"name": "奖品图片是否显示",
+						"type": "switch",
+						"default": false
+					},
+					"imgSize": {
+						"name": "图片尺寸",
+						"type": "suite",
+						"children": {
+							"width": {
+								"name": "宽",
+								"type": "stepper",
+								"default": 30,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							},
+							"height": {
+								"name": "高",
+								"type": "stepper",
+								"default": 30,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							}
+						},
+						"showInPanel": {
+							"conditions": [
+								[
+									".isShowImg",
+									"$eq",
+									true
+								]
+							]
+						}
+					},
+					"imgSpace": {
+						"name": "图片间距",
+						"type": "suite",
+						"children": {
+							"level": {
+								"name": "水平间距",
+								"type": "stepper",
+								"default": 16,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							},
+							"vertical": {
+								"name": "垂直间距",
+								"type": "stepper",
+								"default": 24,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							}
+						},
+						"showInPanel": {
+							"conditions": [
+								[
+									".isShowImg",
+									"$eq",
+									true
+								]
+							]
+						}
+					},
+					"strokeStyle": {
+						"name": "描边颜色",
+						"type": "fill",
+						"default": "transparent"
+					},
+					"turntableImg": {
+						"name": "背景图",
+						"type": "image",
+						"default": "https://img.alicdn.com/tfs/TB1Y9ZDtAL0gK0jSZFxXXXWHVXa-200-200.svg"
+					}
+				}
+			}
+		},
+		"events": {
+			"handleClick": {
+				"description": "当点击抽奖时",
+				"fields": {
+					"name": {
+						"description": "奖品名称",
+						"type": "string"
+					},
+					"imgSrc": {
+						"description": "奖品图片",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"startTurning": {
+				"name": "开始转动"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "一等奖",
+					"imgSrc": "http://game.gtimg.cn/images/js/delottery/g.png"
+				},
+				{
+					"name": "10猫币",
+					"imgSrc": "https://img.alicdn.com/imgextra/i2/O1CN01QVOfqd1C0Hml6lhWM_!!6000000000018-2-tps-32-32.png"
+				},
+				{
+					"name": "谢谢参与",
+					"imgSrc": "https://img.alicdn.com/imgextra/i3/O1CN013OguHS1mo2z9IB8c5_!!6000000005000-2-tps-1023-1023.png"
+				},
+				{
+					"name": "5猫币",
+					"imgSrc": "https://img.alicdn.com/tfs/TB1Z21fzrr1gK0jSZFDXXb9yVXa-42-34.png"
+				},
+				{
+					"name": "10元免费流量包",
+					"imgSrc": "https://img.alicdn.com/tfs/TB1vifRrO_1gK0jSZFqXXcpaXXa-200-200.svg"
+				},
+				{
+					"name": "20元免费流量包",
+					"imgSrc": "https://img.alicdn.com/tfs/TB1IbDPrUT1gK0jSZFrXXcNCXXa-200-200.svg"
+				},
+				{
+					"name": "20猫币",
+					"imgSrc": "https://img.alicdn.com/tfs/TB1tfzSrNv1gK0jSZFFXXb0sXXa-200-200.svg"
+				},
+				{
+					"name": "30元免费流量包",
+					"imgSrc": "https://img.alicdn.com/tfs/TB1R1zRrQL0gK0jSZFxXXXWHVXa-281-200.svg"
+				}
+			]
+		}
+	}
+}

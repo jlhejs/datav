@@ -1,0 +1,1154 @@
+{
+	"name": "carousel-table",
+	"version": "1.8.8",
+	"dependencies": {
+		"alibabacloud-datav-tool-gui-utils": "1.0.2",
+		"animejs": "3.1.0",
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "轮播列表",
+		"icon": "//img.alicdn.com/tfs/TB12GDqlKL2gK0jSZFmXXc7iXXa-370-208.png",
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"text_table",
+			"DataV-6:table"
+		],
+		"view": {
+			"width": "300",
+			"height": "182",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {}
+			}
+		},
+		"config": {
+			"global": {
+				"type": "group",
+				"name": "全局",
+				"children": {
+					"rowCount": {
+						"type": "number",
+						"name": "表格行数",
+						"default": 5,
+						"step": 1,
+						"min": 1,
+						"max": 50
+					},
+					"isLoop": {
+						"type": "boolean",
+						"name": "是否轮播",
+						"default": true
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "arial",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"animation": {
+						"type": "group",
+						"name": "动画",
+						"children": {
+							"mode": {
+								"type": "select",
+								"name": "动画模式",
+								"default": "bottom",
+								"options": [
+									{
+										"name": "全部滚动",
+										"value": "top"
+									},
+									{
+										"name": "逐条滚动",
+										"value": "bottom"
+									}
+								]
+							},
+							"duration": {
+								"type": "number",
+								"name": "轮播间隔(秒)",
+								"default": 2,
+								"step": 1,
+								"min": 1,
+								"max": 3600
+							},
+							"singleStop": {
+								"name": "单页不轮播",
+								"type": "boolean",
+								"default": true
+							}
+						},
+						"show": [
+							[
+								"isLoop",
+								"$eq",
+								true
+							]
+						]
+					},
+					"highLight": {
+						"type": "group",
+						"name": "高亮",
+						"children": {
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": false
+							},
+							"isOrder": {
+								"name": "自动依次高亮",
+								"type": "boolean",
+								"default": true,
+								"description": "关闭时，可指定高亮行",
+								"showInPanel": [
+									[
+										"global.animation.mode",
+										"$eq",
+										"bottom"
+									]
+								]
+							},
+							"hightLightIndex": {
+								"name": "指定高亮序列号",
+								"type": "text",
+								"default": "3,4",
+								"showInPanel": {
+									"conditions": [
+										[
+											"global.highLight.isOrder",
+											"$eq",
+											false
+										],
+										[
+											"global.animation.mode",
+											"$eq",
+											"bottom"
+										]
+									],
+									"logicalType": "$and"
+								}
+							},
+							"hightLightStyle": {
+								"type": "group",
+								"name": "高亮样式",
+								"children": {
+									"textStyle": {
+										"name": "文本样式",
+										"type": "suite",
+										"children": {
+											"fontFamily": {
+												"name": "字体",
+												"type": "search",
+												"default": "arial",
+												"col": 12,
+												"range": [
+													{
+														"微软雅黑": "Microsoft Yahei"
+													},
+													{
+														"宋体": "SimSun"
+													},
+													{
+														"黑体": "SimHei"
+													},
+													{
+														"隶书": "LiSu"
+													},
+													{
+														"幼圆": "YouYuan"
+													},
+													"tahoma",
+													"arial",
+													"sans-serif"
+												],
+												"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+											},
+											"fontSize": {
+												"type": "number",
+												"name": "字号",
+												"default": 12,
+												"col": 12,
+												"step": 1
+											},
+											"color": {
+												"name": "颜色",
+												"type": "fill",
+												"components": [
+													"flat",
+													"linearGradient"
+												],
+												"default": "#fff",
+												"col": 12
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": "normal",
+												"searches": [
+													"normal",
+													"bold",
+													"bolder",
+													"lighter",
+													100,
+													200,
+													300,
+													400,
+													500,
+													600,
+													700,
+													800,
+													900
+												],
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												],
+												"col": 12
+											}
+										}
+									},
+									"backgroundColor": {
+										"name": "背景色",
+										"type": "fill",
+										"components": [
+											"flat",
+											"linearGradient"
+										],
+										"default": "yellowGreen"
+									},
+									"border": {
+										"name": "边框",
+										"type": "suite",
+										"description": "边框颜色为渐变色时, 边框类型失效",
+										"children": {
+											"borderWidth": {
+												"name": "粗细",
+												"type": "stepper",
+												"min": 0,
+												"step": 1,
+												"suffix": "px",
+												"default": 1,
+												"col": 12
+											},
+											"borderStyle": {
+												"name": "类型",
+												"type": "select",
+												"default": "solid",
+												"col": 12,
+												"options": [
+													{
+														"name": "实线",
+														"value": "solid"
+													},
+													{
+														"name": "虚线",
+														"value": "dashed"
+													},
+													{
+														"name": "点线",
+														"value": "dotted"
+													},
+													{
+														"name": "双实线",
+														"value": "double"
+													},
+													{
+														"name": "雕刻效果",
+														"value": "groove"
+													},
+													{
+														"name": "浮雕效果",
+														"value": "ridge"
+													},
+													{
+														"name": "陷入效果",
+														"value": "inset"
+													},
+													{
+														"name": "突出效果",
+														"value": "outset"
+													}
+												]
+											},
+											"borderColor": {
+												"name": "颜色",
+												"type": "fill",
+												"components": [
+													"flat",
+													"linearGradient"
+												],
+												"default": "#f00"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"ifRowHidden": {
+						"type": "boolean",
+						"name": "空值隐藏行",
+						"default": true
+					},
+					"textAnimate": {
+						"name": "溢出文本滚动",
+						"type": "group",
+						"children": {
+							"ifRun": {
+								"name": "是否滚动",
+								"type": "boolean",
+								"default": true
+							},
+							"isSpeed": {
+								"name": "匀速滚动",
+								"type": "boolean",
+								"default": true
+							},
+							"animateDur": {
+								"name": "滚动时间(秒)",
+								"type": "number",
+								"default": 2,
+								"suffix": "s",
+								"showInPanel": {
+									"conditions": [
+										[
+											".isSpeed",
+											"$eq",
+											false
+										]
+									]
+								}
+							},
+							"speedRate": {
+								"name": "速率",
+								"type": "number",
+								"default": 0.03,
+								"step": 0.01,
+								"suffix": "px/s",
+								"showInPanel": {
+									"conditions": [
+										[
+											".isSpeed",
+											"$eq",
+											true
+										]
+									]
+								}
+							}
+						}
+					},
+					"ifUpdateImd": {
+						"name": "即刻更新",
+						"type": "boolean",
+						"default": true,
+						"description": "当数据更新时是否立即更新视图渲染，若未勾选，视图将在下次轮播时更新。"
+					},
+					"defaultImg": {
+						"name": "默认图片",
+						"type": "text",
+						"default": "https://img.alicdn.com/tfs/TB1Bk0IhbGYBuNjy0FoXXciBFXa-99-65.png",
+						"description": "自定义列, 内容类型为图片时 - 非真实图片地址, 用于显示的默认图片"
+					}
+				}
+			},
+			"header": {
+				"type": "group",
+				"name": "表头",
+				"children": {
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": true
+					},
+					"heightPercent": {
+						"type": "number",
+						"name": "表头行高(%)",
+						"default": 20,
+						"step": 1,
+						"range": [
+							0,
+							100
+						],
+						"min": 0,
+						"max": 100,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						]
+					},
+					"backgroundColor": {
+						"type": "color",
+						"name": "背景颜色",
+						"default": "rgb(10, 115, 255)",
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						]
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"children": {
+							"textAlign": {
+								"name": "文本对齐",
+								"type": "select",
+								"default": "left",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "left"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									},
+									{
+										"name": "右对齐",
+										"value": "right"
+									}
+								]
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "arial",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#ffffff"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									0,
+									200
+								],
+								"default": 12,
+								"min": 0,
+								"max": 50,
+								"step": 1
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								],
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						},
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						]
+					}
+				}
+			},
+			"row": {
+				"name": "行配置",
+				"type": "group",
+				"children": {
+					"backgroundColor1": {
+						"name": "奇行背景色",
+						"type": "color",
+						"default": "rgb(10, 115, 255)"
+					},
+					"backgroundColor2": {
+						"name": "偶行背景色",
+						"type": "color",
+						"default": "rgb(36, 130, 255)"
+					},
+					"callbackId": {
+						"name": "回调字段",
+						"type": "string",
+						"default": "area",
+						"description": "回调ID新版已改到交互面板中，样式面板交互功能将弃用，请尽快升级。"
+					}
+				}
+			},
+			"idList": {
+				"type": "group",
+				"name": "序号列",
+				"children": {
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": true
+					},
+					"backgroundColor": {
+						"type": "color",
+						"name": "背景颜色",
+						"default": "rgb(44, 156, 255)",
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						]
+					},
+					"width": {
+						"name": "列宽占比(%)",
+						"type": "number",
+						"range": [
+							0,
+							100
+						],
+						"default": 12,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"suffix": "%",
+						"description": "所有列宽占比总和为100%（ 超出则会偏离您输入的值 ）"
+					},
+					"radius": {
+						"name": "半径占比(%)",
+						"type": "number",
+						"range": [
+							0,
+							100
+						],
+						"default": 60,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						]
+					},
+					"textStyle": {
+						"name": "文本样式",
+						"type": "font",
+						"default": {
+							"fontFamily": "Microsoft Yahei",
+							"fontSize": 10,
+							"fontWeight": "normal",
+							"color": "#ffffff"
+						},
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						]
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "自定义列",
+				"default": [
+					{
+						"columnName": "area",
+						"displayName": "地区",
+						"width": 20,
+						"dataType": "text",
+						"widthPercent": 50,
+						"margin": {
+							"left": 0,
+							"top": 0
+						},
+						"isBr": false,
+						"textStyle": {
+							"textAlign": "left",
+							"fontSize": 12,
+							"color": "rgba(255,255,255,0.8)",
+							"fontWeight": "normal"
+						},
+						"backgroundColor": "#ff7900"
+					},
+					{
+						"columnName": "pv",
+						"displayName": "流量(pv)",
+						"width": 20,
+						"dataType": "text",
+						"widthPercent": 50,
+						"margin": {
+							"left": 0,
+							"top": 0
+						},
+						"isBr": false,
+						"textStyle": {
+							"textAlign": "left",
+							"fontSize": 12,
+							"color": "rgba(255,255,255,0.8)",
+							"fontWeight": "normal"
+						},
+						"backgroundColor": "#ff7900"
+					},
+					{
+						"columnName": "attribute",
+						"displayName": "用户行为特征",
+						"width": 53,
+						"dataType": "text",
+						"widthPercent": 50,
+						"margin": {
+							"left": 0,
+							"top": 0
+						},
+						"isBr": false,
+						"textStyle": {
+							"textAlign": "left",
+							"fontSize": 12,
+							"color": "rgba(255,255,255,0.8)",
+							"fontWeight": "normal"
+						},
+						"backgroundColor": "#ff7900"
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "标签<%= i+1 %>",
+					"child": {
+						"columnName": {
+							"name": "列字段名",
+							"type": "string",
+							"default": "series1",
+							"description": "需要与数据中字段 type 匹配"
+						},
+						"displayName": {
+							"name": "列显示名",
+							"type": "string",
+							"default": "类别一",
+							"description": "表头显示列名称"
+						},
+						"width": {
+							"name": "列宽占比(%)",
+							"type": "number",
+							"default": 20,
+							"range": [
+								0,
+								100
+							],
+							"suffix": "%",
+							"description": "所有列宽占比总和为100%（ 超出则会偏离您输入的值 ）"
+						},
+						"dataType": {
+							"type": "select",
+							"name": "内容类型",
+							"default": "text",
+							"options": [
+								{
+									"name": "文本",
+									"value": "text"
+								},
+								{
+									"name": "图片",
+									"value": "img"
+								}
+							]
+						},
+						"widthPercent": {
+							"name": "图片宽度",
+							"type": "stepper",
+							"default": 30,
+							"suffix": "px",
+							"step": 1,
+							"range": [
+								0,
+								100
+							],
+							"show": [
+								[
+									"dataType",
+									"$eq",
+									"img"
+								]
+							]
+						},
+						"margin": {
+							"name": "图片边距",
+							"type": "margin",
+							"default": {
+								"left": 0,
+								"top": 0
+							},
+							"components": [
+								"left",
+								"top"
+							],
+							"show": [
+								[
+									"dataType",
+									"$eq",
+									"img"
+								]
+							]
+						},
+						"isBr": {
+							"name": "自动换行",
+							"type": "boolean",
+							"default": false,
+							"show": [
+								[
+									"dataType",
+									"$eq",
+									"text"
+								]
+							]
+						},
+						"textAlign": {
+							"name": "文本对齐",
+							"type": "select",
+							"default": "left",
+							"options": [
+								{
+									"name": "左对齐",
+									"value": "left"
+								},
+								{
+									"name": "居中对齐",
+									"value": "center"
+								},
+								{
+									"name": "右对齐",
+									"value": "right"
+								}
+							],
+							"show": [
+								[
+									"dataType",
+									"$eq",
+									"text"
+								]
+							]
+						},
+						"textStyle": {
+							"name": "文本样式",
+							"type": "font",
+							"default": {
+								"fontFamily": "Microsoft Yahei",
+								"fontSize": 12,
+								"fontWeight": "normal",
+								"color": "#ffffff"
+							},
+							"show": [
+								[
+									"dataType",
+									"$eq",
+									"text"
+								]
+							]
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"area": "中国",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "美国",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "俄罗斯",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "德国",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "吉尔吉斯斯坦",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "英国",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "日本",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "南非",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "巴西",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "印度",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "新加坡",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "加拿大",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "澳大利亚",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "阿根廷",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				},
+				{
+					"area": "西班牙",
+					"pv": 688,
+					"attribute": "xxxxxxxxxxxxxxxxxxx"
+				}
+			]
+		},
+		"events": {
+			"row-clicked": {
+				"name": "当点击单行时",
+				"description": "当点击单行时, eg: {area: '中国', pv: 688, attribute: 'xxx'}",
+				"type": "object",
+				"fields": {
+					"area": {
+						"description": "地区",
+						"type": "string"
+					},
+					"pv": {
+						"description": "流量",
+						"type": "number"
+					},
+					"attribute": {
+						"description": "用户行为特征",
+						"type": "string"
+					}
+				}
+			},
+			"data-flipped": {
+				"description": "当数据滚动时",
+				"name": "当数据滚动时",
+				"type": "object",
+				"fields": {
+					"data": {
+						"name": "当前页数据",
+						"description": "当前页数据, eg: [{area: '中国', pv: 688, attribute: 'xxxxxx'}, ...]",
+						"type": "array",
+						"childrenType": "object"
+					},
+					"index": {
+						"name": "索引值",
+						"description": "索引值",
+						"type": "number"
+					}
+				}
+			},
+			"highLight": {
+				"name": "当高亮时",
+				"type": "object",
+				"fields": {
+					"data": {
+						"name": "当前页数据",
+						"description": "当前页数据, eg: [{area: '中国', pv: 688, attribute: 'xxxxxx'}, ...]",
+						"type": "array",
+						"childrenType": "object"
+					},
+					"index": {
+						"name": "索引值",
+						"description": "索引值",
+						"type": "number"
+					}
+				}
+			},
+			"scrollEnd": {
+				"name": "一轮滚动结束",
+				"type": "object",
+				"fields": {
+					"message": {
+						"name": "描述信息(一轮滚动结束)",
+						"description": "描述信息(一轮滚动结束)",
+						"default": "一轮滚动结束",
+						"type": "string"
+					},
+					"isEnding": {
+						"name": "结束",
+						"description": "结束",
+						"default": "0",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"highlight": {
+				"name": "高亮",
+				"fields": {
+					"isOrder": {
+						"name": "是否依次滚动高亮",
+						"type": "boolean",
+						"default": true,
+						"description": "支持逐条滚动高亮和指定高亮"
+					},
+					"hightLightIndex": {
+						"name": "指定高亮值",
+						"type": "number | string",
+						"description": "指定高亮序列号( e.g: '1,2,3' )",
+						"default": "1"
+					},
+					"hightLightStyle": {
+						"name": "样式",
+						"type": "object",
+						"description": "高亮样式",
+						"children": {
+							"color": {
+								"name": "文字颜色",
+								"type": "string",
+								"default": "#f00"
+							},
+							"borderColor": {
+								"name": "边框色",
+								"type": "string",
+								"default": "#f00"
+							},
+							"borderWidth": {
+								"name": "边框宽度",
+								"type": "number",
+								"default": 1
+							},
+							"backgroundColor": {
+								"name": "背景色",
+								"type": "string",
+								"default": "yellow"
+							},
+							"fontSize": {
+								"name": "字体大小",
+								"type": "number",
+								"default": 12
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "number | string",
+								"default": "normal"
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "string",
+								"default": "Microsoft Yahei"
+							}
+						}
+					}
+				},
+				"type": "object"
+			},
+			"startLoop": {
+				"name": "开启滚动",
+				"type": "object",
+				"description": "{ isLoop: true }",
+				"fields": {
+					"isLoop": {
+						"type": "boolean",
+						"name": "是否轮播",
+						"description": "是否轮播",
+						"default": true
+					}
+				}
+			},
+			"stopLoop": {
+				"name": "暂停滚动"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB19PPllUz1gK0jSZLeXXb9kVXa-332-144.png"
+	}
+}

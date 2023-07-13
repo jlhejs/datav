@@ -1,0 +1,104 @@
+{
+    "name": "datav-marquee",
+    "version": "0.0.1",
+    "dependencies": {
+      "bcore": "0.0.18",
+      "jquery": "2.1.4",
+      "lodash": "4.6.1"
+    },
+    "datav": {
+      "parent":"title",
+      "thum":"//files.pengxiaotian.com/com-thum/marquee-370-208.png",
+      "used":true,
+      "locked": false,
+      "hided": false,
+      "selected": true,
+      "hovered": false,
+      "renameing": false,
+      "scaling": {
+        "zoom": false,
+        "w": 0,
+        "h": 0,
+        "sx": 1,
+        "sy": 1
+      },
+      "attr": {
+        "x": 0,
+        "y": 0,
+        "w": 300,
+        "h": 56,
+        "deg": 0,
+        "opacity": 1,
+        "filpV": false,
+        "filpH": false
+      },
+      "projectId": "",
+      "id": "",
+      "name": "VMarquee",
+      "type": "com",
+      "alias": "跑马灯",
+      "icon": "v-icon-chart-bar",
+      "img": "//files.pengxiaotian.com/com/marquee-332-144.png",
+      "config": {
+        "title": { "name": "标题名", "type": "text", "default": "我是跑马灯文本"},
+        "textStyle": { 
+          "name": "文本样式", "type": "group",
+          "children":{
+            "fontFamily": { 
+              "name": "字体", "type": "select", "default": "Microsoft Yahei",
+              "options":[
+                { "value": "Microsoft Yahei", "label": "微软雅黑" },
+                { "value": "SimSun", "label": "宋体" },
+                { "value": "SimHei", "label": "黑体" },
+                { "value": "LiSu", "label": "隶书" },
+                { "value": "YouYuan", "label": "幼圆" },
+                { "value": "tahoma", "label": "tahoma" },
+                { "value": "arial", "label": "arial" },
+                { "value": "sans-serif", "label": "sans-serif" }
+              ]
+            },
+            "fontSize": { "name": "大小", "type": "number", "default": 24},
+            "color": { "name": "颜色", "type": "text", "default": "#fff"},
+            "fontWeight": { "name": "粗细", "type": "text", "default": "normal"}
+          }
+        },
+        "loop": { "name": "是否轮播", "type": "boolean", "default": false },
+        "ifSpeed": { "name": "定速轮播", "type": "boolean", "default": false },
+        "speed": { "name": "动画间隔", "type": "number", "default": 1000 },
+        "duration": { "name": "动画时间", "type": "number", "default": 8000 },
+        "timeout": { "name": "每次停留", "type": "number", "default": 1000 }
+      },
+      "apis": {
+        "source": {
+          "fields": {
+            "value": {
+              "type": "string",
+              "map": "",
+              "description": "值",
+              "optional": false
+            }
+          },
+          "render": "render",
+          "description": "跑马灯接口",
+          "useAutoUpdate": false,
+          "autoUpdate": 1
+        }
+      },
+      "apiData": {
+        "source": {
+          "type": "static",
+          "pageFilters": [],
+          "config": {
+            "useFilter": false,
+            "data": {
+              "value": ""
+            }
+          }
+        }
+      },
+      "events": {
+      },
+      "actions": {}
+    }
+  }
+  

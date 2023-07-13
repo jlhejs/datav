@@ -1,0 +1,1653 @@
+{
+	"name": "guston-3d-layer-Mesh",
+	"version": "0.0.11",
+	"main": "index.js",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"chroma-js": "1.3.4",
+		"safely-merge": "1.0.0"
+	},
+	"datav": {
+		"cn_name": "网格对象",
+		"protocol": 2,
+		"type": [
+			"datav_guston_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"datav_guston"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"bufferData": {
+				"handler": "render",
+				"description": "Buffer数据",
+				"fields": {
+					"vertices": {
+						"description": "顶点"
+					},
+					"uvs": {
+						"description": "纹理"
+					},
+					"normals": {
+						"description": "法向量"
+					},
+					"indices": {
+						"description": "索引"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"display": {
+				"name": "是否显示",
+				"type": "boolean",
+				"default": true,
+				"options": [
+					false,
+					true
+				]
+			},
+			"enableShadow": {
+				"name": "启用阴影",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"shadowConfig": {
+				"type": "group",
+				"name": "阴影设置",
+				"show": [
+					[
+						"enableShadow",
+						"$eq",
+						true
+					]
+				],
+				"children": {
+					"castShadow": {
+						"name": "投射阴影",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"receiveShadow": {
+						"name": "接收阴影",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					}
+				}
+			},
+			"material": {
+				"name": "材质",
+				"type": "options",
+				"default": "Standard",
+				"options": [
+					{
+						"name": "Basic",
+						"value": "Basic"
+					},
+					{
+						"name": "Phong",
+						"value": "Phong"
+					},
+					{
+						"name": "Standard",
+						"value": "Standard"
+					},
+					{
+						"name": "FloatTexture",
+						"value": "FloatTexture"
+					},
+					{
+						"name": "BloomTexture",
+						"value": "BloomTexture"
+					}
+				]
+			},
+			"materialBasic": {
+				"show": [
+					[
+						"material",
+						"$eq",
+						"Basic"
+					]
+				],
+				"type": "group",
+				"name": "Basic材质选项",
+				"fold": true,
+				"children": {
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"doubleSide": {
+						"name": "doubleSide",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"transparent": {
+						"name": "开启透明",
+						"type": "boolean",
+						"default": true,
+						"options": [
+							false,
+							true
+						]
+					},
+					"opacity": {
+						"name": "透明度",
+						"type": "number",
+						"default": 0.8,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.05
+					}
+				}
+			},
+			"materialPhong": {
+				"show": [
+					[
+						"material",
+						"$eq",
+						"Phong"
+					]
+				],
+				"type": "group",
+				"name": "Phong材质选项",
+				"fold": true,
+				"children": {
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"doubleSide": {
+						"name": "doubleSide",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"transparent": {
+						"name": "开启透明",
+						"type": "boolean",
+						"default": true,
+						"options": [
+							false,
+							true
+						]
+					},
+					"opacity": {
+						"name": "透明度",
+						"type": "number",
+						"default": 0.8,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.05
+					},
+					"shininess": {
+						"name": "shininess",
+						"type": "number",
+						"default": 30,
+						"range": [
+							0,
+							100
+						],
+						"step": 1
+					},
+					"specular": {
+						"name": "specular",
+						"type": "color",
+						"default": "#999999"
+					},
+					"map": {
+						"type": "group",
+						"name": "贴图纹理",
+						"children": {
+							"showMap": {
+								"type": "boolean",
+								"name": "启用",
+								"default": false
+							},
+							"map": {
+								"name": "纹理",
+								"type": "image",
+								"default": "https://img.alicdn.com/tfs/TB18AaWrQyWBuNjy0FpXXassXXa-2048-2048.png",
+								"show": [
+									[
+										"showMap",
+										"$eq",
+										true
+									]
+								]
+							}
+						}
+					}
+				}
+			},
+			"materialStandard": {
+				"show": [
+					[
+						"material",
+						"$eq",
+						"Standard"
+					]
+				],
+				"type": "group",
+				"name": "Standard材质选项",
+				"fold": true,
+				"children": {
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"emissive": {
+						"name": "自发光",
+						"type": "color",
+						"default": "#000000"
+					},
+					"wireframe": {
+						"name": "wireframe",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"doubleSide": {
+						"name": "doubleSide",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"flatShading": {
+						"name": "flatShading",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"transparent": {
+						"name": "开启透明",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"opacity": {
+						"name": "透明度",
+						"type": "number",
+						"default": 0.8,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.05
+					},
+					"roughness": {
+						"name": "roughness",
+						"type": "number",
+						"default": 0.4,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.05
+					},
+					"metalness": {
+						"name": "metalness",
+						"type": "number",
+						"default": 0.6,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.05
+					},
+					"envMaps": {
+						"name": "envMaps",
+						"type": "image",
+						"default": null
+					},
+					"map": {
+						"type": "group",
+						"name": "贴图纹理",
+						"children": {
+							"showMap": {
+								"type": "boolean",
+								"name": "启用",
+								"default": false
+							},
+							"map": {
+								"name": "纹理",
+								"type": "image",
+								"default": "https://img.alicdn.com/tfs/TB1o2fyrGmWBuNjy1XaXXXCbXXa-2048-2048.png",
+								"show": [
+									[
+										"showMap",
+										"$eq",
+										true
+									]
+								]
+							}
+						}
+					},
+					"bumpMap": {
+						"type": "group",
+						"name": "Bump纹理",
+						"children": {
+							"showBumpMap": {
+								"type": "boolean",
+								"name": "启用",
+								"default": false
+							},
+							"map": {
+								"name": "纹理",
+								"type": "image",
+								"default": "https://img.alicdn.com/tfs/TB1d3BxoN6I8KJjy0FgXXXXzVXa-512-512.png",
+								"show": [
+									[
+										"showBumpMap",
+										"$eq",
+										true
+									]
+								]
+							},
+							"bumpScale": {
+								"name": "Scale",
+								"type": "number",
+								"default": 0.5,
+								"range": [
+									0,
+									1
+								],
+								"step": 0.01,
+								"show": [
+									[
+										"showBumpMap",
+										"$eq",
+										true
+									]
+								]
+							}
+						}
+					},
+					"displacementMap": {
+						"type": "group",
+						"name": "Displacement纹理",
+						"children": {
+							"showDisMap": {
+								"type": "boolean",
+								"name": "启用",
+								"default": false
+							},
+							"map": {
+								"name": "纹理",
+								"type": "image",
+								"default": "https://img.alicdn.com/tfs/TB1d3BxoN6I8KJjy0FgXXXXzVXa-512-512.png",
+								"show": [
+									[
+										"showDisMap",
+										"$eq",
+										true
+									]
+								]
+							},
+							"displacementScale": {
+								"name": "Scale",
+								"type": "number",
+								"default": 1,
+								"range": [
+									-5,
+									10
+								],
+								"step": 0.05,
+								"show": [
+									[
+										"showDisMap",
+										"$eq",
+										true
+									]
+								]
+							},
+							"displacementBias": {
+								"name": "Bias",
+								"type": "number",
+								"default": 0,
+								"range": [
+									-5,
+									10
+								],
+								"step": 0.05,
+								"show": [
+									[
+										"showDisMap",
+										"$eq",
+										true
+									]
+								]
+							}
+						}
+					}
+				}
+			},
+			"materialFloat": {
+				"show": [
+					[
+						"material",
+						"$eq",
+						"FloatTexture"
+					]
+				],
+				"type": "group",
+				"name": "FloatT材质选项",
+				"fold": true,
+				"children": {
+					"hue": {
+						"name": "hue",
+						"type": "number",
+						"default": 150,
+						"range": [
+							0,
+							360
+						],
+						"step": 1
+					},
+					"light": {
+						"name": "lightBoost",
+						"type": "number",
+						"default": 10,
+						"range": [
+							0,
+							50
+						],
+						"step": 0.01
+					}
+				}
+			},
+			"materialBloom": {
+				"show": [
+					[
+						"material",
+						"$eq",
+						"BloomTexture"
+					]
+				],
+				"type": "group",
+				"name": "Bloom材质选项",
+				"fold": true,
+				"children": {
+					"map": {
+						"name": "纹理",
+						"type": "image",
+						"default": "https://img.alicdn.com/tfs/TB1o2fyrGmWBuNjy1XaXXXCbXXa-2048-2048.png"
+					},
+					"exposure": {
+						"name": "exposure",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.001
+					},
+					"brightMax": {
+						"name": "brightMax",
+						"type": "number",
+						"default": 0.5,
+						"range": [
+							0.1,
+							20
+						],
+						"step": 0.001
+					},
+					"riPowerBase": {
+						"name": "riPowerBase",
+						"type": "number",
+						"default": 1.5,
+						"range": [
+							0.5,
+							3
+						],
+						"step": 0.01
+					}
+				}
+			},
+			"geometry": {
+				"name": "几何体",
+				"fold": true,
+				"type": "options",
+				"default": "TorusKnot",
+				"options": [
+					{
+						"name": "Box",
+						"value": "Box"
+					},
+					{
+						"name": "Plane",
+						"value": "Plane"
+					},
+					{
+						"name": "Sphere",
+						"value": "Sphere"
+					},
+					{
+						"name": "Cylinder",
+						"value": "Cylinder"
+					},
+					{
+						"name": "Torus",
+						"value": "Torus"
+					},
+					{
+						"name": "Cone",
+						"value": "Cone"
+					},
+					{
+						"name": "TorusKnot",
+						"value": "TorusKnot"
+					},
+					{
+						"name": "Icosahedron",
+						"value": "Icosahedron"
+					},
+					{
+						"name": "BufferGeometry",
+						"value": "BufferGeometry"
+					}
+				]
+			},
+			"geometryPlane": {
+				"show": [
+					[
+						"geometry",
+						"$eq",
+						"Plane"
+					]
+				],
+				"type": "group",
+				"name": "Plane几何体选项",
+				"fold": true,
+				"children": {
+					"width": {
+						"name": "width",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"height": {
+						"name": "height",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"widthSegment": {
+						"name": "WidthSegment",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							1000
+						],
+						"step": 1
+					},
+					"heightSegment": {
+						"name": "HeightSegment",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							1000
+						],
+						"step": 1
+					}
+				}
+			},
+			"geometryBox": {
+				"show": [
+					[
+						"geometry",
+						"$eq",
+						"Box"
+					]
+				],
+				"type": "group",
+				"name": "Box几何体选项",
+				"fold": true,
+				"children": {
+					"width": {
+						"name": "width",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"height": {
+						"name": "height",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"depth": {
+						"name": "depth",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"widthSegment": {
+						"name": "WidthSegment",
+						"type": "number",
+						"default": 1,
+						"range": [
+							1,
+							1000
+						],
+						"step": 1
+					},
+					"heightSegment": {
+						"name": "HeightSegment",
+						"type": "number",
+						"default": 1,
+						"range": [
+							1,
+							1000
+						],
+						"step": 1
+					},
+					"depthSegment": {
+						"name": "DepthSegment",
+						"type": "number",
+						"default": 1,
+						"range": [
+							1,
+							1000
+						],
+						"step": 1
+					}
+				}
+			},
+			"geometrySphere": {
+				"show": [
+					[
+						"geometry",
+						"$eq",
+						"Sphere"
+					]
+				],
+				"type": "group",
+				"name": "Sphere几何体选项",
+				"fold": true,
+				"children": {
+					"radius": {
+						"name": "radius",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"widthSegments": {
+						"name": "widthSegments",
+						"type": "number",
+						"default": 12,
+						"range": [
+							4,
+							100
+						],
+						"step": 1
+					},
+					"heightSegments": {
+						"name": "heightSegments",
+						"type": "number",
+						"default": 12,
+						"range": [
+							4,
+							100
+						],
+						"step": 1
+					}
+				}
+			},
+			"geometryCylinder": {
+				"show": [
+					[
+						"geometry",
+						"$eq",
+						"Cylinder"
+					]
+				],
+				"type": "group",
+				"name": "Cylinder几何体选项",
+				"fold": true,
+				"children": {
+					"radiusTop": {
+						"name": "radiusTop",
+						"type": "number",
+						"default": 5,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"radiusBottom": {
+						"name": "radiusBottom",
+						"type": "number",
+						"default": 5,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"height": {
+						"name": "height",
+						"type": "number",
+						"default": 20,
+						"range": [
+							1,
+							200
+						],
+						"step": 1
+					},
+					"radialSegments": {
+						"name": "radialSegments",
+						"type": "number",
+						"default": 16,
+						"range": [
+							4,
+							128
+						],
+						"step": 1
+					},
+					"heightSegments": {
+						"name": "heightSegments",
+						"type": "number",
+						"default": 4,
+						"range": [
+							4,
+							400
+						],
+						"step": 1
+					},
+					"openEnded": {
+						"name": "去除底面",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"thetaStart": {
+						"name": "thetaStart",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							359
+						],
+						"step": 0.1
+					},
+					"thetaLength": {
+						"name": "thetaLength",
+						"type": "number",
+						"default": 360,
+						"range": [
+							1,
+							360
+						],
+						"step": 0.1
+					}
+				}
+			},
+			"geometryTorus": {
+				"show": [
+					[
+						"geometry",
+						"$eq",
+						"Torus"
+					]
+				],
+				"type": "group",
+				"name": "Torus几何体选项",
+				"fold": true,
+				"children": {
+					"radius": {
+						"name": "radius",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							200
+						],
+						"step": 1
+					},
+					"tube": {
+						"name": "tube",
+						"type": "number",
+						"default": 4,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"radialSegments": {
+						"name": "radialSegments",
+						"type": "number",
+						"default": 16,
+						"range": [
+							4,
+							256
+						],
+						"step": 1
+					},
+					"tubularSegments": {
+						"name": "tubularSegments",
+						"type": "number",
+						"default": 128,
+						"range": [
+							32,
+							1024
+						],
+						"step": 1
+					},
+					"arc": {
+						"name": "arc",
+						"type": "number",
+						"default": 360,
+						"range": [
+							1,
+							360
+						],
+						"step": 0.1
+					}
+				}
+			},
+			"geometryCone": {
+				"show": [
+					[
+						"geometry",
+						"$eq",
+						"Cone"
+					]
+				],
+				"type": "group",
+				"name": "Cone几何体选项",
+				"fold": true,
+				"children": {
+					"radius": {
+						"name": "radius",
+						"type": "number",
+						"default": 5,
+						"range": [
+							1,
+							200
+						],
+						"step": 1
+					},
+					"height": {
+						"name": "height",
+						"type": "number",
+						"default": 20,
+						"range": [
+							1,
+							200
+						],
+						"step": 1
+					},
+					"radialSegments": {
+						"name": "radialSegments",
+						"type": "number",
+						"default": 16,
+						"range": [
+							4,
+							256
+						],
+						"step": 1
+					},
+					"heightSegments": {
+						"name": "heightSegments",
+						"type": "number",
+						"default": 32,
+						"range": [
+							32,
+							256
+						],
+						"step": 1
+					},
+					"openEnded": {
+						"name": "去除底面",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"thetaStart": {
+						"name": "thetaStart",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							359
+						],
+						"step": 0.1
+					},
+					"thetaLength": {
+						"name": "thetaLength",
+						"type": "number",
+						"default": 360,
+						"range": [
+							1,
+							360
+						],
+						"step": 0.1
+					}
+				}
+			},
+			"geometryTorusKnot": {
+				"show": [
+					[
+						"geometry",
+						"$eq",
+						"TorusKnot"
+					]
+				],
+				"type": "group",
+				"name": "TorusKnot几何体选项",
+				"fold": true,
+				"children": {
+					"radius": {
+						"name": "radius",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"tube": {
+						"name": "tube",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.1,
+							100
+						],
+						"step": 0.1
+					},
+					"tubularSegments": {
+						"name": "tubularSegments",
+						"type": "number",
+						"default": 64,
+						"range": [
+							8,
+							2048
+						],
+						"step": 1
+					},
+					"radialSegments": {
+						"name": "radialSegments",
+						"type": "number",
+						"default": 8,
+						"range": [
+							6,
+							128
+						],
+						"step": 1
+					},
+					"p": {
+						"name": "p",
+						"type": "number",
+						"default": 2,
+						"range": [
+							1,
+							10
+						],
+						"step": 1
+					},
+					"q": {
+						"name": "q",
+						"type": "number",
+						"default": 3,
+						"range": [
+							1,
+							10
+						],
+						"step": 1
+					}
+				}
+			},
+			"geometryIcosahedron": {
+				"show": [
+					[
+						"geometry",
+						"$eq",
+						"Icosahedron"
+					]
+				],
+				"type": "group",
+				"name": "Icosahedron几何体选项",
+				"fold": true,
+				"children": {
+					"radius": {
+						"name": "radius",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							100
+						],
+						"step": 1
+					},
+					"detail": {
+						"name": "detail",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							5
+						],
+						"step": 1
+					}
+				}
+			},
+			"rotation": {
+				"type": "group",
+				"name": "旋转",
+				"fold": true,
+				"children": {
+					"x": {
+						"name": "rx",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.1
+					},
+					"y": {
+						"name": "ry",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.1
+					},
+					"z": {
+						"name": "rz",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.1
+					}
+				}
+			},
+			"transform": {
+				"type": "group",
+				"name": "偏移",
+				"fold": true,
+				"children": {
+					"x": {
+						"name": "tx",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-1000,
+							1000
+						],
+						"step": 0.001
+					},
+					"y": {
+						"name": "ty",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-1000,
+							1000
+						],
+						"step": 0.001
+					},
+					"z": {
+						"name": "tz",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-1000,
+							1000
+						],
+						"step": 0.001
+					}
+				}
+			},
+			"scale": {
+				"type": "group",
+				"name": "缩放",
+				"fold": true,
+				"children": {
+					"x": {
+						"name": "sx",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.01,
+							100
+						],
+						"step": 0.01
+					},
+					"y": {
+						"name": "sy",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.01,
+							100
+						],
+						"step": 0.01
+					},
+					"z": {
+						"name": "sz",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.01,
+							100
+						],
+						"step": 0.01
+					}
+				}
+			},
+			"enableRotationAnimation": {
+				"name": "启用旋转动画",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"rotationAnimationConfig": {
+				"type": "group",
+				"name": "旋转动画设置",
+				"show": [
+					[
+						"enableRotationAnimation",
+						"$eq",
+						true
+					]
+				],
+				"children": {
+					"x": {
+						"name": "rax",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.001
+					},
+					"y": {
+						"name": "ray",
+						"type": "number",
+						"default": 0.01,
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.001
+					},
+					"z": {
+						"name": "raz",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.001
+					}
+				}
+			},
+			"enableTranslateAnimation": {
+				"name": "启用偏移动画",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"translateAnimationOptions": {
+				"name": "偏移动画设置",
+				"type": "options",
+				"default": "Circle",
+				"show": [
+					[
+						"enableTranslateAnimation",
+						"$eq",
+						true
+					]
+				],
+				"options": [
+					{
+						"name": "Circle",
+						"value": "Circle"
+					},
+					{
+						"name": "Custom",
+						"value": "Custom"
+					}
+				]
+			},
+			"translateAnimationCircle": {
+				"name": "圆形偏移路径",
+				"type": "group",
+				"show": [
+					[
+						"translateAnimationOptions",
+						"$eq",
+						"Circle"
+					]
+				],
+				"fold": true,
+				"children": {
+					"xCenter": {
+						"name": "xCenter",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-1000,
+							1000
+						],
+						"step": 0.1
+					},
+					"yCenter": {
+						"name": "yCenter",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-1000,
+							1000
+						],
+						"step": 0.1
+					},
+					"xRadius": {
+						"name": "xRadius",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							200
+						],
+						"step": 0.1
+					},
+					"yRadius": {
+						"name": "yRadius",
+						"type": "number",
+						"default": 10,
+						"range": [
+							1,
+							200
+						],
+						"step": 0.1
+					},
+					"startAngle": {
+						"name": "startAngle",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							360
+						],
+						"step": 0.1
+					},
+					"endAngle": {
+						"name": "endAngle",
+						"type": "number",
+						"default": 360,
+						"range": [
+							0,
+							360
+						],
+						"step": 0.1
+					},
+					"clockwise": {
+						"name": "clockwise",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"rotation": {
+						"name": "rotation",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							360
+						],
+						"step": 0.1
+					}
+				}
+			}
+		},
+		"api_data": {
+			"bufferData": [
+				{
+					"vertices": [
+						1,
+						1,
+						1,
+						-1,
+						1,
+						1,
+						-1,
+						-1,
+						1,
+						1,
+						-1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						-1,
+						1,
+						1,
+						-1,
+						-1,
+						1,
+						1,
+						-1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						-1,
+						-1,
+						1,
+						-1,
+						-1,
+						1,
+						1,
+						-1,
+						1,
+						1,
+						-1,
+						1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						1,
+						-1,
+						-1,
+						-1,
+						1,
+						-1,
+						-1,
+						1,
+						-1,
+						1,
+						-1,
+						-1,
+						1,
+						1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						1,
+						-1,
+						1,
+						1,
+						-1
+					],
+					"uvs": [
+						0.25,
+						1,
+						0,
+						1,
+						0,
+						0.75,
+						0.25,
+						0.75,
+						0.75,
+						1,
+						0.75,
+						0.75,
+						1,
+						0.75,
+						1,
+						1,
+						0.25,
+						0.5,
+						0.25,
+						0.75,
+						0,
+						0.75,
+						0,
+						0.5,
+						0.5,
+						1,
+						0.25,
+						1,
+						0.25,
+						0.75,
+						0.5,
+						0.75,
+						0.5,
+						0.75,
+						0.25,
+						0.75,
+						0.25,
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.75,
+						0.75,
+						0.75,
+						0.75,
+						1,
+						0.5,
+						1
+					],
+					"normals": [
+						0,
+						0,
+						1,
+						0,
+						0,
+						1,
+						0,
+						0,
+						1,
+						0,
+						0,
+						1,
+						1,
+						0,
+						0,
+						1,
+						0,
+						0,
+						1,
+						0,
+						0,
+						1,
+						0,
+						0,
+						0,
+						1,
+						0,
+						0,
+						1,
+						0,
+						0,
+						1,
+						0,
+						0,
+						1,
+						0,
+						-1,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						-1,
+						0,
+						0,
+						-1
+					],
+					"indices": [
+						0,
+						1,
+						2,
+						0,
+						2,
+						3,
+						4,
+						5,
+						6,
+						4,
+						6,
+						7,
+						8,
+						9,
+						10,
+						8,
+						10,
+						11,
+						12,
+						13,
+						14,
+						12,
+						14,
+						15,
+						16,
+						17,
+						18,
+						16,
+						18,
+						19,
+						20,
+						21,
+						22,
+						20,
+						22,
+						23
+					]
+				}
+			]
+		},
+		"icon": ""
+	}
+}

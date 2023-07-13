@@ -1,0 +1,934 @@
+{
+	"name": "number-title-flop",
+	"version": "1.10.4",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "数字翻牌器",
+		"level": 0,
+		"protocol": 2,
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"supportTheme": {
+			"version": 2,
+			"external": [
+				"font.color",
+				"complexity"
+			]
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": [
+						"title.content",
+						"title.textStyle"
+					],
+					"apiPath": "source.name"
+				},
+				{
+					"configPath": "counter.numbers.textStyle",
+					"apiPath": "source.value"
+				},
+				{
+					"configPath": [
+						"counter.prefix.content",
+						"counter.prefix.textStyle"
+					],
+					"apiPath": "source.prefix"
+				},
+				{
+					"configPath": [
+						"counter.suffix.content",
+						"counter.suffix.textStyle"
+					],
+					"apiPath": "source.suffix"
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"name": {
+						"description": "标题",
+						"optional": true,
+						"type": "string"
+					},
+					"value": {
+						"description": "数值",
+						"type": "number"
+					},
+					"prefix": {
+						"description": "前缀",
+						"optional": true,
+						"type": "string"
+					},
+					"suffix": {
+						"description": "后缀",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"type": "group",
+				"name": "全局",
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"阿里巴巴普惠体": "AlibabaPuHuiTi"
+									},
+									{
+										"AlibabaSans": "AlibabaSans"
+									},
+									{
+										"flipper2016": "flipper2016"
+									},
+									{
+										"flipper2017": "flipper2017"
+									},
+									{
+										"eggboom": "eggboom"
+									},
+									{
+										"AnonymousPro": "AnonymousPro"
+									},
+									{
+										"Cuprum": "Cuprum"
+									},
+									{
+										"OpenSans": "OpenSans"
+									}
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体,翻拍器字体需要安装。"
+							}
+						}
+					},
+					"arrangement": {
+						"type": "select",
+						"name": "排列方式",
+						"default": "top",
+						"options": [
+							{
+								"name": "标题在上",
+								"value": "top"
+							},
+							{
+								"name": "标题在左",
+								"value": "left"
+							},
+							{
+								"name": "标题在下",
+								"value": "bottom"
+							}
+						],
+						"_simplified_show": true
+					},
+					"distance": {
+						"type": "number",
+						"name": "间距",
+						"default": 0,
+						"range": [
+							-100,
+							500
+						],
+						"_simplified_show": true
+					},
+					"abnormalData": {
+						"type": "text",
+						"name": "异常字符",
+						"default": 0,
+						"description": "自定义异常字符显示内容",
+						"_simplified_show": true
+					},
+					"initShowData": {
+						"type": "text",
+						"name": "初始化字符",
+						"default": 0
+					}
+				}
+			},
+			"title": {
+				"type": "group",
+				"name": "标题",
+				"children": {
+					"content": {
+						"type": "text",
+						"name": "标题名",
+						"default": "Typesomething",
+						"description": "支持从数据中获取标题内容，详见数据面板",
+						"dataField": "name",
+						"_simplified_show": true
+					},
+					"textStyle": {
+						"type": "suite",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 18,
+								"step": 1,
+								"col": 12
+							},
+							"color": {
+								"name": "字体颜色",
+								"type": "color",
+								"default": "rgb(121, 218, 255)",
+								"col": 12
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"col": 12,
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							},
+							"textAlign": {
+								"name": "对齐方式",
+								"type": "select",
+								"default": "flex-start",
+								"col": 12,
+								"options": [
+									{
+										"value": "flex-start",
+										"label": "左对齐"
+									},
+									{
+										"value": "center",
+										"label": "居中对齐"
+									},
+									{
+										"value": "flex-end",
+										"label": "右对齐"
+									}
+								]
+							}
+						}
+					}
+				}
+			},
+			"counter": {
+				"type": "group",
+				"name": "翻牌器",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"阿里巴巴普惠体": "AlibabaPuHuiTi"
+							},
+							{
+								"AlibabaSans": "AlibabaSans"
+							},
+							{
+								"flipper2016": "flipper2016"
+							},
+							{
+								"flipper2017": "flipper2017"
+							},
+							{
+								"eggboom": "eggboom"
+							},
+							{
+								"AnonymousPro": "AnonymousPro"
+							},
+							{
+								"Cuprum": "Cuprum"
+							},
+							{
+								"OpenSans": "OpenSans"
+							}
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"justifyContent": {
+						"name": "水平对齐",
+						"type": "options",
+						"options": [
+							{
+								"name": "左对齐",
+								"value": "flex-start"
+							},
+							{
+								"name": "右对齐",
+								"value": "flex-end"
+							},
+							{
+								"name": "居中对齐",
+								"value": "center"
+							}
+						],
+						"default": "flex-start",
+						"_simplified_show": true
+					},
+					"margin": {
+						"name": "间距",
+						"type": "suite",
+						"children": {
+							"preNum": {
+								"name": "前缀-数字",
+								"type": "stepper",
+								"default": 0,
+								"suffix": "px",
+								"col": 12,
+								"_simplified_show": true
+							},
+							"numSuff": {
+								"name": "数字-后缀",
+								"type": "stepper",
+								"default": 0,
+								"suffix": "px",
+								"col": 12,
+								"_simplified_show": true
+							}
+						}
+					},
+					"prefix": {
+						"type": "group",
+						"name": "前缀",
+						"fold": true,
+						"children": {
+							"content": {
+								"type": "string",
+								"name": "内容",
+								"default": "￥",
+								"dataField": "prefix",
+								"_simplified_show": true
+							},
+							"textStyle": {
+								"type": "group",
+								"name": "文本样式",
+								"fold": true,
+								"children": {
+									"fontFamily": {
+										"name": "字体",
+										"type": "search",
+										"default": "Microsoft Yahei",
+										"range": [
+											{
+												"微软雅黑": "Microsoft Yahei"
+											},
+											{
+												"阿里巴巴普惠体": "AlibabaPuHuiTi"
+											},
+											{
+												"AlibabaSans": "AlibabaSans"
+											},
+											{
+												"flipper2016": "flipper2016"
+											},
+											{
+												"flipper2017": "flipper2017"
+											},
+											{
+												"eggboom": "eggboom"
+											},
+											{
+												"AnonymousPro": "AnonymousPro"
+											},
+											{
+												"Cuprum": "Cuprum"
+											},
+											{
+												"OpenSans": "OpenSans"
+											}
+										],
+										"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+									},
+									"color": {
+										"type": "color",
+										"name": "字体颜色",
+										"default": "rgb(10, 115, 255)"
+									},
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"default": 36,
+										"step": 1
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "bolder",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									}
+								}
+							}
+						}
+					},
+					"numbers": {
+						"type": "group",
+						"name": "数字",
+						"fold": true,
+						"children": {
+							"textStyle": {
+								"type": "group",
+								"name": "文本样式",
+								"fold": true,
+								"children": {
+									"color": {
+										"type": "fill",
+										"name": "字体颜色",
+										"description": "注意：字体颜色为渐变色时，字体背景色将会失效。",
+										"default": {
+											"type": "flat",
+											"value": "rgb(10, 115, 255)"
+										},
+										"components": [
+											"flat",
+											"linearGradient"
+										]
+									},
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"default": 36,
+										"step": 1
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "bolder",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									}
+								}
+							},
+							"marginRight": {
+								"name": "数字间隔",
+								"type": "number",
+								"default": 0,
+								"range": [
+									0,
+									10
+								],
+								"step": 0.1,
+								"_simplified_show": true
+							},
+							"backgroundColor": {
+								"name": "背景色",
+								"description": "注意：字体颜色为渐变色时，字体背景色将会失效。",
+								"type": "fill",
+								"default": {
+									"type": "flat",
+									"value": "rgba(51,51,51,0)"
+								},
+								"components": [
+									"flat",
+									"linearGradient"
+								],
+								"_simplified_show": true
+							},
+							"backgroundRadius": {
+								"name": "背景圆角",
+								"type": "number",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"_simplified_show": true
+							},
+							"separatingBackground": {
+								"name": "分隔符背景",
+								"type": "boolean",
+								"default": false,
+								"_simplified_show": true
+							},
+							"digit": {
+								"type": "number",
+								"name": "默认位数",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1,
+								"_simplified_show": true
+							},
+							"rounding": {
+								"type": "boolean",
+								"name": "数据四舍五入",
+								"default": true,
+								"_simplified_show": true
+							},
+							"decimal": {
+								"type": "number",
+								"name": "小数点位数",
+								"default": 2,
+								"range": [
+									0,
+									10
+								],
+								"step": 1,
+								"show": [
+									[
+										"rounding",
+										"$eq",
+										false
+									]
+								],
+								"_simplified_show": true
+							},
+							"separatingChart": {
+								"type": "boolean",
+								"name": "千分位分隔符",
+								"default": true,
+								"_simplified_show": true
+							},
+							"separatingSymbol": {
+								"type": "text",
+								"name": "千分位分割符符号",
+								"default": ",",
+								"description": "分隔符最长一位，超出一位时取第一位，无法以数字作为分隔符。",
+								"_simplified_show": true
+							},
+							"decimalSymbol": {
+								"type": "text",
+								"name": "小数分割符符号",
+								"default": ".",
+								"description": "分隔符最长一位，超出一位时取第一位，无法以数字作为分隔符。",
+								"_simplified_show": true
+							},
+							"fixedWidth": {
+								"type": "number",
+								"name": "定宽",
+								"default": 0,
+								"_simplified_show": true
+							},
+							"increment": {
+								"type": "boolean",
+								"name": "数据抖动修正",
+								"default": false,
+								"_simplified_show": true
+							},
+							"animation": {
+								"name": "开启动画",
+								"type": "boolean",
+								"default": true,
+								"_simplified_show": true
+							},
+							"sameDataFlip": {
+								"type": "boolean",
+								"name": "始终动画",
+								"default": false,
+								"description": "当传入数据不变时始终开启动画",
+								"show": [
+									[
+										"animation",
+										"$eq",
+										true
+									]
+								],
+								"_simplified_show": true
+							},
+							"duration": {
+								"type": "number",
+								"name": "动画时长(ms)",
+								"default": 1000,
+								"step": 500,
+								"show": [
+									[
+										"animation",
+										"$eq",
+										true
+									]
+								],
+								"_simplified_show": true
+							}
+						}
+					},
+					"suffix": {
+						"type": "group",
+						"name": "后缀",
+						"fold": true,
+						"children": {
+							"content": {
+								"type": "string",
+								"name": "内容",
+								"default": "",
+								"dataField": "suffix",
+								"_simplified_show": true
+							},
+							"suffixArrange": {
+								"name": "对齐方式",
+								"type": "options",
+								"options": [
+									{
+										"name": "顶对齐",
+										"value": "flex-start"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									},
+									{
+										"name": "底对齐",
+										"value": "baseline"
+									}
+								],
+								"default": "baseline",
+								"_simplified_show": true
+							},
+							"textStyle": {
+								"type": "group",
+								"name": "文本样式",
+								"fold": true,
+								"children": {
+									"fontFamily": {
+										"name": "字体",
+										"type": "search",
+										"default": "Microsoft Yahei",
+										"range": [
+											{
+												"微软雅黑": "Microsoft Yahei"
+											},
+											{
+												"阿里巴巴普惠体": "AlibabaPuHuiTi"
+											},
+											{
+												"AlibabaSans": "AlibabaSans"
+											},
+											{
+												"flipper2016": "flipper2016"
+											},
+											{
+												"flipper2017": "flipper2017"
+											},
+											{
+												"eggboom": "eggboom"
+											},
+											{
+												"AnonymousPro": "AnonymousPro"
+											},
+											{
+												"Cuprum": "Cuprum"
+											},
+											{
+												"OpenSans": "OpenSans"
+											}
+										],
+										"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+									},
+									"color": {
+										"type": "color",
+										"name": "字体颜色",
+										"default": "#ffffff"
+									},
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"default": 30,
+										"step": 1
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "bolder",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"interaction": {
+				"type": "group",
+				"name": "交互",
+				"fold": true,
+				"children": {
+					"cursor": {
+						"name": "手势光标",
+						"type": "boolean",
+						"default": false
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "",
+					"value": 232425
+				}
+			]
+		},
+		"events": {
+			"number-changed": {
+				"description": "当前值变化时",
+				"fields": {
+					"value": {
+						"description": "当前值",
+						"type": "string | number"
+					}
+				}
+			},
+			"number-click": {
+				"description": "当点击翻牌器时",
+				"fields": {
+					"value": {
+						"description": "当前值",
+						"type": "string | number"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"clear": {
+				"name": "清零当前值",
+				"type": "null"
+			}
+		},
+		"view": {
+			"width": "300",
+			"height": "64",
+			"minWidth": "100",
+			"minHeight": "26",
+			"z-index": 1010
+		},
+		"icon": "//img.alicdn.com/tfs/TB16dHmlKL2gK0jSZPhXXahvXXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB143rolQL0gK0jSZFxXXXWHVXa-160-116.png"
+	}
+}

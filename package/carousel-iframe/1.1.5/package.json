@@ -1,0 +1,110 @@
+{
+	"name": "carousel-iframe",
+	"version": "1.1.5",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "轮播页面",
+		"icon": "//img.alicdn.com/tfs/TB1pC_qlHY1gK0jSZTEXXXDQVXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"interact",
+			"DataV-6:control_data"
+		],
+		"analysis": {
+			"apis": "dataSource"
+		},
+		"level": 1,
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"dataSource": {
+				"handler": "renderData",
+				"description": "大屏轮播数据接口",
+				"fields": {
+					"id": {
+						"description": "大屏ID",
+						"type": "number"
+					},
+					"serieName": {
+						"description": "大屏名称",
+						"type": "string"
+					},
+					"url": {
+						"description": "大屏链接",
+						"type": "string"
+					}
+				}
+			},
+			"idSource": {
+				"handler": "renderId",
+				"description": "当前大屏数据接口",
+				"fields": {
+					"id": {
+						"description": "当前大屏ID",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"config": {
+			"isLoop": {
+				"name": "自动轮播",
+				"type": "boolean",
+				"default": false
+			},
+			"interval": {
+				"name": "间隔时间(s)",
+				"type": "number",
+				"min": 0,
+				"default": 3,
+				"step": 0.1,
+				"show": [
+					[
+						"isLoop",
+						"$eq",
+						true
+					]
+				]
+			}
+		},
+		"api_data": {
+			"dataSource": [
+				{
+					"id": 0,
+					"serieName": "大屏一",
+					"url": "https://m.aliyun.com/?utm_content=se_1435405"
+				},
+				{
+					"id": 1,
+					"serieName": "大屏二",
+					"url": "https://hd.m.aliyun.com/act/detail-datav.html"
+				},
+				{
+					"id": 2,
+					"serieName": "大屏三",
+					"url": "https://tianchi.aliyun.com/markets/tianchi/outsource/ai/mobile"
+				}
+			],
+			"idSource": [
+				{
+					"id": 0
+				}
+			]
+		},
+		"publicHandler": {
+			"getFieldValue": {
+				"name": "获取当前页面信息",
+				"type": "null"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1qFDllFT7gK0jSZFpXXaTkpXa-332-144.png"
+	}
+}

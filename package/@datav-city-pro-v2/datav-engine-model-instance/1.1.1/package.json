@@ -1,0 +1,640 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-model-instance",
+	"version": "1.1.1",
+	"description": "实例化多模型加载器",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "多点位模型",
+		"protocol": 2,
+		"level": 2,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"children": {
+							"shadow": {
+								"name": "阴影设置",
+								"type": "switch",
+								"default": false
+							},
+							"depthWrite": {
+								"name": "深度测试",
+								"type": "switch",
+								"default": true
+							},
+							"wireframe": {
+								"name": "显示线框",
+								"type": "switch",
+								"default": false
+							},
+							"opacity": {
+								"name": "不透明度",
+								"type": "slider",
+								"max": 1,
+								"min": 0,
+								"showRange": true,
+								"step": 0.01,
+								"default": 1
+							},
+							"offsetAlt": {
+								"name": "高度偏移",
+								"type": "slider",
+								"max": 5000,
+								"min": -300,
+								"showRange": true,
+								"step": 0.01,
+								"default": 5
+							},
+							"light": {
+								"name": "光效设置",
+								"type": "suite",
+								"handler": "updateLightOpts",
+								"children": {
+									"envMapIntensityFactor": {
+										"name": "环境贴图强度系数",
+										"type": "hidden",
+										"min": 0,
+										"max": 1,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": true,
+										"default": 1
+									},
+									"emissiveIntensity": {
+										"name": "发光强度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": true,
+										"default": 0
+									}
+								}
+							}
+						}
+					},
+					"graphic": {
+						"name": "图形",
+						"children": {
+							"url": {
+								"name": "模型地址",
+								"type": "upload",
+								"default": "https://cdn-upload.datav.aliyun.com/upload/download/1644290137905-HgDhe1up.glb",
+								"accept": ".gltf,.glb"
+							},
+							"rotation": {
+								"name": "旋转",
+								"type": "suite",
+								"children": {
+									"x": {
+										"name": "X轴旋转",
+										"type": "slider",
+										"min": 0,
+										"max": 360,
+										"suffix": "度",
+										"step": 0.1,
+										"default": 0
+									},
+									"y": {
+										"name": "Y轴旋转",
+										"type": "slider",
+										"min": 0,
+										"max": 360,
+										"suffix": "度",
+										"step": 0.1,
+										"default": 0
+									},
+									"z": {
+										"name": "Z轴旋转",
+										"type": "slider",
+										"min": 0,
+										"max": 360,
+										"suffix": "度",
+										"step": 0.1,
+										"default": 0
+									}
+								}
+							},
+							"scale": {
+								"name": "缩放",
+								"type": "suite",
+								"children": {
+									"x": {
+										"name": "X轴缩放",
+										"type": "slider",
+										"max": 100000,
+										"min": 0.001,
+										"step": 1,
+										"default": 10
+									},
+									"y": {
+										"name": "Y轴缩放",
+										"type": "slider",
+										"max": 100000,
+										"min": 0.001,
+										"step": 1,
+										"default": 10
+									},
+									"z": {
+										"name": "Z轴缩放",
+										"type": "slider",
+										"max": 100000,
+										"min": 0.001,
+										"step": 1,
+										"default": 10
+									}
+								}
+							}
+						}
+					},
+					"animate": {
+						"name": "动效",
+						"children": {
+							"modelAnimate": {
+								"name": "模型动画",
+								"type": "group",
+								"description": "目前不支持链式关键帧动画",
+								"fold": false,
+								"children": {
+									"autoPlay": {
+										"name": "自动播放",
+										"type": "switch",
+										"default": true
+									},
+									"showSkeleton": {
+										"name": "显示骨骼",
+										"type": "switch",
+										"showInPanel": false,
+										"default": false
+									},
+									"defaultLoopMode": {
+										"name": "循环模式",
+										"type": "select",
+										"default": "LoopRepeat",
+										"options": [
+											{
+												"label": "重复播放",
+												"value": "LoopRepeat"
+											},
+											{
+												"label": "单次播放",
+												"value": "LoopOnce"
+											},
+											{
+												"label": "反向播放",
+												"value": "LoopPingPong"
+											}
+										]
+									},
+									"timeScale": {
+										"name": "动画速率",
+										"type": "slider",
+										"max": 1.5,
+										"min": -1.5,
+										"step": 0.001,
+										"default": 1,
+										"showRange": true
+									}
+								}
+							},
+							"scanner": {
+								"name": "扫光动画",
+								"type": "group",
+								"enableHide": true,
+								"showAlias": "enable",
+								"showInPanel": false,
+								"children": {
+									"enable": {
+										"default": false
+									},
+									"frontier": {
+										"name": "锋面类型",
+										"type": "buttonRadio",
+										"default": 1,
+										"options": [
+											{
+												"label": "平面",
+												"value": 1
+											},
+											{
+												"label": "曲面",
+												"value": -1
+											}
+										]
+									},
+									"axisType": {
+										"name": "扫描轴向",
+										"type": "buttonRadio",
+										"default": 1,
+										"options": [
+											{
+												"label": "X轴",
+												"value": 1
+											},
+											{
+												"label": "Y轴",
+												"value": 2
+											},
+											{
+												"label": "Z轴",
+												"value": 3
+											}
+										],
+										"showInPanel": {
+											"conditions": [
+												[
+													".frontier",
+													"$eq",
+													1
+												]
+											]
+										}
+									},
+									"direction": {
+										"name": "正负方向",
+										"type": "buttonRadio",
+										"default": 1,
+										"options": [
+											{
+												"label": "正向",
+												"value": 1
+											},
+											{
+												"label": "负向",
+												"value": -1
+											}
+										]
+									},
+									"color": {
+										"type": "fill",
+										"name": "颜色",
+										"default": "#6699ff"
+									},
+									"length": {
+										"type": "slider",
+										"name": "扫光长度",
+										"default": 0.02,
+										"max": 1,
+										"min": 0.01,
+										"step": 0.001,
+										"showRange": true
+									},
+									"speed": {
+										"type": "slider",
+										"name": "扫光速度",
+										"default": 0.002,
+										"max": 0.05,
+										"min": 0,
+										"step": 0.001,
+										"showRange": true
+									}
+								}
+							}
+						}
+					},
+					"interaction": {
+						"name": "交互",
+						"handler": "updateInteraction",
+						"children": {
+							"enable": {
+								"name": "鼠标交互",
+								"type": "switch",
+								"default": false
+							},
+							"clickType": {
+								"name": "触发方式",
+								"type": "buttonRadio",
+								"default": "click",
+								"showInPanel": false,
+								"options": [
+									{
+										"value": "click",
+										"label": "单击"
+									},
+									{
+										"value": "dblclick",
+										"label": "双击"
+									}
+								]
+							},
+							"interactiveExt": {
+								"name": "点击区域",
+								"type": "buttonRadio",
+								"default": "local",
+								"options": [
+									{
+										"value": "local",
+										"label": "局部"
+									},
+									{
+										"value": "whole",
+										"label": "整体"
+									}
+								]
+							},
+							"interactiveColor": {
+								"name": "点击颜色",
+								"type": "fill",
+								"default": "#f5222d"
+							}
+						}
+					}
+				}
+			}
+		},
+		"keyframeConfig": {
+			"emissiveIntensity": {
+				"name": "发光强度系数",
+				"type": "slider",
+				"min": 0,
+				"max": 1,
+				"step": 0.1,
+				"precision": 0.1,
+				"showRange": true,
+				"default": 1
+			}
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"description": "模型点位数据",
+				"format": "geo_point",
+				"fields": {
+					"id": {
+						"description": "id",
+						"type": "number|string",
+						"optional": false
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number",
+						"optional": false
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number",
+						"optional": false
+					},
+					"altitude": {
+						"description": "高程",
+						"type": "number",
+						"optional": true
+					}
+				}
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"id": 184218,
+					"datasetId": "3018",
+					"name": "xgwhohtndin",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:12.378Z",
+					"updatedAt": "2022-06-10T02:44:12.378Z",
+					"deletedAt": null,
+					"lng": 120.13210126,
+					"lat": 30.26527735
+				},
+				{
+					"id": 184219,
+					"datasetId": "3018",
+					"name": "03xn4vada6as",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:13.893Z",
+					"updatedAt": "2022-06-10T02:44:13.893Z",
+					"deletedAt": null,
+					"lng": 120.13286258,
+					"lat": 30.26478444
+				},
+				{
+					"id": 184220,
+					"datasetId": "3018",
+					"name": "i81el9stgd",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:15.803Z",
+					"updatedAt": "2022-06-10T02:44:15.803Z",
+					"deletedAt": null,
+					"lng": 120.13370451,
+					"lat": 30.26463457
+				},
+				{
+					"id": 184226,
+					"datasetId": "3018",
+					"name": "2kh707ofdhq",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:26.228Z",
+					"updatedAt": "2022-06-10T02:44:26.228Z",
+					"deletedAt": null,
+					"lng": 120.13456831,
+					"lat": 30.26739887
+				},
+				{
+					"id": 184228,
+					"datasetId": "3018",
+					"name": "qv9ekmgodda",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:31.427Z",
+					"updatedAt": "2022-06-10T02:44:31.427Z",
+					"deletedAt": null,
+					"lng": 120.13275747,
+					"lat": 30.26738379
+				},
+				{
+					"id": 184221,
+					"datasetId": "3018",
+					"name": "6ruat46sdl8",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:17.217Z",
+					"updatedAt": "2022-06-10T02:44:17.217Z",
+					"deletedAt": null,
+					"lng": 120.1346077,
+					"lat": 30.26491231
+				},
+				{
+					"id": 184223,
+					"datasetId": "3018",
+					"name": "dj3yxhx2ru8",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:22.031Z",
+					"updatedAt": "2022-06-10T02:44:22.031Z",
+					"deletedAt": null,
+					"lng": 120.13532888,
+					"lat": 30.26591903
+				},
+				{
+					"id": 184225,
+					"datasetId": "3018",
+					"name": "06670bsbcych",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:24.670Z",
+					"updatedAt": "2022-06-10T02:44:24.670Z",
+					"deletedAt": null,
+					"lng": 120.1350449,
+					"lat": 30.26703636
+				},
+				{
+					"id": 184227,
+					"datasetId": "3018",
+					"name": "e3z8komryvd",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:27.984Z",
+					"updatedAt": "2022-06-10T02:44:27.984Z",
+					"deletedAt": null,
+					"lng": 120.133703,
+					"lat": 30.26761671
+				},
+				{
+					"id": 184229,
+					"datasetId": "3018",
+					"name": "n84uzz1xf68",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:33.590Z",
+					"updatedAt": "2022-06-10T02:44:33.590Z",
+					"deletedAt": null,
+					"lng": 120.13210227,
+					"lat": 30.26674461
+				},
+				{
+					"id": 184222,
+					"datasetId": "3018",
+					"name": "q27egwxso8",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:19.183Z",
+					"updatedAt": "2022-06-10T02:44:19.183Z",
+					"deletedAt": null,
+					"lng": 120.13513996,
+					"lat": 30.26536732
+				},
+				{
+					"id": 184224,
+					"datasetId": "3018",
+					"name": "zo24faf625",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:23.504Z",
+					"updatedAt": "2022-06-10T02:44:23.504Z",
+					"deletedAt": null,
+					"lng": 120.13527496,
+					"lat": 30.26657294
+				},
+				{
+					"id": 184230,
+					"datasetId": "3018",
+					"name": "4og7erliey",
+					"config": null,
+					"createdAt": "2022-06-10T02:44:35.082Z",
+					"updatedAt": "2022-06-10T02:44:35.082Z",
+					"deletedAt": null,
+					"lng": 120.13192457,
+					"lat": 30.26610751
+				}
+			]
+		},
+		"events": {
+			"leftClick": {
+				"name": "左键点击模型",
+				"description": "左键点击模型",
+				"type": "object",
+				"fields": {
+					"name": {
+						"name": "mesh id",
+						"type": "string"
+					},
+					"mesh": {
+						"name": "mesh",
+						"type": "object"
+					},
+					"instanceId": {
+						"name": "instancedmesh instancedId",
+						"type": "number"
+					}
+				}
+			},
+			"rightClick": {
+				"name": "右键点击模型",
+				"description": "右键点击模型",
+				"type": "object",
+				"fields": {
+					"name": {
+						"name": "mesh id",
+						"type": "string"
+					},
+					"mesh": {
+						"name": "mesh",
+						"type": "object"
+					},
+					"instanceId": {
+						"name": "instancedmesh instancedId",
+						"type": "number"
+					}
+				}
+			},
+			"loaded": {
+				"name": "模型加载完成",
+				"description": "模型加载完成",
+				"type": "any"
+			}
+		},
+		"publicHandler": {
+			"updateOptions": {
+				"name": "更新配置",
+				"description": "更新配置",
+				"type": "object",
+				"fields": {}
+			},
+			"setData": {
+				"name": "更新数据",
+				"description": "更新数据",
+				"type": "array",
+				"fields": {}
+			},
+			"remove": {
+				"name": "组件销毁",
+				"description": "组件销毁",
+				"type": "null"
+			},
+			"show": {
+				"name": "显示组件",
+				"description": "显示组件",
+				"type": "null"
+			},
+			"hide": {
+				"name": "隐藏组件",
+				"description": "隐藏组件",
+				"type": "null"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms",
+			"map_3d_city_pro_model3d_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/imgextra/i2/O1CN012fK1fr1qpewtA7jms_!!6000000005545-2-tps-720-720.png"
+	}
+}

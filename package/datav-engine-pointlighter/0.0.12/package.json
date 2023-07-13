@@ -1,0 +1,167 @@
+{
+	"name": "datav-engine-pointlighter",
+	"version": "0.0.12",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "点光源层",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"isLensflare": {
+				"name": "耀斑",
+				"type": "boolean",
+				"default": true
+			},
+			"color": {
+				"type": "color",
+				"name": "颜色",
+				"default": "#FFFFFF"
+			},
+			"textureUrl0": {
+				"name": "贴图1",
+				"type": "hidden",
+				"default": "https://img.alicdn.com/tfs/TB1AIkBGYSYBuNjSspiXXXNzpXa-512-512.png"
+			},
+			"textureUrl2": {
+				"name": "贴图2",
+				"type": "hidden",
+				"default": "https://img.alicdn.com/tfs/TB1oV5KHamWBuNjy1XaXXXCbXXa-518-659.png"
+			},
+			"lensflareScale": {
+				"show": [
+					[
+						"isLensflare",
+						"$eq",
+						true
+					]
+				],
+				"name": "耀斑大小",
+				"type": "number",
+				"default": 0.3,
+				"range": [
+					0,
+					100
+				],
+				"step": 0.01
+			},
+			"distance": {
+				"name": "光距",
+				"type": "number",
+				"default": 0,
+				"range": [
+					0,
+					1000
+				],
+				"step": 0.01
+			},
+			"intensity": {
+				"name": "光照强度",
+				"type": "number",
+				"default": 0.3,
+				"range": [
+					0,
+					200
+				],
+				"step": 0.01
+			},
+			"posX": {
+				"name": "X轴坐标(经度)",
+				"type": "number",
+				"range": [
+					-20000,
+					20000
+				],
+				"step": 0.000001,
+				"default": 121.4819
+			},
+			"posY": {
+				"name": "Y轴坐标(纬度)",
+				"type": "number",
+				"range": [
+					-20000,
+					20000
+				],
+				"step": 0.000001,
+				"default": 31.2164
+			},
+			"posZ": {
+				"name": "Z轴坐标(高度)",
+				"type": "number",
+				"range": [
+					-20000,
+					20000
+				],
+				"step": 0.000001,
+				"default": 0
+			}
+		},
+		"api_data": {},
+		"apis": {},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1.Xr6ACzqK1RjSZFpXXakSXXa-180-180.png"
+	}
+}

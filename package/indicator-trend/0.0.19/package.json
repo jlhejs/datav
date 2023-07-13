@@ -1,0 +1,338 @@
+{
+	"name": "indicator-trend",
+	"version": "0.0.19",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "^3.5.1",
+		"lodash": "4.17.11",
+		"prop-types": "15.5.8",
+		"react": "16.13.1",
+		"react-dom": "16.13.1"
+	},
+	"datav": {
+		"cn_name": "业务指标趋势",
+		"icon": "//img.alicdn.com/tfs/TB1nGwRtpT7gK0jSZFpXXaTkpXa-160-116.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1yeZTtCf2gK0jSZFPXXXsopXa-368-208.png",
+		"protocol": 2,
+		"level": 0,
+		"supportTheme": true,
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "options.number.numberStyle",
+					"apiPath": "source.value"
+				}
+			]
+		},
+		"view": {
+			"width": "180",
+			"height": "60",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"value": {
+						"name": "数值",
+						"type": "number",
+						"description": "数值"
+					},
+					"base": {
+						"name": "基础值",
+						"type": "number",
+						"description": "基础值",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"chartAlign": {
+				"name": "对齐方式",
+				"type": "suite",
+				"children": {
+					"alignItems": {
+						"name": "垂直方向",
+						"type": "select",
+						"default": "center",
+						"col": 12,
+						"option": [
+							{
+								"value": "flex-start",
+								"label": "上对齐"
+							},
+							{
+								"value": "center",
+								"label": "居中对齐"
+							},
+							{
+								"value": "flex-end",
+								"label": "下对齐"
+							}
+						]
+					},
+					"justifyContent": {
+						"name": "水平方向",
+						"type": "select",
+						"default": "center",
+						"col": 12,
+						"option": [
+							{
+								"value": "flex-start",
+								"label": "左对齐"
+							},
+							{
+								"value": "center",
+								"label": "居中对齐"
+							},
+							{
+								"value": "flex-end",
+								"label": "右对齐"
+							}
+						]
+					}
+				}
+			},
+			"margin": {
+				"name": "间距",
+				"type": "suite",
+				"children": {
+					"vertical": {
+						"name": "水平间距",
+						"type": "stepper",
+						"default": 2,
+						"col": "12",
+						"suffix": "px"
+					},
+					"horiz": {
+						"name": "垂直间距",
+						"type": "stepper",
+						"default": 0,
+						"col": "12",
+						"suffix": "px"
+					}
+				}
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"titleContent": {
+						"name": "标题",
+						"type": "menuChild",
+						"children": {
+							"title": {
+								"name": "标题内容",
+								"type": "text",
+								"default": "标题",
+								"dataField": true
+							},
+							"titleStyle": {
+								"name": "内容样式",
+								"type": "font",
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontSize": 16,
+									"fontWeight": "normal",
+									"color": "#e1d5d5"
+								}
+							},
+							"newLine": {
+								"name": "标题换行",
+								"type": "switch",
+								"default": false,
+								"description": "标题字数过多时，可换行"
+							}
+						}
+					},
+					"arrow": {
+						"name": "图标",
+						"type": "menuChild",
+						"children": {
+							"iconType": {
+								"name": "图标选择",
+								"type": "imageSelect",
+								"options": [
+									{
+										"value": 0,
+										"label": "图标1",
+										"src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODEiIGhlaWdodD0iNTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iIzI0NUVGRiIgZD0iTTQxIDlsMjUgMzVIMTZ6IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4="
+									},
+									{
+										"value": 1,
+										"label": "图标2",
+										"src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODEiIGhlaWdodD0iNTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQzLjUgMjJ2MjQuNWgtN1YyMkgyNUw0MC41IDYgNTYgMjJINDMuNXoiIGZpbGw9IiMyNDVFRkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg=="
+									},
+									{
+										"value": 2,
+										"label": "图标3",
+										"src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODEiIGhlaWdodD0iNTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTU1LjQ3OCAxNy45NzdsLTcuNDMzLTcuNDMzTDY4IDEwbC0uNTQ0IDE5Ljk1NS03LjQxMS03LjQxMS0xOC4yNyAxOC4yNjlMMzAuOTEgMjkuOTQ2IDE2LjU2NyA0NC4yODcgMTIgMzkuNzJsMTguOTA5LTE4LjkwOSAxMC44NjcgMTAuODY3IDEzLjcwMi0xMy43MDF6IiBmaWxsPSIjMjQ1RUZGIi8+PC9zdmc+"
+									},
+									{
+										"value": 3,
+										"label": "图标4",
+										"src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODEiIGhlaWdodD0iNTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0iIzI0NUVGRiI+PHBhdGggZD0iTTYwLjQ4OCAyNi45MzVsMi45MS02LjM2Ni0yNC45OC0xMS40Mi0yNC43NTcgMTEuNDI1IDIuOTMzIDYuMzU2IDIxLjgzOC0xMC4wNzh6Ii8+PHBhdGggZD0iTTYwLjM2IDQzLjk4bDIuOTEtNi4zNjYtMjQuOTgtMTEuNDItMjQuNzU3IDExLjQyNSAyLjkzNCA2LjM1NiAyMS44MzgtMTAuMDc4eiIvPjwvZz48L3N2Zz4="
+									},
+									{
+										"value": 4,
+										"label": "图标5",
+										"src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODEiIGhlaWdodD0iNTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTU3LjMzMyAxOS40NDRWNDdoLTcuMTFWMTkuNDQ0aC0yLjY2N0w1My43NzggNyA2MCAxOS40NDRoLTIuNjY3ek0yMCAzNC41NTZoNy4xMTFWNDdIMjBWMzQuNTU2em0xNS4xMTEtOC44OWg3LjExMVY0N2gtNy4xMVYyNS42Njd6IiBmaWxsPSIjMjQ1RUZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4="
+									}
+								],
+								"default": 0
+							},
+							"arrowFontSize": {
+								"name": "图标大小",
+								"type": "stepper",
+								"default": 20,
+								"step": 1,
+								"col": 12,
+								"suffix": "px"
+							},
+							"iconColor": {
+								"name": "图标颜色",
+								"type": "suite",
+								"children": {
+									"increaseColor": {
+										"name": "上升",
+										"type": "color",
+										"default": "#db422a",
+										"col": 24
+									},
+									"flatColor": {
+										"name": "持平",
+										"type": "color",
+										"default": "orange",
+										"col": 24
+									},
+									"declineColor": {
+										"name": "下降",
+										"type": "color",
+										"default": "green",
+										"col": 24
+									}
+								}
+							},
+							"syncTextColor": {
+								"name": "是否同步文字颜色",
+								"type": "switch",
+								"default": true
+							}
+						}
+					},
+					"number": {
+						"name": "数值",
+						"type": "menuChild",
+						"children": {
+							"numberStyle": {
+								"name": "内容样式",
+								"type": "font",
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontSize": 20,
+									"fontWeight": "normal",
+									"color": "#db422a"
+								}
+							},
+							"rounding": {
+								"type": "boolean",
+								"name": "数据四舍五入",
+								"default": true
+							},
+							"decimal": {
+								"type": "number",
+								"name": "小数点位数",
+								"default": 2,
+								"range": [
+									0,
+									10
+								],
+								"step": 1,
+								"show": [
+									[
+										"rounding",
+										"$eq",
+										false
+									]
+								]
+							},
+							"baseNumber": {
+								"name": "基础值",
+								"type": "stepper",
+								"step": 1,
+								"default": 0,
+								"description": "以此数值作为基础，来计算图标走势，默认以'0'为基础值（优先使用数据中的初始值）",
+								"dataField": "base"
+							},
+							"thousandBit": {
+								"type": "suite",
+								"name": "千分位",
+								"enableHide": true,
+								"children": {
+									"thousandBitSign": {
+										"type": "text",
+										"name": "分隔符符号",
+										"default": ",",
+										"description": "分隔符最长一位，超出一位时取第一位，无法以数字作为分隔符。"
+									}
+								}
+							},
+							"suffix": {
+								"name": "数值后缀",
+								"type": "text",
+								"default": "%"
+							},
+							"legalJson": {
+								"name": "显示",
+								"type": "switch",
+								"description": "以此判断不合法数据的显示，如果为合法数据则忽略此项",
+								"default": true
+							}
+						}
+					}
+				}
+			},
+			"iconResourceWoff": {
+				"name": "图标资源woff",
+				"type": "hidden",
+				"default": "//at.alicdn.com/t/font_1573938_zxxlvwf7dge.woff"
+			}
+		},
+		"events": {
+			"click": {
+				"description": "当点击时",
+				"fields": {
+					"value": {
+						"type": "string | number",
+						"name": "数值",
+						"optional": true,
+						"description": "数值"
+					},
+					"base": {
+						"type": "string | number",
+						"name": "基础值",
+						"optional": true,
+						"description": "基础值"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": 12,
+					"base": 0
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,189 @@
+{
+	"name": "datav-engine-skybox",
+	"version": "0.0.9",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "2.0.3"
+	},
+	"datav": {
+		"cn_name": "天空盒层",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"textureType": {
+				"name": "贴图类型",
+				"type": "options",
+				"default": "cube",
+				"options": [
+					{
+						"name": "立方体",
+						"value": "cube"
+					},
+					{
+						"name": "球形",
+						"value": "equirect"
+					}
+				]
+			},
+			"mapEquirect": {
+				"show": [
+					[
+						"textureType",
+						"$eq",
+						"equirect"
+					]
+				],
+				"name": "贴图",
+				"type": "string",
+				"default": "https://img.alicdn.com/tfs/TB14Mk.ymzqK1RjSZFjXXblCFXa-1024-512.png"
+			},
+			"mapPx": {
+				"show": [
+					[
+						"textureType",
+						"$eq",
+						"cube"
+					]
+				],
+				"name": "px",
+				"type": "string",
+				"default": "https://img.alicdn.com/tfs/TB1t5DCbvDH8KJjy1XcXXcpdXXa-3840-3840.png"
+			},
+			"mapNx": {
+				"show": [
+					[
+						"textureType",
+						"$eq",
+						"cube"
+					]
+				],
+				"name": "nx",
+				"type": "string",
+				"default": "https://img.alicdn.com/tfs/TB1vwhfXnhSXuNjy1XdXXXYvXXa-3840-3840.png"
+			},
+			"mapPy": {
+				"show": [
+					[
+						"textureType",
+						"$eq",
+						"cube"
+					]
+				],
+				"name": "py",
+				"type": "string",
+				"default": "https://img.alicdn.com/tfs/TB1AwhfXnhSXuNjy1XdXXXYvXXa-3840-3840.png"
+			},
+			"mapNy": {
+				"show": [
+					[
+						"textureType",
+						"$eq",
+						"cube"
+					]
+				],
+				"name": "ny",
+				"type": "string",
+				"default": "https://img.alicdn.com/tfs/TB1DwhfXnhSXuNjy1XdXXXYvXXa-3840-3840.png"
+			},
+			"mapPz": {
+				"show": [
+					[
+						"textureType",
+						"$eq",
+						"cube"
+					]
+				],
+				"name": "pz",
+				"type": "string",
+				"default": "https://img.alicdn.com/tfs/TB1EgrsbBfH8KJjy1XbXXbLdXXa-3840-3840.png"
+			},
+			"mapNz": {
+				"show": [
+					[
+						"textureType",
+						"$eq",
+						"cube"
+					]
+				],
+				"name": "nz",
+				"type": "string",
+				"default": "https://img.alicdn.com/tfs/TB1BwrsbBfH8KJjy1XbXXbLdXXa-3840-3840.png"
+			},
+			"size": {
+				"name": "尺寸",
+				"type": "number",
+				"default": 10000,
+				"range": [
+					10000,
+					500000
+				],
+				"step": 0.01
+			}
+		},
+		"api_data": {},
+		"apis": {},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1hyUqAFYqK1RjSZLeXXbXppXa-180-180.png"
+	}
+}

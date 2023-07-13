@@ -1,0 +1,1299 @@
+{
+	"name": "@echarts/echarts-sankey",
+	"version": "0.0.21",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"lodash": "4.6.1",
+		"jquery": "2.1.4",
+		"echarts": "4.4.0"
+	},
+	"datav": {
+		"cn_name": "ECharts 桑基图",
+		"icon": "//img.alicdn.com/tfs/TB16Y6qlQT2gK0jSZPcXXcKkpXa-368-208.png",
+		"protocol": 2,
+		"level": 1,
+		"type": [
+			"regular_sankey",
+			"DataV-6:regular_relation_sankey"
+		],
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "40",
+			"minHeight": "20"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"nodes": {
+						"description": "节点信息",
+						"type": "array",
+						"children": {
+							"name": {
+								"description": "名称",
+								"type": "string"
+							}
+						}
+					},
+					"links": {
+						"description": "边信息",
+						"type": "array",
+						"children": {
+							"value": {
+								"description": "值",
+								"type": "number"
+							},
+							"source": {
+								"description": "原节点",
+								"type": "string"
+							},
+							"target": {
+								"description": "目标节点",
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		},
+		"config": {
+			"renderer": {
+				"name": "渲染引擎",
+				"type": "select",
+				"default": "canvas",
+				"options": [
+					{
+						"canvas": "canvas"
+					},
+					{
+						"svg": "svg"
+					}
+				],
+				"handler": "switchRenderer"
+			},
+			"_series": {
+				"name": "全局样式",
+				"type": "group",
+				"fold": true,
+				"children": {
+					"margin": {
+						"type": "margin",
+						"name": "自定义边距",
+						"default": {
+							"top": 0,
+							"bottom": 0,
+							"left": 0,
+							"right": 0
+						}
+					},
+					"nodeAlign": {
+						"name": "水平位置",
+						"type": "select",
+						"options": [
+							{
+								"name": "自动",
+								"value": "justify"
+							},
+							{
+								"name": "左对齐",
+								"value": "left"
+							},
+							{
+								"name": "右对齐",
+								"value": "right"
+							}
+						],
+						"default": "justify"
+					},
+					"nodeWidth": {
+						"name": "节点宽度",
+						"type": "number",
+						"step": 1,
+						"default": 16
+					},
+					"nodeGap": {
+						"name": "节点间隔",
+						"type": "number",
+						"step": 1,
+						"default": 6
+					},
+					"layoutIterations": {
+						"name": "布局迭代次数",
+						"type": "number",
+						"step": 1,
+						"default": 48
+					},
+					"draggable": {
+						"name": "可拖拽",
+						"type": "boolean",
+						"default": true
+					},
+					"focusNodeAdjacency": {
+						"name": "交互高亮",
+						"type": "select",
+						"default": "allEdges",
+						"options": [
+							{
+								"name": "无",
+								"value": null
+							},
+							{
+								"name": "高亮上下游邻接边",
+								"value": "allEdges"
+							},
+							{
+								"name": "高亮下游邻接边",
+								"value": "outEdges"
+							},
+							{
+								"name": "高亮上游邻接边",
+								"value": "inEdges"
+							}
+						]
+					},
+					"label": {
+						"name": "标签",
+						"type": "group",
+						"fold": true,
+						"children": {
+							"show": {
+								"name": "显示",
+								"type": "boolean",
+								"default": false
+							},
+							"position": {
+								"name": "位置",
+								"type": "select",
+								"options": [
+									{
+										"name": "top",
+										"value": "top"
+									},
+									{
+										"name": "left",
+										"value": "left"
+									},
+									{
+										"name": "right",
+										"value": "right"
+									},
+									{
+										"name": "bottom",
+										"value": "bottom"
+									},
+									{
+										"name": "inside",
+										"value": "inside"
+									},
+									{
+										"name": "insideLeft",
+										"value": "insideLeft"
+									},
+									{
+										"name": "insideRight",
+										"value": "insideRight"
+									},
+									{
+										"name": "insideTop",
+										"value": "insideTop"
+									},
+									{
+										"name": "insideBottom",
+										"value": "insideBottom"
+									},
+									{
+										"name": "insideTopLeft",
+										"value": "insideTopLeft"
+									},
+									{
+										"name": "insideBottomLeft",
+										"value": "insideBottomLeft"
+									},
+									{
+										"name": "insideTopRight",
+										"value": "insideTopRight"
+									},
+									{
+										"name": "insideBottomRight",
+										"value": "insideBottomRight"
+									}
+								],
+								"default": "right"
+							},
+							"distance": {
+								"name": "定位距离",
+								"type": "number",
+								"step": 1,
+								"default": 5
+							},
+							"rotate": {
+								"name": "旋转",
+								"type": "number",
+								"step": 1,
+								"default": 0,
+								"description": "从 -90 度到 90 度。正值是逆时针。"
+							},
+							"color": {
+								"name": "颜色",
+								"type": "multicolor",
+								"default": {
+									"style": "single",
+									"value": "#fff"
+								}
+							},
+							"fontStyle": {
+								"name": "字体样式",
+								"type": "select",
+								"options": [
+									{
+										"name": "normal",
+										"value": "normal"
+									},
+									{
+										"name": "italic",
+										"value": "italic"
+									},
+									{
+										"name": "oblique",
+										"value": "oblique"
+									}
+								],
+								"default": "normal"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								],
+								"default": "normal"
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"step": 1,
+								"default": 12
+							}
+						}
+					},
+					"itemStyle": {
+						"name": "元素样式",
+						"type": "group",
+						"fold": true,
+						"children": {
+							"borderColor": {
+								"name": "边框色",
+								"type": "multicolor",
+								"default": {
+									"style": "single",
+									"value": "rgba(170, 170, 170, 0)"
+								}
+							},
+							"borderWidth": {
+								"name": "边框粗细",
+								"type": "number",
+								"step": 1,
+								"default": 1
+							},
+							"opacity": {
+								"name": "透明度",
+								"type": "number",
+								"range": [
+									0,
+									1
+								],
+								"default": 1
+							}
+						}
+					},
+					"lineStyle": {
+						"name": "线样式",
+						"type": "group",
+						"fold": true,
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "group",
+								"fold": true,
+								"children": {
+									"color-type": {
+										"name": "取色方式",
+										"type": "select",
+										"options": [
+											{
+												"name": "与source相同",
+												"value": "source"
+											},
+											{
+												"name": "与target相同",
+												"value": "target"
+											},
+											{
+												"name": "自定义",
+												"value": "user-defined"
+											}
+										],
+										"default": "source"
+									},
+									"defined-color": {
+										"name": "自定义颜色",
+										"type": "multicolor",
+										"show": [
+											[
+												"color-type",
+												"$eq",
+												"user-defined"
+											]
+										],
+										"default": {
+											"style": "single",
+											"value": "#333"
+										}
+									}
+								}
+							},
+							"opacity": {
+								"name": "透明度",
+								"type": "number",
+								"range": [
+									0,
+									1
+								],
+								"default": 0.2
+							},
+							"curveness": {
+								"name": "曲度",
+								"type": "number",
+								"step": 0.01,
+								"default": 0.4
+							}
+						}
+					},
+					"tooltip": {
+						"name": "提示框",
+						"type": "group",
+						"fold": true,
+						"children": {
+							"show": {
+								"name": "显示",
+								"type": "boolean",
+								"default": true
+							},
+							"backgroundColor": {
+								"name": "背景色",
+								"type": "multicolor",
+								"default": {
+									"style": "single",
+									"value": "rgba(50,50,50,0.7)"
+								}
+							},
+							"textStyle": {
+								"name": "文本样式",
+								"type": "group",
+								"fold": true,
+								"children": {
+									"color": {
+										"name": "颜色",
+										"type": "multicolor",
+										"default": {
+											"style": "single",
+											"value": "#fff"
+										}
+									},
+									"fontStyle": {
+										"name": "字体样式",
+										"type": "select",
+										"options": [
+											{
+												"name": "normal",
+												"value": "normal"
+											},
+											{
+												"name": "italic",
+												"value": "italic"
+											},
+											{
+												"name": "oblique",
+												"value": "oblique"
+											}
+										],
+										"default": "normal"
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										],
+										"default": "normal"
+									},
+									"fontFamily": {
+										"name": "字体",
+										"type": "search",
+										"default": "Microsoft Yahei",
+										"range": [
+											{
+												"微软雅黑": "Microsoft Yahei"
+											},
+											{
+												"宋体": "SimSun"
+											},
+											{
+												"黑体": "SimHei"
+											},
+											{
+												"隶书": "LiSu"
+											},
+											{
+												"幼圆": "YouYuan"
+											},
+											"tahoma",
+											"arial",
+											"sans-serif"
+										],
+										"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+									},
+									"fontSize": {
+										"name": "字号",
+										"type": "number",
+										"step": 1,
+										"default": 12
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"color": {
+				"name": "调色盘",
+				"type": "array",
+				"fold": true,
+				"default": [
+					{
+						"color": {
+							"style": "single",
+							"value": "#a3f6ff"
+						}
+					},
+					{
+						"color": {
+							"style": "single",
+							"value": "#3dabff"
+						}
+					},
+					{
+						"color": {
+							"style": "single",
+							"value": "#2483ff"
+						}
+					},
+					{
+						"color": {
+							"style": "single",
+							"value": "#0a73ff"
+						}
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "调色盘<%=i+1%>",
+					"child": {
+						"color": {
+							"name": "色值",
+							"type": "multicolor",
+							"default": {
+								"style": "single",
+								"value": "#333"
+							}
+						}
+					}
+				}
+			},
+			"animation": {
+				"name": "动画",
+				"type": "boolean",
+				"default": true
+			},
+			"animationDuration": {
+				"name": "动画时长",
+				"type": "number",
+				"step": 1,
+				"default": 1000
+			},
+			"animationEasing": {
+				"name": "缓动效果",
+				"type": "text",
+				"default": "cubicOut",
+				"description": "初始动画的缓动效果。不同的缓动效果可以参考: https://www.echartsjs.com/gallery/editor.html?c=line-easing"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"nodes": [
+						{
+							"name": "Agricultural 'waste'"
+						},
+						{
+							"name": "Bio-conversion"
+						},
+						{
+							"name": "Liquid"
+						},
+						{
+							"name": "Losses"
+						},
+						{
+							"name": "Solid"
+						},
+						{
+							"name": "Gas"
+						},
+						{
+							"name": "Biofuel imports"
+						},
+						{
+							"name": "Biomass imports"
+						},
+						{
+							"name": "Coal imports"
+						},
+						{
+							"name": "Coal"
+						},
+						{
+							"name": "Coal reserves"
+						},
+						{
+							"name": "District heating"
+						},
+						{
+							"name": "Industry"
+						},
+						{
+							"name": "Heating and cooling - commercial"
+						},
+						{
+							"name": "Heating and cooling - homes"
+						},
+						{
+							"name": "Electricity grid"
+						},
+						{
+							"name": "Over generation / exports"
+						},
+						{
+							"name": "H2 conversion"
+						},
+						{
+							"name": "Road transport"
+						},
+						{
+							"name": "Agriculture"
+						},
+						{
+							"name": "Rail transport"
+						},
+						{
+							"name": "Lighting & appliances - commercial"
+						},
+						{
+							"name": "Lighting & appliances - homes"
+						},
+						{
+							"name": "Gas imports"
+						},
+						{
+							"name": "Ngas"
+						},
+						{
+							"name": "Gas reserves"
+						},
+						{
+							"name": "Thermal generation"
+						},
+						{
+							"name": "Geothermal"
+						},
+						{
+							"name": "H2"
+						},
+						{
+							"name": "Hydro"
+						},
+						{
+							"name": "International shipping"
+						},
+						{
+							"name": "Domestic aviation"
+						},
+						{
+							"name": "International aviation"
+						},
+						{
+							"name": "National navigation"
+						},
+						{
+							"name": "Marine algae"
+						},
+						{
+							"name": "Nuclear"
+						},
+						{
+							"name": "Oil imports"
+						},
+						{
+							"name": "Oil"
+						},
+						{
+							"name": "Oil reserves"
+						},
+						{
+							"name": "Other waste"
+						},
+						{
+							"name": "Pumped heat"
+						},
+						{
+							"name": "Solar PV"
+						},
+						{
+							"name": "Solar Thermal"
+						},
+						{
+							"name": "Solar"
+						},
+						{
+							"name": "Tidal"
+						},
+						{
+							"name": "UK land based bioenergy"
+						},
+						{
+							"name": "Wave"
+						},
+						{
+							"name": "Wind"
+						}
+					],
+					"links": [
+						{
+							"source": "Agricultural 'waste'",
+							"target": "Bio-conversion",
+							"value": 124.729
+						},
+						{
+							"source": "Bio-conversion",
+							"target": "Liquid",
+							"value": 0.597
+						},
+						{
+							"source": "Bio-conversion",
+							"target": "Losses",
+							"value": 26.862
+						},
+						{
+							"source": "Bio-conversion",
+							"target": "Solid",
+							"value": 280.322
+						},
+						{
+							"source": "Bio-conversion",
+							"target": "Gas",
+							"value": 81.144
+						},
+						{
+							"source": "Biofuel imports",
+							"target": "Liquid",
+							"value": 35
+						},
+						{
+							"source": "Biomass imports",
+							"target": "Solid",
+							"value": 35
+						},
+						{
+							"source": "Coal imports",
+							"target": "Coal",
+							"value": 11.606
+						},
+						{
+							"source": "Coal reserves",
+							"target": "Coal",
+							"value": 63.965
+						},
+						{
+							"source": "Coal",
+							"target": "Solid",
+							"value": 75.571
+						},
+						{
+							"source": "District heating",
+							"target": "Industry",
+							"value": 10.639
+						},
+						{
+							"source": "District heating",
+							"target": "Heating and cooling - commercial",
+							"value": 22.505
+						},
+						{
+							"source": "District heating",
+							"target": "Heating and cooling - homes",
+							"value": 46.184
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Over generation / exports",
+							"value": 104.453
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Heating and cooling - homes",
+							"value": 113.726
+						},
+						{
+							"source": "Electricity grid",
+							"target": "H2 conversion",
+							"value": 27.14
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Industry",
+							"value": 342.165
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Road transport",
+							"value": 37.797
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Agriculture",
+							"value": 4.412
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Heating and cooling - commercial",
+							"value": 40.858
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Losses",
+							"value": 56.691
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Rail transport",
+							"value": 7.863
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Lighting & appliances - commercial",
+							"value": 90.008
+						},
+						{
+							"source": "Electricity grid",
+							"target": "Lighting & appliances - homes",
+							"value": 93.494
+						},
+						{
+							"source": "Gas imports",
+							"target": "Ngas",
+							"value": 40.719
+						},
+						{
+							"source": "Gas reserves",
+							"target": "Ngas",
+							"value": 82.233
+						},
+						{
+							"source": "Gas",
+							"target": "Heating and cooling - commercial",
+							"value": 0.129
+						},
+						{
+							"source": "Gas",
+							"target": "Losses",
+							"value": 1.401
+						},
+						{
+							"source": "Gas",
+							"target": "Thermal generation",
+							"value": 151.891
+						},
+						{
+							"source": "Gas",
+							"target": "Agriculture",
+							"value": 2.096
+						},
+						{
+							"source": "Gas",
+							"target": "Industry",
+							"value": 48.58
+						},
+						{
+							"source": "Geothermal",
+							"target": "Electricity grid",
+							"value": 7.013
+						},
+						{
+							"source": "H2 conversion",
+							"target": "H2",
+							"value": 20.897
+						},
+						{
+							"source": "H2 conversion",
+							"target": "Losses",
+							"value": 6.242
+						},
+						{
+							"source": "H2",
+							"target": "Road transport",
+							"value": 20.897
+						},
+						{
+							"source": "Hydro",
+							"target": "Electricity grid",
+							"value": 6.995
+						},
+						{
+							"source": "Liquid",
+							"target": "Industry",
+							"value": 121.066
+						},
+						{
+							"source": "Liquid",
+							"target": "International shipping",
+							"value": 128.69
+						},
+						{
+							"source": "Liquid",
+							"target": "Road transport",
+							"value": 135.835
+						},
+						{
+							"source": "Liquid",
+							"target": "Domestic aviation",
+							"value": 14.458
+						},
+						{
+							"source": "Liquid",
+							"target": "International aviation",
+							"value": 206.267
+						},
+						{
+							"source": "Liquid",
+							"target": "Agriculture",
+							"value": 3.64
+						},
+						{
+							"source": "Liquid",
+							"target": "National navigation",
+							"value": 33.218
+						},
+						{
+							"source": "Liquid",
+							"target": "Rail transport",
+							"value": 4.413
+						},
+						{
+							"source": "Marine algae",
+							"target": "Bio-conversion",
+							"value": 4.375
+						},
+						{
+							"source": "Ngas",
+							"target": "Gas",
+							"value": 122.952
+						},
+						{
+							"source": "Nuclear",
+							"target": "Thermal generation",
+							"value": 839.978
+						},
+						{
+							"source": "Oil imports",
+							"target": "Oil",
+							"value": 504.287
+						},
+						{
+							"source": "Oil reserves",
+							"target": "Oil",
+							"value": 107.703
+						},
+						{
+							"source": "Oil",
+							"target": "Liquid",
+							"value": 611.99
+						},
+						{
+							"source": "Other waste",
+							"target": "Solid",
+							"value": 56.587
+						},
+						{
+							"source": "Other waste",
+							"target": "Bio-conversion",
+							"value": 77.81
+						},
+						{
+							"source": "Pumped heat",
+							"target": "Heating and cooling - homes",
+							"value": 193.026
+						},
+						{
+							"source": "Pumped heat",
+							"target": "Heating and cooling - commercial",
+							"value": 70.672
+						},
+						{
+							"source": "Solar PV",
+							"target": "Electricity grid",
+							"value": 59.901
+						},
+						{
+							"source": "Solar Thermal",
+							"target": "Heating and cooling - homes",
+							"value": 19.263
+						},
+						{
+							"source": "Solar",
+							"target": "Solar Thermal",
+							"value": 19.263
+						},
+						{
+							"source": "Solar",
+							"target": "Solar PV",
+							"value": 59.901
+						},
+						{
+							"source": "Solid",
+							"target": "Agriculture",
+							"value": 0.882
+						},
+						{
+							"source": "Solid",
+							"target": "Thermal generation",
+							"value": 400.12
+						},
+						{
+							"source": "Solid",
+							"target": "Industry",
+							"value": 46.477
+						},
+						{
+							"source": "Thermal generation",
+							"target": "Electricity grid",
+							"value": 525.531
+						},
+						{
+							"source": "Thermal generation",
+							"target": "Losses",
+							"value": 787.129
+						},
+						{
+							"source": "Thermal generation",
+							"target": "District heating",
+							"value": 79.329
+						},
+						{
+							"source": "Tidal",
+							"target": "Electricity grid",
+							"value": 9.452
+						},
+						{
+							"source": "UK land based bioenergy",
+							"target": "Bio-conversion",
+							"value": 182.01
+						},
+						{
+							"source": "Wave",
+							"target": "Electricity grid",
+							"value": 19.013
+						},
+						{
+							"source": "Wind",
+							"target": "Electricity grid",
+							"value": 289.366
+						}
+					]
+				}
+			]
+		},
+		"events": {
+			"click": {
+				"name": "当点击数据项时",
+				"description": "当点击数据项时",
+				"type": "object",
+				"fields": {
+					"y": {
+						"description": "值",
+						"type": "number"
+					},
+					"x": {
+						"description": "类目",
+						"type": "string"
+					},
+					"s": {
+						"description": "系列",
+						"type": "string"
+					}
+				}
+			},
+			"node-click": {
+				"name": "当点击节点时",
+				"description": "当点击节点时",
+				"type": "object",
+				"fields": {
+					"name": {
+						"description": "节点名称",
+						"type": "object"
+					}
+				}
+			},
+			"edge-click": {
+				"name": "当点击连线时",
+				"description": "当点击连线时",
+				"type": "object",
+				"fields": {
+					"source": {
+						"description": "源节点",
+						"type": "object"
+					},
+					"target": {
+						"description": "目标节点",
+						"type": "object"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"highlight": {
+				"name": "高亮显示",
+				"description": "通过seriesName或者seriesIndex指定系列。如果要再指定某个数据可以再指定dataIndex或者name",
+				"type": "object",
+				"fields": {
+					"seriesName": {
+						"name": "系列名",
+						"description": "系列名",
+						"optional": true,
+						"type": "string"
+					},
+					"seriesIndex": {
+						"name": "系列索引",
+						"description": "系列索引",
+						"optional": true,
+						"type": "number"
+					},
+					"dataIndex": {
+						"name": "数据索引",
+						"description": "数据索引",
+						"optional": true,
+						"type": "number"
+					},
+					"name": {
+						"name": "数据名",
+						"description": "数据名",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			},
+			"downplay": {
+				"name": "取消高亮",
+				"description": "通过seriesName或者seriesIndex指定系列。如果要再指定某个数据可以再指定dataIndex或者name",
+				"type": "object",
+				"fields": {
+					"seriesName": {
+						"name": "系列名",
+						"description": "系列名",
+						"optional": true,
+						"type": "string"
+					},
+					"seriesIndex": {
+						"name": "系列索引",
+						"description": "系列索引",
+						"optional": true,
+						"type": "number"
+					},
+					"dataIndex": {
+						"name": "数据索引",
+						"description": "数据索引",
+						"optional": true,
+						"type": "number"
+					},
+					"name": {
+						"name": "数据名",
+						"description": "数据名",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			},
+			"showTip": {
+				"name": "显示提示框",
+				"type": "object",
+				"fields": {
+					"dataIndex": {
+						"name": "数据索引",
+						"description": "数据索引",
+						"optional": true,
+						"type": "number"
+					},
+					"name": {
+						"name": "数据名",
+						"description": "数据名",
+						"optional": true,
+						"type": "string"
+					},
+					"x": {
+						"name": "横坐标位置",
+						"description": "横坐标位置",
+						"type": "number"
+					},
+					"y": {
+						"name": "竖坐标位置",
+						"description": "竖坐标位置",
+						"type": "number"
+					}
+				}
+			},
+			"hideTip": {
+				"name": "隐藏提示框"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1K6zqlHj1gK0jSZFuXXcrHpXa-332-144.png"
+	}
+}

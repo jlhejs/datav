@@ -1,0 +1,24 @@
+{
+  "name": "datav-vue",
+  "version": "0.0.2",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "dayjs": "^1.10.8",
+    "echarts": "^5.3.0",
+    "lodash-es": "^4.17.21",
+    "shortid": "^2.2.16",
+    "vue": "^3.2.31",
+    "vue-echarts": "^6.0.2"
+  },
+  "files": [
+    ""
+  ],
+  "main": "./datav-vue.umd.js",
+  "module": "./datav-vue.es.js",
+  "exports": {
+    ".": {
+      "import": "./datav-vue.es.js",
+      "require": "./datav-vue.umd.js"
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+	"name": "aliplayer",
+	"version": "1.2.0",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "阿里云流播放器",
+		"icon": "//img.alicdn.com/imgextra/i4/O1CN01z4BjYM1PtKNf8TSIz_!!6000000001898-2-tps-368-208.png",
+		"thumbnail": "//img.alicdn.com/imgextra/i4/O1CN01WYxJIH1C8zIiDPIAu_!!6000000000037-2-tps-332-144.png",
+		"protocol": 2,
+		"type": [
+			"media_video",
+			"DataV-6:media"
+		],
+		"level": 1,
+		"analysis": {
+			"apis": "source"
+		},
+		"view": {
+			"width": "500",
+			"height": "400",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"name": "接口描述",
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"source": {
+						"name": "视频链接",
+						"type": "string",
+						"description": "视频链接"
+					}
+				}
+			}
+		},
+		"config": {
+			"palyMode": {
+				"name": "播放模式",
+				"type": "buttonRadio",
+				"default": "H5",
+				"options": [
+					{
+						"name": "H5",
+						"value": "H5"
+					},
+					{
+						"name": "Flash",
+						"value": "Flash"
+					}
+				]
+			},
+			"source": {
+				"name": "视频链接",
+				"type": "text",
+				"default": "//player.alicdn.com/video/editor.mp4"
+			},
+			"hls": {
+				"type": "hidden",
+				"default": "https://g.alicdn.com/de/prismplayer/2.9.20/hls/aliplayer-hls-min.js"
+			},
+			"swf": {
+				"type": "hidden",
+				"default": "https://g.alicdn.com/de/prismplayer-flash/2.8.2/PrismPlayer.swf"
+			},
+			"flv": {
+				"type": "hidden",
+				"default": "https://g.alicdn.com/de/prismplayer/2.9.20/flv/aliplayer-flv-min.js"
+			},
+			"cover": {
+				"name": "封面图片",
+				"type": "image",
+				"default": "//img.alicdn.com/tps/TB1EXIhOFXXXXcIaXXXXXXXXXXX-760-340.jpg"
+			},
+			"playSet": {
+				"name": "播放设置",
+				"type": "suite",
+				"children": {
+					"autoPlay": {
+						"type": "boolean",
+						"default": true,
+						"name": "自动播放",
+						"col": 12
+					},
+					"isLoop": {
+						"type": "boolean",
+						"default": true,
+						"name": "循环播放",
+						"col": 12
+					}
+				}
+			},
+			"isLive": {
+				"type": "boolean",
+				"default": false,
+				"name": "直播",
+				"showInPanel": {
+					"conditions": [
+						[
+							".palyMode",
+							"$eq",
+							"H5"
+						]
+					]
+				}
+			},
+			"volumeSet": {
+				"name": "音量设置",
+				"type": "suite",
+				"showInPanel": {
+					"conditions": [
+						[
+							".palyMode",
+							"$eq",
+							"H5"
+						]
+					]
+				},
+				"children": {
+					"isMuted": {
+						"name": "是否静音",
+						"type": "boolean",
+						"default": false,
+						"col": 8
+					},
+					"volume": {
+						"type": "stepper",
+						"default": 0,
+						"name": "音量大小(%)",
+						"step": 1,
+						"col": 16,
+						"range": [
+							0,
+							100
+						],
+						"showInPanel": {
+							"conditions": [
+								[
+									".isMuted",
+									"$eq",
+									false
+								]
+							]
+						}
+					}
+				}
+			},
+			"controlSet": {
+				"name": "控制条设置",
+				"type": "suite",
+				"showInPanel": {
+					"conditions": [
+						[
+							".palyMode",
+							"$eq",
+							"H5"
+						]
+					]
+				},
+				"children": {
+					"controls": {
+						"type": "buttonRadio",
+						"name": "触发方式",
+						"default": "hover",
+						"options": [
+							{
+								"name": "悬浮",
+								"value": "hover"
+							},
+							{
+								"name": "点击",
+								"value": "click"
+							}
+						]
+					},
+					"showBarTime": {
+						"name": "停留时间",
+						"type": "stepper",
+						"suffix": "ms",
+						"default": 50000,
+						"step": 1,
+						"showInPanel": {
+							"conditions": [
+								[
+									".controls",
+									"$eq",
+									"click"
+								]
+							]
+						}
+					}
+				}
+			},
+			"isFill": {
+				"name": "铺满",
+				"description": "如果视频的宽高比与内容框不相匹配，该视频将被拉伸以适应内容框",
+				"type": "boolean",
+				"default": false
+			}
+		},
+		"publicHandler": {
+			"videoPlay": {
+				"name": "开始播放",
+				"type": "null"
+			},
+			"videoPause": {
+				"name": "暂停播放",
+				"type": "null"
+			},
+			"videoEnded": {
+				"name": "结束播放",
+				"type": "null"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"source": "//player.alicdn.com/video/editor.mp4"
+				}
+			]
+		}
+	}
+}

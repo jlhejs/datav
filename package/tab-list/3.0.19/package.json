@@ -1,0 +1,749 @@
+{
+	"name": "tab-list",
+	"version": "3.0.19",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"datav-antd-adaptor": "4.0.3",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"react": "16.13.1",
+		"react-dom": "16.13.1"
+	},
+	"datav": {
+		"cn_name": "Tab列表",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB1b4jnlHr1gK0jSZR0XXbP8XXa-368-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1NhjplNv1gK0jSZFFXXb0sXXa-332-144.png",
+		"protocol": 2,
+		"type": [
+			"interact",
+			"DataV-6:control_select"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"supportTheme": true,
+		"view": {
+			"width": "300",
+			"height": "34",
+			"minWidth": "20",
+			"minHeight": "20",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"id": {
+						"description": "标签ID",
+						"type": "number"
+					},
+					"content": {
+						"description": "标签值",
+						"type": "string"
+					},
+					"imgSrc": {
+						"description": "图标地址",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"global": {
+						"name": "通用",
+						"type": "menuChild",
+						"children": {
+							"initValue": {
+								"name": "初始选中",
+								"type": "text",
+								"default": 1,
+								"description": "请填入期望初始化选中的标签ID"
+							},
+							"carousel": {
+								"name": "轮播",
+								"type": "suite",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": false
+									},
+									"duration": {
+										"name": "间隔时间",
+										"type": "stepper",
+										"default": 2000,
+										"suffix": "ms"
+									}
+								}
+							},
+							"queueMode": {
+								"name": "tab方向",
+								"type": "buttonRadio",
+								"options": [
+									{
+										"name": "水平",
+										"value": "hori"
+									},
+									{
+										"name": "垂直",
+										"value": "verti"
+									}
+								],
+								"default": "hori"
+							},
+							"globalStyle": {
+								"name": "tab样式",
+								"type": "suite",
+								"children": {
+									"borderRadius": {
+										"name": "圆角",
+										"type": "stepper",
+										"default": 0,
+										"step": 1,
+										"suffix": "px",
+										"min": 0,
+										"col": 12
+									},
+									"bgColor": {
+										"name": "背景色",
+										"type": "color",
+										"default": "rgba(0,0,0,0)",
+										"col": 12
+									}
+								}
+							},
+							"isScroll": {
+								"name": "尺寸自适应",
+								"type": "suite",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": false
+									},
+									"offsetX": {
+										"name": "水平边距",
+										"type": "stepper",
+										"default": 40,
+										"suffix": "px",
+										"step": 1,
+										"col": 12
+									},
+									"offsetY": {
+										"name": "垂直边距",
+										"type": "stepper",
+										"default": 8,
+										"step": 1,
+										"suffix": "px",
+										"col": 12
+									}
+								}
+							},
+							"alignment": {
+								"name": "文字排列",
+								"type": "buttonRadio",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "flex-start"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									},
+									{
+										"name": "右对齐",
+										"value": "flex-end"
+									}
+								],
+								"default": "center"
+							},
+							"imgSetting": {
+								"name": "tab图标",
+								"type": "suite",
+								"description": "可在数据中配置图标，图标key值为'imgSrc'",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"sizeW": {
+										"name": "宽度",
+										"type": "stepper",
+										"default": 20,
+										"suffix": "px",
+										"col": 12,
+										"step": 1
+									},
+									"sizeH": {
+										"name": "高度",
+										"type": "stepper",
+										"default": 20,
+										"suffix": "px",
+										"col": 12,
+										"step": 1
+									},
+									"direction": {
+										"name": "图标位置",
+										"type": "select",
+										"range": [
+											{
+												"name": "上方",
+												"value": "top"
+											},
+											{
+												"name": "下方",
+												"value": "bottom"
+											},
+											{
+												"name": "左侧",
+												"value": "left"
+											},
+											{
+												"name": "右侧",
+												"value": "right"
+											}
+										],
+										"default": "left",
+										"col": 12
+									},
+									"textMargin": {
+										"name": "距离文字间隔",
+										"type": "stepper",
+										"default": 0,
+										"suffix": "px",
+										"step": 1,
+										"col": 12
+									}
+								}
+							},
+							"buttonStyle": {
+								"name": "箭头按钮配置",
+								"type": "group",
+								"children": {
+									"buttonWidth": {
+										"name": "按钮宽度",
+										"type": "stepper",
+										"default": 20,
+										"suffix": "px",
+										"step": 1,
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.global.isScroll.show",
+													"$eq",
+													true
+												],
+												[
+													"options.global.queueMode",
+													"$eq",
+													"hori"
+												]
+											],
+											"logicalType": "$and"
+										}
+									},
+									"buttonHeight": {
+										"name": "按钮高度",
+										"type": "stepper",
+										"default": 20,
+										"suffix": "px",
+										"step": 1,
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.global.isScroll.show",
+													"$eq",
+													true
+												],
+												[
+													"options.global.queueMode",
+													"$eq",
+													"verti"
+												]
+											],
+											"logicalType": "$and"
+										}
+									},
+									"normalStyle": {
+										"name": "默认样式",
+										"type": "group",
+										"fold": false,
+										"children": {
+											"btnNormalTextStyle": {
+												"name": "箭头样式",
+												"type": "suite",
+												"children": {
+													"fontWeight": {
+														"name": "粗细",
+														"type": "select",
+														"default": "normal",
+														"options": [
+															{
+																"name": "normal",
+																"value": "normal"
+															},
+															{
+																"name": "bold",
+																"value": "bold"
+															},
+															{
+																"name": "bolder",
+																"value": "bolder"
+															},
+															{
+																"name": "lighter",
+																"value": "lighter"
+															},
+															{
+																"name": "100",
+																"value": "100"
+															},
+															{
+																"name": "200",
+																"value": "200"
+															},
+															{
+																"name": "300",
+																"value": "300"
+															},
+															{
+																"name": "400",
+																"value": "400"
+															},
+															{
+																"name": "500",
+																"value": "500"
+															},
+															{
+																"name": "600",
+																"value": "600"
+															},
+															{
+																"name": "700",
+																"value": "700"
+															},
+															{
+																"name": "800",
+																"value": "800"
+															},
+															{
+																"name": "900",
+																"value": "900"
+															}
+														],
+														"col": 12
+													},
+													"fontSize": {
+														"type": "stepper",
+														"name": "大小",
+														"default": 12,
+														"suffix": "px",
+														"step": 1,
+														"col": 12
+													},
+													"color": {
+														"name": "颜色",
+														"type": "fill",
+														"default": "rgb(144, 160, 174)"
+													}
+												}
+											},
+											"btnNormalBgColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgb(57, 65, 77)"
+											}
+										}
+									},
+									"hoverStyle": {
+										"name": "悬浮样式",
+										"type": "group",
+										"fold": false,
+										"children": {
+											"btnNormalHoverTextStyle": {
+												"name": "箭头样式",
+												"type": "suite",
+												"children": {
+													"fontWeight": {
+														"name": "粗细",
+														"type": "select",
+														"default": "normal",
+														"options": [
+															{
+																"name": "normal",
+																"value": "normal"
+															},
+															{
+																"name": "bold",
+																"value": "bold"
+															},
+															{
+																"name": "bolder",
+																"value": "bolder"
+															},
+															{
+																"name": "lighter",
+																"value": "lighter"
+															},
+															{
+																"name": "100",
+																"value": "100"
+															},
+															{
+																"name": "200",
+																"value": "200"
+															},
+															{
+																"name": "300",
+																"value": "300"
+															},
+															{
+																"name": "400",
+																"value": "400"
+															},
+															{
+																"name": "500",
+																"value": "500"
+															},
+															{
+																"name": "600",
+																"value": "600"
+															},
+															{
+																"name": "700",
+																"value": "700"
+															},
+															{
+																"name": "800",
+																"value": "800"
+															},
+															{
+																"name": "900",
+																"value": "900"
+															}
+														],
+														"col": 12
+													},
+													"fontSize": {
+														"type": "stepper",
+														"name": "大小",
+														"default": 12,
+														"suffix": "px",
+														"step": 1,
+														"col": 12
+													},
+													"color": {
+														"name": "颜色",
+														"type": "fill",
+														"default": "#40a9ff"
+													}
+												}
+											},
+											"btnNormalHoverBgColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgb(57, 65, 77)"
+											}
+										}
+									}
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											".isScroll.show",
+											"$eq",
+											true
+										]
+									]
+								}
+							}
+						}
+					},
+					"normal": {
+						"name": "未选中",
+						"type": "menuChild",
+						"children": {
+							"normalStyle": {
+								"name": "默认样式",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"normalTextStyle": {
+										"name": "文本样式",
+										"type": "font",
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontSize": 12,
+											"fontWeight": "normal",
+											"color": "rgb(144, 160, 174)"
+										}
+									},
+									"normalBgColor": {
+										"name": "背景色",
+										"type": "color",
+										"default": "rgb(57, 65, 77)"
+									}
+								}
+							},
+							"hoverStyle": {
+								"name": "悬浮样式",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"normalHoverTextStyle": {
+										"name": "文本样式",
+										"type": "font",
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontSize": 12,
+											"fontWeight": "normal",
+											"color": "#40a9ff"
+										}
+									},
+									"normalHoverBgColor": {
+										"name": "背景色",
+										"type": "color",
+										"default": "rgb(57, 65, 77)"
+									}
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											"options.global.isScroll.show",
+											"$eq",
+											false
+										]
+									]
+								}
+							}
+						}
+					},
+					"emphasis": {
+						"name": "选中",
+						"type": "menuChild",
+						"children": {
+							"underline": {
+								"name": "选中装饰条",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"show": {
+										"default": false
+									},
+									"underlineStyle": {
+										"name": "装饰线样式",
+										"type": "suite",
+										"children": {
+											"height": {
+												"name": "粗细",
+												"type": "stepper",
+												"default": 2,
+												"suffix": "px",
+												"col": 8,
+												"step": 1
+											},
+											"borderRadius": {
+												"name": "圆角",
+												"type": "stepper",
+												"default": 4,
+												"suffix": "px",
+												"step": 1,
+												"col": 8,
+												"min": 0
+											},
+											"backgroundColor": {
+												"name": "颜色",
+												"type": "color",
+												"default": "#f00",
+												"style": "simple",
+												"col": 8
+											}
+										}
+									},
+									"underlinePosHor": {
+										"name": "装饰线位置",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"name": "tab底部",
+												"value": "top"
+											},
+											{
+												"name": "tab顶部",
+												"value": "bottom"
+											}
+										],
+										"default": "top",
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.emphasis.underline.show",
+													"$eq",
+													true
+												],
+												[
+													"options.global.queueMode",
+													"$eq",
+													"hori"
+												]
+											]
+										}
+									},
+									"underlinePosVer": {
+										"name": "下划线位置",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"name": "tab左侧",
+												"value": "right"
+											},
+											{
+												"name": "tab右侧",
+												"value": "left"
+											}
+										],
+										"default": "right",
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.emphasis.underline.show",
+													"$eq",
+													true
+												],
+												[
+													"options.global.queueMode",
+													"$eq",
+													"verti"
+												]
+											]
+										}
+									}
+								}
+							},
+							"normalStyle": {
+								"name": "默认样式",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"emphasisTextStyle": {
+										"name": "文本样式",
+										"type": "font",
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontSize": 12,
+											"fontWeight": "normal",
+											"color": "rgb(255, 255, 255)"
+										}
+									},
+									"emphasisBgColor": {
+										"name": "背景色",
+										"type": "color",
+										"default": "rgb(10, 115, 255)"
+									}
+								}
+							},
+							"hoverStyle": {
+								"name": "悬浮样式",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"emphasisHoverTextStyle": {
+										"name": "文本样式",
+										"type": "font",
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontSize": 12,
+											"fontWeight": "normal",
+											"color": "#40a9ff"
+										}
+									},
+									"emphasisHoverBgColor": {
+										"name": "背景色",
+										"type": "color",
+										"default": "rgb(10, 115, 255)"
+									}
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											"options.global.isScroll.show",
+											"$eq",
+											false
+										]
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"id": 1,
+					"content": "TAB1"
+				},
+				{
+					"id": 2,
+					"content": "TAB2"
+				},
+				{
+					"id": 3,
+					"content": "TAB3"
+				}
+			]
+		},
+		"events": {
+			"handleClick": {
+				"description": "当点击Tab时",
+				"fields": {
+					"id": {
+						"description": "当前ID",
+						"type": "number"
+					},
+					"content": {
+						"description": "当前内容",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"select": {
+				"name": "设置选择项",
+				"type": "object",
+				"fields": {
+					"id": {
+						"name": "标签ID",
+						"description": "标签ID",
+						"type": "number",
+						"default": 1
+					}
+				}
+			},
+			"autoCarousel": {
+				"name": "开启轮播",
+				"description": "开启tab自动轮播",
+				"type": "object",
+				"fields": {
+					"duration": {
+						"name": "轮播时间",
+						"description": "轮播时间",
+						"type": "number",
+						"default": 2000
+					}
+				}
+			},
+			"closeAutoCarousel": {
+				"name": "关闭轮播",
+				"description": "关闭轮播"
+			}
+		}
+	}
+}

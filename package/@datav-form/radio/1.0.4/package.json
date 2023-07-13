@@ -1,0 +1,387 @@
+{
+	"name": "@datav-form/radio",
+	"version": "1.0.4",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"datav-antd-adaptor": "4.0.3",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"react": "16.13.1",
+		"react-dom": "16.13.1"
+	},
+	"datav": {
+		"cn_name": "单选框",
+		"icon": "//img.alicdn.com/tfs/TB1DnwZmKT2gK0jSZFvXXXnFXXa-368-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1R535mKH2gK0jSZJnXXaT1FXa-332-144.png",
+		"protocol": 2,
+		"level": 2,
+		"type": [
+			"interact",
+			"DataV-6:control_select"
+		],
+		"supportTheme": true,
+		"view": {
+			"width": "300",
+			"height": "24",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"value": {
+						"description": "按钮值"
+					},
+					"disabled": {
+						"description": "禁选"
+					}
+				}
+			}
+		},
+		"events": {
+			"handleClick": {
+				"description": "当点击单选按钮时",
+				"fields": {
+					"value": {
+						"type": "string | number",
+						"name": "选项值",
+						"optional": true,
+						"description": "选项值"
+					},
+					"disabled": {
+						"type": "boolean",
+						"name": "禁选",
+						"optional": true,
+						"description": "是否禁选"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"setFieldValue": {
+				"name": "设置当前单选框选中值",
+				"type": "object",
+				"fields": {
+					"value": {
+						"name": "值",
+						"type": "string",
+						"default": "A"
+					}
+				}
+			},
+			"getFieldValue": {
+				"name": "获取当前值",
+				"type": "null"
+			},
+			"resetField": {
+				"name": "清空组件到默认值",
+				"type": "null"
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"global": {
+						"name": "全局样式",
+						"type": "menuChild",
+						"children": {
+							"defaultValue": {
+								"name": "默认选中",
+								"type": "text",
+								"default": "C"
+							},
+							"queueMode": {
+								"name": "排列方式",
+								"type": "select",
+								"options": [
+									{
+										"name": "水平方向",
+										"value": "hori"
+									},
+									{
+										"name": "垂直方向",
+										"value": "verti"
+									}
+								],
+								"default": "hori"
+							},
+							"itemSize": {
+								"name": "按钮半径",
+								"type": "stepper",
+								"default": 12,
+								"step": 1,
+								"min": 0,
+								"suffix": "px"
+							},
+							"spaceBetween": {
+								"name": "间距",
+								"type": "suite",
+								"children": {
+									"groupMargin": {
+										"name": "选项间间距",
+										"type": "stepper",
+										"default": 10,
+										"step": 1,
+										"min": 0,
+										"suffix": "px",
+										"col": 12
+									},
+									"groupInnerMargin": {
+										"name": "选项内间距",
+										"type": "stepper",
+										"default": 0,
+										"step": 1,
+										"min": 0,
+										"suffix": "px",
+										"col": 12
+									}
+								}
+							}
+						}
+					},
+					"normal": {
+						"name": "普通样式",
+						"type": "menuChild",
+						"children": {
+							"normalTextStyle": {
+								"name": "文本样式",
+								"type": "font",
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontSize": 12,
+									"fontWeight": "normal",
+									"color": "rgb(144, 160, 174)"
+								}
+							},
+							"normalRadioOuter": {
+								"name": "按钮样式",
+								"type": "group",
+								"children": {
+									"background": {
+										"name": "背景色",
+										"type": "color",
+										"default": "#fff"
+									},
+									"normalBorderStyles": {
+										"name": "边框",
+										"type": "suite",
+										"children": {
+											"borderWidth": {
+												"name": "边框宽度",
+												"type": "stepper",
+												"min": 0,
+												"step": 1,
+												"suffix": "px",
+												"default": 1,
+												"col": 12
+											},
+											"borderColor": {
+												"name": "边框颜色",
+												"type": "color",
+												"default": "#d9d9d9",
+												"col": 12
+											},
+											"borderRadius": {
+												"name": "边框圆角",
+												"type": "stepper",
+												"min": 0,
+												"step": 1,
+												"suffix": "px",
+												"default": 100,
+												"col": 12
+											},
+											"borderStyle": {
+												"name": "线条类型",
+												"type": "select",
+												"default": "solid",
+												"col": 12,
+												"options": [
+													{
+														"name": "实线",
+														"value": "solid"
+													},
+													{
+														"name": "虚线",
+														"value": "dashed"
+													},
+													{
+														"name": "点线",
+														"value": "dotted"
+													},
+													{
+														"name": "双实线",
+														"value": "double"
+													},
+													{
+														"name": "雕刻效果",
+														"value": "groove"
+													},
+													{
+														"name": "浮雕效果",
+														"value": "ridge"
+													},
+													{
+														"name": "陷入效果",
+														"value": "inset"
+													},
+													{
+														"name": "突出效果",
+														"value": "outset"
+													}
+												]
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"emphasis": {
+						"name": "选中样式",
+						"type": "menuChild",
+						"children": {
+							"emphasisTextStyle": {
+								"name": "文本样式",
+								"type": "font",
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontSize": 12,
+									"fontWeight": "normal",
+									"color": "rgb(255, 255, 255)"
+								}
+							},
+							"emphasisRadioOuter": {
+								"name": "按钮外圈样式",
+								"type": "group",
+								"children": {
+									"background": {
+										"name": "背景色",
+										"type": "color",
+										"default": "#1890ff"
+									},
+									"shadowColor": {
+										"name": "阴影色",
+										"type": "color",
+										"default": "rgba(24, 144, 255, 0.08)"
+									},
+									"borderStyles": {
+										"name": "边框样式",
+										"type": "suite",
+										"children": {
+											"borderWidth": {
+												"name": "边框宽度",
+												"type": "stepper",
+												"min": 0,
+												"step": 1,
+												"suffix": "px",
+												"default": 1,
+												"col": 12
+											},
+											"borderColor": {
+												"name": "边框颜色",
+												"type": "color",
+												"default": "#1890ff",
+												"col": 12
+											},
+											"borderRadius": {
+												"name": "边框圆角",
+												"type": "stepper",
+												"step": 1,
+												"suffix": "px",
+												"min": 0,
+												"default": 100,
+												"col": 12
+											},
+											"borderStyle": {
+												"name": "线条类型",
+												"type": "select",
+												"default": "solid",
+												"col": 12,
+												"options": [
+													{
+														"name": "实线",
+														"value": "solid"
+													},
+													{
+														"name": "虚线",
+														"value": "dashed"
+													},
+													{
+														"name": "点线",
+														"value": "dotted"
+													},
+													{
+														"name": "双实线",
+														"value": "double"
+													},
+													{
+														"name": "雕刻效果",
+														"value": "groove"
+													},
+													{
+														"name": "浮雕效果",
+														"value": "ridge"
+													},
+													{
+														"name": "陷入效果",
+														"value": "inset"
+													},
+													{
+														"name": "突出效果",
+														"value": "outset"
+													}
+												]
+											}
+										}
+									}
+								}
+							},
+							"emphasisRadioInner": {
+								"name": "按钮内部样式",
+								"type": "group",
+								"children": {
+									"background": {
+										"name": "背景色",
+										"type": "color",
+										"default": "#79daff"
+									},
+									"borderRadius": {
+										"name": "边框圆角",
+										"type": "stepper",
+										"min": 0,
+										"suffix": "px",
+										"step": 1,
+										"default": 100
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": "A",
+					"disabled": true
+				},
+				{
+					"value": "B",
+					"disabled": false
+				},
+				{
+					"value": "C",
+					"disabled": false
+				},
+				{
+					"value": "D",
+					"disabled": false
+				}
+			]
+		}
+	}
+}

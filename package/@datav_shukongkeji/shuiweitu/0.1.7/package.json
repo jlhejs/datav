@@ -1,0 +1,301 @@
+{
+	"name": "@datav_shukongkeji/shuiweitu",
+	"version": "0.1.7",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"lodash": "4.6.1",
+		"d3-array": "1.2.0",
+		"d3-ease": "1.0.3",
+		"d3-format": "1.2.0",
+		"d3-selection": "1.1.0",
+		"d3-scale": "1.0.6",
+		"d3-shape": "1.2.0",
+		"d3-transition": "1.1.0"
+	},
+	"datav": {
+		"cn_name": "基本水位图",
+		"icon": "//img.alicdn.com/tfs/TB105vsXaagSKJjy0FbXXa.mVXa-280-210.png",
+		"protocol": 2,
+		"type": [
+			"regular_liquidfill"
+		],
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"value": {
+						"type": "number",
+						"description": "数值"
+					}
+				}
+			}
+		},
+		"config": {
+			"frame": {
+				"name": "外框",
+				"type": "group",
+				"children": {
+					"shape": {
+						"name": "形状",
+						"type": "select",
+						"default": "circle",
+						"options": [
+							{
+								"name": "圆形",
+								"value": "circle"
+							},
+							{
+								"name": "方形",
+								"value": "rect"
+							},
+							{
+								"name": "圆角方形",
+								"value": "roundRect"
+							}
+						]
+					},
+					"radius": {
+						"name": "半径",
+						"type": "number",
+						"default": 0.9,
+						"range": [
+							0,
+							1
+						]
+					},
+					"stroke": {
+						"name": "边框颜色",
+						"type": "color",
+						"default": "#294d99"
+					},
+					"strokeWidth": {
+						"name": "边框宽度",
+						"type": "number",
+						"default": 8
+					},
+					"fillGap": {
+						"name": "内部距离",
+						"type": "number",
+						"default": 12
+					}
+				}
+			},
+			"text": {
+				"name": "文字",
+				"type": "group",
+				"children": {
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#294d99"
+					},
+					"insideColor": {
+						"name": "内部颜色",
+						"type": "color",
+						"default": "#fff"
+					},
+					"fontSize": {
+						"name": "字号",
+						"type": "number",
+						"default": 50,
+						"range": [
+							10,
+							100
+						]
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "bold",
+						"options": [
+							{
+								"name": "normal",
+								"value": "normal"
+							},
+							{
+								"name": "bold",
+								"value": "bold"
+							},
+							{
+								"name": "bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							}
+						]
+					},
+					"position": {
+						"name": "高度位置",
+						"type": "number",
+						"default": 0.52,
+						"range": [
+							0,
+							1
+						]
+					},
+					"percentage": {
+						"name": "百分数显示",
+						"type": "select",
+						"default": 0,
+						"options": [
+							{
+								"name": "整数",
+								"value": 0
+							},
+							{
+								"name": "一位小数",
+								"value": 1
+							},
+							{
+								"name": "两位小数",
+								"value": 2
+							}
+						]
+					}
+				}
+			},
+			"wave": {
+				"name": "波浪",
+				"type": "group",
+				"children": {
+					"peaks": {
+						"name": "波峰个数",
+						"type": "number",
+						"default": 2,
+						"range": [
+							1,
+							10
+						]
+					},
+					"amplitude": {
+						"name": "振幅",
+						"type": "number",
+						"default": 0.15,
+						"range": [
+							0,
+							1
+						]
+					},
+					"phase": {
+						"name": "相位",
+						"type": "number",
+						"default": 90,
+						"range": [
+							0,
+							360
+						]
+					},
+					"period": {
+						"name": "周期(秒)",
+						"type": "number",
+						"default": 4,
+						"range": [
+							0.5,
+							60
+						]
+					},
+					"opacity": {
+						"name": "透明度",
+						"type": "number",
+						"default": 0.8,
+						"range": [
+							0,
+							1
+						]
+					},
+					"animation": {
+						"name": "动画",
+						"type": "group",
+						"children": {
+							"show": {
+								"name": "显示",
+								"type": "boolean",
+								"default": true
+							},
+							"direction": {
+								"name": "方向",
+								"type": "select",
+								"default": "ltr",
+								"options": [
+									{
+										"name": "从左到右",
+										"value": "ltr"
+									},
+									{
+										"name": "从右到左",
+										"value": "rtl"
+									}
+								]
+							},
+							"ease": {
+								"name": "变化效果",
+								"type": "select",
+								"default": "easeLinear",
+								"options": [
+									{
+										"name": "匀速",
+										"value": "easeLinear"
+									},
+									{
+										"name": "加速",
+										"value": "easeCubicIn"
+									},
+									{
+										"name": "减速",
+										"value": "easeCubicOut"
+									}
+								]
+							}
+						}
+					}
+				}
+			},
+			"series": {
+				"name": "系列",
+				"type": "group",
+				"children": {
+					"liquidColors": {
+						"name": "颜色",
+						"type": "array",
+						"default": [
+							"#294d99",
+							"#156acf"
+						],
+						"child": {
+							"name": "颜色<%= i + 1 %>",
+							"type": "color",
+							"default": "#294d99"
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": 0.6
+				},
+				{
+					"value": 0.4
+				}
+			]
+		}
+	}
+}

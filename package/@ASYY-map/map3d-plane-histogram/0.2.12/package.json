@@ -1,0 +1,233 @@
+{
+	"name": "map3d-plane-histogram",
+	"version": "0.2.12",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"dmap": "0.2.9"
+	},
+	"datav": {
+		"cn_name": "柱状图层",
+		"protocol": 2,
+		"level": 0,
+		"icon": "https://img.alicdn.com/tfs/TB1gVT4AAvoK1RjSZPfXXXPKFXa-180-180.png",
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"maxHeight": {
+				"type": "number",
+				"default": 120,
+				"range": [
+					30,
+					900
+				],
+				"step": 0.01,
+				"name": "最大高度"
+			},
+			"size": {
+				"type": "number",
+				"default": 50,
+				"range": [
+					30,
+					600
+				],
+				"step": 0.01,
+				"name": "粗细"
+			},
+			"color": {
+				"type": "color",
+				"name": "颜色",
+				"default": "#00FF91"
+			},
+			"opacity": {
+				"type": "number",
+				"default": 0.4,
+				"range": [
+					0,
+					1
+				],
+				"name": "透明度",
+				"step": 0.01
+			}
+		},
+		"api_data": {
+			"histogram": [
+				{
+					"lat": 31.8998,
+					"lng": 102.2212,
+					"value": 7
+				},
+				{
+					"lat": 28.6542,
+					"lng": 120.079,
+					"value": 3
+				},
+				{
+					"lat": 24.0554,
+					"lng": 114.207,
+					"value": 4
+				},
+				{
+					"lat": 33.5807,
+					"lng": 119.0305,
+					"value": 5
+				},
+				{
+					"lat": 39.563,
+					"lng": 118.1108,
+					"value": 10
+				},
+				{
+					"lat": 41.8993,
+					"lng": 114.0101,
+					"value": 3
+				},
+				{
+					"lat": 30.3096,
+					"lng": 114.0812,
+					"value": 9
+				},
+				{
+					"lat": 40.0905,
+					"lng": 113.3014,
+					"value": 4
+				},
+				{
+					"lat": 28.6396,
+					"lng": 102.5089,
+					"value": 6
+				},
+				{
+					"lat": 29.6045,
+					"lng": 114.4932,
+					"value": 7
+				},
+				{
+					"lat": 29.4145,
+					"lng": 112.1723,
+					"value": 9
+				},
+				{
+					"lat": 21.2749,
+					"lng": 110.365,
+					"value": 5
+				},
+				{
+					"lat": 24.7743,
+					"lng": 115.0327,
+					"value": 7
+				},
+				{
+					"lat": 47.2529,
+					"lng": 130.2362,
+					"value": 2
+				},
+				{
+					"lat": 36.0634,
+					"lng": 113.8238,
+					"value": 3
+				},
+				{
+					"lat": 31.3431,
+					"lng": 104.2002,
+					"value": 9
+				},
+				{
+					"lat": 40.4375,
+					"lng": 113.1635,
+					"value": 1
+				},
+				{
+					"lat": 42.5421,
+					"lng": 124.0456,
+					"value": 7
+				},
+				{
+					"lat": 26.7025,
+					"lng": 107.5135,
+					"value": 6
+				},
+				{
+					"lat": 26.2233,
+					"lng": 111.6263,
+					"value": 6
+				},
+				{
+					"lat": 32.3932,
+					"lng": 119.421,
+					"value": 6
+				},
+				{
+					"lat": 38.7257,
+					"lng": 113.259,
+					"value": 1
+				},
+				{
+					"lat": 24.041,
+					"lng": 104.1944,
+					"value": 9
+				},
+				{
+					"lat": 37.13,
+					"lng": 114.6845,
+					"value": 7
+				},
+				{
+					"lat": 35.6638,
+					"lng": 103.3896,
+					"value": 8
+				},
+				{
+					"lat": 36.146,
+					"lng": 112.2514,
+					"value": 1
+				},
+				{
+					"lat": 47.413,
+					"lng": 129.4359,
+					"value": 6
+				}
+			]
+		},
+		"apis": {
+			"histogram": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"value": {
+						"description": "值",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"type": [
+			"map3d_plane_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_plane"
+			],
+			"supportNames": [
+				"map3d-plane*"
+			]
+		}
+	}
+}

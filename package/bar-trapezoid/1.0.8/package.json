@@ -1,0 +1,391 @@
+{
+	"name": "bar-trapezoid",
+	"version": "1.0.8",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"dchart-bar-acute-angle": "0.1.5",
+		"d3": "~3.5.6"
+	},
+	"datav": {
+		"cn_name": "梯形柱状图",
+		"protocol": 2,
+		"private": true,
+		"type": [
+			"regular_bar"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "梯形柱状图接口",
+				"fields": {
+					"x": {
+						"description": "类目",
+						"type": "string"
+					},
+					"y": {
+						"description": "值",
+						"type": "array",
+						"range": 2
+					},
+					"s": {
+						"description": "系列",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"chart": {
+				"type": "group",
+				"name": "图表",
+				"children": {
+					"slope": {
+						"type": "number",
+						"name": "倾斜高度",
+						"default": 10
+					},
+					"margin": {
+						"type": "group",
+						"name": "边距",
+						"children": {
+							"top": {
+								"name": "上边距",
+								"type": "number",
+								"default": 30
+							},
+							"bottom": {
+								"name": "下边距",
+								"type": "number",
+								"default": 45
+							},
+							"left": {
+								"name": "左边距",
+								"type": "number",
+								"default": 45
+							},
+							"right": {
+								"name": "右边距",
+								"type": "number",
+								"default": 20
+							}
+						}
+					},
+					"background": {
+						"type": "color",
+						"name": "背景色",
+						"default": "rgba(1,1,1,0)"
+					},
+					"xaxis": {
+						"type": "group",
+						"name": "x轴",
+						"children": {
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": true
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"font-size": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									10,
+									100
+								],
+								"default": 10
+							},
+							"inner-padding": {
+								"type": "number",
+								"name": "内柱间距离",
+								"min": 0,
+								"default": 0.6,
+								"max": 1
+							},
+							"outer-padding": {
+								"type": "number",
+								"name": "外柱间距离",
+								"min": 0,
+								"default": 0,
+								"max": 1
+							},
+							"tickSize": {
+								"type": "nummber",
+								"name": "指标点长度",
+								"default": 0,
+								"range": [
+									0,
+									40
+								]
+							},
+							"dy": {
+								"type": "number",
+								"name": "坐标轴与文字间距离",
+								"min": -40,
+								"default": 12,
+								"max": 40
+							},
+							"assist-line": {
+								"type": "boolean",
+								"name": "辅助线",
+								"default": false
+							}
+						}
+					},
+					"yaxis": {
+						"type": "group",
+						"name": "y轴",
+						"children": {
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": true
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"font-size": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									10,
+									100
+								],
+								"default": 10
+							},
+							"max": {
+								"type": "text",
+								"name": "最大值",
+								"default": "auto"
+							},
+							"min": {
+								"type": "text",
+								"name": "最小值",
+								"default": "auto"
+							},
+							"ticks": {
+								"type": "number",
+								"name": "显示指标点数量",
+								"default": 5,
+								"range": [
+									0,
+									40
+								],
+								"step": 1
+							},
+							"tickSize": {
+								"type": "nummber",
+								"name": "指标点长度",
+								"default": 0,
+								"range": [
+									0,
+									40
+								]
+							},
+							"dy": {
+								"type": "number",
+								"name": "文字距辅助线距离",
+								"default": 8,
+								"range": [
+									-40,
+									40
+								]
+							},
+							"assist-line": {
+								"type": "boolean",
+								"name": "辅助线",
+								"default": false
+							}
+						}
+					}
+				}
+			},
+			"legend": {
+				"type": "group",
+				"name": "图例",
+				"children": {
+					"handler": "updateLegend",
+					"height": {
+						"type": "number",
+						"name": "行高",
+						"default": 10,
+						"range": [
+							0,
+							100
+						]
+					},
+					"right": {
+						"name": "对右位移",
+						"type": "number",
+						"default": 20
+					},
+					"dis": {
+						"name": "间距",
+						"type": "number",
+						"default": 5
+					},
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": true
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "数据系列",
+				"handler": "updateSeries",
+				"default": [
+					{
+						"show": true,
+						"serie-color": "rgba(32, 108, 187, 0.7)",
+						"legend": {
+							"font-size": 10,
+							"color": "#fff",
+							"value": "1",
+							"showname": "系列1"
+						}
+					},
+					{
+						"show": true,
+						"serie-color": "rgba(0, 253, 249, 0.7)",
+						"legend": {
+							"font-size": 10,
+							"color": "#fff",
+							"value": "2",
+							"showname": "系列2"
+						}
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "系列<%= i+1 %>",
+					"child": {
+						"show": {
+							"name": "显示/隐藏",
+							"type": "boolean",
+							"default": true
+						},
+						"serie-color": {
+							"name": "系列颜色",
+							"type": "color",
+							"default": "rgba(0, 253, 249, 0.7)"
+						},
+						"legend": {
+							"type": "group",
+							"name": "图例",
+							"children": {
+								"font-size": {
+									"type": "number",
+									"name": "字号",
+									"range": [
+										10,
+										100
+									],
+									"default": 10
+								},
+								"color": {
+									"name": "字体颜色",
+									"type": "color",
+									"default": "#fff"
+								},
+								"value": {
+									"name": "系列值",
+									"type": "text",
+									"default": "2"
+								},
+								"showname": {
+									"name": "系列名",
+									"type": "text",
+									"default": "系列2"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "上海",
+					"y": 23,
+					"s": "1"
+				},
+				{
+					"x": "上海",
+					"y": 25,
+					"s": "2"
+				},
+				{
+					"x": "深圳",
+					"y": 13,
+					"s": "1"
+				},
+				{
+					"x": "深圳",
+					"y": 14,
+					"s": "2"
+				},
+				{
+					"x": "合肥",
+					"y": 8,
+					"s": "1"
+				},
+				{
+					"x": "合肥",
+					"y": 17,
+					"s": "2"
+				},
+				{
+					"x": "成都",
+					"y": 9,
+					"s": "1"
+				},
+				{
+					"x": "成都",
+					"y": 21,
+					"s": "2"
+				},
+				{
+					"x": "安徽",
+					"y": 32,
+					"s": "1"
+				},
+				{
+					"x": "安徽",
+					"y": 24,
+					"s": "2"
+				},
+				{
+					"x": "北京",
+					"y": 30,
+					"s": "1"
+				},
+				{
+					"x": "北京",
+					"y": 18,
+					"s": "2"
+				}
+			]
+		},
+		"view": {
+			"width": "600",
+			"height": "400",
+			"minWidth": "300",
+			"minHeight": "150",
+			"z-index": 1010
+		},
+		"icon": {
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/98ab0dc5a95d75441455c080577055ce.png",
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/de03b8c190a88078cd25c8f9e9319bd4.png"
+		}
+	}
+}

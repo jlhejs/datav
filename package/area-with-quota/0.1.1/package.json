@@ -1,0 +1,367 @@
+{
+	"name": "area-with-quota",
+	"version": "0.1.1",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "~2.1.4",
+		"lodash": "~4.0.0",
+		"dchart-core": "~1.1.19"
+	},
+	"datav": {
+		"cn_name": "带指标的区域图",
+		"protocol": 2,
+		"type": [
+			"regular",
+			"area"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "区域图接口",
+				"fields": {
+					"x": {
+						"description": "类目",
+						"type": "string"
+					},
+					"y": {
+						"description": "值",
+						"type": "int"
+					}
+				}
+			}
+		},
+		"config": {
+			"title": {
+				"type": "group",
+				"name": "标题",
+				"children": {
+					"value": {
+						"type": "text",
+						"name": "标题名",
+						"default": "我是标题"
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字体",
+						"range": [
+							10,
+							60
+						],
+						"default": 32
+					},
+					"text-align": {
+						"name": "对齐方式",
+						"type": "select",
+						"range": [
+							{
+								"name": "左对齐",
+								"value": "left"
+							},
+							{
+								"name": "右对齐",
+								"value": "right"
+							},
+							{
+								"name": "居中对齐",
+								"value": "center"
+							}
+						],
+						"default": "center"
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "#fff"
+					},
+					"background-color": {
+						"name": "背景",
+						"type": "color",
+						"default": "#000"
+					}
+				}
+			},
+			"chart": {
+				"type": "group",
+				"name": "图表",
+				"children": {
+					"size": {
+						"type": "number",
+						"name": "容量",
+						"default": 30
+					},
+					"margin": {
+						"type": "group",
+						"name": "边距",
+						"children": {
+							"top": {
+								"name": "上边距",
+								"type": "number",
+								"default": 10
+							},
+							"bottom": {
+								"name": "下边距",
+								"type": "number",
+								"default": 25
+							},
+							"left": {
+								"name": "左边距",
+								"type": "number",
+								"default": 35
+							},
+							"right": {
+								"name": "右边距",
+								"type": "number",
+								"default": 20
+							}
+						}
+					},
+					"xaxis": {
+						"type": "group",
+						"name": "x轴",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"dy": {
+								"name": "位移",
+								"type": "number",
+								"default": 8
+							},
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": false
+							}
+						}
+					},
+					"yaxis": {
+						"type": "group",
+						"name": "y轴",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"dy": {
+								"name": "位移",
+								"type": "number",
+								"default": 8
+							},
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": true
+							}
+						}
+					}
+				}
+			},
+			"series": {
+				"type": "group",
+				"name": "数据系列",
+				"children": {
+					"serie1": {
+						"type": "group",
+						"name": "系列一",
+						"children": {
+							"serie-color": {
+								"name": "系列颜色",
+								"type": "color",
+								"default": "rgba(32, 108, 187, 0.7)"
+							},
+							"legend": {
+								"type": "group",
+								"name": "图例",
+								"children": {
+									"font-size": {
+										"type": "number",
+										"name": "字体",
+										"range": [
+											10,
+											20
+										],
+										"default": 10
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "#fff"
+									},
+									"value": {
+										"name": "图例名",
+										"type": "text",
+										"default": "系列1"
+									}
+								}
+							},
+							"quota": {
+								"type": "group",
+								"name": "指标",
+								"children": {
+									"font-size": {
+										"type": "number",
+										"name": "字体",
+										"range": [
+											10,
+											80
+										],
+										"default": 20
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "#fff"
+									},
+									"prefix": {
+										"type": "text",
+										"name": "前缀",
+										"default": ""
+									},
+									"suffix": {
+										"type": "text",
+										"name": "后缀",
+										"default": "人"
+									}
+								}
+							}
+						}
+					},
+					"serie2": {
+						"type": "group",
+						"name": "系列二",
+						"children": {
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": true
+							},
+							"serie-color": {
+								"name": "系列颜色",
+								"type": "color",
+								"default": "rgba(0, 253, 249, 0.7)"
+							},
+							"legend": {
+								"type": "group",
+								"name": "图例",
+								"children": {
+									"font-size": {
+										"type": "number",
+										"name": "字体",
+										"range": [
+											10,
+											20
+										],
+										"default": 10
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "#fff"
+									},
+									"value": {
+										"name": "图例名",
+										"type": "text",
+										"default": "系列2"
+									}
+								}
+							},
+							"quota": {
+								"type": "group",
+								"name": "指标",
+								"children": {
+									"font-size": {
+										"type": "number",
+										"name": "字体",
+										"range": [
+											10,
+											80
+										],
+										"default": 20
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "#fff"
+									},
+									"prefix": {
+										"type": "text",
+										"name": "前缀",
+										"default": ""
+									},
+									"suffix": {
+										"type": "text",
+										"name": "后缀",
+										"default": "人"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "09:00",
+					"y": [
+						43,
+						32
+					]
+				},
+				{
+					"x": "09:10",
+					"y": [
+						23,
+						12
+					]
+				},
+				{
+					"x": "09:20",
+					"y": [
+						53,
+						54
+					]
+				},
+				{
+					"x": "09:30",
+					"y": [
+						34,
+						53
+					]
+				},
+				{
+					"x": "09:40",
+					"y": [
+						53,
+						67
+					]
+				},
+				{
+					"x": "09:50",
+					"y": [
+						63,
+						77
+					]
+				},
+				{
+					"x": "10:00",
+					"y": [
+						94,
+						78
+					]
+				},
+				{
+					"x": "10:10",
+					"y": [
+						88,
+						79
+					]
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,203 @@
+{
+	"name": "@datav-city-pro-v2-cim/datav-engine-arcgis-raster",
+	"version": "2.0.0",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "ArcGIS栅格瓦片",
+		"protocol": 2,
+		"supportTheme": false,
+		"level": 2,
+		"sceneLayer": false,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"data": {
+						"type": "group",
+						"name": "通用",
+						"children": {
+							"order": {
+								"name": "渲染顺序",
+								"type": "number",
+								"default": 1
+							}
+						}
+					},
+					"style": {
+						"type": "group",
+						"name": "图形",
+						"children": {
+							"opacity": {
+								"name": "透明度",
+								"type": "slider",
+								"caption": "范围 [0, 1]",
+								"min": 0,
+								"max": 1,
+								"step": 0.1,
+								"precision": 0.01,
+								"showRange": false,
+								"default": 1
+							},
+							"hsb": {
+								"name": "HSB调整",
+								"type": "group",
+								"children": {
+									"h": {
+										"name": "色调",
+										"type": "slider",
+										"caption": "范围 [0, 3]",
+										"min": 0,
+										"max": 3,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": false,
+										"default": 0
+									},
+									"s": {
+										"name": "饱和度",
+										"type": "slider",
+										"caption": "范围 [0, 3]",
+										"min": 0,
+										"max": 3,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": false,
+										"default": 1
+									},
+									"b": {
+										"name": "亮度",
+										"type": "slider",
+										"caption": "范围 [0, 1]",
+										"min": 0,
+										"max": 3,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": false,
+										"default": 1
+									}
+								}
+							}
+						}
+					},
+					"status": {
+						"type": "group",
+						"name": "交互",
+						"children": {
+							"enableInteractive": {
+								"name": "server交互",
+								"type": "switch",
+								"default": false,
+								"statusText": false
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": []
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"format": "geo_rastertile_arcgisrest",
+				"description": "数据接口",
+				"fields": {
+					"url": {
+						"description": "服务地址",
+						"type": "string",
+						"optional": false
+					},
+					"projType": {
+						"description": "投影类型",
+						"type": "string",
+						"optional": true
+					},
+					"token": {
+						"description": "API Token",
+						"type": "string",
+						"optional": true
+					},
+					"headers": {
+						"description": "请求头",
+						"type": "object",
+						"optional": true
+					},
+					"customParameters": {
+						"description": "服务参数",
+						"type": "object",
+						"optional": true
+					}
+				}
+			}
+		},
+		"events": {
+			"leftClick": {
+				"name": "左键点击",
+				"description": "左键点击",
+				"type": "object",
+				"fields": {
+					"clickPosition": {
+						"name": "点击位置",
+						"description": "点击位置屏幕坐标",
+						"type": "object",
+						"children": {
+							"x": {
+								"name": "x坐标",
+								"description": "点击位置x坐标",
+								"type": "number",
+								"default": 0
+							},
+							"y": {
+								"name": "y坐标",
+								"description": "点击位置y坐标",
+								"type": "number",
+								"default": 0
+							}
+						}
+					},
+					"data": {
+						"name": "data",
+						"description": "data",
+						"type": "Object",
+						"optional": true
+					},
+					"geo": {
+						"name": "点击地理坐标",
+						"description": "点击地理坐标",
+						"type": "Array",
+						"optional": true
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_rastertile_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/imgextra/i3/O1CN01u5na5V1KWovEDBJNp_!!6000000001172-2-tps-360-360.png"
+	}
+}

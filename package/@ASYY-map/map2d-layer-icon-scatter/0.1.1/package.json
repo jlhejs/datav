@@ -1,0 +1,133 @@
+{
+	"name": "map2d-layer-icon-scatter",
+	"version": "0.1.1",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"ldmap": "0.1.45"
+	},
+	"datav": {
+		"cn_name": "图标点层",
+		"protocol": 2,
+		"type": [
+			"map2d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		},
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"events": {
+			"click-scatter-icon": {
+				"description": "图标点被点击触发",
+				"fields": {
+					"lng": {
+						"description": "经度"
+					},
+					"lat": {
+						"description": "纬度"
+					}
+				}
+			}
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "图标数据接口",
+				"fields": {
+					"lat": {
+						"description": "纬度"
+					},
+					"lng": {
+						"description": "经度"
+					},
+					"iconUrl": {
+						"description": "图标地址",
+						"optional": true
+					},
+					"info": {
+						"description": "弹窗内容",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"radius": {
+				"type": "number",
+				"name": "半径",
+				"default": 15,
+				"step": 1,
+				"range": [
+					0,
+					100
+				]
+			},
+			"offset": {
+				"name": "偏移方式",
+				"type": "options",
+				"default": "center",
+				"options": [
+					{
+						"name": "中心点",
+						"value": "center"
+					},
+					{
+						"name": "底端中点",
+						"value": "bottom"
+					}
+				]
+			},
+			"iconUrl": {
+				"type": "image",
+				"name": "图标图片",
+				"default": "//img.alicdn.com/tps/TB1xKHmMpXXXXalXVXXXXXXXXXX-83-92.png"
+			},
+			"click-key": {
+				"type": "text",
+				"name": "回调 ID",
+				"default": ""
+			},
+			"tip": {
+				"type": "group",
+				"name": "提示框",
+				"children": {
+					"font-size": {
+						"type": "number",
+						"name": "字号",
+						"default": 12,
+						"min": 0,
+						"max": 500
+					},
+					"color": {
+						"type": "color",
+						"name": "颜色",
+						"default": "rgba(255,255,255,0.8)"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"lat": "39",
+					"lng": "106",
+					"name": "小明",
+					"iconUrl": "//img.alicdn.com/tps/TB1xKHmMpXXXXalXVXXXXXXXXXX-83-92.png",
+					"info": "姓名: 小明<br/>部门: 售后<br/>手机号码: 743294829<br/>在线状态: ONLINE <br/>检修目标:NULL"
+				}
+			]
+		},
+		"icon": ""
+	}
+}

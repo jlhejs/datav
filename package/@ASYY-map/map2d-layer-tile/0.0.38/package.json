@@ -1,0 +1,182 @@
+{
+	"name": "map2d-layer-tile",
+	"version": "0.0.38",
+	"description": "2d瓦片",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "zhouningyi",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"ldmap": "0.1.42"
+	},
+	"datav": {
+		"cn_name": "底图层",
+		"protocol": 2,
+		"apis": {},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"opacity": {
+				"name": "透明度",
+				"type": "number",
+				"range": [
+					0,
+					1
+				],
+				"step": 0.1,
+				"default": 1
+			},
+			"url": {
+				"description": "删除内容即可下拉选择预定义的地图或者填写自定义的瓦片地址",
+				"name": "瓦片",
+				"type": "search",
+				"default": "",
+				"searches": [
+					{
+						"name": "GeoQ水墨灰",
+						"value": "GeoQGray"
+					},
+					{
+						"name": "GeoQ午夜蓝",
+						"value": "GeoQBlue"
+					},
+					{
+						"name": "GeoQ彩色",
+						"value": "GeoQColorplate"
+					},
+					{
+						"name": "GeoQ边界(带标注)",
+						"value": "GeoQBound"
+					},
+					{
+						"name": "谷歌电子地图",
+						"value": "NormalGoogle"
+					},
+					{
+						"name": "谷歌卫星图",
+						"value": "SatelliteGoogle"
+					},
+					{
+						"name": "高德卫星图",
+						"value": "SatelliteAMap"
+					},
+					{
+						"name": "高德电子地图",
+						"value": "NormalAMap"
+					},
+					{
+						"name": "高德实时人口热力",
+						"value": "HeatmapAMap"
+					},
+					{
+						"name": "高德实时路况",
+						"value": "AMapRoad"
+					}
+				]
+			},
+			"isAutoRefresh": {
+				"description": "高德热力、腾讯实时路况需开启此选项自动刷新最新的瓦片数据",
+				"name": "自动刷新",
+				"type": "boolean",
+				"default": false
+			},
+			"refreshTime": {
+				"show": [
+					[
+						"isAutoRefresh",
+						"$eq",
+						true
+					]
+				],
+				"description": "刷新时间间隔(分钟)",
+				"name": "刷新间隔",
+				"type": "number",
+				"min": 1,
+				"max": 100,
+				"default": 10
+			},
+			"isFilter": {
+				"name": "滤镜",
+				"type": "boolean",
+				"default": false
+			},
+			"filter": {
+				"show": [
+					[
+						"isFilter",
+						"$eq",
+						true
+					]
+				],
+				"type": "group",
+				"name": "滤镜选项",
+				"children": {
+					"brightness": {
+						"name": "亮度",
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"default": 0.5
+					},
+					"hueRotate": {
+						"name": "色相",
+						"type": "number",
+						"range": [
+							-1,
+							1
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"saturate": {
+						"name": "饱和度",
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"default": 0
+					},
+					"contrast": {
+						"name": "对比度",
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"default": 0.5
+					},
+					"invert": {
+						"name": "反相",
+						"type": "number",
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"default": 0
+					}
+				}
+			}
+		},
+		"api_data": {},
+		"type": [
+			"map2d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d"
+			]
+		}
+	}
+}

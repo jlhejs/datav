@@ -1,0 +1,274 @@
+{
+	"name": "guston-3d-layer-loader-obj",
+	"version": "0.0.3",
+	"main": "index.js",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"chroma-js": "1.3.4",
+		"safely-merge": "1.0.0"
+	},
+	"datav": {
+		"cn_name": "OBJ模型加载器",
+		"protocol": 2,
+		"type": [
+			"datav_guston_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"datav_guston"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"location": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"visible": {
+				"name": "是否显示",
+				"type": "boolean",
+				"default": true,
+				"options": [
+					false,
+					true
+				]
+			},
+			"loaderObj": {
+				"type": "group",
+				"name": "OBJ模型选项",
+				"children": {
+					"rootUrl": {
+						"name": "模型根地址",
+						"type": "text",
+						"default": "http://30.11.226.33:8080/bottom/"
+					},
+					"modelName": {
+						"name": "模型根地址",
+						"type": "text",
+						"default": "bottom"
+					}
+				}
+			},
+			"overrideMaterial": {
+				"name": "覆盖材质",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"doubleSideMaterial": {
+				"name": "强制双面材质",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"enableZFighting": {
+				"name": "解决Z冲突",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"polygonOffsetFactor": {
+				"name": "OffsetFactor",
+				"type": "number",
+				"default": 0,
+				"range": [
+					-10,
+					10
+				],
+				"step": 0.01
+			},
+			"polygonOffsetUnits": {
+				"name": "OffsetUnits",
+				"type": "number",
+				"default": 0,
+				"range": [
+					-10,
+					10
+				],
+				"step": 0.01
+			},
+			"materialFloat": {
+				"show": [
+					[
+						"overrideMaterial",
+						"$eq",
+						true
+					]
+				],
+				"type": "group",
+				"name": "FloatT材质选项",
+				"fold": true,
+				"children": {
+					"hue": {
+						"name": "hue",
+						"type": "number",
+						"default": 150,
+						"range": [
+							0,
+							360
+						],
+						"step": 1
+					},
+					"light": {
+						"name": "lightBoost",
+						"type": "number",
+						"default": 10,
+						"range": [
+							0,
+							50
+						],
+						"step": 0.01
+					}
+				}
+			},
+			"transform": {
+				"type": "group",
+				"name": "偏移",
+				"fold": true,
+				"children": {
+					"x": {
+						"name": "tx",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-5000,
+							5000
+						],
+						"step": 1
+					},
+					"y": {
+						"name": "ty",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-5000,
+							5000
+						],
+						"step": 1
+					},
+					"z": {
+						"name": "tz",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-5000,
+							5000
+						],
+						"step": 1
+					}
+				}
+			},
+			"scale": {
+				"type": "group",
+				"name": "缩放",
+				"fold": true,
+				"children": {
+					"x": {
+						"name": "sx",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.001,
+							100
+						],
+						"step": 0.001
+					},
+					"y": {
+						"name": "sy",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.001,
+							100
+						],
+						"step": 0.001
+					},
+					"z": {
+						"name": "sz",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.001,
+							100
+						],
+						"step": 0.001
+					}
+				}
+			},
+			"rotation": {
+				"type": "group",
+				"name": "旋转",
+				"fold": true,
+				"children": {
+					"x": {
+						"name": "rx",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.1
+					},
+					"y": {
+						"name": "ry",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.1
+					},
+					"z": {
+						"name": "rz",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-180,
+							180
+						],
+						"step": 0.1
+					}
+				}
+			}
+		},
+		"api_data": {
+			"location": [
+				{
+					"lng": 0,
+					"lat": 0
+				},
+				{
+					"lng": 100,
+					"lat": 100
+				},
+				{
+					"lng": -100,
+					"lat": -100
+				}
+			]
+		},
+		"icon": ""
+	}
+}

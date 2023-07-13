@@ -1,0 +1,420 @@
+{
+	"name": "area-double",
+	"version": "0.0.13",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"d3": "3.5.7",
+		"dchart-area-line-double": "0.0.4",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "双轴折线图",
+		"icon": {
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/4e9a983aecc592e79071aec639d07540.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/3bcf3b5b06cd2fb7373df439f7041440.png"
+		},
+		"protocol": 2,
+		"private": true,
+		"type": [
+			"regular_area"
+		],
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "双轴折线图接口",
+				"fields": {
+					"x": {
+						"description": "类目"
+					},
+					"y": {
+						"description": "系列1值"
+					},
+					"z": {
+						"description": "系列2值"
+					}
+				}
+			}
+		},
+		"config": {
+			"chart": {
+				"type": "group",
+				"name": "图表",
+				"children": {
+					"margin": {
+						"type": "group",
+						"name": "边距",
+						"children": {
+							"top": {
+								"name": "顶部",
+								"type": "number",
+								"default": 20
+							},
+							"bottom": {
+								"name": "底部",
+								"type": "number",
+								"default": 40
+							},
+							"left": {
+								"name": "左侧",
+								"type": "number",
+								"default": 40
+							},
+							"right": {
+								"name": "右侧",
+								"type": "number",
+								"default": 40
+							}
+						}
+					},
+					"xaxis": {
+						"type": "group",
+						"name": "X轴",
+						"children": {
+							"show": {
+								"type": "boolean",
+								"name": "是否显示X轴",
+								"default": true
+							},
+							"inner-padding": {
+								"type": "number",
+								"name": "内柱间距离",
+								"min": 0,
+								"default": 0.6,
+								"max": 1
+							},
+							"outer-padding": {
+								"type": "number",
+								"name": "外柱间距离",
+								"min": 0,
+								"default": 0,
+								"max": 1
+							},
+							"font-size": {
+								"type": "number",
+								"name": "字号",
+								"min": 12,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"type": "color",
+								"name": "X轴颜色",
+								"default": "#fff"
+							},
+							"ticksNumber": {
+								"type": "text",
+								"name": "刻度数量,不需要则填 --",
+								"default": "--"
+							},
+							"tickSize": {
+								"type": "number",
+								"name": "指标点长度",
+								"default": 0,
+								"range": [
+									-40,
+									40
+								],
+								"step": 1
+							},
+							"dy": {
+								"type": "number",
+								"name": "坐标轴与文字间距离",
+								"default": 12,
+								"range": [
+									-40,
+									40
+								],
+								"step": 1
+							},
+							"assist-line": {
+								"type": "boolean",
+								"name": "辅助线",
+								"default": false
+							}
+						}
+					},
+					"yaxis": {
+						"type": "group",
+						"name": "Y轴",
+						"children": {
+							"show": {
+								"type": "boolean",
+								"name": "是否显示Y轴",
+								"default": true
+							},
+							"font-size": {
+								"type": "number",
+								"name": "字号",
+								"min": 12,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"type": "color",
+								"name": "Y轴颜色",
+								"default": "#fff"
+							},
+							"label": {
+								"type": "text",
+								"name": "单位",
+								"default": ""
+							},
+							"max": {
+								"type": "text",
+								"name": "最大值",
+								"default": "auto"
+							},
+							"min": {
+								"type": "text",
+								"name": "最小值",
+								"default": "auto"
+							},
+							"ticks": {
+								"type": "number",
+								"name": "显示指标点数量",
+								"default": 5,
+								"range": [
+									0,
+									40
+								],
+								"step": 1
+							},
+							"tickSize": {
+								"type": "number",
+								"name": "指标点长度",
+								"default": 0,
+								"range": [
+									0,
+									40
+								],
+								"step": 1
+							},
+							"dy": {
+								"type": "number",
+								"name": "文字距辅助线距离",
+								"default": 8,
+								"range": [
+									-40,
+									40
+								]
+							},
+							"assist-line": {
+								"type": "boolean",
+								"name": "辅助线",
+								"default": false
+							}
+						}
+					},
+					"zaxis": {
+						"type": "group",
+						"name": "Z轴",
+						"children": {
+							"show": {
+								"type": "boolean",
+								"name": "是否显示Z轴",
+								"default": true
+							},
+							"font-size": {
+								"type": "number",
+								"name": "字号",
+								"min": 12,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"type": "color",
+								"name": "Z轴颜色",
+								"default": "#fff"
+							},
+							"label": {
+								"type": "text",
+								"name": "单位",
+								"default": ""
+							},
+							"max": {
+								"type": "text",
+								"name": "最大值",
+								"default": "auto"
+							},
+							"min": {
+								"type": "text",
+								"name": "最小值",
+								"default": "auto"
+							},
+							"ticks": {
+								"type": "number",
+								"name": "显示指标点数量",
+								"default": 5,
+								"range": [
+									0,
+									40
+								],
+								"step": 1
+							},
+							"tickSize": {
+								"type": "number",
+								"name": "指标点长度",
+								"default": 0,
+								"range": [
+									-40,
+									40
+								],
+								"step": 1
+							},
+							"dy": {
+								"type": "number",
+								"name": "文字距辅助线距离",
+								"default": 8,
+								"range": [
+									-40,
+									40
+								]
+							},
+							"assist-line": {
+								"type": "boolean",
+								"name": "辅助线",
+								"default": false
+							}
+						}
+					}
+				}
+			},
+			"series": {
+				"type": "group",
+				"name": "系列",
+				"children": {
+					"line1": {
+						"type": "group",
+						"name": "系列1",
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "系列颜色",
+								"default": "#1BB5FF"
+							},
+							"circle-radius": {
+								"type": "number",
+								"name": "圆点半径",
+								"default": 10,
+								"range": [
+									0,
+									40
+								]
+							},
+							"stroke-width": {
+								"type": "number",
+								"name": "折线粗细",
+								"default": 1,
+								"range": [
+									0,
+									10
+								]
+							},
+							"area": {
+								"type": "boolean",
+								"name": "区域填充显示/隐藏",
+								"default": true
+							},
+							"bubble": {
+								"type": "boolean",
+								"name": "圆点显示/隐藏",
+								"default": true
+							}
+						}
+					},
+					"line2": {
+						"type": "group",
+						"name": "系列2",
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "系列颜色",
+								"default": "#5FFFFD"
+							},
+							"circle-radius": {
+								"type": "number",
+								"name": "圆点半径",
+								"default": 10,
+								"range": [
+									0,
+									40
+								]
+							},
+							"stroke-width": {
+								"type": "number",
+								"name": "折线粗细",
+								"default": 1,
+								"range": [
+									0,
+									10
+								]
+							},
+							"area": {
+								"type": "boolean",
+								"name": "区域填充显示/隐藏",
+								"default": false
+							},
+							"bubble": {
+								"type": "boolean",
+								"name": "圆点显示/隐藏",
+								"default": true
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "内蒙古",
+					"y": 1200,
+					"z": 22
+				},
+				{
+					"x": "黑龙江",
+					"y": 1111,
+					"z": 32
+				},
+				{
+					"x": "辽宁",
+					"y": 1156,
+					"z": 12
+				},
+				{
+					"x": "吉林",
+					"y": 1879,
+					"z": 33
+				},
+				{
+					"x": "江苏",
+					"y": 1023,
+					"z": 21
+				},
+				{
+					"x": "安徽",
+					"y": 1980,
+					"z": 54
+				},
+				{
+					"x": "浙江",
+					"y": 1043,
+					"z": 43
+				},
+				{
+					"x": "福建",
+					"y": 1232,
+					"z": 22
+				}
+			]
+		}
+	}
+}

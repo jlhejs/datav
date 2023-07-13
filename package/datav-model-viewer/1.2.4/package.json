@@ -1,0 +1,1311 @@
+{
+	"name": "datav-model-viewer",
+	"version": "1.2.4",
+	"dependencies": {
+		"@ali/datav-vangogh": "0.0.118",
+		"eventemitter3": "3.0.0",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "模型查看器",
+		"protocol": 2,
+		"level": 2,
+		"icon": "https://img.alicdn.com/imgextra/i2/O1CN01gTVkod1EDEHAHXUy9_!!6000000000317-2-tps-368-208.png",
+		"iconSet": {
+			"rectangle": "https://img.alicdn.com/imgextra/i3/O1CN01RsvUJD1erEsySqhMM_!!6000000003924-2-tps-332-144.png"
+		},
+		"thumbnail": "",
+		"type": [
+			"DataV-6:media"
+		],
+		"view": {
+			"width": "1920",
+			"height": "1080",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"hooks": {
+			"editOnImmerse": true
+		},
+		"config": {
+			"options": {
+				"default": {
+					"camera": {
+						"type": "perspective",
+						"fov": 60,
+						"position": {
+							"px": -152.3582335206413,
+							"py": 93.94366590820385,
+							"pz": 222.0212268211045
+						},
+						"target": {
+							"tx": 0,
+							"ty": -20,
+							"tz": 0
+						}
+					},
+					"model": {
+						"needsUniqueVertexIndex": true,
+						"url": "https://cdn-upload.datav.aliyun.com/upload/download/1638436131143_model_building.glb",
+						"viewMode": {
+							"wireframe": false,
+							"wireframeWidth": 0.73,
+							"wireframeColor": "#3c3c3c",
+							"channel": "final"
+						},
+						"renderEffect": {
+							"shadow": {
+								"castShadow": false,
+								"receiveShadow": false
+							},
+							"opacity": 1
+						},
+						"transform": {
+							"position": {
+								"offsetX": 0,
+								"offsetY": 0,
+								"offsetZ": 0
+							},
+							"rotation": {
+								"rotationX": 0,
+								"rotationY": 0,
+								"rotationZ": 0
+							},
+							"scale": {
+								"scaleX": 1,
+								"scaleY": 1,
+								"scaleZ": 1
+							}
+						}
+					},
+					"animate": {
+						"modelAnimate": {
+							"autoPlay": false,
+							"defaultAnimation": "",
+							"show": false
+						},
+						"scanner": {
+							"show": true,
+							"frontier": 1,
+							"axisType": 2,
+							"direction": -1,
+							"color": "#0bbcff",
+							"length": 0.3,
+							"speed": 0.002
+						},
+						"autoRotate": {
+							"enable": false,
+							"axis": "y",
+							"showAxis": false,
+							"randomAxis": {
+								"x": 0,
+								"y": 1,
+								"z": 0
+							},
+							"direction": 1,
+							"speed": 0.01
+						}
+					},
+					"lights": {
+						"background": {
+							"show": true,
+							"type": "color",
+							"color": "#181717"
+						},
+						"environmentLight": {
+							"show": true,
+							"hdrUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1606467134385_studio_small_08_1k.hdr",
+							"hdrOrientation": 0,
+							"hdrIntensity": 1.5
+						},
+						"ambientLight": [
+							{
+								"color": "#a2cdff",
+								"intensity": 2,
+								"_active": true
+							}
+						],
+						"directionalLight": [
+							{
+								"color": "#ffffff",
+								"intensity": 6,
+								"position": {
+									"x": 35,
+									"y": 35,
+									"z": 35
+								},
+								"_active": true
+							}
+						],
+						"groundShadow": {
+							"show": false,
+							"boundary": 1,
+							"height": 0,
+							"size": 1,
+							"opacity": 1
+						}
+					},
+					"postprocessing": {
+						"antialiasType": "FXAA",
+						"sharpenVignetteGrain": {
+							"show": false,
+							"sharpness": 0.2,
+							"vignetteRadius": 0.8,
+							"vignetteSoftness": 0.5,
+							"grainFactor": 0.1795
+						},
+						"ssr": {
+							"show": false,
+							"maxRayDistance": 500,
+							"maxIteration": 20,
+							"strideMagnitude": 1,
+							"glossiness": 0.6,
+							"blurSize": 4
+						},
+						"ssao": {
+							"show": false,
+							"bias": 0.1,
+							"intensity": 1,
+							"sharpness": 1,
+							"radius": 10,
+							"blurSize": 4
+						},
+						"bokeh": {
+							"show": false,
+							"bokehRadius": 1,
+							"aperture": 10,
+							"focalDistance": 10,
+							"focalSize": 0.05
+						},
+						"bloom": {
+							"show": false,
+							"useMask": false,
+							"radius": 1,
+							"softKnee": 0.5,
+							"intensity": 0.5,
+							"distinction": 0.8
+						},
+						"ueBloom": {
+							"show": false,
+							"mask": false,
+							"strength": 1.88,
+							"opacity": 0.39,
+							"threshold": 0.11,
+							"smoothWidth": 1,
+							"radius": 0.1
+						},
+						"motionBlur": {
+							"show": false,
+							"blurSize": 16,
+							"intensity": 0.125
+						},
+						"colorCorrection": {
+							"hue": 0,
+							"saturation": 1,
+							"brightness": 0,
+							"contrast": 1
+						}
+					}
+				},
+				"type": "menu",
+				"defaultActive": "model",
+				"children": {
+					"camera": {
+						"name": "相机",
+						"type": "group",
+						"children": {
+							"type": {
+								"name": "相机类型",
+								"type": "radio",
+								"optionCol": 24,
+								"showInPanel": false,
+								"options": [
+									{
+										"name": "透视相机",
+										"value": "perspective"
+									}
+								]
+							},
+							"fov": {
+								"name": "视角",
+								"showInPanel": [
+									[
+										".type",
+										"$eq",
+										"perspective"
+									]
+								],
+								"type": "slider",
+								"suffix": "度",
+								"step": 0.1,
+								"min": 0.1,
+								"max": 180
+							},
+							"position": {
+								"name": "相机位置",
+								"type": "suite",
+								"children": {
+									"px": {
+										"name": "X轴",
+										"type": "slider",
+										"step": 0.01,
+										"min": -1000,
+										"max": 1000
+									},
+									"py": {
+										"name": "Y轴",
+										"type": "slider",
+										"step": 0.01,
+										"min": -1000,
+										"max": 1000
+									},
+									"pz": {
+										"name": "Z轴",
+										"type": "slider",
+										"step": 0.01,
+										"min": -3000,
+										"max": 3000
+									}
+								}
+							},
+							"target": {
+								"name": "目标位置",
+								"type": "suite",
+								"fold": false,
+								"children": {
+									"tx": {
+										"name": "X轴",
+										"type": "slider",
+										"step": 0.01,
+										"min": -1000,
+										"max": 1000
+									},
+									"ty": {
+										"name": "Y轴",
+										"type": "slider",
+										"step": 0.01,
+										"min": -3000,
+										"max": 3000
+									},
+									"tz": {
+										"name": "Z轴",
+										"type": "slider",
+										"step": 0.01,
+										"min": -1000,
+										"max": 1000
+									}
+								}
+							}
+						}
+					},
+					"model": {
+						"name": "模型",
+						"type": "group",
+						"children": {
+							"needsUniqueVertexIndex": {
+								"name": "模型重计算",
+								"type": "switch",
+								"showInPanel": false
+							},
+							"url": {
+								"name": "模型地址",
+								"type": "text",
+								"description": "优先读取数据中的模型地址",
+								"useAssets": true,
+								"acceptAssetTypes": [
+									"model"
+								],
+								"acceptAssetCodes": [
+									"model"
+								],
+								"dataField": "url"
+							},
+							"viewMode": {
+								"name": "显示模式",
+								"type": "suite",
+								"fold": false,
+								"children": {
+									"wireframe": {
+										"name": "线框模式",
+										"type": "switch"
+									},
+									"wireframeWidth": {
+										"name": "线框宽度",
+										"type": "slider",
+										"max": 3,
+										"min": 0.1,
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.model.viewMode.wireframe",
+													"$eq",
+													true
+												]
+											]
+										}
+									},
+									"wireframeColor": {
+										"name": "线框颜色",
+										"type": "fill",
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.model.viewMode.wireframe",
+													"$eq",
+													true
+												]
+											]
+										}
+									},
+									"channel": {
+										"name": "PBR通道显示模式",
+										"type": "select",
+										"options": [
+											{
+												"name": "最终",
+												"value": "final"
+											},
+											{
+												"name": "基础色",
+												"value": "albedo"
+											},
+											{
+												"name": "AO",
+												"value": "ao"
+											},
+											{
+												"name": "金属度",
+												"value": "metalness"
+											},
+											{
+												"name": "粗糙度",
+												"value": "roughness"
+											},
+											{
+												"name": "法线",
+												"value": "normal"
+											},
+											{
+												"name": "发光",
+												"value": "emissive"
+											}
+										]
+									}
+								}
+							},
+							"renderEffect": {
+								"name": "渲染效果",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"shadow": {
+										"name": "阴影设置",
+										"type": "suite",
+										"children": {
+											"castShadow": {
+												"name": "发射阴影",
+												"type": "switch",
+												"col": 12
+											},
+											"receiveShadow": {
+												"name": "接收阴影",
+												"type": "switch",
+												"col": 12
+											}
+										}
+									},
+									"opacity": {
+										"name": "不透明度",
+										"type": "slider",
+										"min": 0,
+										"max": 1
+									}
+								}
+							},
+							"transform": {
+								"name": "变换配置",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"position": {
+										"name": "位置",
+										"type": "suite",
+										"children": {
+											"offsetX": {
+												"name": "X轴",
+												"type": "slider",
+												"min": -1000,
+												"max": 1000,
+												"step": 0.01
+											},
+											"offsetY": {
+												"name": "Y轴",
+												"type": "slider",
+												"min": -1000,
+												"max": 1000,
+												"step": 0.01
+											},
+											"offsetZ": {
+												"name": "Z轴",
+												"type": "slider",
+												"min": -1000,
+												"max": 1000,
+												"step": 0.01
+											}
+										}
+									},
+									"rotation": {
+										"name": "旋转",
+										"type": "suite",
+										"children": {
+											"rotationX": {
+												"name": "X轴旋转",
+												"type": "slider",
+												"range": [
+													0,
+													360
+												],
+												"step": 0.1
+											},
+											"rotationY": {
+												"name": "Y轴旋转",
+												"type": "slider",
+												"range": [
+													0,
+													360
+												],
+												"step": 0.1
+											},
+											"rotationZ": {
+												"name": "Z轴旋转",
+												"type": "slider",
+												"range": [
+													0,
+													360
+												],
+												"step": 0.1
+											}
+										}
+									},
+									"scale": {
+										"name": "缩放",
+										"type": "suite",
+										"children": {
+											"scaleX": {
+												"name": "X缩放",
+												"type": "slider",
+												"range": [
+													0.001,
+													100000
+												],
+												"step": 0.0001
+											},
+											"scaleY": {
+												"name": "Y缩放",
+												"type": "slider",
+												"range": [
+													0.001,
+													100000
+												],
+												"step": 0.0001
+											},
+											"scaleZ": {
+												"name": "Z缩放",
+												"type": "slider",
+												"range": [
+													0.001,
+													100000
+												],
+												"step": 0.0001
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"animate": {
+						"name": "动画",
+						"type": "group",
+						"handler": "updateAnimateOptions",
+						"children": {
+							"modelAnimate": {
+								"name": "模型动画",
+								"type": "suite",
+								"description": "动画详情配置进沉浸态",
+								"children": {
+									"autoPlay": {
+										"type": "switch",
+										"statusText": true
+									},
+									"defaultAnimation": {
+										"name": "默认动画",
+										"type": "string",
+										"showInPanel": false
+									}
+								}
+							},
+							"scanner": {
+								"name": "扫光动画",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"frontier": {
+										"name": "锋面类型",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"label": "平面",
+												"value": 1
+											},
+											{
+												"label": "曲面",
+												"value": -1
+											}
+										]
+									},
+									"axisType": {
+										"name": "扫描轴向",
+										"type": "buttonRadio",
+										"evenlySplit": true,
+										"options": [
+											{
+												"label": "X轴",
+												"value": 1
+											},
+											{
+												"label": "Y轴",
+												"value": 2
+											},
+											{
+												"label": "Z轴",
+												"value": 3
+											}
+										],
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.animate.scanner.frontier",
+													"$eq",
+													1
+												]
+											]
+										}
+									},
+									"direction": {
+										"name": "正负方向",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"label": "正向",
+												"value": 1
+											},
+											{
+												"label": "负向",
+												"value": -1
+											}
+										]
+									},
+									"color": {
+										"type": "fill",
+										"name": "颜色"
+									},
+									"length": {
+										"type": "slider",
+										"name": "扫光长度",
+										"range": [
+											0.001,
+											1
+										],
+										"step": 0.001
+									},
+									"speed": {
+										"type": "slider",
+										"name": "扫光速度",
+										"range": [
+											0,
+											0.04
+										],
+										"step": 0.001
+									}
+								}
+							},
+							"autoRotate": {
+								"name": "绕轴旋转",
+								"type": "group",
+								"enableHide": true,
+								"showAlias": "enable",
+								"children": {
+									"axis": {
+										"name": "旋转轴",
+										"type": "select",
+										"options": [
+											{
+												"label": "X轴",
+												"value": "x"
+											},
+											{
+												"label": "Y轴",
+												"value": "y"
+											},
+											{
+												"label": "Z轴",
+												"value": "z"
+											},
+											{
+												"label": "自定义轴",
+												"value": "random"
+											}
+										]
+									},
+									"showAxis": {
+										"name": "旋转轴显示",
+										"type": "switch",
+										"showInPanel": false
+									},
+									"randomAxis": {
+										"name": "自定义轴",
+										"type": "suite",
+										"children": {
+											"x": {
+												"name": "x轴",
+												"type": "slider",
+												"max": 1,
+												"min": 0
+											},
+											"y": {
+												"name": "y轴",
+												"type": "slider",
+												"max": 1,
+												"min": 0
+											},
+											"z": {
+												"name": "z轴",
+												"type": "slider",
+												"max": 1,
+												"min": 0
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													"options.animate.autoRotate.axis",
+													"$eq",
+													"random"
+												]
+											]
+										}
+									},
+									"direction": {
+										"name": "方向",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"label": "逆时针",
+												"value": 1
+											},
+											{
+												"label": "顺时针",
+												"value": -1
+											}
+										]
+									},
+									"speed": {
+										"name": "转速",
+										"type": "slider",
+										"max": 1,
+										"min": 0.001
+									}
+								}
+							}
+						}
+					},
+					"lights": {
+						"name": "环境与光照",
+						"type": "group",
+						"children": {
+							"background": {
+								"name": "背景",
+								"type": "group",
+								"fold": false,
+								"enableHide": true,
+								"children": {
+									"type": {
+										"name": "背景类型",
+										"type": "radio",
+										"optionCol": 12,
+										"options": [
+											{
+												"name": "无",
+												"value": "black"
+											},
+											{
+												"name": "颜色",
+												"value": "color"
+											},
+											{
+												"name": "环境贴图",
+												"value": "hdr"
+											}
+										]
+									},
+									"color": {
+										"showInPanel": [
+											[
+												".type",
+												"$eq",
+												"color"
+											]
+										],
+										"type": "fill",
+										"name": "颜色"
+									}
+								}
+							},
+							"environmentLight": {
+								"name": "环境贴图",
+								"type": "group",
+								"fold": false,
+								"enableHide": true,
+								"children": {
+									"hdrUrl": {
+										"type": "image",
+										"name": "环境贴图",
+										"isHdr": true,
+										"acceptAssetCodes": [
+											"hdr"
+										],
+										"acceptAssetTypes": [
+											"image"
+										]
+									},
+									"hdrOrientation": {
+										"name": "方向",
+										"type": "slider",
+										"suffix": "度",
+										"step": 1,
+										"min": 0,
+										"max": 360,
+										"showRange": true
+									},
+									"hdrIntensity": {
+										"name": "强度",
+										"type": "slider",
+										"step": 0.01,
+										"min": 0,
+										"max": 5,
+										"showRange": true
+									}
+								}
+							},
+							"ambientLight": {
+								"name": "环境光",
+								"type": "tabs",
+								"maxTabs": 1,
+								"template": {
+									"name": "环境光<%= i + 1 %>",
+									"children": {
+										"color": {
+											"name": "颜色",
+											"type": "fill",
+											"enableAlpha": false
+										},
+										"intensity": {
+											"name": "强度",
+											"type": "slider",
+											"step": 0.01,
+											"min": 0,
+											"max": 10,
+											"showRange": true
+										}
+									}
+								}
+							},
+							"directionalLight": {
+								"name": "平行光",
+								"type": "tabs",
+								"maxTabs": 1,
+								"template": {
+									"name": "平行光<%= i + 1 %>",
+									"children": {
+										"color": {
+											"name": "颜色",
+											"type": "fill",
+											"enableAlpha": false
+										},
+										"intensity": {
+											"name": "强度",
+											"type": "slider",
+											"step": 0.01,
+											"min": 0,
+											"max": 10,
+											"showRange": true
+										},
+										"position": {
+											"name": "位置",
+											"type": "suite",
+											"children": {
+												"x": {
+													"name": "X",
+													"type": "slider",
+													"range": [
+														-20000,
+														20000
+													],
+													"step": 0.01
+												},
+												"y": {
+													"name": "Y",
+													"type": "slider",
+													"range": [
+														-20000,
+														20000
+													],
+													"step": 0.01
+												},
+												"z": {
+													"name": "Z",
+													"type": "slider",
+													"range": [
+														-20000,
+														20000
+													],
+													"step": 0.01
+												}
+											}
+										}
+									}
+								}
+							},
+							"groundShadow": {
+								"name": "投影平面",
+								"type": "group",
+								"fold": false,
+								"enableHide": true,
+								"children": {
+									"boundary": {
+										"name": "边缘淡出",
+										"type": "slider",
+										"step": 0.01,
+										"min": 0,
+										"max": 20,
+										"showRange": true
+									},
+									"height": {
+										"name": "高度",
+										"type": "slider",
+										"step": 0.01,
+										"min": -5,
+										"max": 5,
+										"showRange": true
+									},
+									"size": {
+										"name": "尺寸",
+										"type": "slider",
+										"step": 0.01,
+										"min": 1,
+										"max": 10,
+										"showRange": true
+									},
+									"opacity": {
+										"name": "不透明度",
+										"type": "slider",
+										"step": 0.01,
+										"min": 0,
+										"max": 1,
+										"showRange": true
+									}
+								}
+							}
+						}
+					},
+					"postprocessing": {
+						"name": "后处理",
+						"type": "group",
+						"children": {
+							"antialiasType": {
+								"name": "抗锯齿类型",
+								"type": "radio",
+								"optionCol": 12,
+								"options": [
+									{
+										"name": "SSAA",
+										"value": "SSAA"
+									},
+									{
+										"name": "FXAA",
+										"value": "FXAA"
+									}
+								]
+							},
+							"sharpenVignetteGrain": {
+								"name": "锐化晕影",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {},
+									"sharpness": {
+										"type": "slider",
+										"name": "锐利度",
+										"min": 0,
+										"max": 5,
+										"step": 0.01
+									},
+									"vignetteRadius": {
+										"type": "slider",
+										"name": "晕影半径",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									},
+									"vignetteSoftness": {
+										"type": "slider",
+										"name": "晕影柔和度",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									},
+									"grainFactor": {
+										"type": "slider",
+										"name": "颗粒度",
+										"min": 0,
+										"max": 0.5,
+										"step": 0.01
+									}
+								}
+							},
+							"ssr": {
+								"name": "SSR",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {},
+									"maxRayDistance": {
+										"type": "slider",
+										"name": "反射范围",
+										"min": 0,
+										"max": 1000,
+										"step": 0.001
+									},
+									"maxIteration": {
+										"type": "slider",
+										"name": "光线步进次数",
+										"min": 0,
+										"max": 200,
+										"step": 1
+									},
+									"strideMagnitude": {
+										"type": "slider",
+										"name": "光线步长",
+										"min": 1,
+										"max": 2,
+										"step": 0.001
+									},
+									"glossiness": {
+										"type": "slider",
+										"name": "反射面光泽度",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									},
+									"blurSize": {
+										"type": "slider",
+										"name": "模糊度",
+										"min": 0,
+										"max": 10,
+										"step": 1
+									}
+								}
+							},
+							"ssao": {
+								"name": "AO阴影",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {},
+									"bias": {
+										"type": "slider",
+										"name": "偏移",
+										"min": 0,
+										"max": 1,
+										"step": 0.000001
+									},
+									"intensity": {
+										"type": "slider",
+										"name": "AO强度",
+										"min": 0,
+										"max": 10,
+										"step": 0.01
+									},
+									"sharpness": {
+										"type": "slider",
+										"name": "锐利度",
+										"min": 0.01,
+										"max": 100,
+										"step": 0.01
+									},
+									"radius": {
+										"type": "slider",
+										"name": "AO半径",
+										"min": 0,
+										"max": 100,
+										"step": 0.001
+									},
+									"blurSize": {
+										"type": "slider",
+										"name": "模糊强度",
+										"min": 0,
+										"max": 32,
+										"step": 2
+									}
+								}
+							},
+							"bokeh": {
+								"name": "镜头虚化",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {},
+									"bokehRadius": {
+										"type": "slider",
+										"name": "模糊度",
+										"min": 1,
+										"max": 8,
+										"step": 0.01
+									},
+									"aperture": {
+										"type": "slider",
+										"name": "光圈大小",
+										"min": 0,
+										"max": 100,
+										"step": 0.01
+									},
+									"focalDistance": {
+										"type": "slider",
+										"name": "焦距",
+										"min": 0,
+										"max": 1000000,
+										"step": 0.01
+									},
+									"focalSize": {
+										"type": "slider",
+										"name": "焦点大小",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									}
+								}
+							},
+							"bloom": {
+								"name": "辉光",
+								"type": "group",
+								"enableHide": true,
+								"showInPanel": false,
+								"children": {
+									"show": {},
+									"useMask": {
+										"name": "遮罩",
+										"type": "switch",
+										"statusText": true
+									},
+									"radius": {
+										"type": "slider",
+										"name": "缩放",
+										"min": 0,
+										"max": 10,
+										"step": 0.01
+									},
+									"softKnee": {
+										"type": "slider",
+										"name": "平滑度",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									},
+									"intensity": {
+										"type": "slider",
+										"name": "强度",
+										"min": 0,
+										"max": 10,
+										"step": 0.01
+									},
+									"distinction": {
+										"type": "slider",
+										"name": "亮度阈值",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									}
+								}
+							},
+							"ueBloom": {
+								"name": "辉光",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {},
+									"mask": {
+										"name": "遮罩",
+										"type": "switch"
+									},
+									"strength": {
+										"type": "slider",
+										"name": "强度",
+										"min": 0,
+										"max": 5,
+										"step": 0.01
+									},
+									"opacity": {
+										"type": "slider",
+										"name": "亮度",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									},
+									"threshold": {
+										"type": "slider",
+										"name": "亮度阈值",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									},
+									"smoothWidth": {
+										"type": "slider",
+										"name": "平滑宽度",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									},
+									"radius": {
+										"type": "slider",
+										"name": "光斑半径",
+										"min": 0,
+										"max": 10,
+										"step": 0.01
+									}
+								}
+							},
+							"motionBlur": {
+								"name": "运动模糊",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {},
+									"blurSize": {
+										"type": "slider",
+										"name": "模糊度",
+										"min": 1,
+										"max": 16,
+										"step": 1
+									},
+									"intensity": {
+										"type": "slider",
+										"name": "运动速率",
+										"min": 0,
+										"max": 1,
+										"step": 0.01
+									}
+								}
+							},
+							"colorCorrection": {
+								"name": "颜色校正",
+								"type": "suite",
+								"children": {
+									"hue": {
+										"type": "slider",
+										"name": "色调",
+										"min": -180,
+										"max": 180,
+										"step": 1
+									},
+									"saturation": {
+										"type": "slider",
+										"name": "饱和度",
+										"min": 0,
+										"max": 10,
+										"step": 0.1
+									},
+									"brightness": {
+										"type": "slider",
+										"name": "亮度",
+										"min": -1,
+										"max": 1,
+										"step": 0.01
+									},
+									"contrast": {
+										"type": "slider",
+										"name": "对比度",
+										"min": 0,
+										"max": 5,
+										"step": 0.1
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"events": {},
+		"publicHandler": {
+			"resize": {
+				"name": "画布大小改变",
+				"description": "画布大小改变",
+				"type": "number",
+				"fields": {}
+			},
+			"destroy": {
+				"name": "组件销毁",
+				"description": "组件销毁",
+				"type": "object",
+				"fields": {}
+			},
+			"play": {
+				"name": "动画播放",
+				"description": "动画播放",
+				"type": "string",
+				"fields": {
+					"name": {
+						"name": "动画名",
+						"type": "string"
+					}
+				}
+			},
+			"stop": {
+				"name": "动画停止",
+				"description": "动画停止",
+				"type": "string",
+				"fields": {
+					"name": {
+						"name": "动画名",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"description": "数据接口",
+				"fields": {}
+			}
+		},
+		"api_data": {
+			"source": {
+				"url": ""
+			}
+		}
+	},
+	"devDependencies": {
+		"babel-eslint": "10.0.1",
+		"eslint": "5.16.0",
+		"eslint-config-airbnb-base": "13.1.0",
+		"eslint-config-prettier": "4.2.0",
+		"eslint-plugin-babel": "5.3.0",
+		"eslint-plugin-import": "2.17.2",
+		"eslint-plugin-prettier": "3.1.0",
+		"prettier": "1.17.1"
+	}
+}

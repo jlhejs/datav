@@ -1,0 +1,836 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-model-motion",
+	"version": "1.1.1",
+	"description": "路径动画模型",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "路径动画模型",
+		"protocol": 2,
+		"level": 2,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"selectedArea": {
+				"name": "当前区域",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": {}
+			},
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"children": {
+							"shadow": {
+								"name": "阴影设置",
+								"type": "switch",
+								"default": false
+							},
+							"depthWrite": {
+								"name": "深度测试",
+								"type": "switch",
+								"default": true
+							},
+							"wireframe": {
+								"name": "显示线框",
+								"type": "switch",
+								"default": false
+							},
+							"opacity": {
+								"name": "不透明度",
+								"type": "slider",
+								"max": 1,
+								"min": 0,
+								"showRange": true,
+								"step": 0.01,
+								"default": 1
+							},
+							"offsetAlt": {
+								"name": "高度偏移",
+								"type": "slider",
+								"max": 5000,
+								"min": -300,
+								"showRange": true,
+								"step": 0.01,
+								"default": 10,
+								"suffix": "m"
+							},
+							"light": {
+								"name": "光效设置",
+								"type": "suite",
+								"handler": "updateLightOpts",
+								"children": {
+									"envMapIntensityFactor": {
+										"name": "环境贴图强度系数",
+										"type": "hidden",
+										"min": 0,
+										"max": 1,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": true,
+										"default": 1
+									},
+									"emissiveIntensity": {
+										"name": "发光强度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": true,
+										"default": 0
+									}
+								}
+							}
+						}
+					},
+					"graphic": {
+						"name": "图形",
+						"children": {
+							"url": {
+								"name": "模型地址",
+								"type": "text",
+								"default": "https://cdn-upload.datav.aliyun.com/upload/download/1647496308196-5u2JuO96.glb"
+							},
+							"position": {
+								"name": "位置",
+								"type": "suite",
+								"showInPanel": false,
+								"children": {
+									"lng": {
+										"name": "经度",
+										"type": "slider",
+										"min": -180,
+										"max": 180,
+										"step": 0.000001,
+										"default": 120.12656853
+									},
+									"lat": {
+										"name": "纬度",
+										"type": "slider",
+										"min": -90,
+										"max": 90,
+										"step": 0.000001,
+										"default": 30.17896689
+									},
+									"alt": {
+										"name": "高程",
+										"type": "slider",
+										"min": 1,
+										"max": 50000,
+										"step": 0.01,
+										"default": 10
+									}
+								}
+							},
+							"rotation": {
+								"name": "旋转",
+								"type": "suite",
+								"children": {
+									"x": {
+										"name": "X轴旋转",
+										"type": "slider",
+										"min": 0,
+										"max": 360,
+										"suffix": "度",
+										"step": 0.1,
+										"default": 0
+									},
+									"y": {
+										"name": "Y轴旋转",
+										"type": "slider",
+										"min": 0,
+										"max": 360,
+										"suffix": "度",
+										"step": 0.1,
+										"default": 0
+									},
+									"z": {
+										"name": "Z轴旋转",
+										"type": "slider",
+										"min": 0,
+										"max": 360,
+										"suffix": "度",
+										"step": 0.1,
+										"default": 0
+									}
+								}
+							},
+							"scale": {
+								"name": "缩放",
+								"type": "suite",
+								"children": {
+									"x": {
+										"name": "X轴缩放",
+										"type": "slider",
+										"max": 100000,
+										"min": 0.001,
+										"step": 1,
+										"default": 0.1
+									},
+									"y": {
+										"name": "Y轴缩放",
+										"type": "slider",
+										"max": 100000,
+										"min": 0.001,
+										"step": 1,
+										"default": 0.1
+									},
+									"z": {
+										"name": "Z轴缩放",
+										"type": "slider",
+										"max": 100000,
+										"min": 0.001,
+										"step": 1,
+										"default": 0.1
+									}
+								}
+							}
+						}
+					},
+					"animate": {
+						"name": "动效",
+						"children": {
+							"modelAnimate": {
+								"name": "模型动画",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"autoPlay": {
+										"name": "自动播放",
+										"type": "switch",
+										"default": true
+									},
+									"showSkeleton": {
+										"name": "显示骨骼",
+										"type": "switch",
+										"showInPanel": false,
+										"default": false
+									},
+									"defaultLoopMode": {
+										"name": "循环模式",
+										"type": "select",
+										"default": "LoopRepeat",
+										"options": [
+											{
+												"label": "重复播放",
+												"value": "LoopRepeat"
+											},
+											{
+												"label": "单次播放",
+												"value": "LoopOnce"
+											},
+											{
+												"label": "反向播放",
+												"value": "LoopPingPong"
+											}
+										]
+									},
+									"timeScale": {
+										"name": "动画速率",
+										"type": "slider",
+										"max": 1.5,
+										"min": -1.5,
+										"step": 0.001,
+										"default": 1,
+										"showRange": true
+									}
+								}
+							},
+							"scanner": {
+								"name": "扫光动画",
+								"type": "group",
+								"enableHide": true,
+								"showAlias": "enable",
+								"children": {
+									"enable": {
+										"default": false
+									},
+									"frontier": {
+										"name": "锋面类型",
+										"type": "buttonRadio",
+										"default": 1,
+										"options": [
+											{
+												"label": "平面",
+												"value": 1
+											},
+											{
+												"label": "曲面",
+												"value": -1
+											}
+										]
+									},
+									"axisType": {
+										"name": "扫描轴向",
+										"type": "buttonRadio",
+										"default": 1,
+										"options": [
+											{
+												"label": "X轴",
+												"value": 1
+											},
+											{
+												"label": "Y轴",
+												"value": 2
+											},
+											{
+												"label": "Z轴",
+												"value": 3
+											}
+										],
+										"showInPanel": {
+											"conditions": [
+												[
+													".frontier",
+													"$eq",
+													1
+												]
+											]
+										}
+									},
+									"direction": {
+										"name": "正负方向",
+										"type": "buttonRadio",
+										"default": 1,
+										"options": [
+											{
+												"label": "正向",
+												"value": 1
+											},
+											{
+												"label": "负向",
+												"value": -1
+											}
+										]
+									},
+									"color": {
+										"type": "fill",
+										"name": "颜色",
+										"default": "#6699ff"
+									},
+									"length": {
+										"type": "slider",
+										"name": "扫光长度",
+										"default": 0.02,
+										"max": 1,
+										"min": 0.01,
+										"step": 0.001,
+										"showRange": true
+									},
+									"speed": {
+										"type": "slider",
+										"name": "扫光速度",
+										"default": 0.002,
+										"max": 0.05,
+										"min": 0,
+										"step": 0.001,
+										"showRange": true
+									}
+								}
+							},
+							"pathMoving": {
+								"name": "路径动画",
+								"type": "group",
+								"enableHide": true,
+								"showAlias": "enable",
+								"handler": "updatePathMovingOpts",
+								"children": {
+									"enable": {
+										"default": true
+									},
+									"play": {
+										"name": "自动播放",
+										"type": "switch",
+										"statusText": true,
+										"default": false
+									},
+									"loopMode": {
+										"name": "循环模式",
+										"type": "select",
+										"default": "loop",
+										"options": [
+											{
+												"label": "重复播放",
+												"value": "loop"
+											},
+											{
+												"label": "单次播放",
+												"value": "once"
+											}
+										]
+									},
+									"duration": {
+										"name": "动画时间",
+										"type": "slider",
+										"min": 1,
+										"max": 10000000,
+										"step": 1,
+										"suffix": "ms",
+										"default": 10000
+									},
+									"showPath": {
+										"name": "显示路径",
+										"type": "switch",
+										"default": true
+									},
+									"height": {
+										"name": "路径高度",
+										"type": "slider",
+										"max": 5000,
+										"min": 0,
+										"showRange": true,
+										"step": 1,
+										"default": 10,
+										"suffix": "m"
+									},
+									"tension": {
+										"name": "曲线张力",
+										"type": "slider",
+										"max": 1,
+										"min": 0,
+										"step": 0.1,
+										"default": 0.1,
+										"showRange": true
+									}
+								}
+							},
+							"expand": {
+								"name": "模型展开",
+								"type": "tabs",
+								"handler": "updateExpandOpts",
+								"maxTab": 100,
+								"default": [],
+								"template": {
+									"name": "mesh<%= i + 1%>",
+									"children": {
+										"id": {
+											"name": "面id",
+											"type": "text"
+										},
+										"offset": {
+											"name": "偏移量",
+											"type": "slider",
+											"min": 0,
+											"max": 10000000,
+											"step": 1,
+											"default": 0,
+											"suffix": "m"
+										},
+										"axisType": {
+											"name": "偏移方向",
+											"type": "buttonRadio",
+											"default": "y",
+											"options": [
+												{
+													"label": "X轴",
+													"value": "x"
+												},
+												{
+													"label": "Y轴",
+													"value": "y"
+												},
+												{
+													"label": "Z轴",
+													"value": "z"
+												}
+											]
+										},
+										"duration": {
+											"name": "持续时间",
+											"type": "slider",
+											"min": 1,
+											"max": 10000000,
+											"step": 1,
+											"default": 1000,
+											"suffix": "ms"
+										}
+									}
+								}
+							}
+						}
+					},
+					"interaction": {
+						"name": "交互",
+						"children": {
+							"enable": {
+								"name": "鼠标交互",
+								"type": "switch",
+								"default": false
+							},
+							"clickType": {
+								"name": "触发方式",
+								"type": "buttonRadio",
+								"default": "click",
+								"showInPanel": false,
+								"options": [
+									{
+										"value": "click",
+										"label": "单击"
+									},
+									{
+										"value": "dblclick",
+										"label": "双击"
+									}
+								]
+							},
+							"interactiveExt": {
+								"name": "点击区域",
+								"type": "buttonRadio",
+								"default": "local",
+								"options": [
+									{
+										"value": "local",
+										"label": "局部"
+									},
+									{
+										"value": "whole",
+										"label": "整体"
+									}
+								]
+							},
+							"interactiveColor": {
+								"name": "点击颜色",
+								"type": "fill",
+								"default": "RGBA(79, 240, 252, 0.2)"
+							}
+						}
+					}
+				}
+			}
+		},
+		"keyframeConfig": {
+			"emissiveIntensity": {
+				"name": "发光强度系数",
+				"type": "slider",
+				"min": 0,
+				"max": 1,
+				"step": 0.1,
+				"precision": 0.1,
+				"showRange": true,
+				"default": 1
+			}
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"description": "运动路径",
+				"format": "geo_lineString",
+				"fields": {
+					"id": {
+						"description": "路径id",
+						"type": "number",
+						"optional": false
+					},
+					"geometry": {
+						"description": "坐标",
+						"type": "object",
+						"optional": false
+					}
+				}
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"id": 75,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.12904024,
+								30.26824356
+							],
+							[
+								120.12758342,
+								30.26503272
+							],
+							[
+								120.13385045,
+								30.26308919
+							],
+							[
+								120.13713518,
+								30.26435241
+							],
+							[
+								120.13674836,
+								30.26789483
+							]
+						]
+					}
+				}
+			]
+		},
+		"events": {
+			"leftClick": {
+				"name": "左键点击模型",
+				"description": "左键点击模型",
+				"type": "object",
+				"fields": {
+					"name": {
+						"name": "mesh id",
+						"type": "string"
+					},
+					"mesh": {
+						"name": "mesh",
+						"type": "object"
+					},
+					"instanceId": {
+						"name": "instancedmesh instancedId",
+						"type": "number"
+					}
+				}
+			},
+			"rightClick": {
+				"name": "右键点击模型",
+				"description": "右键点击模型",
+				"type": "object",
+				"fields": {
+					"name": {
+						"name": "mesh id",
+						"type": "string"
+					},
+					"mesh": {
+						"name": "mesh",
+						"type": "object"
+					},
+					"instanceId": {
+						"name": "instancedmesh instancedId",
+						"type": "number"
+					}
+				}
+			},
+			"loaded": {
+				"name": "模型加载完成",
+				"description": "模型加载完成",
+				"type": "any"
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"name": "显示组件",
+				"description": "显示组件",
+				"type": "null"
+			},
+			"hide": {
+				"name": "隐藏组件",
+				"description": "隐藏组件",
+				"type": "null"
+			},
+			"updateScanner": {
+				"name": "扫光动画",
+				"description": "更新扫光动画配置",
+				"type": "object",
+				"fields": {
+					"enable": {
+						"name": "开启/关闭扫光动画",
+						"type": "boolean",
+						"default": false
+					},
+					"frontier": {
+						"name": "锋面类型",
+						"type": "number",
+						"description": "1:平面, -1:曲面",
+						"default": 1,
+						"optional": true
+					},
+					"axisType": {
+						"name": "扫描轴向",
+						"type": "number",
+						"description": "只针对平面锋面, 1:x轴, 2:y轴, 3:z轴",
+						"default": 1,
+						"optional": true
+					},
+					"direction": {
+						"name": "扫描方向",
+						"type": "number",
+						"description": "1:正向, -1:反向",
+						"default": 1,
+						"optional": true
+					},
+					"color": {
+						"name": "扫光颜色",
+						"type": "string",
+						"default": "#6699ff",
+						"optional": true
+					},
+					"length": {
+						"name": "扫光长度",
+						"type": "number",
+						"default": 0.05,
+						"optional": true
+					},
+					"speed": {
+						"name": "扫光速度",
+						"type": "number",
+						"default": 0.05,
+						"optional": true
+					}
+				}
+			},
+			"playAllAnimation": {
+				"name": "播放所有模型动画",
+				"description": "播放所有模型动画",
+				"type": "null"
+			},
+			"stopAllAnimation": {
+				"name": "停止所有模型动画",
+				"description": "停止所有模型动画",
+				"type": "null"
+			},
+			"playSpecifiedAnimation": {
+				"name": "播放模型动画",
+				"description": "通过动画名称播放指定模型动画",
+				"type": "string"
+			},
+			"stopSpecifiedAnimation": {
+				"name": "停止模型动画",
+				"description": "通过动画名称停止指定模型动画",
+				"type": "string"
+			},
+			"expand": {
+				"name": "展开模型",
+				"description": "展开模型",
+				"type": "object",
+				"fields": {
+					"id": {
+						"name": "模型分组 id",
+						"type": "array"
+					},
+					"offset": {
+						"name": "偏移量",
+						"type": "number",
+						"default": 0
+					},
+					"axisType": {
+						"name": "偏移方向",
+						"type": "string",
+						"default": "y",
+						"optional": true
+					},
+					"duration": {
+						"name": "持续时间",
+						"type": "number",
+						"default": 1000
+					}
+				}
+			},
+			"expandByArray": {
+				"name": "分组展开模型",
+				"description": "分组展开模型",
+				"type": "array",
+				"fields": {
+					"id": {
+						"name": "模型分组 id",
+						"type": "array"
+					},
+					"offset": {
+						"name": "偏移量",
+						"type": "number",
+						"default": 0
+					},
+					"axisType": {
+						"name": "偏移方向",
+						"type": "string",
+						"default": "y",
+						"optional": true
+					},
+					"duration": {
+						"name": "持续时间",
+						"type": "number",
+						"default": 1000
+					}
+				}
+			},
+			"resetExpansion": {
+				"name": "复原展开模型",
+				"description": "复原展开模型",
+				"type": "null"
+			},
+			"startMoving": {
+				"name": "初始化路径动画",
+				"description": "初始化设置路径动画数据并播放动画",
+				"type": "object",
+				"fields": {
+					"path": {
+						"name": "路径",
+						"type": "array",
+						"optional": false
+					},
+					"duration": {
+						"name": "动画时间",
+						"type": "number",
+						"default": 8000,
+						"optional": false
+					},
+					"loop": {
+						"name": "是否循环",
+						"type": "bool",
+						"optional": false
+					},
+					"tension": {
+						"name": "曲线张力",
+						"type": "number",
+						"default": 0.5,
+						"optional": true
+					},
+					"showPath": {
+						"name": "显示路径",
+						"type": "bool",
+						"default": true,
+						"optional": true
+					}
+				}
+			},
+			"restartMoving": {
+				"name": "开始路径动画",
+				"description": "从头开始播放路径动画",
+				"type": "null"
+			},
+			"stopMoving": {
+				"name": "终止路径动画",
+				"description": "终止播放路径动画",
+				"type": "null"
+			},
+			"playMoving": {
+				"name": "继续路径动画",
+				"description": "路径动画从暂停处继续播放",
+				"type": "null"
+			},
+			"pauseMoving": {
+				"name": "暂停路径动画",
+				"description": "暂停路径动画，可继续播放",
+				"type": "null"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms",
+			"map_3d_city_pro_model3d_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/imgextra/i3/O1CN01RnN0ue26BNxmXoIcA_!!6000000007623-2-tps-360-360.png"
+	}
+}

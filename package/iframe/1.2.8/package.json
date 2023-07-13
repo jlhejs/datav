@@ -1,0 +1,99 @@
+{
+	"name": "iframe",
+	"version": "1.2.8",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"main": "index.js",
+	"datav": {
+		"cn_name": "iframe",
+		"protocol": 2,
+		"level": 0,
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"url": {
+						"description": "url链接",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"url": {
+				"type": "text",
+				"name": "链接",
+				"default": "https://www.aliyun.com",
+				"dataField": "url"
+			},
+			"closeButton": {
+				"type": "boolean",
+				"name": "可关闭",
+				"default": false
+			},
+			"alwaysShowCloseButton": {
+				"type": "boolean",
+				"name": "始终显示关闭按钮",
+				"default": false,
+				"show": [
+					[
+						"closeButton",
+						"$eq",
+						true
+					]
+				]
+			},
+			"noScrolling": {
+				"type": "boolean",
+				"name": "不可滚动",
+				"default": false
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"url": ""
+				}
+			]
+		},
+		"events": {
+			"url-changed": {
+				"description": "当链接改变时",
+				"fields": {}
+			}
+		},
+		"icon": "//img.alicdn.com/tfs/TB13WrllFY7gK0jSZKzXXaikpXa-368-208.png",
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 110
+		},
+		"type": [
+			"interact",
+			"DataV-6:control_data"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"publicHandler": {
+			"setIframeUrl": {
+				"name": "设置iframe地址",
+				"type": "object",
+				"fields": {
+					"url": {
+						"name": "值",
+						"type": "string",
+						"default": "https://www.aliyun.com"
+					}
+				}
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1aVnmlUH1gK0jSZSyXXXtlpXa-160-116.png"
+	}
+}

@@ -1,0 +1,590 @@
+{
+	"name": "@lottery/single-lottery",
+	"version": "0.0.13",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "2.1.4",
+		"lodash": "4.17.15"
+	},
+	"datav": {
+		"cn_name": "锦鲤抽奖翻牌器",
+		"level": 0,
+		"icon": "//img.alicdn.com/imgextra/i4/O1CN01RPxquY1MOh3I9LAgI_!!6000000001425-2-tps-368-208.png",
+		"thumbnail": "//img.alicdn.com/imgextra/i4/O1CN01LMp5341G0WSCdJ7Yq_!!6000000000560-2-tps-332-144.png",
+		"protocol": 2,
+		"type": [
+			"decorate",
+			"DataV-6:info"
+		],
+		"view": {
+			"width": "1216",
+			"height": "300",
+			"minWidth": "20",
+			"minHeight": "20"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"name": {
+						"description": "名称"
+					},
+					"id": {
+						"description": "标签ID"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"type": "menu",
+				"children": {
+					"prefix": {
+						"name": "前缀",
+						"type": "group",
+						"children": {
+							"width": {
+								"name": "宽度",
+								"type": "stepper",
+								"step": 1,
+								"default": 80,
+								"suffix": "px"
+							},
+							"margin": {
+								"name": "间距",
+								"type": "suite",
+								"children": {
+									"left": {
+										"name": "左侧",
+										"type": "stepper",
+										"step": 1,
+										"default": 20,
+										"col": 12,
+										"suffix": "px"
+									},
+									"right": {
+										"name": "右侧",
+										"type": "stepper",
+										"step": 1,
+										"default": 60,
+										"col": 12,
+										"suffix": "px"
+									}
+								}
+							},
+							"contentType": {
+								"name": "内容类型",
+								"type": "buttonRadio",
+								"default": "img",
+								"options": [
+									{
+										"label": "文字",
+										"value": "text"
+									},
+									{
+										"label": "图片",
+										"value": "img"
+									}
+								]
+							},
+							"content": {
+								"name": "文字内容",
+								"type": "text",
+								"default": "锦鲤",
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"text"
+									]
+								]
+							},
+							"font": {
+								"name": "文字设置",
+								"type": "font",
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"text"
+									]
+								]
+							},
+							"shadow": {
+								"name": "阴影",
+								"type": "suite",
+								"children": {
+									"offsetX": {
+										"name": "水平位移",
+										"type": "stepper",
+										"step": 1,
+										"default": 2,
+										"col": 12,
+										"suffix": "px"
+									},
+									"offsetY": {
+										"name": "垂直位移",
+										"type": "stepper",
+										"step": 1,
+										"default": 2,
+										"col": 12,
+										"suffix": "px"
+									},
+									"blur": {
+										"name": "模糊",
+										"type": "stepper",
+										"step": 1,
+										"default": 3,
+										"col": 12,
+										"suffix": "px"
+									},
+									"color": {
+										"name": "颜色",
+										"type": "fill",
+										"components": [
+											"flat"
+										],
+										"default": "#402706",
+										"col": 12
+									}
+								},
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"text"
+									]
+								]
+							},
+							"img": {
+								"name": "图片",
+								"type": "image",
+								"default": "https://img.alicdn.com/imgextra/i2/O1CN01LyTpsB1dZXtxWmkfB_!!6000000003750-2-tps-211-211.png",
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"img"
+									]
+								]
+							},
+							"size": {
+								"name": "尺寸",
+								"type": "suite",
+								"children": {
+									"width": {
+										"name": "宽度",
+										"type": "stepper",
+										"step": 1,
+										"default": 100,
+										"col": 12,
+										"suffix": "px"
+									},
+									"height": {
+										"name": "高度",
+										"type": "stepper",
+										"step": 1,
+										"default": 100,
+										"col": 12,
+										"suffix": "px"
+									}
+								},
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"img"
+									]
+								]
+							},
+							"round": {
+								"name": "圆角",
+								"type": "stepper",
+								"step": 1,
+								"default": 4,
+								"suffix": "px",
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"img"
+									]
+								]
+							}
+						}
+					},
+					"nick": {
+						"name": "花名",
+						"type": "group",
+						"children": {
+							"width": {
+								"name": "宽度",
+								"type": "stepper",
+								"step": 1,
+								"default": 200,
+								"suffix": "px"
+							},
+							"margin": {
+								"name": "间距",
+								"type": "suite",
+								"children": {
+									"left": {
+										"name": "左侧",
+										"type": "stepper",
+										"step": 1,
+										"default": 0,
+										"col": 12,
+										"suffix": "px"
+									},
+									"right": {
+										"name": "右侧",
+										"type": "stepper",
+										"step": 1,
+										"default": 60,
+										"col": 12,
+										"suffix": "px"
+									}
+								}
+							},
+							"content": {
+								"name": "未开奖前文案",
+								"type": "text",
+								"default": "锦鲤"
+							},
+							"font": {
+								"name": "文字设置",
+								"type": "font",
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontWeight": "normal",
+									"fontSize": 100,
+									"color": "#fff"
+								}
+							},
+							"shadow": {
+								"name": "阴影",
+								"type": "suite",
+								"children": {
+									"offsetX": {
+										"name": "水平位移",
+										"type": "stepper",
+										"step": 1,
+										"default": 2,
+										"col": 12,
+										"suffix": "px"
+									},
+									"offsetY": {
+										"name": "垂直位移",
+										"type": "stepper",
+										"step": 1,
+										"default": 2,
+										"col": 12,
+										"suffix": "px"
+									},
+									"blur": {
+										"name": "模糊",
+										"type": "stepper",
+										"step": 1,
+										"default": 3,
+										"col": 12,
+										"suffix": "px"
+									},
+									"color": {
+										"name": "颜色",
+										"type": "fill",
+										"components": [
+											"flat"
+										],
+										"default": "#402706",
+										"col": 12
+									}
+								}
+							}
+						}
+					},
+					"workId": {
+						"name": "工号",
+						"type": "group",
+						"children": {
+							"digital": {
+								"name": "位数",
+								"type": "stepper",
+								"step": 1,
+								"default": 6
+							},
+							"numbers": {
+								"name": "允许滚动的数字",
+								"description": "允许滚动的数字, 每个数字以逗号(,)相隔",
+								"type": "array",
+								"default": [
+									"0,1,5",
+									"0,1,2,3,4,5,6,7,8,9",
+									"0,1,2,3,4,5,6,7,8,9",
+									"0,1,2,3,4,5,6,7,8,9",
+									"0,1,2,3,4,5,6,7,8,9",
+									"0,1,2,3,4,5,6,7,8,9"
+								],
+								"child": {
+									"name": "数字<%= i+1 %>",
+									"type": "text",
+									"default": "0,1,2,3,4,5,6,7,8,9"
+								}
+							},
+							"duration": {
+								"name": "时间间隔",
+								"type": "suite",
+								"children": {
+									"min": {
+										"name": "最小",
+										"type": "stepper",
+										"step": 1,
+										"default": 100,
+										"suffix": "ms",
+										"col": 12
+									},
+									"max": {
+										"name": "最大",
+										"type": "stepper",
+										"step": 1,
+										"default": 100,
+										"suffix": "ms",
+										"col": 12
+									}
+								}
+							},
+							"font": {
+								"name": "文字设置",
+								"type": "font",
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontWeight": "normal",
+									"fontSize": 100,
+									"color": "#fff"
+								}
+							}
+						}
+					},
+					"suffix": {
+						"name": "后缀",
+						"type": "group",
+						"children": {
+							"width": {
+								"name": "宽度",
+								"type": "stepper",
+								"step": 1,
+								"default": 300,
+								"suffix": "px"
+							},
+							"margin": {
+								"name": "间距",
+								"type": "suite",
+								"children": {
+									"left": {
+										"name": "左侧",
+										"type": "stepper",
+										"step": 1,
+										"default": 60,
+										"col": 12,
+										"suffix": "px"
+									},
+									"right": {
+										"name": "右侧",
+										"type": "stepper",
+										"step": 1,
+										"default": 10,
+										"col": 12,
+										"suffix": "px"
+									}
+								}
+							},
+							"contentType": {
+								"name": "内容类型",
+								"type": "buttonRadio",
+								"options": [
+									{
+										"label": "文字",
+										"value": "text"
+									},
+									{
+										"label": "图片",
+										"value": "img"
+									}
+								],
+								"default": "text"
+							},
+							"content": {
+								"name": "文字内容",
+								"type": "text",
+								"default": "一等奖",
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"text"
+									]
+								]
+							},
+							"font": {
+								"name": "文字设置",
+								"type": "font",
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontWeight": "normal",
+									"fontSize": 100,
+									"color": "#fff"
+								},
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"text"
+									]
+								]
+							},
+							"shadow": {
+								"name": "阴影",
+								"type": "suite",
+								"children": {
+									"offsetX": {
+										"name": "水平位移",
+										"type": "stepper",
+										"step": 1,
+										"default": 2,
+										"col": 12,
+										"suffix": "px"
+									},
+									"offsetY": {
+										"name": "垂直位移",
+										"type": "stepper",
+										"step": 1,
+										"default": 2,
+										"col": 12,
+										"suffix": "px"
+									},
+									"blur": {
+										"name": "模糊",
+										"type": "stepper",
+										"step": 1,
+										"default": 3,
+										"col": 12,
+										"suffix": "px"
+									},
+									"color": {
+										"name": "颜色",
+										"type": "fill",
+										"components": [
+											"flat"
+										],
+										"default": "#402706",
+										"col": 12
+									}
+								},
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"text"
+									]
+								]
+							},
+							"img": {
+								"name": "图片",
+								"type": "image",
+								"default": "//img.alicdn.com/tfs/TB1J3GkgeH2gK0jSZJnXXaT1FXa-600-360.png",
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"img"
+									]
+								]
+							},
+							"size": {
+								"name": "尺寸",
+								"type": "suite",
+								"children": {
+									"width": {
+										"name": "宽度",
+										"type": "stepper",
+										"step": 1,
+										"default": 24,
+										"col": 12,
+										"suffix": "px"
+									},
+									"height": {
+										"name": "高度",
+										"type": "stepper",
+										"step": 1,
+										"default": 24,
+										"col": 12,
+										"suffix": "px"
+									}
+								},
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"img"
+									]
+								]
+							},
+							"round": {
+								"name": "圆角",
+								"type": "stepper",
+								"step": 1,
+								"default": 0,
+								"suffix": "px",
+								"showInPanel": [
+									[
+										".contentType",
+										"$eq",
+										"img"
+									]
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"id": "009165",
+					"name": "沐汐"
+				}
+			]
+		},
+		"events": {},
+		"publicHandler": {
+			"stop": {
+				"name": "停止",
+				"description": "停止某一位",
+				"type": "object",
+				"fields": {
+					"index": {
+						"name": "索引号",
+						"description": "位数索引号, 从最高位开始，0 为起始号",
+						"type": "number"
+					}
+				}
+			},
+			"showName": {
+				"name": "公布名单",
+				"description": "公布名单",
+				"type": "null"
+			},
+			"loop": {
+				"name": "开始翻滚",
+				"description": "开始翻滚",
+				"type": "null"
+			},
+			"clear": {
+				"name": "清除状态",
+				"description": "清除状态",
+				"type": "null"
+			}
+		}
+	}
+}

@@ -1,0 +1,356 @@
+{
+	"name": "map3d-sphere-globe-private",
+	"version": "0.0.3",
+	"main": "index.js",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"dmap": "0.2.8"
+	},
+	"datav": {
+		"cn_name": "地球球体层",
+		"private": true,
+		"protocol": 2,
+		"apis": {},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"globe": {
+				"type": "group",
+				"name": "地球",
+				"children": {
+					"textureType": {
+						"name": "贴图类型",
+						"type": "options",
+						"default": "地形",
+						"options": [
+							{
+								"name": "地形",
+								"value": "地形"
+							},
+							{
+								"name": "卫星",
+								"value": "卫星"
+							},
+							{
+								"name": "粒子",
+								"value": "粒子"
+							},
+							{
+								"name": "行政区",
+								"value": "行政区"
+							},
+							{
+								"name": "自定义",
+								"value": "自定义"
+							}
+						]
+					},
+					"optionsCustom": {
+						"show": [
+							[
+								"textureType",
+								"$eq",
+								"自定义"
+							]
+						],
+						"type": "group",
+						"name": "自定义贴图",
+						"children": {
+							"mapUrl": {
+								"type": "image",
+								"name": "自定义贴图",
+								"default": "http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/mapping/1/earth.topo.bathy.200407.3x4096x2048.dark.jpg"
+							},
+							"ratio": {
+								"type": "number",
+								"name": "缩放",
+								"default": 1,
+								"max": 1.2,
+								"min": 0.9,
+								"step": 0.01
+							},
+							"normalScale": {
+								"type": "number",
+								"name": "凹凸度",
+								"default": 0.7,
+								"range": [
+									0,
+									5
+								],
+								"step": 0.01
+							},
+							"color": {
+								"type": "color",
+								"name": "贴图色",
+								"default": "#2e5784"
+							},
+							"emissive": {
+								"type": "color",
+								"name": "泛光色",
+								"default": "#0B103C"
+							},
+							"specular": {
+								"type": "color",
+								"name": "高亮色",
+								"default": "#0a121b"
+							}
+						}
+					},
+					"optionsDEM": {
+						"show": [
+							[
+								"textureType",
+								"$eq",
+								"地形"
+							]
+						],
+						"type": "group",
+						"name": "地形贴图",
+						"children": {
+							"mapUrl": {
+								"type": "hidden",
+								"default": "http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/mapping/1/earth.topo.bathy.200407.3x4096x2048.dark.jpg"
+							},
+							"ratio": {
+								"type": "number",
+								"name": "缩放",
+								"default": 1,
+								"max": 1.2,
+								"min": 0.9,
+								"step": 0.01
+							},
+							"normalScale": {
+								"type": "number",
+								"name": "凹凸度",
+								"default": 0.7,
+								"range": [
+									0,
+									5
+								],
+								"step": 0.01
+							},
+							"color": {
+								"type": "color",
+								"name": "贴图色",
+								"default": "#2e5784"
+							},
+							"emissive": {
+								"type": "color",
+								"name": "泛光色",
+								"default": "#0B103C"
+							},
+							"specular": {
+								"type": "color",
+								"name": "高亮色",
+								"default": "#0a121b"
+							}
+						}
+					},
+					"optionsDay": {
+						"show": [
+							[
+								"textureType",
+								"$eq",
+								"卫星"
+							]
+						],
+						"type": "group",
+						"name": "卫星贴图",
+						"children": {
+							"mapUrl": {
+								"type": "hidden",
+								"default": "http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/mapping/1/earth.topo.bathy.200407.3x4096x2048.jpg"
+							},
+							"ratio": {
+								"type": "number",
+								"name": "缩放",
+								"default": 1,
+								"max": 1.2,
+								"min": 0.9,
+								"step": 0.01
+							},
+							"normalScale": {
+								"type": "number",
+								"name": "凹凸度",
+								"default": 1.73,
+								"range": [
+									0,
+									5
+								],
+								"step": 0.01
+							},
+							"color": {
+								"type": "color",
+								"name": "贴图色",
+								"default": "#47576A"
+							},
+							"emissive": {
+								"type": "color",
+								"name": "泛光色",
+								"default": "#23232A"
+							},
+							"specular": {
+								"type": "color",
+								"name": "高亮色",
+								"default": "#868686"
+							}
+						}
+					},
+					"optionsParticle": {
+						"show": [
+							[
+								"textureType",
+								"$eq",
+								"粒子"
+							]
+						],
+						"type": "group",
+						"name": "粒子贴图",
+						"children": {
+							"mapUrl": {
+								"type": "hidden",
+								"default": "http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/mapping/v2/particle02.png"
+							},
+							"ratio": {
+								"type": "number",
+								"name": "缩放",
+								"default": 1,
+								"max": 1.2,
+								"min": 0.9,
+								"step": 0.01
+							},
+							"normalScale": {
+								"type": "number",
+								"name": "凹凸度",
+								"default": 0,
+								"range": [
+									0,
+									5
+								],
+								"step": 0.01
+							},
+							"color": {
+								"type": "color",
+								"name": "贴图色",
+								"default": "#68faee"
+							},
+							"emissive": {
+								"type": "color",
+								"name": "泛光色",
+								"default": "#2a2e76"
+							},
+							"specular": {
+								"type": "color",
+								"name": "高亮色",
+								"default": "#00ffea"
+							}
+						}
+					},
+					"optionsZone": {
+						"show": [
+							[
+								"textureType",
+								"$eq",
+								"行政区"
+							]
+						],
+						"type": "group",
+						"name": "行政贴图",
+						"children": {
+							"mapUrl": {
+								"type": "hidden",
+								"default": "http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/mapping/v2/world04.png"
+							},
+							"ratio": {
+								"type": "number",
+								"name": "缩放",
+								"default": 1,
+								"max": 1.2,
+								"min": 0.9,
+								"step": 0.01
+							},
+							"normalScale": {
+								"type": "number",
+								"name": "凹凸度",
+								"default": 0,
+								"range": [
+									0,
+									5
+								],
+								"step": 0.01
+							},
+							"color": {
+								"type": "color",
+								"name": "贴图色",
+								"default": "#FFFFFF"
+							},
+							"emissive": {
+								"type": "color",
+								"name": "泛光色",
+								"default": "#000000"
+							},
+							"specular": {
+								"type": "color",
+								"name": "高亮色",
+								"default": "#172536"
+							}
+						}
+					}
+				}
+			},
+			"atmosphere": {
+				"type": "group",
+				"name": "大气层",
+				"children": {
+					"isAtmosphere": {
+						"name": "显示",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"color": {
+						"type": "color",
+						"name": "颜色",
+						"default": "#fff"
+					},
+					"ratio": {
+						"type": "number",
+						"name": "缩放",
+						"default": 1.2,
+						"step": 0.01,
+						"max": 1.5,
+						"min": 0.9
+					}
+				}
+			},
+			"defaultSpecularMapUrl": {
+				"type": "hidden",
+				"default": "http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/mapping/1/earth_specularmap_flat_8192x4096.jpg"
+			},
+			"defaultNormalMapUrl": {
+				"type": "hidden",
+				"default": "http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/mapping/1/earth_normalmap_flat_8192x4096.jpg"
+			},
+			"defaultBumpMapUrl": {
+				"type": "hidden",
+				"default": "http://datavmap-public.oss-cn-hangzhou.aliyuncs.com/mapping/1/earth_bumpmap_flat_8192x4096aa.jpg"
+			}
+		},
+		"api_data": {},
+		"type": [
+			"map3d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": ""
+	}
+}

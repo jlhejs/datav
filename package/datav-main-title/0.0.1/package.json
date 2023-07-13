@@ -1,0 +1,268 @@
+{
+  "name": "datav-main-title",
+  "version": "0.0.1",
+  "dependencies": {
+    "bcore": "0.0.18",
+    "jquery": "2.1.4",
+    "lodash": "4.6.1"
+  },
+  "datav": {
+    "locked": false,
+    "hided": false,
+    "selected": false,
+    "hovered": false,
+    "renameing": false,
+    "scaling": {
+      "zoom": false,
+      "w": 0,
+      "h": 0,
+      "sx": 1,
+      "sy": 1
+    },
+    "attr": {
+      "x": 0,
+      "y": 0,
+      "w": 300,
+      "h": 56,
+      "deg": 0,
+      "opacity": 1,
+      "filpV": false,
+      "filpH": false
+    },
+    "projectId": "",
+    "id": "",
+    "name": "datav-main-title",
+    "type": "com",
+    "alias": "通用标题",
+    "icon": "v-icon-chart-bar",
+    "img": "//img.alicdn.com/tfs/TB1gFTolQL0gK0jSZFAXXcA9pXa-370-208.png",
+    "config": {
+      "title": {
+        "name": "标题名",
+        "type": "text",
+        "default": "我是标题数据"
+      },
+      "textStyle": {
+        "name": "文本样式",
+        "type": "group",
+        "children": {
+          "fontFamily": {
+            "name": "字体",
+            "type": "select",
+            "default": "Microsoft Yahei",
+            "options": [
+              {
+                "value": "Microsoft Yahei",
+                "label": "微软雅黑"
+              },
+              {
+                "value": "SimSun",
+                "label": "宋体"
+              },
+              {
+                "value": "SimHei",
+                "label": "黑体"
+              },
+              {
+                "value": "LiSu",
+                "label": "隶书"
+              },
+              {
+                "value": "YouYuan",
+                "label": "幼圆"
+              },
+              {
+                "value": "tahoma",
+                "label": "tahoma"
+              },
+              {
+                "value": "arial",
+                "label": "arial"
+              },
+              {
+                "value": "sans-serif",
+                "label": "sans-serif"
+              }
+            ]
+          },
+          "fontSize": {
+            "name": "大小",
+            "type": "number",
+            "default": 24
+          },
+          "color": {
+            "name": "颜色",
+            "type": "text",
+            "default": "#fff"
+          },
+          "fontWeight": {
+            "name": "粗细",
+            "type": "text",
+            "default": "normal"
+          }
+        }
+      },
+      "textAlign": {
+        "name": "文字排列方式",
+        "type": "select",
+        "default": "center",
+        "options": [
+          {
+            "value": "left",
+            "label": "左对齐"
+          },
+          {
+            "value": "center",
+            "label": "居中对齐"
+          },
+          {
+            "value": "right",
+            "label": "右对齐"
+          }
+        ]
+      },
+      "writingMode": {
+        "name": "文字排列顺序",
+        "type": "select",
+        "default": "horizontal-tb",
+        "options": [
+          {
+            "value": "horizontal-tb",
+            "label": "水平"
+          },
+          {
+            "value": "vertical-rl",
+            "label": "垂直"
+          }
+        ]
+      },
+      "letterSpacing": {
+        "name": "文字间隔",
+        "type": "number",
+        "default": 0
+      },
+      "backgroundStyle": {
+        "name": "背景样式",
+        "type": "group",
+        "default": "center",
+        "children": {
+          "show": {
+            "name": "显示",
+            "type": "boolean",
+            "default": false
+          },
+          "bgColor": {
+            "name": "背景色",
+            "type": "text",
+            "default": "#008bff"
+          },
+          "borderRadius": {
+            "name": "圆角",
+            "type": "number",
+            "default": 15
+          },
+          "borderColor": {
+            "name": "边框颜色",
+            "type": "text",
+            "default": "#fff"
+          },
+          "borderStyle": {
+            "name": "边框样式",
+            "type": "text",
+            "default": "solid"
+          },
+          "borderWidth": {
+            "name": "边框宽度",
+            "type": "number",
+            "default": 1
+          }
+        }
+      },
+      "ellipsis": {
+        "name": "省略号",
+        "type": "boolean",
+        "default": false
+      },
+      "urlConfig": {
+        "name": "超连接配置",
+        "type": "group",
+        "default": "center",
+        "children": {
+          "url": {
+            "name": "超链接",
+            "type": "text",
+            "default": ""
+          },
+          "isBlank": {
+            "name": "新窗口",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    },
+    "apis": {
+      "source": {
+        "fields": {
+          "x": {
+            "type": "string",
+            "map": "",
+            "description": "类目",
+            "optional": false
+          },
+          "y": {
+            "type": "string",
+            "map": "",
+            "description": "值",
+            "optional": false
+          }
+        },
+        "render": "render",
+        "description": "基本柱状图接口",
+        "useAutoUpdate": false,
+        "autoUpdate": 1
+      }
+    },
+    "apiData": {
+      "source": {
+        "type": "static",
+        "pageFilters": [],
+        "config": {
+          "useFilter": false,
+          "data": "[{\"x\":\"上海\",\"y\":23},{\"x\":\"深圳\",\"y\":13},{\"x\":\"合肥\",\"y\":2},{\"x\":\"成都\",\"y\":9},{\"x\":\"安徽\",\"y\":5},{\"x\":\"北京\",\"y\":10},{\"x\":\"杭州\",\"y\":14},{\"x\":\"长沙\",\"y\":24}]"
+        }
+      }
+    },
+    "events": {
+      "click": {
+        "description": "当点击数据项时",
+        "fields": {
+          "x": {
+            "type": "string",
+            "map": "",
+            "description": "类目",
+            "optional": false
+          },
+          "y": {
+            "type": "string",
+            "map": "",
+            "description": "值",
+            "optional": false
+          }
+        }
+      }
+    },
+    "actions": {}
+  },
+  "files": [
+    ""
+  ],
+  "main": "./index.umd.js",
+  "module": "./index.es.js",
+  "exports": {
+    ".": {
+      "import": "./index.es.js",
+      "require": "./index.umd.js"
+    }
+  }
+}

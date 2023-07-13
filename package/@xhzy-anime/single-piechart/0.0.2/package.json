@@ -1,0 +1,238 @@
+{
+	"name": "@xhzy-anime/single-piechart",
+	"version": "0.0.2",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "^3.3.1",
+		"lodash": "^4.17.11",
+		"vizz": "0.2.54"
+	},
+	"datav": {
+		"cn_name": "基本饼图",
+		"icon": "//resource.datav.aliyun.com/cube/com/@xhzy-anime/single-piechart/0.0.2/icons/cover.png",
+		"protocol": 2,
+		"type": [
+			"regular_pie"
+		],
+		"supportTheme": true,
+		"view": {
+			"width": 800,
+			"height": 800,
+			"minWidth": 200,
+			"minHeight": 200
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"name": {
+						"description": "名称"
+					},
+					"value": {
+						"description": "值"
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"chart": {
+						"name": "图表",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"label": {
+								"name": "类目标签",
+								"type": "group",
+								"children": {
+									"text": {
+										"name": "文本",
+										"type": "font",
+										"components": [
+											"fontFamily",
+											"fontSize",
+											"fontWeight"
+										],
+										"default": {
+											"fontSize": 26,
+											"fontWeight": "normal"
+										}
+									}
+								}
+							},
+							"number": {
+								"name": "数值标签",
+								"type": "group",
+								"children": {
+									"text": {
+										"name": "文本",
+										"type": "font",
+										"default": {
+											"fontSize": 40,
+											"fontWeight": "normal",
+											"color": "#FFFAE9"
+										}
+									}
+								}
+							},
+							"percent": {
+								"name": "比例标签",
+								"type": "group",
+								"children": {
+									"text": {
+										"name": "文本",
+										"type": "font",
+										"default": {
+											"fontSize": 22,
+											"fontWeight": "normal",
+											"color": "#FFFAE9"
+										}
+									}
+								}
+							}
+						}
+					},
+					"series": {
+						"name": "系列",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"series": {
+								"name": "饼图",
+								"type": "group",
+								"children": {
+									"values": {
+										"type": "array",
+										"name": "数据系列",
+										"default": [
+											{
+												"name": "y1",
+												"value": "#EEB24E"
+											},
+											{
+												"name": "y2",
+												"value": "#4A0E62"
+											},
+											{
+												"name": "y3",
+												"value": "#8F1D5B"
+											}
+										],
+										"child": {
+											"name": "系列<%=i+1%>",
+											"type": "object",
+											"child": {
+												"name": {
+													"name": "系列名",
+													"type": "text",
+													"default": ""
+												},
+												"value": {
+													"name": "颜色",
+													"type": "color",
+													"default": "#A61F44"
+												}
+											}
+										}
+									},
+									"innerRadius": {
+										"name": "半径",
+										"type": "number",
+										"default": 0,
+										"min": 0,
+										"max": 50,
+										"step": 1,
+										"suffix": "%"
+									},
+									"radius": {
+										"name": "半径",
+										"type": "number",
+										"default": 30,
+										"min": 0,
+										"max": 50,
+										"step": 1,
+										"suffix": "%"
+									},
+									"link": {
+										"type": "group",
+										"name": "连线",
+										"children": {
+											"length": {
+												"type": "number",
+												"name": "连线长度",
+												"default": 40,
+												"min": 0
+											},
+											"lineWidth": {
+												"type": "number",
+												"name": "连线宽度",
+												"default": 2,
+												"min": 0
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"others": {
+						"name": "其它",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"animation": {
+								"name": "动画",
+								"type": "group",
+								"children": {
+									"animationDuration": {
+										"name": "动画时间",
+										"type": "number",
+										"default": 5,
+										"min": 0
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "第一产业",
+					"value": 6.54,
+					"s": "y1"
+				},
+				{
+					"name": "第二产业",
+					"value": 33.46,
+					"s": "y2"
+				},
+				{
+					"name": "第三产业",
+					"value": 42.7,
+					"s": "y3"
+				}
+			]
+		},
+		"events": {
+			"finish": {
+				"name": "动画结束",
+				"type": "object",
+				"description": "动画结束事件",
+				"fields": {
+					"data": {
+						"type": "array",
+						"name": "数据",
+						"optional": true,
+						"description": "数据"
+					}
+				}
+			}
+		}
+	}
+}

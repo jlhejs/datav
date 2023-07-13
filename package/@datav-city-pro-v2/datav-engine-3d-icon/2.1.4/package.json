@@ -1,0 +1,492 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-3d-icon",
+	"version": "2.1.4",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "三维图标",
+		"protocol": 2,
+		"level": 0,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"fold": false,
+						"children": {
+							"depthWrite": {
+								"name": "深度写入",
+								"type": "switch"
+							},
+							"depthTest": {
+								"name": "深度测试",
+								"type": "switch"
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"fold": false,
+						"children": {
+							"geometry": {
+								"name": "几何",
+								"type": "group",
+								"children": {
+									"geometryType": {
+										"name": "图标形状",
+										"type": "select",
+										"options": [
+											{
+												"label": "三角柱体",
+												"value": "geometryTypeA"
+											},
+											{
+												"label": "立方体",
+												"value": "geometryTypeB"
+											},
+											{
+												"label": "圆柱体",
+												"value": "geometryTypeC"
+											}
+										]
+									},
+									"radius": {
+										"showInPanel": [
+											[
+												".geometryType",
+												"$ne",
+												"geometryTypeB"
+											]
+										],
+										"name": "图标半径",
+										"type": "slider",
+										"min": 0.01,
+										"max": 100,
+										"step": 0.1,
+										"showRange": true
+									},
+									"scaleX": {
+										"showInPanel": [
+											[
+												".geometryType",
+												"$eq",
+												"geometryTypeB"
+											]
+										],
+										"name": "图标宽度",
+										"type": "slider",
+										"min": 0.01,
+										"max": 100,
+										"step": 0.1,
+										"showRange": true
+									},
+									"scaleY": {
+										"showInPanel": [
+											[
+												".geometryType",
+												"$eq",
+												"geometryTypeB"
+											]
+										],
+										"name": "图标高度",
+										"type": "slider",
+										"min": 0.01,
+										"max": 100,
+										"step": 0.1,
+										"showRange": true
+									},
+									"scaleZ": {
+										"name": "图标厚度",
+										"type": "slider",
+										"min": 0.01,
+										"max": 100,
+										"step": 0.1,
+										"showRange": true
+									}
+								}
+							},
+							"envMapIntensityFactor": {
+								"name": "环境贴图强度系数",
+								"type": "slider",
+								"min": 0,
+								"max": 10,
+								"step": 0.01,
+								"showRange": true
+							},
+							"foreground": {
+								"type": "group",
+								"name": "图标",
+								"fold": true,
+								"children": {
+									"color": {
+										"name": "颜色",
+										"type": "fill"
+									},
+									"map": {
+										"name": "颜色贴图",
+										"type": "image"
+									},
+									"roughness": {
+										"name": "粗糙度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.01,
+										"precision": 0.01,
+										"showRange": true
+									},
+									"roughnessMap": {
+										"name": "粗糙度贴图",
+										"type": "image"
+									},
+									"metalness": {
+										"name": "金属度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.01,
+										"precision": 0.01,
+										"showRange": true
+									},
+									"metalnessMap": {
+										"name": "金属度贴图",
+										"type": "image"
+									},
+									"normalMap": {
+										"name": "法线贴图",
+										"type": "image"
+									},
+									"aoMap": {
+										"name": "环境遮蔽贴图",
+										"type": "image"
+									},
+									"emissive": {
+										"name": "发光颜色",
+										"type": "fill"
+									},
+									"emissiveMap": {
+										"name": "发光贴图",
+										"type": "image"
+									}
+								}
+							},
+							"background": {
+								"type": "group",
+								"name": "背景",
+								"fold": true,
+								"children": {
+									"color": {
+										"name": "颜色",
+										"type": "fill"
+									},
+									"map": {
+										"name": "颜色贴图",
+										"type": "image"
+									},
+									"roughness": {
+										"name": "粗糙度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.01,
+										"precision": 0.01,
+										"showRange": true
+									},
+									"roughnessMap": {
+										"name": "粗糙度贴图",
+										"type": "image"
+									},
+									"metalness": {
+										"name": "金属度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.01,
+										"precision": 0.01,
+										"showRange": true
+									},
+									"metalnessMap": {
+										"name": "金属度贴图",
+										"type": "image"
+									},
+									"normalMap": {
+										"name": "法线贴图",
+										"type": "image"
+									},
+									"aoMap": {
+										"name": "环境遮蔽贴图",
+										"type": "image"
+									},
+									"emissive": {
+										"name": "发光颜色",
+										"type": "fill"
+									},
+									"emissiveMap": {
+										"name": "发光贴图",
+										"type": "image"
+									}
+								}
+							}
+						}
+					},
+					"animate": {
+						"name": "动效",
+						"fold": false,
+						"children": {
+							"speed": {
+								"name": "旋转速度",
+								"type": "slider",
+								"min": 0,
+								"max": 100,
+								"step": 0.1,
+								"precision": 0.1,
+								"showRange": true
+							}
+						}
+					},
+					"interactive": {
+						"name": "交互",
+						"fold": false,
+						"children": {
+							"enableInteractive": {
+								"name": "鼠标交互",
+								"type": "switch"
+							},
+							"activeColor": {
+								"name": "点击颜色",
+								"type": "fill"
+							}
+						}
+					}
+				},
+				"default": {
+					"general": {
+						"depthWrite": true,
+						"depthTest": true
+					},
+					"graph": {
+						"geometry": {
+							"geometryType": "geometryTypeC",
+							"radius": 0.3,
+							"scaleX": 1,
+							"scaleY": 1,
+							"scaleZ": 0.03
+						},
+						"envMapIntensityFactor": 2,
+						"foreground": {
+							"color": "#b1b1b1",
+							"map": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/95a9fe55d8c9486e3cc9ad3bc2b87bd0.png",
+							"roughness": 1,
+							"roughnessMap": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/25b4496851408cded830f58a7bad3842.png",
+							"metalness": 1,
+							"metalnessMap": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/25b4496851408cded830f58a7bad3842.png",
+							"normalMap": "",
+							"aoMap": "",
+							"emissive": "#666666",
+							"emissiveMap": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/ed22e497dcda7edc0bec4a22cb3d962d.png"
+						},
+						"background": {
+							"color": "#830000",
+							"map": "",
+							"roughness": 0.82,
+							"roughnessMap": "",
+							"metalness": 1,
+							"metalnessMap": "",
+							"normalMap": "",
+							"aoMap": "",
+							"emissive": "#000000",
+							"emissiveMap": ""
+						}
+					},
+					"animate": {
+						"speed": 2
+					},
+					"interactive": {
+						"enableInteractive": true,
+						"activeColor": "#ffae00"
+					}
+				}
+			}
+		},
+		"keyframeConfig": {
+			"envMapIntensityFactor": {
+				"name": "环境贴图强度系数",
+				"type": "slider",
+				"min": 0,
+				"max": 1,
+				"step": 0.1,
+				"precision": 0.1,
+				"showRange": true,
+				"default": 0
+			},
+			"speed": {
+				"name": "旋转速度",
+				"type": "slider",
+				"min": 0,
+				"max": 100,
+				"step": 0.1,
+				"precision": 0.1,
+				"showRange": true,
+				"default": 0
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"id": 0,
+					"lng": 120.13120288509491,
+					"lat": 30.267053137679852,
+					"altitude": 35.96756596239893
+				},
+				{
+					"id": 1,
+					"lng": 120.15900247230648,
+					"lat": 30.258840866945654,
+					"altitude": 32.35051703296591
+				},
+				{
+					"id": 2,
+					"lng": 120.14528749492825,
+					"lat": 30.24543680114143,
+					"altitude": 39.55678515314915
+				},
+				{
+					"id": 3,
+					"lng": 120.13367394332234,
+					"lat": 30.26224668300178,
+					"altitude": 33.792768801810155
+				}
+			]
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"errorHandler": "dataErrorHandler",
+				"format": "geo_point",
+				"description": "数据接口",
+				"fields": {
+					"id": {
+						"description": "id",
+						"type": "number|string",
+						"optional": true
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number",
+						"optional": false
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number",
+						"optional": false
+					},
+					"altitude": {
+						"description": "高程",
+						"type": "number",
+						"optional": false
+					}
+				}
+			}
+		},
+		"events": {
+			"leftClick": {
+				"name": "左键点击",
+				"description": "左键点击时",
+				"type": "object",
+				"fields": {
+					"clickPosition": {
+						"name": "点击屏幕坐标",
+						"description": "点击屏幕坐标",
+						"type": "object",
+						"children": {
+							"x": {
+								"name": "x坐标",
+								"description": "x坐标",
+								"type": "number"
+							},
+							"y": {
+								"name": "y坐标",
+								"description": "y坐标",
+								"type": "number"
+							}
+						}
+					},
+					"data": {
+						"name": "原始数据项",
+						"description": "被点击图元对应的原始数据项",
+						"type": "object",
+						"children": {
+							"lng": {
+								"name": "经度",
+								"description": "经度",
+								"type": "number"
+							},
+							"lat": {
+								"name": "纬度",
+								"description": "纬度",
+								"type": "number"
+							},
+							"altitude": {
+								"name": "高程",
+								"description": "高程",
+								"type": "number"
+							}
+						}
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			},
+			"highlight": {
+				"name": "高亮",
+				"description": "高亮指定id对应的三维图标",
+				"type": "object",
+				"fields": {
+					"ids": {
+						"name": "高亮图标id数组",
+						"description": "高亮图标id数组",
+						"type": "array"
+					}
+				}
+			},
+			"unhighlight": {
+				"name": "取消高亮",
+				"description": "取消当前高亮的图标"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/tfs/TB1upJYYYY1gK0jSZTEXXXDQVXa-180-180.png"
+	}
+}

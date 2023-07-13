@@ -1,0 +1,279 @@
+{
+	"name": "main-title",
+	"version": "1.5.14",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"xss": "1.0.8"
+	},
+	"datav": {
+		"cn_name": "通用标题",
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "textStyle",
+					"apiPath": "source.value"
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"description": "值",
+						"optional": true,
+						"type": "string | number"
+					},
+					"url": {
+						"description": "超链接地址",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"content": {
+				"type": "text",
+				"name": "标题名",
+				"default": "我是标题数据",
+				"description": "支持从数据中获取标题内容，详见数据面板",
+				"dataField": "value"
+			},
+			"textStyle": {
+				"type": "group",
+				"name": "文本样式",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "arial",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"阿里巴巴普惠体": "AlibabaPuHuiTi"
+							}
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"default": 24,
+						"step": 1
+					},
+					"color": {
+						"name": "颜色",
+						"type": "fill",
+						"components": [
+							"flat",
+							"linearGradient"
+						],
+						"default": "#fff"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						],
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					}
+				}
+			},
+			"textAlign": {
+				"name": "对齐方式",
+				"type": "options",
+				"options": [
+					{
+						"name": "左对齐",
+						"value": "left"
+					},
+					{
+						"name": "右对齐",
+						"value": "right"
+					},
+					{
+						"name": "居中对齐",
+						"value": "center"
+					}
+				],
+				"default": "center"
+			},
+			"writingMode": {
+				"name": "文字排列方式",
+				"type": "select",
+				"options": [
+					{
+						"name": "水平",
+						"value": "horizontal-tb"
+					},
+					{
+						"name": "垂直",
+						"value": "vertical-rl"
+					}
+				],
+				"default": "horizontal-tb"
+			},
+			"letterSpacing": {
+				"name": "文字间隔",
+				"type": "number",
+				"default": 0,
+				"suffix": "px"
+			},
+			"backgroundStyle": {
+				"type": "group",
+				"name": "背景样式",
+				"enableHide": true,
+				"children": {
+					"show": {
+						"default": false
+					},
+					"bgColor": {
+						"name": "背景色",
+						"type": "fill",
+						"default": "#008bff"
+					},
+					"borderRadius": {
+						"name": "圆角",
+						"type": "stepper",
+						"default": 10,
+						"min": 0,
+						"step": 1,
+						"suffix": "px"
+					},
+					"bgBorder": {
+						"type": "line",
+						"name": "背景边框",
+						"components": [
+							"width",
+							"style",
+							"color"
+						],
+						"default": {
+							"width": 1,
+							"style": "solid",
+							"color": "#fff"
+						}
+					}
+				}
+			},
+			"ellipsis": {
+				"name": "省略号",
+				"type": "boolean",
+				"description": "溢出文本加省略号",
+				"default": false
+			},
+			"urlConfig": {
+				"name": "超链接配置",
+				"type": "group",
+				"description": "点击标题区域可跳转至设定的超链接",
+				"children": {
+					"url": {
+						"name": "超链接",
+						"type": "string",
+						"default": "",
+						"dataField": "url"
+					},
+					"ifBlank": {
+						"name": "是否新开窗口",
+						"type": "boolean",
+						"default": false
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": []
+		},
+		"view": {
+			"width": "300",
+			"height": "56",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"icon": "//img.alicdn.com/tfs/TB1gFTolQL0gK0jSZFAXXcA9pXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1cjHmlQP2gK0jSZPxXXacQpXa-332-144.png"
+	}
+}

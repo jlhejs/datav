@@ -1,0 +1,689 @@
+{
+	"name": "datavmap-canvas2d-stream-popups",
+	"version": "2.0.42",
+	"description": "流式气泡层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-canvas2d-stream-popups.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"chroma-js": "1.3.3",
+		"rbush": "3.0.0",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "流式气泡层",
+		"level": 0,
+		"icon": "https://img.alicdn.com/tfs/TB1XpmDti_1gK0jSZFqXXcpaXXa-180-180.png",
+		"protocol": 2,
+		"type": [
+			"datavmap-canvas2d_subcoms_topinfo"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavmap-canvas2d"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"apis": {
+			"dataSource": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					},
+					"info": {
+						"description": "信息内容",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"zoomRange": {
+				"name": "可见级别",
+				"type": "slider",
+				"mode": "double",
+				"default": [
+					0,
+					18
+				],
+				"min": 0,
+				"max": 22,
+				"step": 0.1
+			},
+			"defaultStyle": {
+				"type": "group",
+				"name": "默认配置",
+				"fold": false,
+				"children": {
+					"iconUrl": {
+						"type": "image",
+						"name": "图片路径",
+						"default": "https://img.alicdn.com/tfs/TB1zrmCtXY7gK0jSZKzXXaikpXa-96-96.png"
+					},
+					"iconSize": {
+						"type": "suite",
+						"name": "图片尺寸",
+						"children": {
+							"width": {
+								"type": "number",
+								"name": "宽度",
+								"caption": "宽度 [0, 400]",
+								"default": 32,
+								"range": [
+									0,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"height": {
+								"type": "number",
+								"name": "高度",
+								"caption": "高度 [0, 400]",
+								"default": 32,
+								"range": [
+									0,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					},
+					"offset": {
+						"type": "suite",
+						"name": "图标偏移量",
+						"children": {
+							"x": {
+								"type": "number",
+								"name": "水平方向",
+								"caption": "水平方向 [-400, 400]",
+								"default": 0,
+								"range": [
+									-400,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"y": {
+								"type": "number",
+								"name": "垂直方向",
+								"caption": "垂直方向 [-400, 400]",
+								"default": 0,
+								"range": [
+									-400,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					},
+					"popupOffset": {
+						"type": "suite",
+						"name": "浮框偏移量",
+						"children": {
+							"x": {
+								"type": "number",
+								"name": "水平方向",
+								"caption": "水平方向 [-400, 400]",
+								"default": 20,
+								"range": [
+									-400,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"y": {
+								"type": "number",
+								"name": "垂直方向",
+								"caption": "垂直方向 [-400, 400]",
+								"default": 31,
+								"range": [
+									-400,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					},
+					"circleStyle": {
+						"type": "suite",
+						"name": "圆圈样式",
+						"fold": true,
+						"enableHide": true,
+						"default": {
+							"show": true
+						},
+						"children": {
+							"fillColor": {
+								"type": "color",
+								"name": "填充颜色",
+								"default": "rgba(50, 50, 250, 0)"
+							},
+							"radius": {
+								"type": "number",
+								"name": "圆圈半径",
+								"caption": "半径 [0, 20]",
+								"default": 4,
+								"range": [
+									0,
+									20
+								],
+								"step": 0.1,
+								"suffix": "px"
+							},
+							"strokeColor": {
+								"type": "color",
+								"name": "边线颜色",
+								"default": "#06e8ff"
+							},
+							"weight": {
+								"name": "边线粗细",
+								"type": "number",
+								"caption": "边线粗细 [0, 20]",
+								"default": 2,
+								"range": [
+									0,
+									20
+								],
+								"step": 0.1,
+								"suffix": "px"
+							}
+						}
+					}
+				}
+			},
+			"popupStyle": {
+				"type": "group",
+				"name": "浮框配置",
+				"description": "浮框功能需先设置info字段！",
+				"fold": false,
+				"children": {
+					"textStyle": {
+						"type": "font",
+						"name": "文本样式",
+						"fold": false,
+						"children": {
+							"fontFamily": {
+								"type": "search",
+								"name": "字体",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 12,
+								"range": [
+									12,
+									100
+								],
+								"step": 1
+							},
+							"fontWeight": {
+								"type": "search",
+								"name": "字体粗细",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#FFFFFF"
+							}
+						}
+					},
+					"textAlign": {
+						"name": "文本对齐",
+						"type": "radio",
+						"default": "left",
+						"options": [
+							{
+								"name": "左对齐",
+								"value": "left"
+							},
+							{
+								"name": "居中",
+								"value": "center"
+							},
+							{
+								"name": "右对齐",
+								"value": "right"
+							}
+						]
+					},
+					"lineHeight": {
+						"type": "number",
+						"name": "行高比例",
+						"caption": "范围 [0.5, 5]",
+						"default": 1.4,
+						"range": [
+							0.5,
+							6
+						],
+						"step": 0.1
+					},
+					"margin": {
+						"name": "外边距",
+						"type": "margin",
+						"default": {
+							"top": 10,
+							"bottom": 10,
+							"left": 14,
+							"right": 0
+						}
+					},
+					"contentStyle": {
+						"type": "suite",
+						"name": "背景配置",
+						"fold": false,
+						"children": {
+							"background": {
+								"type": "color",
+								"name": "背景颜色",
+								"default": "rgba(46, 46, 247, 0.6)"
+							},
+							"width": {
+								"type": "number",
+								"name": "内容宽度",
+								"caption": "内容宽度 [0, 500]",
+								"default": 100,
+								"range": [
+									10,
+									500
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"radius": {
+								"type": "number",
+								"name": "圆角半径",
+								"caption": "圆角半径 [0, 50]",
+								"default": 5,
+								"range": [
+									0,
+									50
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					},
+					"shadow": {
+						"type": "suite",
+						"name": "阴影",
+						"fold": false,
+						"children": {
+							"shadowColor": {
+								"type": "color",
+								"name": "阴影色",
+								"default": "rgba(18, 35, 60, 0.7)"
+							},
+							"shadowBlur": {
+								"type": "number",
+								"name": "阴影模糊",
+								"caption": "阴影模糊 [0, 100]",
+								"default": 5,
+								"range": [
+									0,
+									100
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"shadowOffsetX": {
+								"type": "number",
+								"name": "阴影X偏移",
+								"caption": "阴影X偏移 [0, 50]",
+								"default": 5,
+								"range": [
+									0,
+									50
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"shadowOffsetY": {
+								"type": "number",
+								"name": "阴影Y偏移",
+								"caption": "阴影Y偏移 [0, 50]",
+								"default": 5,
+								"range": [
+									0,
+									50
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					}
+				}
+			},
+			"animateStyle": {
+				"type": "group",
+				"name": "动画配置",
+				"fold": true,
+				"children": {
+					"isCache": {
+						"name": "缓存",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"cacheCount": {
+						"show": [
+							[
+								"isCache",
+								"$eq",
+								true
+							]
+						],
+						"name": "缓存条数",
+						"type": "number",
+						"min": 0,
+						"max": 10000,
+						"step": 1,
+						"default": 300
+					},
+					"isOrder": {
+						"name": "顺序",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"popupNum": {
+						"name": "冒泡数目",
+						"type": "number",
+						"caption": "范围 [0, 50]",
+						"default": 5,
+						"range": [
+							0,
+							50
+						],
+						"step": 1,
+						"suffix": "个"
+					},
+					"spreadTime": {
+						"name": "平铺时间",
+						"type": "number",
+						"caption": "范围 [0, 5]",
+						"default": 2,
+						"range": [
+							0,
+							5
+						],
+						"step": 0.1,
+						"suffix": "秒"
+					},
+					"keepTime": {
+						"name": "停留时间",
+						"type": "number",
+						"caption": "范围 [1, 600]",
+						"default": 3,
+						"range": [
+							1,
+							600
+						],
+						"step": 0.1,
+						"suffix": "秒"
+					},
+					"fadeTime": {
+						"name": "消失时间",
+						"type": "number",
+						"caption": "范围 [0, 5]",
+						"default": 2,
+						"range": [
+							0,
+							5
+						],
+						"step": 0.1,
+						"suffix": "秒"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"dataSource": [
+				{
+					"lng": 124.233398,
+					"lat": 45.73686,
+					"info": "TextLabel1"
+				},
+				{
+					"lng": 123.574219,
+					"lat": 47.428087,
+					"info": "TextLabel2"
+				},
+				{
+					"lng": 116.894531,
+					"lat": 43.484812,
+					"info": "TextLabel3"
+				},
+				{
+					"lng": 121.992188,
+					"lat": 41.442726,
+					"info": "TextLabel4"
+				},
+				{
+					"lng": 116.191406,
+					"lat": 40.010787,
+					"info": "TextLabel5"
+				},
+				{
+					"lng": 117.114258,
+					"lat": 39.095963,
+					"info": "TextLabel6"
+				},
+				{
+					"lng": 112.412109,
+					"lat": 38.203655,
+					"info": "TextLabel7"
+				},
+				{
+					"lng": 118.125,
+					"lat": 35.960223,
+					"info": "TextLabel8"
+				},
+				{
+					"lng": 118.959961,
+					"lat": 33.431441,
+					"info": "TextLabel9"
+				},
+				{
+					"lng": 118.696289,
+					"lat": 32.138409,
+					"info": "TextLabel10"
+				},
+				{
+					"lng": 121.552734,
+					"lat": 31.278551,
+					"info": "TextLabel11"
+				},
+				{
+					"lng": 119.707031,
+					"lat": 28.536275,
+					"info": "TextLabel12"
+				},
+				{
+					"lng": 116.894531,
+					"lat": 30.675715,
+					"info": "TextLabel13"
+				},
+				{
+					"lng": 117.641602,
+					"lat": 26.037042,
+					"info": "TextLabel14"
+				},
+				{
+					"lng": 113.90625,
+					"lat": 23.644524,
+					"info": "TextLabel15"
+				},
+				{
+					"lng": 111.533203,
+					"lat": 22.998852,
+					"info": "TextLabel16"
+				},
+				{
+					"lng": 101.777344,
+					"lat": 36.668419,
+					"info": "TextLabel17"
+				},
+				{
+					"lng": 106.083984,
+					"lat": 38.582526,
+					"info": "TextLabel18"
+				},
+				{
+					"lng": 87.539063,
+					"lat": 43.897892,
+					"info": "TextLabel19"
+				},
+				{
+					"lng": 92.900391,
+					"lat": 42.747012,
+					"info": "TextLabel20"
+				},
+				{
+					"lng": 113.027344,
+					"lat": 33.174342,
+					"info": "TextLabel21"
+				},
+				{
+					"lng": 108.984375,
+					"lat": 35.603719,
+					"info": "TextLabel22"
+				},
+				{
+					"lng": 106.611328,
+					"lat": 29.496988,
+					"info": "TextLabel23"
+				},
+				{
+					"lng": 103.842773,
+					"lat": 30.789037,
+					"info": "TextLabel24"
+				},
+				{
+					"lng": 102.304688,
+					"lat": 25.005973,
+					"info": "TextLabel25"
+				},
+				{
+					"lng": 88.198242,
+					"lat": 31.503629,
+					"info": "TextLabel26"
+				},
+				{
+					"lng": 85.078125,
+					"lat": 40.713956,
+					"info": "TextLabel27"
+				},
+				{
+					"lng": 110.698242,
+					"lat": 27.955591,
+					"info": "TextLabel28"
+				},
+				{
+					"lng": 113.686523,
+					"lat": 27.994401,
+					"info": "TextLabel29"
+				},
+				{
+					"lng": 115.400391,
+					"lat": 27.059126,
+					"info": "TextLabel30"
+				},
+				{
+					"lng": 112.060547,
+					"lat": 31.052934,
+					"info": "TextLabel31"
+				},
+				{
+					"lng": 106.523438,
+					"lat": 26.70636,
+					"info": "TextLabel32"
+				},
+				{
+					"lng": 108.457031,
+					"lat": 22.755921,
+					"info": "TextLabel33"
+				}
+			]
+		}
+	}
+}

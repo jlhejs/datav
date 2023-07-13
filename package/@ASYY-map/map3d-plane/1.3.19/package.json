@@ -1,0 +1,209 @@
+{
+	"name": "map3d-plane",
+	"version": "1.3.19",
+	"description": "map3d-plane",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "shuke.ft",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"dmap": "0.2.9",
+		"@tweenjs/tween.js": "17.4.0"
+	},
+	"datav": {
+		"cn_name": "3D平面世界地图",
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"map_3d_plane",
+			"DataV-6:map"
+		],
+		"children": {
+			"default": [
+				"map3d-plane-scatter",
+				"map3d-plane-flyingline",
+				"map3d-plane-histogram"
+			],
+			"supportTypes": [
+				"map3d_plane_subcoms"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/imgextra/i3/O1CN01BlhoLd1XZeQRpKwYp_!!6000000002938-0-tps-664-288.jpg",
+		"thumbnail": "//img.alicdn.com/imgextra/i3/O1CN01BlhoLd1XZeQRpKwYp_!!6000000002938-0-tps-664-288.jpg",
+		"view": {
+			"width": "900",
+			"height": "600",
+			"minWidth": "150",
+			"minHeight": "60",
+			"z-index": 100
+		},
+		"apis": {
+			"areas": {
+				"handler": "render",
+				"description": "热力值数据接口",
+				"fields": {
+					"id": {
+						"description": "地理id",
+						"type": "string"
+					},
+					"value": {
+						"description": "值",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"config": {
+			"mapOptions": {
+				"type": "group",
+				"name": "全局设置",
+				"handler": "updateMapOptions",
+				"children": {
+					"rotation": {
+						"name": "相机旋转",
+						"type": "group",
+						"fold": false,
+						"children": {
+							"x": {
+								"name": "水平方向",
+								"type": "number",
+								"range": [
+									-180,
+									180
+								],
+								"default": -90,
+								"step": 0.1
+							},
+							"y": {
+								"name": "垂直方向",
+								"type": "number",
+								"range": [
+									-90,
+									90
+								],
+								"default": 60,
+								"step": 0.1
+							}
+						}
+					},
+					"center": {
+						"type": "group",
+						"name": "相机中心",
+						"fold": false,
+						"children": {
+							"lat": {
+								"name": "纬度",
+								"type": "number",
+								"default": 46.35,
+								"range": [
+									-90,
+									90
+								],
+								"step": 0.01
+							},
+							"lng": {
+								"name": "经度",
+								"type": "number",
+								"default": 28.5,
+								"range": [
+									-180,
+									180
+								],
+								"step": 0.01
+							}
+						}
+					},
+					"distance": {
+						"name": "相机距离",
+						"type": "number",
+						"range": [
+							18,
+							420
+						],
+						"step": 1,
+						"default": 320
+					},
+					"isInteractive": {
+						"type": "boolean",
+						"name": "地图交互",
+						"default": true
+					}
+				}
+			},
+			"areaOptions": {
+				"type": "group",
+				"name": "填充设置",
+				"handler": "updateAreaOptions",
+				"children": {
+					"fill": {
+						"type": "group",
+						"name": "填充颜色",
+						"children": {
+							"colorFrontFrom": {
+								"default": "#33C9FB",
+								"name": "最小值",
+								"type": "color"
+							},
+							"colorFrontTo": {
+								"default": "#1F68A7",
+								"name": "最大值",
+								"type": "color"
+							},
+							"colorFrontDefault": {
+								"default": "#676767",
+								"name": "无数据",
+								"type": "color"
+							},
+							"colorBack": {
+								"default": "#222",
+								"name": "背面",
+								"type": "color"
+							}
+						}
+					},
+					"stroke": {
+						"type": "group",
+						"name": "边线选项",
+						"children": {
+							"color": {
+								"default": "#00fffc",
+								"name": "颜色",
+								"type": "color"
+							},
+							"linewidth": {
+								"default": 0.1,
+								"type": "number",
+								"max": 4,
+								"min": 0,
+								"step": 0.1,
+								"name": "宽度"
+							},
+							"opacity": {
+								"default": 0.8,
+								"type": "number",
+								"step": 0.01,
+								"range": [
+									0,
+									1
+								],
+								"name": "透明度"
+							}
+						}
+					}
+				}
+			},
+			"mapData": {
+				"name": "默认世界数据",
+				"type": "text",
+				"default": "https://geo.datav.aliyun.com/areas_v3/world_land_boundary.json"
+			}
+		},
+		"api_data": {
+			"areas": []
+		}
+	}
+}

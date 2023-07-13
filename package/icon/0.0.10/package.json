@@ -1,0 +1,315 @@
+{
+	"name": "icon",
+	"version": "0.0.10",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.17.11",
+		"datav-react-adaptor": "16.12.0",
+		"datav-react-dom-adaptor": "16.12.2",
+		"prop-types": "15.5.8"
+	},
+	"datav": {
+		"cn_name": "图标",
+		"icon": "//img.alicdn.com/tfs/TB16lzfdmR26e4jSZFEXXbwuXXa-368-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1b.SKevzO3e4jSZFxXXaP_FXa-160-116.png",
+		"supportTheme": true,
+		"protocol": 2,
+		"level": 1,
+		"type": [
+			"material",
+			"DataV-6:media"
+		],
+		"view": {
+			"width": "100",
+			"height": "100",
+			"minWidth": "40",
+			"minHeight": "40"
+		},
+		"events": {
+			"handleClick": {
+				"name": "当点击时",
+				"fields": {
+					"url": {
+						"type": "string | number",
+						"name": "图标链接"
+					},
+					"type": {
+						"type": "string | number",
+						"name": "图标类型"
+					}
+				}
+			},
+			"handleMouseOver": {
+				"name": "当鼠标移入时",
+				"fields": {
+					"url": {
+						"type": "string | number",
+						"name": "图标链接"
+					},
+					"type": {
+						"type": "string | number",
+						"name": "图标类型"
+					}
+				}
+			},
+			"handleMouseOut": {
+				"name": "当鼠标移出时",
+				"fields": {
+					"url": {
+						"type": "string | number",
+						"name": "图标链接"
+					},
+					"type": {
+						"type": "string | number",
+						"name": "图标类型"
+					}
+				}
+			}
+		},
+		"apis": {},
+		"config": {
+			"iconType": {
+				"name": "图标资源",
+				"type": "buttonRadio",
+				"default": "basic",
+				"options": [
+					{
+						"name": "通用",
+						"value": "basic"
+					},
+					{
+						"name": "行业",
+						"value": "industry"
+					},
+					{
+						"name": "自定义",
+						"value": "custom"
+					}
+				]
+			},
+			"basicIconType": {
+				"name": "图标类型",
+				"type": "iconfontSelect",
+				"hideUrl": true,
+				"default": {
+					"url": "//at.alicdn.com/t/font_1954693_4yym3fajdug.woff",
+					"type": 59565
+				},
+				"showInPanel": {
+					"conditions": [
+						[
+							".iconType",
+							"$eq",
+							"basic"
+						]
+					]
+				}
+			},
+			"customIconType": {
+				"name": "图标类型",
+				"type": "iconfontSelect",
+				"description": "用户可在iconfont.cn中制作图标，在此输入图标项目生成的Unicode字体文件，即可在DataV中使用该自定义图标",
+				"default": {
+					"url": "//at.alicdn.com/t/font_1954693_4yym3fajdug.woff",
+					"type": 59638
+				},
+				"showInPanel": {
+					"conditions": [
+						[
+							".iconType",
+							"$eq",
+							"custom"
+						]
+					]
+				}
+			},
+			"industryIconType": {
+				"name": "行业",
+				"type": "buttonRadio",
+				"default": "traffic",
+				"options": [
+					{
+						"name": "交通",
+						"value": "traffic"
+					},
+					{
+						"name": "医疗",
+						"value": "medical"
+					},
+					{
+						"name": "工业",
+						"value": "industry"
+					}
+				],
+				"showInPanel": {
+					"conditions": [
+						[
+							".iconType",
+							"$eq",
+							"industry"
+						]
+					]
+				}
+			},
+			"trafficIcon": {
+				"name": "图标类型",
+				"type": "iconfontSelect",
+				"hideUrl": true,
+				"default": {
+					"url": "//at.alicdn.com/t/font_1998805_19xrt3c936b.woff",
+					"type": 58996
+				},
+				"showInPanel": {
+					"conditions": [
+						[
+							".industryIconType",
+							"$eq",
+							"traffic"
+						],
+						[
+							".iconType",
+							"$eq",
+							"industry"
+						]
+					]
+				}
+			},
+			"medicalIcon": {
+				"name": "图标类型",
+				"type": "iconfontSelect",
+				"hideUrl": true,
+				"default": {
+					"url": "//at.alicdn.com/t/font_1998807_hfy2v55s8mt.woff",
+					"type": 59008
+				},
+				"showInPanel": {
+					"conditions": [
+						[
+							".industryIconType",
+							"$eq",
+							"medical"
+						],
+						[
+							".iconType",
+							"$eq",
+							"industry"
+						]
+					]
+				}
+			},
+			"industryIcon": {
+				"name": "图标类型",
+				"type": "iconfontSelect",
+				"hideUrl": true,
+				"default": {
+					"url": "//at.alicdn.com/t/font_1954484_zd02y8ogwlm.woff",
+					"type": 59494
+				},
+				"showInPanel": {
+					"conditions": [
+						[
+							".industryIconType",
+							"$eq",
+							"industry"
+						],
+						[
+							".iconType",
+							"$eq",
+							"industry"
+						]
+					]
+				}
+			},
+			"iconStyle": {
+				"name": "图标样式",
+				"type": "suite",
+				"children": {
+					"color": {
+						"name": "颜色",
+						"type": "fill",
+						"components": [
+							"flat",
+							"linearGradient"
+						],
+						"default": "#0a73ff"
+					},
+					"padding": {
+						"name": "边距",
+						"type": "slider",
+						"min": -100,
+						"max": 100,
+						"suffix": "%",
+						"step": 1,
+						"default": 0
+					}
+				}
+			},
+			"border": {
+				"enableHide": true,
+				"name": "背景样式",
+				"type": "suite",
+				"children": {
+					"show": {
+						"default": false
+					},
+					"background": {
+						"type": "color",
+						"name": "背景色",
+						"default": "#171b22",
+						"col": 12
+					},
+					"borderRadius": {
+						"name": "背景圆角",
+						"type": "number",
+						"step": 1,
+						"suffix": "px",
+						"default": 20,
+						"col": 12
+					},
+					"borderWidth": {
+						"name": "边框粗细",
+						"type": "number",
+						"step": 1,
+						"suffix": "px",
+						"default": 1,
+						"col": 12
+					},
+					"borderStyle": {
+						"type": "select",
+						"name": "边框类型",
+						"col": 12,
+						"default": "solid",
+						"options": [
+							{
+								"value": "solid",
+								"label": "实线"
+							},
+							{
+								"value": "dotted",
+								"label": "点线"
+							},
+							{
+								"value": "dashed",
+								"label": "虚线"
+							}
+						]
+					},
+					"borderColor": {
+						"type": "color",
+						"name": "边框颜色",
+						"default": "#fff",
+						"col": 24
+					}
+				}
+			},
+			"spin": {
+				"name": "旋转动画",
+				"type": "switch",
+				"default": false,
+				"statusText": true
+			}
+		},
+		"api_data": {}
+	}
+}

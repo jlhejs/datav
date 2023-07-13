@@ -1,0 +1,455 @@
+{
+	"name": "datavmap-3d-layer-flashpoint",
+	"version": "0.0.12",
+	"description": "基于datav.gl的呼吸气泡点层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-3d-layer-flashpoint.git"
+	},
+	"keywords": [
+		"datav.gl",
+		"mapbox",
+		"scatter"
+	],
+	"author": "yunyi.zww",
+	"dependencies": {
+		"eventemitter3": "2.0.3",
+		"safely-merge": "1.0.0",
+		"chroma-js": "1.3.7"
+	},
+	"datav": {
+		"cn_name": "呼吸气泡点层",
+		"icon": "//img.alicdn.com/tfs/TB1JE_4AQvoK1RjSZFDXXXY3pXa-180-180.png",
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"datavgl_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavgl"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"apis": {
+			"points": {
+				"handler": "render",
+				"description": "散点数据接口",
+				"fields": {
+					"lat": {
+						"description": "纬度"
+					},
+					"lng": {
+						"description": "经度"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"visibility": {
+				"name": "显示",
+				"type": "hidden",
+				"default": true
+			},
+			"minSize": {
+				"name": "最小值大小",
+				"type": "number",
+				"default": 10.4,
+				"range": [
+					0.1,
+					50
+				],
+				"step": 0.1
+			},
+			"maxSize": {
+				"name": "最大值大小",
+				"type": "number",
+				"default": 40.4,
+				"range": [
+					0.1,
+					100
+				],
+				"step": 0.1
+			},
+			"minColor": {
+				"type": "color",
+				"name": "最小值颜色",
+				"default": "RGBA(43,185,255,0.86)"
+			},
+			"maxColor": {
+				"type": "color",
+				"name": "最大值颜色",
+				"default": "RGBA(235,25,251,0.82)"
+			},
+			"rangeTime": {
+				"name": "最长持续时间",
+				"type": "number",
+				"default": 1,
+				"range": [
+					0.1,
+					10
+				],
+				"step": 0.1
+			},
+			"blending": {
+				"name": "叠加模式",
+				"type": "options",
+				"default": "AdditiveBlending",
+				"options": [
+					{
+						"name": "无叠加",
+						"value": "NoBlending"
+					},
+					{
+						"name": "正常模式",
+						"value": "NormalBlending"
+					},
+					{
+						"name": "添加模式",
+						"value": "AdditiveBlending"
+					}
+				]
+			},
+			"pointZ": {
+				"name": "点高度",
+				"type": "number",
+				"default": 0,
+				"range": [
+					0,
+					200
+				],
+				"step": 0.1
+			},
+			"pointTextureUrl": {
+				"type": "text",
+				"default": "https://img.alicdn.com/tfs/TB1uylBDFuWBuNjSszbXXcS7FXa-64-64.png",
+				"name": "点贴图地址"
+			}
+		},
+		"api_data": {
+			"points": [
+				{
+					"lat": 31.8998,
+					"lng": 102.2212,
+					"value": 26
+				},
+				{
+					"lat": 28.6542,
+					"lng": 120.079,
+					"value": 41
+				},
+				{
+					"lat": 24.0554,
+					"lng": 114.207,
+					"value": 36
+				},
+				{
+					"lat": 40.634,
+					"lng": 122.5059,
+					"value": 33
+				},
+				{
+					"lat": 25.6879,
+					"lng": 114.3073,
+					"value": 31
+				},
+				{
+					"lat": 34.6948,
+					"lng": 110.6911,
+					"value": 15,
+					"type": 22
+				},
+				{
+					"lat": 23.9505,
+					"lng": 117.3409,
+					"value": 14
+				},
+				{
+					"lat": 28.2145,
+					"lng": 110.2144,
+					"value": 12
+				},
+				{
+					"lat": 37.6866,
+					"lng": 116.2584,
+					"value": 18
+				},
+				{
+					"lat": 29.4432,
+					"lng": 111.6456,
+					"value": 16
+				},
+				{
+					"lat": 43.7928,
+					"lng": 87.6177,
+					"value": 14
+				},
+				{
+					"lat": 33.5807,
+					"lng": 119.0305,
+					"value": 1
+				},
+				{
+					"lat": 39.563,
+					"lng": 118.1108,
+					"value": 18
+				},
+				{
+					"lat": 41.8993,
+					"lng": 114.0101,
+					"value": 15
+				},
+				{
+					"lat": 30.3096,
+					"lng": 114.0812,
+					"value": 13
+				},
+				{
+					"lat": 40.0905,
+					"lng": 113.3014,
+					"value": 24
+				},
+				{
+					"lat": 28.6396,
+					"lng": 102.5089,
+					"value": 15
+				},
+				{
+					"lat": 29.6045,
+					"lng": 114.4932,
+					"value": 12
+				},
+				{
+					"lat": 29.4145,
+					"lng": 112.1723,
+					"value": 13
+				},
+				{
+					"lat": 21.2749,
+					"lng": 110.365,
+					"value": 11
+				},
+				{
+					"lat": 24.7743,
+					"lng": 115.0327,
+					"value": 11
+				},
+				{
+					"lat": 47.2529,
+					"lng": 130.2362,
+					"value": 18
+				},
+				{
+					"lat": 26.8721,
+					"lng": 100.233,
+					"value": 13
+				},
+				{
+					"lat": 37.4934,
+					"lng": 118.2489,
+					"value": 1
+				},
+				{
+					"lat": 36.0634,
+					"lng": 113.8238,
+					"value": 1
+				},
+				{
+					"lat": 31.3431,
+					"lng": 104.2002,
+					"value": 1
+				},
+				{
+					"lat": 40.4375,
+					"lng": 113.1635,
+					"value": 1
+				},
+				{
+					"lat": 42.8655,
+					"lng": 90.2127,
+					"value": 1
+				},
+				{
+					"lat": 47.4794,
+					"lng": 129.3114,
+					"value": 1
+				},
+				{
+					"lat": 28.7602,
+					"lng": 104.6308,
+					"value": 1
+				},
+				{
+					"lat": 42.287,
+					"lng": 119.9065,
+					"value": 1
+				},
+				{
+					"lat": 29.9456,
+					"lng": 122.302,
+					"value": 1
+				},
+				{
+					"lat": 42.5421,
+					"lng": 124.0456,
+					"value": 1
+				},
+				{
+					"lat": 26.7025,
+					"lng": 107.5135,
+					"value": 1
+				},
+				{
+					"lat": 31.355,
+					"lng": 107.7223,
+					"value": 1
+				},
+				{
+					"lat": 32.9397,
+					"lng": 117.3632,
+					"value": 26
+				},
+				{
+					"lat": 40.1243,
+					"lng": 124.383,
+					"value": 22
+				},
+				{
+					"lat": 32.8671,
+					"lng": 117.5625,
+					"value": 18
+				},
+				{
+					"lat": 34.2134,
+					"lng": 108.9266,
+					"value": 16
+				},
+				{
+					"lat": 31.464,
+					"lng": 104.7417,
+					"value": 41
+				},
+				{
+					"lat": 25.1118,
+					"lng": 99.1671,
+					"value": 23
+				},
+				{
+					"lat": 32.7054,
+					"lng": 116.7228,
+					"value": 65
+				},
+				{
+					"lat": 36.5329,
+					"lng": 113.0501,
+					"value": 2
+				},
+				{
+					"lat": 26.2233,
+					"lng": 111.6263,
+					"value": 3
+				},
+				{
+					"lat": 32.3932,
+					"lng": 119.421,
+					"value": 5
+				},
+				{
+					"lat": 38.7257,
+					"lng": 113.259,
+					"value": 13
+				},
+				{
+					"lat": 24.041,
+					"lng": 104.1944,
+					"value": 24
+				},
+				{
+					"lat": 37.13,
+					"lng": 114.6845,
+					"value": 42
+				},
+				{
+					"lat": 35.6638,
+					"lng": 103.3896,
+					"value": 33
+				},
+				{
+					"lat": 36.146,
+					"lng": 112.2514,
+					"value": 61
+				},
+				{
+					"lat": 46.8096,
+					"lng": 130.3618,
+					"value": 13
+				},
+				{
+					"lat": 22.1328,
+					"lng": 108.4491,
+					"value": 12
+				},
+				{
+					"lat": 43.252,
+					"lng": 94.6928,
+					"value": 51
+				},
+				{
+					"lat": 34.6777,
+					"lng": 107.7966,
+					"value": 13
+				},
+				{
+					"lat": 30.0966,
+					"lng": 117.0215,
+					"value": 31
+				},
+				{
+					"lat": 46.9931,
+					"lng": 89.525,
+					"value": 15
+				},
+				{
+					"lat": 34.1544,
+					"lng": 113.4713,
+					"value": 114
+				},
+				{
+					"lat": 25.2916,
+					"lng": 117.4207,
+					"value": 12
+				},
+				{
+					"lat": 30.6676,
+					"lng": 104.0557,
+					"value": 10
+				},
+				{
+					"lat": 47.413,
+					"lng": 129.4359,
+					"value": 100
+				}
+			]
+		}
+	}
+}

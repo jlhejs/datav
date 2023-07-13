@@ -1,0 +1,161 @@
+{
+	"name": "map3d-sphere-markers",
+	"version": "0.3.5",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"dmap": "0.2.9"
+	},
+	"datav": {
+		"cn_name": "浮框层",
+		"protocol": 2,
+		"level": 0,
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"config": {
+			"fold": false,
+			"ratio": {
+				"type": "number",
+				"default": 1.2,
+				"step": 0.1,
+				"range": [
+					0.5,
+					2
+				],
+				"name": "浮框高度"
+			},
+			"marker": {
+				"name": "配置",
+				"fold": false,
+				"type": "group",
+				"children": {
+					"scaleSize": {
+						"type": "number",
+						"default": 55,
+						"range": [
+							0,
+							110
+						],
+						"name": "浮框大小"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"markers": [
+				{
+					"type": "dom",
+					"id": 1,
+					"latlngs": {
+						"lng": -180.1904296,
+						"lat": 7.29701788
+					},
+					"content": {
+						"title": "NO.2",
+						"content": "正文正文正文正文",
+						"width": 900,
+						"height": 350,
+						"paddingLeft": 90,
+						"paddingRight": 60,
+						"paddingTop": 110,
+						"titleFontSize": 45,
+						"titleColor": "#fbf320",
+						"contentColor": "#000",
+						"contentFontSize": 40,
+						"fontFamily": "Microsoft Yahei, serif",
+						"bgImgUrl": "https://img.alicdn.com/tps/TB1bymmOFXXXXaxXpXXXXXXXXXX-2201-753.png"
+					}
+				},
+				{
+					"type": "dom",
+					"id": 2,
+					"latlngs": {
+						"lng": -20.83203125,
+						"lat": 13.94426488
+					},
+					"content": {
+						"title": "NO.1",
+						"content": "正文正文正文正文",
+						"width": 900,
+						"height": 350,
+						"paddingLeft": 90,
+						"paddingRight": 60,
+						"paddingTop": 110,
+						"titleFontSize": 45,
+						"titleColor": "#fbf320",
+						"contentColor": "#000",
+						"contentFontSize": 40,
+						"fontFamily": "Microsoft Yahei, serif",
+						"bgImgUrl": "https://img.alicdn.com/tps/TB1bymmOFXXXXaxXpXXXXXXXXXX-2201-753.png"
+					}
+				},
+				{
+					"type": "dom",
+					"id": 3,
+					"latlngs": {
+						"lng": 81.79882813,
+						"lat": 13.58183026
+					},
+					"content": {
+						"title": "NO.3",
+						"content": "正文正文正文正文",
+						"width": 900,
+						"height": 350,
+						"paddingLeft": 90,
+						"paddingRight": 60,
+						"paddingTop": 110,
+						"titleFontSize": 45,
+						"titleColor": "#fbf320",
+						"contentColor": "#000",
+						"contentFontSize": 40,
+						"fontFamily": "Microsoft Yahei, serif",
+						"bgImgUrl": "https://img.alicdn.com/tps/TB1bymmOFXXXXaxXpXXXXXXXXXX-2201-753.png"
+					}
+				}
+			]
+		},
+		"apis": {
+			"markers": {
+				"handler": "render",
+				"description": "浮框",
+				"fields": {
+					"type": {
+						"description": "浮框类型",
+						"type": "string"
+					},
+					"id": {
+						"description": "浮框ID",
+						"type": "number"
+					},
+					"latlngs": {
+						"description": "浮框位置",
+						"type": "object"
+					},
+					"content": {
+						"description": "浮框内容",
+						"type": "object"
+					}
+				}
+			}
+		},
+		"type": [
+			"map3d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB14tL9AAvoK1RjSZPfXXXPKFXa-180-180.png"
+	}
+}

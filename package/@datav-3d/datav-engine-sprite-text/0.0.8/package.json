@@ -1,0 +1,381 @@
+{
+	"name": "@datav-3d/datav-engine-sprite-text",
+	"version": "0.0.8",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "文字标签",
+		"protocol": 2,
+		"supportTheme": true,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"size": {
+				"type": "number",
+				"name": "显示大小",
+				"default": 70,
+				"range": [
+					0.01,
+					1000
+				],
+				"step": 0.01
+			},
+			"padding": {
+				"type": "group",
+				"name": "间距",
+				"children": {
+					"left": {
+						"type": "number",
+						"name": "左间距",
+						"default": 44,
+						"range": [
+							0,
+							128
+						],
+						"step": 1
+					},
+					"right": {
+						"type": "number",
+						"name": "右间距",
+						"default": 73,
+						"range": [
+							0,
+							128
+						],
+						"step": 1
+					},
+					"bottom": {
+						"type": "number",
+						"name": "下间距",
+						"default": 18,
+						"range": [
+							0,
+							128
+						],
+						"step": 1
+					},
+					"top": {
+						"type": "number",
+						"name": "上间距",
+						"default": 18,
+						"range": [
+							0,
+							128
+						],
+						"step": 1
+					},
+					"titleContent": {
+						"type": "number",
+						"name": "文本间距",
+						"default": 17,
+						"range": [
+							0,
+							128
+						],
+						"step": 1
+					},
+					"iconTitleContent": {
+						"type": "number",
+						"name": "图标文本间距",
+						"default": 16,
+						"range": [
+							0,
+							128
+						],
+						"step": 1
+					}
+				}
+			},
+			"background": {
+				"type": "group",
+				"name": "背景",
+				"children": {
+					"color": {
+						"type": "color",
+						"name": "颜色",
+						"default": "rgba(232, 232, 232, 0.3)"
+					},
+					"outlineWidth": {
+						"type": "number",
+						"name": "边框宽度",
+						"default": 2,
+						"range": [
+							1,
+							10
+						],
+						"step": 1
+					},
+					"outlineColor": {
+						"type": "color",
+						"name": "边框颜色",
+						"default": "#ffffff"
+					}
+				}
+			},
+			"title": {
+				"type": "group",
+				"name": "标题文本",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"default": 24,
+						"range": [
+							1,
+							128
+						],
+						"step": 1
+					},
+					"fontColor": {
+						"type": "color",
+						"name": "字体颜色",
+						"default": "#fff"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "search",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						]
+					}
+				}
+			},
+			"splitLine": {
+				"type": "group",
+				"name": "文本分割线",
+				"children": {
+					"color": {
+						"type": "color",
+						"name": "颜色",
+						"default": "rgba(255, 255, 255, 1)"
+					},
+					"width": {
+						"type": "number",
+						"name": "宽度",
+						"default": 1,
+						"range": [
+							1,
+							10
+						],
+						"step": 1
+					}
+				}
+			},
+			"content": {
+				"type": "group",
+				"name": "内容文本",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"default": 24,
+						"range": [
+							1,
+							128
+						],
+						"step": 1
+					},
+					"fontColor": {
+						"type": "color",
+						"name": "字体颜色",
+						"default": "#fff"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "search",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						]
+					}
+				}
+			},
+			"icon": {
+				"type": "group",
+				"name": "图标",
+				"children": {
+					"width": {
+						"type": "number",
+						"name": "宽度",
+						"default": 48,
+						"range": [
+							0,
+							256
+						],
+						"step": 1
+					},
+					"height": {
+						"type": "number",
+						"name": "高度",
+						"default": 48,
+						"range": [
+							0,
+							256
+						],
+						"step": 1
+					}
+				}
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"x": 120.1409912109375,
+					"y": 30.273448679969864,
+					"z": 5,
+					"title": "Place name",
+					"content": "123.12.16",
+					"iconUrl": "https://img.alicdn.com/tfs/TB1CE_RsAL0gK0jSZFAXXcA9pXa-48-48.png"
+				},
+				{
+					"x": 120.1409912109375,
+					"y": 30.273448679969864,
+					"z": 5,
+					"title": "Place name",
+					"content": "123.12.16",
+					"iconUrl": "https://img.alicdn.com/tfs/TB1CE_RsAL0gK0jSZFAXXcA9pXa-48-48.png"
+				}
+			]
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"description": "数据接口",
+				"fields": {
+					"x": {
+						"description": "经度",
+						"type": "number",
+						"optional": false
+					},
+					"y": {
+						"description": "纬度",
+						"type": "number",
+						"optional": false
+					},
+					"z": {
+						"description": "高程",
+						"type": "number",
+						"optional": false
+					},
+					"title": {
+						"description": "标题文本",
+						"type": "string",
+						"optional": false
+					},
+					"content": {
+						"description": "内容文本",
+						"type": "string",
+						"optional": false
+					},
+					"iconUrl": {
+						"description": "图标url",
+						"type": "string",
+						"optional": false
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_lite_subcoms",
+			"map_3d_city_lite_subcoms_add"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_lite"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1J9T7AxTpK1RjSZFMXXbG_VXa-180-180.png"
+	}
+}

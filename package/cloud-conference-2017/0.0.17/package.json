@@ -1,0 +1,151 @@
+{
+	"name": "cloud-conference-2017",
+	"version": "0.0.17",
+	"dependencies": {
+		"async": "2.5.0",
+		"bcore": "0.0.21",
+		"chroma-js": "1.3.4",
+		"jquery": "3.1.0",
+		"lodash": "4.16.4",
+		"simpleheat": "0.4.0",
+		"stats.js": "0.17.0",
+		"three": "0.83.0",
+		"three-orbit-controls": "82.1.0",
+		"tween.js": "16.6.0"
+	},
+	"datav": {
+		"cn_name": "云栖大会监控屏",
+		"private": true,
+		"protocol": 2,
+		"type": [
+			"map_cloud_conference_2017"
+		],
+		"children": {
+			"default": [
+				"cloud-conference-2017-buildings"
+			],
+			"supportTypes": [
+				"map_cloud_conference_2017_subcoms"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"showStats": {
+				"name": "显示帧率",
+				"type": "boolean",
+				"default": true
+			},
+			"cameraPositionName": {
+				"name": "视角位置",
+				"type": "options",
+				"default": "stop",
+				"options": [
+					{
+						"name": "当前位置",
+						"value": "stop"
+					},
+					{
+						"name": "AB区",
+						"value": "AB"
+					},
+					{
+						"name": "C区",
+						"value": "C"
+					},
+					{
+						"name": "D区",
+						"value": "D"
+					},
+					{
+						"name": "E区",
+						"value": "E"
+					},
+					{
+						"name": "总览",
+						"value": "overview"
+					},
+					{
+						"name": "轮播",
+						"value": "repeat"
+					}
+				]
+			},
+			"camera": {
+				"type": "group",
+				"fold": true,
+				"name": "相机设置",
+				"children": {
+					"x": {
+						"type": "number",
+						"name": "相机坐标X",
+						"default": -71.43,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 0.01
+					},
+					"y": {
+						"type": "number",
+						"name": "相机坐标Y",
+						"default": -193.88,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 0.01
+					},
+					"z": {
+						"type": "number",
+						"name": "相机坐标Z",
+						"default": 183.67,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 0.01
+					},
+					"lookAtX": {
+						"type": "number",
+						"name": "视点X",
+						"default": 91.48,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 0.01
+					},
+					"lookAtY": {
+						"type": "number",
+						"name": "视点Y",
+						"default": -81.63,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 0.01
+					},
+					"lookAtZ": {
+						"type": "number",
+						"name": "视点Z",
+						"default": 20.41,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 0.01
+					}
+				}
+			}
+		},
+		"apis": {},
+		"api_data": {},
+		"icon": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/efff3c1c538f1b504eaa7c1cf7c6515a.png"
+	}
+}

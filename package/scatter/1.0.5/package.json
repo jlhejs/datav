@@ -1,0 +1,271 @@
+{
+	"name": "scatter",
+	"version": "1.0.5",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "~4.6.1",
+		"dchart-core": "1.2.29"
+	},
+	"datav": {
+		"cn_name": "散点图",
+		"icon": {
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/ca60a2ea62c04c4157d31d3629bb4054.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/347f27751c10052c75ef56eed3e361e7.png"
+		},
+		"protocol": 2,
+		"private": true,
+		"type": [
+			"regular_scatterplot"
+		],
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "散点图接口",
+				"fields": {
+					"x": {
+						"description": "类目",
+						"type": "string"
+					},
+					"y": {
+						"description": "值",
+						"type": "int"
+					},
+					"r": {
+						"description": "值",
+						"type": "int"
+					},
+					"s": {
+						"description": "系列(可选字段)",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"chartStyle": {
+				"name": "图表样式",
+				"type": "group",
+				"children": {
+					"distance": {
+						"type": "group",
+						"name": "边距",
+						"children": {
+							"top": {
+								"type": "number",
+								"name": "上边距",
+								"range": [
+									-500,
+									500
+								],
+								"default": 20
+							},
+							"bottom": {
+								"type": "number",
+								"name": "下边距",
+								"range": [
+									-500,
+									500
+								],
+								"default": 25
+							},
+							"left": {
+								"type": "number",
+								"name": "左边距",
+								"range": [
+									-500,
+									500
+								],
+								"default": 30
+							},
+							"right": {
+								"type": "number",
+								"name": "右边距",
+								"range": [
+									-500,
+									500
+								],
+								"default": 50
+							}
+						}
+					},
+					"xaxis": {
+						"name": "x轴样式",
+						"type": "group",
+						"children": {
+							"text-color": {
+								"type": "color",
+								"name": "文字色",
+								"default": "rgba(252, 251, 253, 1)"
+							},
+							"font-size": {
+								"type": "number",
+								"name": "文字大小",
+								"range": [
+									0,
+									100
+								],
+								"default": 12
+							},
+							"label": {
+								"type": "string",
+								"name": "标签",
+								"default": ""
+							}
+						}
+					},
+					"yaxis": {
+						"name": "y轴样式",
+						"type": "group",
+						"children": {
+							"text-color": {
+								"type": "color",
+								"name": "文字色",
+								"default": "rgba(252, 251, 253, 1)"
+							},
+							"font-size": {
+								"type": "number",
+								"name": "文字大小",
+								"range": [
+									0,
+									100
+								],
+								"default": 12
+							},
+							"label": {
+								"type": "string",
+								"name": "标签",
+								"default": ""
+							}
+						}
+					}
+				}
+			},
+			"default-serie": {
+				"type": "group",
+				"name": "默认系列",
+				"children": {
+					"color": {
+						"type": "color",
+						"name": "填充色",
+						"default": "rgba(111, 194, 218, 1)"
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "数据系列",
+				"default": [
+					{
+						"serie-value": "1",
+						"serie-color": "#65f5f3"
+					},
+					{
+						"serie-value": "2",
+						"serie-color": "#4A6EE2"
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "系列<%= i+ 1 %>",
+					"child": {
+						"serie-value": {
+							"name": "系列值",
+							"type": "text",
+							"default": "1"
+						},
+						"serie-color": {
+							"name": "系列颜色",
+							"type": "color",
+							"default": "#65f5f3"
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "09:00",
+					"y": 43,
+					"r": 11,
+					"s": "1"
+				},
+				{
+					"x": "09:00",
+					"y": 55,
+					"r": 22,
+					"s": "2"
+				},
+				{
+					"x": "09:10",
+					"y": 44,
+					"r": 12,
+					"s": "1"
+				},
+				{
+					"x": "09:10",
+					"y": 90,
+					"r": 8,
+					"s": "2"
+				},
+				{
+					"x": "09:20",
+					"y": 53,
+					"r": 54,
+					"s": "1"
+				},
+				{
+					"x": "09:30",
+					"y": 34,
+					"r": 53,
+					"s": "1"
+				},
+				{
+					"x": "09:30",
+					"y": 29,
+					"r": 22,
+					"s": "2"
+				},
+				{
+					"x": "09:40",
+					"y": 53,
+					"r": 67,
+					"s": "1"
+				},
+				{
+					"x": "09:50",
+					"y": 63,
+					"r": 77,
+					"s": "1"
+				},
+				{
+					"x": "09:50",
+					"y": 88,
+					"r": 22,
+					"s": "2"
+				},
+				{
+					"x": "10:00",
+					"y": 94,
+					"r": 78,
+					"s": "1"
+				},
+				{
+					"x": "10:10",
+					"y": 88,
+					"r": 79,
+					"s": "1"
+				}
+			]
+		}
+	}
+}

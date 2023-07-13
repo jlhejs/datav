@@ -1,0 +1,133 @@
+{
+	"name": "map3d-earth-globe",
+	"version": "0.1.1",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "2.0.3"
+	},
+	"datav": {
+		"cn_name": "球体层",
+		"level": 0,
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"bumpMapUrl": {
+				"name": "默认凹凸贴图",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1Jp7dbsjI8KJjSsppXXXbyVXa-9000-4500.jpg"
+			},
+			"mapUrl": {
+				"name": "贴图类型",
+				"type": "options",
+				"default": "//img.alicdn.com/imgextra/i3/O1CN01LP9xBV1v2GKSy8qV1_!!6000000006114-0-tps-4096-2048.jpg",
+				"options": [
+					{
+						"name": "地形",
+						"value": "//img.alicdn.com/imgextra/i3/O1CN01LP9xBV1v2GKSy8qV1_!!6000000006114-0-tps-4096-2048.jpg"
+					},
+					{
+						"name": "卫星",
+						"value": "//img.alicdn.com/imgextra/i1/O1CN01M2MNNk1v2GKVeaouG_!!6000000006114-0-tps-4096-2048.jpg"
+					},
+					{
+						"name": "粒子",
+						"value": "//img.alicdn.com/imgextra/i2/O1CN01yd3ZuT1MfdpdMCDHp_!!6000000001462-2-tps-4096-2048.png"
+					},
+					{
+						"name": "行政区",
+						"value": "//img.alicdn.com/imgextra/i3/O1CN01vw1R8g1f96OHIAb59_!!6000000003963-2-tps-4096-2048.png"
+					},
+					{
+						"name": "自定义",
+						"value": "customMap"
+					}
+				]
+			},
+			"customMapUrl": {
+				"show": [
+					[
+						"mapUrl",
+						"$eq",
+						"customMap"
+					]
+				],
+				"type": "image",
+				"name": "自定义贴图",
+				"default": "//img.alicdn.com/imgextra/i3/O1CN01LP9xBV1v2GKSy8qV1_!!6000000006114-0-tps-4096-2048.jpg"
+			},
+			"scale": {
+				"name": "缩放",
+				"type": "number",
+				"default": 1,
+				"range": [
+					1,
+					1.2
+				],
+				"step": 0.01
+			},
+			"lightIntensity": {
+				"name": "光照强度",
+				"type": "number",
+				"default": 6,
+				"range": [
+					0,
+					10
+				],
+				"step": 0.01
+			},
+			"roughness": {
+				"name": "粗糙程度",
+				"type": "number",
+				"default": 0.42,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			},
+			"metalness": {
+				"name": "金属感",
+				"type": "number",
+				"default": 0.36,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			},
+			"bumpScale": {
+				"name": "凹凸感",
+				"type": "number",
+				"default": 0.3,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			}
+		},
+		"api_data": {},
+		"apis": {},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"type": [
+			"map3d-earth-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1cjY3ANTpK1RjSZFMXXbG_VXa-180-180.png"
+	}
+}

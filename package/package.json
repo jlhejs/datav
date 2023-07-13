@@ -1,0 +1,16 @@
+{
+    "version": "0.0.1",
+    "name": "datav-basic-bar",
+    "files": [
+      ""
+    ],
+    "main": "./datav-basic-bar.umd.js",
+    "module": "./datav-basic-bar.es.js",
+    "exports": {
+      ".": {
+        "import": "./datav-basic-bar.es.js",
+        "require": "./datav-basic-bar.umd.js"
+      }
+    }
+  }
+  

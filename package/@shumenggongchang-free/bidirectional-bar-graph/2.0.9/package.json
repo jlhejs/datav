@@ -1,0 +1,491 @@
+{
+	"name": "@shumenggongchang-free/bidirectional-bar-graph",
+	"version": "2.0.9",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"d3": "^3.5.17",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"textures": "^1.2.0"
+	},
+	"datav": {
+		"cn_name": "双向条形图",
+		"icon": "//resource.datav.aliyun.com/cube/com/@shumenggongchang-free/bidirectional-bar-graph/2.0.9/icons/316x238icon.png",
+		"protocol": 2,
+		"type": [
+			"regular_bar"
+		],
+		"view": {
+			"width": "600",
+			"height": "250",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"name": {
+						"description": "分类名称"
+					},
+					"children": {
+						"description": "子分类"
+					}
+				}
+			}
+		},
+		"config": {
+			"size": {
+				"name": "布局",
+				"type": "group",
+				"handler": "updateSize",
+				"children": {
+					"legendWidth": {
+						"name": "图例宽度",
+						"type": "number",
+						"default": 0.15,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"handler": "updateSize"
+					},
+					"legendHeight": {
+						"name": "图例高度",
+						"type": "number",
+						"default": 0.15,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"handler": "updateSize"
+					},
+					"primaryInnerPadding": {
+						"name": "主类别间距",
+						"type": "number",
+						"default": 1.61,
+						"step": 0.01,
+						"range": [
+							0,
+							4
+						],
+						"handler": "updateSize"
+					},
+					"secondaryInnerPadding": {
+						"name": "次类别间距",
+						"type": "number",
+						"default": 1.02,
+						"step": 0.01,
+						"range": [
+							0,
+							2
+						],
+						"handler": "updateSize"
+					},
+					"leftChartRatio": {
+						"name": "左图标比例",
+						"type": "number",
+						"default": 0.7,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"handler": "updateSize"
+					},
+					"rightChartRatio": {
+						"name": "右图标比例",
+						"type": "number",
+						"default": 0.8,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"handler": "updateSize"
+					},
+					"duration": {
+						"name": "动画时间",
+						"type": "number",
+						"default": 0.3,
+						"step": 0.1,
+						"range": [
+							0,
+							5
+						],
+						"handler": "updateSize"
+					},
+					"textRatio": {
+						"name": "文本占比",
+						"type": "number",
+						"default": 0.07,
+						"step": 0.01,
+						"range": [
+							0,
+							0.5
+						],
+						"handler": "updateSize"
+					},
+					"horizontalRatio": {
+						"name": "横向分割比",
+						"type": "number",
+						"default": 0.5,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"handler": "updateSize"
+					},
+					"unit": {
+						"name": "单位",
+						"type": "string",
+						"default": "(单位)",
+						"handler": "updateSize"
+					}
+				}
+			},
+			"legend": {
+				"name": "图例",
+				"type": "group",
+				"handler": "updateLegend",
+				"children": {
+					"legendStartWidth": {
+						"name": "横向起始点",
+						"type": "number",
+						"default": 0.76,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"handler": "updateLegend"
+					},
+					"legendStartHeight": {
+						"name": "纵向起始点",
+						"type": "number",
+						"default": 0.73,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"handler": "updateLegend"
+					},
+					"legendChartWidth": {
+						"name": "矩形宽度",
+						"type": "number",
+						"default": 24,
+						"step": 1,
+						"range": [
+							0,
+							100
+						],
+						"handler": "updateLegend"
+					},
+					"legendChartHeight": {
+						"name": "矩形高度",
+						"type": "number",
+						"default": 7,
+						"step": 1,
+						"range": [
+							0,
+							50
+						],
+						"handler": "updateLegend"
+					},
+					"legendChartPaddingX": {
+						"name": "矩形横向间隔",
+						"type": "number",
+						"default": 101,
+						"step": 1,
+						"range": [
+							20,
+							200
+						],
+						"handler": "updateLegend"
+					},
+					"legendBottomOffset": {
+						"name": "下侧图例偏移",
+						"type": "number",
+						"default": 22,
+						"step": 1,
+						"range": [
+							0,
+							100
+						],
+						"handler": "updateLegend"
+					},
+					"legendChartPaddingY": {
+						"name": "矩形纵向间隔",
+						"type": "number",
+						"default": 22.45,
+						"step": 1,
+						"range": [
+							0,
+							80
+						],
+						"handler": "updateLegend"
+					},
+					"secondaryName1": {
+						"name": "次分类名称1",
+						"type": "text",
+						"default": "成本",
+						"handler": "updateLegend"
+					},
+					"secondaryName2": {
+						"name": "次分类名称2",
+						"type": "text",
+						"default": "营业额",
+						"handler": "updateLegend"
+					}
+				}
+			},
+			"font": {
+				"name": "字体",
+				"type": "group",
+				"handler": "updateFont",
+				"children": {
+					"fontSize": {
+						"name": "字体大小",
+						"type": "number",
+						"default": 12,
+						"range": [
+							0,
+							50
+						],
+						"step": 1,
+						"handler": "updateFont"
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "select",
+						"options": [
+							{
+								"name": "微软雅黑",
+								"value": "Microsoft YaHei"
+							},
+							{
+								"name": "宋体",
+								"value": "SimSuncss"
+							},
+							{
+								"name": "黑体",
+								"value": "SimHei"
+							},
+							{
+								"name": "隶书",
+								"value": "LiSu"
+							},
+							{
+								"name": "幼圆",
+								"value": "YouYuan"
+							},
+							{
+								"name": "tahoma",
+								"value": "Tahoma"
+							},
+							{
+								"name": "arial",
+								"value": "Arial"
+							},
+							{
+								"name": "sans-serif",
+								"value": "sans-serif"
+							},
+							{
+								"name": "serif",
+								"value": "serif"
+							}
+						],
+						"default": "Microsoft YaHei",
+						"handler": "updateFont"
+					},
+					"legendFontSize": {
+						"name": "图例字体大小",
+						"type": "number",
+						"default": 16,
+						"range": [
+							0,
+							50
+						],
+						"step": 1,
+						"handler": "updateFont"
+					},
+					"legendFontFamily": {
+						"name": "图例字体",
+						"type": "select",
+						"options": [
+							{
+								"name": "微软雅黑",
+								"value": "Microsoft YaHei"
+							},
+							{
+								"name": "宋体",
+								"value": "SimSuncss"
+							},
+							{
+								"name": "黑体",
+								"value": "SimHei"
+							},
+							{
+								"name": "隶书",
+								"value": "LiSu"
+							},
+							{
+								"name": "幼圆",
+								"value": "YouYuan"
+							},
+							{
+								"name": "tahoma",
+								"value": "Tahoma"
+							},
+							{
+								"name": "arial",
+								"value": "Arial"
+							},
+							{
+								"name": "sans-serif",
+								"value": "sans-serif"
+							},
+							{
+								"name": "serif",
+								"value": "serif"
+							}
+						],
+						"default": "Microsoft YaHei",
+						"handler": "updateFont"
+					}
+				}
+			},
+			"color": {
+				"name": "颜色",
+				"type": "group",
+				"handler": "updateColor",
+				"children": {
+					"rectColor": {
+						"name": "主分类颜色",
+						"type": "array",
+						"default": [
+							"#00C5FF",
+							"#00FFEB",
+							"#97ff5f"
+						],
+						"child": {
+							"type": "color",
+							"default": "#fff",
+							"name": "色值<%=i+1%>"
+						},
+						"handler": "updateColor"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "部门1",
+					"children": [
+						{
+							"name": "网络",
+							"values": [
+								"25",
+								"23"
+							]
+						},
+						{
+							"name": "金融",
+							"values": [
+								"15",
+								"18"
+							]
+						},
+						{
+							"name": "政治",
+							"values": [
+								"12",
+								"19"
+							]
+						},
+						{
+							"name": "暴恐",
+							"values": [
+								"16",
+								"12"
+							]
+						}
+					]
+				},
+				{
+					"name": "部门2",
+					"children": [
+						{
+							"name": "网络",
+							"values": [
+								"25",
+								"23"
+							]
+						},
+						{
+							"name": "金融",
+							"values": [
+								"15",
+								"18"
+							]
+						},
+						{
+							"name": "公共",
+							"values": [
+								"23",
+								"14"
+							]
+						},
+						{
+							"name": "暴恐",
+							"values": [
+								"16",
+								"12"
+							]
+						}
+					]
+				},
+				{
+					"name": "部门3",
+					"children": [
+						{
+							"name": "金融",
+							"values": [
+								"15",
+								"18"
+							]
+						},
+						{
+							"name": "公共",
+							"values": [
+								"23",
+								"14"
+							]
+						},
+						{
+							"name": "政治",
+							"values": [
+								"12",
+								"19"
+							]
+						},
+						{
+							"name": "暴恐",
+							"values": [
+								"16",
+								"12"
+							]
+						}
+					]
+				}
+			]
+		}
+	}
+}

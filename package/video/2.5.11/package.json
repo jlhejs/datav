@@ -1,0 +1,134 @@
+{
+	"name": "video",
+	"version": "2.5.11",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "视频",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB1zEozl.H1gK0jSZSyXXXtlpXa-370-208.png",
+		"protocol": 2,
+		"type": [
+			"media_video",
+			"DataV-6:media"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 110
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"url": {
+						"description": "视频地址",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"src": {
+				"type": "text",
+				"name": "视频地址",
+				"default": "",
+				"description": "推荐 mp4 格式视频地址，支持以数据的形式传入，详见数据面板",
+				"dataField": "url",
+				"useAssets": true,
+				"acceptAssetTypes": [
+					"video"
+				],
+				"acceptAssetCodes": [
+					"video"
+				]
+			},
+			"empty": {
+				"type": "text",
+				"default": "这是一段关于视频的介绍",
+				"name": "空视频文案"
+			},
+			"autoplay": {
+				"type": "boolean",
+				"default": true,
+				"name": "自动播放"
+			},
+			"loop": {
+				"type": "boolean",
+				"default": true,
+				"name": "循环播放"
+			},
+			"controls": {
+				"type": "boolean",
+				"default": true,
+				"name": "控制条"
+			},
+			"isMuted": {
+				"name": "静音",
+				"type": "boolean",
+				"default": false
+			},
+			"volume": {
+				"type": "number",
+				"default": 50,
+				"name": "音量(%)",
+				"step": 1,
+				"range": [
+					0,
+					100
+				],
+				"show": [
+					[
+						"isMuted",
+						"$eq",
+						false
+					]
+				]
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"url": ""
+				}
+			]
+		},
+		"events": {
+			"video-start": {
+				"name": "当播放开始时",
+				"description": "当播放开始时",
+				"type": "null"
+			},
+			"video-ended": {
+				"name": "当播放结束时",
+				"description": "当播放结束时",
+				"type": "null"
+			}
+		},
+		"publicHandler": {
+			"videoStart": {
+				"name": "开始播放",
+				"type": "null"
+			},
+			"videoPause": {
+				"name": "暂停播放",
+				"type": "null"
+			},
+			"videoEnded": {
+				"name": "结束播放",
+				"type": "null"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB14jnqlHj1gK0jSZFuXXcrHpXa-334-144.png"
+	}
+}

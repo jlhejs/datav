@@ -1,0 +1,125 @@
+{
+	"name": "map3d-earth-movingicon",
+	"version": "0.0.6",
+	"main": "index.js",
+	"dependencies": {
+		"cheap-ruler": "2.5.1",
+		"eventemitter3": "2.0.3"
+	},
+	"datav": {
+		"cn_name": "移动图标层",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"mapUrl": {
+				"type": "image",
+				"name": "自定义贴图",
+				"default": "https://img.alicdn.com/tfs/TB1EsjxkeGSBuNjSspbXXciipXa-19-13.png"
+			},
+			"height": {
+				"type": "number",
+				"name": "高度",
+				"default": 10,
+				"range": [
+					0,
+					40
+				],
+				"step": 0.1
+			},
+			"size": {
+				"type": "number",
+				"name": "大小",
+				"default": 15,
+				"range": [
+					0.1,
+					100
+				],
+				"step": 0.01
+			},
+			"speed": {
+				"type": "number",
+				"name": "速度",
+				"default": 3,
+				"range": [
+					0,
+					10
+				],
+				"step": 1
+			},
+			"maxOpacity": {
+				"type": "number",
+				"name": "透明度",
+				"default": 1,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			}
+		},
+		"api_data": {
+			"movingicon": {
+				"type": "FeatureCollection",
+				"features": [
+					{
+						"type": "Feature",
+						"properties": {},
+						"geometry": {
+							"type": "LineString",
+							"coordinates": [
+								[
+									116.23535156249999,
+									39.977120098439634
+								],
+								[
+									120.36621093749999,
+									31.240985378021307
+								],
+								[
+									115.400390625,
+									25.085598897064752
+								],
+								[
+									105.4248046875,
+									22.39071391683855
+								],
+								[
+									90.791015625,
+									30.977609093348686
+								]
+							]
+						}
+					}
+				]
+			}
+		},
+		"apis": {
+			"movingicon": {
+				"handler": "setData",
+				"description": "移动图标层",
+				"fields": {}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map3d-earth-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1C4j8AwHqK1RjSZFPXXcwapXa-180-180.png"
+	}
+}

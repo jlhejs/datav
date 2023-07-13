@@ -1,0 +1,78 @@
+{
+  "name": "datav-full-screen",
+  "version": "0.0.1",
+  "dependencies": {
+    "bcore": "0.0.18",
+    "jquery": "2.1.4",
+    "lodash": "4.6.1"
+  },
+  "datav": {
+    "id": "FullScreen_YkOoPgCS-",
+    "alias": "全屏切换",
+    "img": "//files.pengxiaotian.com/com-thum/full-screen-368-208.png",
+    "name": "VFullScreen",
+    "icon": "v-icon-interact",
+    "type": "com",
+    "renameing": false,
+    "selected": false,
+    "locked": false,
+    "hided": false,
+    "hovered": false,
+    "scaling": {
+      "zoom": false,
+      "w": 0,
+      "h": 0,
+      "sx": 1,
+      "sy": 1
+    },
+    "attr": {
+      "x": 0,
+      "y": 0,
+      "w": 200,
+      "h": 200,
+      "deg": 0,
+      "opacity": 1,
+      "filpV": false,
+      "filpH": false
+    },
+    "projectId": 100003,
+    "config": {
+      "request": {
+        "name": "request",
+        "type": "text",
+        "default": "https://files.pengxiaotian.com/datav/fsrequest.png"
+      },
+      "exit": {
+        "name": "exit",
+        "type": "text",
+        "default": "https://files.pengxiaotian.com/datav/fsexit.png"
+      },
+      "bgColor": {
+        "name": "bgColor",
+        "type": "text",
+        "default": "rgba(255, 255, 255, 0.2)"
+      },
+      "borderRadius": {
+        "name": "文字样式",
+        "type": "number",
+        "default": 50
+      },
+      "alwaysShow": {
+        "name": "alwaysShow",
+        "type": "boolean",
+        "default": true
+      }
+    }
+  },
+  "files": [
+    ""
+  ],
+  "main": "./index.umd.js",
+  "module": "./index.es.js",
+  "exports": {
+    ".": {
+      "import": "./index.es.js",
+      "require": "./index.umd.js"
+    }
+  }
+}

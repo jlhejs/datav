@@ -1,0 +1,10 @@
+{
+    "name": "datav-vue",
+    "version": "0.0.2",
+    "dependencies": {
+      "bcore": "0.0.18",
+      "jquery": "2.1.4",
+      "lodash": "4.6.1"
+    }
+  }
+  

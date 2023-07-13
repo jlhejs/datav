@@ -1,0 +1,303 @@
+{
+	"name": "countdown",
+	"version": "0.0.13",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "倒计时",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB13UZ0mRv0gK0jSZKbXXbK2FXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"analysis": {
+			"apis": "data"
+		},
+		"view": {
+			"width": "300",
+			"height": "56",
+			"minWidth": "160",
+			"minHeight": "30",
+			"z-index": 110
+		},
+		"config": {
+			"dayNumbers": {
+				"type": "group",
+				"name": "倒计天数",
+				"fold": true,
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"default": 24,
+								"range": [
+									10,
+									100
+								]
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "search",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							}
+						}
+					}
+				}
+			},
+			"dayUnit": {
+				"type": "group",
+				"name": "单位样式",
+				"fold": true,
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"default": 24,
+								"range": [
+									10,
+									100
+								]
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "search",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							}
+						}
+					},
+					"marginLeft": {
+						"name": "左侧间隔",
+						"type": "number",
+						"default": 10,
+						"range": [
+							0,
+							100
+						]
+					},
+					"marginRight": {
+						"name": "右侧间隔",
+						"type": "number",
+						"default": 10,
+						"range": [
+							0,
+							100
+						]
+					}
+				}
+			},
+			"time": {
+				"type": "group",
+				"name": "时间样式",
+				"fold": true,
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"default": 24,
+								"range": [
+									10,
+									100
+								]
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "search",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							}
+						}
+					},
+					"padding": {
+						"name": "间隔空格数",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							1
+						],
+						"step": 1
+					}
+				}
+			}
+		},
+		"apis": {
+			"data": {
+				"description": "数据",
+				"handler": "render",
+				"fields": {
+					"endTime": {
+						"name": "时间",
+						"type": "string",
+						"description": "时间"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"endTime": "2020-12-20 00:00:00"
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1gHM0mQL0gK0jSZFtXXXQCXXa-160-116.png"
+	}
+}

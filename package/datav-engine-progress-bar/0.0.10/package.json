@@ -1,0 +1,407 @@
+{
+	"name": "datav-engine-progress-bar",
+	"version": "0.0.10",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "进度条",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"background": {
+				"type": "group",
+				"name": "背景",
+				"children": {
+					"color": {
+						"type": "color",
+						"name": "颜色",
+						"default": "#000"
+					}
+				}
+			},
+			"indexBar": {
+				"type": "group",
+				"name": "指标",
+				"children": {
+					"font": {
+						"type": "group",
+						"name": "字体",
+						"children": {
+							"size": {
+								"name": "大小",
+								"type": "group",
+								"children": {
+									"key": {
+										"type": "number",
+										"name": "键",
+										"default": 21,
+										"range": [
+											1,
+											128
+										],
+										"step": 1
+									},
+									"value": {
+										"type": "number",
+										"name": "值",
+										"default": 36,
+										"range": [
+											1,
+											128
+										],
+										"step": 1
+									}
+								}
+							},
+							"color": {
+								"type": "group",
+								"name": "颜色",
+								"children": {
+									"key": {
+										"type": "color",
+										"name": "键",
+										"default": "#fff"
+									},
+									"value": {
+										"type": "color",
+										"name": "值",
+										"default": "#0ee"
+									}
+								}
+							},
+							"weight": {
+								"name": "粗细",
+								"type": "group",
+								"children": {
+									"key": {
+										"type": "number",
+										"name": "键",
+										"default": 100,
+										"range": [
+											100,
+											900
+										],
+										"step": 100
+									},
+									"value": {
+										"type": "number",
+										"name": "值",
+										"default": 900,
+										"range": [
+											100,
+											900
+										],
+										"step": 100
+									}
+								}
+							}
+						}
+					},
+					"padding": {
+						"type": "group",
+						"name": "间距",
+						"children": {
+							"horizontal": {
+								"type": "group",
+								"name": "水平",
+								"children": {
+									"left": {
+										"type": "number",
+										"name": "左",
+										"default": 22,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									},
+									"right": {
+										"type": "number",
+										"name": "右",
+										"default": 14,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									}
+								}
+							},
+							"font": {
+								"type": "number",
+								"name": "字体",
+								"default": 14,
+								"range": [
+									0,
+									128
+								],
+								"step": 1
+							},
+							"vertical": {
+								"type": "group",
+								"name": "垂直",
+								"children": {
+									"top": {
+										"type": "number",
+										"name": "上",
+										"default": 36,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									},
+									"bottom": {
+										"type": "number",
+										"name": "下",
+										"default": 7,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"progressBar": {
+				"type": "group",
+				"name": "进度条",
+				"children": {
+					"font": {
+						"type": "group",
+						"name": "字体",
+						"children": {
+							"size": {
+								"type": "number",
+								"name": "大小",
+								"default": 31,
+								"range": [
+									1,
+									128
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#fff"
+							},
+							"weight": {
+								"type": "number",
+								"name": "粗细",
+								"default": 100,
+								"range": [
+									100,
+									900
+								],
+								"step": 100
+							}
+						}
+					},
+					"padding": {
+						"type": "group",
+						"name": "间距",
+						"children": {
+							"horizontal": {
+								"type": "group",
+								"name": "水平",
+								"children": {
+									"left": {
+										"type": "number",
+										"name": "左",
+										"default": 22,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									},
+									"right": {
+										"type": "number",
+										"name": "右",
+										"default": 22,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									}
+								}
+							},
+							"vertical": {
+								"type": "group",
+								"name": "垂直",
+								"children": {
+									"top": {
+										"type": "number",
+										"name": "上",
+										"default": 7,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									},
+									"bottom": {
+										"type": "number",
+										"name": "下",
+										"default": 36,
+										"range": [
+											0,
+											128
+										],
+										"step": 1
+									}
+								}
+							}
+						}
+					},
+					"bar": {
+						"type": "group",
+						"name": "条",
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "正常颜色",
+								"default": "#0090FF "
+							},
+							"threshold": {
+								"type": "number",
+								"name": "阈值",
+								"default": 0.5,
+								"range": [
+									0,
+									1
+								],
+								"step": 0.01
+							},
+							"alertColor": {
+								"type": "color",
+								"name": "报警颜色",
+								"default": "#FF0000"
+							},
+							"baseColor": {
+								"type": "color",
+								"name": "底颜色",
+								"default": "#979797"
+							}
+						}
+					}
+				}
+			},
+			"size": {
+				"type": "number",
+				"name": "大小",
+				"default": 1,
+				"range": [
+					0,
+					50
+				],
+				"step": 0.01
+			}
+		},
+		"api_data": {
+			"bar": [
+				{
+					"pos": {
+						"x": 120.17468112895,
+						"y": 30.25752775,
+						"z": 0
+					},
+					"index": [
+						{
+							"key": "当前人数",
+							"value": 2345
+						},
+						{
+							"key": "五分钟进场人数",
+							"value": 23
+						}
+					],
+					"progress": [
+						{
+							"key": "能源负荷",
+							"value": 0.4
+						}
+					]
+				}
+			]
+		},
+		"apis": {
+			"bar": {
+				"handler": "setData",
+				"description": "进度条数据",
+				"fields": {}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1dxL4Aq6qK1RjSZFmXXX0PFXa-180-180.png"
+	}
+}

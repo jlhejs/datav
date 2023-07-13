@@ -1,0 +1,191 @@
+{
+	"name": "datav-engine-sequence-animation",
+	"version": "0.0.4",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "序列帧动画",
+		"icon": "//img.alicdn.com/tfs/TB1cCb3AyrpK1RjSZFhXXXSdXXa-180-180.png",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"size": {
+				"name": "粒子大小",
+				"type": "number",
+				"default": 100,
+				"range": [
+					10,
+					300
+				],
+				"step": 5
+			},
+			"pointsTexture": {
+				"name": "动画纹理",
+				"type": "image",
+				"default": "https://img.alicdn.com/tfs/TB1m1WvXMmTBuNjy1XbXXaMrVXa-2048-2048.png"
+			},
+			"defaultPointsTexture": {
+				"name": "默认动画纹理",
+				"type": "hidden",
+				"default": "https://img.alicdn.com/tfs/TB1m1WvXMmTBuNjy1XbXXaMrVXa-2048-2048.png"
+			},
+			"textureSegmentsX": {
+				"name": "纹理横格",
+				"type": "number",
+				"default": 8,
+				"range": [
+					2,
+					20
+				],
+				"step": 1
+			},
+			"textureSegmentsY": {
+				"name": "纹理纵格",
+				"type": "number",
+				"default": 8,
+				"range": [
+					2,
+					20
+				],
+				"step": 1
+			},
+			"speed": {
+				"name": "动画速度",
+				"type": "number",
+				"default": 0.5,
+				"range": [
+					0.01,
+					2
+				],
+				"step": 0.01
+			},
+			"opacity": {
+				"name": "透明度",
+				"type": "number",
+				"default": 1,
+				"range": [
+					0.1,
+					1
+				],
+				"step": 0.1
+			},
+			"heightPosition": {
+				"name": "垂直位置",
+				"type": "number",
+				"range": [
+					0,
+					200000
+				],
+				"step": 10,
+				"default": 0
+			}
+		},
+		"api_data": {
+			"location": [
+				{
+					"x": 120.13391017913817,
+					"y": 30.266628860828856,
+					"z": 0,
+					"value": 10
+				},
+				{
+					"x": 120.14047622680663,
+					"y": 30.26644353304456,
+					"z": 0,
+					"value": 20
+				},
+				{
+					"x": 120.12605667114256,
+					"y": 30.27507943609008,
+					"z": 0,
+					"value": 5
+				}
+			]
+		},
+		"apis": {
+			"location": {
+				"handler": "setData",
+				"description": "位置数据",
+				"fields": {
+					"x": {
+						"description": "x轴(经度)"
+					},
+					"y": {
+						"description": "y轴(纬度)"
+					},
+					"z": {
+						"description": "z轴(高度)"
+					},
+					"value": {
+						"description": "数值",
+						"optional": true
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		}
+	}
+}

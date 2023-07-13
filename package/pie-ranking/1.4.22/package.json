@@ -1,0 +1,509 @@
+{
+	"name": "pie-ranking",
+	"version": "1.4.22",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"d3": "3.5.12"
+	},
+	"datav": {
+		"cn_name": "轮播饼图",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB1_aI1mQP2gK0jSZPxXXacQpXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"regular_pie",
+			"DataV-6:regular_pie"
+		],
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "50",
+			"minHeight": "50",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "轮播饼图接口",
+				"fields": {
+					"type": {
+						"description": "类别名"
+					},
+					"value": {
+						"description": "值说明"
+					}
+				}
+			}
+		},
+		"config": {
+			"pie": {
+				"type": "group",
+				"name": "饼图属性",
+				"children": {
+					"_innerRadius": {
+						"type": "number",
+						"name": "内半径",
+						"default": 0.86,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						]
+					},
+					"_outerRadius": {
+						"type": "number",
+						"name": "外半径",
+						"default": 1,
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						]
+					},
+					"animationTime": {
+						"type": "number",
+						"name": "动画时长",
+						"default": 2000
+					},
+					"loopTime": {
+						"type": "number",
+						"name": "轮播间隔",
+						"default": 3000
+					},
+					"defaultColor": {
+						"type": "color",
+						"name": "默认颜色",
+						"default": "#00baff"
+					}
+				}
+			},
+			"percent": {
+				"type": "group",
+				"name": "中间百分比部分",
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "rgb(144, 160, 174)"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					},
+					"isNowrap": {
+						"type": "boolean",
+						"name": "自动换行",
+						"default": true
+					},
+					"PercentToValue": {
+						"name": "显示真实值",
+						"type": "boolean",
+						"default": false,
+						"description": "默认显示百分比值，勾选后显示真实数据数值。"
+					},
+					"percentSymbol": {
+						"name": "百分号",
+						"type": "text",
+						"default": "%",
+						"show": [
+							[
+								"PercentToValue",
+								"$eq",
+								false
+							]
+						]
+					},
+					"percentFontSize": {
+						"type": "number",
+						"name": "百分号字号",
+						"default": 16,
+						"show": [
+							[
+								"PercentToValue",
+								"$eq",
+								false
+							]
+						]
+					},
+					"percentPosition": {
+						"name": "百分号位置",
+						"type": "select",
+						"show": [
+							[
+								"PercentToValue",
+								"$eq",
+								false
+							]
+						],
+						"options": [
+							{
+								"name": "前置",
+								"value": "front"
+							},
+							{
+								"name": "后置",
+								"value": "end"
+							}
+						],
+						"default": "end"
+					},
+					"percentMargin": {
+						"name": "百分号偏移值",
+						"type": "number",
+						"default": 5,
+						"show": [
+							[
+								"PercentToValue",
+								"$eq",
+								false
+							]
+						]
+					},
+					"decimalPlace": {
+						"type": "number",
+						"name": "小数点位数",
+						"default": 0,
+						"step": 1,
+						"range": [
+							0,
+							10
+						]
+					},
+					"sizePercent": {
+						"type": "number",
+						"name": "外框占比",
+						"default": 0.5,
+						"range": [
+							0,
+							1
+						]
+					},
+					"numHeightPercent": {
+						"type": "number",
+						"name": "数字占比",
+						"default": 0.6,
+						"range": [
+							0,
+							1
+						]
+					},
+					"numberFontSize": {
+						"type": "number",
+						"name": "数字字号",
+						"default": 20
+					},
+					"descriptionFontSize": {
+						"type": "number",
+						"name": "描述字号",
+						"default": 12
+					}
+				}
+			},
+			"legend": {
+				"name": "图例",
+				"type": "group",
+				"fold": true,
+				"handler": "updateLegendLayout",
+				"children": {
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": false
+					},
+					"textarea": {
+						"type": "group",
+						"name": "文本",
+						"fold": true,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 10,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgba(255,255,255,0.6)"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					},
+					"layout": {
+						"name": "布局",
+						"type": "group",
+						"fold": true,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"children": {
+							"margin": {
+								"name": "间距",
+								"type": "group",
+								"children": {
+									"horiInterval": {
+										"name": "左右间距",
+										"type": "number",
+										"default": 8
+									},
+									"vertiInterval": {
+										"name": "上下间距",
+										"type": "number",
+										"default": 0
+									}
+								}
+							},
+							"loc": {
+								"name": "位置",
+								"type": "options",
+								"default": "bottom-center",
+								"options": [
+									{
+										"name": "顶部居中",
+										"value": "top-center"
+									},
+									{
+										"name": "顶部居左",
+										"value": "top-left"
+									},
+									{
+										"name": "顶部居右",
+										"value": "top-right"
+									},
+									{
+										"name": "底部居中",
+										"value": "bottom-center"
+									},
+									{
+										"name": "底部居左",
+										"value": "bottom-left"
+									},
+									{
+										"name": "底部居右",
+										"value": "bottom-right"
+									}
+								]
+							}
+						}
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "自定义类别",
+				"default": [
+					{
+						"color": "rgb(10, 115, 255)"
+					},
+					{
+						"color": "rgb(61, 171, 255)"
+					},
+					{
+						"color": "#2483ff"
+					},
+					{
+						"color": "#a3f6ff"
+					},
+					{
+						"color": "#57cdff"
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "标签<%= i+1 %>",
+					"child": {
+						"color": {
+							"name": "背景颜色",
+							"type": "color",
+							"default": "#000"
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"type": "TYPE_1",
+					"value": 32
+				},
+				{
+					"type": "TYPE_2",
+					"value": 54
+				},
+				{
+					"type": "TYPE_3",
+					"value": 45
+				},
+				{
+					"type": "TYPE_4",
+					"value": 12
+				},
+				{
+					"type": "TYPE_5",
+					"value": 40
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1Sj.5mKH2gK0jSZJnXXaT1FXa-160-116.png"
+	}
+}

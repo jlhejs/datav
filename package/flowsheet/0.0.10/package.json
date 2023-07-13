@@ -1,0 +1,553 @@
+{
+	"name": "flowsheet",
+	"version": "0.0.10",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"datav-antd-adaptor": "4.0.3",
+		"lodash": "4.17.20",
+		"prop-types": "15.5.8",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"svg.js": "2.7.1"
+	},
+	"datav": {
+		"cn_name": "流程图",
+		"icon": "//img.alicdn.com/tfs/TB1w.QRtAL0gK0jSZFtXXXQCXXa-332-144.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1xuZTtCf2gK0jSZFPXXXsopXa-368-208.png",
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"network",
+			"DataV-6:regular_relation"
+		],
+		"supportTheme": true,
+		"view": {
+			"width": "800",
+			"height": "540",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"nodes": {
+						"description": "节点描述信息"
+					},
+					"edges": {
+						"description": "连接线描述信息"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"ginsengAmericanFn": {
+				"name": "高亮流程图节点",
+				"type": "object",
+				"description": "高亮流程图节点",
+				"fields": {
+					"id": {
+						"type": "string",
+						"name": "节点id",
+						"optional": true,
+						"description": "当前节点id"
+					}
+				}
+			}
+		},
+		"events": {
+			"handleClick": {
+				"name": "当点击节点时",
+				"type": "object",
+				"description": "当点击节点时",
+				"fields": {
+					"id": {
+						"type": "string | number",
+						"name": "节点id",
+						"optional": true,
+						"description": "节点id"
+					},
+					"width": {
+						"type": "string | number",
+						"name": "节点宽度",
+						"optional": true,
+						"description": "节点宽度"
+					},
+					"height": {
+						"type": "string | number",
+						"name": "节点高度",
+						"optional": true,
+						"description": "节点高度"
+					},
+					"title": {
+						"type": "string | number",
+						"name": "节点标题",
+						"optional": true,
+						"description": "节点标题"
+					},
+					"content": {
+						"type": "string | array",
+						"name": "节点内容",
+						"optional": true,
+						"description": "节点内容"
+					},
+					"status": {
+						"type": "string | number",
+						"name": "节点状态",
+						"optional": true,
+						"description": "节点状态"
+					}
+				}
+			},
+			"handleDoubleClick": {
+				"name": "当双击节点时",
+				"type": "object",
+				"description": "当双击节点时",
+				"fields": {
+					"id": {
+						"type": "string | number",
+						"name": "节点id",
+						"optional": true,
+						"description": "节点id"
+					},
+					"width": {
+						"type": "string | number",
+						"name": "节点宽度",
+						"optional": true,
+						"description": "节点宽度"
+					},
+					"height": {
+						"type": "string | number",
+						"name": "节点高度",
+						"optional": true,
+						"description": "节点高度"
+					},
+					"title": {
+						"type": "string | number",
+						"name": "节点标题",
+						"optional": true,
+						"description": "节点标题"
+					},
+					"content": {
+						"type": "string | array",
+						"name": "节点内容",
+						"optional": true,
+						"description": "节点内容"
+					},
+					"status": {
+						"type": "string | number",
+						"name": "节点状态",
+						"optional": true,
+						"description": "节点状态"
+					}
+				}
+			},
+			"handleBlankAreaClick": {
+				"name": "当点击空白区域时",
+				"type": "object",
+				"description": "当点击空白区域时",
+				"fields": {}
+			}
+		},
+		"config": {
+			"nodesGroup": {
+				"type": "menu",
+				"children": {
+					"nodes": {
+						"name": "节点",
+						"type": "menuChild",
+						"children": {
+							"size": {
+								"name": "节点尺寸",
+								"type": "suite",
+								"children": {
+									"width": {
+										"name": "宽度",
+										"type": "stepper",
+										"default": 150,
+										"suffix": "px",
+										"col": 12
+									},
+									"height": {
+										"name": "高度",
+										"type": "stepper",
+										"default": 150,
+										"suffix": "px",
+										"col": 12
+									}
+								}
+							},
+							"margin": {
+								"type": "suite",
+								"name": "节点间距",
+								"children": {
+									"leftRight": {
+										"name": "左右距离",
+										"type": "stepper",
+										"default": 60,
+										"suffix": "px",
+										"col": 12
+									},
+									"topBottom": {
+										"name": "上下距离",
+										"type": "stepper",
+										"default": 40,
+										"suffix": "px",
+										"col": 12
+									}
+								}
+							},
+							"autoHighlight": {
+								"name": "点击自动高亮",
+								"type": "switch",
+								"default": true
+							},
+							"autoHighlightContent": {
+								"name": "非高亮样式",
+								"type": "group",
+								"children": {
+									"autoTitle": {
+										"name": "标题",
+										"type": "suite",
+										"children": {
+											"titleBackgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "#ebecf0",
+												"col": 12
+											},
+											"titleColor": {
+												"name": "字体色",
+												"type": "color",
+												"default": "#ebecf0",
+												"col": 12
+											}
+										}
+									},
+									"autoContent": {
+										"name": "文本",
+										"type": "suite",
+										"children": {
+											"contentBackgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "#fff",
+												"col": 12
+											},
+											"contentColor": {
+												"name": "字体色",
+												"type": "color",
+												"default": "#ebecf0",
+												"col": 12
+											}
+										}
+									},
+									"nonCableLineColor": {
+										"name": "连接线颜色(非高亮)",
+										"type": "color",
+										"default": "rgba(0, 0, 0, 0)"
+									}
+								},
+								"show": [
+									[
+										"autoHighlight",
+										"$eq",
+										true
+									]
+								]
+							},
+							"title": {
+								"type": "group",
+								"name": "标题样式",
+								"fold": true,
+								"children": {
+									"font": {
+										"name": "文本",
+										"type": "font",
+										"components": [
+											"fontFamily",
+											"fontWeight",
+											"fontSize",
+											"color"
+										],
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontWeight": "normal",
+											"fontSize": 14,
+											"color": "#ffffff"
+										}
+									},
+									"height": {
+										"name": "行高",
+										"type": "stepper",
+										"default": 28,
+										"suffix": "px"
+									},
+									"textAlign": {
+										"name": "对齐方式",
+										"type": "select",
+										"default": "left",
+										"options": [
+											{
+												"name": "左对齐",
+												"value": "left"
+											},
+											{
+												"name": "居中",
+												"value": "center"
+											},
+											{
+												"name": "右对齐",
+												"value": "right"
+											}
+										]
+									},
+									"backgroundColor": {
+										"type": "tabs",
+										"name": "标题背景",
+										"default": [
+											{
+												"columnName": "success",
+												"displayName": "#00e691",
+												"showHidden": false
+											},
+											{
+												"columnName": "warning",
+												"displayName": "#e67422",
+												"showHidden": false
+											},
+											{
+												"columnName": "error",
+												"displayName": "#ff3838",
+												"showHidden": false
+											},
+											{
+												"columnName": "default",
+												"displayName": "#0a73ff",
+												"showHidden": false
+											}
+										],
+										"template": {
+											"type": "object",
+											"name": "背景<%= i+1 %>",
+											"children": {
+												"columnName": {
+													"name": "状态名",
+													"type": "string",
+													"default": "default",
+													"description": "status字段对应的数值"
+												},
+												"displayName": {
+													"name": "背景色",
+													"type": "color",
+													"default": "#ff6a00"
+												}
+											}
+										}
+									}
+								}
+							},
+							"content": {
+								"type": "group",
+								"name": "文本样式",
+								"fold": true,
+								"children": {
+									"contentFont": {
+										"name": "文本",
+										"type": "font",
+										"components": [
+											"fontFamily",
+											"fontWeight",
+											"fontSize",
+											"color"
+										],
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontWeight": "normal",
+											"fontSize": 12,
+											"color": "#ebecf0"
+										}
+									},
+									"lineHeight": {
+										"name": "行高",
+										"type": "stepper",
+										"default": 14,
+										"suffix": "px"
+									},
+									"backgroundColor": {
+										"name": "背景色",
+										"type": "color",
+										"default": "#39414d"
+									},
+									"labelFont": {
+										"name": "类型文本",
+										"type": "font",
+										"components": [
+											"fontFamily",
+											"fontWeight",
+											"fontSize",
+											"color"
+										],
+										"default": {
+											"fontFamily": "Microsoft Yahei",
+											"fontWeight": "normal",
+											"fontSize": 12,
+											"color": "#ebecf0"
+										},
+										"description": "当内容两列展示, 此模块设置左侧类型文本"
+									}
+								}
+							}
+						}
+					},
+					"cableLine": {
+						"name": "连接线",
+						"type": "menuChild",
+						"children": {
+							"cableLineTypes": {
+								"name": "连接线类型",
+								"type": "select",
+								"default": "bezier",
+								"options": [
+									{
+										"name": "贝塞尔曲线",
+										"value": "bezier"
+									},
+									{
+										"name": "直线",
+										"value": "line"
+									},
+									{
+										"name": "直角",
+										"value": "rightAngle"
+									}
+								]
+							},
+							"cableLineColor": {
+								"name": "连接线颜色",
+								"type": "color",
+								"default": "#ffffff"
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"nodes": [
+						{
+							"id": "a1",
+							"title": "a1",
+							"status": "success",
+							"content": "测试内容\r\n测试内容测试内容"
+						},
+						{
+							"id": "b1",
+							"title": "b1",
+							"status": "warning",
+							"content": "测试异常异常\r\n测试测试异常异常内容"
+						},
+						{
+							"id": "b2",
+							"title": "b2",
+							"status": "error",
+							"content": "成功节点成功节点"
+						},
+						{
+							"id": "c1",
+							"title": "c1",
+							"status": "default",
+							"content": "无换行符测试内容测试内容测试内容"
+						},
+						{
+							"id": "c2",
+							"title": "c2",
+							"status": "error",
+							"content": [
+								{
+									"label": "姓名",
+									"value": "张三"
+								},
+								{
+									"label": "年龄",
+									"value": "18"
+								},
+								{
+									"label": "时间",
+									"value": "2018-09-07"
+								},
+								{
+									"label": "描述",
+									"value": "xxxxxxxxxxxxxxxxxxxxxxxx"
+								}
+							]
+						},
+						{
+							"id": "c3",
+							"title": "c3",
+							"content": "无换行符测试内容测试内容测试内容",
+							"info": {
+								"serviceOrderCode": "LBX032749142837532",
+								"serviceNodeCode": null,
+								"serviceNodeName": "交易出库",
+								"status": 1,
+								"userType": "seller",
+								"feeCode": null,
+								"feeName": null,
+								"statusStr": "未发起计费"
+							}
+						},
+						{
+							"id": "d1",
+							"title": "d1",
+							"status": "blue",
+							"content": "无换行符测试内容测试内容测试内容"
+						},
+						{
+							"id": "d2",
+							"title": "d2",
+							"content": "无换行符测试内容测试内容测试内容"
+						}
+					],
+					"edges": [
+						{
+							"from": "a1",
+							"to": "b1"
+						},
+						{
+							"from": "a1",
+							"to": "b2"
+						},
+						{
+							"from": "b1",
+							"to": "c1"
+						},
+						{
+							"from": "b1",
+							"to": "c2"
+						},
+						{
+							"from": "b1",
+							"to": "c3"
+						},
+						{
+							"from": "b2",
+							"to": "c3"
+						},
+						{
+							"from": "c1",
+							"to": "d1"
+						},
+						{
+							"from": "c3",
+							"to": "d2"
+						}
+					]
+				}
+			]
+		}
+	}
+}

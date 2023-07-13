@@ -1,0 +1,2016 @@
+{
+	"name": "pivot-sheet",
+	"version": "0.0.3",
+	"dependencies": {
+		"@ant-design/icons": "^4.7.0",
+		"alibabacloud-datav-tool-gui-utils": "^1.0.2",
+		"bcore": "0.0.18",
+		"lodash": "4.6.1",
+		"moment": "^2.29.1",
+		"react": "16.13.1",
+		"react-dom": "16.13.1"
+	},
+	"datav": {
+		"cn_name": "交叉透视表",
+		"icon": "//img.alicdn.com/imgextra/i1/O1CN01vK2C8B1uzVvj4Npjd_!!6000000006108-2-tps-368-208.png",
+		"thumbnail": "//img.alicdn.com/imgextra/i2/O1CN01LEIb2j1h60vl49Phb_!!6000000004227-2-tps-332-144.png",
+		"protocol": 2,
+		"level": 1,
+		"supportTheme": {
+			"version": 2,
+			"complexity": [
+				"L0",
+				"L1",
+				"L2"
+			]
+		},
+		"type": [
+			"text_table",
+			"DataV-6:table"
+		],
+		"hooks": {
+			"editOnImmerse": true
+		},
+		"view": {
+			"width": "800",
+			"height": "430",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"relation": {
+			"conditionalStyle": [
+				{
+					"configPath": "options.condition.customStyle",
+					"ruleKey": "rules"
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"name": "透视表接口",
+				"handler": "render",
+				"description": "透视表接口",
+				"fields": {
+					"row1": {
+						"name": "row1",
+						"description": "第一行数据",
+						"type": "string | number",
+						"optional": false
+					},
+					"row2": {
+						"name": "row2",
+						"description": "第二行数据",
+						"type": "string | number",
+						"optional": true
+					},
+					"column1": {
+						"name": "column1",
+						"description": "第一列数据",
+						"type": "string | number",
+						"optional": false
+					},
+					"column2": {
+						"name": "column2",
+						"description": "第二列数据",
+						"type": "string | number",
+						"optional": true
+					},
+					"value1": {
+						"name": "value1",
+						"description": "数量",
+						"type": "number",
+						"optional": false
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"chart": {
+						"name": "图形",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"hierarchyType": {
+								"name": "展示方式",
+								"type": "buttonRadio",
+								"default": "grid",
+								"description": "行头展示方式",
+								"options": [
+									{
+										"name": "平铺网格结构",
+										"value": "grid"
+									},
+									{
+										"name": "树状结构",
+										"value": "tree"
+									}
+								],
+								"_simplified_show": true
+							},
+							"layoutWidthType": {
+								"name": "布局",
+								"type": "buttonRadio",
+								"default": "colAdaptive",
+								"options": [
+									{
+										"name": "列等宽",
+										"value": "colAdaptive"
+									},
+									{
+										"name": "紧凑",
+										"value": "compact"
+									}
+								],
+								"_simplified_show": true
+							},
+							"grandTotal": {
+								"name": "总计",
+								"type": "suite",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"position": {
+										"name": "位置",
+										"type": "buttonRadio",
+										"default": "bottom",
+										"options": [
+											{
+												"name": "上(前)方",
+												"value": "top"
+											},
+											{
+												"name": "下(后)方",
+												"value": "bottom"
+											}
+										],
+										"_simplified_show": true
+									}
+								}
+							},
+							"subtotal": {
+								"name": "小计",
+								"type": "suite",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"position": {
+										"name": "位置",
+										"type": "buttonRadio",
+										"default": "bottom",
+										"options": [
+											{
+												"name": "上(前)方",
+												"value": "top"
+											},
+											{
+												"name": "下(后)方",
+												"value": "bottom"
+											}
+										],
+										"_simplified_show": true
+									}
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											".hierarchyType",
+											"$eq",
+											"grid"
+										]
+									]
+								}
+							},
+							"iconSet": {
+								"name": "图标",
+								"type": "suite",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": false,
+										"_simplified_show": true
+									},
+									"icon": {
+										"name": "形状",
+										"type": "markerSelect",
+										"default": "CellUp",
+										"col": 12,
+										"schemes": [
+											{
+												"name": "2D形状",
+												"scheme": [
+													{
+														"label": "同环比上升",
+														"value": "CellUp",
+														"src": "https://img.alicdn.com/imgextra/i4/O1CN01QULtTA1p5ZMptjqd9_!!6000000005309-55-tps-48-48.svg"
+													},
+													{
+														"label": "同环比下降",
+														"value": "CellDown",
+														"src": "https://img.alicdn.com/imgextra/i2/O1CN01eE1dAq1JkjGtWXO58_!!6000000001067-55-tps-50-50.svg"
+													}
+												]
+											}
+										]
+									},
+									"fill": {
+										"name": "颜色",
+										"type": "fill",
+										"col": 12,
+										"default": "#30BF78"
+									},
+									"size": {
+										"name": "尺寸",
+										"type": "stepper",
+										"min": 0,
+										"step": 1,
+										"suffix": "px",
+										"col": 12,
+										"default": 12
+									},
+									"position": {
+										"name": "显示位置",
+										"type": "buttonRadio",
+										"default": "right",
+										"col": 12,
+										"options": [
+											{
+												"value": "left",
+												"label": "左"
+											},
+											{
+												"value": "right",
+												"label": "右"
+											}
+										]
+									}
+								}
+							},
+							"interval": {
+								"name": "柱状图标记",
+								"type": "suite",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": false,
+										"_simplified_show": true
+									},
+									"beginColor": {
+										"name": "颜色",
+										"type": "fill",
+										"components": [
+											"flat",
+											"linearGradient"
+										],
+										"default": {
+											"type": "flat",
+											"value": "rgba(82, 134, 249, 0.3)"
+										}
+									}
+								}
+							},
+							"customIntervalRange": {
+								"name": "自定义标记范围",
+								"type": "suite",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": false
+									},
+									"start": {
+										"name": "开始",
+										"type": "stepper",
+										"default": 0,
+										"step": 1,
+										"col": 12
+									},
+									"end": {
+										"name": "结束",
+										"type": "stepper",
+										"default": 1000,
+										"step": 1,
+										"col": 12
+									}
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											".interval.show",
+											"$eq",
+											true
+										]
+									]
+								}
+							},
+							"totalBackgroundColor": {
+								"name": "整体背景",
+								"type": "suite",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true,
+										"_simplified_show": true
+									},
+									"color": {
+										"name": "颜色",
+										"type": "fill",
+										"components": [
+											"flat",
+											"linearGradient"
+										],
+										"default": {
+											"type": "flat",
+											"value": "rgba(0, 0, 0, 0)"
+										}
+									}
+								}
+							},
+							"fill": {
+								"name": "背景颜色映射",
+								"type": "colorMapping",
+								"description": "数据单元格背景颜色映射",
+								"fixedComponents": [
+									"flat",
+									"linearGradient"
+								],
+								"default": {
+									"mapping": true,
+									"fixed": {
+										"type": "flat",
+										"value": "rgba(185, 185, 185, 0.1)"
+									},
+									"scale": {
+										"type": "threshold",
+										"scheme": "seq-2",
+										"custom": true,
+										"range": [
+											"#1187A8",
+											"#116795",
+											"#11528B",
+											"#174183",
+											"#103B72",
+											"#182866",
+											"#121E52"
+										],
+										"domain": [
+											0,
+											400,
+											800,
+											2400,
+											5000,
+											10000,
+											40000,
+											40001
+										],
+										"excepted": "yellow",
+										"abnormal": "RGBA(255, 66, 66, 0)",
+										"pin": [
+											false,
+											false,
+											false,
+											false,
+											false,
+											false,
+											false
+										]
+									},
+									"threshold": {
+										"custom": true,
+										"domain": [
+											0,
+											400,
+											800,
+											2400,
+											5000,
+											10000,
+											40000,
+											40001
+										],
+										"excepted": "yellow",
+										"scheme": "seq-2",
+										"range": [
+											"#1187A8",
+											"#116795",
+											"#11528B",
+											"#174183",
+											"#103B72",
+											"#182866",
+											"#121E52"
+										],
+										"abnormal": "RGBA(255, 66, 66, 0)",
+										"pin": [
+											false,
+											false,
+											false,
+											false,
+											false,
+											false,
+											false
+										]
+									},
+									"linear": {
+										"custom": false,
+										"domain": [
+											0,
+											200,
+											400,
+											600,
+											800,
+											1000
+										],
+										"excepted": "yellow",
+										"scheme": "div-4",
+										"range": [
+											"RGBA(52, 255, 245, 0.1)",
+											"RGBA(49, 224, 242, 0.14)",
+											"RGBA(45, 192, 238, 0.1)",
+											"RGBA(42, 161, 235, 0.1)",
+											"RGBA(39, 130, 231, 0.11)",
+											"#ff74e7"
+										],
+										"abnormal": "transparent",
+										"pin": [
+											false,
+											false,
+											false,
+											false,
+											false,
+											false
+										]
+									},
+									"ordinal": {
+										"custom": false,
+										"domain": [
+											0,
+											200,
+											400,
+											600,
+											800,
+											1000
+										],
+										"excepted": "yellow",
+										"scheme": "cat-2",
+										"range": [
+											"#8CD4C6",
+											"#FEFFB3",
+											"#BFBADB",
+											"#FA8073",
+											"#80B1D2",
+											"#FCB460"
+										],
+										"abnormal": "transparent",
+										"pin": [
+											false,
+											false,
+											false,
+											false,
+											false,
+											false
+										]
+									}
+								}
+							},
+							"metaSeries": {
+								"type": "tabs",
+								"name": "数据元信息",
+								"defaultViewMode": "column",
+								"default": [
+									{
+										"columnName": "row1",
+										"displayName": "省份"
+									},
+									{
+										"columnName": "row2",
+										"displayName": "城市"
+									},
+									{
+										"columnName": "column1",
+										"displayName": "类别"
+									},
+									{
+										"columnName": "column2",
+										"displayName": "子类别"
+									},
+									{
+										"columnName": "value1",
+										"displayName": "数量"
+									}
+								],
+								"template": {
+									"type": "object",
+									"name": "系列<%= i + 1%>",
+									"children": {
+										"columnName": {
+											"name": "字段名",
+											"type": "select",
+											"options": [
+												{
+													"name": "row1",
+													"value": "row1"
+												},
+												{
+													"name": "row2",
+													"value": "row2"
+												},
+												{
+													"name": "column1",
+													"value": "column1"
+												},
+												{
+													"name": "column2",
+													"value": "column2"
+												},
+												{
+													"name": "value1",
+													"value": "value1"
+												}
+											],
+											"_simplified_show": true
+										},
+										"displayName": {
+											"name": "显示名",
+											"type": "string",
+											"_simplified_show": true
+										}
+									}
+								}
+							}
+						}
+					},
+					"cell": {
+						"name": "单元格",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"cellSize": {
+								"name": "单元格尺寸",
+								"type": "group",
+								"description": "也可以拖动表格线调整行高列宽",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": false
+									},
+									"customRowWidthSeries": {
+										"type": "tabs",
+										"name": "宽度",
+										"defaultViewMode": "row",
+										"fold": false,
+										"default": [],
+										"template": {
+											"type": "object",
+											"name": "系列<%= i + 1%>",
+											"children": {
+												"key": {
+													"name": "key值",
+													"type": "select",
+													"default": "row1",
+													"options": [
+														{
+															"name": "row1",
+															"value": "row1"
+														},
+														{
+															"name": "row2",
+															"value": "row2"
+														},
+														{
+															"name": "value1",
+															"value": "value1"
+														},
+														{
+															"name": "总计",
+															"value": "总计"
+														},
+														{
+															"name": "小计",
+															"value": "小计"
+														}
+													]
+												},
+												"value": {
+													"name": "数值",
+													"type": "stepper",
+													"suffix": "px",
+													"step": 1,
+													"default": 100
+												}
+											}
+										}
+									},
+									"customColHeightSeries": {
+										"type": "tabs",
+										"name": "高度",
+										"defaultViewMode": "row",
+										"fold": false,
+										"default": [],
+										"template": {
+											"type": "object",
+											"name": "系列<%= i + 1%>",
+											"children": {
+												"key": {
+													"name": "key值",
+													"type": "select",
+													"default": "column1",
+													"options": [
+														{
+															"name": "column1",
+															"value": "column1"
+														},
+														{
+															"name": "column2",
+															"value": "column2"
+														},
+														{
+															"name": "$$extra$$",
+															"value": "$$extra$$"
+														},
+														{
+															"name": "value1",
+															"value": "value1"
+														}
+													]
+												},
+												"value": {
+													"name": "数值",
+													"type": "stepper",
+													"suffix": "px",
+													"step": 1,
+													"default": 30
+												}
+											}
+										}
+									}
+								}
+							},
+							"dataCell": {
+								"name": "数据单元格",
+								"type": "group",
+								"children": {
+									"horizontal": {
+										"name": "水平对齐",
+										"type": "buttonRadio",
+										"default": "center",
+										"options": [
+											{
+												"name": "左",
+												"value": "left"
+											},
+											{
+												"name": "中",
+												"value": "center"
+											},
+											{
+												"name": "右",
+												"value": "right"
+											}
+										],
+										"_simplified_show": true
+									},
+									"vertical": {
+										"name": "垂直对齐",
+										"type": "buttonRadio",
+										"default": "middle",
+										"options": [
+											{
+												"name": "上",
+												"value": "top"
+											},
+											{
+												"name": "中",
+												"value": "middle"
+											},
+											{
+												"name": "下",
+												"value": "bottom"
+											}
+										],
+										"_simplified_show": true
+									},
+									"textStyle": {
+										"type": "font",
+										"name": "文本样式",
+										"default": {
+											"fontSize": 12,
+											"color": "rgba(255, 255, 255, 0.75)",
+											"fontWeight": "normal",
+											"fontFamily": "Helvetica"
+										}
+									},
+									"border": {
+										"name": "线型样式",
+										"type": "suite",
+										"children": {
+											"width": {
+												"name": "线宽",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 1,
+												"suffix": "px",
+												"col": 12
+											},
+											"color": {
+												"name": "颜色",
+												"type": "color",
+												"default": "rgba(255, 255, 255, 0.1)",
+												"col": 12
+											}
+										}
+									},
+									"backgroundShape": {
+										"name": "自定义背景图",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false
+											},
+											"img": {
+												"name": "背景图",
+												"type": "image",
+												"default": "//gw.alipayobjects.com/zos/antfincdn/og1XQOMyyj/1e3a8de1-3b42-405d-9f82-f92cb1c10413.png",
+												"dataField": "img"
+											}
+										}
+									}
+								}
+							},
+							"rowCell": {
+								"name": "行头单元格",
+								"type": "group",
+								"children": {
+									"horizontal": {
+										"name": "水平对齐",
+										"type": "buttonRadio",
+										"default": "center",
+										"options": [
+											{
+												"name": "左",
+												"value": "left"
+											},
+											{
+												"name": "中",
+												"value": "center"
+											},
+											{
+												"name": "右",
+												"value": "right"
+											}
+										],
+										"_simplified_show": true
+									},
+									"backgroundColor": {
+										"name": "背景颜色",
+										"type": "fill",
+										"components": [
+											"flat",
+											"linearGradient"
+										],
+										"default": {
+											"type": "flat",
+											"value": "rgba(48, 40, 199, 0.3)"
+										}
+									},
+									"textStyle": {
+										"type": "font",
+										"name": "文本样式",
+										"description": "当行头文本加「超链接」交互时，此处颜色配置被超链接颜色配置覆盖",
+										"default": {
+											"fontSize": 12,
+											"color": "#ffffff",
+											"fontWeight": "normal",
+											"fontFamily": "Helvetica"
+										}
+									},
+									"border": {
+										"name": "线型样式",
+										"type": "suite",
+										"children": {
+											"width": {
+												"name": "线宽",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 1,
+												"suffix": "px",
+												"col": 12
+											},
+											"color": {
+												"name": "颜色",
+												"type": "color",
+												"default": "rgba(255, 255, 255, 0.1)",
+												"col": 12
+											}
+										}
+									},
+									"backgroundShape": {
+										"name": "自定义背景图",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false
+											},
+											"img": {
+												"name": "背景图",
+												"type": "image",
+												"default": "//gw.alipayobjects.com/zos/antfincdn/og1XQOMyyj/1e3a8de1-3b42-405d-9f82-f92cb1c10413.png",
+												"dataField": "img"
+											}
+										}
+									}
+								}
+							},
+							"colCell": {
+								"name": "列头单元格",
+								"type": "group",
+								"children": {
+									"horizontal": {
+										"name": "水平对齐",
+										"type": "buttonRadio",
+										"default": "center",
+										"options": [
+											{
+												"name": "左",
+												"value": "left"
+											},
+											{
+												"name": "中",
+												"value": "center"
+											},
+											{
+												"name": "右",
+												"value": "right"
+											}
+										],
+										"_simplified_show": true
+									},
+									"backgroundColor": {
+										"name": "背景颜色",
+										"type": "fill",
+										"components": [
+											"flat",
+											"linearGradient"
+										],
+										"default": {
+											"type": "flat",
+											"value": "rgba(8, 120, 255, 0.25)"
+										}
+									},
+									"textStyle": {
+										"type": "font",
+										"name": "文本样式",
+										"default": {
+											"fontSize": 12,
+											"color": "#ffffff",
+											"fontWeight": "normal",
+											"fontFamily": "Helvetica"
+										}
+									},
+									"border": {
+										"name": "线型样式",
+										"type": "suite",
+										"children": {
+											"width": {
+												"name": "线宽",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 1,
+												"suffix": "px",
+												"col": 12
+											},
+											"color": {
+												"name": "颜色",
+												"type": "color",
+												"default": "rgba(255, 255, 255, 0.1)",
+												"col": 12
+											}
+										}
+									},
+									"backgroundShape": {
+										"name": "自定义背景图",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false
+											},
+											"img": {
+												"name": "背景图",
+												"type": "image",
+												"default": "//gw.alipayobjects.com/zos/antfincdn/og1XQOMyyj/1e3a8de1-3b42-405d-9f82-f92cb1c10413.png",
+												"dataField": "img"
+											}
+										}
+									}
+								}
+							},
+							"cornerCell": {
+								"name": "角头单元格",
+								"type": "group",
+								"children": {
+									"horizontal": {
+										"name": "水平对齐",
+										"type": "buttonRadio",
+										"default": "center",
+										"options": [
+											{
+												"name": "左",
+												"value": "left"
+											},
+											{
+												"name": "中",
+												"value": "center"
+											},
+											{
+												"name": "右",
+												"value": "right"
+											}
+										],
+										"_simplified_show": true
+									},
+									"backgroundColor": {
+										"name": "背景颜色",
+										"type": "fill",
+										"components": [
+											"flat",
+											"linearGradient"
+										],
+										"default": {
+											"type": "flat",
+											"value": "rgba(34, 55, 189, 0.25)"
+										}
+									},
+									"textStyle": {
+										"type": "font",
+										"name": "文本样式",
+										"default": {
+											"fontSize": 12,
+											"color": "#fff",
+											"fontWeight": "normal",
+											"fontFamily": "Helvetica"
+										}
+									},
+									"border": {
+										"name": "线型样式",
+										"type": "suite",
+										"children": {
+											"width": {
+												"name": "线宽",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 1,
+												"suffix": "px",
+												"col": 12
+											},
+											"color": {
+												"name": "颜色",
+												"type": "color",
+												"default": "rgba(255, 255, 255, 0.1)",
+												"col": 12
+											}
+										}
+									},
+									"backgroundShape": {
+										"name": "自定义背景图",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false
+											},
+											"img": {
+												"name": "背景图",
+												"type": "image",
+												"default": "//gw.alipayobjects.com/zos/antfincdn/og1XQOMyyj/1e3a8de1-3b42-405d-9f82-f92cb1c10413.png",
+												"dataField": "img"
+											}
+										}
+									}
+								}
+							},
+							"splitLine": {
+								"name": "分割线",
+								"type": "suite",
+								"description": "指的是数据单元格和其他单元格的分割线",
+								"children": {
+									"width": {
+										"name": "线宽",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 2,
+										"suffix": "px",
+										"col": 12
+									},
+									"color": {
+										"name": "颜色",
+										"type": "fill",
+										"default": "rgba(146, 180, 255, 0.2)",
+										"col": 12
+									}
+								}
+							},
+							"resizeLine": {
+								"name": "拖拽热区线",
+								"type": "suite",
+								"children": {
+									"lineStyle": {
+										"name": "线型",
+										"type": "select",
+										"default": "dashed",
+										"col": 9,
+										"options": [
+											{
+												"name": "实线",
+												"value": "solid"
+											},
+											{
+												"name": "虚线",
+												"value": "dashed"
+											},
+											{
+												"name": "点线",
+												"value": "dotted"
+											}
+										]
+									},
+									"lineWidth": {
+										"name": "粗细",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"suffix": "px",
+										"default": 3,
+										"col": 9
+									},
+									"lineColor": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#326EF4",
+										"style": "simple",
+										"col": 6
+									},
+									"dashedLength": {
+										"name": "长度",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 3,
+										"suffix": "px",
+										"col": 12,
+										"showInPanel": {
+											"conditions": [
+												[
+													".lineStyle",
+													"$eq",
+													"dashed"
+												]
+											]
+										}
+									},
+									"dashedSpace": {
+										"name": "间距",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 3,
+										"suffix": "px",
+										"col": 12,
+										"showInPanel": {
+											"conditions": [
+												[
+													".lineStyle",
+													"$eq",
+													"dashed"
+												]
+											]
+										}
+									},
+									"dottedLength": {
+										"name": "长度",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 2,
+										"col": 12,
+										"suffix": "px",
+										"showInPanel": {
+											"conditions": [
+												[
+													".lineStyle",
+													"$eq",
+													"dotted"
+												]
+											]
+										}
+									},
+									"dottedSpace": {
+										"name": "间距",
+										"type": "stepper",
+										"step": 1,
+										"min": 0,
+										"default": 4,
+										"suffix": "px",
+										"col": 12,
+										"showInPanel": {
+											"conditions": [
+												[
+													".lineStyle",
+													"$eq",
+													"dotted"
+												]
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"tooltip": {
+						"name": "交互",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"tooltipSet": {
+								"name": "提示框",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"trigger": {
+										"name": "触发方式",
+										"type": "buttonRadio",
+										"default": "click",
+										"options": [
+											{
+												"name": "悬浮",
+												"value": "mouseover"
+											},
+											{
+												"name": "点击",
+												"value": "click"
+											}
+										],
+										"_simplified_show": true
+									},
+									"series": {
+										"type": "tabs",
+										"name": "内容显示",
+										"defaultViewMode": "column",
+										"default": [
+											{
+												"columnName": "row1",
+												"displayName": "省份"
+											},
+											{
+												"columnName": "row2",
+												"displayName": "城市"
+											},
+											{
+												"columnName": "column1",
+												"displayName": "类别"
+											},
+											{
+												"columnName": "column2",
+												"displayName": "子类别"
+											},
+											{
+												"columnName": "value1",
+												"displayName": "数量"
+											}
+										],
+										"template": {
+											"type": "object",
+											"name": "系列<%= i + 1%>",
+											"children": {
+												"columnName": {
+													"name": "字段名",
+													"type": "select",
+													"options": [
+														{
+															"name": "row1",
+															"value": "row1"
+														},
+														{
+															"name": "row2",
+															"value": "row2"
+														},
+														{
+															"name": "column1",
+															"value": "column1"
+														},
+														{
+															"name": "column2",
+															"value": "column2"
+														},
+														{
+															"name": "value1",
+															"value": "value1"
+														}
+													],
+													"_simplified_show": true
+												},
+												"displayName": {
+													"name": "显示名",
+													"type": "string",
+													"description": "提示框显示名称",
+													"_simplified_show": true
+												}
+											}
+										}
+									},
+									"contentSpace": {
+										"name": "内容间距",
+										"type": "stepper",
+										"step": 1,
+										"default": 14,
+										"suffix": "px"
+									},
+									"contentTextStyle": {
+										"name": "内容文本",
+										"type": "font",
+										"default": {
+											"fontFamily": "AlibabaPuHuiTi",
+											"fontWeight": 100,
+											"fontSize": 12,
+											"color": "#fff"
+										}
+									},
+									"bgBox": {
+										"name": "弹窗背景",
+										"type": "group",
+										"children": {
+											"padding": {
+												"name": "背景边距",
+												"type": "suite",
+												"children": {
+													"paddingX": {
+														"name": "水平",
+														"caption": "水平",
+														"type": "stepper",
+														"default": 6,
+														"step": 1,
+														"suffix": "px",
+														"col": 12
+													},
+													"paddingY": {
+														"name": "垂直",
+														"caption": "垂直",
+														"type": "stepper",
+														"default": 8,
+														"step": 1,
+														"suffix": "px",
+														"col": 12
+													}
+												}
+											},
+											"backgroundColor": {
+												"name": "背景颜色",
+												"type": "fill",
+												"default": "rgba(56, 90, 131, 0.8)"
+											},
+											"border": {
+												"name": "边框样式",
+												"type": "suite",
+												"children": {
+													"borderStyle": {
+														"name": "线型",
+														"caption": "线型",
+														"type": "select",
+														"default": "solid",
+														"col": 12,
+														"options": [
+															{
+																"name": "实线",
+																"value": "solid"
+															},
+															{
+																"name": "虚线",
+																"value": "dashed"
+															},
+															{
+																"name": "点线",
+																"value": "dotted"
+															}
+														]
+													},
+													"borderRadius": {
+														"name": "圆角",
+														"caption": "圆角",
+														"type": "stepper",
+														"min": 0,
+														"suffix": "px",
+														"step": 1,
+														"default": 4,
+														"col": 12
+													},
+													"borderWidth": {
+														"name": "线宽",
+														"caption": "线宽",
+														"type": "stepper",
+														"step": 1,
+														"min": 0,
+														"default": 1,
+														"suffix": "px",
+														"col": 12
+													},
+													"borderColor": {
+														"name": "颜色",
+														"caption": "颜色",
+														"type": "color",
+														"default": "rgba(255, 255, 255, 0.3)",
+														"col": 12
+													}
+												}
+											}
+										}
+									},
+									"marker": {
+										"name": "标记",
+										"type": "group",
+										"children": {
+											"shape": {
+												"name": "形状",
+												"type": "markerSelect",
+												"schemes": [
+													{
+														"name": "2D形状",
+														"scheme": [
+															{
+																"label": "圆形",
+																"value": "circle",
+																"src": "https://img.alicdn.com/imgextra/i2/O1CN01kWYHGH1Sv6m0c1aji_!!6000000002308-55-tps-48-48.svg"
+															},
+															{
+																"label": "三角形",
+																"value": "triangle",
+																"src": "https://img.alicdn.com/imgextra/i4/O1CN01QULtTA1p5ZMptjqd9_!!6000000005309-55-tps-48-48.svg"
+															},
+															{
+																"label": "向下三角形",
+																"value": "triangle-down",
+																"src": "https://img.alicdn.com/imgextra/i2/O1CN01eE1dAq1JkjGtWXO58_!!6000000001067-55-tps-50-50.svg"
+															},
+															{
+																"label": "矩形",
+																"value": "square",
+																"src": "https://img.alicdn.com/imgextra/i1/O1CN01G6r3AJ1x4D7E6QdOT_!!6000000006389-55-tps-48-48.svg"
+															},
+															{
+																"label": "六边形",
+																"value": "hexagon",
+																"src": "https://img.alicdn.com/imgextra/i1/O1CN01zQsCgN1wpYRQqNDYZ_!!6000000006357-55-tps-48-48.svg"
+															},
+															{
+																"label": "菱形",
+																"value": "diamond",
+																"src": "https://img.alicdn.com/imgextra/i3/O1CN01cF5ETy1KsnruyRRoh_!!6000000001220-55-tps-50-50.svg"
+															},
+															{
+																"label": "蝶形",
+																"value": "bowtie",
+																"src": "https://img.alicdn.com/imgextra/i4/O1CN011LHBeT29E53XQjpDj_!!6000000008035-55-tps-50-50.svg"
+															}
+														]
+													}
+												],
+												"default": "circle"
+											},
+											"size": {
+												"name": "尺寸",
+												"type": "stepper",
+												"default": 2,
+												"step": 1,
+												"suffix": "px"
+											},
+											"colorCustom": {
+												"name": "自定义颜色",
+												"type": "suite",
+												"description": "自定义颜色关闭时，标记颜色跟随单元格背景颜色",
+												"enableHide": true,
+												"children": {
+													"show": {
+														"default": true
+													},
+													"color": {
+														"type": "fill",
+														"components": [
+															"flat",
+															"linearGradient"
+														],
+														"default": {
+															"type": "flat",
+															"value": "rgba(235, 255, 33, 0.7)"
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"interaction": {
+								"name": "交互",
+								"type": "group",
+								"description": "鼠标拖动表格线，可以调节行高列宽；鼠标框选可以显示求和内容",
+								"children": {
+									"mouse": {
+										"name": "鼠标操作",
+										"type": "suite",
+										"children": {
+											"mergedCell": {
+												"name": "合并单元格",
+												"type": "boolean",
+												"default": false,
+												"description": "按住 command 或者 Ctrl 进行多选",
+												"col": 12,
+												"_simplified_show": true
+											},
+											"hoverHighlight": {
+												"name": "联动高亮",
+												"type": "boolean",
+												"description": "鼠标悬浮，行列联动高亮",
+												"default": true,
+												"col": 12,
+												"_simplified_show": true
+											},
+											"selectedCellsSpotlight": {
+												"name": "点击高亮",
+												"type": "boolean",
+												"description": "鼠标点击或圈选时高亮",
+												"default": true,
+												"col": 12,
+												"_simplified_show": true
+											},
+											"autoResetSheetStyle": {
+												"name": "取消高亮",
+												"type": "boolean",
+												"description": "在鼠标移出表格区域后，取消高亮状态",
+												"default": true,
+												"col": 12,
+												"_simplified_show": true
+											},
+											"groupSort": {
+												"name": "组内排序",
+												"type": "boolean",
+												"default": true,
+												"col": 12,
+												"_simplified_show": true
+											},
+											"advancedSort": {
+												"name": "高级排序",
+												"type": "boolean",
+												"default": false,
+												"col": 12,
+												"_simplified_show": true
+											}
+										}
+									},
+									"hoverColor": {
+										"name": "hover样式",
+										"type": "suite",
+										"children": {
+											"normalColor": {
+												"name": "单元格背景",
+												"type": "color",
+												"default": "rgba(16, 247, 226, 0.7)",
+												"col": 12,
+												"description": "行头和数据格交互背景颜色(悬浮、选中、联动高亮十字)"
+											},
+											"colCellColor": {
+												"name": "列头背景",
+												"type": "color",
+												"default": "rgba(51, 174, 245, 0.65)",
+												"col": 12,
+												"description": "列头交互背景颜色(悬浮、选中)"
+											}
+										}
+									},
+									"frameColor": {
+										"name": "框选样式",
+										"type": "suite",
+										"children": {
+											"color": {
+												"name": "单元格背景",
+												"type": "fill",
+												"default": "#baff57",
+												"description": "框选背景颜色"
+											}
+										}
+									},
+									"linkFields": {
+										"name": "超链接",
+										"type": "group",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false,
+												"_simplified_show": true
+											},
+											"linkTextFill": {
+												"name": "文本色",
+												"type": "fill",
+												"default": "rgba(83, 146, 255, 0.85)"
+											},
+											"link": {
+												"name": "字段设置",
+												"type": "tabs",
+												"fold": false,
+												"description": "只有行头数据可以设置跳转链接功能",
+												"default": [
+													{
+														"columnName": "row1",
+														"displayName": "province",
+														"link": "https://datav.aliyun.com",
+														"isBlank": true
+													},
+													{
+														"columnName": "row2",
+														"displayName": "city",
+														"link": "https://datav.aliyun.com",
+														"isBlank": true
+													}
+												],
+												"template": {
+													"type": "object",
+													"name": "第<%= i+1 %>列",
+													"children": {
+														"columnName": {
+															"name": "跳转字段",
+															"type": "string",
+															"default": "row1",
+															"description": "需要与数据中字段匹配",
+															"_simplified_show": true
+														},
+														"displayName": {
+															"name": "字段映射",
+															"type": "string",
+															"default": "province",
+															"_simplified_show": true
+														},
+														"link": {
+															"name": "跳转链接",
+															"type": "string",
+															"default": "https://datav.aliyun.com",
+															"description": "例如，跳转链接为：https://datav.aliyun.com，跳转映射字段为：province，那么拼接好的url是：https://datav.aliyun.com?key=province",
+															"_simplified_show": true
+														},
+														"isBlank": {
+															"name": "是否新开窗口",
+															"type": "boolean",
+															"default": true,
+															"_simplified_show": true
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"condition": {
+						"name": "条件",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"customStyle": {
+								"name": "条件样式",
+								"type": "tabs",
+								"fold": false,
+								"default": [
+									{
+										"rules": {
+											"operator": "AND",
+											"enabled": false,
+											"expressions": [
+												{
+													"operator": "AND",
+													"expressions": [
+														[
+															"value1",
+															"eq",
+															7789
+														]
+													]
+												}
+											]
+										},
+										"textColor": {
+											"type": "flat",
+											"show": true,
+											"value": "#f00"
+										},
+										"backgroundColor": {
+											"type": "flat",
+											"show": true,
+											"value": "yellow"
+										},
+										"icon": {
+											"show": true,
+											"iconShape": "CellUp",
+											"iconColor": "#f00"
+										}
+									}
+								],
+								"template": {
+									"type": "object",
+									"name": "条件样式<%= i + 1%>",
+									"children": {
+										"rules": {
+											"type": "logicalTree",
+											"default": {
+												"enabled": false,
+												"operator": "OR",
+												"expressions": [
+													{
+														"operator": "AND",
+														"expressions": [
+															[
+																"value1",
+																"eq",
+																5343
+															]
+														]
+													}
+												]
+											}
+										},
+										"textColor": {
+											"name": "文字颜色",
+											"type": "suite",
+											"enableHide": true,
+											"children": {
+												"value": {
+													"type": "fill",
+													"default": "red"
+												}
+											},
+											"showInPanel": {
+												"conditions": [
+													[
+														".rules.enabled",
+														"$eq",
+														true
+													]
+												]
+											}
+										},
+										"backgroundColor": {
+											"name": "背景颜色",
+											"type": "suite",
+											"enableHide": true,
+											"children": {
+												"value": {
+													"type": "fill",
+													"default": "yellow"
+												}
+											},
+											"showInPanel": {
+												"conditions": [
+													[
+														".rules.enabled",
+														"$eq",
+														true
+													]
+												]
+											}
+										},
+										"icon": {
+											"name": "图标",
+											"type": "suite",
+											"enableHide": true,
+											"children": {
+												"iconShape": {
+													"name": "形状",
+													"type": "markerSelect",
+													"default": "CellUp",
+													"schemes": [
+														{
+															"name": "2D形状",
+															"scheme": [
+																{
+																	"label": "同环比上升",
+																	"value": "CellUp",
+																	"src": "https://img.alicdn.com/imgextra/i4/O1CN01QULtTA1p5ZMptjqd9_!!6000000005309-55-tps-48-48.svg"
+																},
+																{
+																	"label": "同环比下降",
+																	"value": "CellDown",
+																	"src": "https://img.alicdn.com/imgextra/i2/O1CN01eE1dAq1JkjGtWXO58_!!6000000001067-55-tps-50-50.svg"
+																}
+															]
+														}
+													],
+													"col": 12
+												},
+												"iconColor": {
+													"name": "颜色",
+													"type": "fill",
+													"default": "#f00",
+													"col": 12
+												}
+											},
+											"showInPanel": {
+												"conditions": [
+													[
+														".rules.enabled",
+														"$eq",
+														true
+													]
+												]
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value1": 7789,
+					"row1": "浙江省",
+					"row2": "杭州市",
+					"column1": "家具",
+					"column2": "桌子"
+				},
+				{
+					"value1": 2367,
+					"row1": "浙江省",
+					"row2": "绍兴市",
+					"column1": "家具",
+					"column2": "桌子"
+				},
+				{
+					"value1": 3877,
+					"row1": "浙江省",
+					"row2": "宁波市",
+					"column1": "家具",
+					"column2": "桌子"
+				},
+				{
+					"value1": 4342,
+					"row1": "浙江省",
+					"row2": "舟山市",
+					"column1": "家具",
+					"column2": "桌子"
+				},
+				{
+					"value1": 5343,
+					"row1": "浙江省",
+					"row2": "杭州市",
+					"column1": "家具",
+					"column2": "沙发"
+				},
+				{
+					"value1": 632,
+					"row1": "浙江省",
+					"row2": "绍兴市",
+					"column1": "家具",
+					"column2": "沙发"
+				},
+				{
+					"value1": 7234,
+					"row1": "浙江省",
+					"row2": "宁波市",
+					"column1": "家具",
+					"column2": "沙发"
+				},
+				{
+					"value1": 834,
+					"row1": "浙江省",
+					"row2": "舟山市",
+					"column1": "家具",
+					"column2": "沙发"
+				},
+				{
+					"value1": 945,
+					"row1": "浙江省",
+					"row2": "杭州市",
+					"column1": "办公用品",
+					"column2": "笔"
+				},
+				{
+					"value1": 1304,
+					"row1": "浙江省",
+					"row2": "绍兴市",
+					"column1": "办公用品",
+					"column2": "笔"
+				},
+				{
+					"value1": 1145,
+					"row1": "浙江省",
+					"row2": "宁波市",
+					"column1": "办公用品",
+					"column2": "笔"
+				},
+				{
+					"value1": 1432,
+					"row1": "浙江省",
+					"row2": "舟山市",
+					"column1": "办公用品",
+					"column2": "笔"
+				},
+				{
+					"value1": 1343,
+					"row1": "浙江省",
+					"row2": "杭州市",
+					"column1": "办公用品",
+					"column2": "纸张"
+				},
+				{
+					"value1": 1354,
+					"row1": "浙江省",
+					"row2": "绍兴市",
+					"column1": "办公用品",
+					"column2": "纸张"
+				},
+				{
+					"value1": 1523,
+					"row1": "浙江省",
+					"row2": "宁波市",
+					"column1": "办公用品",
+					"column2": "纸张"
+				},
+				{
+					"value1": 1634,
+					"row1": "浙江省",
+					"row2": "舟山市",
+					"column1": "办公用品",
+					"column2": "纸张"
+				},
+				{
+					"value1": 1723,
+					"row1": "四川省",
+					"row2": "成都市",
+					"column1": "家具",
+					"column2": "桌子"
+				},
+				{
+					"value1": 1822,
+					"row1": "四川省",
+					"row2": "绵阳市",
+					"column1": "家具",
+					"column2": "桌子"
+				},
+				{
+					"value1": 1943,
+					"row1": "四川省",
+					"row2": "南充市",
+					"column1": "家具",
+					"column2": "桌子"
+				},
+				{
+					"value1": 2330,
+					"row1": "四川省",
+					"row2": "乐山市",
+					"column1": "家具",
+					"column2": "桌子"
+				},
+				{
+					"value1": 2451,
+					"row1": "四川省",
+					"row2": "成都市",
+					"column1": "家具",
+					"column2": "沙发"
+				},
+				{
+					"value1": 2244,
+					"row1": "四川省",
+					"row2": "绵阳市",
+					"column1": "家具",
+					"column2": "沙发"
+				},
+				{
+					"value1": 2333,
+					"row1": "四川省",
+					"row2": "南充市",
+					"column1": "家具",
+					"column2": "沙发"
+				},
+				{
+					"value1": 2445,
+					"row1": "四川省",
+					"row2": "乐山市",
+					"column1": "家具",
+					"column2": "沙发"
+				},
+				{
+					"value1": 2335,
+					"row1": "四川省",
+					"row2": "成都市",
+					"column1": "办公用品",
+					"column2": "笔"
+				},
+				{
+					"value1": 245,
+					"row1": "四川省",
+					"row2": "绵阳市",
+					"column1": "办公用品",
+					"column2": "笔"
+				},
+				{
+					"value1": 2457,
+					"row1": "四川省",
+					"row2": "南充市",
+					"column1": "办公用品",
+					"column2": "笔"
+				},
+				{
+					"value1": 2458,
+					"row1": "四川省",
+					"row2": "乐山市",
+					"column1": "办公用品",
+					"column2": "笔"
+				},
+				{
+					"value1": 4004,
+					"row1": "四川省",
+					"row2": "成都市",
+					"column1": "办公用品",
+					"column2": "纸张"
+				},
+				{
+					"value1": 3077,
+					"row1": "四川省",
+					"row2": "绵阳市",
+					"column1": "办公用品",
+					"column2": "纸张"
+				},
+				{
+					"value1": 3551,
+					"row1": "四川省",
+					"row2": "南充市",
+					"column1": "办公用品",
+					"column2": "纸张"
+				},
+				{
+					"value1": 352,
+					"row1": "四川省",
+					"row2": "乐山市",
+					"column1": "办公用品",
+					"column2": "纸张"
+				}
+			]
+		},
+		"events": {
+			"itemSelect": {
+				"name": "当数据单元格选中时",
+				"type": [
+					"object",
+					"array"
+				],
+				"description": "当数据单元格选中时(按住 Command / Ctrl 键 可多选)",
+				"fields": {
+					"row1": {
+						"name": "row1",
+						"description": "第一行数据",
+						"type": "string | number",
+						"optional": false
+					},
+					"row2": {
+						"name": "row2",
+						"description": "第二行数据",
+						"type": "string | number",
+						"optional": true
+					},
+					"column1": {
+						"name": "column1",
+						"description": "第一列数据",
+						"type": "string | number",
+						"optional": false
+					},
+					"column2": {
+						"name": "column2",
+						"description": "第二列数据",
+						"type": "string | number",
+						"optional": true
+					},
+					"value1": {
+						"name": "value1",
+						"description": "数量",
+						"type": "number",
+						"optional": false
+					}
+				}
+			}
+		}
+	}
+}

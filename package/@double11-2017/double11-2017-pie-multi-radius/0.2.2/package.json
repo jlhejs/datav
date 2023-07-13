@@ -1,0 +1,475 @@
+{
+	"name": "@double11-2017/double11-2017-pie-multi-radius",
+	"version": "0.2.2",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"chroma-js": "1.3.4",
+		"d3": "3.5.12",
+		"dchart-pie-multi-radius": "0.4.2",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "双11多维度饼图",
+		"protocol": 2,
+		"type": [
+			"regular_pie",
+			"DataV-6:regular_pie"
+		],
+		"level": 0,
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "多维度饼图接口",
+				"fields": {
+					"x": {
+						"description": "类目"
+					},
+					"y": {
+						"description": "值"
+					}
+				}
+			}
+		},
+		"config": {
+			"fontFamily": {
+				"name": "字体",
+				"type": "search",
+				"default": "Microsoft Yahei",
+				"range": [
+					{
+						"微软雅黑": "Microsoft Yahei"
+					},
+					{
+						"宋体": "SimSun"
+					},
+					{
+						"黑体": "SimHei"
+					},
+					{
+						"隶书": "LiSu"
+					},
+					{
+						"幼圆": "YouYuan"
+					},
+					"tahoma",
+					"arial",
+					"sans-serif"
+				],
+				"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+			},
+			"outerBorderColor": {
+				"name": "外环颜色",
+				"type": "color",
+				"default": "rgba(10, 115, 255, 0.3)"
+			},
+			"label": {
+				"type": "group",
+				"name": "标签",
+				"children": {
+					"dx": {
+						"name": "标签距中心",
+						"type": "number",
+						"default": 0.74,
+						"range": [
+							0,
+							1
+						]
+					},
+					"dr": {
+						"type": "number",
+						"name": "轴距距中心",
+						"default": 0.88,
+						"range": [
+							0,
+							1
+						]
+					},
+					"line": {
+						"name": "标签连线",
+						"type": "group",
+						"children": {
+							"width": {
+								"name": "连线粗细",
+								"type": "number",
+								"default": 2
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgba(255, 255, 255, 0.1)"
+							}
+						}
+					},
+					"cate": {
+						"name": "类目",
+						"type": "group",
+						"children": {
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": false
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"pos": {
+								"name": "垂直位移",
+								"type": "text",
+								"default": "0"
+							}
+						}
+					},
+					"account": {
+						"name": "数值",
+						"type": "group",
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgb(255, 255, 255)"
+							},
+							"weight": {
+								"name": "字体粗细",
+								"type": "text",
+								"default": "Normal"
+							},
+							"decimal": {
+								"name": "小数点位数",
+								"type": "number",
+								"default": 0
+							},
+							"real": {
+								"type": "boolean",
+								"name": "真实数值",
+								"default": false
+							},
+							"pos": {
+								"name": "垂直位移",
+								"type": "text",
+								"default": "1.1em"
+							}
+						}
+					}
+				}
+			},
+			"arc": {
+				"name": "极轴",
+				"type": "group",
+				"children": {
+					"outerRadius": {
+						"name": "外半径",
+						"type": "number",
+						"default": 0.96,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"innerRadius": {
+						"name": "内半径",
+						"type": "number",
+						"default": 0.94,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"padAngle": {
+						"name": "间距",
+						"type": "number",
+						"default": 0.05
+					},
+					"net": {
+						"name": "网络线",
+						"type": "group",
+						"children": {
+							"show": {
+								"name": "显示/隐藏",
+								"type": "boolean",
+								"default": false
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgba(170,170,170,0.5)"
+							}
+						}
+					},
+					"colors": {
+						"name": "颜色",
+						"type": "array",
+						"default": [
+							{
+								"pos": 0,
+								"color": "#0a73ff"
+							},
+							{
+								"pos": 0.35,
+								"color": "rgb(0, 179, 255)"
+							},
+							{
+								"pos": 0.65,
+								"color": "rgb(87, 205, 255)"
+							},
+							{
+								"pos": 1,
+								"color": "rgb(170, 238, 255)"
+							},
+							{
+								"pos": 1,
+								"color": "rgb(87, 205, 255)"
+							},
+							{
+								"pos": 0,
+								"color": "rgb(0, 179, 255)"
+							},
+							{
+								"pos": 1,
+								"color": "rgb(10, 115, 255)"
+							}
+						],
+						"child": {
+							"name": "颜色<%= i+1 %>",
+							"type": "object",
+							"child": {
+								"pos": {
+									"name": "位置",
+									"type": "number",
+									"range": [
+										0,
+										1
+									],
+									"default": 0
+								},
+								"color": {
+									"name": "颜色",
+									"type": "color",
+									"default": "#fff"
+								}
+							}
+						}
+					}
+				}
+			},
+			"legend": {
+				"name": "图例",
+				"type": "group",
+				"fold": true,
+				"handler": "updateLegendLayout",
+				"children": {
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": false,
+						"handler": "updateLegendLayout"
+					},
+					"textarea": {
+						"type": "group",
+						"name": "文本",
+						"fold": true,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 10,
+								"max": 100,
+								"handler": "updateLegendLayout"
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff",
+								"handler": "updateLegendLayout"
+							}
+						},
+						"handler": "updateLegendLayout"
+					},
+					"layout": {
+						"name": "布局",
+						"type": "group",
+						"fold": true,
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"children": {
+							"margin": {
+								"name": "间距",
+								"type": "group",
+								"children": {
+									"horiInterval": {
+										"name": "左右间距",
+										"type": "number",
+										"default": 8,
+										"handler": "updateLegendLayout"
+									},
+									"vertiInterval": {
+										"name": "上下间距",
+										"type": "number",
+										"default": 0,
+										"handler": "updateLegendLayout"
+									}
+								},
+								"handler": "updateLegendLayout"
+							},
+							"loc": {
+								"name": "位置",
+								"type": "options",
+								"default": "bottom-center",
+								"options": [
+									{
+										"name": "顶部居中",
+										"value": "top-center"
+									},
+									{
+										"name": "顶部居左",
+										"value": "top-left"
+									},
+									{
+										"name": "顶部居右",
+										"value": "top-right"
+									},
+									{
+										"name": "底部居中",
+										"value": "bottom-center"
+									},
+									{
+										"name": "底部居左",
+										"value": "bottom-left"
+									},
+									{
+										"name": "底部居右",
+										"value": "bottom-right"
+									}
+								],
+								"handler": "updateLegendLayout"
+							}
+						},
+						"handler": "updateLegendLayout"
+					}
+				}
+			},
+			"series": {
+				"fold": true,
+				"type": "array",
+				"name": "数据系列",
+				"default": [
+					{
+						"inner": 0.5,
+						"outer": 0.7,
+						"showName": "货物1"
+					},
+					{
+						"inner": 0.49,
+						"outer": 0.67,
+						"showName": "货物2"
+					},
+					{
+						"inner": 0.78,
+						"outer": 0.81,
+						"showName": "货物3"
+					},
+					{
+						"inner": 0.73,
+						"outer": 0.81,
+						"showName": "货物4"
+					},
+					{
+						"inner": 0.58,
+						"outer": 0.67,
+						"showName": "货物5"
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "系列<%= i+1 %>",
+					"child": {
+						"inner": {
+							"name": "内半径",
+							"type": "number",
+							"default": 0.55,
+							"range": [
+								0,
+								1
+							],
+							"step": 0.0001
+						},
+						"outer": {
+							"name": "外半径",
+							"type": "number",
+							"default": 0.98,
+							"range": [
+								0,
+								1
+							],
+							"step": 0.0001
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "货物1",
+					"y": "14"
+				},
+				{
+					"x": "货物2",
+					"y": "12"
+				},
+				{
+					"x": "货物3",
+					"y": "18"
+				},
+				{
+					"x": "货物4",
+					"y": "9"
+				},
+				{
+					"x": "货物5",
+					"y": "10"
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "30",
+			"minHeight": "20",
+			"z-index": 1010
+		},
+		"icon": "//img.alicdn.com/tfs/TB1sWk4mNv1gK0jSZFFXXb0sXXa-368-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1X2sZmFT7gK0jSZFpXXaTkpXa-160-116.png"
+	}
+}

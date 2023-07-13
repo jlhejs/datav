@@ -1,0 +1,173 @@
+{
+	"name": "pie-multi-radius-with-title",
+	"version": "0.1.8",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "~2.1.4",
+		"lodash": "*"
+	},
+	"datav": {
+		"cn_name": "带标题的多维饼图",
+		"protocol": 2,
+		"type": [
+			"regular",
+			"pie"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "多维度饼图接口",
+				"fields": {
+					"x": {
+						"description": "类目",
+						"type": "string"
+					},
+					"y": {
+						"description": "值",
+						"type": "int"
+					}
+				}
+			}
+		},
+		"config": {
+			"chart": {
+				"type": "group",
+				"name": "图表",
+				"children": {
+					"axis": {
+						"type": "group",
+						"name": "标签",
+						"children": {
+							"dx": {
+								"type": "number",
+								"name": "标签距中心",
+								"default": 40,
+								"range": [
+									0,
+									50
+								]
+							},
+							"dr": {
+								"type": "number",
+								"name": "轴距距中心",
+								"default": 25,
+								"range": [
+									0,
+									40
+								]
+							}
+						}
+					},
+					"radius": {
+						"type": "number",
+						"name": "半径",
+						"range": [
+							0,
+							50
+						],
+						"default": 22
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "#fff"
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字号",
+						"min": 10,
+						"default": 12,
+						"max": 100
+					}
+				}
+			},
+			"title": {
+				"type": "group",
+				"name": "标题",
+				"children": {
+					"value": {
+						"type": "text",
+						"name": "标题名",
+						"default": "我是标题"
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字体",
+						"min": 10,
+						"default": 20,
+						"max": 100
+					},
+					"text-align": {
+						"name": "对齐方式",
+						"type": "select",
+						"options": [
+							{
+								"name": "左对齐",
+								"value": "left"
+							},
+							{
+								"name": "右对齐",
+								"value": "right"
+							},
+							{
+								"name": "居中对齐",
+								"value": "center"
+							}
+						],
+						"default": "center"
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "#fff"
+					},
+					"background-color": {
+						"name": "背景",
+						"type": "color",
+						"default": "#000"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "普货",
+					"y": 5
+				},
+				{
+					"x": "普货",
+					"y": 22
+				},
+				{
+					"x": "泡货",
+					"y": 22
+				},
+				{
+					"x": "设备",
+					"y": 14
+				},
+				{
+					"x": "矿产",
+					"y": 15
+				},
+				{
+					"x": "钢铁",
+					"y": 15
+				},
+				{
+					"x": "建材",
+					"y": 12
+				},
+				{
+					"x": "食品",
+					"y": 12
+				},
+				{
+					"x": "粮食",
+					"y": 28
+				}
+			]
+		}
+	}
+}

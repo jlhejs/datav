@@ -1,0 +1,2373 @@
+{
+	"name": "ml-g-cloud",
+	"version": "5.1.5",
+	"dependencies": {
+		"@antv/g2plot": "^2.4.20",
+		"alibabacloud-datav-tool-gui-utils": "1.0.0",
+		"bcore": "0.0.22",
+		"d3-format": "^3.1.0",
+		"lodash": "4.17.11",
+		"moment": "2.27.0"
+	},
+	"datav": {
+		"cn_name": "词云",
+		"level": 0,
+		"protocol": 2,
+		"type": [
+			"text_label",
+			"DataV-6:regular",
+			"DataV-6:info",
+			"DataV-6:analysis"
+		],
+		"view": {
+			"width": "500",
+			"height": "300",
+			"minWidth": "20",
+			"minHeight": "10",
+			"z-index": 110
+		},
+		"analysis": {
+			"apis": "source"
+		},
+		"supportTheme": {
+			"version": 2,
+			"complexity": [
+				"L0",
+				"L1"
+			]
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "options.chart.fill",
+					"apiPath": "source.colorField"
+				}
+			],
+			"conditionalStyle": [
+				{
+					"configPath": "options.condition.customStyle",
+					"ruleKey": "rules"
+				}
+			]
+		},
+		"icon": "//img.alicdn.com/tfs/TB16HjqlNv1gK0jSZFFXXb0sXXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1hp_mlUY1gK0jSZFMXXaWcVXa-160-116.png",
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"name": {
+						"name": "名称",
+						"description": "名称",
+						"type": "string | number",
+						"characteristic": "not-aggregated",
+						"optional": false
+					},
+					"value": {
+						"name": "值",
+						"description": "值",
+						"type": "number",
+						"characteristic": "aggregated",
+						"optional": false
+					},
+					"colorField": {
+						"name": "颜色映射",
+						"description": "颜色映射",
+						"type": "number",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"chart": {
+						"name": "图形",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"margin": {
+								"type": "margin",
+								"name": "图表边距",
+								"default": {
+									"top": 40,
+									"bottom": 40,
+									"left": 30,
+									"right": 20
+								},
+								"children": {
+									"show": {
+										"default": false
+									}
+								},
+								"enableHide": true
+							},
+							"shape": {
+								"name": "形状",
+								"type": "buttonRadio",
+								"evenlySplit": true,
+								"default": "rectangular",
+								"options": [
+									{
+										"value": "archimedean",
+										"label": "椭圆"
+									},
+									{
+										"value": "rectangular",
+										"label": "矩形"
+									},
+									{
+										"value": "customize",
+										"label": "自定义"
+									}
+								],
+								"_simplified_show": true
+							},
+							"customizeShape": {
+								"name": "图形",
+								"type": "text",
+								"description": "可以是 url 地址和 base64，词语只渲染图片的深色部位，浅色的部位（如白色）不渲染词语。当使用图片的 url 地址时，图片的大小不宜过大，不然图片加载时间过长。",
+								"default": "https://gw.alipayobjects.com/zos/antfincdn/Qw7Xbn76kM/53176454-747c-4f0a-a9e5-936aa66a0082.png",
+								"prefixIcon": "link",
+								"_simplified_show": true,
+								"showInPanel": {
+									"conditions": [
+										[
+											".shape",
+											"$eq",
+											"customize"
+										]
+									]
+								}
+							},
+							"fill": {
+								"name": "颜色",
+								"type": "colorMapping",
+								"fixedComponents": [
+									"flat",
+									"linearGradient"
+								],
+								"scaleTypes": [
+									"ordinal"
+								],
+								"default": {
+									"mapping": true,
+									"fixed": {
+										"type": "flat",
+										"value": "#2483ff"
+									},
+									"scale": {
+										"type": "ordinal",
+										"scheme": "cat-1",
+										"custom": false,
+										"range": [
+											"#2782e7",
+											"#2dc0ee",
+											"#34fff5"
+										],
+										"domain": [],
+										"excepted": "yellow",
+										"abnormal": "transparent",
+										"pin": [
+											false,
+											false,
+											false
+										]
+									}
+								}
+							},
+							"wordStyle": {
+								"name": "词语样式",
+								"type": "suite",
+								"children": {
+									"fontFamily": {
+										"name": "字体",
+										"type": "search",
+										"default": "Helvetica",
+										"range": [
+											{
+												"微软雅黑": "Microsoft Yahei"
+											},
+											{
+												"宋体": "SimSun"
+											},
+											{
+												"黑体": "SimHei"
+											},
+											{
+												"隶书": "LiSu"
+											},
+											{
+												"幼圆": "YouYuan"
+											},
+											"tahoma",
+											"Helvetica",
+											"sans-serif"
+										],
+										"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体",
+										"col": 12
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"searches": [
+											"normal",
+											"bold",
+											"bolder",
+											"lighter",
+											100,
+											200,
+											300,
+											400,
+											500,
+											600,
+											700,
+											800,
+											900
+										],
+										"options": [
+											{
+												"name": "normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										],
+										"col": 12
+									},
+									"fontSizeRangeStart": {
+										"name": "最小字号",
+										"type": "stepper",
+										"step": 1,
+										"default": 10,
+										"min": 0,
+										"suffix": "px",
+										"col": 12
+									},
+									"fontSizeRangeEnd": {
+										"name": "最大字号",
+										"type": "stepper",
+										"step": 1,
+										"default": 34,
+										"min": 0,
+										"suffix": "px",
+										"col": 12
+									},
+									"padding": {
+										"name": "边距",
+										"type": "stepper",
+										"step": 1,
+										"default": 2,
+										"min": 0,
+										"suffix": "px",
+										"col": 12,
+										"_simplified_show": true
+									},
+									"open": {
+										"name": "保持位置不变",
+										"type": "switch",
+										"default": true,
+										"col": 12,
+										"_simplified_show": true
+									},
+									"rotationRange": {
+										"name": "旋转角度范围",
+										"type": "slider",
+										"mode": "double",
+										"default": [
+											0,
+											90
+										],
+										"suffix": "°",
+										"min": 0,
+										"max": 360,
+										"step": 1,
+										"showCurrentRange": true,
+										"showInPanel": {
+											"conditions": [
+												[
+													".open",
+													"$eq",
+													false
+												]
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"animation": {
+						"name": "动画",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"isShow": {
+								"type": "switch",
+								"name": "动画开关",
+								"default": true,
+								"_simplified_show": true
+							},
+							"animationEasing": {
+								"name": "动画效果",
+								"type": "select",
+								"options": [
+									{
+										"value": "zoom-in",
+										"label": "缩放渐入"
+									},
+									{
+										"value": "wave-in",
+										"label": "划动进入"
+									}
+								],
+								"default": "wave-in",
+								"filterable": true,
+								"allowCustom": true,
+								"showInPanel": {
+									"conditions": [
+										[
+											".isShow",
+											"$eq",
+											true
+										]
+									]
+								},
+								"_simplified_show": true
+							},
+							"duration": {
+								"name": "动画时长",
+								"type": "stepper",
+								"step": 1,
+								"default": 1000,
+								"min": 0,
+								"suffix": "ms",
+								"showInPanel": {
+									"conditions": [
+										[
+											".isShow",
+											"$eq",
+											true
+										]
+									]
+								},
+								"_simplified_show": true
+							}
+						}
+					},
+					"tooltip": {
+						"name": "交互",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"tooltipSet": {
+								"name": "提示框",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"mode": {
+										"name": "模式",
+										"type": "buttonRadio",
+										"default": "simple",
+										"options": [
+											{
+												"name": "简洁",
+												"value": "simple"
+											},
+											{
+												"name": "通用",
+												"value": "common"
+											}
+										]
+									},
+									"trigger": {
+										"name": "触发方式",
+										"type": "buttonRadio",
+										"default": "mouseover",
+										"options": [
+											{
+												"name": "点击",
+												"value": "click"
+											},
+											{
+												"name": "悬浮",
+												"value": "mouseover"
+											}
+										],
+										"_simplified_show": true
+									},
+									"titleSpace": {
+										"name": "标题间距",
+										"type": "stepper",
+										"step": 1,
+										"default": 10,
+										"suffix": "px",
+										"showInPanel": {
+											"conditions": [
+												[
+													".mode",
+													"$eq",
+													"common"
+												]
+											]
+										}
+									},
+									"titleText": {
+										"name": "提示框标题",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false,
+												"_simplified_show": true
+											},
+											"con": {
+												"type": "text",
+												"default": "标题"
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".mode",
+													"$eq",
+													"common"
+												]
+											]
+										}
+									},
+									"titleTextStyle": {
+										"name": "标题样式",
+										"type": "font",
+										"default": {
+											"fontFamily": "Helvetica",
+											"fontWeight": "normal",
+											"fontSize": 12,
+											"color": "rgb(144, 160, 174)"
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".mode",
+													"$eq",
+													"common"
+												]
+											]
+										}
+									},
+									"series": {
+										"type": "tabs",
+										"name": "内容显示",
+										"defaultViewMode": "column",
+										"default": [
+											{
+												"columnName": "name",
+												"displayName": "名称"
+											},
+											{
+												"columnName": "value",
+												"displayName": "数值"
+											}
+										],
+										"template": {
+											"type": "object",
+											"name": "系列<%= i + 1%>",
+											"children": {
+												"columnName": {
+													"name": "字段名",
+													"type": "string",
+													"description": "需要与数据中字段匹配",
+													"_simplified_show": true
+												},
+												"displayName": {
+													"name": "显示名",
+													"type": "string",
+													"description": "提示框显示名称",
+													"_simplified_show": true
+												},
+												"prefixSuffix": {
+													"type": "suite",
+													"name": "前后缀",
+													"children": {
+														"prefix": {
+															"name": "前缀",
+															"caption": "前缀",
+															"type": "text",
+															"default": "",
+															"col": 12,
+															"_simplified_show": true
+														},
+														"suffix": {
+															"name": "后缀",
+															"caption": "后缀",
+															"type": "text",
+															"default": "",
+															"col": 12,
+															"_simplified_show": true
+														}
+													}
+												}
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													".mode",
+													"$eq",
+													"common"
+												]
+											]
+										}
+									},
+									"valueFormat": {
+										"name": "数值格式",
+										"type": "select",
+										"default": ".1f",
+										"description": "参考文档：https://github.com/d3/d3-format/blob/v3.1.0/README.md#format",
+										"options": [
+											{
+												"value": "",
+												"name": "默认"
+											},
+											{
+												"value": "d",
+												"name": "11(整数)"
+											},
+											{
+												"value": ".1f",
+												"name": "11.1(浮点数)"
+											},
+											{
+												"value": ".2f",
+												"name": "11.11(浮点数)"
+											},
+											{
+												"value": ".0%",
+												"name": "11%(百分比)"
+											},
+											{
+												"value": ".1%",
+												"name": "11.1%(百分比)"
+											},
+											{
+												"value": ",.0f",
+												"name": "1,111(千分位)"
+											},
+											{
+												"value": ",.1f",
+												"name": "1,111.1(千分位)"
+											}
+										],
+										"filterable": true,
+										"allowCustom": true,
+										"_simplified_show": true
+									},
+									"contentSpace": {
+										"name": "内容间距",
+										"type": "stepper",
+										"step": 1,
+										"default": 4,
+										"suffix": "px",
+										"showInPanel": {
+											"conditions": [
+												[
+													".mode",
+													"$eq",
+													"common"
+												]
+											]
+										}
+									},
+									"contentTextStyle": {
+										"name": "内容文本",
+										"type": "font",
+										"default": {
+											"fontFamily": "Helvetica",
+											"fontWeight": "normal",
+											"fontSize": 12,
+											"color": "#fff"
+										}
+									},
+									"suffix": {
+										"name": "后缀",
+										"type": "string",
+										"default": "",
+										"showInPanel": {
+											"conditions": [
+												[
+													".mode",
+													"$eq",
+													"simple"
+												]
+											]
+										}
+									},
+									"bgBox": {
+										"name": "弹窗背景",
+										"type": "group",
+										"children": {
+											"padding": {
+												"name": "背景边距",
+												"type": "suite",
+												"children": {
+													"paddingX": {
+														"name": "水平",
+														"caption": "水平",
+														"type": "stepper",
+														"default": 12,
+														"step": 1,
+														"suffix": "px",
+														"col": 12
+													},
+													"paddingY": {
+														"name": "垂直",
+														"caption": "垂直",
+														"type": "stepper",
+														"default": 12,
+														"step": 1,
+														"suffix": "px",
+														"col": 12
+													}
+												}
+											},
+											"backgroundColor": {
+												"name": "背景颜色",
+												"type": "fill",
+												"default": "rgba(51, 51, 51, 0.8)"
+											},
+											"border": {
+												"name": "边框样式",
+												"type": "suite",
+												"children": {
+													"borderStyle": {
+														"name": "线型",
+														"caption": "线型",
+														"type": "select",
+														"default": "solid",
+														"col": 12,
+														"options": [
+															{
+																"name": "实线",
+																"value": "solid"
+															},
+															{
+																"name": "虚线",
+																"value": "dashed"
+															},
+															{
+																"name": "点线",
+																"value": "dotted"
+															}
+														]
+													},
+													"borderRadius": {
+														"name": "圆角",
+														"caption": "圆角",
+														"type": "stepper",
+														"min": 0,
+														"step": 1,
+														"default": 4,
+														"col": 12
+													},
+													"borderWidth": {
+														"name": "线宽",
+														"caption": "线宽",
+														"type": "stepper",
+														"step": 1,
+														"min": 0,
+														"default": 1,
+														"col": 12
+													},
+													"borderColor": {
+														"name": "颜色",
+														"caption": "颜色",
+														"type": "color",
+														"default": "rgba(0,0,0,0.25)",
+														"col": 12
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"active": {
+								"name": "选中态",
+								"type": "group",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": true
+									},
+									"trigger": {
+										"name": "触发方式",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"label": "点击",
+												"value": "click"
+											},
+											{
+												"label": "悬浮",
+												"value": "hover"
+											}
+										],
+										"default": "click",
+										"_simplified_show": true
+									},
+									"selectType": {
+										"name": "选中方式",
+										"type": "buttonRadio",
+										"options": [
+											{
+												"label": "单选",
+												"value": "single"
+											},
+											{
+												"label": "多选",
+												"value": "multi"
+											}
+										],
+										"default": "single",
+										"_simplified_show": true
+									},
+									"fillWrap": {
+										"name": "词语颜色",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false
+											},
+											"fill": {
+												"type": "fill",
+												"components": [
+													"flat",
+													"linearGradient"
+												],
+												"default": {
+													"type": "linearGradient",
+													"value": {
+														"angle": 90,
+														"stops": [
+															{
+																"offset": 0,
+																"color": "#00ff95"
+															},
+															{
+																"offset": 100,
+																"color": "rgba(88, 142, 233, 0.5)"
+															}
+														]
+													}
+												},
+												"enableHide": true,
+												"_simplified_show": true
+											}
+										}
+									},
+									"line": {
+										"name": "词语描边",
+										"type": "suite",
+										"children": {
+											"lineStyle": {
+												"name": "线型",
+												"caption": "线型",
+												"type": "select",
+												"default": "solid",
+												"col": 9,
+												"options": [
+													{
+														"name": "实线",
+														"value": "solid"
+													},
+													{
+														"name": "虚线",
+														"value": "dashed"
+													},
+													{
+														"name": "点线",
+														"value": "dotted"
+													}
+												]
+											},
+											"lineWidth": {
+												"name": "粗细",
+												"caption": "粗细",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 1,
+												"col": 9
+											},
+											"lineColor": {
+												"name": "颜色",
+												"caption": "颜色",
+												"type": "color",
+												"style": "simple",
+												"default": "#ffffff",
+												"col": 6
+											},
+											"dashedLength": {
+												"name": "长度",
+												"caption": "长度",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 3,
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".lineStyle",
+															"$eq",
+															"dashed"
+														]
+													]
+												}
+											},
+											"dashedSpace": {
+												"name": "间距",
+												"caption": "间距",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 8,
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".lineStyle",
+															"$eq",
+															"dashed"
+														]
+													]
+												}
+											},
+											"dottedLength": {
+												"name": "长度",
+												"caption": "长度",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 2,
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".lineStyle",
+															"$eq",
+															"dotted"
+														]
+													]
+												}
+											},
+											"dottedSpace": {
+												"name": "间距",
+												"caption": "间距",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 4,
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".lineStyle",
+															"$eq",
+															"dotted"
+														]
+													]
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"legend": {
+						"name": "图例",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"isShow": {
+								"type": "switch",
+								"name": "图例开关",
+								"default": true,
+								"_simplified_show": true
+							},
+							"layout": {
+								"name": "图例位置",
+								"type": "iconRadio",
+								"default": "top",
+								"optionCol": 4,
+								"options": [
+									{
+										"value": "top-left",
+										"src": "top-left",
+										"label": "顶部居左"
+									},
+									{
+										"value": "top",
+										"src": "top-center",
+										"label": "顶部居中"
+									},
+									{
+										"value": "top-right",
+										"src": "top-right",
+										"label": "顶部居右"
+									},
+									{
+										"value": "bottom-left",
+										"src": "bottom-left",
+										"label": "底部居左"
+									},
+									{
+										"value": "bottom",
+										"src": "bottom-center",
+										"label": "底部居中"
+									},
+									{
+										"value": "bottom-right",
+										"src": "bottom-right",
+										"label": "底部居右"
+									},
+									{
+										"value": "left-top",
+										"src": "left-top",
+										"label": "左侧居顶"
+									},
+									{
+										"value": "left",
+										"src": "left-center",
+										"label": "左侧居中"
+									},
+									{
+										"value": "left-bottom",
+										"src": "left-bottom",
+										"label": "左侧居底"
+									},
+									{
+										"value": "right-top",
+										"src": "right-top",
+										"label": "右侧居顶"
+									},
+									{
+										"value": "right",
+										"src": "right-center",
+										"label": "右侧居中"
+									},
+									{
+										"value": "right-bottom",
+										"src": "right-bottom",
+										"label": "右侧居底"
+									}
+								],
+								"showInPanel": {
+									"conditions": [
+										[
+											".isShow",
+											"$eq",
+											true
+										]
+									]
+								},
+								"_simplified_show": true
+							},
+							"textStyle": {
+								"type": "font",
+								"name": "文本样式",
+								"default": {
+									"fontFamily": "Helvetica",
+									"fontWeight": "normal",
+									"fontSize": 12,
+									"color": "rgb(144, 160, 174)"
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											".isShow",
+											"$eq",
+											true
+										]
+									]
+								}
+							},
+							"cateLegend": {
+								"name": "分类图例",
+								"type": "group",
+								"children": {
+									"marker": {
+										"name": "图例标记",
+										"type": "suite",
+										"children": {
+											"shape": {
+												"name": "形状",
+												"type": "markerSelect",
+												"schemes": [
+													{
+														"name": "2D形状",
+														"scheme": [
+															{
+																"label": "圆形",
+																"value": "circle",
+																"src": "https://img.alicdn.com/imgextra/i2/O1CN01kWYHGH1Sv6m0c1aji_!!6000000002308-55-tps-48-48.svg"
+															},
+															{
+																"label": "三角形",
+																"value": "triangle",
+																"src": "https://img.alicdn.com/imgextra/i4/O1CN01QULtTA1p5ZMptjqd9_!!6000000005309-55-tps-48-48.svg"
+															},
+															{
+																"label": "向下三角形",
+																"value": "triangle-down",
+																"src": "https://img.alicdn.com/imgextra/i2/O1CN01eE1dAq1JkjGtWXO58_!!6000000001067-55-tps-50-50.svg"
+															},
+															{
+																"label": "矩形",
+																"value": "square",
+																"src": "https://img.alicdn.com/imgextra/i1/O1CN01G6r3AJ1x4D7E6QdOT_!!6000000006389-55-tps-48-48.svg"
+															},
+															{
+																"label": "六边形",
+																"value": "hexagon",
+																"src": "https://img.alicdn.com/imgextra/i1/O1CN01zQsCgN1wpYRQqNDYZ_!!6000000006357-55-tps-48-48.svg"
+															},
+															{
+																"label": "菱形",
+																"value": "diamond",
+																"src": "https://img.alicdn.com/imgextra/i3/O1CN01cF5ETy1KsnruyRRoh_!!6000000001220-55-tps-50-50.svg"
+															},
+															{
+																"label": "蝶形",
+																"value": "bowtie",
+																"src": "https://img.alicdn.com/imgextra/i4/O1CN011LHBeT29E53XQjpDj_!!6000000008035-55-tps-50-50.svg"
+															}
+														]
+													}
+												],
+												"default": "square",
+												"col": 12
+											},
+											"size": {
+												"name": "尺寸",
+												"type": "stepper",
+												"default": 4,
+												"step": 1,
+												"suffix": "px",
+												"col": 12
+											}
+										}
+									},
+									"markerSpace": {
+										"name": "图例间距",
+										"type": "suite",
+										"children": {
+											"openselfSpacing": {
+												"type": "switch",
+												"name": "自定义间距",
+												"default": false
+											},
+											"itemSpacing": {
+												"name": "水平间距",
+												"type": "stepper",
+												"default": 24,
+												"step": 1,
+												"suffix": "px",
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".openselfSpacing",
+															"$eq",
+															true
+														],
+														[
+															"options.legend.layout",
+															"$in",
+															[
+																"top-left",
+																"top",
+																"top-right",
+																"bottom-left",
+																"bottom",
+																"bottom-right"
+															]
+														]
+													]
+												}
+											},
+											"itemMarginBottom": {
+												"name": "垂直间距",
+												"type": "stepper",
+												"default": 12,
+												"step": 1,
+												"suffix": "px",
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".openselfSpacing",
+															"$eq",
+															true
+														],
+														[
+															"options.legend.layout",
+															"$in",
+															[
+																"left-top",
+																"left",
+																"left-bottom",
+																"right-top",
+																"right",
+																"right-bottom"
+															]
+														]
+													]
+												}
+											},
+											"spacing": {
+												"name": "内间距",
+												"type": "stepper",
+												"default": 4,
+												"step": 1,
+												"suffix": "px",
+												"col": 12,
+												"showInPanel": {
+													"conditions": [
+														[
+															".openselfSpacing",
+															"$eq",
+															true
+														]
+													]
+												}
+											}
+										}
+									},
+									"maxItemWidth": {
+										"name": "最大宽度",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false
+											},
+											"width": {
+												"name": "宽度",
+												"type": "stepper",
+												"default": 100,
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									},
+									"flip": {
+										"name": "允许翻页",
+										"type": "group",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": true,
+												"_simplified_show": true
+											},
+											"maxRow": {
+												"name": "最大行数",
+												"type": "stepper",
+												"min": 1,
+												"step": 1,
+												"suffix": "行",
+												"default": 1
+											},
+											"textStyle": {
+												"type": "font",
+												"name": "页码样式",
+												"default": {
+													"fontFamily": "Helvetica",
+													"fontWeight": "normal",
+													"fontSize": 12,
+													"color": "rgb(144, 160, 174)"
+												}
+											},
+											"pageMarker": {
+												"name": "箭头样式",
+												"type": "suite",
+												"children": {
+													"pageSize": {
+														"name": "尺寸",
+														"type": "stepper",
+														"default": 12,
+														"step": 1,
+														"suffix": "px"
+													},
+													"flipColor": {
+														"name": "默认色",
+														"type": "fill",
+														"default": "#000",
+														"col": 12
+													},
+													"inactiveFill": {
+														"name": "禁用色",
+														"type": "fill",
+														"default": "#000",
+														"col": 12
+													}
+												}
+											}
+										}
+									}
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											".isShow",
+											"$eq",
+											true
+										]
+									]
+								}
+							},
+							"continuousLegend": {
+								"name": "连续图例",
+								"type": "group",
+								"children": {
+									"track": {
+										"name": "滑轨样式",
+										"type": "suite",
+										"children": {
+											"type": {
+												"name": "类型",
+												"type": "buttonRadio",
+												"options": [
+													{
+														"label": "矩形",
+														"value": "color"
+													},
+													{
+														"label": "三角形",
+														"value": "size"
+													}
+												],
+												"default": "color",
+												"col": 24
+											},
+											"width": {
+												"name": "长度",
+												"type": "stepper",
+												"default": 100,
+												"stepper": 1,
+												"step": 1,
+												"allowCustom": true,
+												"col": 12
+											},
+											"height": {
+												"name": "高度",
+												"type": "stepper",
+												"default": 12,
+												"step": 1,
+												"stepper": 1,
+												"col": 12
+											},
+											"railColor": {
+												"name": "背景色",
+												"caption": "背景色",
+												"type": "fill",
+												"default": "rgba(89, 89, 89, 0.1)"
+											}
+										}
+									},
+									"handler": {
+										"name": "滑块样式",
+										"type": "suite",
+										"children": {
+											"min": {
+												"type": "select",
+												"name": "最小值",
+												"option": [
+													{
+														"label": "自动",
+														"value": "auto"
+													}
+												],
+												"default": "auto",
+												"allowCustom": true,
+												"col": 12
+											},
+											"max": {
+												"name": "最大值",
+												"type": "select",
+												"option": [
+													{
+														"label": "自动",
+														"value": "auto"
+													}
+												],
+												"default": "auto",
+												"allowCustom": true,
+												"col": 12
+											},
+											"size": {
+												"name": "尺寸",
+												"type": "stepper",
+												"default": 6,
+												"step": 1,
+												"suffix": "px",
+												"col": 12
+											},
+											"fill": {
+												"name": "颜色",
+												"type": "fill",
+												"default": "#f0f0f0",
+												"col": 12
+											}
+										}
+									},
+									"label": {
+										"name": "标注样式",
+										"type": "suite",
+										"children": {
+											"alignHorizon": {
+												"name": "对齐方式",
+												"caption": "对齐方式",
+												"type": "iconRadio",
+												"options": [
+													{
+														"label": "顶端对齐",
+														"value": "top",
+														"src": "position-top"
+													},
+													{
+														"label": "居中对齐",
+														"value": "rail",
+														"src": "middle-center-pos"
+													},
+													{
+														"label": "底端对齐",
+														"value": "bottom",
+														"src": "position-bottom"
+													}
+												],
+												"default": "rail",
+												"col": 12
+											},
+											"spacing": {
+												"name": "间距",
+												"caption": "间距",
+												"type": "stepper",
+												"default": 6,
+												"step": 1,
+												"col": 12
+											}
+										}
+									}
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											".默认隐藏",
+											"$eq",
+											true
+										]
+									]
+								}
+							}
+						}
+					},
+					"condition": {
+						"name": "条件",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"customStyle": {
+								"name": "数据条件系列",
+								"type": "tabs",
+								"fold": false,
+								"default": [
+									{
+										"rules": {
+											"operator": "AND",
+											"enabled": false,
+											"expressions": [
+												{
+													"operator": "AND",
+													"expressions": [
+														[
+															"value",
+															"gt",
+															"35"
+														]
+													]
+												}
+											]
+										},
+										"fill": {
+											"type": "flat",
+											"show": true,
+											"value": "#f00"
+										}
+									}
+								],
+								"template": {
+									"type": "object",
+									"name": "条件样式<%= i + 1%>",
+									"children": {
+										"rules": {
+											"type": "logicalTree",
+											"default": {
+												"enabled": false,
+												"operator": "OR",
+												"expressions": [
+													{
+														"operator": "AND",
+														"expressions": [
+															[
+																"y",
+																"gt",
+																12
+															]
+														]
+													}
+												]
+											}
+										},
+										"fill": {
+											"name": "图变颜色",
+											"type": "suite",
+											"enableHide": true,
+											"children": {
+												"value": {
+													"type": "fill",
+													"default": "yellow",
+													"components": [
+														"flat",
+														"linearGradient"
+													]
+												}
+											},
+											"showInPanel": {
+												"conditions": [
+													[
+														".rules.enabled",
+														"$eq",
+														true
+													]
+												]
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "心灵奇旅",
+					"value": 8.9,
+					"colorField": "热门"
+				},
+				{
+					"name": "无依之地",
+					"value": 8.4,
+					"colorField": "热门"
+				},
+				{
+					"name": "随风飘散",
+					"value": 6.9,
+					"colorField": "热门"
+				},
+				{
+					"name": "天堂的张望",
+					"value": 6.2,
+					"colorField": "热门"
+				},
+				{
+					"name": "摇滚红与黑",
+					"value": 8.1,
+					"colorField": "热门"
+				},
+				{
+					"name": "一秒钟",
+					"value": 7.8,
+					"colorField": "热门"
+				},
+				{
+					"name": "神奇女侠1984",
+					"value": 6.3,
+					"colorField": "热门"
+				},
+				{
+					"name": "沐浴之王",
+					"value": 6.3,
+					"colorField": "热门"
+				},
+				{
+					"name": "刻在你心底的名字",
+					"value": 7.1,
+					"colorField": "热门"
+				},
+				{
+					"name": "2020去死",
+					"value": 7.3,
+					"colorField": "热门"
+				},
+				{
+					"name": "除暴",
+					"value": 6.4,
+					"colorField": "热门"
+				},
+				{
+					"name": "女人的碎片",
+					"value": 7.7,
+					"colorField": "热门"
+				},
+				{
+					"name": "我和我的家乡",
+					"value": 7.3,
+					"colorField": "热门"
+				},
+				{
+					"name": "疯狂原始人2",
+					"value": 8.1,
+					"colorField": "热门"
+				},
+				{
+					"name": "前程似锦的女孩",
+					"value": 7.4,
+					"colorField": "热门"
+				},
+				{
+					"name": "夺冠",
+					"value": 7.3,
+					"colorField": "热门"
+				},
+				{
+					"name": "行骗天下JP：公主篇",
+					"value": 7.4,
+					"colorField": "热门"
+				},
+				{
+					"name": "信条",
+					"value": 7.7,
+					"colorField": "热门"
+				},
+				{
+					"name": "消失的情人节",
+					"value": 7.1,
+					"colorField": "热门"
+				},
+				{
+					"name": "电话",
+					"value": 7.6,
+					"colorField": "热门"
+				},
+				{
+					"name": "穷途鼠的奶酪梦",
+					"value": 7.7,
+					"colorField": "热门"
+				},
+				{
+					"name": "在回家之后重新开始",
+					"value": 6.6,
+					"colorField": "热门"
+				},
+				{
+					"name": "鬼灭之刃 剧场版 无限列车篇",
+					"value": 8.4,
+					"colorField": "热门"
+				},
+				{
+					"name": "酒精计划",
+					"value": 7.5,
+					"colorField": "热门"
+				},
+				{
+					"name": "末日逃生",
+					"value": 5.6,
+					"colorField": "热门"
+				},
+				{
+					"name": "芝加哥七君子审判",
+					"value": 8.6,
+					"colorField": "热门"
+				},
+				{
+					"name": "八佰",
+					"value": 7.6,
+					"colorField": "热门"
+				},
+				{
+					"name": "菊石",
+					"value": 7.1,
+					"colorField": "热门"
+				},
+				{
+					"name": "玫瑰岛的不可思议的历史",
+					"value": 8,
+					"colorField": "热门"
+				},
+				{
+					"name": "金刚川",
+					"value": 6.5,
+					"colorField": "热门"
+				},
+				{
+					"name": "1/2的魔法",
+					"value": 7.7,
+					"colorField": "热门"
+				},
+				{
+					"name": "风平浪静",
+					"value": 6.3,
+					"colorField": "热门"
+				},
+				{
+					"name": "无声",
+					"value": 7.3,
+					"colorField": "热门"
+				},
+				{
+					"name": "姜子牙",
+					"value": 6.8,
+					"colorField": "热门"
+				},
+				{
+					"name": "狼行者",
+					"value": 8,
+					"colorField": "热门"
+				},
+				{
+					"name": "砍人快乐",
+					"value": 6.1,
+					"colorField": "热门"
+				},
+				{
+					"name": "米纳里",
+					"value": 7.2,
+					"colorField": "热门"
+				},
+				{
+					"name": "馗降：粽邪2",
+					"value": 5.9,
+					"colorField": "热门"
+				},
+				{
+					"name": "陈翔六点半之民间高手",
+					"value": 6.4,
+					"colorField": "热门"
+				},
+				{
+					"name": "哆啦A梦：大雄的新恐龙",
+					"value": 7.5,
+					"colorField": "热门"
+				},
+				{
+					"name": "逃走的女人",
+					"value": 7.2,
+					"colorField": "热门"
+				},
+				{
+					"name": "曼克",
+					"value": 7.4,
+					"colorField": "热门"
+				},
+				{
+					"name": "南山的部长们",
+					"value": 8.1,
+					"colorField": "热门"
+				},
+				{
+					"name": "世纪大劫案",
+					"value": 7.2,
+					"colorField": "热门"
+				},
+				{
+					"name": "担保",
+					"value": 7.8,
+					"colorField": "热门"
+				},
+				{
+					"name": "一点就到家",
+					"value": 6.7,
+					"colorField": "热门"
+				},
+				{
+					"name": "鸣鸟不飞：乌云密布",
+					"value": 8.2,
+					"colorField": "热门"
+				},
+				{
+					"name": "最幸福的季节",
+					"value": 7.1,
+					"colorField": "热门"
+				},
+				{
+					"name": "领袖水准",
+					"value": 6.8,
+					"colorField": "热门"
+				},
+				{
+					"name": "逃跑",
+					"value": 6.7,
+					"colorField": "热门"
+				},
+				{
+					"name": "随风飘散",
+					"value": "6.9",
+					"colorField": "最新"
+				},
+				{
+					"name": "天堂的张望",
+					"value": "6.2",
+					"colorField": "最新"
+				},
+				{
+					"name": "摇滚红与黑",
+					"value": "8.1",
+					"colorField": "最新"
+				},
+				{
+					"name": "Jose与虎与鱼们",
+					"value": "6.5",
+					"colorField": "最新"
+				},
+				{
+					"name": "红月",
+					"value": "6.7",
+					"colorField": "最新"
+				},
+				{
+					"name": "那些曾经",
+					"value": "7.1",
+					"colorField": "最新"
+				},
+				{
+					"name": "边缘状态",
+					"value": "7.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "女人的碎片",
+					"value": "7.7",
+					"colorField": "最新"
+				},
+				{
+					"name": "绝命碰撞",
+					"value": "5.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "柏林亚历山大广场",
+					"value": "6.8",
+					"colorField": "最新"
+				},
+				{
+					"name": "邻居",
+					"value": "6.7",
+					"colorField": "最新"
+				},
+				{
+					"name": "溶解",
+					"value": "6.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "米纳里",
+					"value": "7.2",
+					"colorField": "最新"
+				},
+				{
+					"name": "爬坡人生",
+					"value": "6.8",
+					"colorField": "最新"
+				},
+				{
+					"name": "在回家之后重新开始",
+					"value": "6.6",
+					"colorField": "最新"
+				},
+				{
+					"name": "前程似锦的女孩",
+					"value": "7.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "敢梦有爱",
+					"value": "6.6",
+					"colorField": "最新"
+				},
+				{
+					"name": "躯壳",
+					"value": "5.5",
+					"colorField": "最新"
+				},
+				{
+					"name": "特斯拉",
+					"value": "5.6",
+					"colorField": "最新"
+				},
+				{
+					"name": "圣诞速配",
+					"value": "7.1",
+					"colorField": "最新"
+				},
+				{
+					"name": "拯救圣诞记2",
+					"value": "6.2",
+					"colorField": "最新"
+				},
+				{
+					"name": "馗降：粽邪2",
+					"value": "5.9",
+					"colorField": "最新"
+				},
+				{
+					"name": "陈翔六点半之民间高手",
+					"value": "6.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "少年侦探",
+					"value": "7.1",
+					"colorField": "最新"
+				},
+				{
+					"name": "我不好惹",
+					"value": "5.5",
+					"colorField": "最新"
+				},
+				{
+					"name": "胜赔人生",
+					"value": "7.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "让他们说吧",
+					"value": "6.5",
+					"colorField": "最新"
+				},
+				{
+					"name": "2020去死",
+					"value": "7.3",
+					"colorField": "最新"
+				},
+				{
+					"name": "顺其自然的日子",
+					"value": "6.7",
+					"colorField": "最新"
+				},
+				{
+					"name": "恋途未卜",
+					"value": "6.7",
+					"colorField": "最新"
+				},
+				{
+					"name": "鬼灭之刃 那田蜘蛛山篇",
+					"value": "9.3",
+					"colorField": "最新"
+				},
+				{
+					"name": "火线救妻",
+					"value": "6.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "婆罗多",
+					"value": "7.0",
+					"colorField": "最新"
+				},
+				{
+					"name": "茧",
+					"value": "6.8",
+					"colorField": "最新"
+				},
+				{
+					"name": "渔民的朋友",
+					"value": "7.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "玛丽亚·凯莉的奇幻圣诞节特别节目",
+					"value": "8.0",
+					"colorField": "最新"
+				},
+				{
+					"name": "心灵奇旅",
+					"value": "8.9",
+					"colorField": "最新"
+				},
+				{
+					"name": "午夜天空",
+					"value": "5.8",
+					"colorField": "最新"
+				},
+				{
+					"name": "如何成为好妻子",
+					"value": "6.1",
+					"colorField": "最新"
+				},
+				{
+					"name": "脚步",
+					"value": "7.5",
+					"colorField": "最新"
+				},
+				{
+					"name": "荒井小姐的秘密生活",
+					"value": "6.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "记忆屋：我永远不会忘记你",
+					"value": "5.6",
+					"colorField": "最新"
+				},
+				{
+					"name": "蓝调天后",
+					"value": "6.7",
+					"colorField": "最新"
+				},
+				{
+					"name": "公主大对换：反转再反转",
+					"value": "5.4",
+					"colorField": "最新"
+				},
+				{
+					"name": "约会大作战 赤黑新章：虚或实",
+					"value": "7.3",
+					"colorField": "最新"
+				},
+				{
+					"name": "安稳觉",
+					"value": "7.5",
+					"colorField": "最新"
+				},
+				{
+					"name": "别放手",
+					"value": "5.5",
+					"colorField": "最新"
+				},
+				{
+					"name": "沉默东京",
+					"value": "5.6",
+					"colorField": "最新"
+				},
+				{
+					"name": "夏日往事",
+					"value": "6.5",
+					"colorField": "最新"
+				},
+				{
+					"name": "周围有婴儿的哭声吗？",
+					"value": "6.9",
+					"colorField": "最新"
+				},
+				{
+					"name": "紫罗兰永恒花园 剧场版",
+					"value": "8.4",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "神奇的费曼先生",
+					"value": "9.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "摇滚红与黑",
+					"value": "8.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "波斯语课",
+					"value": "8.5",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "命运之夜——天之杯Ⅲ：春之歌",
+					"value": "8.9",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "让风带着我起飞",
+					"value": "8.6",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "伯德街小岛",
+					"value": "8.4",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "长夜漫漫路迢迢",
+					"value": "8.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "寅次郎的故事：欢迎归来",
+					"value": "8.0",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "摄影师",
+					"value": "8.5",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "鬼灭之刃 那田蜘蛛山篇",
+					"value": "9.3",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "白箱剧场版",
+					"value": "8.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "士兵",
+					"value": "8.3",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "十三个月亮",
+					"value": "8.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "藏书室女尸之谜",
+					"value": "8.3",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "孤味",
+					"value": "8.0",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "直到世界尽头",
+					"value": "8.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "搬家",
+					"value": "8.4",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "悲惨世界：音乐会现场",
+					"value": "9.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "谋杀启事",
+					"value": "8.5",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "雌雄莫辨",
+					"value": "8.3",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "皮罗斯马尼",
+					"value": "9.0",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "白草地",
+					"value": "8.6",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "小王子",
+					"value": "9.3",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "阳炎座",
+					"value": "8.0",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "丝路花雨",
+					"value": "9.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "岁城璃心",
+					"value": "8.7",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "鸟，孤儿和愚人",
+					"value": "8.3",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "一个美国人在巴黎",
+					"value": "8.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "较量",
+					"value": "8.3",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "拽妹黛薇儿要上大学了没",
+					"value": "9.4",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "勿忘我",
+					"value": "8.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "春色一箩筐",
+					"value": "8.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "美女与野兽之幸福生活",
+					"value": "8.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "笑面人",
+					"value": "8.6",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "在这世界的（还有更多的）角落",
+					"value": "8.4",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "太白山脉",
+					"value": "8.4",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "化身博士",
+					"value": "8.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "角落小伙伴：魔法绘本里的新朋友",
+					"value": "8.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "命案目睹记",
+					"value": "8.4",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "少年泰坦出击大战少年泰坦",
+					"value": "8.4",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "特蕾莎修女",
+					"value": "8.5",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "千子2",
+					"value": "8.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "赛文奥特曼 我是地球人",
+					"value": "9.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "史努比的惊险夏令营",
+					"value": "8.9",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "奥特曼物语",
+					"value": "8.2",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "一路顺风，查理布朗",
+					"value": "8.5",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "萨拉戈萨手稿",
+					"value": "8.3",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "猫和老鼠1992电影版",
+					"value": "8.1",
+					"colorField": "冷门佳片"
+				},
+				{
+					"name": "姆明：漫游蓝湾",
+					"value": "8.1",
+					"colorField": "冷门佳片"
+				}
+			]
+		},
+		"events": {
+			"itemSelect": {
+				"name": "当数据项选中时",
+				"type": [
+					"object"
+				],
+				"description": "当数据项选中时",
+				"fields": {
+					"name": {
+						"name": "名称",
+						"description": "名称",
+						"type": "string | number",
+						"optional": false
+					},
+					"value": {
+						"name": "值",
+						"description": "值",
+						"type": "string | number",
+						"optional": false
+					},
+					"colorField": {
+						"name": "系列",
+						"description": "系列",
+						"type": "string | number",
+						"optional": true
+					}
+				}
+			},
+			"legendSelect": {
+				"name": "当图例被点击时",
+				"description": "当图例被点击时",
+				"type": "object",
+				"fields": {
+					"checked": {
+						"type": "boolean",
+						"name": "开关",
+						"description": "开关",
+						"optional": true
+					},
+					"value": {
+						"type": "string",
+						"name": "系列值",
+						"description": "系列值",
+						"optional": true
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"highlight": {
+				"name": "高亮",
+				"fields": {
+					"data": {
+						"name": "数据",
+						"type": "object",
+						"optional": true,
+						"description": "需要高亮的数据项，单个高亮：{ 'name': '猫和老鼠1992电影版' }；批量高亮：[{ 'name': '太白山脉' }, { 'value': 8.4 }]",
+						"children": {
+							"name": {
+								"name": "名称",
+								"description": "名称",
+								"type": "string | number",
+								"optional": false
+							},
+							"value": {
+								"name": "值",
+								"description": "值",
+								"type": "string | number",
+								"optional": false
+							},
+							"colorField": {
+								"name": "系列",
+								"description": "系列",
+								"type": "string | number",
+								"optional": true
+							}
+						}
+					},
+					"style": {
+						"name": "样式",
+						"type": "object",
+						"optional": true,
+						"description": "选中样式，如：fillStyle、stroke、opacity等; 高亮样式不传入时，使用默认样式(配置中选中态的样式)",
+						"children": {
+							"fillStyle": {
+								"name": "填充色",
+								"type": "string",
+								"default": "#f00",
+								"optional": true
+							}
+						}
+					}
+				},
+				"type": "object"
+			},
+			"reset": {
+				"name": "重置选择项"
+			}
+		}
+	}
+}

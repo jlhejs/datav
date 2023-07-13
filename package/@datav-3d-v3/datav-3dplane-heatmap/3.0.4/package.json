@@ -1,0 +1,664 @@
+{
+	"name": "@datav-3d-v3/datav-3dplane-heatmap",
+	"version": "3.0.4",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "点热力层",
+		"protocol": 2,
+		"level": 2,
+		"private": false,
+		"supportTheme": true,
+		"icon": "//img.alicdn.com/imgextra/i3/O1CN01ipuWYD1KLpRCvkjm2_!!6000000001148-2-tps-720-720.png",
+		"type": [
+			"map_3d_3dplane_subcoms_v3",
+			"DataV-6:analysis"
+		],
+		"analysis": {
+			"apis": "dataSource"
+		},
+		"parent": {
+			"supportTypes": [
+				"map_3d_3dplane_v3"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"defaultActive": "graph",
+				"children": {
+					"general": {
+						"type": "group",
+						"name": "通用",
+						"children": {
+							"opacity": {
+								"name": "不透明度",
+								"type": "number",
+								"caption": "范围 [0, 100]",
+								"default": 100,
+								"range": [
+									0,
+									100
+								],
+								"step": 0.1,
+								"suffix": "%"
+							},
+							"heightScale": {
+								"name": "高程比例",
+								"type": "number",
+								"caption": "高程比例 范围 [0, 5]",
+								"default": 1,
+								"range": [
+									0,
+									5
+								],
+								"step": 0.1
+							}
+						}
+					},
+					"graph": {
+						"type": "group",
+						"name": "图形",
+						"children": {
+							"radius": {
+								"name": "热力半径",
+								"type": "number",
+								"caption": "范围 [0, 100]",
+								"default": 57.3,
+								"range": [
+									0,
+									100
+								],
+								"step": 0.1,
+								"suffix": "px"
+							},
+							"height": {
+								"name": "拉升高度",
+								"type": "number",
+								"caption": "范围 [0, 200]",
+								"default": 33,
+								"range": [
+									0,
+									200
+								],
+								"suffix": "px",
+								"step": 1
+							},
+							"blur": {
+								"name": "热力模糊",
+								"type": "number",
+								"caption": "范围 [0, 100]",
+								"default": 60.4,
+								"range": [
+									0,
+									100
+								],
+								"step": 0.1,
+								"suffix": "px"
+							},
+							"colorMapping": {
+								"name": "热力颜色",
+								"type": "colorMapping",
+								"fixedComponents": [
+									"flat"
+								],
+								"noCustom": true,
+								"scaleTypes": [
+									"linear"
+								],
+								"schemes": [
+									{
+										"id": "ribbon-1",
+										"type": "ribbon",
+										"scheme": [
+											"#7845FF",
+											"#AE83FA",
+											"#E4C2F5",
+											"#FFC0D7",
+											"#FF7FA0"
+										]
+									},
+									{
+										"id": "ribbon-2",
+										"type": "ribbon",
+										"scheme": [
+											"RGBA(64, 44, 187, 0.63)",
+											"#3B45D7",
+											"#2289D9",
+											"#35D7FF",
+											"#2FFFE1"
+										]
+									},
+									{
+										"id": "ribbon-3",
+										"type": "ribbon",
+										"scheme": [
+											"RGBA(68, 215, 182, 0.33)",
+											"RGBA(99, 198, 159, 0.8)",
+											"#97C56E",
+											"#F5B440",
+											"#FF7000"
+										]
+									},
+									{
+										"id": "ribbon-4",
+										"type": "ribbon",
+										"scheme": [
+											"#7845FF",
+											"#AE83FA",
+											"#E4C2F5",
+											"#FFC0D7",
+											"#FF7FA0"
+										]
+									},
+									{
+										"id": "ribbon-5",
+										"type": "ribbon",
+										"scheme": [
+											"RGBA(243, 120, 102, 0.56)",
+											"#DF9953",
+											"#FFA751",
+											"#FDE27E",
+											"#FFFFBD"
+										]
+									},
+									{
+										"id": "ribbon-6",
+										"type": "ribbon",
+										"scheme": [
+											"RGBA(77, 177, 86, 0.54)",
+											"#2E9B80",
+											"#B09AFB",
+											"#D4C8FF",
+											"#B5F1FB"
+										]
+									},
+									{
+										"id": "ribbon-7",
+										"type": "ribbon",
+										"scheme": [
+											"RGBA(255, 104, 61, 0.43)",
+											"#FF9886",
+											"#FFC9CF",
+											"#CCD7E5",
+											"#66C4C8"
+										]
+									},
+									{
+										"id": "ribbon-8",
+										"type": "ribbon",
+										"scheme": [
+											"RGBA(36, 105, 228, 0.33)",
+											"RGBA(40, 142, 232, 0.8)",
+											"#2CB4ED",
+											"#30D9F1",
+											"#34FFF5"
+										]
+									},
+									{
+										"id": "ribbon-9",
+										"type": "ribbon",
+										"scheme": [
+											"RGBA(65, 181, 142, 0.57)",
+											"#5AC9A4",
+											"#36E7BB",
+											"#F7FFC2",
+											"#FFF8DF"
+										]
+									},
+									{
+										"id": "ribbon-10",
+										"type": "ribbon",
+										"scheme": [
+											"#463874",
+											"#9958FF",
+											"#BA84EB",
+											"#FBD772",
+											"#FFF5CF"
+										]
+									}
+								],
+								"default": {
+									"mapping": true,
+									"scale": {
+										"custom": false,
+										"domain": [],
+										"excepted": "#7845FF",
+										"type": "threshold",
+										"scheme": "ribbon-7",
+										"range": [
+											"RGBA(97, 223, 255, 0.54)",
+											"RGBA(231, 173, 193, 0.8)",
+											"#F7AFB7",
+											"#FDC5A7",
+											"#FDDCAD",
+											"#FFE8B6"
+										],
+										"pin": [
+											false,
+											false,
+											false,
+											false,
+											false,
+											false
+										]
+									},
+									"fixed": "#2483ff",
+									"linear": {
+										"custom": false,
+										"domain": [],
+										"excepted": "#7845FF",
+										"scheme": "ribbon-7",
+										"range": [
+											"RGBA(97, 223, 255, 0.54)",
+											"RGBA(231, 173, 193, 0.8)",
+											"#F7AFB7",
+											"#FDC5A7",
+											"#FDDCAD",
+											"#FFE8B6"
+										],
+										"abnormal": "rgba(255,255,255,0)",
+										"pin": [
+											false,
+											false,
+											false,
+											false,
+											false,
+											false
+										]
+									}
+								}
+							},
+							"grid": {
+								"name": "网格",
+								"type": "group",
+								"fold": true,
+								"enableHide": true,
+								"default": {
+									"show": false
+								},
+								"children": {
+									"fill": {
+										"name": "填充",
+										"type": "number",
+										"caption": "填充范围 [0, 1]",
+										"default": 0.3,
+										"range": [
+											0,
+											100
+										],
+										"step": 0.1,
+										"suffix": "%",
+										"description": "填充为屏幕空间比例"
+									},
+									"gap": {
+										"name": "间距",
+										"type": "number",
+										"caption": "间距范围 [0, 1]",
+										"default": 0.2,
+										"range": [
+											0,
+											100
+										],
+										"step": 0.1,
+										"suffix": "%",
+										"description": "间距为屏幕空间比例"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "options.graph.colorMapping",
+					"apiPath": "dataSource.value"
+				}
+			]
+		},
+		"apis": {
+			"dataSource": {
+				"handler": "render",
+				"description": "数据接口",
+				"format": "geo_point",
+				"type": "array",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number",
+						"optional": false
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number",
+						"optional": false
+					},
+					"value": {
+						"description": "值",
+						"type": "number",
+						"optional": false
+					}
+				}
+			}
+		},
+		"api_data": {
+			"dataSource": [
+				{
+					"lng": 102.2212,
+					"lat": 31.8998,
+					"value": 48
+				},
+				{
+					"lng": 120.079,
+					"lat": 28.6542,
+					"value": 16
+				},
+				{
+					"lng": 114.207,
+					"lat": 24.0554,
+					"value": 1
+				},
+				{
+					"lng": 122.5059,
+					"lat": 40.634,
+					"value": 93
+				},
+				{
+					"lng": 114.3073,
+					"lat": 25.6879,
+					"value": 90
+				},
+				{
+					"lng": 110.6911,
+					"lat": 34.6948,
+					"value": 32
+				},
+				{
+					"lng": 117.3409,
+					"lat": 23.9505,
+					"value": 65
+				},
+				{
+					"lng": 110.2144,
+					"lat": 28.2145,
+					"value": 9
+				},
+				{
+					"lng": 116.2584,
+					"lat": 37.6866,
+					"value": 67
+				},
+				{
+					"lng": 111.6456,
+					"lat": 29.4432,
+					"value": 14
+				},
+				{
+					"lng": 87.6177,
+					"lat": 43.7928,
+					"value": 47
+				},
+				{
+					"lng": 119.0305,
+					"lat": 33.5807,
+					"value": 27
+				},
+				{
+					"lng": 118.1108,
+					"lat": 39.563,
+					"value": 6
+				},
+				{
+					"lng": 114.0101,
+					"lat": 41.8993,
+					"value": 72
+				},
+				{
+					"lng": 114.0812,
+					"lat": 30.3096,
+					"value": 63
+				},
+				{
+					"lng": 113.3014,
+					"lat": 40.0905,
+					"value": 31
+				},
+				{
+					"lng": 102.5089,
+					"lat": 28.6396,
+					"value": 15
+				},
+				{
+					"lng": 114.4932,
+					"lat": 29.6045,
+					"value": 88
+				},
+				{
+					"lng": 112.1723,
+					"lat": 29.4145,
+					"value": 74
+				},
+				{
+					"lng": 110.365,
+					"lat": 21.2749,
+					"value": 38
+				},
+				{
+					"lng": 115.0327,
+					"lat": 24.7743,
+					"value": 97
+				},
+				{
+					"lng": 130.2362,
+					"lat": 47.2529,
+					"value": 25
+				},
+				{
+					"lng": 100.233,
+					"lat": 26.8721,
+					"value": 46
+				},
+				{
+					"lng": 118.2489,
+					"lat": 37.4934,
+					"value": 81
+				},
+				{
+					"lng": 113.8238,
+					"lat": 36.0634,
+					"value": 98
+				},
+				{
+					"lng": 104.2002,
+					"lat": 31.3431,
+					"value": 69
+				},
+				{
+					"lng": 113.1635,
+					"lat": 40.4375,
+					"value": 57
+				},
+				{
+					"lng": 90.2127,
+					"lat": 42.8655,
+					"value": 8
+				},
+				{
+					"lng": 129.3114,
+					"lat": 47.4794,
+					"value": 38
+				},
+				{
+					"lng": 104.6308,
+					"lat": 28.7602,
+					"value": 69
+				},
+				{
+					"lng": 119.9065,
+					"lat": 42.287,
+					"value": 39
+				},
+				{
+					"lng": 122.302,
+					"lat": 29.9456,
+					"value": 87
+				},
+				{
+					"lng": 124.0456,
+					"lat": 42.5421,
+					"value": 57
+				},
+				{
+					"lng": 107.5135,
+					"lat": 26.7025,
+					"value": 52
+				},
+				{
+					"lng": 107.7223,
+					"lat": 31.355,
+					"value": 45
+				},
+				{
+					"lng": 117.3632,
+					"lat": 32.9397,
+					"value": 23
+				},
+				{
+					"lng": 124.383,
+					"lat": 40.1243,
+					"value": 43
+				},
+				{
+					"lng": 117.5625,
+					"lat": 32.8671,
+					"value": 68
+				},
+				{
+					"lng": 108.9266,
+					"lat": 34.2134,
+					"value": 70
+				},
+				{
+					"lng": 104.7417,
+					"lat": 31.464,
+					"value": 55
+				},
+				{
+					"lng": 99.1671,
+					"lat": 25.1118,
+					"value": 14
+				},
+				{
+					"lng": 116.7228,
+					"lat": 32.7054,
+					"value": 85
+				},
+				{
+					"lng": 113.0501,
+					"lat": 36.5329,
+					"value": 94
+				},
+				{
+					"lng": 111.6263,
+					"lat": 26.2233,
+					"value": 68
+				},
+				{
+					"lng": 119.421,
+					"lat": 32.3932,
+					"value": 51
+				},
+				{
+					"lng": 113.259,
+					"lat": 38.7257,
+					"value": 84
+				},
+				{
+					"lng": 104.1944,
+					"lat": 24.041,
+					"value": 88
+				},
+				{
+					"lng": 114.6845,
+					"lat": 37.13,
+					"value": 91
+				},
+				{
+					"lng": 103.3896,
+					"lat": 35.6638,
+					"value": 98
+				},
+				{
+					"lng": 112.2514,
+					"lat": 36.146,
+					"value": 14
+				},
+				{
+					"lng": 130.3618,
+					"lat": 46.8096,
+					"value": 35
+				},
+				{
+					"lng": 108.4491,
+					"lat": 22.1328,
+					"value": 41
+				},
+				{
+					"lng": 94.6928,
+					"lat": 43.252,
+					"value": 49
+				},
+				{
+					"lng": 107.7966,
+					"lat": 34.6777,
+					"value": 89
+				},
+				{
+					"lng": 117.0215,
+					"lat": 30.0966,
+					"value": 52
+				},
+				{
+					"lng": 89.525,
+					"lat": 46.9931,
+					"value": 25
+				},
+				{
+					"lng": 113.4713,
+					"lat": 34.1544,
+					"value": 66
+				},
+				{
+					"lng": 117.4207,
+					"lat": 25.2916,
+					"value": 69
+				},
+				{
+					"lng": 104.0557,
+					"lat": 30.6676,
+					"value": 13
+				},
+				{
+					"lng": 129.4359,
+					"lat": 47.413,
+					"value": 16
+				}
+			]
+		}
+	}
+}

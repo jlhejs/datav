@@ -1,0 +1,244 @@
+{
+	"name": "datav-engine-scanner",
+	"version": "0.0.14",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "扫光层",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"isloop": {
+				"name": "循环",
+				"type": "boolean",
+				"default": true
+			},
+			"modelUrl": {
+				"name": "模型地址",
+				"type": "string",
+				"default": "https://sh-conf.oss-cn-shanghai.aliyuncs.com/expo/city/city.gltf"
+			},
+			"axisType": {
+				"name": "轮播方向",
+				"type": "options",
+				"default": 3,
+				"options": [
+					{
+						"name": "X轴",
+						"value": 1
+					},
+					{
+						"name": "Y轴",
+						"value": 2
+					},
+					{
+						"name": "Z轴",
+						"value": 3
+					}
+				]
+			},
+			"direction": {
+				"name": "正负方向",
+				"type": "options",
+				"default": 1,
+				"options": [
+					{
+						"name": "正向",
+						"value": 1
+					},
+					{
+						"name": "负向",
+						"value": -1
+					}
+				]
+			},
+			"color": {
+				"type": "color",
+				"name": "颜色",
+				"default": "#6699ff"
+			},
+			"depthTest": {
+				"name": "深度检测",
+				"type": "boolean",
+				"default": false
+			},
+			"length": {
+				"type": "number",
+				"name": "扫光长度",
+				"default": 0.2,
+				"range": [
+					0.001,
+					1
+				],
+				"step": 0.001
+			},
+			"speed": {
+				"type": "number",
+				"name": "扫光速度",
+				"default": 0.003,
+				"range": [
+					0,
+					0.04
+				],
+				"step": 0.001
+			},
+			"scaleX": {
+				"name": "X缩放",
+				"type": "number",
+				"range": [
+					0.001,
+					100
+				],
+				"step": 0.0001,
+				"default": 1
+			},
+			"scaleY": {
+				"name": "Y缩放",
+				"type": "number",
+				"range": [
+					0.001,
+					100
+				],
+				"step": 0.0001,
+				"default": 1
+			},
+			"scaleZ": {
+				"name": "Z缩放",
+				"type": "number",
+				"range": [
+					0.001,
+					100
+				],
+				"step": 0.0001,
+				"default": 1
+			},
+			"offsetX": {
+				"name": "X轴坐标(经度)",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.000001,
+				"default": 120.17468
+			},
+			"offsetY": {
+				"name": "Y轴坐标(纬度)",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.000001,
+				"default": 30.25752
+			},
+			"offsetZ": {
+				"name": "Z轴坐标(高度)",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.000001,
+				"default": 0
+			},
+			"rotationX": {
+				"type": "number",
+				"name": "X旋转",
+				"default": 0,
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.0001
+			},
+			"rotationY": {
+				"type": "number",
+				"name": "Y旋转",
+				"default": 0,
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.0001
+			},
+			"rotationZ": {
+				"type": "number",
+				"name": "X旋转",
+				"default": 0,
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.0001
+			}
+		},
+		"api_data": {},
+		"apis": {},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1xLT7AAPoK1RjSZKbXXX1IXXa-180-180.png"
+	}
+}

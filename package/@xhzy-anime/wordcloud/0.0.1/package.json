@@ -1,0 +1,208 @@
+{
+	"name": "@xhzy-anime/wordcloud",
+	"version": "0.0.1",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "^3.3.1",
+		"lodash": "^4.17.11",
+		"vizz": "0.2.30"
+	},
+	"datav": {
+		"cn_name": "词云",
+		"icon": "//resource.datav.aliyun.com/cube/com/@xhzy-anime/wordcloud/0.0.1/icons/cover.png",
+		"protocol": 2,
+		"type": [
+			"text_label"
+		],
+		"supportTheme": true,
+		"view": {
+			"width": 1000,
+			"height": 500,
+			"minWidth": 500,
+			"minHeight": 200
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"name": {
+						"description": "词"
+					},
+					"value": {
+						"description": "词频"
+					}
+				}
+			}
+		},
+		"config": {
+			"wordcloud": {
+				"name": "词云",
+				"type": "group",
+				"children": {
+					"series": {
+						"name": "系列",
+						"type": "group",
+						"children": {
+							"max": {
+								"name": "最大尺寸",
+								"type": "number",
+								"default": 80,
+								"min": 0
+							},
+							"min": {
+								"name": "最小尺寸",
+								"type": "number",
+								"default": 20,
+								"min": 0
+							},
+							"maxFill": {
+								"name": "最大颜色",
+								"type": "color",
+								"default": "#FFE472"
+							},
+							"minFill": {
+								"name": "最小颜色",
+								"type": "color",
+								"default": "#665D41"
+							},
+							"shape": {
+								"name": "形状",
+								"type": "select",
+								"options": [
+									{
+										"name": "圆形",
+										"value": "circle"
+									},
+									{
+										"name": "钻石形",
+										"value": "diamond"
+									},
+									{
+										"name": "长方形",
+										"value": "square"
+									},
+									{
+										"name": "三角形",
+										"value": "triangle"
+									},
+									{
+										"name": "五角星形",
+										"value": "star"
+									}
+								],
+								"default": "circle"
+							}
+						}
+					},
+					"text": {
+						"name": "字体",
+						"type": "group",
+						"children": {
+							"gridSize": {
+								"name": "字间距",
+								"type": "number",
+								"default": 20,
+								"min": 0
+							},
+							"text": {
+								"name": "字体",
+								"type": "font",
+								"components": [
+									"fontFamily",
+									"fontWeight"
+								],
+								"default": {
+									"fontWeight": "bold"
+								}
+							}
+						}
+					}
+				}
+			},
+			"animation": {
+				"name": "动画",
+				"type": "group",
+				"children": {
+					"animationDuration": {
+						"name": "动画时间",
+						"type": "number",
+						"default": 5,
+						"min": 0
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "媒体大脑",
+					"value": 90
+				},
+				{
+					"name": "短视频",
+					"value": 85
+				},
+				{
+					"name": "内容生产者",
+					"value": 74
+				},
+				{
+					"name": "MGC+AI",
+					"value": 89
+				},
+				{
+					"name": "MAGIC",
+					"value": 64
+				},
+				{
+					"name": "人工智能",
+					"value": 34
+				},
+				{
+					"name": "智能媒体",
+					"value": 12
+				},
+				{
+					"name": "媒体融合",
+					"value": 37
+				},
+				{
+					"name": "数据可视化",
+					"value": 69
+				},
+				{
+					"name": "智能化编辑部",
+					"value": 83
+				},
+				{
+					"name": "版权区块链",
+					"value": 49
+				},
+				{
+					"name": "金融短视频",
+					"value": 26
+				},
+				{
+					"name": "体育短视频",
+					"value": 59
+				}
+			]
+		},
+		"events": {
+			"finish": {
+				"name": "动画结束",
+				"type": "object",
+				"description": "动画结束事件",
+				"fields": {
+					"data": {
+						"type": "array",
+						"name": "数据",
+						"optional": true,
+						"description": "数据"
+					}
+				}
+			}
+		}
+	}
+}

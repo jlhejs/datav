@@ -1,0 +1,93 @@
+{
+	"name": "map2d-layer-lines-konva",
+	"version": "0.0.9",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"ldmap": "0.1.2"
+	},
+	"datav": {
+		"private": true,
+		"cn_name": "线路热力图",
+		"protocol": 2,
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"apis": {
+			"geojson": {
+				"handler": "geojson",
+				"description": "接口描述",
+				"fields": {
+					"type": {
+						"description": "类型"
+					}
+				}
+			},
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"id": {
+						"description": "id"
+					},
+					"value": {
+						"description": "值"
+					}
+				}
+			}
+		},
+		"config": {
+			"gradinent": {
+				"type": "group",
+				"name": "填充",
+				"children": {
+					"to": {
+						"default": "#00fff0",
+						"name": "最高值颜色",
+						"type": "color"
+					},
+					"from": {
+						"default": "#05607d",
+						"name": "最低值颜色",
+						"type": "color"
+					},
+					"none": {
+						"default": "#4d4d4d",
+						"name": "无数据颜色",
+						"type": "color"
+					}
+				}
+			},
+			"style": {
+				"type": "group",
+				"name": "风格",
+				"children": {
+					"weight": {
+						"type": "number",
+						"name": "粗细",
+						"default": 3,
+						"min": 0,
+						"max": 10
+					}
+				}
+			}
+		},
+		"api_data": {
+			"geojson": "./geojson.json",
+			"source": "./source.json"
+		},
+		"type": [
+			"subcom"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		}
+	}
+}

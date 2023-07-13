@@ -1,0 +1,43 @@
+{
+	"name": "datav-solution-industry-ambientlighter",
+	"version": "0.0.1",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "工业组件环境光",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"intensity": {
+				"name": "光照强度",
+				"type": "number",
+				"default": 0.5,
+				"range": [
+					0,
+					10
+				],
+				"step": 0.01
+			},
+			"color": {
+				"type": "color",
+				"name": "颜色",
+				"default": "#FFFFFF"
+			}
+		},
+		"api_data": {},
+		"apis": {},
+		"type": [
+			"map_3d_industry_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_industry"
+			],
+			"supportNames": []
+		},
+		"icon": ""
+	}
+}

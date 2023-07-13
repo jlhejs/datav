@@ -1,0 +1,670 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-od-flyline",
+	"version": "2.1.4",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "OD飞线",
+		"icon": "//img.alicdn.com/imgextra/i2/O1CN01H1Ga1o1hwE08eZJt9_!!6000000004341-2-tps-360-360.png",
+		"protocol": 2,
+		"level": 2,
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"fold": false,
+						"children": {
+							"blending": {
+								"type": "select",
+								"name": "混合模式",
+								"options": [
+									{
+										"value": "NormalBlending",
+										"label": "正常模式"
+									},
+									{
+										"value": "AdditiveBlending",
+										"label": "添加模式"
+									},
+									{
+										"value": "NoBlending",
+										"label": "无叠加模式"
+									}
+								]
+							},
+							"sizeAttenuation": {
+								"type": "switch",
+								"name": "随距衰减",
+								"description": "贴图型宜开启"
+							},
+							"segments": {
+								"name": "飞线分段",
+								"type": "slider",
+								"description": "飞线的构成线段数量",
+								"step": 1,
+								"min": 1,
+								"max": 300,
+								"showRange": true
+							},
+							"blurWidthRatio": {
+								"name": "边缘模糊",
+								"type": "slider",
+								"description": "虚化宽度比例，抗锯齿",
+								"step": 0.01,
+								"min": 0,
+								"max": 1,
+								"showRange": true
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"fold": false,
+						"children": {
+							"arcRatio": {
+								"name": "飞线弧度",
+								"type": "slider",
+								"description": "矢跨比",
+								"step": 0.05,
+								"min": 0,
+								"max": 10,
+								"showRange": true
+							},
+							"lineType": {
+								"name": "飞线线型",
+								"type": "buttonRadio",
+								"options": [
+									{
+										"label": "矢量",
+										"value": 0
+									},
+									{
+										"label": "贴图",
+										"value": 1
+									}
+								]
+							},
+							"base": {
+								"type": "group",
+								"name": "基底线",
+								"fold": false,
+								"children": {
+									"baseWidth": {
+										"type": "slider",
+										"name": "基线粗细",
+										"step": 0.1,
+										"min": 0,
+										"max": 500,
+										"showRange": true
+									},
+									"baseColor": {
+										"type": "fill",
+										"name": "基线颜色"
+									},
+									"baseOpacity": {
+										"type": "slider",
+										"name": "不透明系数",
+										"step": 0.05,
+										"min": 0,
+										"max": 10,
+										"showRange": true
+									}
+								}
+							},
+							"highlight": {
+								"type": "group",
+								"name": "高亮线",
+								"fold": false,
+								"showInPanel": {
+									"conditions": [
+										[
+											".lineType",
+											"$eq",
+											0
+										]
+									]
+								},
+								"children": {
+									"brightSegCount": {
+										"type": "slider",
+										"name": "高亮数量",
+										"step": 1,
+										"min": 1,
+										"max": 30,
+										"showRange": true
+									},
+									"brightSegWidth": {
+										"type": "slider",
+										"name": "高亮粗细",
+										"step": 0.1,
+										"min": 0,
+										"max": 200,
+										"showRange": true
+									},
+									"spaceRatio": {
+										"name": "虚线长度",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.01,
+										"showRange": true
+									},
+									"brightSegColor": {
+										"type": "color",
+										"name": "高亮颜色"
+									},
+									"brightSegOpacity": {
+										"type": "slider",
+										"name": "不透明系数",
+										"min": 0,
+										"max": 1,
+										"step": 0.05,
+										"showRange": true
+									}
+								}
+							},
+							"textureParams": {
+								"name": "飞线贴图",
+								"type": "group",
+								"fold": false,
+								"showInPanel": {
+									"conditions": [
+										[
+											".lineType",
+											"$eq",
+											1
+										]
+									]
+								},
+								"children": {
+									"lineTexture": {
+										"name": "飞线",
+										"type": "group",
+										"fold": false,
+										"children": {
+											"texture0Type": {
+												"name": "贴图类型",
+												"type": "buttonRadio",
+												"options": [
+													{
+														"label": "默认",
+														"value": "default"
+													},
+													{
+														"label": "自定义",
+														"value": "custom"
+													}
+												]
+											},
+											"defaultTexture0Url": {
+												"name": "默认贴图",
+												"type": "imageSelect",
+												"showInPanel": {
+													"conditions": [
+														[
+															".texture0Type",
+															"$eq",
+															"default"
+														]
+													]
+												},
+												"options": [
+													{
+														"label": "类型一",
+														"value": "//img.alicdn.com/imgextra/i1/O1CN01q9wMhr1ZlDY0rcKk6_!!6000000003234-2-tps-512-28.png",
+														"src": "//img.alicdn.com/imgextra/i1/O1CN01q9wMhr1ZlDY0rcKk6_!!6000000003234-2-tps-512-28.png"
+													},
+													{
+														"label": "类型二",
+														"value": "//img.alicdn.com/imgextra/i2/O1CN01u79eoD1azhgzIYtBi_!!6000000003401-2-tps-512-28.png",
+														"src": "//img.alicdn.com/imgextra/i2/O1CN01u79eoD1azhgzIYtBi_!!6000000003401-2-tps-512-28.png"
+													},
+													{
+														"label": "类型三",
+														"value": "//img.alicdn.com/imgextra/i2/O1CN01i4gzoz1kPCHSrwJGv_!!6000000004675-2-tps-512-28.png",
+														"src": "//img.alicdn.com/imgextra/i2/O1CN01i4gzoz1kPCHSrwJGv_!!6000000004675-2-tps-512-28.png"
+													},
+													{
+														"label": "类型四",
+														"value": "//img.alicdn.com/imgextra/i1/O1CN012Obc8h1hUHpioAC2N_!!6000000004280-2-tps-512-28.png",
+														"src": "//img.alicdn.com/imgextra/i1/O1CN012Obc8h1hUHpioAC2N_!!6000000004280-2-tps-512-28.png"
+													}
+												]
+											},
+											"customTexture0Url": {
+												"name": "贴图地址",
+												"type": "image",
+												"showInPanel": {
+													"conditions": [
+														[
+															".texture0Type",
+															"$eq",
+															"custom"
+														]
+													]
+												}
+											},
+											"uvScale0": {
+												"name": "UV平铺值",
+												"type": "suite",
+												"children": {
+													"x": {
+														"name": "u",
+														"type": "slider",
+														"min": 0,
+														"max": 100,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true
+													},
+													"y": {
+														"name": "v",
+														"type": "slider",
+														"min": 0,
+														"max": 100,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true
+													}
+												}
+											}
+										}
+									},
+									"symbolTexture": {
+										"name": "符号贴图",
+										"type": "group",
+										"fold": false,
+										"children": {
+											"texture1Type": {
+												"name": "贴图类型",
+												"type": "buttonRadio",
+												"options": [
+													{
+														"label": "默认",
+														"value": "default"
+													},
+													{
+														"label": "自定义",
+														"value": "custom"
+													}
+												]
+											},
+											"defaultTexture1Url": {
+												"name": "默认贴图",
+												"type": "imageSelect",
+												"showInPanel": {
+													"conditions": [
+														[
+															".texture1Type",
+															"$eq",
+															"default"
+														]
+													]
+												},
+												"options": [
+													{
+														"label": "类型一",
+														"value": "//img.alicdn.com/imgextra/i2/O1CN01PE3Ou41g0gcUgoium_!!6000000004080-2-tps-40-40.png",
+														"src": "//img.alicdn.com/imgextra/i2/O1CN01PE3Ou41g0gcUgoium_!!6000000004080-2-tps-40-40.png"
+													},
+													{
+														"label": "类型二",
+														"value": "//img.alicdn.com/imgextra/i4/O1CN01DKO9zD1xJmbEtQYWI_!!6000000006423-2-tps-40-40.png",
+														"src": "//img.alicdn.com/imgextra/i4/O1CN01DKO9zD1xJmbEtQYWI_!!6000000006423-2-tps-40-40.png"
+													},
+													{
+														"label": "类型三",
+														"value": "//img.alicdn.com/imgextra/i2/O1CN016iLQJH1u7vVGOxVnu_!!6000000005991-2-tps-40-40.png",
+														"src": "//img.alicdn.com/imgextra/i2/O1CN016iLQJH1u7vVGOxVnu_!!6000000005991-2-tps-40-40.png"
+													},
+													{
+														"label": "类型四",
+														"value": "//img.alicdn.com/imgextra/i1/O1CN018kvknL1ObB5kTeHhG_!!6000000001723-2-tps-40-40.png",
+														"src": "//img.alicdn.com/imgextra/i1/O1CN018kvknL1ObB5kTeHhG_!!6000000001723-2-tps-40-40.png"
+													}
+												]
+											},
+											"customTexture1Url": {
+												"name": "贴图地址",
+												"type": "image",
+												"showInPanel": {
+													"conditions": [
+														[
+															".texture1Type",
+															"$eq",
+															"custom"
+														]
+													]
+												}
+											},
+											"symbolCount": {
+												"name": "符号数量",
+												"type": "hidden",
+												"min": 1,
+												"max": 100,
+												"step": 1,
+												"showRange": true
+											},
+											"symbolIntervalLen": {
+												"name": "符号间距",
+												"type": "slider",
+												"min": 10,
+												"max": 100000,
+												"step": 1,
+												"showRange": true,
+												"suffix": "m"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"animate": {
+						"name": "动效",
+						"fold": false,
+						"children": {
+							"dashSpeed0": {
+								"name": "飞线速度",
+								"type": "slider",
+								"description": "正负控制方向",
+								"min": -0.2,
+								"max": 0.2,
+								"step": 0.0002,
+								"showRange": true
+							},
+							"dashSpeed1": {
+								"name": "符号速度",
+								"type": "slider",
+								"description": "正负控制方向",
+								"showInPanel": {
+									"conditions": [
+										[
+											"..graph.lineType",
+											"$eq",
+											1
+										]
+									]
+								},
+								"min": -0.04,
+								"max": 0.04,
+								"step": 0.0001,
+								"showRange": true
+							}
+						}
+					}
+				},
+				"default": {
+					"general": {
+						"blending": "AdditiveBlending",
+						"sizeAttenuation": true,
+						"segments": 59,
+						"blurWidthRatio": 0.5
+					},
+					"graph": {
+						"arcRatio": 0.2,
+						"lineType": 1,
+						"base": {
+							"baseWidth": 12,
+							"baseColor": "#00bf82",
+							"baseOpacity": 3.5
+						},
+						"highlight": {
+							"brightSegCount": 3,
+							"brightSegWidth": 22,
+							"spaceRatio": 0.4,
+							"brightSegColor": "#725002",
+							"brightSegOpacity": 1
+						},
+						"textureParams": {
+							"lineTexture": {
+								"texture0Type": "default",
+								"defaultTexture0Url": "//img.alicdn.com/imgextra/i1/O1CN01q9wMhr1ZlDY0rcKk6_!!6000000003234-2-tps-512-28.png",
+								"customTexture0Url": "",
+								"uvScale0": {
+									"x": 1,
+									"y": 1
+								}
+							},
+							"symbolTexture": {
+								"texture1Type": "custom",
+								"defaultTexture1Url": "//img.alicdn.com/imgextra/i4/O1CN01DKO9zD1xJmbEtQYWI_!!6000000006423-2-tps-40-40.png",
+								"customTexture1Url": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/d9950df3769c8f93793f50d4e3e286c7.png",
+								"symbolCount": 5,
+								"symbolIntervalLen": 80
+							}
+						}
+					},
+					"animate": {
+						"dashSpeed0": 0.05,
+						"dashSpeed1": -0.04
+					}
+				}
+			}
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"errorHandler": "errorRender",
+				"format": "geo_lineString_od",
+				"description": "数据接口",
+				"fields": {
+					"geometry": {
+						"description": "线坐标串",
+						"type": "object",
+						"optional": false
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.154046,
+								30.2637289100773,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.17213325806927,
+								30.267190753554008,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.17810671898712,
+								30.252440358865613,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.17791849385821,
+								30.238986013397373,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.16928768877017,
+								30.22756265984922,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.154046,
+								30.22378928276095,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.14129129528908,
+								30.230520233840597,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.12592427277968,
+								30.237793209683378,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.1258112766044,
+								30.253611870523635,
+								200
+							]
+						]
+					}
+				},
+				{
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								120.154046,
+								30.245687,
+								200
+							],
+							[
+								120.12962633032294,
+								30.27471817926984,
+								200
+							]
+						]
+					}
+				}
+			]
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		}
+	}
+}

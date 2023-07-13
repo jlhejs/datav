@@ -1,0 +1,127 @@
+{
+	"name": "test",
+	"version": "0.0.4",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "~4.6.1"
+	},
+	"datav": {
+		"cn_name": "私有测试",
+		"icon": {
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/36be7c5c3b5204f7f937c29acc987a6d.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/36be7c5c3b5204f7f937c29acc987a6d.png"
+		},
+		"protocol": 2,
+		"private": true,
+		"type": [
+			"decorate"
+		],
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"value": {
+						"description": "值说明"
+					}
+				}
+			}
+		},
+		"config": {
+			"chart": {
+				"type": "group",
+				"name": "全局样式",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "text",
+						"default": "Microsoft Yahei"
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字号",
+						"min": 10,
+						"default": 56,
+						"max": 100
+					},
+					"textAlign": {
+						"name": "对齐方式",
+						"type": "options",
+						"options": [
+							{
+								"name": "左对齐",
+								"value": "left"
+							},
+							{
+								"name": "右对齐",
+								"value": "right"
+							},
+							{
+								"name": "居中对齐",
+								"value": "center"
+							}
+						],
+						"default": "center"
+					},
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#000"
+					},
+					"show": {
+						"name": "显示/隐藏",
+						"type": "boolean",
+						"default": true
+					},
+					"multicolor": {
+						"name": "渐变颜色",
+						"type": "multicolor",
+						"default": {
+							"style": "single",
+							"value": "#2F8FBE"
+						}
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "search",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						]
+					},
+					"background-image": {
+						"type": "image",
+						"name": "背景图",
+						"default": "//img.alicdn.com/tps/TB1arutOpXXXXXNaFXXXXXXXXXX-572-747.png"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": "值"
+				}
+			]
+		}
+	}
+}

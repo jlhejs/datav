@@ -1,0 +1,210 @@
+{
+	"name": "datavmap-3d-layer-polyhill",
+	"version": "0.1.6",
+	"description": "基于datav.gl的多边形山体组件",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-3d-layer-polyhill.git"
+	},
+	"keywords": [
+		"datav.gl",
+		"mapbox",
+		"polyhill"
+	],
+	"author": "mingwang",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"geojson-bbox": "^0.0.0",
+		"safely-merge": "^1.0.1",
+		"simplex-noise": "2.3.0"
+	},
+	"datav": {
+		"cn_name": "多边形山体组件",
+		"icon": "https://img.alicdn.com/tfs/TB1S5T5ACzqK1RjSZFpXXakSXXa-180-180.png",
+		"protocol": 2,
+		"type": [
+			"datavgl_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavgl"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"apis": {
+			"region": {
+				"handler": "render",
+				"description": "山体范围数据接口",
+				"fields": {}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"visible": {
+				"name": "显示",
+				"type": "hidden",
+				"default": "true"
+			},
+			"hillScaleZ": {
+				"name": "山体高度",
+				"type": "number",
+				"default": 50,
+				"range": [
+					1,
+					1000
+				],
+				"step": 0.1
+			},
+			"opacity": {
+				"name": "山体透明度",
+				"type": "number",
+				"default": 0.6,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			},
+			"threshold": {
+				"name": "剔除阈值",
+				"type": "number",
+				"default": 0.01,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			},
+			"segNum": {
+				"name": "等高线密度",
+				"type": "number",
+				"default": 20,
+				"range": [
+					0,
+					200
+				],
+				"step": 1
+			},
+			"radius": {
+				"name": "等高线宽度",
+				"type": "number",
+				"default": 1,
+				"range": [
+					0.01,
+					10
+				],
+				"step": 0.01
+			},
+			"color": {
+				"name": "山体颜色",
+				"type": "color",
+				"default": "#ff0000"
+			},
+			"lineColor": {
+				"name": "等高线颜色",
+				"type": "color",
+				"default": "#ffffff"
+			}
+		},
+		"api_data": {
+			"region": {
+				"type": "FeatureCollection",
+				"features": [
+					{
+						"type": "Feature",
+						"properties": {},
+						"geometry": {
+							"type": "Polygon",
+							"coordinates": [
+								[
+									[
+										120.13193607330321,
+										30.252746841711577
+									],
+									[
+										120.1353907585144,
+										30.252320527028715
+									],
+									[
+										120.13807296752928,
+										30.252765377090626
+									],
+									[
+										120.1415491104126,
+										30.255286156056954
+									],
+									[
+										120.14438152313232,
+										30.25654652128185
+									],
+									[
+										120.1471495628357,
+										30.25890039537824
+									],
+									[
+										120.15017509460449,
+										30.25999390824693
+									],
+									[
+										120.14981031417847,
+										30.261624887867903
+									],
+									[
+										120.1448106765747,
+										30.262384766850218
+									],
+									[
+										120.14302968978883,
+										30.262885171749378
+									],
+									[
+										120.14236450195312,
+										30.263719174247907
+									],
+									[
+										120.13901710510254,
+										30.2634041074699
+									],
+									[
+										120.1338028907776,
+										30.26027191805195
+									],
+									[
+										120.1333737373352,
+										30.25688014466367
+									],
+									[
+										120.13249397277832,
+										30.255490039763323
+									],
+									[
+										120.13193607330321,
+										30.252746841711577
+									]
+								]
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}

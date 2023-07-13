@@ -1,0 +1,601 @@
+{
+	"name": "@lottery/carousel-img",
+	"version": "1.0.4",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"animejs": "3.1.0"
+	},
+	"datav": {
+		"cn_name": "抽奖轮播图",
+		"level": 0,
+		"protocol": 2,
+		"icon": "//img.alicdn.com/imgextra/i3/O1CN013WhDnj28y3EXvb6sr_!!6000000008000-2-tps-368-208.png",
+		"thumbnail": "//img.alicdn.com/imgextra/i1/O1CN01LiAnne1CIbg97izbt_!!6000000000058-2-tps-332-144.png",
+		"type": [
+			"regular"
+		],
+		"view": {
+			"width": "700",
+			"height": "88",
+			"minWidth": "700",
+			"minHeight": "88"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "抽奖轮播图接口描述",
+				"fields": {
+					"id": {
+						"name": "id",
+						"description": "id",
+						"type": "string | number",
+						"optional": false
+					},
+					"title": {
+						"name": "名称",
+						"description": "名称",
+						"type": "string | number",
+						"optional": false
+					},
+					"url": {
+						"name": "图片地址",
+						"description": "图片地址",
+						"type": "string",
+						"optional": false
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"type": "menu",
+				"children": {
+					"content": {
+						"name": "内容",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"prize": {
+								"name": "奖品",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"layout": {
+										"name": "布局方式",
+										"type": "buttonRadio",
+										"default": "horizontal",
+										"options": [
+											{
+												"name": "水平",
+												"value": "horizontal"
+											},
+											{
+												"name": "垂直",
+												"value": "vertical"
+											}
+										]
+									},
+									"directionHor": {
+										"name": "运动方向",
+										"type": "buttonRadio",
+										"default": "left",
+										"options": [
+											{
+												"name": "左",
+												"value": "left"
+											},
+											{
+												"name": "右",
+												"value": "right"
+											}
+										],
+										"showInPanel": {
+											"conditions": [
+												[
+													".layout",
+													"$eq",
+													"horizontal"
+												]
+											]
+										}
+									},
+									"directionVer": {
+										"name": "运动方向",
+										"type": "buttonRadio",
+										"default": "top",
+										"options": [
+											{
+												"name": "上",
+												"value": "top"
+											},
+											{
+												"name": "下",
+												"value": "bottom"
+											}
+										],
+										"showInPanel": {
+											"conditions": [
+												[
+													".layout",
+													"$eq",
+													"vertical"
+												]
+											]
+										}
+									},
+									"prizeNum": {
+										"name": "显示数量",
+										"type": "stepper",
+										"default": 7,
+										"step": 1
+									},
+									"prizeSize": {
+										"name": "奖品尺寸",
+										"type": "suite",
+										"children": {
+											"sizeW": {
+												"name": "宽度",
+												"type": "stepper",
+												"default": 30,
+												"suffix": "px",
+												"col": 12,
+												"step": 1
+											},
+											"sizeH": {
+												"name": "高度",
+												"type": "stepper",
+												"default": 30,
+												"suffix": "px",
+												"col": 12,
+												"step": 1
+											}
+										}
+									},
+									"prizeContent": {
+										"type": "tabs",
+										"name": "奖品内容",
+										"defaultViewMode": "column",
+										"description": "假如data中有数据，优先展示数据的内容",
+										"default": [
+											{
+												"id": 0,
+												"title": "小鸟",
+												"url": "https://img.alicdn.com/imgextra/i1/O1CN01yf1GEn27aPAIcTq42_!!6000000007813-2-tps-280-320.png"
+											},
+											{
+												"id": 1,
+												"title": "机器人",
+												"url": "https://img.alicdn.com/imgextra/i2/O1CN01m3jVkx1lBkIXdKvas_!!6000000004781-55-tps-200-200.svg"
+											},
+											{
+												"id": 2,
+												"title": "机器人2",
+												"url": "https://img.alicdn.com/imgextra/i1/O1CN017DyURE1HDB3yaMUxM_!!6000000000723-55-tps-200-200.svg"
+											},
+											{
+												"id": 3,
+												"title": "章鱼丸子",
+												"url": "https://img.alicdn.com/imgextra/i2/O1CN01MNGiHv25nZJzKqjq6_!!6000000007571-55-tps-200-200.svg"
+											},
+											{
+												"id": 4,
+												"title": "无脸男",
+												"url": "https://img.alicdn.com/imgextra/i3/O1CN01NzP7391hHSmKzz95X_!!6000000004252-55-tps-200-200.svg"
+											}
+										],
+										"template": {
+											"type": "object",
+											"name": "奖品<%= i + 1%>",
+											"children": {
+												"id": {
+													"name": "标识",
+													"type": "number"
+												},
+												"title": {
+													"name": "名字",
+													"type": "string"
+												},
+												"url": {
+													"name": "图片",
+													"type": "image"
+												}
+											}
+										}
+									}
+								}
+							},
+							"drawArea": {
+								"name": "抽中区域",
+								"type": "group",
+								"fold": true,
+								"children": {
+									"drawMode": {
+										"name": "模式",
+										"type": "buttonRadio",
+										"default": "debugMode",
+										"options": [
+											{
+												"name": "调试模式",
+												"value": "debugMode"
+											},
+											{
+												"name": "正常模式",
+												"value": "normalMode"
+											}
+										]
+									},
+									"position": {
+										"name": "位置",
+										"type": "buttonRadio",
+										"default": "middle",
+										"options": [
+											{
+												"name": "头部",
+												"value": "top"
+											},
+											{
+												"name": "中间",
+												"value": "middle"
+											},
+											{
+												"name": "尾部",
+												"value": "bottom"
+											}
+										],
+										"showInPanel": {
+											"conditions": [
+												[
+													".customPosition.show",
+													"$eq",
+													false
+												],
+												[
+													"global.animation.drawAreaAnima.drawMode",
+													"$eq",
+													"fixed"
+												]
+											],
+											"logicalType": "$and"
+										}
+									},
+									"customPosition": {
+										"name": "自定义位置",
+										"type": "suite",
+										"enableHide": true,
+										"children": {
+											"show": {
+												"default": false
+											},
+											"horizontalOffset": {
+												"name": "水平位置",
+												"type": "stepper",
+												"default": 100,
+												"step": 1,
+												"suffix": "px",
+												"showInPanel": {
+													"conditions": [
+														[
+															"global.content.prize.layout",
+															"$eq",
+															"horizontal"
+														]
+													]
+												}
+											},
+											"verticalOffset": {
+												"name": "距头部位置",
+												"type": "stepper",
+												"default": 100,
+												"step": 1,
+												"suffix": "px",
+												"showInPanel": {
+													"conditions": [
+														[
+															"global.content.prize.layout",
+															"$eq",
+															"vertical"
+														]
+													]
+												}
+											}
+										},
+										"showInPanel": {
+											"conditions": [
+												[
+													"global.animation.drawAreaAnima.drawMode",
+													"$eq",
+													"fixed"
+												]
+											]
+										}
+									},
+									"drawSize": {
+										"name": "尺寸",
+										"type": "suite",
+										"children": {
+											"drawSizeW": {
+												"name": "宽度",
+												"type": "stepper",
+												"default": 50,
+												"suffix": "px",
+												"col": 12,
+												"step": 1
+											},
+											"drawSizeH": {
+												"name": "高度",
+												"type": "stepper",
+												"default": 50,
+												"suffix": "px",
+												"col": 12,
+												"step": 1
+											}
+										}
+									},
+									"drawBorderRadius": {
+										"name": "圆角",
+										"type": "stepper",
+										"min": 0,
+										"step": 1,
+										"suffix": "px",
+										"default": 4
+									},
+									"drawBgColor": {
+										"name": "填充色",
+										"type": "fill",
+										"default": "rgba(10, 115, 255, 0.3)"
+									},
+									"drawBorder": {
+										"name": "边框",
+										"type": "suite",
+										"children": {
+											"borderStyle": {
+												"name": "线型",
+												"type": "select",
+												"default": "solid",
+												"col": 8,
+												"options": [
+													{
+														"name": "实线",
+														"value": "solid"
+													},
+													{
+														"name": "虚线",
+														"value": "dashed"
+													},
+													{
+														"name": "点线",
+														"value": "dotted"
+													}
+												]
+											},
+											"borderWidth": {
+												"name": "粗细",
+												"type": "stepper",
+												"step": 1,
+												"min": 0,
+												"default": 1,
+												"col": 8
+											},
+											"borderColor": {
+												"name": "颜色",
+												"type": "color",
+												"default": "#0a73ff",
+												"col": 8,
+												"style": "simple"
+											}
+										}
+									}
+								}
+							},
+							"notPumped": {
+								"name": "未抽中",
+								"type": "group",
+								"description": "未抽中奖品时，数据抛出值配置",
+								"children": {
+									"id": {
+										"name": "标识",
+										"type": "stepper",
+										"default": -1
+									},
+									"title": {
+										"name": "名字",
+										"type": "text",
+										"default": "未抽中"
+									},
+									"url": {
+										"name": "图片",
+										"type": "image",
+										"default": "https://img.alicdn.com/imgextra/i2/O1CN01xNJ8P0219wXZQZXxr_!!6000000006943-2-tps-32-32.png"
+									}
+								}
+							}
+						}
+					},
+					"animation": {
+						"name": "动画",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"speed": {
+								"name": "奖品速度",
+								"type": "stepper",
+								"step": 0.1,
+								"default": 1,
+								"min": 0,
+								"max": 1,
+								"suffix": "s",
+								"description": "每一项滚动花费的时间，单位为 s"
+							},
+							"increaseSpeedSet": {
+								"name": "递增速度",
+								"type": "suite",
+								"description": "每次抽中奖品后，递增速度，清空动画或重新开始动画，速度还原",
+								"enableHide": true,
+								"children": {
+									"show": {
+										"default": false
+									},
+									"increaseSpeed": {
+										"name": "速度",
+										"type": "stepper",
+										"step": 1,
+										"default": 1,
+										"min": 0
+									}
+								}
+							},
+							"drawAreaAnima": {
+								"name": "中间区域动画",
+								"type": "group",
+								"fold": false,
+								"children": {
+									"drawMode": {
+										"name": "方式",
+										"type": "buttonRadio",
+										"default": "fixed",
+										"options": [
+											{
+												"name": "固定",
+												"value": "fixed"
+											},
+											{
+												"name": "滚动",
+												"value": "scroll"
+											}
+										]
+									},
+									"drawSpeed": {
+										"name": "滚动速度",
+										"type": "stepper",
+										"step": 1,
+										"default": 3,
+										"min": 0,
+										"suffix": "s",
+										"showInPanel": {
+											"conditions": [
+												[
+													".drawMode",
+													"$eq",
+													"scroll"
+												]
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"interaction": {
+						"name": "交互",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"trigger": {
+								"name": "抽奖难度",
+								"type": "buttonRadio",
+								"default": "hard",
+								"description": "简单：只要抽中区域和奖品有任何重合，就算抽中; 普通：抽中区域和奖品有 1/3 重合; 地狱：抽中区域和奖品要有 4/5 重合",
+								"options": [
+									{
+										"name": "简单",
+										"value": "simple"
+									},
+									{
+										"name": "普通",
+										"value": "normal"
+									},
+									{
+										"name": "地狱",
+										"value": "hard"
+									}
+								]
+							},
+							"isPause": {
+								"name": "抽奖后暂停",
+								"type": "boolean",
+								"default": false
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"id": 0,
+					"title": "小鸟",
+					"url": "https://img.alicdn.com/imgextra/i2/O1CN01P8VxYa1IRfCpVyccv_!!6000000000890-55-tps-200-200.svg"
+				},
+				{
+					"id": 1,
+					"title": "机器人",
+					"url": "https://img.alicdn.com/imgextra/i2/O1CN01m3jVkx1lBkIXdKvas_!!6000000004781-55-tps-200-200.svg"
+				},
+				{
+					"id": 2,
+					"title": "机器人2",
+					"url": "https://img.alicdn.com/imgextra/i1/O1CN017DyURE1HDB3yaMUxM_!!6000000000723-55-tps-200-200.svg"
+				},
+				{
+					"id": 3,
+					"title": "章鱼丸子",
+					"url": "https://img.alicdn.com/imgextra/i2/O1CN01MNGiHv25nZJzKqjq6_!!6000000007571-55-tps-200-200.svg"
+				},
+				{
+					"id": 4,
+					"title": "无脸男",
+					"url": "https://img.alicdn.com/imgextra/i3/O1CN01NzP7391hHSmKzz95X_!!6000000004252-55-tps-200-200.svg"
+				}
+			]
+		},
+		"publicHandler": {
+			"start": {
+				"name": "开始动画"
+			},
+			"pause": {
+				"name": "暂停动画"
+			},
+			"lottery": {
+				"name": "抽奖"
+			},
+			"restore": {
+				"name": "恢复动画"
+			},
+			"stop": {
+				"name": "结束动画"
+			}
+		},
+		"events": {
+			"itemSelect": {
+				"name": "抽奖",
+				"type": [
+					"object"
+				],
+				"description": "抽奖时，抛出抽中数据",
+				"fields": {
+					"id": {
+						"name": "id",
+						"description": "id",
+						"type": "string | number",
+						"optional": false
+					},
+					"title": {
+						"name": "名称",
+						"description": "名称",
+						"type": "string | number",
+						"optional": false
+					},
+					"url": {
+						"name": "图片地址",
+						"description": "图片地址",
+						"type": "string",
+						"optional": false
+					}
+				}
+			}
+		}
+	}
+}

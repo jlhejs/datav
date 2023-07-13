@@ -1,0 +1,3338 @@
+$color_1: var(--datav-gui-font-color-1);
+$color_2: var(--datav-gui-font-color-base);
+$color_3: var(--datav-gui-primary-color);
+$color_4: var(--datav-gui-hover-color);
+$color_5: var(--datav-gui-active-color);
+$color_6: var(--datav-gui-font-color-2);
+$color_7: var(--datav-gui-font-color-3);
+$color_8: var(--datav-gui-font-color-description);
+$color_9: var(--datav-gui-font-color-disabled);
+$color_10: var(--datav-gui-logo-color);
+$color_11: var(--datav-gui-disabled-color);
+$color_12: #a1aeb3;
+$color_13: #fff;
+$color_14: var(--datav-gui-error-color);
+$color_15: inherit;
+$font-family_1: sans-serif;
+$font-family_2: "datav-gui-iconfont-font";
+$border-color_1: transparent;
+$border-color_2: var(--datav-gui-primary-color);
+$border-color_3: var(--datav-gui-font-color-base) transparent transparent transparent;
+$border-top-color_1: var(--datav-gui-component-background-hover-color);
+$border-top-color_2: var(--datav-gui-primary-color);
+$border-right-color_1: transparent;
+$border-right-color_2: var(--datav-gui-component-background-hover-color);
+$border-right-color_3: var(--datav-gui-primary-color);
+$border-bottom-color_1: var(--datav-gui-background-color-front);
+$border-bottom-color_2: var(--datav-gui-component-background-hover-color);
+$border-bottom-color_3: var(--datav-gui-primary-color);
+$border-left-color_1: var(--datav-gui-background-color-front);
+$border-left-color_2: var(--datav-gui-component-background-hover-color);
+$border-left-color_3: var(--datav-gui-primary-color);
+$outline-color_1: var(--datav-gui-component-border-color);
+
+/*  DataV-GUI-Icons */
+/*  DataV-GUI-3.0 */
+@keyframes dash {
+    to {
+        stroke-dashoffset: 120;
+    }
+}
+:root {
+    --datav-gui-primary-color: #2483ff;
+    --datav-gui-error-color: #FF4F43;
+    --datav-gui-hover-color: #26A5FF;
+    --datav-gui-active-color: #2693FF;
+    --datav-gui-disabled-color: #424447;
+    --datav-gui-background-color-front: hsl(215, 15%, 13%);
+    --datav-gui-background-color-front-lighter: hsl(215, 15%, 28%);
+    --datav-gui-background-color-back: hsl(215, 15%, 8%);
+    --datav-gui-background-color-back-darker: hsl(0, 0%, 0%);
+    --datav-gui-background-hover-color: #1B3964;
+    --datav-gui-component-background-color: #262C33;
+    --datav-gui-component-background-color-darker: #262C33;
+    --datav-gui-component-background-hover-color: #303640;
+    --datav-gui-component-background-active-color: #262B33;
+    --datav-gui-component-background-disabled-color: #13161A;
+    --datav-gui-font-color-base: #A1AEB3;
+    --datav-gui-font-color-1: #fff;
+    --datav-gui-font-color-2: #C3D3D9;
+    --datav-gui-font-color-3: #737C80;
+    --datav-gui-font-color-description: #5C6366;
+    --datav-gui-font-color-disabled: #424447;
+    --datav-gui-border-color: rgba(52, 52, 52, .5);
+    --datav-gui-component-border-color: #0B0C0D;
+    --datav-gui-cover-color: rgba(0, 0, 0, 0.75);
+    --datav-gui-component-slider-track-color: linear-gradient(to right, #74f0ff, #2681ff);
+    --datav-gui-disabled-opacity: 0.6;
+    --datav-gui-popover-shadow: 0 0 4px #000;
+    --datav-gui-logo-color: rgba(255, 255, 255, 0.25);
+    --datav-gui-font-size-base: 12px;
+    --datav-gui-icon-size-md: 14px;
+    --datav-gui-component-border: 1px solid var(--datav-gui-component-border-color);
+    --datav-gui-transition-time: 0.3s;
+    --datav-gui-transition-easing: ease-in-out;
+    --datav-gui-slider-handle-bg: #fff;
+    --datav-gui-padding-border-color: #737C80;
+    --datav-gui-field-show-hide-bg: #6d7278;
+    --datav-gui-field-padding-right: 8px;
+    --datav-gui-field-padding-top: 4px;
+    --datav-gui-field-padding-bottom: 4px;
+    --datav-gui-field-padding-left-level-1: 8px;
+    --datav-gui-field-padding-left-level-2: 8px;
+    --datav-gui-field-padding-left-level-3: 8px;
+    --datav-gui-field-padding-left-level-4: 8px;
+    --datav-gui-field-padding-left-level-5: 24px;
+    --datav-gui-collection-padding-left-level-0: 0;
+    --datav-gui-collection-padding-left-level-1: 8px;
+    --datav-gui-collection-padding-left-level-2: 8px;
+    --datav-gui-collection-padding-left-level-3: 8px;
+    --datav-gui-collection-padding-left-level-4: 24px;
+    --datav-gui-component-container-width: 192px;
+    --datav-gui-component-height: 24px;
+    --datav-gui-menu-item-height: 36px;
+    --datav-gui-with-icon-width: 83px;
+    --datav-gui-image-content-height: 120px;
+    --datav-gui-image-select-input-height: 68px;
+    --datav-gui-image-select-image-content-height: 78px;
+    --datav-gui-image-select-image-height: 54px;
+    --datav-gui-input-padding: 7px;
+    --datav-gui-field-padding-right: 8px;
+    --datav-gui-field-padding-top: 4px;
+    --datav-gui-field-padding-bottom: 4px;
+    --datav-gui-field-padding-left-level-1: 8px;
+    --datav-gui-field-padding-left-level-2: 8px;
+    --datav-gui-field-padding-left-level-3: 8px;
+    --datav-gui-field-padding-left-level-4: 8px;
+    --datav-gui-field-padding-left-level-5: 24px;
+    --datav-gui-collection-padding-left-level-0: 0;
+    --datav-gui-collection-padding-left-level-1: 8px;
+    --datav-gui-collection-padding-left-level-2: 8px;
+    --datav-gui-collection-padding-left-level-3: 8px;
+    --datav-gui-collection-padding-left-level-4: 24px;
+    --datav-gui-component-container-width: 192px;
+    --datav-gui-component-height: 24px;
+    --datav-gui-menu-item-height: 36px;
+    --datav-gui-with-icon-width: 83px;
+    --datav-gui-image-content-height: 120px;
+    --datav-gui-image-select-input-height: 68px;
+    --datav-gui-image-select-image-content-height: 78px;
+    --datav-gui-image-select-image-height: 54px;
+    --datav-gui-input-padding: 7px;
+}
+.datav-gui {
+    .datav-gui-field.\--level1 {
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        padding-left: var(--datav-gui-field-padding-left-level-1);
+        background: var(--datav-gui-background-color-front);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        padding-left: var(--datav-gui-field-padding-left-level-1);
+        background: var(--datav-gui-background-color-front);
+    }
+    .datav-gui-field {
+        &:first-child {
+            padding-top: 16px;
+            padding-top: 16px;
+        }
+        width: 100%;
+        display: flex;
+        position: relative;
+        padding-top: var(--datav-gui-field-padding-top);
+        padding-right: var(--datav-gui-field-padding-right);
+        padding-bottom: var(--datav-gui-field-padding-bottom);
+        transition: all var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_2;
+        width: 100%;
+        display: flex;
+        position: relative;
+        padding-top: var(--datav-gui-field-padding-top);
+        padding-right: var(--datav-gui-field-padding-right);
+        padding-bottom: var(--datav-gui-field-padding-bottom);
+        transition: all var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_2;
+        &:last-child {
+            &:not(.\--caption) {
+                padding-bottom: 16px;
+            }
+        }
+        &:last-child[class~="--caption"] {
+            padding-bottom: 16px;
+        }
+        &:last-child[class~="datav-gui-suite"] {
+            padding-bottom: calc(16px - var(--datav-gui-field-padding-bottom));
+        }
+        .datav-gui-field-title {
+            flex: 1;
+            min-width: 40px;
+            height: var(--datav-gui-component-height);
+            line-height: var(--datav-gui-component-height);
+            padding-right: 5px;
+        }
+        .datav-gui-field-container {
+            width: var(--datav-gui-component-container-width);
+            align-items:center;/*垂直居中*/
+            display: flex;
+            &>div{
+                // display: flex;
+            }
+            .datav-gui-suite-component {
+                margin-left: -4px;
+                margin-right: -4px;
+                display: flex;
+                flex-flow: wrap;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding-bottom: 0;
+                .datav-gui-suite__item {
+                    padding-left: 4px;
+                    padding-right: 4px;
+                    padding-bottom: var(--datav-gui-field-padding-bottom);
+                }
+                .datav-gui-suite__item.\--no-caption {
+                    margin-bottom: 2px;
+                }
+                .datav-gui-suite__item.\--field-disabled {
+                    opacity: var(--datav-gui-disabled-opacity);
+                    pointer-events: none;
+                    cursor: not-allowed;
+                }
+                // 与iconRadio样式冲突
+                // .datav-gui-component>div{
+                //     display: grid;
+                // }
+            }
+            .not-exist {
+                line-height: var(--datav-gui-component-height);
+            }
+        }
+    }
+    --grid-all: 24;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    font-family: $font-family_1;
+    width: 100%;
+    .datav-gui-grid-col-1 {
+        width: calc(1 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-2 {
+        width: calc(2 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-3 {
+        width: calc(3 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-4 {
+        width: calc(4 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-5 {
+        width: calc(5 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-6 {
+        width: calc(6 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-7 {
+        width: calc(7 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-8 {
+        width: calc(8 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-9 {
+        width: calc(9 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-10 {
+        width: calc(10 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-11 {
+        width: calc(11 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-11-5 {
+        width: calc(11.5 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-12 {
+        width: calc(12 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-13 {
+        width: calc(13 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-14 {
+        width: calc(14 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-15 {
+        width: calc(15 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-16 {
+        width: calc(16 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-17 {
+        width: calc(17 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-18 {
+        width: calc(18 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-19 {
+        width: calc(19 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-20 {
+        width: calc(20 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-21 {
+        width: calc(21 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-22 {
+        width: calc(22 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-23 {
+        width: calc(23 * 100%/var(--grid-all));
+    }
+    .datav-gui-grid-col-24 {
+        width: calc(24 * 100%/var(--grid-all));
+    }
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
+    input {
+        &::-webkit-input-placeholder {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_8;
+        }
+        &::-moz-placeholder {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_8;
+        }
+        &:-ms-input-placeholder {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_8;
+        }
+        &:-moz-placeholder {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_8;
+        }
+    }
+    input[type="range"] {
+        height: 2px;
+        -webkit-appearance: none;
+        background: transparent;
+        box-sizing: border-box;
+        display: inline-block;
+        &::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 2px;
+            background: transparent;
+            border-radius: 0;
+            cursor: pointer;
+        }
+        &::-webkit-slider-thumb {
+            height: 9px;
+            width: 9px;
+            border-radius: 0;
+            background: #ffffff;
+            -webkit-appearance: none;
+            margin-top: -4px;
+            cursor: pointer;
+        }
+    }
+    input[type="number"] {
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            width: 0;
+            height: 0;
+            display: none;
+        }
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            width: 0;
+            height: 0;
+            display: none;
+        }
+    }
+    * {
+        box-sizing: border-box;
+    }
+    .datav-gui-logo {
+        text-align: right;
+        padding: var(--datav-gui-field-padding-right);
+        background: var(--datav-gui-background-color-front);
+        .datav-gui-logo-icon.datav-gui-icon {
+            margin-left: 4px;
+            height: 12px;
+            width: 46px;
+            color: $color_10;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    }
+    .iconfont {
+        cursor: pointer;
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_2;
+        font-size: 16px;
+        font-style: normal;
+        transition: transform var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
+        &:hover {
+            color: $color_4;
+            color: $color_4;
+        }
+        &:active {
+            color: $color_5;
+            color: $color_5;
+        }
+        &:disabled {
+            color: $color_11;
+            cursor: not-allowed;
+            &:hover {
+                color: $color_11;
+            }
+            &:active {
+                color: $color_11;
+            }
+        }
+    }
+    .iconfont.\--disabled {
+        color: $color_11;
+        cursor: not-allowed;
+        &:hover {
+            color: $color_11;
+        }
+        &:active {
+            color: $color_11;
+        }
+    }
+    .datav-gui--highlight {
+        color: $color_3 !important;
+    }
+    .datav-gui-field.datav-gui-suite {
+        padding-bottom: 0;
+    }
+    .datav-gui-field.\--disabled {
+        cursor: not-allowed;
+        .datav-gui-field-title {
+            opacity: var(--datav-gui-disabled-opacity);
+        }
+        .datav-gui-field-container {
+            opacity: var(--datav-gui-disabled-opacity);
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+    }
+    .datav-gui-field.\--field-disabled {
+        cursor: not-allowed;
+        .datav-gui-field-title {
+            opacity: var(--datav-gui-disabled-opacity);
+        }
+        .datav-gui-field-container {
+            opacity: var(--datav-gui-disabled-opacity);
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+    }
+    .datav-gui-field.\--disabled.\--disabled {
+        .datav-gui-show-placeholder {
+            opacity: var(--datav-gui-disabled-opacity);
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+    }
+    .datav-gui-field.\--field-disabled.\--disabled {
+        .datav-gui-show-placeholder {
+            opacity: var(--datav-gui-disabled-opacity);
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+    }
+    .datav-gui-field.\--level0 {
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        padding-left: var(--datav-gui-field-padding-left-level-1);
+        background: var(--datav-gui-background-color-front);
+    }
+    .datav-gui-field.\--level2 {
+        padding-left: var(--datav-gui-field-padding-left-level-2);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_6;
+    }
+    .datav-gui-field.\--level3 {
+        padding-left: var(--datav-gui-field-padding-left-level-3);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_7;
+    }
+    .datav-gui-field.\--level4 {
+        padding-left: var(--datav-gui-field-padding-left-level-4);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_7;
+    }
+    .datav-gui-field.\--level5 {
+        padding-left: var(--datav-gui-field-padding-left-level-5);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_7;
+    }
+    .datav-gui-field.\--level6 {
+        padding-left: var(--datav-gui-field-padding-left-level-5);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_7;
+    }
+    .datav-gui-collection.datav-collapse-panel {
+        background: transparent;
+    }
+    .datav-gui-collection {
+        .datav-gui-field-title {
+            flex: 1;
+            height: var(--datav-gui-component-height);
+            line-height: var(--datav-gui-component-height);
+        }
+        .n-collapse-item__header {
+            border: none;
+            padding: 0;
+            position: relative;
+            &::before {
+                content: "";
+                display: "block";
+                width: 100%;
+                height: 1px;
+                background: var(--datav-gui-border-color);
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+        }
+        .datav-collapse-panel-content {
+            padding: 0;
+        }
+        .datav-gui-collection-list-empty {
+            padding: 12px;
+            padding-left: 28px;
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_7;
+        }
+        flex-flow: wrap;
+        .datav-gui-collection {
+            margin-left: 0;
+        }
+        .n-collapse-item__header-main {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            padding-right: 8px;
+            .datav-collapse-panel-slots {
+                margin-left: auto;
+                transition: 0.3s all;
+                display: none;
+                align-items: center;
+                padding-right: 20px;
+                .datav-collapse-panel-slots-split {
+                    display: inline-block;
+                    width: 1px;
+                    height: 8px;
+                    border-left: 1px solid var(--datav-gui-border-color);
+                    margin-left: 6px;
+                }
+                .iconfont {
+                    padding: 4px;
+                    margin-left: 6px;
+                }
+            }
+        }
+        .n-collapse-item__header--active {
+            .n-collapse-item__header-main {
+                .datav-collapse-panel-slots {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    .datav-gui-collection.\--disabled {
+        .datav-collapse-panel-arrow {
+            opacity: var(--datav-gui-disabled-opacity);
+        }
+        .datav-gui-collection-title {
+            opacity: var(--datav-gui-disabled-opacity);
+        }
+    }
+    .datav-gui-collection.\--level1 {
+        .n-collapse-item__header {
+            background: var(--datav-gui-background-color-front);
+            &::before {
+                left: 0;
+            }
+        }
+        .n-collapse-item__header-main {
+            padding-left: var(--datav-gui-collection-padding-left-level-1);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+        }
+        .datav-gui-column-tabs-head-item {
+            padding-left: var(--datav-gui-collection-padding-left-level-1);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+        }
+    }
+    .datav-gui-collection.\--level2 {
+        margin-left: 0;
+        .n-collapse-item__header {
+            background: transparent;
+            &::before {
+                left: 0;
+            }
+        }
+        .n-collapse-item__header-main {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-2);
+        }
+        .datav-gui-column-tabs-head-item {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-2);
+        }
+    }
+    .datav-gui-collection.\--level3 {
+        .n-collapse-item__header {
+            background: transparent;
+            &::before {
+                left: 28px;
+            }
+        }
+        .n-collapse-item__header-main {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-3);
+        }
+        .datav-gui-column-tabs-head-item {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-3);
+        }
+    }
+    .datav-gui-collection.\--level4 {
+        .n-collapse-item__header {
+            background: transparent;
+            &::before {
+                left: 44px;
+            }
+        }
+        .n-collapse-item__header-main {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-4);
+        }
+        .datav-gui-column-tabs-head-item {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-4);
+        }
+    }
+    .datav-gui-collection.\--level5 {
+        .n-collapse-item__header {
+            background: transparent;
+            &::before {
+                left: 44px;
+            }
+        }
+        .n-collapse-item__header-main {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-4);
+        }
+        .datav-gui-column-tabs-head-item {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-4);
+        }
+    }
+    .datav-gui-collection.\--level6 {
+        .n-collapse-item__header {
+            background: transparent;
+            &::before {
+                left: 44px;
+            }
+        }
+        .n-collapse-item__header-main {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-4);
+        }
+        .datav-gui-column-tabs-head-item {
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_6;
+            padding-left: var(--datav-gui-collection-padding-left-level-4);
+        }
+    }
+    .datav-gui-component {
+        line-height: var(--datav-gui-component-height);
+        display: flex;
+    }
+    .datav-gui-caption {
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_8;
+        height: 16px;
+        line-height: 16px;
+    }
+    .datav-gui-fixed-width-option {
+        margin: 0 !important;
+    }
+    .datav-gui-basic-tabs.el-tabs--left {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        >.datav-gui-basic-tabs-head {
+            width: var(--datav-gui-menu-item-height);
+            .datav-gui-basic-tabs-scroll.need-nav {
+                padding: 20px 0;
+            }
+            .datav-gui-basic-tabs-scroll {
+                .menu-nav {
+                    padding: 4px 11px;
+                }
+                .menu-nav-left {
+                    top: 0px;
+                    left: unset;
+                }
+                .menu-nav-left.\--top {
+                    transform: rotate(90deg);
+                }
+                .menu-nav-right {
+                    bottom: 0px;
+                    right: unset;
+                }
+                .menu-nav-right.\--bottom {
+                    transform: rotate(90deg);
+                }
+                .header-container {
+                    position: relative;
+                    overflow: hidden;
+                    overflow-y: auto;
+                    width: 100%;
+                    height: 100%;
+                    .inner {
+                        flex-direction: column;
+                    }
+                    .datav-gui-basic-tabs-head-item {
+                        width: var(--datav-gui-menu-item-height);
+                        height: unset;
+                        padding: 16px 0;
+                    }
+                }
+            }
+        }
+        >.datav-gui-basic-tabs-content {
+            flex: 1;
+            overflow: hidden;
+            background: var(--datav-gui-background-color-front);
+        }
+    }
+    .datav-gui-basic-tabs.el-tabs--top {
+        .el-tabs__header {
+			margin-bottom: 0;
+			.el-tabs__nav-wrap{
+				padding: 0 15px;
+				&::after{
+					height: 1px;
+					background-color: rgb(28, 28, 28);
+				}
+			}
+            .el-tabs__nav-scroll {
+                position: relative;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                .el-tabs__nav {
+                    cursor: pointer;
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_6;
+                    .el-tabs__item{
+						padding: 0 10px;
+						font-size: 12px;
+						height: 36px;
+						line-height: 36px;
+						color: #A1AEB3;
+						&.is-active{
+							color: var(--datav-main-color);
+						}
+
+					}
+                }
+				.el-tabs__active-bar{
+					height: 1px;
+					background-color: var(--datav-main-color);
+				}
+                .menu-nav.\--disabled {
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_9;
+                    &:hover {
+                        font-size: var(--datav-gui-font-size-base);
+                        color: $color_9;
+                    }
+                }
+                .menu-nav-left {
+                    font-size: 16px;
+                    left: 0px;
+                }
+                .menu-nav-right {
+                    font-size: 16px;
+                    right: 0px;
+                }
+                .header-container {
+                    position: relative;
+                    overflow: hidden;
+                    overflow-x: auto;
+                    width: 100%;
+                    height: 100%;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                    .inner {
+                        position: relative;
+                        display: inline-flex;
+                        white-space: nowrap;
+                        transition: all var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
+                    }
+                    .datav-gui-basic-tabs-head-item {
+                        height: var(--datav-gui-menu-item-height);
+                        padding: 0 16px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        white-space: nowrap;
+                        font-size: var(--datav-gui-font-size-base);
+                        color: $color_2;
+                        cursor: pointer;
+                        border: 1px solid transparent;
+                        user-select: none;
+                        &:hover {
+                            color: $color_4;
+                            .datav-gui-icon {
+                                color: $color_4;
+                            }
+                        }
+                        .item-label.\--badge {
+                            position: relative;
+                            line-height: 16px;
+                            &::after {
+                                position: absolute;
+                                top: 0;
+                                left: -2px;
+                                content: '';
+                                display: block;
+                                width: 4px;
+                                height: 4px;
+                                border-radius: 2px;
+                                background: var(--datav-gui-error-color);
+                            }
+                        }
+                        .datav-gui-icon {
+                            height: 20px;
+                            width: 20px;
+                            margin: 2px;
+                            display: inline-flex;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 0;
+                        }
+                    }
+                    .datav-gui-basic-tabs-head-item.\--selected {
+                        font-size: var(--datav-gui-font-size-base);
+                        color: $color_3;
+                        .datav-gui-icon {
+                            color: $color_3;
+                        }
+                    }
+                }
+            }
+            .datav-gui-basic-tabs-scroll.need-nav {
+                padding: 0 20px;
+            }
+        }
+        .datav-gui-basic-tabs-content {
+            .datav-gui-basic-tabs-content-item__fade-enter {
+                opacity: 0.01;
+            }
+            .datav-gui-basic-tabs-content-item__fade-enter-active {
+                opacity: 1;
+                transition: opacity 200ms var(--datav-gui-transition-easing);
+            }
+            .datav-gui-basic-tabs-content-item__fade-exit {
+                opacity: 1;
+            }
+            .datav-gui-basic-tabs-content-item__fade-exit-active {
+                opacity: 0;
+                height: 0;
+            }
+            .datav-gui-basic-tabs-content-item.\--animation {
+                transition-delay: 2s;
+                transition: visibility 0s, opacity var(--datav-gui-transition-time);
+            }
+            .datav-gui-basic-tabs-content-item.\--show {
+                opacity: 1;
+                visibility: visible;
+                height: 100%;
+                overflow: auto;
+                pointer-events: all;
+            }
+            .datav-gui-basic-tabs-content-item.\--hide {
+                opacity: 0;
+                visibility: hidden;
+                height: 0;
+                overflow: hidden;
+                pointer-events: none;
+            }
+        }
+    }
+    .datav-gui-collection.\--all-disabled {
+        >.n-collapse-item__header {
+            >.n-collapse-item__header-main {
+                >.datav-collapse-panel-slots {
+                    >.iconfont {
+                        &:not(.datav-gui-icon-right) {
+                            pointer-events: none;
+                            opacity: var(--datav-gui-disabled-opacity);
+                            cursor: not-allowed;
+                        }
+                    }
+                }
+                >.datav-gui-collection-title {
+                    opacity: var(--datav-gui-disabled-opacity);
+                }
+                >.datav-gui-field-title {
+                    opacity: var(--datav-gui-disabled-opacity);
+                }
+            }
+        }
+        >.datav-collapse-panel-content-wp {
+            >.datav-collapse-panel-content {
+                >.datav-gui-tabs-content {
+                    >.datav-gui-basic-tabs {
+                        >.datav-gui-basic-tabs-head {
+                            opacity: var(--datav-gui-disabled-opacity);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .datav-gui-collection.\--field-disabled {
+        >.n-collapse-item__header {
+            >.n-collapse-item__header-main {
+                >.datav-collapse-panel-slots {
+                    >.iconfont {
+                        &:not(.datav-gui-icon-right) {
+                            pointer-events: none;
+                            opacity: var(--datav-gui-disabled-opacity);
+                            cursor: not-allowed;
+                        }
+                    }
+                }
+                >.datav-gui-collection-title {
+                    opacity: var(--datav-gui-disabled-opacity);
+                }
+                >.datav-gui-field-title {
+                    opacity: var(--datav-gui-disabled-opacity);
+                }
+            }
+        }
+        >.datav-collapse-panel-content-wp {
+            >.datav-collapse-panel-content {
+                >.datav-gui-tabs-content {
+                    >.datav-gui-basic-tabs {
+                        >.datav-gui-basic-tabs-head {
+                            opacity: var(--datav-gui-disabled-opacity);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .datav-gui-collection.\--all-disabled.\--all-disabled {
+        >.n-collapse-item__header {
+            >.n-collapse-item__header-main {
+                >.datav-gui-show-placeholder {
+                    pointer-events: none;
+                    opacity: var(--datav-gui-disabled-opacity);
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+    .datav-gui-collection.\--field-disabled.\--all-disabled {
+        >.n-collapse-item__header {
+            >.n-collapse-item__header-main {
+                >.datav-gui-show-placeholder {
+                    pointer-events: none;
+                    opacity: var(--datav-gui-disabled-opacity);
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+    .datav-gui-menu {
+        >.\--vertical.datav-gui-basic-tabs {
+            >.el-tabs__header.is-left {
+                width: 36px;
+                >.el-tabs__nav-wrap.is-left{
+                    >.el-tabs__nav-scroll{
+                        >.el-tabs__nav.is-left{
+                            >.el-tabs__active-bar.is-left{
+                                width: 1px;
+                            }
+                            >.el-tabs__item.is-left {
+                                padding: 16px 0;
+                                height: unset;
+                                box-shadow: -1px 0 0 0 transparent;
+                                margin: 0 0 0 1px;
+                                writing-mode: vertical-lr;
+                                width: 100%;
+                                .iconfont{
+                                    height: 20px;
+                                    width: 20px;
+                                    margin: 2px;
+                                    display: inline-flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    padding: 0;
+                                }
+                                .item-label{
+                                    display: inline-block;
+                                }
+                            }
+                            >.el-tabs__item.is-active {
+                                box-shadow: -1px 0 0 0 var(--datav-gui-primary-color);
+                                .iconfont{
+                                    color: var(--datav-main-color);
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+        >.datav-gui-basic-tabs {
+            >.el-tabs__header {
+                .el-tabs__nav {
+                    .el-tabs__item.is-left {
+                        box-shadow: 0 -1px 0 0 transparent;
+                        margin: 1px 0 0;
+                    }
+                    .datav-gui-basic-tabs-head-item.\--icon {
+                        >img {
+                            width: 100%;
+                            height: 32px;
+                            object-fit: contain;
+                        }
+                        >div {
+                            line-height: 16px;
+                        }
+                    }
+                }
+            }
+            >.n-tabs-nav {
+                .header-container {
+                    .datav-gui-basic-tabs-head-item.\--icon {
+                        width: var(--datav-gui-with-icon-width);
+                        padding: 0;
+                        display: inline-flex;
+                        align-items: center;
+                        flex-direction: column;
+                    }
+                    .datav-gui-basic-tabs-head-item.\--selected {
+                        border: var(--datav-gui-border-color);
+                        border-bottom-color: $border-bottom-color_1;
+                        border-top-width: 0;
+                        background: var(--datav-gui-background-color-front);
+                        box-shadow: 0 -1px 0 0px var(--datav-gui-primary-color);
+                    }
+                }
+            }
+        }
+        .datav-gui-multiple-menu {
+            background-color: var(--datav-nav-bg-active);
+            .el-tabs__nav-wrap{
+                background: var(--datav-gui-bgcolor-front);
+                &::after{
+                    height: 0;
+                    display: none;
+                }
+            }
+            .n-tabs-nav {
+                background: var(--datav-gui-background-color-front);
+            }
+            .datav-gui-basic-tabs-head {
+                &::before {
+                    background: transparent;
+                }
+            }
+            .el-tabs__nav-scroll {
+                justify-content: center;
+                .el-tabs__nav.is-top {
+                    display: flex;
+                    justify-content: center;
+                    .el-tabs__item {
+                        height: 50px;
+                        display: flex;
+                        align-items: center;
+                        border: none !important;
+                        &:first-child {
+                            >div {
+                                border-right-color: $border-right-color_1;
+                            }
+                        }
+                        >div {
+                            height: 100%;
+                            display: inline-block;
+                            height: 24px;
+                            line-height: 20px;
+                            padding: 0 40px;
+                            background: var(--datav-gui-component-background-color);
+                            border: 1px solid var(--datav-gui-component-border-color);
+                            font-size: var(--datav-gui-font-size-base);
+                            color: $color_1;
+                            outline: none;
+                            box-shadow: none;
+                            .datav-gui-icon {
+                                color: $color_1 !important;
+                            }
+                            &:hover {
+                                border: 1px solid var(--datav-gui-primary-color);
+                            }
+                        }
+                    }
+                    .el-tabs__item.\is-active {
+                        border-bottom: 1px solid var(--datav-gui-primary-color);
+                        background: none;
+                        border: none !important;
+                        >div {
+                            background: var(--datav-gui-background-color-front-lighter);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .datav-gui-tabs {
+        .n-collapse-item__header {
+            width: 100%;
+            .datav-gui-tabs-content {
+                width: 100% !important;
+                .datav-gui-column-tabs-head-item {
+                    line-height: 16px;
+                    cursor: pointer;
+                    padding-top: 16px;
+                    margin: 0;
+                    margin-left: 20px;
+                    position: relative;
+                    display: inline-block;
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        display: inline-block;
+                        bottom: 8px;
+                        left: -4px;
+                        height: 4px;
+                        width: 4px;
+                        border-radius: 1px;
+                        background: var(--datav-gui-primary-color);
+                        transition: all 0.2s;
+                        opacity: 0;
+                    }
+                    &:hover {
+                        color: $color_4;
+                    }
+                    &:active {
+                        color: $color_5;
+                    }
+                }
+                .datav-gui-column-tabs-head-item.\--selected {
+                    color: $color_3;
+                    &::before {
+                        opacity: 1;
+                    }
+                }
+                .datav-gui-basic-tabs-content-item {
+                    border-bottom: 1px solid var(--datav-gui-border-color);
+                }
+            }
+        }
+        .n-collapse-item__content-wrapper {
+            width: 100%;
+            .datav-gui-tabs-content {
+                width: 100% !important;
+                .datav-gui-column-tabs-head-item {
+                    line-height: 16px;
+                    cursor: pointer;
+                    padding-top: 16px;
+                    margin: 0;
+                    margin-left: 20px;
+                    position: relative;
+                    display: inline-block;
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        display: inline-block;
+                        bottom: 8px;
+                        left: -4px;
+                        height: 4px;
+                        width: 4px;
+                        border-radius: 1px;
+                        background: var(--datav-gui-primary-color);
+                        transition: all 0.2s;
+                        opacity: 0;
+                    }
+                    &:hover {
+                        color: $color_4;
+                    }
+                    &:active {
+                        color: $color_5;
+                    }
+                }
+                .datav-gui-column-tabs-head-item.\--selected {
+                    color: $color_3;
+                    &::before {
+                        opacity: 1;
+                    }
+                }
+                .datav-gui-basic-tabs-content-item {
+                    border-bottom: 1px solid var(--datav-gui-border-color);
+                }
+            }
+        }
+        .n-tabs-nav {
+            .datav-gui-basic-tabs-scroll {
+                .header-container {
+                    .datav-gui-basic-tabs-head-item {
+                        display: inline-flex;
+                        justify-content: center;
+                        align-items: center;
+                        &:not(.\--icon) {
+                            padding: 0 15px;
+                            outline: none;
+                            box-shadow: none;
+                            >div {
+                                display: inline-flex;
+                                justify-content: center;
+                                align-items: center;
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    display: inline-block;
+                                    bottom: 4px;
+                                    height: 4px;
+                                    width: 4px;
+                                    border-radius: 1px;
+                                    background: var(--datav-gui-primary-color);
+                                    transition: all 0.2s;
+                                    opacity: 0;
+                                }
+                            }
+                            >div.\--selected {
+                                background: transparent;
+                                &::before {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                        &:not(.\--icon).\--selected {
+                            background: transparent;
+                            border-color: $border-color_1;
+                        }
+                    }
+                    .datav-gui-basic-tabs-head-item.\--icon {
+                        height: 43px;
+                        width: 74px;
+                        margin: 8px 0 8px 8px;
+                        border: var(--datav-gui-component-border);
+                        padding: 0;
+                        >img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                        }
+                        &:hover {
+                            border: 1px solid var(--datav-gui-hover-color);
+                        }
+                        &:active {
+                            border: 1px solid var(--datav-gui-active-color);
+                        }
+                    }
+                    .datav-gui-basic-tabs-head-item.\--icon.\--selected {
+                        border: 1px solid var(--datav-gui-primary-color);
+                    }
+                }
+            }
+        }
+    }
+    .iconfont.\--selected {
+        color: $color_3;
+    }
+    .iconfont.icon-add {
+        &:not(.\--disabled) {
+            &:hover {
+                transition: all var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
+                transform: rotate(90deg);
+            }
+        }
+    }
+    .datav-gui-suite {
+        .datav-gui-suite__item.radio-custom {
+            .datav-btn-outline {
+                width: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    .datav-gui-fill {
+        width: 100%;
+        height: var(--datav-gui-component-height);
+        background: var(--datav-gui-component-background-color);
+        border: 1px solid var(--datav-gui-component-border-color);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        outline: none;
+        box-shadow: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        &:hover {
+            background: var(--datav-gui-component-background-hover-color);
+            border: 1px solid var(--datav-gui-primary-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+        }
+        &:active {
+            background: var(--datav-gui-component-background-active-color);
+            border: 1px solid var(--datav-gui-primary-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+        }
+        &:focus {
+            background: var(--datav-gui-component-background-hover-color);
+            border: 1px solid var(--datav-gui-primary-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+        }
+        .datav-gui-fill-default {
+            cursor: pointer;
+            display: block;
+            width: 22px;
+            height: 17px;
+            border-radius: 2px;
+            border: 1px solid var(--datav-gui-component-border-color);
+            margin-left: 3px;
+            background-image: url("data:image/png;base64,R0lGODdhCgAKAPAAAOXl5f///ywAAAAACgAKAEACEIQdqXt9GxyETrI279OIgwIAOw==");
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            >span {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .datav-gui-fill-input {
+            background: transparent;
+            padding-left: 5px;
+            border: none;
+            width: 0;
+            flex: 1;
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            &:hover {
+                border: none;
+                background: transparent;
+            }
+            &:active {
+                border: none;
+                background: transparent;
+            }
+            &:focus {
+                border: none;
+                background: transparent;
+            }
+        }
+        .datav-gui-fill-picker-trigger {
+            height: 24px;
+            width: 24px;
+            cursor: pointer;
+        }
+    }
+    .datav-gui-fill.\--simple {
+        padding: 4px 4px;
+        .datav-gui-fill-simple-trigger {
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+    .datav-gui-image-select {
+        width: 100%;
+        .datav-gui-image-select-input {
+            width: 100%;
+            height: var(--datav-gui-image-select-input-height);
+            padding: 5px;
+            padding-right: 0;
+            background: var(--datav-gui-component-background-color);
+            border: 1px solid var(--datav-gui-component-border-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+            &:hover {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:active {
+                background: var(--datav-gui-component-background-active-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:focus {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:disabled {
+                background: var(--datav-gui-component-background-disabled-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_9;
+                outline: none;
+                box-shadow: none;
+            }
+            .rc-select-selection {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                padding-right: 16px;
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+                background: transparent;
+                border-color: $border-color_1;
+                .rc-select-selection__rendered {
+                    height: 100%;
+                    width: 100%;
+                    line-height: 100%;
+                    margin-left: 0;
+                    display: flex;
+                    align-items: center;
+                    .rc-select-selection-selected-value {
+                        width: 100%;
+                        display: flex !important;
+                        flex-wrap: nowrap;
+                        align-items: center;
+                        position: relative;
+                        >span {
+                            padding-left: 5px;
+                            flex: 1;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: block;
+                            line-height: 24px;
+                        }
+                        .datav-gui-iconfont-icon {
+                            width: 54px;
+                            padding: 10px 2px 10px 10px;
+                            font-size: 28px;
+                        }
+                        .datav-gui-image-select-image {
+                            height: 54px;
+                            width: 50%;
+                            display: inline-flex;
+                            object-fit: contain;
+                        }
+                    }
+                    .rc-select-search {
+                        position: absolute;
+                        padding-left: 54px;
+                        padding-right: 8px;
+                        .rc-select-search__field {
+                            border: none;
+                            border-bottom: 1px solid var(--datav-gui-primary-color);
+                            line-height: 24px;
+                        }
+                    }
+                }
+                .rc-select-arrow {
+                    width: auto;
+                    top: 11px;
+                }
+            }
+        }
+    }
+    .datav-gui-keyboard {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .keyboard-display {
+            line-height: var(--datav-gui-component-height);
+            height: var(--datav-gui-component-height);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+        }
+        .keyboard-change-btn.datav-btn.datav-btn-outline {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            max-width: 100px;
+            margin-left: 5px;
+            border: 1px solid var(--datav-gui-primary-color);
+            color: $color_3;
+            &:hover {
+                &:not(.datav-btn-loading) {
+                    &:not(.datav-btn-disabled) {
+                        background: var(--datav-gui-hover-color);
+                        border: 1px solid var(--datav-gui-hover-color);
+                    }
+                }
+            }
+            &:active {
+                &:not(.datav-btn-loading) {
+                    &:not(.datav-btn-disabled) {
+                        background: var(--datav-gui-active-color);
+                        border: 1px solid var(--datav-gui-active-color);
+                    }
+                }
+            }
+        }
+        .keyboard-input {
+            &:not(.datav-input-number--disabled) {
+                background: var(--datav-gui-component-background-color);
+                border: 1px solid var(--datav-gui-component-border-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+                &:hover {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                }
+                &:active {
+                    background: var(--datav-gui-component-background-active-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                }
+                &:focus {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                }
+                &:disabled {
+                    background: var(--datav-gui-component-background-disabled-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_9;
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+        .keyboard-cancel {
+            line-height: var(--datav-gui-component-height);
+            height: var(--datav-gui-component-height);
+            overflow: hidden;
+            padding-left: 8px;
+            min-width: 40px;
+            max-width: 100px;
+            text-align: end;
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_3;
+        }
+    }
+    .datav-checkbox-group {
+        .datav-checkbox-checked {
+            .datav-checkbox-input-wp {
+                border-color: $border-color_2;
+                &::after {
+                    border-color: $border-color_2;
+                }
+            }
+            .datav-checkbox-label {
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+            }
+        }
+        line-height: var(--datav-gui-component-height);
+        .datav-checkbox {
+            max-width: 100%;
+            .datav-checkbox-input-wp {
+                outline-color: $outline-color_1;
+                background: var(--datav-gui-component-background-color);
+                &:hover {
+                    background: var(--datav-gui-background-hover-color);
+                }
+            }
+            .datav-checkbox-label {
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_2;
+            }
+        }
+        .datav-btn.datav-btn-outline.datav-radio-button {
+            background: var(--datav-gui-component-background-color);
+            outline: var(--datav-gui-component-border);
+            height: var(--datav-gui-component-height);
+            line-height: var(--datav-gui-component-height);
+            padding: 0;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_2;
+            color: $color_12;
+            .datav-gui-icon {
+                color: $color_12 !important;
+            }
+            &:not(.\--checked) {
+                &:not(.datav-btn-disabled) {
+                    &:hover {
+                        background: var(--datav-gui-component-background-hover-color);
+                    }
+                    &:active {
+                        background: var(--datav-gui-component-background-active-color);
+                    }
+                }
+            }
+        }
+        .datav-btn.datav-btn-outline.datav-radio-button.\--checked {
+            background: var(--datav-gui-primary-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            color: $color_13;
+            .datav-gui-icon {
+                color: $color_13 !important;
+            }
+            &:not(.datav-btn-disabled) {
+                &:hover {
+                    background: var(--datav-gui-hover-color);
+                }
+                &:active {
+                    background: var(--datav-gui-active-color);
+                }
+            }
+        }
+        .datav-btn.datav-btn-outline.datav-radio-button.datav-btn-disabled {
+            opacity: 0.2;
+        }
+    }
+    .datav-radio-group {
+        .datav-checkbox-checked {
+            .datav-checkbox-input-wp {
+                border-color: $border-color_2;
+                &::after {
+                    background: var(--datav-gui-primary-color);
+                }
+            }
+            .datav-checkbox-label {
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+            }
+        }
+        line-height: var(--datav-gui-component-height);
+        .datav-checkbox {
+            max-width: 100%;
+            .datav-checkbox-input-wp {
+                outline-color: $outline-color_1;
+                background: var(--datav-gui-component-background-color);
+                &:hover {
+                    background: var(--datav-gui-background-hover-color);
+                }
+            }
+            .datav-checkbox-label {
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_2;
+            }
+        }
+        .datav-btn.datav-btn-outline.datav-radio-button {
+            background: var(--datav-gui-component-background-color);
+            outline: var(--datav-gui-component-border);
+            height: var(--datav-gui-component-height);
+            line-height: var(--datav-gui-component-height);
+            padding: 0;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_2;
+            color: $color_12;
+            .datav-gui-icon {
+                color: $color_12 !important;
+            }
+            &:not(.\--checked) {
+                &:not(.datav-btn-disabled) {
+                    &:hover {
+                        background: var(--datav-gui-component-background-hover-color);
+                    }
+                    &:active {
+                        background: var(--datav-gui-component-background-active-color);
+                    }
+                }
+            }
+        }
+        .datav-btn.datav-btn-outline.datav-radio-button.\--checked {
+            background: var(--datav-gui-primary-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            color: $color_13;
+            .datav-gui-icon {
+                color: $color_13 !important;
+            }
+            &:not(.datav-btn-disabled) {
+                &:hover {
+                    background: var(--datav-gui-hover-color);
+                }
+                &:active {
+                    background: var(--datav-gui-active-color);
+                }
+            }
+        }
+        .datav-btn.datav-btn-outline.datav-radio-button.datav-btn-disabled {
+            opacity: 0.2;
+        }
+    }
+    .datav-radio-group.\--not-separated {
+        .datav-btn.datav-btn-outline.datav-radio-button {
+            margin-right: 0;
+        }
+    }
+    .datav-checkbox-group.\--not-separated {
+        .datav-btn.datav-btn-outline.datav-radio-button {
+            margin-right: 0;
+        }
+    }
+    .datav-radio-group.datav-gui-radio-icon {
+        width: calc(100% + 4px);
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .datav-gui-radio-icon-option {
+            height: calc(var(--datav-gui-component-height) + 0px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            .datav-radio-button.datav-btn.datav-btn-outline {
+                width: 100%;
+                height: 100%;
+                .datav-gui-radio-icon-image {
+                    width: 100%;
+                    height: 100%;
+                }
+                .datav-gui-icon {
+                    font-size: var(--datav-gui-icon-size-md);
+                }
+                &:hover {
+                    outline: 1px solid var(--datav-gui-primary-color);
+                    .datav-gui-icon {
+                        color: $color_1;
+                    }
+                }
+                &:active {
+                    outline: 1px solid var(--datav-gui-primary-color);
+                    .datav-gui-icon {
+                        color: $color_1;
+                    }
+                }
+            }
+            .datav-radio-button.datav-btn.datav-btn-outline.\--checked {
+                outline: 1px solid var(--datav-gui-primary-color);
+                .datav-gui-icon {
+                    color: $color_1;
+                }
+            }
+            .datav-btn.datav-btn-outline.datav-radio-button.\--checked {
+                &:not(.datav-btn-disabled) {
+                    &:hover {
+                        outline: 1px solid var(--datav-gui-hover-color);
+                    }
+                    &:active {
+                        outline: 1px solid var(--datav-gui-active-color);
+                    }
+                }
+            }
+        }
+        .datav-gui-radio-icon-option.\--square {
+            width: calc(var(--datav-gui-component-height) + 0px);
+        }
+        .datav-gui-radio-icon-option.\--event-split {
+            flex: 1;
+        }
+    }
+    .datav-checkbox-group.datav-gui-radio-icon {
+        width: calc(100% + 4px);
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .datav-gui-radio-icon-option {
+            height: calc(var(--datav-gui-component-height) + 0px);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            .datav-radio-button.datav-btn.datav-btn-outline {
+                width: 100%;
+                height: 100%;
+                .datav-gui-radio-icon-image {
+                    width: 100%;
+                    height: 100%;
+                }
+                .datav-gui-icon {
+                    font-size: var(--datav-gui-icon-size-md);
+                }
+                &:hover {
+                    outline: 1px solid var(--datav-gui-primary-color);
+                    .datav-gui-icon {
+                        color: $color_1;
+                    }
+                }
+                &:active {
+                    outline: 1px solid var(--datav-gui-primary-color);
+                    .datav-gui-icon {
+                        color: $color_1;
+                    }
+                }
+            }
+            .datav-radio-button.datav-btn.datav-btn-outline.\--checked {
+                outline: 1px solid var(--datav-gui-primary-color);
+                .datav-gui-icon {
+                    color: $color_1;
+                }
+            }
+            .datav-btn.datav-btn-outline.datav-radio-button.\--checked {
+                &:not(.datav-btn-disabled) {
+                    &:hover {
+                        outline: 1px solid var(--datav-gui-hover-color);
+                    }
+                    &:active {
+                        outline: 1px solid var(--datav-gui-active-color);
+                    }
+                }
+            }
+        }
+        .datav-gui-radio-icon-option.\--square {
+            width: calc(var(--datav-gui-component-height) + 0px);
+        }
+        .datav-gui-radio-icon-option.\--event-split {
+            flex: 1;
+        }
+    }
+    .datav-gui-select {
+        width: 100%;
+        height: var(--datav-gui-component-height);
+        .rc-select {
+            vertical-align: top;
+        }
+        .rc-select-selection {
+            border-radius: 0 !important;
+            background: var(--datav-gui-component-background-color);
+            border: 1px solid var(--datav-gui-component-border-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+            &:hover {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:active {
+                background: var(--datav-gui-component-background-active-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:focus {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:disabled {
+                background: var(--datav-gui-component-background-disabled-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_9;
+                outline: none;
+                box-shadow: none;
+            }
+            .rc-select-selection-selected-value {
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+            }
+            .rc-select-search__field {
+                border: 0 !important;
+                background: transparent;
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+            }
+            .rc-select-selection__choice {
+                height: var(--datav-gui-component-height);
+                line-height: var(--datav-gui-component-height);
+                margin-top: 0 !important;
+                background: transparent;
+                border-radius: 0 !important;
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+            }
+        }
+        .rc-select-selection--single {
+            height: var(--datav-gui-component-height) !important;
+            line-height: var(--datav-gui-component-height) !important;
+        }
+        .rc-select-selection__rendered {
+            height: 100%;
+            line-height: calc(var(--datav-gui-component-height) - 2px);
+            margin-left: var(--datav-gui-input-padding);
+        }
+        .rc-select-selection-selected-value {
+            height: 100%;
+            line-height: calc(var(--datav-gui-component-height) - 2px);
+        }
+        .rc-select-selection--multiple {
+            height: var(--datav-gui-component-height) !important;
+            min-height: var(--datav-gui-component-height);
+        }
+        .rc-select-arrow {
+            top: 0;
+            right: 2px;
+            width: 14px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .datav-input-number.datav-gui-stepper__input {
+        background: var(--datav-gui-component-background-color);
+        height: var(--datav-gui-component-height);
+        border: none;
+        .datav-input__prefix {
+            font-size: var(--datav-gui-font-size-base) !important;
+            color: $color_8 !important;
+        }
+        .datav-input__suffix {
+            font-size: var(--datav-gui-font-size-base) !important;
+            color: $color_8 !important;
+        }
+        .datav-input__content {
+            background: var(--datav-gui-component-background-color);
+            border: 1px solid var(--datav-gui-component-border-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+            border-right-color: $border-right-color_1;
+            &:hover {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:active {
+                background: var(--datav-gui-component-background-active-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:focus {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:disabled {
+                background: var(--datav-gui-component-background-disabled-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_9;
+                outline: none;
+                box-shadow: none;
+            }
+            .datav-input__number {
+                color: $color_1 !important;
+                text-align: start;
+            }
+        }
+    }
+    .datav-input-number.datav-input-number--right-spin.datav-gui-slider__stepper {
+        background: var(--datav-gui-component-background-color);
+        height: var(--datav-gui-component-height);
+        border: none;
+        .datav-input__prefix {
+            font-size: var(--datav-gui-font-size-base) !important;
+            color: $color_8 !important;
+        }
+        .datav-input__suffix {
+            font-size: var(--datav-gui-font-size-base) !important;
+            color: $color_8 !important;
+        }
+        .datav-input__content {
+            background: var(--datav-gui-component-background-color);
+            border: 1px solid var(--datav-gui-component-border-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+            border-right-color: $border-right-color_1;
+            &:hover {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:active {
+                background: var(--datav-gui-component-background-active-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:focus {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:disabled {
+                background: var(--datav-gui-component-background-disabled-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_9;
+                outline: none;
+                box-shadow: none;
+            }
+            .datav-input__number {
+                color: $color_1 !important;
+                text-align: start;
+            }
+        }
+    }
+    .datav-input-number.datav-gui-stepper__input.datav-input-number--right-spin {
+        .spin-btn-group {
+            border: var(--datav-gui-component-border);
+            background: var(--datav-gui-component-background-color);
+            .minus-spin-btn {
+                line-height: calc(var(--datav-gui-component-height) / 2 - 5px) !important;
+                height: calc(var(--datav-gui-component-height) / 2 - 1px) !important;
+                background: var(--datav-gui-component-background-color);
+                border: 1px solid var(--datav-gui-component-border-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+                border-color: $border-color_1;
+                font-size: var(--datav-gui-font-size-base) !important;
+                color: $color_2 !important;
+                border-top: var(--datav-gui-component-border);
+                &:hover {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:active {
+                    background: var(--datav-gui-component-background-active-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:focus {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:disabled {
+                    background: var(--datav-gui-component-background-disabled-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_9;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+            }
+            .add-spin-btn {
+                line-height: calc(var(--datav-gui-component-height) / 2 - 5px) !important;
+                height: calc(var(--datav-gui-component-height) / 2 - 1px) !important;
+                background: var(--datav-gui-component-background-color);
+                border: 1px solid var(--datav-gui-component-border-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+                border-color: $border-color_1;
+                font-size: var(--datav-gui-font-size-base) !important;
+                color: $color_2 !important;
+                &:hover {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:active {
+                    background: var(--datav-gui-component-background-active-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:focus {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:disabled {
+                    background: var(--datav-gui-component-background-disabled-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_9;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+            }
+        }
+    }
+    .datav-input-number.datav-input-number--right-spin.datav-gui-slider__stepper.datav-input-number--right-spin {
+        .spin-btn-group {
+            border: var(--datav-gui-component-border);
+            background: var(--datav-gui-component-background-color);
+            .minus-spin-btn {
+                line-height: calc(var(--datav-gui-component-height) / 2 - 5px) !important;
+                height: calc(var(--datav-gui-component-height) / 2 - 1px) !important;
+                background: var(--datav-gui-component-background-color);
+                border: 1px solid var(--datav-gui-component-border-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+                border-color: $border-color_1;
+                font-size: var(--datav-gui-font-size-base) !important;
+                color: $color_2 !important;
+                border-top: var(--datav-gui-component-border);
+                &:hover {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:active {
+                    background: var(--datav-gui-component-background-active-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:focus {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:disabled {
+                    background: var(--datav-gui-component-background-disabled-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_9;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+            }
+            .add-spin-btn {
+                line-height: calc(var(--datav-gui-component-height) / 2 - 5px) !important;
+                height: calc(var(--datav-gui-component-height) / 2 - 1px) !important;
+                background: var(--datav-gui-component-background-color);
+                border: 1px solid var(--datav-gui-component-border-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+                border-color: $border-color_1;
+                font-size: var(--datav-gui-font-size-base) !important;
+                color: $color_2 !important;
+                &:hover {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:active {
+                    background: var(--datav-gui-component-background-active-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:focus {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+                &:disabled {
+                    background: var(--datav-gui-component-background-disabled-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_9;
+                    outline: none;
+                    box-shadow: none;
+                    border-color: $border-color_1;
+                }
+            }
+        }
+    }
+    .datav-gui-slider {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        .datav-gui-slider__slider {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            .datav-slider {
+                display: flex;
+                align-items: center;
+                right: 0;
+                .datav-slider-rail {
+                    background: var(--datav-gui-component-background-color-darker);
+                }
+                .datav-slider-track {
+                    background: var(--datav-gui-component-slider-track-color);
+                }
+                .datav-slider-handle {
+                    &:not(.\--disabled) {
+                        background: var(--datav-gui-slider-handle-bg);
+                        margin-top: 0;
+                    }
+                    &:not(.\--disabled).\--focused {
+                        margin-top: 0;
+                        &:hover {
+                            background: var(--datav-gui-hover-color);
+                        }
+                    }
+                }
+            }
+            .slider-range {
+                height: 12px;
+                line-height: 12px;
+                margin-bottom: 2px;
+                margin-top: -2px;
+                display: flex;
+                justify-content: space-between;
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_8;
+                .slider-range-current {
+                    padding: 0 4px;
+                }
+            }
+        }
+        .datav-input-number.datav-gui-slider__stepper {
+            width: 88px;
+            margin-left: 8px;
+        }
+    }
+    .datav-gui-switch {
+        height: var(--datav-gui-component-height);
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        .datav-switch {
+            box-sizing: content-box;
+            padding: 4px 0;
+            &::before {
+                left: 0;
+                background: var(--datav-gui-component-background-color-darker);
+                border: 1px solid var(--datav-gui-component-border-color);
+            }
+            &::after {
+                left: 1px;
+            }
+        }
+        .datav-switch.datav-switch--checked {
+            &::before {
+                background: var(--datav-gui-primary-color);
+            }
+            &::after {
+                left: 15px;
+            }
+        }
+        .datav-gui-switch-tip {
+            margin-left: 5px;
+        }
+    }
+    .datav-input {
+        &:focus {
+            &:not(.datav-input-number--disabled) {
+                border: 1px solid var(--datav-gui-primary-color);
+            }
+        }
+        &:hover {
+            &:not(.datav-input-number--disabled) {
+                border: 1px solid var(--datav-gui-primary-color);
+            }
+        }
+    }
+    .datav-gui-padding {
+        height: 96px;
+        position: relative;
+        border: 1px solid var(--datav-gui-padding-border-color);
+        border-style: solid;
+        .datav-gui-padding-inner-box {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            rect {
+                stroke: var(--datav-gui-padding-border-color);
+                stroke-width: 1;
+                stroke-dasharray: 3 2;
+                fill: transparent;
+            }
+            line {
+                stroke: var(--datav-gui-padding-border-color);
+                stroke-width: 1;
+                stroke-dasharray: 3 2;
+                fill: transparent;
+            }
+            rect.\--margin {
+                stroke-dasharray: none;
+                stroke-width: 1;
+            }
+            line.\--margin {
+                stroke-dasharray: none;
+            }
+        }
+        .datav-gui-padding-display-value {
+            position: absolute;
+            line-height: 14px;
+            user-select: none;
+            border-style: solid;
+            border-color: $border-color_1;
+            .datav-gui-padding-number {
+                position: absolute;
+                cursor: pointer;
+            }
+            .datav-gui-padding-number.\--input {
+                width: 30px;
+                height: 16px;
+                text-align: center;
+            }
+        }
+        .datav-gui-padding-display-value.\--top {
+            cursor: ns-resize;
+            width: 100%;
+            height: 30px;
+            left: 0;
+            border-width: 28px calc(var(--datav-gui-component-container-width) * 0.2) 0 calc(var(--datav-gui-component-container-width) * 0.2);
+            top: 0;
+            .datav-gui-padding-number {
+                line-height: 18px;
+                left: 50%;
+                top: 7px;
+                transform: translateX(-50%);
+                top: -23px;
+            }
+        }
+        .datav-gui-padding-display-value.\--bottom {
+            cursor: ns-resize;
+            width: 100%;
+            height: 30px;
+            left: 0;
+            bottom: 0;
+            border-width: 0 calc(var(--datav-gui-component-container-width) * 0.2) 28px calc(var(--datav-gui-component-container-width) * 0.2);
+            .datav-gui-padding-number {
+                line-height: 18px;
+                left: 50%;
+                top: 7px;
+                transform: translateX(-50%);
+            }
+        }
+        .datav-gui-padding-display-value.\--top.\--selected {
+            border-top-color: $border-top-color_1;
+        }
+        .datav-gui-padding-display-value.\--bottom.\--selected {
+            border-bottom-color: $border-bottom-color_2;
+        }
+        .datav-gui-padding-display-value.\--left {
+            cursor: ew-resize;
+            width: 20%;
+            height: 100%;
+            text-align: center;
+            top: 0;
+            border-width: 30px 0 30px calc(var(--datav-gui-component-container-width) * 0.195);
+            left: 0;
+            .datav-gui-padding-number {
+                display: inline-block;
+                text-align: center;
+                top: 50%;
+                left: calc(-1 * var(--datav-gui-component-container-width) * 0.1);
+                transform: translateY(-50%) translateX(-50%);
+            }
+        }
+        .datav-gui-padding-display-value.\--right {
+            cursor: ew-resize;
+            width: 20%;
+            height: 100%;
+            text-align: center;
+            top: 0;
+            border-width: 30px calc(var(--datav-gui-component-container-width) * 0.195) 30px 0;
+            right: 0;
+            .datav-gui-padding-number {
+                display: inline-block;
+                text-align: center;
+                top: 50%;
+                left: calc(-1 * var(--datav-gui-component-container-width) * 0.1);
+                transform: translateY(-50%) translateX(-50%);
+                left: calc(var(--datav-gui-component-container-width) * 0.1);
+            }
+        }
+        .datav-gui-padding-display-value.\--left.\--selected {
+            border-left-color: $border-left-color_2;
+        }
+        .datav-gui-padding-display-value.\--right.\--selected {
+            border-right-color: $border-right-color_2;
+        }
+        .datav-gui-padding-display-value.\--input {
+            width: 36px;
+            padding: 0;
+            text-align: center;
+        }
+        .datav-gui-padding-display-value.\--input.\--top {
+            top: 3px;
+        }
+        .datav-gui-padding-display-value.\--input.\--bottom {
+            bottom: 3px;
+        }
+        .datav-gui-padding-display-value.\--input.\--left {
+            left: 3px;
+        }
+        .datav-gui-padding-display-value.\--input.\--right {
+            right: 3px;
+        }
+    }
+    .datav-gui-padding.datav-gui-margin {
+        border-style: dashed;
+        border-width: 1px;
+    }
+    .iconfontfont-select-url {
+        margin-bottom: 4px;
+    }
+    .iconfontfont-select-error {
+        line-height: 16px;
+        font-size: 12px;
+        color: $color_14;
+    }
+    .iconfontfont-select {
+        .datav-gui-text-prefix-icon {
+            .datav-icon {
+                font-size: var(--datav-gui-font-size-base);
+                padding-left: 3px;
+            }
+        }
+    }
+    .iconfontfont-icon {
+        font-family: $font-family_2 !important;
+        font-size: 22px;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+    }
+}
+.no-default-border {
+    outline: none;
+    box-shadow: none;
+}
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+.ellipsis-2 {
+    display: -webkit-box;
+    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.no-user-select {
+    user-select: none;
+}
+.layout-center-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.layout-h-sb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.can-click {
+    cursor: pointer;
+}
+.click-disabled {
+    cursor: not-allowed;
+}
+.test-border {
+    border: 1px solid red;
+}
+.font-size-base {
+    font-size: var(--datav-gui-font-size-base);
+}
+.font-highlight-primary {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_3;
+}
+.font-highlight-primary-hover {
+    color: $color_4;
+}
+.font-highlight-primary-active {
+    color: $color_5;
+}
+.font-normal-base {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_2;
+}
+.font-normal-1 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+}
+.font-normal-2 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_6;
+}
+.font-normal-3 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_7;
+}
+.font-des {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_8;
+}
+.font-disabled {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_9;
+}
+.text-level1 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+}
+.text-level2 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_6;
+}
+.text-level3 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_7;
+}
+.text-title-1 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+}
+.text-title-2 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_6;
+}
+.text-title-3 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_6;
+}
+.text-title-4 {
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_6;
+}
+.input-normal {
+    background: var(--datav-gui-component-background-color);
+    border: 1px solid var(--datav-gui-component-border-color);
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+    outline: none;
+    box-shadow: none;
+}
+.input-hover {
+    background: var(--datav-gui-component-background-hover-color);
+    border: 1px solid var(--datav-gui-primary-color);
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+    outline: none;
+    box-shadow: none;
+}
+.input-focus {
+    background: var(--datav-gui-component-background-hover-color);
+    border: 1px solid var(--datav-gui-primary-color);
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+    outline: none;
+    box-shadow: none;
+}
+.input-active {
+    background: var(--datav-gui-component-background-active-color);
+    border: 1px solid var(--datav-gui-primary-color);
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+    outline: none;
+    box-shadow: none;
+}
+.input-disabled {
+    background: var(--datav-gui-component-background-disabled-color);
+    border: 1px solid var(--datav-gui-primary-color);
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_9;
+    outline: none;
+    box-shadow: none;
+}
+.input-style {
+    background: var(--datav-gui-component-background-color);
+    border: 1px solid var(--datav-gui-component-border-color);
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+    outline: none;
+    box-shadow: none;
+    &:hover {
+        background: var(--datav-gui-component-background-hover-color);
+        border: 1px solid var(--datav-gui-primary-color);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        outline: none;
+        box-shadow: none;
+    }
+    &:active {
+        background: var(--datav-gui-component-background-active-color);
+        border: 1px solid var(--datav-gui-primary-color);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        outline: none;
+        box-shadow: none;
+    }
+    &:focus {
+        background: var(--datav-gui-component-background-hover-color);
+        border: 1px solid var(--datav-gui-primary-color);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        outline: none;
+        box-shadow: none;
+    }
+    &:disabled {
+        background: var(--datav-gui-component-background-disabled-color);
+        border: 1px solid var(--datav-gui-primary-color);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_9;
+        outline: none;
+        box-shadow: none;
+    }
+}
+datav-gui {
+    .datav-gui-collection {
+        .n-collapse-item__header {
+            .datav-gui {
+                .datav-gui-collection {
+                    .n-collapse-item__header {
+                        .n-collapse-item__header-main {
+                            transition: all var(--datav-gui-transition-time) var(--datav-gui-transition-easing);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.datav-gui-title-with-description {
+    cursor: help;
+    text-decoration: underline dotted;
+    display: inline-block;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.datav-gui-show-placeholder {
+    display: block;
+    width: 16px;
+    height: var(--datav-gui-component-height);
+    margin-right: 4px;
+    position: relative;
+}
+.datav-gui-field-show {
+    display: inline-block;
+    width: 16px;
+    height: var(--datav-gui-component-height);
+    position: relative;
+    cursor: pointer;
+    margin-right: 4px;
+    .datav-gui-field-show-bg {
+        display: inline-block;
+        width: 100%;
+        height: 8px;
+        border-radius: 4px;
+        position: absolute;
+        left: 0;
+        top: 8px;
+        transition: background 0.3s ease-in;
+    }
+    &::after {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 3px;
+        position: absolute;
+        top: 9px;
+        left: 1px;
+        transition: all 0.25s ease-in;
+        background: #fff;
+    }
+}
+.datav-gui-field-show.\--not-checked {
+    .datav-gui-field-show-bg {
+        background: var(--datav-gui-field-show-hide-bg);
+    }
+}
+.datav-gui-field-show.\--checked {
+    .datav-gui-field-show-bg {
+        background: var(--datav-gui-primary-color);
+    }
+    &::after {
+        transform: translateX(8px);
+    }
+}
+.datav-gui-dragging-tab-head {
+    height: var(--datav-gui-menu-item-height);
+    line-height: var(--datav-gui-menu-item-height);
+    padding: 0 15px;
+    display: inline-block;
+    white-space: nowrap;
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_2;
+    cursor: pointer;
+    border: 1px solid transparent;
+    user-select: none;
+    outline: none;
+    box-shadow: none;
+    color: $color_3;
+    box-sizing: border-box;
+    pointer-events: auto !important;
+    cursor: grabbing !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.datav-gui-dragging-tab-head.\--icon {
+    height: 43px;
+    width: 74px;
+    margin: 8px 0 8px 8px;
+    border: var(--datav-gui-component-border);
+    padding: 0;
+    >img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    &:hover {
+        border: 1px solid var(--datav-gui-hover-color);
+    }
+    &:active {
+        border: 1px solid var(--datav-gui-active-color);
+    }
+}
+.datav-gui-dragging-tab-head.\--icon.\--selected {
+    border: 1px solid var(--datav-gui-primary-color);
+}
+.datav-gui-popover.datav-pop-content.datav-pop-content__default {
+    background: var(--datav-gui-background-color-back);
+    border: 1px solid var(--datav-gui-primary-color);
+    color: $color_2;
+    box-shadow: var(--datav-gui-popover-shadow);
+    .datav-collapse-panel {
+        background: transparent;
+        .n-collapse-item__header {
+            border: none;
+            color: $color_2;
+        }
+    }
+    .datav-collapse-panel-content-wp {
+        margin-top: 0px;
+    }
+    .datav-gui-fill-image {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        .datav-gui-image-content {
+            margin-top: 5px;
+        }
+    }
+    .datav-gui-fill-image-upload-setting {
+        width: 100%;
+        display: flex;
+        margin-top: 8px;
+        .datav-gui-fill-image-uploader {
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--datav-gui-component-border-color);
+        }
+        .datav-gui-fill-image-setting {
+            flex: 1;
+            margin-left: 8px;
+            .datav-gui-fill-image-fill-type {
+                width: 100%;
+                margin-bottom: 6px;
+                .rc-select-selection {
+                    border-radius: 0px;
+                    background: var(--datav-gui-component-background-color);
+                    border: 1px solid var(--datav-gui-component-border-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                    &:hover {
+                        background: var(--datav-gui-component-background-hover-color);
+                        border: 1px solid var(--datav-gui-primary-color);
+                        font-size: var(--datav-gui-font-size-base);
+                        color: $color_1;
+                        outline: none;
+                        box-shadow: none;
+                    }
+                    &:active {
+                        background: var(--datav-gui-component-background-active-color);
+                        border: 1px solid var(--datav-gui-primary-color);
+                        font-size: var(--datav-gui-font-size-base);
+                        color: $color_1;
+                        outline: none;
+                        box-shadow: none;
+                    }
+                    &:focus {
+                        background: var(--datav-gui-component-background-hover-color);
+                        border: 1px solid var(--datav-gui-primary-color);
+                        font-size: var(--datav-gui-font-size-base);
+                        color: $color_1;
+                        outline: none;
+                        box-shadow: none;
+                    }
+                    .rc-select-arrow {
+                        .rc-select-arrow-icon {
+                            border-color: $border-color_3;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.datav-gui-popover.datav-pop-content.datav-pop-content__default.datav-pop-content__tooltip {
+    background: var(--datav-gui-primary-color);
+    font-size: var(--datav-gui-font-size-base);
+    color: $color_1;
+    color: $color_13;
+    width: auto;
+    max-width: 200px;
+    overflow-wrap: break-word;
+}
+.datav-gui-popover.datav-pop-content.datav-pop-content__default.datav-pop-content__tooltip.datav-pop-content__bottom {
+    &::before {
+        border-bottom-color: $border-bottom-color_3 !important;
+    }
+}
+.datav-gui-popover.datav-pop-content.datav-pop-content__default.datav-pop-content__tooltip.datav-pop-content__top {
+    &::before {
+        border-top-color: $border-top-color_2 !important;
+    }
+}
+.datav-gui-popover.datav-pop-content.datav-pop-content__default.datav-pop-content__tooltip.datav-pop-content__right {
+    &::before {
+        border-right-color: $border-right-color_3 !important;
+    }
+}
+.datav-gui-popover.datav-pop-content.datav-pop-content__default.datav-pop-content__tooltip.datav-pop-content__left {
+    &::before {
+        border-left-color: $border-left-color_3 !important;
+    }
+}
+.datav-gui-popover.datav-pop-content.datav-pop-content__default.datav-gui-fill-popover {
+    width: var(--datav-gui-component-container-width);
+    padding: 0 !important;
+    background: var(--datav-gui-background-color-back);
+    box-sizing: border-box;
+    * {
+        box-sizing: border-box;
+    }
+    .datav-gui-fill-rec-pop {
+        width: 100%;
+        display: flex;
+        padding: 5px 4px 5px 6px;
+        flex-wrap: wrap;
+        .datav-gui-fill-swatch {
+            display: inline-block;
+            width: 15px;
+            height: 10px;
+            margin-right: 3px;
+            margin-top: 3px;
+            cursor: pointer;
+        }
+        .datav-gui-fill-swatch.\--gradient {
+            background-image: url("data:image/png;base64,R0lGODdhCgAKAPAAAOXl5f///ywAAAAACgAKAEACEIQdqXt9GxyETrI279OIgwIAOw==");
+            span {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .datav-color-picker-panel {
+        border: 1px solid transparent;
+        width: 100%;
+        background: transparent;
+        input {
+            background: var(--datav-gui-component-background-color);
+            border: 1px solid var(--datav-gui-component-border-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+            &:hover {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:active {
+                background: var(--datav-gui-component-background-active-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:focus {
+                background: var(--datav-gui-component-background-hover-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+                outline: none;
+                box-shadow: none;
+            }
+            &:disabled {
+                background: var(--datav-gui-component-background-disabled-color);
+                border: 1px solid var(--datav-gui-primary-color);
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_9;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+        .datav-color-picker-panel-params-lable {
+            label {
+                color: $color_15;
+            }
+        }
+        .datav-icon.datav-font.icon-array-add.datav-color-picker-panel-palette-add {
+            color: $color_1;
+            &:hover {
+                border: 1px solid var(--datav-gui-primary-color);
+            }
+        }
+    }
+    .datav-tabs {
+        .datav-tabs__nav {
+            background: var(--datav-gui-background-color-back-darker);
+        }
+        .datav-tabs__tab {
+            border-width: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            >img {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        .datav-tabs__tab.\--actived {
+            border-width: 0;
+            background: var(--datav-gui-background-color-back);
+        }
+        .datav-tab-panel {
+            background: transparent;
+        }
+    }
+}
+.datav-gui-image-select-dropdown {
+    box-sizing: border-box;
+    background: var(--datav-gui-background-color-back);
+    * {
+        box-sizing: border-box;
+    }
+    .rc-select-dropdown-menu {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 8px;
+        margin-bottom: 8px;
+        .rc-select-dropdown-menu-item.datav-gui-image-select-option {
+            width: 50%;
+            height: var(--datav-gui-image-select-image-content-height);
+            padding: 8px 0 0 8px;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            &:hover {
+                border-left: none;
+                background: transparent;
+                font-size: var(--datav-gui-font-size-base);
+                color: $color_1;
+            }
+            >span {
+                width: 100%;
+                height: 16px;
+                line-height: 16px;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
+            }
+            .datav-gui-image-select-image {
+                width: 100%;
+                height: var(--datav-gui-image-select-image-height);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid transparent;
+                object-fit: contain;
+                &:hover {
+                    background: var(--datav-gui-component-background-hover-color);
+                    border: 1px solid var(--datav-gui-primary-color);
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_1;
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+            .datav-gui-image-select-image.\--selected {
+                border: 1px solid var(--datav-gui-primary-color);
+            }
+        }
+        .rc-select-dropdown-menu-item.datav-gui-image-select-option.\--invisible {
+            display: none;
+        }
+        .rc-select-dropdown-menu-item.datav-gui-image-select-option.\--iconfont {
+            width: 33%;
+            height: 50px;
+        }
+        .rc-select-dropdown-menu-item.datav-gui-image-select-option.\--iconfont.rc-select-dropdown-menu-item-selected {
+            color: $color_3;
+        }
+        .rc-select-dropdown-menu-item.datav-gui-image-select-option.rc-select-dropdown-menu-item-selected {
+            &::before {
+                display: none;
+            }
+        }
+    }
+    .datav-gui-image-select-dropdown-menu {
+        .\--image-select-uploader {
+            margin: 8px 8px 4px;
+        }
+    }
+}
+.rc-select-dropdown {
+    z-index: 10001;
+    box-shadow: none;
+    background: var(--datav-gui-background-color-back);
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid var(--datav-gui-primary-color);
+    border-radius: 0 !important;
+    .rc-select-dropdown-menu-item {
+        padding: 0 14px;
+        height: var(--datav-gui-component-height);
+        line-height: var(--datav-gui-component-height);
+        background: var(--datav-gui-background-color-back);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_2;
+        cursor: pointer;
+        &:hover {
+            padding: 0 12px;
+            background: var(--datav-gui-background-hover-color);
+            border-left: 2px solid var(--datav-gui-primary-color);
+            cursor: pointer;
+        }
+    }
+    .rc-select-dropdown-menu-item-active {
+        padding: 0 14px;
+        height: var(--datav-gui-component-height);
+        line-height: var(--datav-gui-component-height);
+        background: var(--datav-gui-background-color-back);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_2;
+        cursor: pointer;
+    }
+    .rc-select-dropdown-menu-item-selected {
+        height: var(--datav-gui-component-height);
+        line-height: var(--datav-gui-component-height);
+        padding: 0 4px;
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        background: var(--datav-gui-background-color-back);
+        &:hover {
+            padding: 0 2px;
+        }
+        &::before {
+            content: "\25AA";
+            color: $color_3;
+            padding-right: 4px;
+        }
+    }
+    >div {
+        >div {
+            &::-webkit-scrollbar {
+                width: 0 !important;
+            }
+        }
+    }
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
+}
+.datav-gui-image {
+    width: 100%;
+    .datav-gui-text-prefix-icon {
+        .datav-icon {
+            font-size: var(--datav-gui-font-size-base);
+            padding-left: 3px;
+        }
+    }
+    .datav-gui-image-input {
+        width: 100%;
+        height: var(--datav-gui-component-height);
+        padding-left: 22px;
+        background: var(--datav-gui-component-background-color);
+        border: 1px solid var(--datav-gui-component-border-color);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        outline: none;
+        box-shadow: none;
+    }
+    .datav-gui-image-error {
+        display: block;
+        width: 100%;
+        color: $color_14;
+    }
+    .datav-gui-image-content {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: var(--datav-gui-image-content-height);
+        padding: 10px;
+        margin-top: 3px;
+        background: var(--datav-gui-component-background-color);
+        border: 1px solid var(--datav-gui-component-border-color);
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_1;
+        outline: none;
+        box-shadow: none;
+        &:hover {
+            background: var(--datav-gui-component-background-hover-color);
+            border: 1px solid var(--datav-gui-primary-color);
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_1;
+            outline: none;
+            box-shadow: none;
+        }
+        >img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+        >.datav-gui-hdr {
+            height: 100%;
+            width: 100%;
+            >canvas {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .datav-gui-image-inner-content {
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_2;
+            .datav-gui-image-inner-icon {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                font-size: 50px;
+            }
+            .datav-gui-image-inner-des {
+                line-height: 18px;
+                text-align: center;
+            }
+        }
+        .datav-gui-image-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: var(--datav-gui-cover-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--datav-gui-font-size-base);
+            color: $color_2;
+        }
+        .datav-gui-image-loading {
+            transform-origin: 50% 50%;
+            >rect {
+                width: 100%;
+                height: 100%;
+                fill: transparent;
+            }
+            >polygon {
+                fill: transparent;
+                stroke-dasharray: 20;
+                stroke: var(--datav-gui-primary-color);
+                stroke-width: 2;
+                animation: dash 1.5s cubic-bezier(0.35, 0.04, 0.63, 0.95) infinite;
+                transform: translate(50%, 50%);
+            }
+        }
+        .datav-gui-image-ud {
+            >span {
+                cursor: pointer;
+                &:hover {
+                    font-size: var(--datav-gui-font-size-base);
+                    color: $color_4;
+                }
+            }
+        }
+    }
+}
+.datav-gui-text {
+    position: relative;
+    width: 100%;
+    height: var(--datav-gui-component-height);
+    line-height: var(--datav-gui-component-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .datav-gui-text-prefix {
+        position: absolute;
+        vertical-align: middle;
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_8;
+        left: var(--datav-gui-input-padding);
+    }
+    .datav-gui-text-suffix {
+        position: absolute;
+        vertical-align: middle;
+        font-size: var(--datav-gui-font-size-base);
+        color: $color_8;
+        right: var(--datav-gui-input-padding);
+    }
+    .datav-gui-text-prefix-icon {
+        left: var(--datav-gui-input-padding);
+    }
+    .datav-gui-text-suffix-icon {
+        right: var(--datav-gui-input-padding);
+    }
+    .datav-gui-text-with-prefix {
+        padding-left: calc(var(--datav-gui-icon-size-md) + var(--datav-gui-input-padding) * 2);
+    }
+    .datav-gui-text-with-suffix {
+        padding-right: calc(var(--datav-gui-icon-size-md) + var(--datav-gui-input-padding) * 2);
+    }
+}

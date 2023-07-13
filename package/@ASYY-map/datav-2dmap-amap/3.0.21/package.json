@@ -1,0 +1,359 @@
+{
+	"name": "datav-2dmap-amap",
+	"version": "3.0.21",
+	"description": "高德底地图（含室内地图）作为底图层接入组件",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datav-2dmap-amap.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "高德底图层",
+		"icon": "https://img.alicdn.com/imgextra/i3/O1CN01ydDoHX23NLN6oKv1b_!!6000000007243-2-tps-360-360.png",
+		"level": 1,
+		"protocol": 2,
+		"type": [
+			"datav-2dmap-v3_subcoms_basemap"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datav-2dmap-v3"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"events": {
+			"click": {
+				"description": "室内地图楼层被点击触发",
+				"fields": {
+					"indoormapFloor": {
+						"description": "室内地图楼层号"
+					}
+				}
+			}
+		},
+		"apis": {},
+		"config": {
+			"options": {
+				"type": "menu",
+				"defaultActive": "graph",
+				"children": {
+					"general": {
+						"name": "通用",
+						"children": {
+							"zoomRange": {
+								"name": "可见级别",
+								"description": "级别表示地图的缩放层级，子组件在设置范围内将显示，范围外将隐藏。",
+								"type": "slider",
+								"mode": "double",
+								"caption": "范围 [3, 20]",
+								"default": [
+									3,
+									20
+								],
+								"min": 3,
+								"max": 20,
+								"step": 0.1,
+								"suffix": "级"
+							},
+							"opacity": {
+								"name": "不透明度",
+								"type": "number",
+								"caption": "范围 [0, 100]",
+								"default": 100,
+								"range": [
+									0,
+									100
+								],
+								"step": 1,
+								"suffix": "%"
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"children": {
+							"mapType": {
+								"name": "地图样式",
+								"type": "buttonRadio",
+								"default": "normal",
+								"options": [
+									{
+										"value": "normal",
+										"label": "标准模板"
+									},
+									{
+										"value": "custom",
+										"label": "自定义样式"
+									}
+								]
+							},
+							"standardStyleTemplate": {
+								"showInPanel": [
+									[
+										".mapType",
+										"$eq",
+										"normal"
+									]
+								],
+								"name": "标准模板",
+								"type": "imageSelect",
+								"default": "dark",
+								"options": [
+									{
+										"name": "标准",
+										"label": "标准",
+										"src": "https://img.alicdn.com/tfs/TB1d6xboHH1gK0jSZFwXXc7aXXa-162-104.png",
+										"value": "normal"
+									},
+									{
+										"name": "幻影黑",
+										"label": "幻影黑",
+										"src": "https://img.alicdn.com/tfs/TB1rsVdoRr0gK0jSZFnXXbRRXXa-162-100.png",
+										"value": "dark"
+									},
+									{
+										"name": "靛青蓝",
+										"label": "靛青蓝",
+										"src": "https://img.alicdn.com/tfs/TB1s.E_oET1gK0jSZFrXXcNCXXa-162-102.png",
+										"value": "blue"
+									},
+									{
+										"name": "极夜蓝",
+										"label": "极夜蓝",
+										"src": "https://img.alicdn.com/tfs/TB1xZVdoRr0gK0jSZFnXXbRRXXa-162-104.png",
+										"value": "darkblue"
+									},
+									{
+										"name": "雅士灰",
+										"label": "雅士灰",
+										"src": "https://img.alicdn.com/tfs/TB1uQk9ouT2gK0jSZFvXXXnFXXa-162-104.png",
+										"value": "grey"
+									},
+									{
+										"name": "月光银",
+										"label": "月光银",
+										"src": "https://img.alicdn.com/tfs/TB1hdxcoND1gK0jSZFyXXciOVXa-162-104.png",
+										"value": "light"
+									},
+									{
+										"name": "草色青",
+										"label": "草色青",
+										"src": "https://img.alicdn.com/tfs/TB1EQA_oEY1gK0jSZFMXXaWcVXa-162-104.png",
+										"value": "fresh"
+									},
+									{
+										"name": "涂鸦",
+										"label": "涂鸦",
+										"src": "https://img.alicdn.com/tfs/TB1bxgyop67gK0jSZPfXXahhFXa-162-104.png",
+										"value": "graffiti"
+									},
+									{
+										"name": "远山黛",
+										"label": "远山黛",
+										"src": "https://img.alicdn.com/tfs/TB1h4gyop67gK0jSZPfXXahhFXa-162-104.png",
+										"value": "whitesmoke"
+									},
+									{
+										"name": "马卡龙",
+										"label": "马卡龙",
+										"src": "https://img.alicdn.com/tfs/TB1lopXoQL0gK0jSZFxXXXWHVXa-162-104.png",
+										"value": "macaron"
+									},
+									{
+										"name": "酱籽",
+										"label": "酱籽",
+										"src": "https://img.alicdn.com/tfs/TB1kWXaoO_1gK0jSZFqXXcpaXXa-162-104.png",
+										"value": "wine"
+									}
+								],
+								"description": ""
+							},
+							"mapKey": {
+								"showInPanel": [
+									[
+										".mapType",
+										"$eq",
+										"custom"
+									]
+								],
+								"type": "text",
+								"name": "高德Key",
+								"default": "",
+								"description": "通过高德开放平台-控制台-应用管理-我的应用申请key，具体请查看组件帮助文档。"
+							},
+							"mapSecurity": {
+								"showInPanel": [
+									[
+										".mapType",
+										"$eq",
+										"custom"
+									]
+								],
+								"type": "text",
+								"name": "高德密钥",
+								"default": "",
+								"description": "通过高德开放平台-控制台-应用管理-我的应用配置安全密钥：http://lbs.amap.com/dev/key/app，具体请查看组件帮助文档。"
+							},
+							"customMapStyle": {
+								"showInPanel": [
+									[
+										".mapType",
+										"$eq",
+										"custom"
+									]
+								],
+								"type": "text",
+								"name": "地图样式ID",
+								"default": "normal",
+								"description": "通过高德开放平台配置的自定义地图获取，具体请查看组件帮助文档。"
+							},
+							"amapFeatures": {
+								"type": "checkbox",
+								"name": "显示内容",
+								"default": [
+									"bg",
+									"road",
+									"building",
+									"point"
+								],
+								"optionCol": 12,
+								"options": [
+									{
+										"label": "背景",
+										"value": "bg"
+									},
+									{
+										"label": "道路",
+										"value": "road"
+									},
+									{
+										"label": "建筑物",
+										"value": "building"
+									},
+									{
+										"label": "标注",
+										"value": "point"
+									},
+									{
+										"label": "路况",
+										"value": "traffic"
+									}
+								]
+							},
+							"filter": {
+								"fold": true,
+								"type": "suite",
+								"name": "风格滤镜",
+								"enableHide": true,
+								"default": {
+									"show": false
+								},
+								"children": {
+									"brightness": {
+										"name": "亮度",
+										"caption": "亮度 [0, 100]",
+										"type": "number",
+										"range": [
+											0,
+											10
+										],
+										"step": 0.01,
+										"default": 1
+									},
+									"contrast": {
+										"name": "对比度",
+										"caption": "对比度 [0, 5]",
+										"type": "number",
+										"range": [
+											0,
+											5
+										],
+										"step": 0.01,
+										"default": 1
+									},
+									"grayscale": {
+										"name": "灰度",
+										"caption": "灰度 [0, 1]",
+										"type": "number",
+										"range": [
+											0,
+											1
+										],
+										"step": 0.01,
+										"default": 0
+									},
+									"hueRotate": {
+										"name": "色相",
+										"caption": "色相 [0, 360]",
+										"type": "number",
+										"range": [
+											0,
+											360
+										],
+										"step": 0.01,
+										"default": 0
+									},
+									"invert": {
+										"name": "反转",
+										"caption": "反转 [0, 1]",
+										"type": "number",
+										"step": 0.01,
+										"range": [
+											0,
+											1
+										],
+										"default": 0
+									},
+									"saturate": {
+										"name": "饱和度",
+										"caption": "饱和度 [0, 10]",
+										"type": "number",
+										"range": [
+											0,
+											10
+										],
+										"step": 0.01,
+										"default": 1
+									},
+									"sepia": {
+										"name": "墨度",
+										"caption": "墨度 [0, 1]",
+										"type": "number",
+										"range": [
+											0,
+											1
+										],
+										"step": 0.01,
+										"default": 0
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {}
+	}
+}

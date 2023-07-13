@@ -1,0 +1,334 @@
+{
+	"name": "arrow-plotting",
+	"version": "0.1.6",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "箭头标绘",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB1UI35mND1gK0jSZFyXXciOVXa-370-208.png",
+		"protocol": 2,
+		"type": [
+			"material_decorate",
+			"DataV-6:media"
+		],
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "30",
+			"minHeight": "30",
+			"z-index": 110
+		},
+		"config": {
+			"lineStyle": {
+				"type": "group",
+				"name": "线样式",
+				"fold": true,
+				"children": {
+					"leftTop": {
+						"name": "左侧高度比例",
+						"type": "number",
+						"default": 0.9,
+						"range": [
+							0,
+							1
+						]
+					},
+					"rightTop": {
+						"name": "右侧高度比例",
+						"type": "number",
+						"default": 0.3,
+						"range": [
+							0,
+							1
+						]
+					},
+					"weight": {
+						"name": "弧线粗细",
+						"type": "number",
+						"default": 2,
+						"range": [
+							0,
+							20
+						],
+						"step": 0.1
+					},
+					"lineType": {
+						"name": "线型",
+						"type": "search",
+						"default": "0.4,0.6",
+						"range": [
+							{
+								"0.4,0.6": "0.4,0.6"
+							},
+							{
+								"0.5,0.5": "0.5,0.5"
+							},
+							{
+								"1,0": "1,0"
+							},
+							{
+								"0,0": "0,0"
+							}
+						]
+					},
+					"strokeLinecap": {
+						"name": "端点形状",
+						"type": "search",
+						"default": "round",
+						"range": [
+							{
+								"butt": "butt"
+							},
+							{
+								"round": "round"
+							}
+						]
+					},
+					"strokeDasharray": {
+						"name": "虚线",
+						"type": "search",
+						"default": "5,5",
+						"range": [
+							{
+								"5,5": "5,5"
+							},
+							{
+								"10,10": "10,10"
+							},
+							{
+								"10,5,10,5": "10,5,10,5"
+							},
+							{
+								"5,10,5,10": "5,10,5,10"
+							},
+							{
+								"20,10,5,5,5,10": "20,10,5,5,5,10"
+							}
+						]
+					},
+					"animateDirection": {
+						"name": "动画方向",
+						"type": "search",
+						"default": "向右",
+						"range": [
+							{
+								"向左": "向左"
+							},
+							{
+								"向右": "向右"
+							}
+						]
+					},
+					"speed": {
+						"name": "虚线速度",
+						"type": "number",
+						"default": 20,
+						"range": [
+							0,
+							300
+						],
+						"step": 0.1
+					},
+					"strokeColor": {
+						"type": "color",
+						"name": "填充颜色",
+						"default": "rgb(10, 115, 255)"
+					}
+				}
+			},
+			"arrowStyle": {
+				"type": "group",
+				"name": "箭头样式",
+				"fold": true,
+				"children": {
+					"visibilityArrowLeft": {
+						"name": "显示左箭头",
+						"type": "boolean",
+						"default": false
+					},
+					"visibilityArrowRight": {
+						"name": "显示右箭头",
+						"type": "boolean",
+						"default": true
+					},
+					"width": {
+						"name": "宽度",
+						"type": "number",
+						"default": 10,
+						"range": [
+							0,
+							100
+						]
+					},
+					"height": {
+						"name": "高度",
+						"type": "number",
+						"default": 10,
+						"range": [
+							0,
+							100
+						]
+					},
+					"strokeColor": {
+						"type": "color",
+						"name": "填充颜色",
+						"default": "rgb(10, 115, 255)"
+					}
+				}
+			},
+			"textStyle": {
+				"type": "group",
+				"name": "文本样式",
+				"fold": true,
+				"children": {
+					"visibility": {
+						"name": "显示",
+						"type": "boolean",
+						"default": true
+					},
+					"textPosition": {
+						"name": "文字位置",
+						"type": "search",
+						"default": "文字在上",
+						"range": [
+							{
+								"文字在上": "文字在上"
+							},
+							{
+								"文在在下": "文字在下"
+							}
+						]
+					},
+					"padding": {
+						"name": "文字与线间隔",
+						"type": "number",
+						"default": 5,
+						"range": [
+							0,
+							100
+						]
+					},
+					"animateDirection": {
+						"name": "动画方向",
+						"type": "search",
+						"default": "向右",
+						"range": [
+							{
+								"向左": "向左"
+							},
+							{
+								"向右": "向右"
+							}
+						]
+					},
+					"timeLength": {
+						"name": "动画时间间隔",
+						"type": "number",
+						"default": 5,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"fontSize": {
+						"name": "字号",
+						"type": "number",
+						"default": 12,
+						"range": [
+							10,
+							100
+						]
+					},
+					"color": {
+						"type": "color",
+						"name": "字体颜色",
+						"default": "#FFFFFF"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "search",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						]
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					}
+				}
+			}
+		},
+		"apis": {
+			"data": {
+				"description": "数据",
+				"handler": "render",
+				"fields": {
+					"content": {
+						"description": "内容"
+					},
+					"alink": {
+						"description": "超链接"
+					},
+					"textAnimate": {
+						"description": "文字动画"
+					},
+					"lineAnimate": {
+						"description": "虚线动画"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"content": "箭头标绘文字",
+					"alink": "https://data.aliyun.com/visual/datav?spm=5176.8142029.388261.171.563b6d3elq2EPo",
+					"textAnimate": true,
+					"lineAnimate": true
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1kvo5mQT2gK0jSZFkXXcIQFXa-162-116.png"
+	}
+}

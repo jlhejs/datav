@@ -1,0 +1,88 @@
+{
+	"name": "@datav-city-pro-v2-cim/datav-engine-3dtile-oblique-photography",
+	"version": "2.0.6",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "^4.0.7"
+	},
+	"datav": {
+		"cn_name": "3D Tiles 倾斜摄影",
+		"protocol": 2,
+		"supportTheme": false,
+		"level": 2,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"data": {
+						"type": "group",
+						"name": "通用",
+						"children": {
+							"maximumScreenSpaceError": {
+								"name": "最大屏幕空间误差",
+								"type": "slider",
+								"caption": "范围 [8, 100]",
+								"min": 8,
+								"max": 100,
+								"step": 1,
+								"precision": 1,
+								"showRange": false,
+								"default": 16
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": []
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"format": "geo_3dtile_obliquephotography_3dtile",
+				"description": "数据接口",
+				"fields": {
+					"url": {
+						"description": "三维服务URL",
+						"type": "string",
+						"optional": false
+					}
+				}
+			}
+		},
+		"events": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_tile3d_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "//img.alicdn.com/imgextra/i4/O1CN01t3UxCD1FmKIjzx9FD_!!6000000000529-2-tps-360-360.png"
+	}
+}

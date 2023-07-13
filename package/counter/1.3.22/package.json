@@ -1,0 +1,428 @@
+{
+	"name": "counter",
+	"version": "1.3.22",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"dchart-counter": "0.2.15",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "翻牌指标器",
+		"level": 0,
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "翻牌器接口",
+				"fields": {
+					"value": {
+						"description": "值"
+					}
+				}
+			}
+		},
+		"private": true,
+		"protocol": 2,
+		"config": {
+			"global": {
+				"type": "group",
+				"name": "全局",
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "fanpaiqi",
+								"range": [
+									{
+										"翻牌器字体": "fanpaiqi"
+									},
+									{
+										"哥特体": "HighlandGothicFLF"
+									},
+									{
+										"Acens": "Acens"
+									},
+									{
+										"DIN": "DIN"
+									},
+									{
+										"DIN2": "DIN2"
+									},
+									{
+										"Neo": "Petitinho"
+									},
+									{
+										"Digital": "DS-Digital"
+									},
+									{
+										"Prisma": "Prisma"
+									},
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							}
+						}
+					},
+					"align": {
+						"type": "group",
+						"name": "对齐方式",
+						"fold": true,
+						"children": {
+							"justifyContent": {
+								"name": "水平对齐方式",
+								"type": "options",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "flex-start"
+									},
+									{
+										"name": "右对齐",
+										"value": "flex-end"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									}
+								],
+								"default": "center"
+							},
+							"alignItems": {
+								"name": "垂直对齐方式",
+								"type": "options",
+								"options": [
+									{
+										"name": "顶部对齐",
+										"value": "flex-start"
+									},
+									{
+										"name": "底部对齐",
+										"value": "flex-end"
+									},
+									{
+										"name": "垂直居中",
+										"value": "center"
+									},
+									{
+										"name": "基准线对齐",
+										"value": "baseline"
+									}
+								],
+								"default": "center"
+							}
+						}
+					}
+				}
+			},
+			"prefix": {
+				"type": "group",
+				"name": "前缀",
+				"children": {
+					"content": {
+						"type": "string",
+						"name": "内容",
+						"default": "$"
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#160707"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									0,
+									100
+								],
+								"default": 45,
+								"min": 0,
+								"max": 100,
+								"step": 1
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					}
+				}
+			},
+			"numbers": {
+				"type": "group",
+				"name": "数字",
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#333333"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									0,
+									100
+								],
+								"default": 47,
+								"min": 0,
+								"max": 100,
+								"step": 1
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								],
+								"description": "某些字体无法更改字体粗细"
+							}
+						}
+					},
+					"marginRight": {
+						"name": "数字间隔",
+						"type": "number",
+						"default": 0.2,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"backgroundColor": {
+						"name": "背景色",
+						"type": "color",
+						"default": "#54f5f5"
+					},
+					"backgroundRadius": {
+						"name": "背景圆角",
+						"type": "number",
+						"default": 6,
+						"range": [
+							0,
+							100
+						]
+					},
+					"separatingBackground": {
+						"name": "分隔符背景",
+						"type": "boolean",
+						"default": false
+					},
+					"digit": {
+						"type": "number",
+						"name": "默认位数",
+						"default": 0,
+						"range": [
+							0,
+							100
+						],
+						"step": 1
+					},
+					"rounding": {
+						"type": "boolean",
+						"name": "数据四舍五入",
+						"default": true
+					},
+					"decimal": {
+						"type": "number",
+						"name": "小数点位数",
+						"default": 2,
+						"range": [
+							0,
+							10
+						],
+						"step": 1,
+						"show": [
+							[
+								"rounding",
+								"$eq",
+								false
+							]
+						]
+					},
+					"separatingChart": {
+						"type": "boolean",
+						"name": "千分位分隔符",
+						"default": false
+					},
+					"separatingSymbol": {
+						"type": "text",
+						"name": "千分位分割符符号",
+						"default": ",",
+						"description": "分隔符最长一位，超出一位时取第一位，无法以数字作为分隔符。"
+					},
+					"decimalSymbol": {
+						"type": "text",
+						"name": "小数分割符符号",
+						"default": ".",
+						"description": "分隔符最长一位，超出一位时取第一位，无法以数字作为分隔符。"
+					},
+					"duration": {
+						"name": "动画间隔",
+						"type": "number",
+						"default": 1000
+					},
+					"increment": {
+						"type": "boolean",
+						"name": "数据抖动修正",
+						"default": false
+					},
+					"fixedWidth": {
+						"type": "number",
+						"name": "定宽",
+						"default": 0
+					}
+				}
+			},
+			"suffix": {
+				"type": "group",
+				"name": "后缀",
+				"children": {
+					"content": {
+						"type": "string",
+						"name": "内容",
+						"default": ""
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#160707"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									0,
+									100
+								],
+								"default": 56,
+								"min": 0,
+								"max": 100,
+								"step": 1
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					}
+				}
+			},
+			"interaction": {
+				"type": "group",
+				"name": "交互",
+				"fold": true,
+				"children": {
+					"callbackId": {
+						"type": "string",
+						"name": "回调 ID",
+						"default": ""
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": 2314232.6732
+				}
+			]
+		},
+		"view": {
+			"width": "440",
+			"height": "115",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"type": [
+			"figure_board"
+		],
+		"icon": {
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/42cb5e2f95854e0272237c04c20e8a9c.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/b1daee31cd952b90e8e2f50cc95f197b.png"
+		}
+	}
+}

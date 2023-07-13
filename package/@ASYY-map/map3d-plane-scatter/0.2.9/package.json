@@ -1,0 +1,312 @@
+{
+	"name": "map3d-plane-scatter",
+	"version": "0.2.9",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"dmap": "0.2.9"
+	},
+	"datav": {
+		"cn_name": "散点层",
+		"protocol": 2,
+		"level": 0,
+		"icon": "https://img.alicdn.com/tfs/TB1mK3fAxjaK1RjSZFAXXbdLFXa-180-180.png",
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"ratio": {
+				"type": "number",
+				"name": "散点高度",
+				"default": 4,
+				"range": [
+					0,
+					20
+				],
+				"step": 0.01
+			},
+			"scaleOffset": {
+				"type": "number",
+				"name": "呼吸范围",
+				"default": 1,
+				"range": [
+					0,
+					3
+				],
+				"step": 0.01
+			},
+			"scaleSpeed": {
+				"type": "number",
+				"name": "呼吸速率",
+				"default": 0.007,
+				"range": [
+					0,
+					0.2
+				],
+				"step": 0.001
+			},
+			"maxPtSize": {
+				"type": "number",
+				"default": 11,
+				"range": [
+					1,
+					100
+				],
+				"step": 1,
+				"name": "最大半径"
+			},
+			"minPtSize": {
+				"type": "number",
+				"default": 5,
+				"range": [
+					1,
+					50
+				],
+				"step": 1,
+				"name": "最小半径"
+			},
+			"sprite": {
+				"type": "group",
+				"name": "散点样式",
+				"children": {
+					"from": {
+						"type": "color",
+						"name": "内圈颜色",
+						"default": "#FFFC00"
+					},
+					"to": {
+						"type": "color",
+						"name": "外圈颜色",
+						"default": "#b4b41f"
+					},
+					"drawN": {
+						"type": "number",
+						"default": 15,
+						"range": [
+							1,
+							40
+						],
+						"step": 1,
+						"name": "渐变数量"
+					},
+					"easing": {
+						"name": "渐变类型",
+						"type": "select",
+						"default": "Quartic.In.1",
+						"options": [
+							{
+								"name": "线性",
+								"value": "Linear.None.1.7"
+							},
+							{
+								"name": "s型",
+								"value": "Quartic.InOut.1"
+							},
+							{
+								"name": "外疏",
+								"value": "Quartic.Out.1"
+							},
+							{
+								"name": "内疏",
+								"value": "Quartic.In.1"
+							}
+						]
+					}
+				}
+			}
+		},
+		"api_data": {
+			"scatter": [
+				{
+					"lat": 62.103883,
+					"lng": -106.523438,
+					"value": 51
+				},
+				{
+					"lat": 50.064192,
+					"lng": -74.179688,
+					"value": 94
+				},
+				{
+					"lat": 43.068888,
+					"lng": -104.765625,
+					"value": 90
+				},
+				{
+					"lat": -16.299051,
+					"lng": -58.007812,
+					"value": 36
+				},
+				{
+					"lat": 37.996404,
+					"lng": 85.432403,
+					"value": 83
+				},
+				{
+					"lat": 30.44572,
+					"lng": 94.922655,
+					"value": 55
+				},
+				{
+					"lat": 24.203949,
+					"lng": 105.823615,
+					"value": 29
+				},
+				{
+					"lat": 17.644022,
+					"lng": -10.898438,
+					"value": 23
+				},
+				{
+					"lat": 34.597042,
+					"lng": -84.726562,
+					"value": 70
+				},
+				{
+					"lat": 51.618017,
+					"lng": -61.523437,
+					"value": 18
+				},
+				{
+					"lat": 34.016242,
+					"lng": -104.765625,
+					"value": 42
+				},
+				{
+					"lat": 31.501552,
+					"lng": 120.853839,
+					"value": 48
+				},
+				{
+					"lat": 30.066677,
+					"lng": 118.481709,
+					"value": 76
+				},
+				{
+					"lat": 26.977316,
+					"lng": 116.635464,
+					"value": 71
+				},
+				{
+					"lat": 34.740778,
+					"lng": 117.164073,
+					"value": 88
+				},
+				{
+					"lat": 34.595741,
+					"lng": 112.857578,
+					"value": 84
+				},
+				{
+					"lat": 39.573011,
+					"lng": 116.285298,
+					"value": 7
+				},
+				{
+					"lat": 38.273105,
+					"lng": 110.659935,
+					"value": 36
+				},
+				{
+					"lat": 31.950282,
+					"lng": 115.406069,
+					"value": 15
+				},
+				{
+					"lat": 23.722477,
+					"lng": 112.32951,
+					"value": 58
+				},
+				{
+					"lat": 23.31952,
+					"lng": 120.765501,
+					"value": 97
+				},
+				{
+					"lat": 44.215781,
+					"lng": 125.689882,
+					"value": 32
+				},
+				{
+					"lat": 28.918395,
+					"lng": 107.84604,
+					"value": 13
+				},
+				{
+					"lat": 37.996531,
+					"lng": 94.044447,
+					"value": 57
+				},
+				{
+					"lat": 29.456165,
+					"lng": 113.472703,
+					"value": 34
+				},
+				{
+					"lat": 28.841794,
+					"lng": 119.448469,
+					"value": 53
+				},
+				{
+					"lat": 26.66359,
+					"lng": 118.656972,
+					"value": 96
+				},
+				{
+					"lat": 26.427911,
+					"lng": 110.043794,
+					"value": 11
+				},
+				{
+					"lat": 19.060209,
+					"lng": 109.603594,
+					"value": 5
+				},
+				{
+					"lat": 22.103386,
+					"lng": 114.438471,
+					"value": 21
+				}
+			]
+		},
+		"apis": {
+			"scatter": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					},
+					"value": {
+						"description": "值",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"type": [
+			"map3d_plane_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_plane"
+			],
+			"supportNames": [
+				"map3d-plane*"
+			]
+		}
+	}
+}

@@ -1,0 +1,1843 @@
+{
+	"name": "@datav-form/time-picker",
+	"version": "0.1.1",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"d3-time": "1.0.11",
+		"d3-time-format": "2.1.3",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"moment": "2.29.1",
+		"xss": "1.0.3"
+	},
+	"datav": {
+		"cn_name": "时间选择器",
+		"icon": "//img.alicdn.com/tfs/TB1xO.2mKH2gK0jSZFEXXcqMpXa-370-208.png",
+		"protocol": 2,
+		"level": 2,
+		"type": [
+			"interact",
+			"DataV-6:control_select"
+		],
+		"view": {
+			"width": "300",
+			"height": "40",
+			"minWidth": "20",
+			"minHeight": "10"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"name": "数据接口",
+				"description": "数据接口",
+				"fields": {
+					"time": {
+						"name": "默认时间",
+						"description": "默认时间",
+						"type": "string"
+					},
+					"startTime": {
+						"name": "开始时间",
+						"description": "设置时间范围区间",
+						"type": "string"
+					},
+					"endTime": {
+						"name": "结束时间",
+						"description": "设置时间范围区间",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"callback": {
+				"name": "格式设置",
+				"type": "suite",
+				"children": {
+					"_type": {
+						"name": "时间格式",
+						"type": "select",
+						"description": "请参照 %Y/%m/%d %H:%M:%S",
+						"default": "%Y-%m-%d",
+						"options": [
+							{
+								"value": "%Y-%m-%d %H:%M:%S",
+								"label": "2020-10-10 10:10:10"
+							},
+							{
+								"value": "%Y-%m-%d %H:%M",
+								"label": "2020-10-10 10:10"
+							},
+							{
+								"value": "%Y-%m-%d",
+								"label": "2020-10-10"
+							},
+							{
+								"value": "%Y",
+								"label": "2020(年份)"
+							},
+							{
+								"value": "%m-%d",
+								"label": "10-10(月-日)"
+							},
+							{
+								"value": "%H:%M:%S",
+								"label": "10:10:10"
+							},
+							{
+								"value": "%H:%M",
+								"label": "10:10(时:分)"
+							},
+							{
+								"value": "%m-%d %H:%M",
+								"label": "10-10 10:10"
+							},
+							{
+								"value": "%m",
+								"label": "10(月)"
+							},
+							{
+								"value": "%d",
+								"label": "10(日)"
+							},
+							{
+								"value": "%H",
+								"label": "10(时)"
+							},
+							{
+								"value": "%m/%d",
+								"label": "10/10"
+							},
+							{
+								"value": "%m.%d",
+								"label": "10.10(月.日)"
+							}
+						]
+					}
+				}
+			},
+			"timeLimit": {
+				"name": "可选时间范围",
+				"type": "suite",
+				"enableHide": true,
+				"description": "时间范围设置, 数据优先级高于设置",
+				"children": {
+					"show": {
+						"default": false
+					},
+					"startTime": {
+						"name": "开始时间",
+						"type": "text",
+						"description": "请参照 %Y-%m-%d",
+						"default": "2020-10-01"
+					},
+					"endTime": {
+						"name": "结束时间",
+						"type": "text",
+						"description": "请参照 %Y-%m-%d",
+						"default": "2020-10-20"
+					}
+				}
+			},
+			"momentSet": {
+				"name": "时刻设置",
+				"type": "boolean",
+				"default": false,
+				"description": "打开后可设置时分秒"
+			},
+			"global": {
+				"name": "全局样式",
+				"type": "group",
+				"fold": true,
+				"handler": "updateInputStyle",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Arial",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体,翻拍器字体需要安装。"
+					},
+					"input": {
+						"name": "输入框样式",
+						"type": "group",
+						"children": {
+							"indent": {
+								"name": "缩进",
+								"type": "number",
+								"default": 8
+							},
+							"backgroundColor": {
+								"name": "背景色",
+								"type": "color",
+								"default": "#181a1c"
+							},
+							"borderNormal": {
+								"name": "普通边框样式",
+								"type": "group",
+								"children": {
+									"borderWidth": {
+										"name": "边框宽度",
+										"type": "number",
+										"min": 0,
+										"default": 1
+									},
+									"borderColor": {
+										"name": "边框颜色",
+										"type": "color",
+										"default": "rgb(10, 115, 255)"
+									},
+									"borderRadius": {
+										"name": "边框圆角",
+										"type": "number",
+										"min": 0,
+										"default": 0
+									}
+								}
+							},
+							"borderHover": {
+								"name": "悬浮边框样式",
+								"type": "group",
+								"children": {
+									"borderWidth": {
+										"name": "边框宽度",
+										"type": "number",
+										"default": 1,
+										"min": 0
+									},
+									"borderColor": {
+										"name": "边框颜色",
+										"type": "color",
+										"default": "rgb(61, 171, 255)"
+									},
+									"borderRadius": {
+										"name": "边框圆角",
+										"type": "number",
+										"default": 0,
+										"min": 0
+									}
+								}
+							},
+							"textStyle": {
+								"type": "group",
+								"name": "文本样式",
+								"fold": true,
+								"children": {
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"min": 0,
+										"default": 12,
+										"step": 1
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "rgb(144, 160, 174)"
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"calendar": {
+				"name": "日历样式",
+				"type": "group",
+				"description": "该样式配置项在PC端生效。",
+				"handler": "updateCalenderStyle",
+				"fold": true,
+				"children": {
+					"height": {
+						"name": "日历框高度",
+						"type": "number",
+						"default": 280,
+						"step": 1,
+						"min": 100
+					},
+					"margin": {
+						"name": "顶部间距",
+						"type": "number",
+						"default": 8
+					},
+					"borderRadius": {
+						"name": "圆角",
+						"default": 0,
+						"type": "number"
+					},
+					"backgroundColor": {
+						"name": "日历框背景色",
+						"type": "color",
+						"default": "rgb(24, 26, 28)"
+					},
+					"header": {
+						"name": "顶部样式",
+						"type": "group",
+						"children": {
+							"dateTextStyle": {
+								"type": "group",
+								"name": "日期文本样式",
+								"fold": true,
+								"children": {
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"min": 0,
+										"default": 14,
+										"step": 1
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "rgb(10, 115, 255)"
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									}
+								}
+							},
+							"timeTextStyle": {
+								"type": "group",
+								"name": "时间文本样式",
+								"fold": true,
+								"children": {
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"min": 0,
+										"default": 14,
+										"step": 1
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "rgba(255,255,255,0.35)"
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									}
+								}
+							},
+							"headerHeight": {
+								"name": "顶部高度",
+								"type": "number",
+								"default": 11.5,
+								"description": "基于日历框高度的百分比数值。",
+								"range": [
+									10,
+									20
+								],
+								"step": 0.1
+							},
+							"lastNextMonthMargin": {
+								"name": "上下月图标间距",
+								"type": "number",
+								"default": 2,
+								"range": [
+									0,
+									50
+								],
+								"step": 0.1
+							},
+							"yearMonthMargin": {
+								"name": "年月选择框间距",
+								"type": "number",
+								"default": 10,
+								"range": [
+									0,
+									50
+								],
+								"step": 0.1
+							},
+							"splitLine": {
+								"name": "分割线样式",
+								"type": "group",
+								"children": {
+									"color": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#39414d"
+									},
+									"width": {
+										"name": "线宽",
+										"type": "number",
+										"default": 1,
+										"range": [
+											0,
+											10
+										]
+									}
+								}
+							}
+						}
+					},
+					"body": {
+						"name": "主体样式",
+						"type": "group",
+						"children": {
+							"splitLine": {
+								"name": "分割线样式",
+								"type": "group",
+								"children": {
+									"color": {
+										"name": "颜色",
+										"type": "color",
+										"default": "rgba(255,255,255,0.35)"
+									},
+									"width": {
+										"name": "线宽",
+										"type": "number",
+										"default": 1,
+										"range": [
+											0,
+											10
+										]
+									}
+								}
+							},
+							"height": {
+								"name": "高度",
+								"type": "number",
+								"default": 210,
+								"min": 50,
+								"step": 10
+							}
+						}
+					},
+					"dateBodyStyle": {
+						"name": "日期样式",
+						"type": "group",
+						"children": {
+							"tableStyle": {
+								"name": "日期表格样式",
+								"type": "group",
+								"children": {
+									"backgroundColor": {
+										"name": "背景色",
+										"type": "color",
+										"default": "rgb(24, 26, 28)"
+									},
+									"border": {
+										"name": "边框样式",
+										"type": "group",
+										"children": {
+											"borderWidth": {
+												"name": "边框宽度",
+												"type": "number",
+												"min": 0,
+												"default": 1
+											},
+											"borderColor": {
+												"name": "边框颜色",
+												"type": "color",
+												"default": "transparent"
+											},
+											"borderRadius": {
+												"name": "边框圆角",
+												"type": "number",
+												"min": 0,
+												"default": 0
+											}
+										}
+									},
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"min": 0,
+										"default": 14,
+										"step": 1
+									}
+								}
+							},
+							"tdStyle": {
+								"name": "日期表格行列样式",
+								"type": "group",
+								"children": {
+									"normal": {
+										"name": "普通样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgba(24,24,24,0.8)"
+											},
+											"border": {
+												"name": "边框样式",
+												"type": "group",
+												"children": {
+													"borderWidth": {
+														"name": "边框宽度",
+														"type": "number",
+														"min": 0,
+														"default": 1
+													},
+													"borderColor": {
+														"name": "边框颜色",
+														"type": "color",
+														"default": "#00baff"
+													},
+													"borderRadius": {
+														"name": "边框圆角",
+														"type": "number",
+														"min": 0,
+														"default": 2
+													}
+												}
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": "normal",
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											},
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "rgb(144, 160, 174)"
+											}
+										}
+									},
+									"hoverStyle": {
+										"name": "悬停样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgb(61, 171, 255)"
+											},
+											"border": {
+												"name": "边框样式",
+												"type": "group",
+												"children": {
+													"borderWidth": {
+														"name": "边框宽度",
+														"type": "number",
+														"min": 0,
+														"default": 1
+													},
+													"borderColor": {
+														"name": "边框颜色",
+														"type": "color",
+														"default": "#00baff"
+													},
+													"borderRadius": {
+														"name": "边框圆角",
+														"type": "number",
+														"min": 0,
+														"default": 2
+													}
+												}
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": "normal",
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											},
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "rgba(255, 255, 255, 0.8)"
+											}
+										}
+									},
+									"focusStyle": {
+										"name": "选中样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgb(36, 131, 255)"
+											},
+											"border": {
+												"name": "边框样式",
+												"type": "group",
+												"children": {
+													"borderWidth": {
+														"name": "边框宽度",
+														"type": "number",
+														"min": 0,
+														"default": 1
+													},
+													"borderColor": {
+														"name": "边框颜色",
+														"type": "color",
+														"default": "#00baff"
+													},
+													"borderRadius": {
+														"name": "边框圆角",
+														"type": "number",
+														"min": 0,
+														"default": 4
+													}
+												}
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": "normal",
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											},
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "rgba(255, 255, 255, 0.8)"
+											}
+										}
+									},
+									"todayStyle": {
+										"name": "今日样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgba(24,24,24,0.8)"
+											},
+											"border": {
+												"name": "边框样式",
+												"type": "group",
+												"children": {
+													"borderWidth": {
+														"name": "边框宽度",
+														"type": "number",
+														"min": 0,
+														"default": 1
+													},
+													"borderColor": {
+														"name": "边框颜色",
+														"type": "color",
+														"default": "#00baff"
+													},
+													"borderRadius": {
+														"name": "边框圆角",
+														"type": "number",
+														"min": 0,
+														"default": 4
+													}
+												}
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": 700,
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											},
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "rgba(0, 0, 0, 0.65)"
+											}
+										}
+									},
+									"lastNextMonthStyle": {
+										"name": "上下月样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgba(24,24,24,0.82)"
+											},
+											"border": {
+												"name": "边框样式",
+												"type": "group",
+												"children": {
+													"borderWidth": {
+														"name": "边框宽度",
+														"type": "number",
+														"min": 0,
+														"default": 1
+													},
+													"borderColor": {
+														"name": "边框颜色",
+														"type": "color",
+														"default": "#1890ff"
+													},
+													"borderRadius": {
+														"name": "边框圆角",
+														"type": "number",
+														"min": 0,
+														"default": 4
+													}
+												}
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": "normal",
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											},
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "rgba(0,0,0,.25)"
+											}
+										}
+									},
+									"week": {
+										"name": "星期字体样式",
+										"type": "group",
+										"children": {
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "#b1adad"
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": "bold",
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"timeBodyStyle": {
+						"name": "时间样式",
+						"type": "group",
+						"children": {
+							"ulBoxStyle": {
+								"name": "时间容器样式",
+								"type": "group",
+								"children": {
+									"border": {
+										"name": "边框样式",
+										"type": "group",
+										"children": {
+											"borderWidth": {
+												"name": "边框宽度",
+												"type": "number",
+												"min": 0,
+												"default": 0
+											},
+											"borderColor": {
+												"name": "边框颜色",
+												"type": "color",
+												"default": "#1890ff"
+											}
+										}
+									},
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"min": 0,
+										"default": 14,
+										"step": 1
+									}
+								}
+							},
+							"liStyle": {
+								"name": "时间行样式",
+								"type": "group",
+								"children": {
+									"normal": {
+										"name": "普通样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgba(24,24,24,0.8)"
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": "normal",
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											},
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "rgba(255,255,255,0.8)"
+											}
+										}
+									},
+									"hoverStyle": {
+										"name": "悬停样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "rgba(24,24,24,0.8)"
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": "normal",
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											},
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "rgba(255,255,255,0.35)"
+											}
+										}
+									},
+									"focusStyle": {
+										"name": "选中样式",
+										"type": "group",
+										"children": {
+											"backgroundColor": {
+												"name": "背景色",
+												"type": "color",
+												"default": "#00baff"
+											},
+											"fontWeight": {
+												"name": "字体粗细",
+												"type": "select",
+												"default": 700,
+												"options": [
+													{
+														"name": "Normal",
+														"value": "normal"
+													},
+													{
+														"name": "Bold",
+														"value": "bold"
+													},
+													{
+														"name": "Bolder",
+														"value": "bolder"
+													},
+													{
+														"name": "Lighter",
+														"value": "lighter"
+													},
+													{
+														"name": "100",
+														"value": "100"
+													},
+													{
+														"name": "200",
+														"value": "200"
+													},
+													{
+														"name": "300",
+														"value": "300"
+													},
+													{
+														"name": "400",
+														"value": "400"
+													},
+													{
+														"name": "500",
+														"value": "500"
+													},
+													{
+														"name": "600",
+														"value": "600"
+													},
+													{
+														"name": "700",
+														"value": "700"
+													},
+													{
+														"name": "800",
+														"value": "800"
+													},
+													{
+														"name": "900",
+														"value": "900"
+													}
+												]
+											},
+											"color": {
+												"name": "字体颜色",
+												"type": "color",
+												"default": "rgba(24,24,24,0.8)"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"footer": {
+						"name": "底部样式",
+						"type": "group",
+						"children": {
+							"height": {
+								"name": "高度",
+								"type": "number",
+								"default": 40,
+								"range": [
+									10,
+									100
+								],
+								"step": 0.1
+							},
+							"bottom": {
+								"name": "底部偏移值",
+								"type": "number",
+								"default": -4,
+								"step": 1
+							},
+							"nowBtnStyle": {
+								"type": "group",
+								"name": "此刻按键样式",
+								"fold": true,
+								"children": {
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"min": 0,
+										"default": 14,
+										"step": 1
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "#1890ff"
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									},
+									"left": {
+										"type": "number",
+										"name": "左侧偏移值",
+										"min": 0,
+										"default": 10,
+										"step": 1
+									},
+									"top": {
+										"type": "number",
+										"name": "顶部偏移值",
+										"min": 0,
+										"default": 7,
+										"step": 1
+									}
+								}
+							},
+							"checkBtnStyle": {
+								"type": "group",
+								"name": "切换按键样式",
+								"fold": true,
+								"children": {
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"min": 0,
+										"default": 14,
+										"step": 1
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "#00a5ff"
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									},
+									"right": {
+										"type": "number",
+										"name": "右侧偏移值",
+										"min": 0,
+										"default": 60,
+										"step": 1
+									},
+									"top": {
+										"type": "number",
+										"name": "顶部偏移值",
+										"min": 0,
+										"default": 7,
+										"step": 1
+									}
+								}
+							},
+							"okBtnStyle": {
+								"type": "group",
+								"name": "确定按键样式",
+								"fold": true,
+								"children": {
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"min": 0,
+										"default": 14,
+										"step": 1
+									},
+									"color": {
+										"name": "字体颜色",
+										"type": "color",
+										"default": "#fff"
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									},
+									"right": {
+										"type": "number",
+										"name": "右侧偏移值",
+										"default": 10,
+										"step": 1
+									},
+									"top": {
+										"type": "number",
+										"name": "顶部偏移值",
+										"default": 7,
+										"step": 1
+									},
+									"backgroundColor": {
+										"name": "背景颜色",
+										"type": "color",
+										"default": "#00a5ff"
+									},
+									"borderRadius": {
+										"name": "圆角",
+										"type": "number",
+										"default": 0,
+										"min": 0
+									}
+								}
+							}
+						}
+					},
+					"yearInterval": {
+						"name": "年份跨度",
+						"type": "number",
+						"handler": "updateYearOptions",
+						"step": 1,
+						"default": 15,
+						"range": [
+							1,
+							50
+						],
+						"description": "设置日历年份前后年数跨度。"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"time": "2020-10-10",
+					"startTime": "2020-10-01",
+					"endTime": "2020-10-20"
+				}
+			]
+		},
+		"events": {
+			"time-changed": {
+				"name": "当前时间变化时",
+				"description": "当前时间变化时",
+				"fields": {
+					"time": {
+						"name": "当前时间值",
+						"description": "当前时间值",
+						"type": "string"
+					},
+					"startTime": {
+						"name": "开始时间",
+						"description": "设置时间范围区间",
+						"type": "string"
+					},
+					"endTime": {
+						"name": "结束时间",
+						"description": "设置时间范围区间",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"getFieldValue": {
+				"name": "获取当前时间器值",
+				"type": "null"
+			},
+			"resetField": {
+				"name": "清空组件到默认值",
+				"type": "null"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1AYo5mHj1gK0jSZFOXXc7GpXa-334-144.png"
+	}
+}

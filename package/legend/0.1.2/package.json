@@ -1,0 +1,241 @@
+{
+	"name": "legend",
+	"version": "0.1.2",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "~4.6.1"
+	},
+	"datav": {
+		"cn_name": "图例",
+		"icon": {},
+		"protocol": 2,
+		"private": true,
+		"type": [
+			""
+		],
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"showName": {
+						"description": "显示名"
+					},
+					"color": {
+						"description": "颜色"
+					}
+				}
+			}
+		},
+		"config": {
+			"textarea": {
+				"type": "group",
+				"name": "文本",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"min": 10,
+						"default": 56,
+						"max": 100
+					},
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#fff"
+					}
+				}
+			},
+			"layout": {
+				"name": "布局",
+				"type": "group",
+				"children": {
+					"margin": {
+						"name": "间距",
+						"type": "group",
+						"children": {
+							"horiInterval": {
+								"name": "左右间距",
+								"type": "number",
+								"default": 8
+							},
+							"vertiInterval": {
+								"name": "上下间距",
+								"type": "number",
+								"default": 8
+							}
+						}
+					},
+					"loc": {
+						"name": "位置",
+						"type": "options",
+						"default": "bottom-center",
+						"options": [
+							{
+								"name": "顶部居中",
+								"value": "top-center"
+							},
+							{
+								"name": "顶部居左",
+								"value": "top-left"
+							},
+							{
+								"name": "顶部居右",
+								"value": "top-right"
+							},
+							{
+								"name": "底部居中",
+								"value": "bottom-center"
+							},
+							{
+								"name": "底部居左",
+								"value": "bottom-left"
+							},
+							{
+								"name": "底部居右",
+								"value": "bottom-right"
+							}
+						]
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"showName": "系列一",
+					"color": {
+						"style": "single",
+						"value": "#333"
+					}
+				},
+				{
+					"showName": "系列二",
+					"color": {
+						"style": "double",
+						"from": "#fa2356",
+						"to": "#2356fa",
+						"angle": "45"
+					}
+				}
+			]
+		}
+	},
+	"i18n": {
+		"en_US": {
+			"cn_name": "Legend",
+			"apis": {
+				"source": {
+					"description": "Legend Interface",
+					"fields": {
+						"showName": {
+							"description": "Show Name Field"
+						},
+						"color": {
+							"description": "Color Field"
+						}
+					}
+				}
+			},
+			"config": {
+				"textarea": {
+					"name": "Textarea",
+					"children": {
+						"fontFamily": {
+							"name": "Font Family",
+							"description": "Please select the font that your system has, if your system does not have this font, the title will show the default font"
+						},
+						"fontSize": {
+							"name": "Font Size"
+						},
+						"color": {
+							"name": "Color"
+						}
+					}
+				},
+				"layout": {
+					"name": "Layout",
+					"children": {
+						"margin": {
+							"name": "Margin",
+							"children": {
+								"horiInterval": {
+									"name": "Horizontal Interval"
+								},
+								"vertiInterval": {
+									"name": "Vertical Interval"
+								}
+							}
+						},
+						"loc": {
+							"name": "Position",
+							"options": [
+								{
+									"name": "Top Center"
+								},
+								{
+									"name": "Top Left"
+								},
+								{
+									"name": "Top Right"
+								},
+								{
+									"name": "Bottom Center"
+								},
+								{
+									"name": "Bottom Left"
+								},
+								{
+									"name": "Bottom Right"
+								}
+							]
+						}
+					}
+				}
+			},
+			"api_data": {
+				"source": [
+					{
+						"showName": "Series 1"
+					},
+					{
+						"showName": "series 2"
+					}
+				]
+			}
+		}
+	}
+}

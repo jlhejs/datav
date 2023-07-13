@@ -1,0 +1,119 @@
+{
+	"name": "cloud-conference-2017-buildings",
+	"version": "0.0.4",
+	"description": "云栖大会建筑层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"keywords": [],
+	"author": "shuke.ft",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"three": "0.83.0"
+	},
+	"datav": {
+		"cn_name": "云栖大会建筑层",
+		"icon": {},
+		"private": true,
+		"protocol": 2,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "模型数据",
+				"fields": {}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"modelUrl": {
+				"name": "模型地址",
+				"type": "string",
+				"default": "http://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/buildinds3.dae"
+			},
+			"offsetX": {
+				"name": "X轴偏移",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.01,
+				"default": 0
+			},
+			"offsetY": {
+				"name": "Y轴偏移",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.01,
+				"default": 0
+			},
+			"offsetZ": {
+				"name": "Z轴偏移",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.01,
+				"default": 0
+			},
+			"rotationX": {
+				"name": "X轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.001,
+				"default": 0.5
+			},
+			"rotationY": {
+				"name": "Y轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.001,
+				"default": 0
+			},
+			"rotationZ": {
+				"name": "Z轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.001,
+				"default": 0
+			}
+		},
+		"api_data": {
+			"source": []
+		},
+		"type": [
+			"map_cloud_conference_2017_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_cloud_conference_2017"
+			],
+			"supportNames": []
+		}
+	}
+}

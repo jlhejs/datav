@@ -1,0 +1,257 @@
+{
+  "name": "datav-paragraph",
+  "version": "0.0.1",
+  "dependencies": {
+    "bcore": "0.0.18",
+    "jquery": "2.1.4",
+    "lodash": "4.6.1"
+  },
+  "datav": {
+    "alias": "多行文本",
+    "img": "http://file.xzuy.com/datav/com-thum/paragraph-370-208.png",
+    "name": "VParagraph",
+    "icon": "v-icon-title",
+    "type": "com",
+    "attr": {
+      "x": 492,
+      "y": 202,
+      "w": 300,
+      "h": 180,
+      "deg": 0,
+      "opacity": 1,
+      "filpV": false,
+      "filpH": false
+    },
+    "projectId": "632aa39d9792991711597dd6",
+    "apis": {
+      "source": {
+        "fields": {
+          "value": {
+            "type": "string",
+            "map": "",
+            "description": "值",
+            "optional": false
+          }
+        },
+        "render": "render",
+        "description": "多行文本接口",
+        "useAutoUpdate": false,
+        "autoUpdate": 1
+      }
+    },
+    "apiData": {
+      "source": {
+        "comId": "Paragraph_GqAIN1af0Q",
+        "id": "lbzhYPN3QU",
+        "type": "static",
+        "pageFilters": [],
+        "config": {
+          "useFilter": false,
+          "data": ""
+        }
+      }
+    },
+    "id": "",
+    "parent": "title",
+    "thum": "//files.pengxiaotian.com/com-thum/marquee-370-208.png",
+    "scaling": {
+      "zoom": false,
+      "w": 0,
+      "h": 0,
+      "sx": 1,
+      "sy": 1
+    },
+    "config": {
+      "content": {
+        "name": "content",
+        "type": "text",
+        "default": "DataV 提供运营动态直播、数据综合展示、设备监控预警等多种场景模板，稍加修改就能够直接服务于您的可视化需求。通过拖拽即可实现灵活的可视化布局，在模板的基础上任何人都能够发挥创意，实现您自己的可视化应用。支持阿里云分析数据库、关系型数据库、Restful API、CSV、静态JSON等多种数据来源，且能够动态轮询。能够实现多个数据源汇聚于一个可视化界面中"
+      },
+      "textStyle": {
+        "name": "文字样式",
+        "type": "group",
+        "children": {
+          "fontFamily": {
+            "name": "字体",
+            "type": "select",
+            "default": "Microsoft Yahei",
+            "options": [
+              {
+                "value": "Microsoft Yahei",
+                "label": "微软雅黑"
+              },
+              {
+                "value": "SimSun",
+                "label": "宋体"
+              },
+              {
+                "value": "SimHei",
+                "label": "黑体"
+              },
+              {
+                "value": "LiSu",
+                "label": "隶书"
+              },
+              {
+                "value": "YouYuan",
+                "label": "幼圆"
+              },
+              {
+                "value": "tahoma",
+                "label": "tahoma"
+              },
+              {
+                "value": "arial",
+                "label": "arial"
+              },
+              {
+                "value": "sans-serif",
+                "label": "sans-serif"
+              }
+            ]
+          },
+          "fontSize": {
+            "name": "字体大小",
+            "type": "number",
+            "suffix": "px",
+            "default": 16
+          },
+          "color": {
+            "name": "颜色",
+            "type": "color",
+            "default": "#fff"
+          },
+          "fontWeight": {
+            "name": "字体的粗细",
+            "type": "select",
+            "allowCustom": true,
+            "default": "normal",
+            "options": [
+              {
+                "value": "normal",
+                "label": "标准"
+              },
+              {
+                "value": "bold",
+                "label": "粗体"
+              },
+              {
+                "value": "bolder",
+                "label": "超粗体"
+              },
+              {
+                "value": "lighter",
+                "label": "细"
+              },
+              {
+                "value": "100",
+                "label": "100"
+              },
+              {
+                "value": "200",
+                "label": "200"
+              },
+              {
+                "value": "300",
+                "label": "300"
+              },
+              {
+                "value": "400",
+                "label": "400"
+              },
+              {
+                "value": "500",
+                "label": "500"
+              },
+              {
+                "value": "600",
+                "label": "600"
+              },
+              {
+                "value": "700",
+                "label": "700"
+              },
+              {
+                "value": "800",
+                "label": "800"
+              },
+              {
+                "value": "900",
+                "label": "900"
+              }
+            ]
+          }
+        }
+      },
+      "scroll": {
+        "name": "文字滚动",
+        "type": "group",
+        "children": {
+          "duration": {
+            "name": "滚动持续时间",
+            "type": "number",
+            "suffix": "秒",
+            "default": 5
+          },
+          "overScroll": {
+            "name": "溢出滚动",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "lineHeight": {
+        "name": "行高",
+        "type": "number",
+        "suffix": "px",
+        "default": 36
+      },
+      "textAlign": {
+        "name": "对齐文本",
+        "type": "select",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "左对齐"
+          },
+          {
+            "value": "right",
+            "label": "右对齐"
+          },
+          {
+            "value": "center",
+            "label": "居中"
+          },
+          {
+            "value": "justify",
+            "label": "两端对齐"
+          },
+          {
+            "value": "inherit",
+            "label": "继承"
+          }
+        ]
+      },
+      "textIndent": {
+        "name": "文本的首行",
+        "type": "number",
+        "suffix": "px",
+        "default": 32
+      }
+    },
+    "events": {},
+    "actions": {}
+  },
+  "files": [
+    ""
+  ],
+  "main": "./index.umd.js",
+  "module": "./index.es.js",
+  "exports": {
+    ".": {
+      "import": "./index.es.js",
+      "require": "./index.umd.js"
+    }
+  }
+}

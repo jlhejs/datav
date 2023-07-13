@@ -1,0 +1,387 @@
+{
+	"name": "bar-with-line",
+	"version": "0.1.9",
+	"dependencies": {
+		"bcore": "0.0.20",
+		"jquery": "2.1.4",
+		"lodash": "4.15.0",
+		"dchart-bar-with-line": "0.2.8",
+		"d3": "3.5.6"
+	},
+	"datav": {
+		"cn_name": "折线柱状图",
+		"protocol": 2,
+		"private": true,
+		"type": [
+			"regular_bar"
+		],
+		"view": {
+			"width": "300",
+			"height": "200",
+			"minWidth": "100",
+			"minHeight": "50",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "柱状图接口",
+				"fields": {
+					"x": {
+						"description": "类目"
+					},
+					"y": {
+						"description": "柱状图值"
+					},
+					"z": {
+						"description": "折线图值"
+					}
+				}
+			}
+		},
+		"config": {
+			"margin": {
+				"type": "group",
+				"name": "边距",
+				"children": {
+					"top": {
+						"name": "顶部",
+						"type": "number",
+						"default": 20
+					},
+					"bottom": {
+						"name": "底部",
+						"type": "number",
+						"default": 40
+					},
+					"left": {
+						"name": "左侧",
+						"type": "number",
+						"default": 40
+					},
+					"right": {
+						"name": "右侧",
+						"type": "number",
+						"default": 40
+					}
+				}
+			},
+			"bar": {
+				"type": "group",
+				"name": "柱子",
+				"children": {
+					"color": {
+						"type": "multicolor",
+						"name": "柱体填充色",
+						"default": {
+							"style": "single",
+							"value": "#79cbe8"
+						}
+					},
+					"bg-color": {
+						"type": "multicolor",
+						"name": "柱体背景色",
+						"default": {
+							"style": "single",
+							"value": "#025d7c"
+						}
+					}
+				}
+			},
+			"line": {
+				"type": "group",
+				"name": "折线",
+				"children": {
+					"color": {
+						"type": "multicolor",
+						"name": "折现颜色",
+						"default": {
+							"style": "single",
+							"value": "#fff"
+						}
+					},
+					"circle-radius": {
+						"type": "number",
+						"name": "圆点半径",
+						"default": 5,
+						"min": 0,
+						"max": 10,
+						"show": [
+							[
+								"interpolate",
+								"$eq",
+								false
+							]
+						]
+					},
+					"stroke-width": {
+						"type": "number",
+						"name": "折现宽度",
+						"default": 1,
+						"min": 1,
+						"max": 5
+					},
+					"interpolate": {
+						"type": "boolean",
+						"name": "近似曲线",
+						"default": false
+					}
+				}
+			},
+			"xaxis": {
+				"type": "group",
+				"name": "X轴",
+				"children": {
+					"show": {
+						"type": "boolean",
+						"name": "是否显示X轴",
+						"default": true
+					},
+					"inner-padding": {
+						"type": "number",
+						"name": "内柱间距离",
+						"min": 0,
+						"default": 0.6,
+						"max": 1
+					},
+					"outer-padding": {
+						"type": "number",
+						"name": "外柱间距离",
+						"min": 0,
+						"default": 0,
+						"max": 1
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字号",
+						"min": 12,
+						"default": 12,
+						"max": 100
+					},
+					"color": {
+						"type": "color",
+						"name": "X轴颜色",
+						"default": "#fff"
+					},
+					"tickSize": {
+						"type": "number",
+						"name": "指标点长度",
+						"default": 0,
+						"range": [
+							-40,
+							40
+						],
+						"step": 1
+					},
+					"dy": {
+						"type": "number",
+						"name": "坐标轴与文字间距离",
+						"default": 12,
+						"range": [
+							-40,
+							40
+						],
+						"step": 1
+					},
+					"assist-line": {
+						"type": "boolean",
+						"name": "辅助线",
+						"default": false
+					}
+				}
+			},
+			"yaxis": {
+				"type": "group",
+				"name": "Y轴",
+				"children": {
+					"show": {
+						"type": "boolean",
+						"name": "是否显示Y轴",
+						"default": true
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字号",
+						"min": 12,
+						"default": 12,
+						"max": 100
+					},
+					"color": {
+						"type": "color",
+						"name": "Y轴颜色",
+						"default": "#fff"
+					},
+					"label": {
+						"type": "text",
+						"name": "单位",
+						"default": ""
+					},
+					"max": {
+						"type": "text",
+						"name": "最大值",
+						"default": "auto"
+					},
+					"min": {
+						"type": "text",
+						"name": "最小值",
+						"default": "auto"
+					},
+					"ticks": {
+						"type": "number",
+						"name": "显示指标点数量",
+						"default": 5,
+						"range": [
+							0,
+							40
+						],
+						"step": 1
+					},
+					"tickSize": {
+						"type": "number",
+						"name": "指标点长度",
+						"default": 0,
+						"range": [
+							0,
+							40
+						],
+						"step": 1
+					},
+					"dy": {
+						"type": "number",
+						"name": "文字距辅助线距离",
+						"default": 8,
+						"range": [
+							-40,
+							40
+						]
+					},
+					"assist-line": {
+						"type": "boolean",
+						"name": "辅助线",
+						"default": false
+					}
+				}
+			},
+			"zaxis": {
+				"type": "group",
+				"name": "Z轴",
+				"children": {
+					"show": {
+						"type": "boolean",
+						"name": "是否显示Z轴",
+						"default": true
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字号",
+						"min": 12,
+						"default": 12,
+						"max": 100
+					},
+					"color": {
+						"type": "color",
+						"name": "Z轴颜色",
+						"default": "#fff"
+					},
+					"label": {
+						"type": "text",
+						"name": "单位",
+						"default": ""
+					},
+					"max": {
+						"type": "text",
+						"name": "最大值",
+						"default": "auto"
+					},
+					"min": {
+						"type": "text",
+						"name": "最小值",
+						"default": "auto"
+					},
+					"ticks": {
+						"type": "number",
+						"name": "显示指标点数量",
+						"default": 5,
+						"range": [
+							0,
+							40
+						],
+						"step": 1
+					},
+					"tickSize": {
+						"type": "number",
+						"name": "指标点长度",
+						"default": 0,
+						"range": [
+							-40,
+							40
+						],
+						"step": 1
+					},
+					"dy": {
+						"type": "number",
+						"name": "文字距辅助线距离",
+						"default": 8,
+						"range": [
+							-40,
+							40
+						]
+					},
+					"assist-line": {
+						"type": "boolean",
+						"name": "辅助线",
+						"default": false
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "2月",
+					"y": "235.5",
+					"z": "0"
+				},
+				{
+					"x": "3月",
+					"y": "156.3",
+					"z": "-33.6"
+				},
+				{
+					"x": "4月",
+					"y": "123.5",
+					"z": "-21"
+				},
+				{
+					"x": "5月",
+					"y": "423.5",
+					"z": "42.9"
+				},
+				{
+					"x": "6月",
+					"y": "456.5",
+					"z": "7.8"
+				},
+				{
+					"x": "7月",
+					"y": "356.5",
+					"z": "-21.9"
+				},
+				{
+					"x": "8月",
+					"y": "456.5",
+					"z": "28.1"
+				},
+				{
+					"x": "9月",
+					"y": "853.5",
+					"z": "87"
+				}
+			]
+		},
+		"icon": {
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/bf02c665dd1c62118c6f5ecc2e4a8323.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/698cfea9b6ca15aa036be13939f7bba9.png"
+		}
+	}
+}

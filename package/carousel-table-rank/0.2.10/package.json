@@ -1,0 +1,272 @@
+{
+	"name": "carousel-table-rank",
+	"version": "0.2.10",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "~2.1.4",
+		"lodash": "~3.10.0"
+	},
+	"datav": {
+		"cn_name": "轮播表格排行榜",
+		"protocol": 2,
+		"type": [
+			"figure"
+		],
+		"private": true,
+		"apis": {
+			"source": {
+				"autoUpdate": 30000,
+				"handler": "render",
+				"fields": {}
+			}
+		},
+		"config": {
+			"background-color": {
+				"type": "color",
+				"name": "背景颜色",
+				"default": "rgba(0, 0, 0, 0)"
+			},
+			"title": {
+				"type": "group",
+				"name": "标题",
+				"children": {
+					"value": {
+						"type": "text",
+						"name": "标题名",
+						"default": "我是标题"
+					},
+					"height": {
+						"type": "number",
+						"name": "标题区域高度",
+						"default": 22,
+						"min": 1,
+						"max": 55
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字体",
+						"min": 10,
+						"default": 18,
+						"max": 55
+					},
+					"color": {
+						"type": "color",
+						"name": "字体颜色",
+						"default": "#F8BC38"
+					},
+					"text-align": {
+						"name": "对齐方式",
+						"type": "select",
+						"options": [
+							{
+								"name": "左对齐",
+								"value": "left"
+							},
+							{
+								"name": "右对齐",
+								"value": "right"
+							},
+							{
+								"name": "居中对齐",
+								"value": "center"
+							}
+						],
+						"default": "left"
+					}
+				}
+			},
+			"chart": {
+				"type": "group",
+				"name": "列表",
+				"children": {
+					"rowCount": {
+						"type": "number",
+						"name": "图表显示行数",
+						"default": 5,
+						"step": 1,
+						"min": 1,
+						"max": 20
+					},
+					"duration": {
+						"type": "number",
+						"name": "轮播时间间隔(毫秒)",
+						"default": 5000,
+						"min": 3000,
+						"max": 60000
+					},
+					"hasIndex": {
+						"type": "boolean",
+						"name": "是否显示序号列",
+						"default": true
+					},
+					"contentMaxLength": {
+						"name": "最大字符串长度",
+						"type": "number",
+						"default": 20,
+						"min": 5,
+						"max": 50
+					},
+					"margin": {
+						"type": "group",
+						"name": "边距",
+						"children": {
+							"margin-top": {
+								"name": "顶部",
+								"type": "number",
+								"default": 0,
+								"min": 0,
+								"max": 20
+							},
+							"margin-bottom": {
+								"name": "底部",
+								"type": "number",
+								"default": 0,
+								"min": 0,
+								"max": 20
+							},
+							"margin-left": {
+								"name": "左侧",
+								"type": "number",
+								"default": 15,
+								"min": 0,
+								"max": 20
+							},
+							"margin-right": {
+								"name": "右侧",
+								"type": "number",
+								"default": 15,
+								"min": 0,
+								"max": 20
+							}
+						}
+					},
+					"index": {
+						"type": "group",
+						"name": "序号列",
+						"children": {
+							"font-size": {
+								"name": "字号",
+								"type": "string",
+								"default": "0.4em"
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#FFF"
+							},
+							"background-color": {
+								"type": "color",
+								"name": "背景色",
+								"default": "#44D3E4"
+							}
+						}
+					},
+					"column": {
+						"type": "group",
+						"name": "单元格",
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#FFF"
+							},
+							"font-size": {
+								"name": "字号",
+								"type": "string",
+								"default": "0.8em"
+							},
+							"margin": {
+								"type": "group",
+								"name": "单元格边距",
+								"children": {
+									"margin-top": {
+										"name": "顶部",
+										"type": "number",
+										"default": 0,
+										"min": 0,
+										"max": 20
+									},
+									"margin-bottom": {
+										"name": "底部",
+										"type": "number",
+										"default": 0,
+										"min": 0,
+										"max": 20
+									},
+									"margin-left": {
+										"name": "左侧",
+										"type": "number",
+										"default": 15,
+										"min": 0,
+										"max": 20
+									},
+									"margin-right": {
+										"name": "右侧",
+										"type": "number",
+										"default": 15,
+										"min": 0,
+										"max": 20
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				},
+				{
+					"商品名": "CPRIME NEO旗舰版能量手环",
+					"金额": 688
+				}
+			]
+		},
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "0",
+			"minHeight": "0"
+		},
+		"icon": {
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/7810439a61cd6b379707f511741f7d1d.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/bd08747e770a2fc4a96edddbf57d4fc5.png"
+		}
+	}
+}

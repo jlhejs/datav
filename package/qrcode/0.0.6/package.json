@@ -1,0 +1,268 @@
+{
+	"name": "qrcode",
+	"version": "0.0.6",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"qrcodejs2": "0.0.2"
+	},
+	"datav": {
+		"cn_name": "二维码",
+		"protocol": 2,
+		"level": 0,
+		"icon": "//img.alicdn.com/imgextra/i1/O1CN01XPa6jM1jmGallnwNm_!!6000000004590-2-tps-368-208.png",
+		"thumbnail": "//img.alicdn.com/imgextra/i1/O1CN017FqAyq1sFaslSZWbn_!!6000000005737-2-tps-332-144.png",
+		"supportTheme": true,
+		"type": [
+			"decorate",
+			"DataV-6:info"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"view": {
+			"width": "200",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"text": {
+						"name": "生成二维码内容",
+						"type": "string",
+						"description": "生成二维码内容"
+					}
+				}
+			}
+		},
+		"config": {
+			"text": {
+				"name": "输入内容",
+				"type": "text",
+				"description": "支持从数据中获取二维码内容，详见数据面板",
+				"default": "http://www.aliyun.com"
+			},
+			"color": {
+				"name": "填充颜色",
+				"type": "suite",
+				"children": {
+					"colorDark": {
+						"type": "color",
+						"name": "前景",
+						"default": "#000",
+						"col": 12
+					},
+					"colorLight": {
+						"type": "color",
+						"name": "背景",
+						"default": "#fff",
+						"col": 12
+					}
+				}
+			},
+			"border": {
+				"name": "边框样式",
+				"type": "suite",
+				"children": {
+					"borderStyle": {
+						"name": "线型",
+						"type": "select",
+						"default": "solid",
+						"col": 12,
+						"options": [
+							{
+								"name": "实线",
+								"value": "solid"
+							},
+							{
+								"name": "虚线",
+								"value": "dashed"
+							},
+							{
+								"name": "点线",
+								"value": "dotted"
+							},
+							{
+								"name": "双实线",
+								"value": "double"
+							},
+							{
+								"name": "雕刻效果",
+								"value": "groove"
+							},
+							{
+								"name": "浮雕效果",
+								"value": "ridge"
+							},
+							{
+								"name": "陷入效果",
+								"value": "inset"
+							},
+							{
+								"name": "突出效果",
+								"value": "outset"
+							}
+						]
+					},
+					"borderRadius": {
+						"name": "圆角",
+						"type": "stepper",
+						"min": 0,
+						"step": 1,
+						"default": 0,
+						"col": 12,
+						"suffix": "px"
+					},
+					"borderWidth": {
+						"name": "线宽",
+						"type": "stepper",
+						"step": 1,
+						"min": 0,
+						"default": 0,
+						"suffix": "px",
+						"col": 12
+					},
+					"borderColor": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#fff",
+						"col": 12
+					}
+				}
+			},
+			"logo": {
+				"name": "LOGO",
+				"type": "group",
+				"enableHide": true,
+				"default": {
+					"show": false
+				},
+				"children": {
+					"logoImg": {
+						"name": "图片链接",
+						"type": "image",
+						"default": "https://private-alipayobjects.alipay.com/alipay-rmsdeploy-image/skylark/avatar/6990e17e-6f3e-4075-9b8f-d2faa61e056c.gif?x-oss-process=image%2Fresize%2Cm_fill%2Cw_90%2Ch_90%2Fformat%2Cpng"
+					},
+					"size": {
+						"name": "图片尺寸",
+						"type": "suite",
+						"description": "注：logo尺寸占比30%以内可正常使用；",
+						"children": {
+							"sizeW": {
+								"name": "宽度",
+								"type": "stepper",
+								"default": 50,
+								"suffix": "px",
+								"col": 12,
+								"step": 1
+							},
+							"sizeH": {
+								"name": "高度",
+								"type": "stepper",
+								"default": 50,
+								"suffix": "px",
+								"col": 12,
+								"step": 1
+							}
+						}
+					},
+					"imgBorderRadius": {
+						"name": "图片圆角",
+						"type": "stepper",
+						"min": 0,
+						"step": 1,
+						"default": 8,
+						"suffix": "px"
+					},
+					"backgroundColor": {
+						"name": "背景颜色",
+						"type": "color",
+						"default": "#fff"
+					},
+					"border": {
+						"name": "边框样式",
+						"type": "suite",
+						"children": {
+							"borderStyle": {
+								"name": "线型",
+								"type": "select",
+								"default": "solid",
+								"col": 12,
+								"options": [
+									{
+										"name": "实线",
+										"value": "solid"
+									},
+									{
+										"name": "虚线",
+										"value": "dashed"
+									},
+									{
+										"name": "点线",
+										"value": "dotted"
+									},
+									{
+										"name": "双实线",
+										"value": "double"
+									},
+									{
+										"name": "雕刻效果",
+										"value": "groove"
+									},
+									{
+										"name": "浮雕效果",
+										"value": "ridge"
+									},
+									{
+										"name": "陷入效果",
+										"value": "inset"
+									},
+									{
+										"name": "突出效果",
+										"value": "outset"
+									}
+								]
+							},
+							"borderRadius": {
+								"name": "圆角",
+								"type": "stepper",
+								"min": 0,
+								"step": 1,
+								"default": 10,
+								"suffix": "px",
+								"col": 12
+							},
+							"borderWidth": {
+								"name": "线宽",
+								"type": "stepper",
+								"step": 1,
+								"min": 0,
+								"default": 4,
+								"suffix": "px",
+								"col": 12
+							},
+							"borderColor": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff",
+								"col": 12
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"text": "http://www.aliyun.com"
+				}
+			]
+		}
+	}
+}

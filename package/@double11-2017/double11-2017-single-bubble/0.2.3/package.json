@@ -1,0 +1,535 @@
+{
+	"name": "@double11-2017/double11-2017-single-bubble",
+	"version": "0.2.3",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"d3-ease": "1.0.3",
+		"d3-hierarchy": "1.1.5",
+		"d3-scale": "1.0.6",
+		"d3-selection": "1.1.0",
+		"d3-transition": "1.1.0",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"level": 1,
+		"cn_name": "双11气泡图",
+		"icon": "//img.alicdn.com/tfs/TB1WD_mlRv0gK0jSZKbXXbK2FXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"regular_bubble",
+			"DataV-6:regular_scatter"
+		],
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "20",
+			"minHeight": "20",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"description": "值",
+						"type": "number"
+					},
+					"content": {
+						"description": "内容",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"name": "全局样式",
+				"type": "group",
+				"children": {
+					"duration": {
+						"name": "动画时间(s)",
+						"type": "number",
+						"default": 1,
+						"min": 0,
+						"step": 1
+					},
+					"ease": {
+						"name": "动画方式",
+						"type": "search",
+						"default": "easeBackOut",
+						"searches": [
+							"easeLinear",
+							"easePolyIn",
+							"easePolyOut",
+							"easePoly",
+							"easePolyInOut",
+							"easeQuadIn",
+							"easeQuadOut",
+							"easeQuad",
+							"easeQuadInOut",
+							"easeCubicIn",
+							"easeCubicOut",
+							"easeCubicInOut",
+							"easeSinIn",
+							"easeSinOut",
+							"easeSin",
+							"easeSinInOut",
+							"easeExpIn",
+							"easeExpOut",
+							"easeExp",
+							"easeExpInOut",
+							"easeCircleIn",
+							"easeCircleOut",
+							"easeCircle",
+							"easeCircleInOut",
+							"easeElasticIn",
+							"easeElastic",
+							"easeElasticOut",
+							"easeElasticInOut",
+							"easeBackIn",
+							"easeBackOut",
+							"easeBack",
+							"easeBackInOut",
+							"easeBounceIn",
+							"easeBounce",
+							"easeBounceOut",
+							"easeBounceInOut"
+						]
+					},
+					"padding": {
+						"name": "间隔",
+						"type": "number",
+						"default": 2
+					},
+					"ratio": {
+						"name": "系数",
+						"type": "number",
+						"default": 1,
+						"min": 0,
+						"step": 0.1
+					},
+					"posX": {
+						"name": "水平位移",
+						"type": "text",
+						"default": "0px"
+					},
+					"posY": {
+						"name": "垂直位移",
+						"type": "text",
+						"default": "-15px"
+					}
+				}
+			},
+			"content": {
+				"name": "文本样式",
+				"type": "group",
+				"children": {
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "bolder",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						],
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					},
+					"maxSize": {
+						"name": "最大字体",
+						"type": "number",
+						"default": 20
+					},
+					"minSize": {
+						"name": "最小字体",
+						"type": "number",
+						"default": 12
+					},
+					"numericalLabel": {
+						"name": "标签",
+						"type": "suite",
+						"children": {
+							"show": {
+								"default": true
+							},
+							"labelType": {
+								"name": "显示类型",
+								"type": "select",
+								"default": "value",
+								"options": [
+									{
+										"name": "值",
+										"value": "value"
+									},
+									{
+										"name": "名称",
+										"value": "content"
+									}
+								]
+							}
+						},
+						"enableHide": true
+					},
+					"verticalPos": {
+						"name": "垂直偏移",
+						"type": "stepper",
+						"default": -12,
+						"suffix": "px",
+						"step": 1
+					}
+				}
+			},
+			"nodes": {
+				"name": "节点样式",
+				"type": "group",
+				"children": {
+					"series": {
+						"type": "tabs",
+						"name": "数据系列",
+						"default": [
+							{
+								"color": {
+									"type": "linearGradient",
+									"value": {
+										"angle": 0,
+										"stops": [
+											{
+												"offset": 0,
+												"color": "#7e35ee"
+											},
+											{
+												"offset": 16,
+												"color": "#7e35ee"
+											},
+											{
+												"offset": 16,
+												"color": "#4a2979"
+											},
+											{
+												"offset": 60,
+												"color": "#4a2979"
+											},
+											{
+												"offset": 16,
+												"color": "#382652"
+											},
+											{
+												"offset": 96,
+												"color": "#382652"
+											},
+											{
+												"offset": 96,
+												"color": "#7e35ee"
+											},
+											{
+												"offset": 100,
+												"color": "#7e35ee"
+											}
+										]
+									}
+								}
+							},
+							{
+								"color": {
+									"type": "linearGradient",
+									"value": {
+										"angle": 0,
+										"stops": [
+											{
+												"offset": 0,
+												"color": "#ff3388"
+											},
+											{
+												"offset": 16,
+												"color": "#ff3388"
+											},
+											{
+												"offset": 16,
+												"color": "#883557"
+											},
+											{
+												"offset": 60,
+												"color": "#883557"
+											},
+											{
+												"offset": 16,
+												"color": "#612a41"
+											},
+											{
+												"offset": 96,
+												"color": "#612a41"
+											},
+											{
+												"offset": 96,
+												"color": "#ff3388"
+											},
+											{
+												"offset": 100,
+												"color": "#ff3388"
+											}
+										]
+									}
+								}
+							},
+							{
+								"color": {
+									"type": "linearGradient",
+									"value": {
+										"angle": 0,
+										"stops": [
+											{
+												"offset": 0,
+												"color": "#2a64f9"
+											},
+											{
+												"offset": 16,
+												"color": "#2a64f9"
+											},
+											{
+												"offset": 16,
+												"color": "#2d4584"
+											},
+											{
+												"offset": 60,
+												"color": "#2d4584"
+											},
+											{
+												"offset": 16,
+												"color": "#1f2d52"
+											},
+											{
+												"offset": 96,
+												"color": "#1f2d52"
+											},
+											{
+												"offset": 96,
+												"color": "#2a64f9"
+											},
+											{
+												"offset": 100,
+												"color": "#2a64f9"
+											}
+										]
+									}
+								}
+							},
+							{
+								"color": {
+									"type": "linearGradient",
+									"value": {
+										"angle": 0,
+										"stops": [
+											{
+												"offset": 0,
+												"color": "#33fab7"
+											},
+											{
+												"offset": 16,
+												"color": "#33fab7"
+											},
+											{
+												"offset": 16,
+												"color": "#2d6b56"
+											},
+											{
+												"offset": 60,
+												"color": "#2d6b56"
+											},
+											{
+												"offset": 16,
+												"color": "#1f4c3d"
+											},
+											{
+												"offset": 96,
+												"color": "#1f4c3d"
+											},
+											{
+												"offset": 96,
+												"color": "#33fab7"
+											},
+											{
+												"offset": 100,
+												"color": "#33fab7"
+											}
+										]
+									}
+								}
+							}
+						],
+						"template": {
+							"type": "object",
+							"name": "系列<%= i + 1%>",
+							"children": {
+								"color": {
+									"name": "颜色",
+									"type": "fill",
+									"default": {
+										"type": "linearGradient",
+										"value": {
+											"angle": 0,
+											"stops": [
+												{
+													"offset": 0,
+													"color": "#ff3388"
+												},
+												{
+													"offset": 16,
+													"color": "#ff3388"
+												},
+												{
+													"offset": 16,
+													"color": "#883557"
+												},
+												{
+													"offset": 60,
+													"color": "#883557"
+												},
+												{
+													"offset": 16,
+													"color": "#612a41"
+												},
+												{
+													"offset": 96,
+													"color": "#612a41"
+												},
+												{
+													"offset": 96,
+													"color": "#ff3388"
+												},
+												{
+													"offset": 100,
+													"color": "#ff3388"
+												}
+											]
+										}
+									},
+									"components": [
+										"flat",
+										"linearGradient"
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": 302,
+					"content": "电视"
+				},
+				{
+					"value": 268,
+					"content": "连衣裙"
+				},
+				{
+					"value": 207,
+					"content": "冰箱"
+				},
+				{
+					"value": 98,
+					"content": "手机"
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1VfDolQL0gK0jSZFxXXXWHVXa-160-116.png"
+	}
+}

@@ -1,0 +1,216 @@
+{
+	"name": "map3d-earth-footprint",
+	"version": "0.0.14",
+	"main": "index.js",
+	"dependencies": {
+		"cheap-ruler": "2.5.1",
+		"eventemitter3": "2.0.3",
+		"geoclassify": "0.0.4"
+	},
+	"datav": {
+		"cn_name": "路网轨迹层",
+		"level": 1,
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"height": {
+				"type": "number",
+				"name": "高度",
+				"default": 1,
+				"range": [
+					0,
+					10
+				],
+				"step": 0.1
+			},
+			"maxSize": {
+				"type": "number",
+				"name": "最大宽度",
+				"default": 1.5,
+				"range": [
+					0.1,
+					10
+				],
+				"step": 0.01
+			},
+			"length": {
+				"type": "number",
+				"name": "轨迹长度",
+				"default": 0.3,
+				"range": [
+					0.001,
+					1
+				],
+				"step": 0.001
+			},
+			"speed": {
+				"type": "number",
+				"name": "速度",
+				"default": 0.004,
+				"range": [
+					0.0001,
+					0.1
+				],
+				"step": 0.0001
+			},
+			"fromColor": {
+				"type": "color",
+				"name": "最大值颜色",
+				"default": "RGBA(232, 0, 0, 0.8)"
+			},
+			"toColor": {
+				"type": "color",
+				"name": "最小值颜色",
+				"default": "RGBA(0, 200, 0, 0.6)"
+			},
+			"pointGap": {
+				"type": "number",
+				"name": "点间距(km)",
+				"default": 2.5,
+				"range": [
+					0.01,
+					100
+				],
+				"step": 0.1
+			},
+			"opacityFactor": {
+				"type": "number",
+				"name": "透明度系数",
+				"default": 0.6,
+				"range": [
+					0.01,
+					1
+				],
+				"step": 0.05
+			}
+		},
+		"api_data": {
+			"footprint": {
+				"type": "FeatureCollection",
+				"features": [
+					{
+						"type": "Feature",
+						"properties": {
+							"value": 4
+						},
+						"geometry": {
+							"type": "LineString",
+							"coordinates": [
+								[
+									116.23535156249999,
+									39.977120098439634
+								],
+								[
+									120.36621093749999,
+									31.240985378021307
+								],
+								[
+									115.400390625,
+									25.085598897064752
+								],
+								[
+									105.4248046875,
+									22.39071391683855
+								],
+								[
+									90.791015625,
+									30.977609093348686
+								]
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"value": 10
+						},
+						"geometry": {
+							"type": "LineString",
+							"coordinates": [
+								[
+									120.23535156249999,
+									39.977120098439634
+								],
+								[
+									125.36621093749999,
+									31.240985378021307
+								],
+								[
+									130.400390625,
+									25.085598897064752
+								],
+								[
+									131.4248046875,
+									22.39071391683855
+								],
+								[
+									132.791015625,
+									30.977609093348686
+								]
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"value": 8
+						},
+						"geometry": {
+							"type": "LineString",
+							"coordinates": [
+								[
+									130.2353515625,
+									39.977120098439634
+								],
+								[
+									131.3662109375,
+									31.240985378021307
+								],
+								[
+									132.400390625,
+									25.085598897064752
+								],
+								[
+									133.4248046875,
+									22.39071391683855
+								],
+								[
+									134.791015625,
+									30.977609093348686
+								]
+							]
+						}
+					}
+				]
+			}
+		},
+		"apis": {
+			"footprint": {
+				"handler": "setData",
+				"description": "轨迹层",
+				"fields": {}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map3d-earth-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1IcY0ArPpK1RjSZFFXXa5PpXa-180-180.png"
+	}
+}

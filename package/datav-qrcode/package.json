@@ -1,0 +1,281 @@
+{
+  "name": "datav-qrcode",
+  "version": "0.0.6",
+  "dependencies": {
+    "qrcodejs2-fixes": "0.0.2"
+  },
+  "datav": {
+    "id": "",
+    "alias": "二维码",
+    "name": "datav-qrcode",
+    "icon": "iconfont icon-datav-qrcode",
+    "img": "//img.alicdn.com/imgextra/i1/O1CN01XPa6jM1jmGallnwNm_!!6000000004590-2-tps-368-208.png",
+    "type": "com",
+    "renameing": false,
+    "selected": true,
+    "locked": false,
+    "hided": false,
+    "hovered": false,
+    "scaling": {
+      "zoom": false,
+      "w": 0,
+      "h": 0,
+      "sx": 1,
+      "sy": 1
+    },
+    "attr": {
+      "x": 583,
+      "y": 279,
+      "w": 300,
+      "h": 180,
+      "deg": 0,
+      "opacity": 1,
+      "filpV": false,
+      "filpH": false
+    },
+    "projectId": 100003,
+    "config": {
+      "text": {
+        "name": "输入内容",
+        "type": "text",
+        "description": "支持从数据中获取二维码内容，详见数据面板",
+        "default": "http://www.aliyun.com"
+      },
+      "color": {
+        "name": "填充颜色",
+        "type": "suite",
+        "children": {
+          "colorDark": {
+            "type": "color",
+            "name": "前景",
+            "default": "#000",
+            "col": 12
+          },
+          "colorLight": {
+            "type": "color",
+            "name": "背景",
+            "default": "#fff",
+            "col": 12
+          }
+        }
+      },
+      "border": {
+        "name": "边框样式",
+        "type": "suite",
+        "children": {
+          "borderStyle": {
+            "name": "线型",
+            "type": "select",
+            "default": "solid",
+            "col": 12,
+            "options": [
+              {
+                "label": "实线",
+                "value": "solid"
+              },
+              {
+                "label": "虚线",
+                "value": "dashed"
+              },
+              {
+                "label": "点线",
+                "value": "dotted"
+              },
+              {
+                "label": "双实线",
+                "value": "double"
+              },
+              {
+                "label": "雕刻效果",
+                "value": "groove"
+              },
+              {
+                "label": "浮雕效果",
+                "value": "ridge"
+              },
+              {
+                "label": "陷入效果",
+                "value": "inset"
+              },
+              {
+                "label": "突出效果",
+                "value": "outset"
+              }
+            ]
+          },
+          "borderRadius": {
+            "name": "圆角",
+            "type": "stepper",
+            "min": 0,
+            "step": 1,
+            "default": 0,
+            "col": 12,
+            "suffix": "px"
+          },
+          "borderWidth": {
+            "name": "线宽",
+            "type": "stepper",
+            "step": 1,
+            "min": 0,
+            "default": 0,
+            "suffix": "px",
+            "col": 12
+          },
+          "borderColor": {
+            "name": "颜色",
+            "type": "color",
+            "default": "#fff",
+            "col": 12
+          }
+        }
+      },
+      "logo": {
+        "name": "LOGO",
+        "type": "group",
+        "enableHide": true,
+        "default": {
+          "show": false
+        },
+        "children": {
+          "logoImg": {
+            "name": "图片链接",
+            "type": "image",
+            "default": "//file.jlhe.com/datav/datav-logo.png"
+          },
+          "size": {
+            "name": "图片尺寸",
+            "type": "suite",
+            "description": "注：logo尺寸占比30%以内可正常使用；",
+            "children": {
+              "sizeW": {
+                "name": "宽度",
+                "type": "stepper",
+                "default": 50,
+                "suffix": "px",
+                "col": 12,
+                "step": 1
+              },
+              "sizeH": {
+                "name": "高度",
+                "type": "stepper",
+                "default": 50,
+                "suffix": "px",
+                "col": 12,
+                "step": 1
+              }
+            }
+          },
+          "imgBorderRadius": {
+            "name": "图片圆角",
+            "type": "stepper",
+            "min": 0,
+            "step": 1,
+            "default": 8,
+            "suffix": "px"
+          },
+          "backgroundColor": {
+            "name": "背景颜色",
+            "type": "color",
+            "default": "#fff"
+          },
+          "border": {
+            "name": "边框样式",
+            "type": "suite",
+            "children": {
+              "borderStyle": {
+                "name": "线型",
+                "type": "select",
+                "default": "solid",
+                "col": 12,
+                "options": [
+                  {
+                    "label": "实线",
+                    "value": "solid"
+                  },
+                  {
+                    "label": "虚线",
+                    "value": "dashed"
+                  },
+                  {
+                    "label": "点线",
+                    "value": "dotted"
+                  },
+                  {
+                    "label": "双实线",
+                    "value": "double"
+                  },
+                  {
+                    "label": "雕刻效果",
+                    "value": "groove"
+                  },
+                  {
+                    "label": "浮雕效果",
+                    "value": "ridge"
+                  },
+                  {
+                    "label": "陷入效果",
+                    "value": "inset"
+                  },
+                  {
+                    "label": "突出效果",
+                    "value": "outset"
+                  }
+                ]
+              },
+              "borderRadius": {
+                "name": "圆角",
+                "type": "stepper",
+                "min": 0,
+                "step": 1,
+                "default": 10,
+                "suffix": "px",
+                "col": 12
+              },
+              "borderWidth": {
+                "name": "线宽",
+                "type": "stepper",
+                "step": 1,
+                "min": 0,
+                "default": 4,
+                "suffix": "px",
+                "col": 12
+              },
+              "borderColor": {
+                "name": "颜色",
+                "type": "color",
+                "default": "#fff",
+                "col": 12
+              }
+            }
+          }
+        }
+      }
+    },
+    "apis": {
+      "source": {
+        "fields": {
+          "text": {
+            "type": "string",
+            "map": "",
+            "description": "文本",
+            "optional": false
+          }
+        },
+        "render": "render",
+        "description": "二维码接口",
+        "useAutoUpdate": false,
+        "autoUpdate": 1
+      }
+    },
+    "apiData": {
+      "source": {
+        "type": "static",
+        "pageFilters": [],
+        "config": {
+          "useFilter": false,
+          "data": "[{\"text\":\"http://www.aliyun.com\"}]"
+        }
+      }
+    }
+  }
+}

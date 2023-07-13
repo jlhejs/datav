@@ -1,0 +1,180 @@
+{
+	"name": "map3d-earth-floatboard",
+	"version": "0.0.17",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "2.0.3"
+	},
+	"datav": {
+		"cn_name": "浮框层",
+		"level": 0,
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"height": {
+				"name": "高度",
+				"type": "number",
+				"default": 25,
+				"range": [
+					1,
+					50
+				],
+				"step": 0.01
+			},
+			"scale": {
+				"name": "缩放",
+				"type": "number",
+				"default": 50,
+				"range": [
+					5,
+					200
+				],
+				"step": 0.01
+			},
+			"opacity": {
+				"name": "透明度",
+				"type": "number",
+				"default": 1,
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01
+			},
+			"enableInteractive": {
+				"name": "交互开关",
+				"type": "switch",
+				"default": false
+			},
+			"activeColor": {
+				"name": "点击颜色",
+				"type": "fill",
+				"default": "#ff0000",
+				"show": [
+					[
+						"enableInteractive",
+						"$eq",
+						true
+					]
+				]
+			}
+		},
+		"api_data": {
+			"floatboard": [
+				{
+					"lng": 135,
+					"lat": 34,
+					"content": {
+						"width": 900,
+						"height": 350,
+						"title": "标题1标题1标题1标题1",
+						"titleFontSize": 45,
+						"titleColor": "#fbf320",
+						"content": "1文abgz正c文\n正文正文\n正文正文",
+						"contentColor": "#000",
+						"contentFontSize": 40,
+						"paddingLeft": 90,
+						"paddingRight": 60,
+						"paddingTop": 40,
+						"titleLetterSpace": 10,
+						"letterSpace": 15,
+						"fontFamily": "Microsoft Yahei, serif",
+						"bgImgUrl": "https://img.alicdn.com/tps/TB1bymmOFXXXXaxXpXXXXXXXXXX-2201-753.png"
+					}
+				},
+				{
+					"lng": 55.3,
+					"lat": 25.27,
+					"content": {
+						"width": 900,
+						"height": 350,
+						"title": "标题2",
+						"titleFontSize": 45,
+						"titleColor": "#fbf320",
+						"content": "正文正文正文正文",
+						"contentColor": "#000",
+						"contentFontSize": 40,
+						"paddingLeft": 90,
+						"paddingRight": 60,
+						"paddingTop": 110,
+						"fontFamily": "Microsoft Yahei, serif",
+						"bgImgUrl": "https://img.alicdn.com/tps/TB1bymmOFXXXXaxXpXXXXXXXXXX-2201-753.png"
+					}
+				},
+				{
+					"lng": 119,
+					"lat": 30,
+					"content": {
+						"width": 900,
+						"height": 350,
+						"title": "标题3",
+						"titleFontSize": 45,
+						"titleColor": "#fbf320",
+						"content": "正文正文正文正文",
+						"contentColor": "#000",
+						"contentFontSize": 40,
+						"paddingLeft": 90,
+						"paddingRight": 60,
+						"paddingTop": 110,
+						"fontFamily": "Microsoft Yahei, serif",
+						"bgImgUrl": "https://img.alicdn.com/tps/TB1bymmOFXXXXaxXpXXXXXXXXXX-2201-753.png"
+					}
+				}
+			]
+		},
+		"apis": {
+			"floatboard": {
+				"handler": "setData",
+				"description": "数据接口",
+				"fields": {
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"content": {
+						"description": "内容",
+						"optional": true,
+						"type": "object"
+					}
+				}
+			}
+		},
+		"events": {
+			"active": {
+				"name": "选中状态",
+				"description": "选中时",
+				"type": "any"
+			},
+			"inactive": {
+				"name": "取消选中",
+				"description": "取消选中时",
+				"type": "any"
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"type": [
+			"map3d-earth-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1QIj6ACzqK1RjSZFHXXb3CpXa-180-180.png"
+	}
+}

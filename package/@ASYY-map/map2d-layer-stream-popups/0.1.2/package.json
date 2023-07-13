@@ -1,0 +1,455 @@
+{
+	"name": "map2d-layer-stream-popups",
+	"version": "0.1.2",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"ldmap": "0.1.46"
+	},
+	"datav": {
+		"cn_name": "流式气泡层",
+		"protocol": 2,
+		"type": [
+			"map2d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		},
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "流式数据接口",
+				"fields": {
+					"lat": {
+						"description": "纬度"
+					},
+					"lng": {
+						"description": "经度"
+					},
+					"info": {
+						"description": "信息内容"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"fontFamily": {
+				"name": "字体",
+				"type": "search",
+				"default": "Microsoft Yahei",
+				"range": [
+					{
+						"微软雅黑": "Microsoft Yahei"
+					},
+					{
+						"宋体": "SimSun"
+					},
+					{
+						"黑体": "SimHei"
+					},
+					{
+						"隶书": "LiSu"
+					},
+					{
+						"幼圆": "YouYuan"
+					},
+					"tahoma",
+					"arial",
+					"sans-serif"
+				],
+				"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+			},
+			"fontSize": {
+				"name": "字号",
+				"type": "number",
+				"min": 10,
+				"max": 100,
+				"default": 12
+			},
+			"fontColor": {
+				"type": "color",
+				"name": "字体颜色",
+				"default": "rgba(255,255,255,1)"
+			},
+			"isCircle": {
+				"type": "boolean",
+				"default": true,
+				"name": "参考定位点",
+				"description": "作为调整图标位置时的参考点使用,实际使用的时候请关闭此选项"
+			},
+			"iconUrl": {
+				"type": "image",
+				"name": "图标图片",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/c865cb8f92f3c885350970f64c299a2e.png"
+			},
+			"iconWidth": {
+				"name": "图标宽度",
+				"type": "number",
+				"range": [
+					10,
+					100
+				],
+				"step": 1,
+				"default": 20
+			},
+			"iconHeight": {
+				"name": "图标高度",
+				"type": "number",
+				"range": [
+					10,
+					100
+				],
+				"step": 1,
+				"default": 20
+			},
+			"iconOffsetX": {
+				"name": "图标X偏移",
+				"type": "number",
+				"range": [
+					-100,
+					100
+				],
+				"step": 1,
+				"default": 10,
+				"description": "建议设置为图标宽度的一半来水平居中"
+			},
+			"iconOffsetY": {
+				"name": "图标Y偏移",
+				"type": "number",
+				"range": [
+					-100,
+					100
+				],
+				"step": 1,
+				"default": 20,
+				"description": "建议设置为图标高度值来下对齐图标,设置为图标高度值的一半来垂直居中"
+			},
+			"contentBack": {
+				"type": "color",
+				"name": "背景颜色",
+				"default": "rgba(230, 45, 128, 0.8)"
+			},
+			"contentWidth": {
+				"name": "内容宽度",
+				"type": "number",
+				"range": [
+					10,
+					300
+				],
+				"step": 1,
+				"default": 100
+			},
+			"contentHeight": {
+				"name": "内容高度",
+				"type": "number",
+				"range": [
+					10,
+					300
+				],
+				"step": 1,
+				"default": 20
+			},
+			"contentOffsetX": {
+				"name": "内容X偏移",
+				"type": "number",
+				"range": [
+					-100,
+					100
+				],
+				"step": 1,
+				"default": -12
+			},
+			"contentOffsetY": {
+				"name": "内容Y偏移",
+				"type": "number",
+				"range": [
+					-100,
+					100
+				],
+				"step": 1,
+				"default": 10
+			},
+			"contentALign": {
+				"name": "多行对齐",
+				"type": "search",
+				"default": "center",
+				"range": [
+					{
+						"居中": "center"
+					},
+					{
+						"左对齐": "left"
+					},
+					{
+						"右对齐": "right"
+					}
+				]
+			},
+			"isCache": {
+				"name": "缓存",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"cacheCount": {
+				"show": [
+					[
+						"isCache",
+						"$eq",
+						true
+					]
+				],
+				"name": "缓存条数",
+				"type": "number",
+				"min": 0,
+				"max": 10000,
+				"step": 1,
+				"default": 300
+			},
+			"isOrder": {
+				"name": "顺序",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"popupNum": {
+				"name": "冒泡数目",
+				"type": "number",
+				"min": 1,
+				"step": 1,
+				"max": 500,
+				"default": 5
+			},
+			"spreadTime": {
+				"name": "平铺时间",
+				"type": "number",
+				"min": 0.1,
+				"step": 0.1,
+				"max": 100,
+				"default": 0.5
+			},
+			"keepTime": {
+				"name": "停留时间",
+				"type": "number",
+				"min": 0.1,
+				"step": 0.1,
+				"max": 100,
+				"default": 1
+			},
+			"fadeTime": {
+				"name": "消失时间",
+				"type": "number",
+				"min": 0.1,
+				"step": 0.1,
+				"max": 100,
+				"default": 1
+			},
+			"updateTime": {
+				"name": "更新时间",
+				"type": "number",
+				"min": 0.1,
+				"step": 0.1,
+				"max": 100,
+				"default": 1
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"lng": 124.233398,
+					"lat": 45.73686,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 123.574219,
+					"lat": 47.428087,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 116.894531,
+					"lat": 43.484812,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 121.992188,
+					"lat": 41.442726,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 116.191406,
+					"lat": 40.010787,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 117.114258,
+					"lat": 39.095963,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 112.412109,
+					"lat": 38.203655,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 118.125,
+					"lat": 35.960223,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 113.862305,
+					"lat": 34.957995,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 118.959961,
+					"lat": 33.431441,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 118.696289,
+					"lat": 32.138409,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 121.552734,
+					"lat": 31.278551,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 119.707031,
+					"lat": 28.536275,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 116.894531,
+					"lat": 30.675715,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 117.641602,
+					"lat": 26.037042,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 120.9375,
+					"lat": 23.765237,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 113.90625,
+					"lat": 23.644524,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 111.533203,
+					"lat": 22.998852,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 101.777344,
+					"lat": 36.668419,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 106.083984,
+					"lat": 38.582526,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 87.539063,
+					"lat": 43.897892,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 92.900391,
+					"lat": 42.747012,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 113.027344,
+					"lat": 33.174342,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 108.984375,
+					"lat": 35.603719,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 106.611328,
+					"lat": 29.496988,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 103.842773,
+					"lat": 30.789037,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 102.304688,
+					"lat": 25.005973,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 88.198242,
+					"lat": 31.503629,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 85.078125,
+					"lat": 40.713956,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 110.698242,
+					"lat": 27.955591,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 113.686523,
+					"lat": 27.994401,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 115.400391,
+					"lat": 27.059126,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 112.060547,
+					"lat": 31.052934,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 106.523438,
+					"lat": 26.70636,
+					"info": "自定义信息"
+				},
+				{
+					"lng": 108.457031,
+					"lat": 22.755921,
+					"info": "自定义信息"
+				}
+			]
+		},
+		"icon": ""
+	}
+}

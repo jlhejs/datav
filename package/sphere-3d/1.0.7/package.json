@@ -1,0 +1,122 @@
+{
+	"name": "sphere-3d",
+	"version": "1.0.7",
+	"description": "dmap球组件",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "zhouningyi",
+	"dependencies": {
+		"bcore": "0.0.*",
+		"dmap": "~0.1.18"
+	},
+	"datav": {
+		"private": true,
+		"cn_name": "3D地球(dmap)",
+		"protocol": 2,
+		"apis": {},
+		"config": {
+			"handler": "updateOptions",
+			"rotation": {
+				"name": "相机旋转",
+				"type": "group",
+				"fold": true,
+				"children": {
+					"x": {
+						"name": "x",
+						"type": "number",
+						"min": -3.14,
+						"max": 3.14,
+						"default": 1.519203673205
+					},
+					"y": {
+						"name": "y",
+						"type": "number",
+						"min": -1.6,
+						"max": 1.6,
+						"default": 0
+					}
+				}
+			},
+			"center": {
+				"type": "group",
+				"fold": true,
+				"children": {
+					"lat": {
+						"type": "number",
+						"default": -9.5,
+						"min": -90,
+						"max": 90,
+						"step": 0.1
+					},
+					"lng": {
+						"type": "number",
+						"default": 71,
+						"min": -180,
+						"max": 180,
+						"step": 0.1
+					}
+				}
+			},
+			"distance": {
+				"name": "相机距离",
+				"type": "number",
+				"min": 5843979,
+				"max": 60843979,
+				"default": 17843979
+			},
+			"autoRotateSpeed": {
+				"name": "自转速度",
+				"type": "number",
+				"default": 0,
+				"min": -0.01,
+				"max": 0.01
+			}
+		},
+		"api_data": {},
+		"view": {
+			"width": "1400",
+			"height": "800",
+			"minWidth": "150",
+			"minHeight": "60"
+		},
+		"coms": {
+			"type": "coms",
+			"name": "地图图层",
+			"default": "map3d_flyingline",
+			"children": [
+				{
+					"comId": "map3d-globe",
+					"id": "1"
+				},
+				{
+					"comId": "map3d-flyingline",
+					"id": "2"
+				},
+				{
+					"comId": "map3d-solar",
+					"id": "3"
+				},
+				{
+					"comId": "map3d-scatter",
+					"id": "4"
+				},
+				{
+					"comId": "map3d-areas",
+					"id": "5"
+				}
+			],
+			"options": [
+				"map3d-flyingline",
+				"map3d-globe",
+				"map3d-solar",
+				"map3d-scatter",
+				"map3d-areas"
+			]
+		},
+		"type": [
+			"map_earth"
+		]
+	}
+}

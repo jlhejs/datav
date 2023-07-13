@@ -1,0 +1,2135 @@
+{
+	"name": "datav-2dmap-frame-animation",
+	"version": "3.0.18",
+	"description": "帧动画层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datav-2dmap-frame-animation.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww (yunyi.zww@alibaba-inc.com)",
+	"dependencies": {
+		"apng-js": "^1.1.1",
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "帧动画层",
+		"level": 0,
+		"icon": "https://img.alicdn.com/imgextra/i2/O1CN01CsUvBb1w6DFYDtb92_!!6000000006258-2-tps-360-360.png",
+		"protocol": 2,
+		"type": [
+			"datav-2dmap-v3_subcoms_centerlayer",
+			"DataV-6:analysis"
+		],
+		"analysis": {
+			"apis": "dataSource"
+		},
+		"parent": {
+			"supportTypes": [
+				"map_datav-2dmap"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"events": {
+			"click": {
+				"description": "当点击点时",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					}
+				}
+			},
+			"mouseover": {
+				"description": "当鼠标移入时",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"defaultActive": "graph",
+				"children": {
+					"general": {
+						"name": "通用",
+						"children": {
+							"zoomRange": {
+								"name": "可见级别",
+								"type": "slider",
+								"description": "级别表示地图的缩放层级，子组件在设置范围内将显示，范围外将隐藏。",
+								"caption": "范围 [0, 22]",
+								"mode": "double",
+								"default": [
+									0,
+									18
+								],
+								"min": 0,
+								"max": 22,
+								"step": 0.1,
+								"suffix": "级"
+							},
+							"opacity": {
+								"name": "不透明度",
+								"type": "number",
+								"caption": "范围 [0, 100]",
+								"default": 100,
+								"range": [
+									0,
+									100
+								],
+								"step": 1,
+								"suffix": "%"
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"children": {
+							"iconUrl": {
+								"name": "动图形状",
+								"type": "imageSelect",
+								"withUploader": true,
+								"default": "https://img.alicdn.com/imgextra/i1/O1CN01rkIIdF1cTIu4bcPF6_!!6000000003601-54-tps-200-200.apng",
+								"options": [
+									{
+										"label": "圆形1",
+										"src": "https://img.alicdn.com/imgextra/i2/O1CN01tkAIQz1tIAk7TUmeZ_!!6000000005878-1-tps-48-48.gif",
+										"value": "https://img.alicdn.com/imgextra/i3/O1CN01oi26PA23WxgpBvE87_!!6000000007264-54-tps-200-200.apng"
+									},
+									{
+										"label": "圆形2",
+										"src": "https://img.alicdn.com/imgextra/i1/O1CN01casDaS1q4U3noqNRg_!!6000000005442-1-tps-48-48.gif",
+										"value": "https://img.alicdn.com/imgextra/i1/O1CN01HteuUe1LWeKKK1TLA_!!6000000001307-54-tps-200-200.apng"
+									},
+									{
+										"label": "圆形3",
+										"src": "https://img.alicdn.com/imgextra/i2/O1CN01aiNtYs1lMjlTnZs3I_!!6000000004805-1-tps-48-48.gif",
+										"value": "https://img.alicdn.com/imgextra/i4/O1CN01WEGlfF1LQEmdBZPoM_!!6000000001293-54-tps-200-200.apng"
+									},
+									{
+										"label": "圆形4",
+										"src": "https://img.alicdn.com/imgextra/i1/O1CN01rkIIdF1cTIu4bcPF6_!!6000000003601-54-tps-200-200.apng",
+										"value": "https://img.alicdn.com/imgextra/i1/O1CN01rkIIdF1cTIu4bcPF6_!!6000000003601-54-tps-200-200.apng"
+									},
+									{
+										"label": "圆形5",
+										"src": "https://img.alicdn.com/imgextra/i3/O1CN014YxyE71vF5IxDPraj_!!6000000006142-1-tps-48-48.gif",
+										"value": "https://img.alicdn.com/imgextra/i3/O1CN01YStOWB29U6v7rWx1Y_!!6000000008070-54-tps-200-200.apng"
+									}
+								],
+								"description": ""
+							},
+							"iconSize": {
+								"type": "suite",
+								"name": "动图尺寸",
+								"children": {
+									"width": {
+										"type": "number",
+										"name": "宽度",
+										"caption": "宽度 [0, 400]",
+										"default": 70,
+										"range": [
+											0,
+											400
+										],
+										"step": 1,
+										"suffix": "px"
+									},
+									"height": {
+										"type": "number",
+										"name": "高度",
+										"caption": "高度 [0, 400]",
+										"default": 70,
+										"range": [
+											0,
+											400
+										],
+										"step": 1,
+										"suffix": "px"
+									}
+								}
+							}
+						}
+					},
+					"animation": {
+						"name": "动效",
+						"children": {
+							"speed": {
+								"type": "number",
+								"name": "播放速度",
+								"caption": "范围 [0, 2]",
+								"default": 1,
+								"range": [
+									0,
+									2
+								],
+								"step": 0.1
+							}
+						}
+					},
+					"label": {
+						"type": "group",
+						"name": "标签",
+						"children": {
+							"isShow": {
+								"type": "boolean",
+								"name": "显示标签",
+								"default": false
+							},
+							"eventType": {
+								"name": "显示方式",
+								"type": "radio",
+								"optionCol": 12,
+								"default": "mouseover",
+								"options": [
+									{
+										"value": "click",
+										"label": "点击"
+									},
+									{
+										"value": "mouseover",
+										"label": "悬浮"
+									}
+								]
+							},
+							"position": {
+								"type": "iconRadio",
+								"name": "相对位置",
+								"default": "top",
+								"evenlySplit": true,
+								"options": [
+									{
+										"label": "左侧",
+										"value": "left",
+										"src": "position-left"
+									},
+									{
+										"label": "中心",
+										"value": "center",
+										"src": "position-center"
+									},
+									{
+										"label": "右侧",
+										"value": "right",
+										"src": "position-right"
+									},
+									{
+										"label": "顶部",
+										"value": "top",
+										"src": "position-top"
+									},
+									{
+										"label": "底部",
+										"value": "bottom",
+										"src": "position-bottom"
+									}
+								]
+							},
+							"offset": {
+								"type": "suite",
+								"name": "相对偏移",
+								"children": {
+									"x": {
+										"type": "number",
+										"name": "水平方向",
+										"caption": "水平方向 [-100, 100]",
+										"default": 0,
+										"range": [
+											-100,
+											100
+										],
+										"step": 1,
+										"suffix": "px"
+									},
+									"y": {
+										"type": "number",
+										"name": "垂直方向",
+										"caption": "垂直方向 [-100, 100]",
+										"default": 0,
+										"range": [
+											-100,
+											100
+										],
+										"step": 1,
+										"suffix": "px"
+									}
+								}
+							},
+							"contentStyle": {
+								"type": "group",
+								"name": "内容样式",
+								"fold": true,
+								"children": {
+									"lineSeries": {
+										"type": "array",
+										"name": "每行样式",
+										"fold": false,
+										"default": [
+											{
+												"fieldName": "name"
+											}
+										],
+										"child": {
+											"type": "object",
+											"name": "行<%= i+1 %>",
+											"child": {
+												"fieldName": {
+													"type": "text",
+													"name": "行字段",
+													"default": "name",
+													"description": "需要与地理数据中字段名称匹配"
+												},
+												"content": {
+													"type": "suite",
+													"name": "字段样式",
+													"children": {
+														"fontFamily": {
+															"type": "search",
+															"name": "字体",
+															"caption": "字体",
+															"col": 12,
+															"default": "Microsoft Yahei",
+															"range": [
+																{
+																	"微软雅黑": "Microsoft Yahei"
+																},
+																{
+																	"宋体": "SimSun"
+																},
+																{
+																	"黑体": "SimHei"
+																},
+																{
+																	"隶书": "LiSu"
+																},
+																{
+																	"幼圆": "YouYuan"
+																},
+																"tahoma",
+																"arial",
+																"sans-serif"
+															],
+															"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+														},
+														"fontSize": {
+															"type": "stepper",
+															"name": "字号",
+															"caption": "字号",
+															"col": 12,
+															"default": 12,
+															"min": 10,
+															"max": 100,
+															"step": 1,
+															"suffix": "px"
+														},
+														"color": {
+															"type": "color",
+															"name": "颜色",
+															"caption": "颜色",
+															"col": 12,
+															"default": "#FFFFFF"
+														},
+														"fontWeight": {
+															"type": "search",
+															"name": "粗细",
+															"caption": "粗细",
+															"col": 12,
+															"default": "normal",
+															"searches": [
+																"normal",
+																"bold",
+																"bolder",
+																"lighter",
+																100,
+																200,
+																300,
+																400,
+																500,
+																600,
+																700,
+																800,
+																900
+															]
+														}
+													}
+												},
+												"prefix": {
+													"type": "suite",
+													"name": "字段前缀",
+													"fold": false,
+													"enableHide": true,
+													"default": {
+														"show": false
+													},
+													"children": {
+														"name": {
+															"type": "text",
+															"name": "内容",
+															"caption": "内容",
+															"col": 12,
+															"default": "名称："
+														},
+														"padding": {
+															"type": "stepper",
+															"name": "间隔",
+															"caption": "间隔",
+															"col": 12,
+															"default": 5,
+															"min": 0,
+															"max": 100,
+															"step": 1,
+															"suffix": "px"
+														},
+														"fontFamily": {
+															"type": "search",
+															"name": "字体",
+															"caption": "字体",
+															"col": 12,
+															"default": "Microsoft Yahei",
+															"range": [
+																{
+																	"微软雅黑": "Microsoft Yahei"
+																},
+																{
+																	"宋体": "SimSun"
+																},
+																{
+																	"黑体": "SimHei"
+																},
+																{
+																	"隶书": "LiSu"
+																},
+																{
+																	"幼圆": "YouYuan"
+																},
+																"tahoma",
+																"arial",
+																"sans-serif"
+															],
+															"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+														},
+														"fontSize": {
+															"type": "stepper",
+															"name": "字号",
+															"caption": "字号",
+															"col": 12,
+															"default": 12,
+															"min": 10,
+															"max": 100,
+															"step": 1,
+															"suffix": "px"
+														},
+														"color": {
+															"type": "color",
+															"name": "颜色",
+															"caption": "颜色",
+															"col": 12,
+															"default": "#FFFFFF"
+														},
+														"fontWeight": {
+															"type": "search",
+															"name": "粗细",
+															"caption": "粗细",
+															"col": 12,
+															"default": "normal",
+															"searches": [
+																"normal",
+																"bold",
+																"bolder",
+																"lighter",
+																100,
+																200,
+																300,
+																400,
+																500,
+																600,
+																700,
+																800,
+																900
+															]
+														}
+													}
+												},
+												"suffix": {
+													"type": "suite",
+													"name": "字段后缀",
+													"fold": false,
+													"enableHide": true,
+													"default": {
+														"show": false
+													},
+													"children": {
+														"name": {
+															"type": "text",
+															"name": "内容",
+															"caption": "内容",
+															"col": 12,
+															"default": "%"
+														},
+														"padding": {
+															"type": "stepper",
+															"name": "间隔",
+															"caption": "间隔",
+															"col": 12,
+															"default": 2,
+															"min": 0,
+															"max": 20,
+															"step": 1,
+															"suffix": "px"
+														},
+														"fontFamily": {
+															"type": "search",
+															"name": "字体",
+															"caption": "字体",
+															"col": 12,
+															"default": "Microsoft Yahei",
+															"range": [
+																{
+																	"微软雅黑": "Microsoft Yahei"
+																},
+																{
+																	"宋体": "SimSun"
+																},
+																{
+																	"黑体": "SimHei"
+																},
+																{
+																	"隶书": "LiSu"
+																},
+																{
+																	"幼圆": "YouYuan"
+																},
+																"tahoma",
+																"arial",
+																"sans-serif"
+															],
+															"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+														},
+														"fontSize": {
+															"type": "stepper",
+															"name": "字号",
+															"caption": "字号",
+															"col": 12,
+															"default": 12,
+															"min": 10,
+															"max": 100,
+															"step": 1,
+															"suffix": "px"
+														},
+														"color": {
+															"type": "color",
+															"name": "颜色",
+															"caption": "颜色",
+															"col": 12,
+															"default": "#FFFFFF"
+														},
+														"fontWeight": {
+															"type": "search",
+															"name": "粗细",
+															"caption": "粗细",
+															"col": 12,
+															"default": "normal",
+															"searches": [
+																"normal",
+																"bold",
+																"bolder",
+																"lighter",
+																100,
+																200,
+																300,
+																400,
+																500,
+																600,
+																700,
+																800,
+																900
+															]
+														}
+													}
+												}
+											}
+										}
+									},
+									"fieldWidth": {
+										"type": "suite",
+										"name": "字段宽度",
+										"children": {
+											"widthAdapt": {
+												"type": "select",
+												"name": "适应类型",
+												"col": 12,
+												"default": "adapt",
+												"options": [
+													{
+														"value": "adapt",
+														"label": "自适应"
+													},
+													{
+														"value": "fixedWidth",
+														"label": "固定宽度"
+													}
+												]
+											},
+											"maxWidth": {
+												"showInPanel": [
+													[
+														".widthAdapt",
+														"$eq",
+														"adapt"
+													]
+												],
+												"type": "stepper",
+												"name": "最大宽度",
+												"caption": "最大宽度",
+												"col": 12,
+												"default": 200,
+												"min": 0,
+												"max": 500,
+												"step": 1,
+												"suffix": "px"
+											},
+											"fixedWidth": {
+												"showInPanel": [
+													[
+														".widthAdapt",
+														"$eq",
+														"fixedWidth"
+													]
+												],
+												"type": "stepper",
+												"name": "固定宽度",
+												"caption": "固定宽度",
+												"col": 12,
+												"default": 200,
+												"min": 0,
+												"max": 500,
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									},
+									"textProcess": {
+										"name": "文本溢出",
+										"type": "hidden",
+										"optionCol": 8,
+										"default": "clip",
+										"options": [
+											{
+												"value": "clip",
+												"label": "切断"
+											},
+											{
+												"value": "lineFeed",
+												"label": "换行"
+											}
+										]
+									},
+									"lineHeight": {
+										"type": "number",
+										"name": "行高比例",
+										"caption": "范围 [1, 2]",
+										"default": 1.4,
+										"range": [
+											1,
+											2
+										],
+										"step": 0.1
+									},
+									"textBorder": {
+										"type": "suite",
+										"name": "内容描边",
+										"fold": false,
+										"enableHide": true,
+										"default": {
+											"show": false
+										},
+										"children": {
+											"color": {
+												"type": "color",
+												"name": "颜色",
+												"caption": "颜色",
+												"col": 12,
+												"default": "#ff0000"
+											},
+											"weight": {
+												"type": "stepper",
+												"name": "粗细",
+												"caption": "粗细 [0, 5]",
+												"col": 12,
+												"default": 1,
+												"min": 0,
+												"max": 5,
+												"range": [
+													0,
+													5
+												],
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									},
+									"textShadow": {
+										"type": "suite",
+										"name": "内容阴影",
+										"fold": false,
+										"enableHide": true,
+										"default": {
+											"show": false
+										},
+										"children": {
+											"color": {
+												"type": "color",
+												"name": "颜色",
+												"caption": "颜色",
+												"col": 12,
+												"default": "#00ff00"
+											},
+											"blur": {
+												"type": "stepper",
+												"name": "模糊",
+												"caption": "模糊",
+												"col": 12,
+												"default": 2,
+												"min": 0,
+												"max": 100,
+												"step": 1,
+												"suffix": "px"
+											},
+											"offsetX": {
+												"type": "stepper",
+												"name": "偏移X",
+												"caption": "偏移X [0, 10]",
+												"col": 12,
+												"default": 2,
+												"min": 0,
+												"max": 10,
+												"step": 1,
+												"suffix": "px"
+											},
+											"offsetY": {
+												"type": "stepper",
+												"name": "偏移Y",
+												"caption": "偏移Y [0, 10]",
+												"col": 12,
+												"default": 2,
+												"min": 0,
+												"max": 10,
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									}
+								}
+							},
+							"backgroundStyle": {
+								"type": "group",
+								"name": "背景样式",
+								"fold": true,
+								"children": {
+									"show": {
+										"type": "boolean",
+										"name": "显示",
+										"default": false
+									},
+									"backgroundType": {
+										"name": "背景类型",
+										"type": "buttonRadio",
+										"default": "vector",
+										"options": [
+											{
+												"value": "vector",
+												"label": "矢量"
+											},
+											{
+												"value": "image",
+												"label": "图片"
+											}
+										]
+									},
+									"imageUrl": {
+										"showInPanel": [
+											[
+												".backgroundType",
+												"$eq",
+												"image"
+											]
+										],
+										"name": "图片模板",
+										"type": "imageSelect",
+										"withUploader": true,
+										"default": "https://img.alicdn.com/imgextra/i4/O1CN01z5siIS1nsuooBrmnZ_!!6000000005146-2-tps-496-92.png",
+										"options": [
+											{
+												"name": "单行背景框1",
+												"label": "单行背景框1",
+												"value": "https://img.alicdn.com/imgextra/i4/O1CN01z5siIS1nsuooBrmnZ_!!6000000005146-2-tps-496-92.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01moLbyU1l9ufg7sRpw_!!6000000004777-2-tps-160-100.png"
+											},
+											{
+												"name": "三行背景框1",
+												"label": "三行背景框1",
+												"value": "https://img.alicdn.com/imgextra/i4/O1CN01LDIBz41tLpuJ7ArFW_!!6000000005886-2-tps-496-224.png",
+												"src": "https://img.alicdn.com/imgextra/i4/O1CN01PC9EhB1NBhRFngBpv_!!6000000001532-2-tps-160-100.png"
+											},
+											{
+												"name": "五行背景框1",
+												"label": "五行背景框1",
+												"value": "https://img.alicdn.com/imgextra/i1/O1CN01LOed3l25KiKEBhkNH_!!6000000007508-2-tps-560-300.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01tRFmFL1rXATW1pA2Q_!!6000000005640-2-tps-160-100.png"
+											},
+											{
+												"name": "单行背景框2",
+												"label": "单行背景框2",
+												"value": "https://img.alicdn.com/imgextra/i4/O1CN01dCnxsm1Zy2dGcbo7P_!!6000000003262-2-tps-496-92.png",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN01A2fNK121sMy2fdm4g_!!6000000007040-2-tps-160-100.png"
+											},
+											{
+												"name": "三行背景框2",
+												"label": "三行背景框2",
+												"value": "https://img.alicdn.com/imgextra/i2/O1CN01NfQZDp1PFTwMhop7d_!!6000000001811-2-tps-496-224.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01woftYY1b5CREDigs0_!!6000000003413-2-tps-160-100.png"
+											},
+											{
+												"name": "五行背景框2",
+												"label": "五行背景框2",
+												"value": "https://img.alicdn.com/imgextra/i2/O1CN01mieQqr1ndnkWHpc0X_!!6000000005113-2-tps-560-300.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01Lt31rc1nh0WPFfJEX_!!6000000005120-2-tps-160-100.png"
+											},
+											{
+												"name": "单行背景框3",
+												"label": "单行背景框3",
+												"value": "https://img.alicdn.com/imgextra/i1/O1CN01qMFQNU1xXysA3F3nn_!!6000000006454-2-tps-496-92.png",
+												"src": "https://img.alicdn.com/imgextra/i4/O1CN01EKO5MA1DHWJRfkfmp_!!6000000000191-2-tps-160-100.png"
+											},
+											{
+												"name": "三行背景框3",
+												"label": "三行背景框3",
+												"value": "https://img.alicdn.com/imgextra/i1/O1CN01bnkqlB1XiLpZdVKUD_!!6000000002957-2-tps-496-224.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01BrlPGm1h2LfO3JWxN_!!6000000004219-2-tps-160-100.png"
+											},
+											{
+												"name": "五行背景框3",
+												"label": "五行背景框3",
+												"value": "https://img.alicdn.com/imgextra/i4/O1CN01mJa9Xp1pxc76oFvcS_!!6000000005427-2-tps-560-300.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01wwe2Yw1y9XLhQKfkr_!!6000000006536-2-tps-160-100.png"
+											},
+											{
+												"name": "单行背景框4",
+												"label": "单行背景框4",
+												"value": "https://img.alicdn.com/imgextra/i1/O1CN01qDW4Ho28GzxRqmJfL_!!6000000007906-2-tps-496-92.png",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN013Hq1uf27o90c8pekR_!!6000000007843-2-tps-160-100.png"
+											},
+											{
+												"name": "三行背景框4",
+												"label": "三行背景框4",
+												"value": "https://img.alicdn.com/imgextra/i4/O1CN0143IZvi1YyDAAsPjBu_!!6000000003127-2-tps-496-224.png",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN01ZH213b1bVlPSLQahy_!!6000000003471-2-tps-160-100.png"
+											},
+											{
+												"name": "五行背景框4",
+												"label": "五行背景框4",
+												"value": "https://img.alicdn.com/imgextra/i3/O1CN01bOEw6H1UxyUYbNkNM_!!6000000002585-2-tps-560-300.png",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN01JP2rWh20PgY0RVHLa_!!6000000006842-2-tps-160-100.png"
+											},
+											{
+												"name": "单行背景框5",
+												"label": "单行背景框5",
+												"value": "https://img.alicdn.com/imgextra/i4/O1CN01GLLcEn25rgqAOjpdu_!!6000000007580-2-tps-496-92.png",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN01Au4t331EL0x12ud1F_!!6000000000334-2-tps-160-100.png"
+											},
+											{
+												"name": "三行背景框5",
+												"label": "三行背景框5",
+												"value": "https://img.alicdn.com/imgextra/i3/O1CN011HnifL1YREe9R9aoZ_!!6000000003055-2-tps-496-224.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01c2zmlt1YaqxkiCBMZ_!!6000000003076-2-tps-160-100.png"
+											},
+											{
+												"name": "五行背景框5",
+												"label": "五行背景框5",
+												"value": "https://img.alicdn.com/imgextra/i2/O1CN01Gzw44k1YgLiGSKItk_!!6000000003088-2-tps-560-300.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01t5ggpx1ZsXsRqTeYs_!!6000000003250-2-tps-160-100.png"
+											},
+											{
+												"name": "单行背景框6",
+												"label": "单行背景框6",
+												"value": "https://img.alicdn.com/imgextra/i3/O1CN01CF6IdB1tMkhQUompY_!!6000000005888-2-tps-496-92.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01LHk92q1GYsALjTaN9_!!6000000000635-2-tps-160-100.png"
+											},
+											{
+												"name": "三行背景框6",
+												"label": "三行背景框6",
+												"value": "https://img.alicdn.com/imgextra/i2/O1CN019ytUfG1MpG1zpgrQs_!!6000000001483-2-tps-496-224.png",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN01aqi7v21sF8UurwEoy_!!6000000005736-2-tps-160-100.png"
+											},
+											{
+												"name": "五行背景框6",
+												"label": "五行背景框6",
+												"value": "https://img.alicdn.com/imgextra/i4/O1CN017ZUzC622wmOciXAZy_!!6000000007185-2-tps-560-300.png",
+												"src": "https://img.alicdn.com/imgextra/i4/O1CN01rJMfLs1PV3PCjJJsk_!!6000000001845-2-tps-160-100.png"
+											},
+											{
+												"name": "单行背景框7",
+												"label": "单行背景框7",
+												"value": "https://img.alicdn.com/imgextra/i2/O1CN01hojINM1iZ9eWFKMtP_!!6000000004426-2-tps-496-92.png",
+												"src": "https://img.alicdn.com/imgextra/i4/O1CN01qOtulW1mi5qTEsKIO_!!6000000004987-2-tps-160-100.png"
+											},
+											{
+												"name": "三行背景框7",
+												"label": "三行背景框7",
+												"value": "https://img.alicdn.com/imgextra/i3/O1CN01rEVvKv1K5L5fO9yho_!!6000000001112-2-tps-496-224.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01z8aMqa2A5CzqiHxlB_!!6000000008151-2-tps-160-100.png"
+											},
+											{
+												"name": "五行背景框7",
+												"label": "五行背景框7",
+												"value": "https://img.alicdn.com/imgextra/i1/O1CN01EdbY0n1h1tGjuUhoP_!!6000000004218-2-tps-560-300.png",
+												"src": "https://img.alicdn.com/imgextra/i4/O1CN01MyVwBd1TampEbAHms_!!6000000002399-2-tps-160-100.png"
+											},
+											{
+												"name": "单行背景框8",
+												"label": "单行背景框8",
+												"value": "https://img.alicdn.com/imgextra/i3/O1CN01COkqVd1vwavQiKr1m_!!6000000006237-2-tps-496-92.png",
+												"src": "https://img.alicdn.com/imgextra/i4/O1CN01C8s0811F24BG0iYYr_!!6000000000428-2-tps-160-100.png"
+											},
+											{
+												"name": "三行背景框8",
+												"label": "三行背景框8",
+												"value": "https://img.alicdn.com/imgextra/i2/O1CN01K7j21g1T4Ghe35pcE_!!6000000002328-2-tps-496-224.png",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN017mvt971wAKoFbxjf2_!!6000000006267-2-tps-160-100.png"
+											},
+											{
+												"name": "五行背景框8",
+												"label": "五行背景框8",
+												"value": "https://img.alicdn.com/imgextra/i2/O1CN01Vb9jM61lMHMZRwK0C_!!6000000004804-2-tps-560-300.png",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN01cETZHj1agT39WUWlQ_!!6000000003359-2-tps-160-100.png"
+											}
+										],
+										"description": ""
+									},
+									"background": {
+										"showInPanel": [
+											[
+												".backgroundType",
+												"$eq",
+												"vector"
+											]
+										],
+										"name": "背景颜色",
+										"type": "fill",
+										"components": [
+											"flat",
+											"linearGradient"
+										],
+										"default": {
+											"type": "flat",
+											"value": "#2483ff7f"
+										}
+									},
+									"border": {
+										"showInPanel": [
+											[
+												".backgroundType",
+												"$eq",
+												"vector"
+											]
+										],
+										"type": "suite",
+										"name": "边框样式",
+										"fold": false,
+										"children": {
+											"dashArray": {
+												"type": "search",
+												"name": "线型",
+												"caption": "线型",
+												"col": 12,
+												"default": "",
+												"searches": [
+													{
+														"name": "————",
+														"value": ""
+													},
+													{
+														"name": "- - - - -",
+														"value": "4,4"
+													},
+													{
+														"name": "- -- - --",
+														"value": "4,4,8,4"
+													},
+													{
+														"name": "-- -- -- ",
+														"value": "8,4"
+													}
+												]
+											},
+											"weight": {
+												"type": "stepper",
+												"name": "线宽",
+												"caption": "线宽",
+												"col": 12,
+												"default": 1,
+												"min": 0,
+												"max": 20,
+												"step": 1,
+												"suffix": "px"
+											},
+											"color": {
+												"type": "color",
+												"name": "颜色",
+												"caption": "颜色",
+												"default": "#FFFFFF"
+											}
+										}
+									},
+									"borderRadius": {
+										"showInPanel": [
+											[
+												".backgroundType",
+												"$eq",
+												"vector"
+											]
+										],
+										"type": "suite",
+										"name": "边框圆角",
+										"fold": false,
+										"children": {
+											"topLeft": {
+												"type": "stepper",
+												"name": "左上",
+												"caption": "左上",
+												"col": 12,
+												"default": 5,
+												"min": 0,
+												"max": 100,
+												"step": 1,
+												"suffix": "px"
+											},
+											"topRight": {
+												"type": "stepper",
+												"name": "右上",
+												"caption": "右上",
+												"col": 12,
+												"default": 5,
+												"min": 0,
+												"max": 100,
+												"step": 1,
+												"suffix": "px"
+											},
+											"bottomLeft": {
+												"type": "stepper",
+												"name": "左下",
+												"caption": "左下",
+												"col": 12,
+												"default": 5,
+												"min": 0,
+												"max": 100,
+												"step": 1,
+												"suffix": "px"
+											},
+											"bottomRight": {
+												"type": "stepper",
+												"name": "右下",
+												"caption": "右下",
+												"col": 12,
+												"default": 5,
+												"min": 0,
+												"max": 100,
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									},
+									"opacity": {
+										"showInPanel": [
+											[
+												".backgroundType",
+												"$eq",
+												"image"
+											]
+										],
+										"name": "不透明度",
+										"type": "number",
+										"caption": "范围 [0, 100]",
+										"default": 100,
+										"range": [
+											0,
+											100
+										],
+										"step": 1
+									},
+									"shadow": {
+										"type": "hidden",
+										"name": "背景阴影",
+										"fold": false,
+										"enableHide": true,
+										"default": {
+											"show": true
+										},
+										"children": {
+											"color": {
+												"type": "color",
+												"name": "颜色",
+												"caption": "颜色",
+												"col": 12,
+												"default": "rgba(102, 172, 175, 0.32)"
+											},
+											"blur": {
+												"type": "stepper",
+												"name": "模糊",
+												"caption": "模糊 [0, 100]",
+												"col": 12,
+												"default": 5,
+												"range": [
+													0,
+													50
+												],
+												"step": 1,
+												"suffix": "px"
+											},
+											"offsetX": {
+												"type": "stepper",
+												"name": "偏移X",
+												"caption": "偏移X [0, 100]",
+												"col": 12,
+												"default": 5,
+												"range": [
+													0,
+													50
+												],
+												"step": 1,
+												"suffix": "px"
+											},
+											"offsetY": {
+												"type": "stepper",
+												"name": "偏移Y",
+												"caption": "偏移Y [0, 100]",
+												"col": 12,
+												"default": 5,
+												"range": [
+													0,
+													50
+												],
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									},
+									"margin": {
+										"name": "内容边距",
+										"type": "margin",
+										"default": {
+											"top": 10,
+											"right": 20,
+											"bottom": 10,
+											"left": 20
+										}
+									}
+								}
+							}
+						}
+					},
+					"interaction": {
+						"name": "交互",
+						"children": {
+							"graph": {
+								"type": "group",
+								"name": "图形交互",
+								"fold": false,
+								"enableHide": true,
+								"default": {
+									"show": true
+								},
+								"children": {
+									"sizeScale": {
+										"type": "number",
+										"name": "尺寸缩放",
+										"caption": "尺寸缩放 [1, 2]",
+										"default": 1.5,
+										"range": [
+											1,
+											2
+										],
+										"step": 0.1
+									}
+								}
+							}
+						}
+					},
+					"condition": {
+						"name": "条件",
+						"children": {
+							"condition": {
+								"name": "条件样式",
+								"type": "tabs",
+								"fold": false,
+								"description": "",
+								"default": [
+									{
+										"rules": {
+											"title": "条件名称",
+											"enabled": false,
+											"operator": "AND",
+											"expressions": [
+												{
+													"operator": "AND",
+													"expressions": [
+														[
+															"value",
+															"gt",
+															10
+														]
+													]
+												}
+											]
+										},
+										"graph": {}
+									}
+								],
+								"template": {
+									"name": "样式<%= i + 1%>",
+									"children": {
+										"rules": {
+											"type": "logicalTree",
+											"default": {
+												"title": "条件名称",
+												"enabled": true,
+												"operator": "OR",
+												"expressions": []
+											},
+											"relationalExprDefault": [
+												"value",
+												"gt",
+												10
+											]
+										},
+										"graph": {
+											"showInPanel": [
+												[
+													".rules.enabled",
+													"$eq",
+													true
+												]
+											],
+											"type": "group",
+											"name": "图形",
+											"fold": false,
+											"children": {
+												"iconUrl": {
+													"name": "动图形状",
+													"type": "imageSelect",
+													"withUploader": true,
+													"default": "https://img.alicdn.com/imgextra/i3/O1CN01oi26PA23WxgpBvE87_!!6000000007264-54-tps-200-200.apng",
+													"options": [
+														{
+															"label": "圆形1",
+															"src": "https://img.alicdn.com/imgextra/i2/O1CN01tkAIQz1tIAk7TUmeZ_!!6000000005878-1-tps-48-48.gif",
+															"value": "https://img.alicdn.com/imgextra/i3/O1CN01oi26PA23WxgpBvE87_!!6000000007264-54-tps-200-200.apng"
+														},
+														{
+															"label": "圆形2",
+															"src": "https://img.alicdn.com/imgextra/i1/O1CN01casDaS1q4U3noqNRg_!!6000000005442-1-tps-48-48.gif",
+															"value": "https://img.alicdn.com/imgextra/i1/O1CN01HteuUe1LWeKKK1TLA_!!6000000001307-54-tps-200-200.apng"
+														},
+														{
+															"label": "圆形3",
+															"src": "https://img.alicdn.com/imgextra/i2/O1CN01aiNtYs1lMjlTnZs3I_!!6000000004805-1-tps-48-48.gif",
+															"value": "https://img.alicdn.com/imgextra/i4/O1CN01WEGlfF1LQEmdBZPoM_!!6000000001293-54-tps-200-200.apng"
+														},
+														{
+															"label": "圆形4",
+															"src": "https://img.alicdn.com/imgextra/i1/O1CN01rkIIdF1cTIu4bcPF6_!!6000000003601-54-tps-200-200.apng",
+															"value": "https://img.alicdn.com/imgextra/i1/O1CN01rkIIdF1cTIu4bcPF6_!!6000000003601-54-tps-200-200.apng"
+														},
+														{
+															"label": "圆形5",
+															"src": "https://img.alicdn.com/imgextra/i3/O1CN014YxyE71vF5IxDPraj_!!6000000006142-1-tps-48-48.gif",
+															"value": "https://img.alicdn.com/imgextra/i3/O1CN01YStOWB29U6v7rWx1Y_!!6000000008070-54-tps-200-200.apng"
+														}
+													],
+													"description": ""
+												},
+												"iconSize": {
+													"type": "suite",
+													"name": "动图尺寸",
+													"children": {
+														"width": {
+															"type": "number",
+															"name": "宽度",
+															"caption": "宽度 [0, 400]",
+															"default": 50,
+															"range": [
+																0,
+																400
+															],
+															"step": 1,
+															"suffix": "px"
+														},
+														"height": {
+															"type": "number",
+															"name": "高度",
+															"caption": "高度 [0, 400]",
+															"default": 50,
+															"range": [
+																0,
+																400
+															],
+															"step": 1,
+															"suffix": "px"
+														}
+													}
+												}
+											}
+										},
+										"animation": {
+											"showInPanel": [
+												[
+													".rules.enabled",
+													"$eq",
+													true
+												]
+											],
+											"type": "group",
+											"name": "动效",
+											"fold": false,
+											"children": {
+												"speed": {
+													"type": "number",
+													"name": "播放速度",
+													"caption": "范围 [0, 2]",
+													"default": 1,
+													"range": [
+														0,
+														2
+													],
+													"step": 0.1
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"popupStyle": {
+						"type": "group",
+						"name": "自定义弹框样式",
+						"description": "请设置 info 字段作为弹框内容，info 支持配置 html 片段",
+						"fold": true,
+						"children": {
+							"isShow": {
+								"name": "弹框开关",
+								"type": "boolean",
+								"default": true
+							},
+							"eventType": {
+								"name": "显示方式",
+								"type": "radio",
+								"optionCol": 8,
+								"default": "click",
+								"options": [
+									{
+										"value": "click",
+										"label": "点击"
+									},
+									{
+										"value": "mouseover",
+										"label": "悬浮"
+									}
+								]
+							},
+							"offset": {
+								"name": "相对偏移",
+								"type": "suite",
+								"children": {
+									"x": {
+										"type": "number",
+										"name": "水平比例",
+										"caption": "水平方向 [-1000, 1000]",
+										"default": 0,
+										"range": [
+											-1000,
+											1000
+										],
+										"step": 1,
+										"suffix": "px"
+									},
+									"y": {
+										"type": "number",
+										"name": "垂直比例",
+										"caption": "垂直方向 [-1000, 1000]",
+										"default": 0,
+										"range": [
+											-1000,
+											1000
+										],
+										"step": 1,
+										"suffix": "px"
+									}
+								}
+							},
+							"textStyle": {
+								"type": "font",
+								"name": "文本样式",
+								"fold": false,
+								"default": {
+									"fontFamily": "Microsoft Yahei",
+									"fontWeight": "bold",
+									"fontSize": 14,
+									"color": "#ffffff"
+								},
+								"children": {
+									"fontFamily": {
+										"type": "search",
+										"name": "字体",
+										"range": [
+											{
+												"微软雅黑": "Microsoft Yahei"
+											},
+											{
+												"宋体": "SimSun"
+											},
+											{
+												"黑体": "SimHei"
+											},
+											{
+												"隶书": "LiSu"
+											},
+											{
+												"幼圆": "YouYuan"
+											},
+											"tahoma",
+											"arial",
+											"sans-serif"
+										],
+										"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+									},
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"range": [
+											12,
+											100
+										],
+										"step": 1
+									},
+									"color": {
+										"type": "color",
+										"name": "颜色"
+									},
+									"fontWeight": {
+										"type": "search",
+										"name": "粗细",
+										"searches": [
+											"normal",
+											"bold",
+											"bolder",
+											"lighter",
+											100,
+											200,
+											300,
+											400,
+											500,
+											600,
+											700,
+											800,
+											900
+										]
+									},
+									"lineHeight": {
+										"type": "number",
+										"name": "行高比例",
+										"caption": "行高比例",
+										"default": 1.8,
+										"range": [
+											0.5,
+											5
+										],
+										"step": 0.1
+									}
+								}
+							},
+							"isEmptyShow": {
+								"type": "boolean",
+								"default": false,
+								"name": "显示空值"
+							},
+							"domStyle": {
+								"type": "group",
+								"name": "弹框样式",
+								"flod": true,
+								"children": {
+									"padding": {
+										"type": "padding",
+										"default": {
+											"top": 16,
+											"right": 40,
+											"bottom": 16,
+											"left": 16
+										},
+										"name": "内边距"
+									},
+									"border": {
+										"type": "suite",
+										"name": "边框样式",
+										"default": {
+											"radius": 8,
+											"width": 2,
+											"color": "#000000"
+										},
+										"children": {
+											"radius": {
+												"name": "圆角",
+												"type": "number",
+												"caption": "圆角",
+												"range": [
+													0,
+													20
+												],
+												"step": 1
+											},
+											"width": {
+												"name": "线宽",
+												"type": "stepper",
+												"caption": "线宽",
+												"col": 12,
+												"step": 1,
+												"suffix": "px"
+											},
+											"color": {
+												"name": "颜色",
+												"type": "color",
+												"col": 12,
+												"caption": "颜色"
+											}
+										}
+									},
+									"backgroundColor": {
+										"type": "color",
+										"name": "背景颜色",
+										"default": "rgba(0, 0, 0, 0.88)"
+									},
+									"boxShadow": {
+										"type": "suite",
+										"name": "投影样式",
+										"default": {
+											"blurColor": "rgba(0, 0, 0, 0.3)",
+											"blurRadius": 12,
+											"offsetX": 0,
+											"offsetY": 4
+										},
+										"children": {
+											"blurColor": {
+												"col": 12,
+												"name": "模糊色",
+												"type": "color"
+											},
+											"blurRadius": {
+												"name": "模糊半径",
+												"type": "stepper",
+												"caption": "模糊半径",
+												"col": 12,
+												"step": 1,
+												"suffix": "px"
+											},
+											"offsetX": {
+												"name": "X偏移",
+												"type": "stepper",
+												"col": 12,
+												"caption": "X偏移",
+												"step": 1,
+												"suffix": "px"
+											},
+											"offsetY": {
+												"name": "Y偏移",
+												"type": "stepper",
+												"caption": "Y偏移",
+												"col": 12,
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									},
+									"closeBtn": {
+										"type": "suite",
+										"name": "关闭按钮",
+										"default": {
+											"enable": true,
+											"color": "rgba(255, 255, 255, 0.4)"
+										},
+										"children": {
+											"enable": {
+												"type": "boolean",
+												"name": "显示",
+												"col": 12,
+												"caption": "显示"
+											},
+											"color": {
+												"name": "颜色",
+												"type": "color",
+												"col": 12,
+												"caption": "颜色"
+											}
+										}
+									},
+									"tipBtn": {
+										"type": "suite",
+										"name": "指向箭头",
+										"default": {
+											"enable": true
+										},
+										"children": {
+											"enable": {
+												"type": "boolean",
+												"name": "显示"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "options.graph.colorMapping",
+					"apiPath": "dataSource.iconField"
+				}
+			],
+			"conditionalStyle": [
+				{
+					"configPath": "options.condition.condition",
+					"ruleKey": "rules"
+				}
+			]
+		},
+		"apis": {
+			"dataSource": {
+				"handler": "render",
+				"description": "数据接口",
+				"format": "geo_point",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number",
+						"optional": false
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number",
+						"optional": false
+					},
+					"name": {
+						"description": "名称",
+						"type": "string",
+						"optional": true
+					},
+					"value": {
+						"description": "数值",
+						"type": "number",
+						"optional": true
+					},
+					"id": {
+						"description": "唯一标识",
+						"type": "string",
+						"optional": true
+					},
+					"popupType": {
+						"description": "弹框类型（需要搭配二次开发功能使用）",
+						"type": "string",
+						"optional": true
+					},
+					"info": {
+						"description": "自定义弹框内容字段，支持 html 片段",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"api_data": {
+			"dataSource": [
+				{
+					"id": 1,
+					"lng": 102.2212,
+					"lat": 31.8998,
+					"name": "点0",
+					"value": 8,
+					"info": "点0"
+				},
+				{
+					"id": 2,
+					"lng": 120.079,
+					"lat": 28.6542,
+					"name": "点1",
+					"value": 21,
+					"info": "点1"
+				},
+				{
+					"id": 3,
+					"lng": 114.207,
+					"lat": 24.0554,
+					"name": "点2",
+					"value": 4,
+					"info": "点2"
+				},
+				{
+					"id": 4,
+					"lng": 122.5059,
+					"lat": 40.634,
+					"name": "点3",
+					"value": 13,
+					"info": "点3"
+				},
+				{
+					"id": 5,
+					"lng": 114.3073,
+					"lat": 25.6879,
+					"name": "点4",
+					"value": 9,
+					"info": "点4"
+				},
+				{
+					"id": 6,
+					"lng": 110.6911,
+					"lat": 34.6948,
+					"name": "点5",
+					"value": 14,
+					"info": "点5"
+				},
+				{
+					"id": 7,
+					"lng": 117.3409,
+					"lat": 23.9505,
+					"name": "点6",
+					"value": 20,
+					"info": "点6"
+				},
+				{
+					"id": 8,
+					"lng": 110.2144,
+					"lat": 28.2145,
+					"name": "点7",
+					"value": 19,
+					"info": "点7"
+				},
+				{
+					"id": 9,
+					"lng": 116.2584,
+					"lat": 37.6866,
+					"name": "点8",
+					"value": 19,
+					"info": "点8"
+				},
+				{
+					"id": 10,
+					"lng": 111.6456,
+					"lat": 29.4432,
+					"name": "点9",
+					"value": 19,
+					"info": "点9"
+				},
+				{
+					"id": 11,
+					"lng": 87.6177,
+					"lat": 43.7928,
+					"name": "点10",
+					"value": 9
+				},
+				{
+					"id": 12,
+					"lng": 119.0305,
+					"lat": 33.5807,
+					"name": "点11",
+					"value": 6,
+					"info": "点11"
+				},
+				{
+					"id": 13,
+					"lng": 118.1108,
+					"lat": 39.563,
+					"name": "点12",
+					"value": 21,
+					"info": "点12"
+				},
+				{
+					"id": 14,
+					"lng": 114.0101,
+					"lat": 41.8993,
+					"name": "点13",
+					"value": 13
+				},
+				{
+					"id": 15,
+					"lng": 114.0812,
+					"lat": 30.3096,
+					"name": "点14",
+					"value": 8
+				},
+				{
+					"id": 16,
+					"lng": 113.3014,
+					"lat": 40.0905,
+					"name": "点15",
+					"value": 29,
+					"info": "点15"
+				},
+				{
+					"id": 17,
+					"lng": 102.5089,
+					"lat": 28.6396,
+					"name": "点16",
+					"value": 25
+				},
+				{
+					"id": 18,
+					"lng": 114.4932,
+					"lat": 29.6045,
+					"name": "点17",
+					"value": 7
+				},
+				{
+					"id": 19,
+					"lng": 112.1723,
+					"lat": 29.4145,
+					"name": "点18",
+					"value": 23,
+					"info": "点18"
+				},
+				{
+					"id": 20,
+					"lng": 110.365,
+					"lat": 21.2749,
+					"name": "点19",
+					"value": 20
+				},
+				{
+					"id": 21,
+					"lng": 115.0327,
+					"lat": 24.7743,
+					"name": "点20",
+					"value": 10
+				},
+				{
+					"id": 22,
+					"lng": 130.2362,
+					"lat": 47.2529,
+					"name": "点21",
+					"value": 5,
+					"info": "点21"
+				},
+				{
+					"id": 23,
+					"lng": 100.233,
+					"lat": 26.8721,
+					"name": "点22",
+					"value": 24
+				},
+				{
+					"id": 24,
+					"lng": 118.2489,
+					"lat": 37.4934,
+					"name": "点23",
+					"value": 29
+				},
+				{
+					"id": 25,
+					"lng": 113.8238,
+					"lat": 36.0634,
+					"name": "点24",
+					"value": 5
+				},
+				{
+					"id": 26,
+					"lng": 104.2002,
+					"lat": 31.3431,
+					"name": "点25",
+					"value": 11
+				},
+				{
+					"id": 27,
+					"lng": 113.1635,
+					"lat": 40.4375,
+					"name": "点26",
+					"value": 14
+				},
+				{
+					"id": 28,
+					"lng": 90.2127,
+					"lat": 42.8655,
+					"name": "点27",
+					"value": 4,
+					"info": "点27"
+				},
+				{
+					"id": 29,
+					"lng": 129.3114,
+					"lat": 47.4794,
+					"name": "点28",
+					"value": 29,
+					"info": "点28"
+				},
+				{
+					"id": 30,
+					"lng": 104.6308,
+					"lat": 28.7602,
+					"name": "点29",
+					"value": 8,
+					"info": "点29"
+				},
+				{
+					"id": 31,
+					"lng": 119.9065,
+					"lat": 42.287,
+					"name": "点30",
+					"value": 23
+				},
+				{
+					"id": 32,
+					"lng": 122.302,
+					"lat": 29.9456,
+					"name": "点31",
+					"value": 23
+				},
+				{
+					"id": 33,
+					"lng": 124.0456,
+					"lat": 42.5421,
+					"name": "点32",
+					"value": 5
+				},
+				{
+					"id": 34,
+					"lng": 107.5135,
+					"lat": 26.7025,
+					"name": "点33",
+					"value": 18
+				},
+				{
+					"id": 35,
+					"lng": 107.7223,
+					"lat": 31.355,
+					"name": "点34",
+					"value": 28
+				},
+				{
+					"id": 36,
+					"lng": 117.3632,
+					"lat": 32.9397,
+					"name": "点35",
+					"value": 26
+				},
+				{
+					"id": 37,
+					"lng": 124.383,
+					"lat": 40.1243,
+					"name": "点36",
+					"value": 16
+				},
+				{
+					"id": 38,
+					"lng": 117.5625,
+					"lat": 32.8671,
+					"name": "点37",
+					"value": 29
+				},
+				{
+					"id": 39,
+					"lng": 108.9266,
+					"lat": 34.2134,
+					"name": "点38",
+					"value": 26,
+					"info": "点38"
+				},
+				{
+					"id": 40,
+					"lng": 104.7417,
+					"lat": 31.464,
+					"name": "点39",
+					"value": 27
+				},
+				{
+					"id": 41,
+					"lng": 99.1671,
+					"lat": 25.1118,
+					"name": "点40",
+					"value": 4
+				},
+				{
+					"id": 42,
+					"lng": 116.7228,
+					"lat": 32.7054,
+					"name": "点41",
+					"value": 5,
+					"info": "点41"
+				},
+				{
+					"id": 43,
+					"lng": 113.0501,
+					"lat": 36.5329,
+					"name": "点42",
+					"value": 10,
+					"info": "点42"
+				},
+				{
+					"id": 44,
+					"lng": 111.6263,
+					"lat": 26.2233,
+					"name": "点43",
+					"value": 24
+				},
+				{
+					"id": 45,
+					"lng": 119.421,
+					"lat": 32.3932,
+					"name": "点44",
+					"value": 24,
+					"info": "点44"
+				},
+				{
+					"id": 46,
+					"lng": 113.259,
+					"lat": 38.7257,
+					"name": "点45",
+					"value": 21
+				},
+				{
+					"id": 47,
+					"lng": 104.1944,
+					"lat": 24.041,
+					"name": "点46",
+					"value": 17
+				},
+				{
+					"id": 48,
+					"lng": 114.6845,
+					"lat": 37.13,
+					"name": "点47",
+					"value": 10
+				},
+				{
+					"id": 49,
+					"lng": 103.3896,
+					"lat": 35.6638,
+					"name": "点48",
+					"value": 11,
+					"info": "点48"
+				},
+				{
+					"id": 50,
+					"lng": 112.2514,
+					"lat": 36.146,
+					"name": "点49",
+					"value": 5,
+					"info": "点49"
+				},
+				{
+					"id": 51,
+					"lng": 130.3618,
+					"lat": 46.8096,
+					"name": "点50",
+					"value": 25,
+					"info": "点50"
+				},
+				{
+					"id": 52,
+					"lng": 108.4491,
+					"lat": 22.1328,
+					"name": "点51",
+					"value": 19,
+					"info": "点51"
+				},
+				{
+					"id": 53,
+					"lng": 94.6928,
+					"lat": 43.252,
+					"name": "点52",
+					"value": 1
+				},
+				{
+					"id": 54,
+					"lng": 107.7966,
+					"lat": 34.6777,
+					"name": "点53",
+					"value": 4
+				},
+				{
+					"id": 55,
+					"lng": 117.0215,
+					"lat": 30.0966,
+					"name": "点54",
+					"value": 28,
+					"info": "点54"
+				},
+				{
+					"id": 56,
+					"lng": 89.525,
+					"lat": 46.9931,
+					"name": "点55",
+					"value": 20
+				},
+				{
+					"id": 57,
+					"lng": 113.4713,
+					"lat": 34.1544,
+					"name": "点56",
+					"value": 6
+				},
+				{
+					"id": 58,
+					"lng": 117.4207,
+					"lat": 25.2916,
+					"name": "点57",
+					"value": 25
+				},
+				{
+					"id": 59,
+					"lng": 104.0557,
+					"lat": 30.6676,
+					"name": "点58",
+					"value": 14
+				},
+				{
+					"id": 60,
+					"lng": 129.4359,
+					"lat": 47.413,
+					"name": "点59",
+					"value": 26,
+					"info": "点59"
+				}
+			]
+		}
+	}
+}

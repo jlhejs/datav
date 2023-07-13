@@ -1,0 +1,263 @@
+{
+	"name": "map3d-sphere-areas",
+	"version": "0.3.5",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"dmap": "0.2.9"
+	},
+	"datav": {
+		"cn_name": "区域热力层",
+		"protocol": 2,
+		"level": 0,
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"fill": {
+				"name": "填充颜色",
+				"type": "group",
+				"fold": false,
+				"children": {
+					"colorFrontFrom": {
+						"name": "最小值",
+						"type": "color",
+						"default": "#33C9FB"
+					},
+					"colorFrontTo": {
+						"name": "最大值",
+						"type": "color",
+						"default": "#1F68A7"
+					},
+					"colorFrontDefault": {
+						"name": "无值",
+						"type": "color",
+						"default": "#676767"
+					}
+				}
+			},
+			"stroke": {
+				"type": "group",
+				"name": "边线配置",
+				"fold": false,
+				"children": {
+					"color": {
+						"default": "#00FFFC",
+						"name": "颜色",
+						"type": "color"
+					},
+					"linewidth": {
+						"default": 1,
+						"type": "number",
+						"max": 4,
+						"min": 0,
+						"step": 1,
+						"name": "宽度"
+					},
+					"opacity": {
+						"default": 0.8,
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"name": "透明度"
+					}
+				}
+			},
+			"ratio": {
+				"fold": true,
+				"type": "number",
+				"name": "缩放",
+				"default": 1.02,
+				"min": 0.8,
+				"max": 1.5,
+				"step": 0.01
+			}
+		},
+		"api_data": {
+			"geojson": {
+				"type": "FeatureCollection",
+				"features": []
+			},
+			"areas": [
+				{
+					"adcode": "710000",
+					"value": 0.774761951295659
+				},
+				{
+					"adcode": "330000",
+					"value": 0.7794583269860595
+				},
+				{
+					"adcode": "110000",
+					"value": 0.6869565532542765
+				},
+				{
+					"adcode": "120000",
+					"value": 0.9352621990256011
+				},
+				{
+					"adcode": "130000",
+					"value": 0.8719353775959462
+				},
+				{
+					"adcode": "140000",
+					"value": 0.20899744261987507
+				},
+				{
+					"adcode": "150000",
+					"value": 0.22816960071213543
+				},
+				{
+					"adcode": "210000",
+					"value": 0.8665573971811682
+				},
+				{
+					"adcode": "220000",
+					"value": 0.8985264701768756
+				},
+				{
+					"adcode": "230000",
+					"value": 0.442098643630743
+				},
+				{
+					"adcode": "310000",
+					"value": 0.1820987407118082
+				},
+				{
+					"adcode": "320000",
+					"value": 0.3555776213761419
+				},
+				{
+					"adcode": "340000",
+					"value": 0.07747840788215399
+				},
+				{
+					"adcode": "350000",
+					"value": 0.8615943104960024
+				},
+				{
+					"adcode": "360000",
+					"value": 0.44437674642540514
+				},
+				{
+					"adcode": "370000",
+					"value": 0.1642170869745314
+				},
+				{
+					"adcode": "410000",
+					"value": 0.9202997088432312
+				},
+				{
+					"adcode": "420000",
+					"value": 0.8393562983255833
+				},
+				{
+					"adcode": "430000",
+					"value": 0.8322803608607501
+				},
+				{
+					"adcode": "440000",
+					"value": 0.15621825796552002
+				},
+				{
+					"adcode": "450000",
+					"value": 0.5911341919563711
+				},
+				{
+					"adcode": "460000",
+					"value": 0.0355344582349062
+				},
+				{
+					"adcode": "500000",
+					"value": 0.6326046527829021
+				},
+				{
+					"adcode": "510000",
+					"value": 0.7675190144218504
+				},
+				{
+					"adcode": "520000",
+					"value": 0.5071576246991754
+				},
+				{
+					"adcode": "530000",
+					"value": 0.24055390688590705
+				},
+				{
+					"adcode": "540000",
+					"value": 0.06762729142792523
+				},
+				{
+					"adcode": "610000",
+					"value": 0.38014482404105365
+				},
+				{
+					"adcode": "620000",
+					"value": 0.9826915708836168
+				},
+				{
+					"adcode": "630000",
+					"value": 0.8479520713444799
+				},
+				{
+					"adcode": "640000",
+					"value": 0.7397376655135304
+				},
+				{
+					"adcode": "650000",
+					"value": 0.5802350421436131
+				},
+				{
+					"adcode": "810000",
+					"value": 0.7632624560501426
+				},
+				{
+					"adcode": "820000",
+					"value": 0.7354091051965952
+				}
+			]
+		},
+		"apis": {
+			"areas": {
+				"handler": "render",
+				"description": "区域热力图",
+				"fields": {
+					"adcode": {
+						"description": "地理id"
+					},
+					"value": {
+						"description": "值"
+					}
+				}
+			},
+			"geojson": {
+				"handler": "geojson",
+				"description": "地理边界",
+				"fields": {}
+			}
+		},
+		"type": [
+			"map3d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1WG6.AsfpK1RjSZFOXXa6nFXa-180-180.png"
+	}
+}

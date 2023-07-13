@@ -1,0 +1,414 @@
+{
+	"name": "text-label",
+	"version": "1.2.12",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "文字标签",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB153HnlNn1gK0jSZKPXXXvUXXa-370-208.png",
+		"protocol": 2,
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"content": {
+						"description": "标签值",
+						"type": "string"
+					},
+					"type": {
+						"description": "标签类别名",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"type": "group",
+				"name": "全局",
+				"children": {
+					"autoMode": {
+						"name": "自动布局",
+						"type": "boolean",
+						"default": false
+					},
+					"rowNum": {
+						"type": "number",
+						"name": "行数",
+						"default": 2,
+						"step": 1,
+						"min": 1,
+						"max": 100,
+						"show": [
+							[
+								"autoMode",
+								"$eq",
+								false
+							]
+						]
+					},
+					"columNum": {
+						"type": "number",
+						"name": "列数",
+						"default": 3,
+						"step": 1,
+						"min": 1,
+						"max": 100,
+						"show": [
+							[
+								"autoMode",
+								"$eq",
+								false
+							]
+						]
+					},
+					"marginRight": {
+						"name": "标签列间距",
+						"type": "text",
+						"default": "6",
+						"show": [
+							[
+								"autoMode",
+								"$eq",
+								false
+							]
+						]
+					},
+					"marginBottom": {
+						"name": "标签行间距",
+						"type": "text",
+						"default": "6",
+						"show": [
+							[
+								"autoMode",
+								"$eq",
+								false
+							]
+						]
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							}
+						}
+					}
+				}
+			},
+			"defaultLabel": {
+				"name": "默认标签配置",
+				"type": "group",
+				"children": {
+					"padding": {
+						"name": "内容边距",
+						"type": "text",
+						"default": "0"
+					},
+					"borderRadius": {
+						"name": "圆角半径",
+						"type": "text",
+						"default": "0"
+					},
+					"backgroundColor": {
+						"name": "背景颜色",
+						"type": "color",
+						"default": "rgb(10, 115, 255)"
+					},
+					"textStyle": {
+						"name": "文本样式",
+						"type": "group",
+						"fold": true,
+						"children": {
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"default": 12,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "rgba(255,255,255,0.8)"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								],
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "自定义标签系列",
+				"default": [
+					{
+						"typeName": "series1",
+						"backgroundColor": "rgb(121, 218, 255)",
+						"textStyle": {
+							"fontSize": 12,
+							"color": "rgba(0,0,0,0.8)",
+							"fontWeight": "normal"
+						}
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "标签<%= i+1 %>",
+					"child": {
+						"typeName": {
+							"name": "标签类别名",
+							"type": "text",
+							"default": "series1",
+							"description": "需要与数据中字段 type 匹配"
+						},
+						"backgroundColor": {
+							"name": "背景颜色",
+							"type": "color",
+							"default": "#000"
+						},
+						"textStyle": {
+							"name": "文本样式",
+							"type": "group",
+							"fold": true,
+							"children": {
+								"fontSize": {
+									"name": "字号",
+									"type": "number",
+									"default": 12,
+									"range": [
+										0,
+										100
+									],
+									"step": 1
+								},
+								"color": {
+									"type": "color",
+									"name": "字体颜色",
+									"default": "#FFF"
+								},
+								"fontWeight": {
+									"name": "字体粗细",
+									"type": "select",
+									"default": "normal",
+									"searches": [
+										"normal",
+										"bold",
+										"bolder",
+										"lighter",
+										100,
+										200,
+										300,
+										400,
+										500,
+										600,
+										700,
+										800,
+										900
+									],
+									"options": [
+										{
+											"name": "Normal",
+											"value": "normal"
+										},
+										{
+											"name": "Bold",
+											"value": "bold"
+										},
+										{
+											"name": "Bolder",
+											"value": "bolder"
+										},
+										{
+											"name": "Lighter",
+											"value": "lighter"
+										},
+										{
+											"name": "100",
+											"value": "100"
+										},
+										{
+											"name": "200",
+											"value": "200"
+										},
+										{
+											"name": "300",
+											"value": "300"
+										},
+										{
+											"name": "400",
+											"value": "400"
+										},
+										{
+											"name": "500",
+											"value": "500"
+										},
+										{
+											"name": "600",
+											"value": "600"
+										},
+										{
+											"name": "700",
+											"value": "700"
+										},
+										{
+											"name": "800",
+											"value": "800"
+										},
+										{
+											"name": "900",
+											"value": "900"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"content": "家有宝宝"
+				},
+				{
+					"content": "时尚达人",
+					"type": "series1"
+				},
+				{
+					"content": "美食专家"
+				},
+				{
+					"content": "运动先锋",
+					"type": "series1"
+				},
+				{
+					"content": "VIP4"
+				},
+				{
+					"content": "美食专家",
+					"type": "series1"
+				}
+			]
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1p0LrlG61gK0jSZFlXXXDKFXa-160-116.png"
+	}
+}

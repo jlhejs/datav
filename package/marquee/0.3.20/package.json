@@ -1,0 +1,229 @@
+{
+	"name": "marquee",
+	"version": "0.3.20",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"animejs": "3.1.0"
+	},
+	"datav": {
+		"cn_name": "跑马灯",
+		"level": 0,
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"name": "值",
+						"description": "值",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"protocol": 2,
+		"config": {
+			"textStyle": {
+				"type": "group",
+				"name": "文本样式",
+				"children": {
+					"color": {
+						"type": "color",
+						"name": "字体颜色",
+						"default": "#ffffff"
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"range": [
+							0,
+							100
+						],
+						"default": 18,
+						"min": 0,
+						"max": 100,
+						"step": 1
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						],
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					}
+				}
+			},
+			"loop": {
+				"name": "是否轮播",
+				"type": "boolean",
+				"default": true
+			},
+			"ifSpeed": {
+				"name": "定速播放",
+				"type": "boolean",
+				"default": false
+			},
+			"duration": {
+				"name": "动画时间",
+				"type": "number",
+				"default": 8000,
+				"show": [
+					[
+						"ifSpeed",
+						"$eq",
+						false
+					]
+				]
+			},
+			"speed": {
+				"name": "动画间隔",
+				"type": "number",
+				"default": 1000,
+				"description": "每100长度动画时长",
+				"show": [
+					[
+						"ifSpeed",
+						"$eq",
+						true
+					]
+				]
+			},
+			"leading": {
+				"name": "前期停留",
+				"type": "number",
+				"default": 1000
+			},
+			"subordinate": {
+				"name": "后期停留",
+				"type": "number",
+				"default": 0
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": "DataV可视化产品，创造属于您的双11指挥大屏！"
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "56",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "textStyle",
+					"apiPath": "source.value"
+				}
+			]
+		},
+		"icon": "//img.alicdn.com/tfs/TB1wVjnlRv0gK0jSZKbXXbK2FXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1d4nolO_1gK0jSZFqXXcpaXXa-332-144.png"
+	}
+}

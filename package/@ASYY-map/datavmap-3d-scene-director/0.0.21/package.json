@@ -1,0 +1,165 @@
+{
+	"name": "datavmap-3d-scene-director",
+	"version": "0.0.21",
+	"description": "基于datav.gl的场景管理器",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-3d-scene-director.git"
+	},
+	"keywords": [
+		"datav.gl",
+		"mapbox",
+		"scene",
+		"director"
+	],
+	"author": "wandergis",
+	"dependencies": {
+		"async": "2.5.0",
+		"cheap-ruler": "2.5.0",
+		"eventemitter3": "2.0.3",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "场景管理器",
+		"icon": "//img.alicdn.com/tfs/TB1vTb6AwHqK1RjSZFPXXcwapXa-180-180.png",
+		"level": 1,
+		"protocol": 2,
+		"type": [
+			"datavgl_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavgl"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"play": {
+				"description": "运行"
+			},
+			"pause": {
+				"description": "暂停"
+			}
+		},
+		"events": {
+			"scene-director-start": {
+				"description": "场景管理器启动时",
+				"fields": {
+					"type": {
+						"description": "启动"
+					}
+				}
+			},
+			"scene-director-stop": {
+				"description": "场景管理器结束时",
+				"fields": {
+					"type": {
+						"description": "结束"
+					}
+				}
+			},
+			"scene-keyframe-finish": {
+				"description": "关键帧结束时",
+				"fields": {}
+			}
+		},
+		"apis": {
+			"data": {
+				"description": "关键帧数据",
+				"handler": "setData",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"optional": true
+					},
+					"lat": {
+						"description": "纬度",
+						"optional": true
+					},
+					"zoom": {
+						"description": "缩放等级",
+						"optional": true
+					},
+					"pitch": {
+						"description": "倾斜",
+						"optional": true
+					},
+					"bearing": {
+						"description": "旋转",
+						"optional": true
+					},
+					"duration": {
+						"description": "持续时间",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"keyControl": {
+				"name": "空格控制",
+				"type": "boolean",
+				"default": true
+			},
+			"isCycle": {
+				"name": "轮播",
+				"type": "boolean",
+				"default": true
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"lng": 120.13300895690918,
+					"lat": 30.240234663024598,
+					"easing": "Quadratic.Out",
+					"duration": 3000
+				},
+				{
+					"startDuration": 3000,
+					"duration": 10000,
+					"zoom": 17,
+					"pitch": 60,
+					"path": [
+						[
+							120.13300895690918,
+							30.240234663024598
+						],
+						[
+							120.1306915283203,
+							30.252320527028715
+						],
+						[
+							120.13335227966307,
+							30.263070506250088
+						],
+						[
+							120.15506744384764,
+							30.270557727533095
+						]
+					]
+				},
+				{
+					"bearing": 0,
+					"duration": 4000
+				},
+				{
+					"bearing": 179,
+					"duration": 4000
+				}
+			]
+		}
+	}
+}

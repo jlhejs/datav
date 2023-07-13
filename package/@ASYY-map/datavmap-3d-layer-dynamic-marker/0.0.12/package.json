@@ -1,0 +1,222 @@
+{
+	"name": "datavmap-3d-layer-dynamic-marker",
+	"version": "0.0.12",
+	"description": "基于datav.gl的动态内容布告板",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-3d-layer-dynamic-marker.git"
+	},
+	"keywords": [
+		"datav.gl",
+		"mapbox",
+		"dynamic-marker"
+	],
+	"author": "lushan",
+	"dependencies": {
+		"eventemitter3": "2.0.3",
+		"safely-merge": "1.0.1",
+		"chroma-js": "1.3.4"
+	},
+	"datav": {
+		"cn_name": "动态内容布告板",
+		"icon": "//img.alicdn.com/tfs/TB1cLn4ArrpK1RjSZTEXXcWAVXa-180-180.png",
+		"protocol": 2,
+		"level": 1,
+		"type": [
+			"datavgl_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavgl"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"apis": {
+			"location": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"lat": {
+						"description": "纬度"
+					},
+					"lng": {
+						"description": "经度"
+					},
+					"photo": {
+						"description": "图片"
+					},
+					"title": {
+						"description": "标题"
+					},
+					"content": {
+						"description": "内容"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"visibility": {
+				"name": "显示",
+				"type": "hidden",
+				"default": true
+			},
+			"markerSprite": {
+				"name": "图标",
+				"type": "group",
+				"children": {
+					"spriteSizeScale": {
+						"name": "窗体大小",
+						"type": "number",
+						"range": [
+							1,
+							100
+						],
+						"step": 1,
+						"default": 5
+					}
+				}
+			},
+			"randomShow": {
+				"name": "随机轮播",
+				"type": "boolean",
+				"default": true
+			},
+			"randomShowPercent": {
+				"name": "轮播比例",
+				"type": "number",
+				"range": [
+					0.1,
+					1
+				],
+				"step": 0.1,
+				"default": 0.5
+			},
+			"randomShowSpeed": {
+				"name": "轮播速度",
+				"type": "number",
+				"range": [
+					0.005,
+					0.5
+				],
+				"step": 0.01,
+				"default": 0.05
+			},
+			"randomShowRound": {
+				"name": "轮播次数",
+				"type": "number",
+				"range": [
+					1,
+					10
+				],
+				"step": 1,
+				"default": 1
+			},
+			"showEnterDuration": {
+				"name": "渐入时间",
+				"type": "number",
+				"range": [
+					1,
+					10
+				],
+				"step": 1,
+				"default": 3
+			},
+			"showKeepDuration": {
+				"name": "停留时间",
+				"type": "number",
+				"range": [
+					1,
+					10
+				],
+				"step": 1,
+				"default": 3
+			},
+			"showLeaveDuration": {
+				"name": "渐隐时间",
+				"type": "number",
+				"range": [
+					1,
+					10
+				],
+				"step": 1,
+				"default": 4
+			},
+			"heightPosition": {
+				"name": "垂直位置",
+				"type": "number",
+				"range": [
+					0,
+					200000
+				],
+				"step": 10,
+				"default": 0
+			}
+		},
+		"api_data": {
+			"location": [
+				{
+					"lng": 120.1658821105957,
+					"lat": 30.276191299728147,
+					"photo": "https://img.alicdn.com/tfs/TB1BIBgiwMPMeJjy1XcXXXpppXa-500-300.png",
+					"title": "公共安全防务",
+					"content": "公共安全是指保护个人、财产不受到灾害或事故等危险的威胁。"
+				},
+				{
+					"lng": 120.14983177185057,
+					"lat": 30.2749311866533,
+					"photo": "https://img.alicdn.com/tfs/TB1BwczigMPMeJjy1XdXXasrXXa-500-300.png",
+					"title": "市民健身锻炼",
+					"content": "提升人们的健身意识，实现体育健康促进成为体育锻炼的有效途径。"
+				},
+				{
+					"lng": 120.12914657592773,
+					"lat": 30.268111470509464,
+					"photo": "https://img.alicdn.com/tfs/TB1BwczigMPMeJjy1XdXXasrXXa-500-300.png",
+					"title": "市民健身锻炼",
+					"content": "提升人们的健身意识，实现体育健康促进成为体育锻炼的有效途径。"
+				},
+				{
+					"lng": 120.12562751770021,
+					"lat": 30.254989597183144,
+					"photo": "https://img.alicdn.com/tfs/TB1BwczigMPMeJjy1XdXXasrXXa-500-300.png",
+					"title": "市民健身锻炼",
+					"content": "提升人们的健身意识，实现体育健康促进成为体育锻炼的有效途径。"
+				},
+				{
+					"lng": 120.15283584594727,
+					"lat": 30.263070506250088,
+					"photo": "https://img.alicdn.com/tfs/TB1BwczigMPMeJjy1XdXXasrXXa-500-300.png",
+					"title": "市民健身锻炼",
+					"content": "提升人们的健身意识，实现体育健康促进成为体育锻炼的有效途径。"
+				},
+				{
+					"lng": 120.16785621643066,
+					"lat": 30.24772362510289,
+					"photo": "https://img.alicdn.com/tfs/TB1BwczigMPMeJjy1XdXXasrXXa-500-300.png",
+					"title": "市民健身锻炼",
+					"content": "提升人们的健身意识，实现体育健康促进成为体育锻炼的有效途径。"
+				}
+			]
+		}
+	}
+}

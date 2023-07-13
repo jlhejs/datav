@@ -1,0 +1,287 @@
+{
+	"name": "event-dashboard",
+	"version": "0.1.11",
+	"dependencies": {
+		"chroma-js": "1.3.4",
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"three": "0.99.0",
+		"tween.js": "16.6.0"
+	},
+	"datav": {
+		"cn_name": "事件仪表盘",
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"interact",
+			"DataV-6:control_data"
+		],
+		"analysis": {
+			"apis": "data"
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "textStyle",
+					"apiPath": "data.context"
+				}
+			]
+		},
+		"view": {
+			"width": "1200",
+			"height": "260",
+			"minWidth": "200",
+			"minHeight": "30"
+		},
+		"events": {
+			"dashboard-click": {
+				"description": "单击事件触发",
+				"fields": {
+					"id": {
+						"description": "序号"
+					},
+					"context": {
+						"description": "内容"
+					}
+				}
+			}
+		},
+		"config": {
+			"textStyle": {
+				"type": "group",
+				"name": "文本样式",
+				"fold": true,
+				"children": {
+					"fontSize": {
+						"name": "字号",
+						"type": "number",
+						"default": 24,
+						"range": [
+							10,
+							36
+						]
+					},
+					"color": {
+						"type": "color",
+						"name": "字体颜色",
+						"default": "#FFFFFF"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "search",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						]
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					}
+				}
+			},
+			"imageStyle": {
+				"type": "group",
+				"name": "图片样式",
+				"fold": true,
+				"children": {
+					"imageWidth": {
+						"type": "number",
+						"name": "图标长度",
+						"default": 7,
+						"range": [
+							0,
+							20
+						],
+						"step": 0.1
+					},
+					"imageHeight": {
+						"type": "number",
+						"name": "图标高度",
+						"default": 3.5,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"imageOpacity": {
+						"type": "number",
+						"name": "图标透明度",
+						"default": 0.6,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.1
+					}
+				}
+			},
+			"backgroundStyle": {
+				"type": "group",
+				"name": "背景样式",
+				"fold": true,
+				"children": {
+					"circleOuterColor": {
+						"type": "color",
+						"name": "外侧圆弧颜色",
+						"default": "#164238"
+					},
+					"circleCenterColor": {
+						"type": "color",
+						"name": "中间圆弧颜色",
+						"default": "#042628"
+					},
+					"circleInnerColor": {
+						"type": "color",
+						"name": "内侧圆弧颜色",
+						"default": "#0F3840"
+					},
+					"graduationOuterColor": {
+						"type": "color",
+						"name": "外侧刻度颜色",
+						"default": "#408E97"
+					},
+					"graduationInnerColor": {
+						"type": "color",
+						"name": "内侧刻度颜色",
+						"default": "#40BFD2"
+					},
+					"arrowColor": {
+						"type": "color",
+						"name": "三角形箭头颜色",
+						"default": "#40BFD2"
+					},
+					"backgroundColor": {
+						"type": "color",
+						"name": "组件背景颜色",
+						"default": "#000000"
+					}
+				}
+			}
+		},
+		"apis": {
+			"data": {
+				"description": "映射数据",
+				"handler": "setData",
+				"fields": {
+					"id": {
+						"name": "序号",
+						"type": "number",
+						"description": "序号"
+					},
+					"context": {
+						"name": "内容",
+						"type": "string | number",
+						"description": "内容"
+					},
+					"url": {
+						"name": "图标路径",
+						"type": "string",
+						"description": "图标路径"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"data": [
+				{
+					"id": 655866,
+					"context": "俄罗斯",
+					"url": "https://img.alicdn.com/tfs/TB1jfCRgv9TBuNjy0FcXXbeiFXa-200-133.png"
+				},
+				{
+					"id": 206252,
+					"context": "美国",
+					"url": "https://img.alicdn.com/tfs/TB1L9K2gv5TBuNjSspcXXbnGFXa-224-118.png"
+				},
+				{
+					"id": 152418,
+					"context": "西班牙",
+					"url": "https://img.alicdn.com/tfs/TB1pEu5gv9TBuNjy1zbXXXpepXa-200-133.png"
+				},
+				{
+					"id": 139340,
+					"context": "法国",
+					"url": "https://img.alicdn.com/tfs/TB1s2CRgv9TBuNjy0FcXXbeiFXa-200-133.png"
+				},
+				{
+					"id": 138786,
+					"context": "新加坡",
+					"url": "https://img.alicdn.com/tfs/TB11znbgx1YBuNjy1zcXXbNcXXa-200-133.png"
+				},
+				{
+					"id": 95516,
+					"context": "荷兰",
+					"url": "https://img.alicdn.com/tfs/TB1D4CygrSYBuNjSspiXXXNzpXa-200-133.png"
+				},
+				{
+					"id": 90197,
+					"context": "波兰",
+					"url": "https://img.alicdn.com/tfs/TB1K4vcguOSBuNjy0FdXXbDnVXa-206-129.png"
+				},
+				{
+					"id": 82697,
+					"context": "以色列",
+					"url": "https://img.alicdn.com/tfs/TB1DDKIgwaTBuNjSszfXXXgfpXa-192-140.png"
+				},
+				{
+					"id": 50096,
+					"context": "土耳其",
+					"url": "https://img.alicdn.com/tfs/TB16lUjgDlYBeNjSszcXXbwhFXa-200-133.png"
+				},
+				{
+					"id": 49162,
+					"context": "乌克兰",
+					"url": "https://img.alicdn.com/tfs/TB1DbgTgDJYBeNjy1zeXXahzVXa-200-133.png"
+				},
+				{
+					"id": 47290,
+					"context": "巴西",
+					"url": "https://img.alicdn.com/tfs/TB1SIAwgCBYBeNjy0FeXXbnmFXa-196-137.png"
+				},
+				{
+					"id": 46465,
+					"context": "意大利",
+					"url": "https://img.alicdn.com/tfs/TB1bHkTgDJYBeNjy1zeXXahzVXa-200-133.png"
+				}
+			]
+		},
+		"icon": "//img.alicdn.com/tfs/TB1cfU1mHr1gK0jSZFDXXb9yVXa-368-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1VTM2mO_1gK0jSZFqXXcpaXXa-160-116.png"
+	}
+}

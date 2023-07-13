@@ -1,0 +1,297 @@
+{
+  "name": "datav-bg-box",
+  "version": "0.0.1",
+  "dependencies": {
+    "shortid": "^2.2.16",
+    "vue": "^3.2.31"
+  },
+  "datav": {
+    "id": "DatavBgBox_vXHjA9ixq",
+    "alias": "自定义背景块",
+    "img": "//files.pengxiaotian.com/com-thum/bg-box-370-208.png",
+    "name": "datav-bg-box",
+    "icon": "v-icon-material",
+    "type": "com",
+    "renameing": false,
+    "selected": true,
+    "locked": false,
+    "hided": false,
+    "hovered": false,
+    "scaling": {
+      "zoom": false,
+      "w": 0,
+      "h": 0,
+      "sx": 1,
+      "sy": 1
+    },
+    "attr": {
+      "x": 583,
+      "y": 279,
+      "w": 300,
+      "h": 180,
+      "deg": 0,
+      "opacity": 1,
+      "filpV": false,
+      "filpH": false
+    },
+    "projectId": 100003,
+    "config": {
+      "borderRadius": {
+        "name": "文字样式",
+        "type": "number",
+        "default": 0
+      },
+      "fills": {
+        "name": "填充",
+        "type": "array",
+        "default": [
+          {
+            "fill": "#003A8C",
+            "opacity": 10
+          }
+        ],
+        "child": {
+          "name": "系列<%=i+1%>",
+          "type": "object",
+          "child": {
+            "fill": {
+              "name": "颜色",
+              "type": "color",
+              "default": "#003A8C"
+            },
+            "opacity": {
+              "name": "透明度",
+              "type": "number",
+              "min": 0,
+              "max": 100,
+              "range": true,
+              "default": 10
+            }
+          }
+        }
+      },
+      "border": {
+        "name": "边框",
+        "type": "group",
+        "children": {
+          "show": {
+            "name": "显示",
+            "type": "boolean",
+            "default": true
+          },
+          "type": {
+            "name": "边框类型",
+            "type": "select",
+            "default": "flat",
+            "options": [
+              {
+                "value": "flat",
+                "label": "纯色"
+              },
+              {
+                "value": "linearGradient",
+                "label": "渐变"
+              },
+              {
+                "value": "image",
+                "label": "图片"
+              }
+            ]
+          },
+          "flat": {
+            "name": "边框配置",
+            "type": "group",
+            "children": {
+              "width": {
+                "name": "粗细",
+                "type": "number",
+                "suffix": "px",
+                "default": 1
+              },
+              "style": {
+                "name": "样式",
+                "type": "select",
+                "default": "solid",
+                "options": [
+                  {
+                    "value": "solid",
+                    "label": "实体填充"
+                  },
+                  {
+                    "value": "gradient",
+                    "label": "渐变填充"
+                  }
+                ]
+              },
+              "color": {
+                "name": "颜色",
+                "type": "color",
+                "default": "#008bff"
+              }
+            }
+          },
+          "linearGradient": {
+            "name": "渐变色",
+            "type": "group",
+            "children": {
+              "width": {
+                "name": "宽度",
+                "type": "number",
+                "default": 2
+              },
+              "color": {
+                "name": "颜色",
+                "type": "group",
+                "children": {
+                  "angle": {
+                    "name": "角度",
+                    "type": "number",
+                    "default": 135
+                  },
+                  "stops": {
+                    "name": "stops",
+                    "type": "array",
+                    "default": [
+                      {
+                        "offset": 0,
+                        "color": "#00DEFF"
+                      },
+                      {
+                        "offset": 100,
+                        "color": "#008BFF"
+                      }
+                    ],
+                    "child": {
+                      "name": "系列<%=i+1%>",
+                      "type": "object",
+                      "child": {
+                        "offset": {
+                          "name": "offset",
+                          "type": "number",
+                          "default": 0
+                        },
+                        "color": {
+                          "name": "颜色",
+                          "type": "text",
+                          "default": "#00DEFF"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "imageType": {
+            "name": "图片类型",
+            "type": "text",
+            "default": "preset"
+          },
+          "presetImage": {
+            "name": "presetImage",
+            "type": "text",
+            "default": "box38"
+          },
+          "customImage": {
+            "name": "customImage",
+            "type": "group",
+            "children": {
+              "source": {
+                "name": "source",
+                "type": "image",
+                "default": "https://files.pengxiaotian.com/datav/custom-bg-border.png"
+              },
+              "slice": {
+                "name": "切片",
+                "type": "text",
+                "default": "32 37 fill"
+              },
+              "width": {
+                "name": "宽度",
+                "type": "text",
+                "default": "32px 37px"
+              },
+              "outset": {
+                "name": "外扩",
+                "type": "text",
+                "default": "0"
+              },
+              "repeat": {
+                "name": "平铺",
+                "type": "text",
+                "default": "no-repeat",
+                "select": [
+                  {
+                    "value": "no-repeat",
+                    "label": "不重复，拉伸满"
+                  },
+                  {
+                    "value": "repeat",
+                    "label": "水平和垂直重复"
+                  },
+                  {
+                    "value": "repeat-x",
+                    "label": "水平重复"
+                  },
+                  {
+                    "value": "repeat-y",
+                    "label": "垂直重复"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "filter": {
+        "name": "滤镜 ",
+        "type": "group",
+        "children": {
+          "blur": {
+            "name": "模糊",
+            "type": "text",
+            "default": "0px"
+          }
+        }
+      },
+      "backdropFilter": {
+        "name": "背景过滤器",
+        "type": "group",
+        "children": {
+          "blur": {
+            "name": "磨玻璃模糊",
+            "type": "text",
+            "default": "0px"
+          }
+        }
+      },
+      "urlConfig": {
+        "name": "超链接配置",
+        "type": "group",
+        "children": {
+          "url": {
+            "name": "超链接",
+            "type": "text",
+            "default": ""
+          },
+          "ifBlank": {
+            "name": "新窗口",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    }
+  },
+  "files": [
+    ""
+  ],
+  "main": "./index.umd.js",
+  "module": "./index.es.js",
+  "exports": {
+    ".": {
+      "import": "./index.es.js",
+      "require": "./index.umd.js"
+    }
+  }
+}

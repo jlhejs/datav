@@ -1,0 +1,246 @@
+{
+	"name": "paragraph",
+	"version": "1.2.20",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "多行文本",
+		"level": 0,
+		"protocol": 2,
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "textStyle",
+					"apiPath": "source.value"
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"description": "文本值",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"content": {
+				"type": "text",
+				"name": "段落内容",
+				"default": "DataV 提供运营动态直播、数据综合展示、设备监控预警等多种场景模板，稍加修改就能够直接服务于您的可视化需求。通过拖拽即可实现灵活的可视化布局，在模板的基础上任何人都能够发挥创意，实现您自己的可视化应用。支持阿里云分析数据库、关系型数据库、Restful API、CSV、静态JSON等多种数据来源，且能够动态轮询。能够实现多个数据源汇聚于一个可视化界面中",
+				"description": "支持从数据中获取段落内容，详见数据面板",
+				"dataField": "value"
+			},
+			"scroll": {
+				"name": "文本滚动",
+				"type": "group",
+				"children": {
+					"overScroll": {
+						"name": "溢出滚动",
+						"type": "boolean",
+						"default": false,
+						"description": "仅当文本溢出时有效"
+					},
+					"duration": {
+						"name": "滚动持续时间",
+						"type": "number",
+						"default": 5000
+					}
+				}
+			},
+			"textStyle": {
+				"type": "group",
+				"name": "文本样式",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"default": 12,
+						"step": 1
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "#fff"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						],
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					}
+				}
+			},
+			"letterSpacing": {
+				"name": "文字间隔",
+				"type": "number",
+				"default": 0,
+				"suffix": "px"
+			},
+			"lineHeight": {
+				"type": "number",
+				"name": "行高",
+				"default": 36,
+				"range": [
+					0,
+					200
+				],
+				"step": 1
+			},
+			"textAlign": {
+				"name": "对齐方式",
+				"type": "options",
+				"options": [
+					{
+						"name": "左对齐",
+						"value": "left"
+					},
+					{
+						"name": "右对齐",
+						"value": "right"
+					},
+					{
+						"name": "居中对齐",
+						"value": "center"
+					}
+				],
+				"default": "left"
+			},
+			"textIndent": {
+				"type": "number",
+				"name": "首行缩进",
+				"range": [
+					0,
+					100
+				],
+				"step": 1,
+				"default": 32
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": ""
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"icon": "//img.alicdn.com/tfs/TB1KJHmlKL2gK0jSZPhXXahvXXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB11Q_klFY7gK0jSZKzXXaikpXa-160-116.png"
+	}
+}

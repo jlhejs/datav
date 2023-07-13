@@ -1,0 +1,501 @@
+{
+	"name": "pie-comparison-with-counter",
+	"version": "1.2.26",
+	"dependencies": {
+		"bcore": "0.0.22",
+		"dchart-pie": "0.1.2",
+		"jquery": "2.1.4",
+		"lodash": "4.17.11"
+	},
+	"datav": {
+		"cn_name": "指标对比饼图",
+		"level": 0,
+		"protocol": 2,
+		"supportTheme": true,
+		"type": [
+			"regular_pie",
+			"DataV-6:regular_pie"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "指标对比饼图接口",
+				"fields": {
+					"x": {
+						"description": "类目",
+						"type": "string"
+					},
+					"y": {
+						"description": "值",
+						"type": "int"
+					}
+				}
+			}
+		},
+		"config": {
+			"fontFamily": {
+				"name": "字体",
+				"type": "search",
+				"default": "Microsoft Yahei",
+				"range": [
+					{
+						"微软雅黑": "Microsoft Yahei"
+					},
+					{
+						"宋体": "SimSun"
+					},
+					{
+						"黑体": "SimHei"
+					},
+					{
+						"隶书": "LiSu"
+					},
+					{
+						"幼圆": "YouYuan"
+					},
+					"tahoma",
+					"arial",
+					"sans-serif"
+				],
+				"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+			},
+			"container": {
+				"type": "group",
+				"name": "容器",
+				"children": {
+					"padding": {
+						"default": 6,
+						"type": "number",
+						"name": "内边距"
+					}
+				}
+			},
+			"labels": {
+				"type": "group",
+				"name": "标签",
+				"children": {
+					"show": {
+						"default": false
+					},
+					"color": {
+						"default": "rgb(144, 160, 174)",
+						"name": "颜色",
+						"type": "color"
+					},
+					"fontSize": {
+						"default": 14,
+						"type": "number",
+						"name": "字号",
+						"range": [
+							12,
+							100
+						]
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					}
+				}
+			},
+			"chart": {
+				"type": "group",
+				"name": "图表",
+				"children": {
+					"radius": {
+						"name": "半径",
+						"type": "number",
+						"default": 0.95,
+						"range": [
+							0,
+							1
+						]
+					},
+					"color": {
+						"default": "rgb(144, 160, 174)",
+						"name": "颜色",
+						"type": "color"
+					},
+					"decorate-color": {
+						"default": "rgba(255,255,255,0.1)",
+						"name": "装饰色",
+						"type": "color"
+					},
+					"background-color": {
+						"default": "rgba(1, 1, 1, 0)",
+						"name": "背景色",
+						"type": "color"
+					},
+					"font-size": {
+						"default": 14,
+						"type": "number",
+						"name": "字号",
+						"range": [
+							12,
+							100
+						]
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					},
+					"margin": {
+						"name": "边距",
+						"type": "group",
+						"children": {
+							"top": {
+								"name": "上边距",
+								"type": "number",
+								"default": 0
+							},
+							"bottom": {
+								"name": "下边距",
+								"type": "number",
+								"default": 0
+							},
+							"left": {
+								"name": "左边距",
+								"type": "number",
+								"default": 0
+							},
+							"right": {
+								"name": "右边距",
+								"type": "number",
+								"default": 0
+							}
+						}
+					},
+					"angleOffset": {
+						"type": "number",
+						"name": "起始角度偏移",
+						"default": 0,
+						"range": [
+							0,
+							360
+						],
+						"step": 1
+					}
+				}
+			},
+			"series": {
+				"type": "group",
+				"name": "数据系列",
+				"children": {
+					"serie1": {
+						"type": "group",
+						"name": "系列一",
+						"children": {
+							"serie-color": {
+								"type": "color",
+								"default": "rgba(1,1,1,0)",
+								"name": "颜色"
+							}
+						}
+					},
+					"serie2": {
+						"type": "group",
+						"name": "系列二",
+						"children": {
+							"serie-color": {
+								"type": "color",
+								"default": "rgb(10, 115, 255)",
+								"name": "颜色"
+							}
+						}
+					}
+				}
+			},
+			"animation": {
+				"name": "动画",
+				"type": "group",
+				"fold": true,
+				"children": {
+					"show": {
+						"name": "开启",
+						"type": "boolean",
+						"default": true
+					},
+					"animationDuration": {
+						"name": "初始动画时长",
+						"type": "number",
+						"step": 1,
+						"default": 1000
+					},
+					"animationEasing": {
+						"name": "缓动效果",
+						"type": "search",
+						"options": [
+							{
+								"name": "linear",
+								"value": "linear"
+							},
+							{
+								"name": "quadraticIn",
+								"value": "quadraticIn"
+							},
+							{
+								"name": "quadraticOut",
+								"value": "quadraticOut"
+							},
+							{
+								"name": "quadraticInOut",
+								"value": "quadraticInOut"
+							},
+							{
+								"name": "cubicIn",
+								"value": "cubicIn"
+							},
+							{
+								"name": "cubicOut",
+								"value": "cubicOut"
+							},
+							{
+								"name": "cubicInOut",
+								"value": "cubicInOut"
+							},
+							{
+								"name": "quarticIn",
+								"value": "quarticIn"
+							},
+							{
+								"name": "quarticOut",
+								"value": "quarticOut"
+							},
+							{
+								"name": "quarticInOut",
+								"value": "quarticInOut"
+							},
+							{
+								"name": "quinticIn",
+								"value": "quinticIn"
+							},
+							{
+								"name": "quinticOut",
+								"value": "quinticOut"
+							},
+							{
+								"name": "quinticInOut",
+								"value": "quinticInOut"
+							},
+							{
+								"name": "sinusoidalIn",
+								"value": "sinusoidalIn"
+							},
+							{
+								"name": "sinusoidalOut",
+								"value": "sinusoidalOut"
+							},
+							{
+								"name": "sinusoidalInOut",
+								"value": "sinusoidalInOut"
+							},
+							{
+								"name": "exponentialIn",
+								"value": "exponentialIn"
+							},
+							{
+								"name": "exponentialOut",
+								"value": "exponentialOut"
+							},
+							{
+								"name": "exponentialInOut",
+								"value": "exponentialInOut"
+							},
+							{
+								"name": "circularIn",
+								"value": "circularIn"
+							},
+							{
+								"name": "circularOut",
+								"value": "circularOut"
+							},
+							{
+								"name": "circularInOut",
+								"value": "circularInOut"
+							},
+							{
+								"name": "elasticIn",
+								"value": "elasticIn"
+							},
+							{
+								"name": "elasticOut",
+								"value": "elasticOut"
+							},
+							{
+								"name": "elasticInOut",
+								"value": "elasticInOut"
+							},
+							{
+								"name": "backIn",
+								"value": "backIn"
+							},
+							{
+								"name": "backOut",
+								"value": "backOut"
+							},
+							{
+								"name": "backInOut",
+								"value": "backInOut"
+							},
+							{
+								"name": "bounceIn",
+								"value": "bounceIn"
+							},
+							{
+								"name": "bounceOut",
+								"value": "bounceOut"
+							},
+							{
+								"name": "bounceInOut",
+								"value": "bounceInOut"
+							}
+						],
+						"default": "cubicInOut"
+					},
+					"animationDurationUpdate": {
+						"name": "更新动画时长",
+						"type": "number",
+						"default": 300,
+						"step": 1
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "女",
+					"y": 1000
+				},
+				{
+					"x": "男",
+					"y": 2000
+				}
+			]
+		},
+		"icon": "//img.alicdn.com/tfs/TB1VWc1mUT1gK0jSZFrXXcNCXXa-368-208.png",
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"publicHandler": {
+			"clear": {
+				"name": "清空组件",
+				"type": "null"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1cF75mND1gK0jSZFyXXciOVXa-160-116.png"
+	}
+}

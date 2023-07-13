@@ -1,0 +1,304 @@
+{
+	"name": "map2d-layer-areas",
+	"version": "0.1.0",
+	"description": "2d区域热力图",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "zhouningyi",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"ldmap": "0.1.40",
+		"polylabel": "1.0.2"
+	},
+	"datav": {
+		"cn_name": "区域热力层",
+		"protocol": 2,
+		"type": [
+			"map2d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		},
+		"events": {
+			"area-map-click": {
+				"description": "区域被点击触发",
+				"fields": {
+					"id": {
+						"description": "区域关联id"
+					}
+				}
+			}
+		},
+		"apis": {
+			"source": {
+				"description": "映射数据",
+				"handler": "render",
+				"fields": {
+					"id": {
+						"description": "区域关联id"
+					},
+					"value": {
+						"description": "值"
+					},
+					"info": {
+						"description": "弹窗内容",
+						"optional": true
+					}
+				}
+			},
+			"geojson": {
+				"description": "矢量面数据",
+				"handler": "geojson",
+				"fields": {}
+			}
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"click-key": {
+				"type": "text",
+				"name": "回调 ID",
+				"default": ""
+			},
+			"isLabel": {
+				"name": "标注",
+				"type": "boolean",
+				"default": true,
+				"options": [
+					false,
+					true
+				]
+			},
+			"label": {
+				"show": [
+					[
+						"isLabel",
+						"$eq",
+						true
+					]
+				],
+				"type": "group",
+				"name": "标注选项",
+				"children": {
+					"labelField": {
+						"name": "标注字段",
+						"type": "text",
+						"default": "name",
+						"description": "需要与地理数据中字段名称匹配"
+					},
+					"labelColor": {
+						"default": "#fff",
+						"name": "颜色",
+						"type": "color"
+					},
+					"labelShadowColor": {
+						"default": "rgba(0, 0, 0, 0.85)",
+						"name": "阴影色",
+						"type": "color"
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"labelFontSize": {
+						"type": "number",
+						"name": "字号",
+						"default": 12,
+						"min": 0,
+						"max": 50
+					}
+				}
+			},
+			"fill": {
+				"type": "group",
+				"name": "填充颜色",
+				"children": {
+					"from": {
+						"default": "rgba(5, 96, 125, 0.8)",
+						"name": "最小值",
+						"type": "color"
+					},
+					"to": {
+						"default": "rgba(0, 255, 240, 0.5)",
+						"name": "最大值",
+						"type": "color"
+					},
+					"none": {
+						"default": "rgba(77, 77, 77, 0.5)",
+						"name": "无数据",
+						"type": "color"
+					}
+				}
+			},
+			"stroke": {
+				"type": "group",
+				"name": "边线选项",
+				"children": {
+					"color": {
+						"type": "color",
+						"name": "颜色",
+						"default": "#fff"
+					},
+					"opacity": {
+						"type": "number",
+						"name": "透明度",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"weight": {
+						"type": "number",
+						"name": "粗细",
+						"default": 1,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"dashArray": {
+						"type": "text",
+						"name": "虚线",
+						"default": "1,0"
+					}
+				}
+			},
+			"hover": {
+				"type": "group",
+				"name": "鼠标滑入",
+				"children": {
+					"fillColor": {
+						"type": "color",
+						"name": "高亮色",
+						"default": "#FEE619"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"id": "710000",
+					"value": 0.774761951295659
+				},
+				{
+					"id": "330000",
+					"value": 0.7794583269860595
+				},
+				{
+					"id": "150000",
+					"value": 0.22816960071213543
+				},
+				{
+					"id": "210000",
+					"value": 0.8665573971811682
+				},
+				{
+					"id": "220000",
+					"value": 0.8985264701768756
+				},
+				{
+					"id": "230000",
+					"value": 0.442098643630743
+				},
+				{
+					"id": "310000",
+					"value": 0.1820987407118082
+				},
+				{
+					"id": "320000",
+					"value": 0.3555776213761419
+				},
+				{
+					"id": "340000",
+					"value": 0.07747840788215399
+				},
+				{
+					"id": "350000",
+					"value": 0.8615943104960024
+				},
+				{
+					"id": "360000",
+					"value": 0.44437674642540514
+				},
+				{
+					"id": "370000",
+					"value": 0.1642170869745314
+				},
+				{
+					"id": "410000",
+					"value": 0.9202997088432312
+				},
+				{
+					"id": "420000",
+					"value": 0.8393562983255833
+				},
+				{
+					"id": "430000",
+					"value": 0.8322803608607501
+				},
+				{
+					"id": "440000",
+					"value": 0.15621825796552002
+				},
+				{
+					"id": "450000",
+					"value": 0.5911341919563711
+				},
+				{
+					"id": "460000",
+					"value": 0.0355344582349062
+				},
+				{
+					"id": "650000",
+					"value": 0.5802350421436131
+				},
+				{
+					"id": "810000",
+					"value": 0.7632624560501426
+				},
+				{
+					"id": "820000",
+					"value": 0.7354091051965952
+				}
+			],
+			"geojson": {
+				"type": "FeatureCollection",
+				"features": []
+			}
+		},
+		"icon": ""
+	}
+}

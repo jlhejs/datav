@@ -1,0 +1,241 @@
+{
+	"name": "datav-engine-water",
+	"version": "0.0.10",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "水体展示组件",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"style": {
+				"type": "group",
+				"name": "水体",
+				"children": {
+					"alpha": {
+						"name": "透明度",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"waterColor": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"sunColor": {
+						"name": "光照颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"normalMap": {
+						"name": "法线贴图",
+						"type": "hidden",
+						"default": "https://img.alicdn.com/tfs/TB1OSvUczihSKJjy0FlXXadEXXa-1024-1024.jpg"
+					},
+					"colorMap": {
+						"type": "text",
+						"name": "颜色贴图",
+						"default": "https://img.alicdn.com/tfs/TB1cXeJXy6guuRjy1XdXXaAwpXa-512-512.jpg"
+					},
+					"ratio": {
+						"name": "反射比率",
+						"type": "number",
+						"default": 0.5,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.001
+					},
+					"flowDirection": {
+						"name": "水流方向",
+						"type": "group",
+						"children": {
+							"x": {
+								"name": "x",
+								"type": "boolean",
+								"default": true
+							},
+							"y": {
+								"name": "y",
+								"type": "boolean",
+								"default": true
+							}
+						}
+					},
+					"distortionScale": {
+						"name": "波纹密度",
+						"type": "number",
+						"default": 300,
+						"range": [
+							1,
+							1000
+						],
+						"step": 1
+					}
+				}
+			},
+			"speed": {
+				"name": "流速",
+				"type": "number",
+				"default": 1,
+				"range": [
+					0,
+					10
+				],
+				"step": 0.01
+			},
+			"offset": {
+				"name": "偏移",
+				"type": "group",
+				"children": {
+					"x": {
+						"name": "x轴偏移量",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-100000,
+							100000
+						],
+						"step": 0.00001
+					},
+					"y": {
+						"name": "y轴偏移量",
+						"type": "number",
+						"default": 1,
+						"range": [
+							-100,
+							100
+						],
+						"step": 0.01
+					},
+					"z": {
+						"name": "z轴偏移量",
+						"type": "number",
+						"default": 0,
+						"range": [
+							-100000,
+							100000
+						],
+						"step": 0.00001
+					}
+				}
+			}
+		},
+		"api_data": {
+			"data": {
+				"type": "FeatureCollection",
+				"features": [
+					{
+						"type": "Feature",
+						"properties": {},
+						"geometry": {
+							"type": "Polygon",
+							"coordinates": [
+								[
+									[
+										34.80468749999999,
+										7.36246686553575
+									],
+									[
+										147.65625,
+										7.36246686553575
+									],
+									[
+										147.65625,
+										53.74871079689897
+									],
+									[
+										34.80468749999999,
+										53.74871079689897
+									],
+									[
+										34.80468749999999,
+										7.36246686553575
+									]
+								]
+							]
+						}
+					}
+				]
+			}
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"description": "数据接口",
+				"fields": {}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1dXfYAwDqK1RjSZSyXXaxEVXa-180-180.png"
+	}
+}

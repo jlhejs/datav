@@ -1,0 +1,144 @@
+{
+	"name": "datavmap-3d-layer-geofence",
+	"version": "0.0.8",
+	"description": "基于datav.gl的地理围栏",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"keywords": [
+		"datav.gl",
+		"mapbox",
+		"buildingMarker"
+	],
+	"author": "shuke",
+	"dependencies": {
+		"chroma-js": "1.3.4",
+		"earcut": "2.1.3",
+		"eventemitter3": "2.0.3",
+		"geojson-bbox": "0.0.0",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "地理围栏",
+		"icon": "//img.alicdn.com/tfs/TB1U5P5ApzqK1RjSZFoXXbfcXXa-180-180.png",
+		"protocol": 2,
+		"level": 1,
+		"type": [
+			"datavgl_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavgl"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"visibility": {
+				"name": "显示",
+				"type": "hidden",
+				"default": true
+			},
+			"color": {
+				"name": "标记颜色",
+				"type": "color",
+				"default": "#3399ff"
+			},
+			"geofenceHeight": {
+				"name": "标记高度",
+				"type": "number",
+				"range": [
+					0.2,
+					10
+				],
+				"step": 0.01,
+				"default": 0.2
+			},
+			"depthTest": {
+				"name": "深度检测",
+				"type": "boolean",
+				"default": false
+			},
+			"depthWrite": {
+				"name": "深度写入",
+				"type": "boolean",
+				"default": false
+			},
+			"offsetHeight": {
+				"name": "垂直位置",
+				"type": "number",
+				"range": [
+					0,
+					10
+				],
+				"step": 0.01,
+				"default": 0
+			}
+		},
+		"api_data": {
+			"source": {
+				"type": "FeatureCollection",
+				"features": [
+					{
+						"type": "Feature",
+						"properties": {},
+						"geometry": {
+							"type": "Polygon",
+							"coordinates": [
+								[
+									[
+										120.15602231025696,
+										30.26831069447888
+									],
+									[
+										120.15641927719116,
+										30.266795655535624
+									],
+									[
+										120.15772819519042,
+										30.267027314380503
+									],
+									[
+										120.15748679637908,
+										30.268421889076723
+									],
+									[
+										120.15602231025696,
+										30.26831069447888
+									]
+								]
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}

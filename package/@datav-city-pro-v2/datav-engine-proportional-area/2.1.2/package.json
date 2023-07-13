@@ -1,0 +1,386 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-proportional-area",
+	"version": "2.1.2",
+	"main": "index.js",
+	"dependencies": {
+		"@turf/transform-scale": "5.1.5",
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "区域柱状图",
+		"protocol": 2,
+		"level": 2,
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"name": "通用",
+						"fold": false,
+						"children": {
+							"blendingType": {
+								"name": "混合模式",
+								"type": "select",
+								"description": "内柱",
+								"default": "AdditiveBlending",
+								"options": [
+									{
+										"label": "添加模式",
+										"value": "AdditiveBlending"
+									},
+									{
+										"label": "正常模式",
+										"value": "NormalBlending"
+									},
+									{
+										"label": "无叠加模式",
+										"value": "NoBlending"
+									}
+								]
+							},
+							"depthTest": {
+								"name": "深度测试",
+								"type": "switch",
+								"default": true
+							},
+							"depthWrite": {
+								"name": "深度写入",
+								"type": "switch",
+								"default": false
+							},
+							"defaultBase": {
+								"name": "起始高度",
+								"description": "数据对应属性缺省值",
+								"type": "slider",
+								"min": 0,
+								"max": 10000,
+								"step": 0.1,
+								"showRange": true,
+								"default": 0
+							}
+						}
+					},
+					"graph": {
+						"name": "图形",
+						"fold": false,
+						"children": {
+							"defaultScale": {
+								"name": "内外半径比",
+								"description": "数据对应属性缺省值",
+								"type": "slider",
+								"min": 0.1,
+								"max": 1,
+								"step": 0.02,
+								"showRange": true,
+								"default": 0.8
+							},
+							"defaultHeight": {
+								"name": "外柱高度",
+								"description": "数据对应属性缺省值",
+								"type": "slider",
+								"min": 0.2,
+								"max": 10000,
+								"step": 0.2,
+								"showRange": true,
+								"default": 1000
+							},
+							"defaultHeightRatio": {
+								"name": "内外高度比",
+								"description": "数据对应属性缺省值",
+								"type": "slider",
+								"min": 0.1,
+								"max": 1,
+								"step": 0.01,
+								"showRange": true,
+								"default": 0.7
+							},
+							"defaultInnerColor": {
+								"type": "fill",
+								"name": "内柱颜色",
+								"description": "数据对应属性缺省值",
+								"default": "RGBA(200,10,10,0.75)"
+							},
+							"defaultOuterColor": {
+								"type": "fill",
+								"name": "外柱颜色",
+								"description": "数据对应属性缺省值",
+								"default": "RGBA(0,105,106,0.2)"
+							}
+						}
+					},
+					"animate": {
+						"name": "动效",
+						"fold": false,
+						"children": {
+							"enableSideAnimate": {
+								"name": "动画开关",
+								"description": "内柱侧面动画",
+								"type": "switch",
+								"default": true
+							},
+							"animateOpts": {
+								"name": "动画参数",
+								"description": "内柱侧面动画",
+								"type": "group",
+								"children": {
+									"sideTextureUrl": {
+										"name": "贴图样式",
+										"type": "image",
+										"default": "https://img.alicdn.com/imgextra/i4/O1CN01C7NLqk1WMzjqi5ZuG_!!6000000002775-2-tps-500-500.png",
+										"handler": "sideTextureUrlHandler"
+									},
+									"sideTextureColor": {
+										"name": "贴图颜色",
+										"type": "fill",
+										"default": "RGBA(204, 128, 157, 1.00)",
+										"handler": "sideTextureColorHandler"
+									},
+									"uvScale": {
+										"name": "UV平铺值",
+										"type": "group",
+										"children": {
+											"x": {
+												"name": "x",
+												"type": "slider",
+												"min": 0,
+												"max": 100,
+												"step": 0.01,
+												"precision": 0.01,
+												"showRange": true,
+												"default": 1
+											},
+											"y": {
+												"name": "y",
+												"type": "slider",
+												"min": 0,
+												"max": 100,
+												"step": 0.01,
+												"precision": 0.01,
+												"showRange": true,
+												"default": 1
+											}
+										}
+									},
+									"uvSpeed": {
+										"name": "动画速度",
+										"type": "slider",
+										"min": 0,
+										"max": 0.2,
+										"step": 0.001,
+										"showRange": true,
+										"default": 0.01
+									}
+								},
+								"showInPanel": {
+									"conditions": [
+										[
+											".enableSideAnimate",
+											"$eq",
+											true
+										]
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"keyframeConfig": {},
+		"api_data": {
+			"source": [
+				{
+					"id": 13,
+					"geometry": {
+						"type": "Polygon",
+						"coordinates": [
+							[
+								[
+									120.15553951263428,
+									30.2540999151896
+								],
+								[
+									120.15124797821046,
+									30.254396476749452
+								],
+								[
+									120.15064716339111,
+									30.251393749596474
+								],
+								[
+									120.15639781951903,
+									30.249947959344166
+								],
+								[
+									120.15837192535399,
+									30.25202395920164
+								],
+								[
+									120.15553951263428,
+									30.2540999151896
+								]
+							]
+						]
+					}
+				},
+				{
+					"height": 1200,
+					"id": 12,
+					"geometry": {
+						"type": "Polygon",
+						"coordinates": [
+							[
+								[
+									120.13339519500731,
+									30.243311879882658
+								],
+								[
+									120.13335227966307,
+									30.238714556494408
+								],
+								[
+									120.137300491333,
+									30.236082121288117
+								],
+								[
+									120.13511180877686,
+									30.242385017475055
+								],
+								[
+									120.13339519500731,
+									30.243311879882658
+								]
+							]
+						]
+					}
+				},
+				{
+					"innerColor": "RGBA(0,0,100,0.5)",
+					"outerColor": "RGBA(81, 109, 179, .20)",
+					"scale": 0.8,
+					"base": 100,
+					"height": 800,
+					"heightRatio": 0.45,
+					"id": 11,
+					"geometry": {
+						"type": "Polygon",
+						"coordinates": [
+							[
+								[
+									120.14420986175537,
+									30.237602268529127
+								],
+								[
+									120.1517629623413,
+									30.237602268529127
+								],
+								[
+									120.1517629623413,
+									30.24264453983033
+								],
+								[
+									120.14420986175537,
+									30.24264453983033
+								],
+								[
+									120.14420986175537,
+									30.237602268529127
+								]
+							]
+						]
+					}
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"handler": "setData",
+				"errorHandler": "errorRender",
+				"format": "geo_polygon",
+				"description": "数据接口",
+				"fields": {
+					"innerColor": {
+						"description": "内柱颜色",
+						"type": "string",
+						"optional": true
+					},
+					"outerColor": {
+						"description": "外柱颜色",
+						"type": "string",
+						"optional": true
+					},
+					"scale": {
+						"description": "内外柱半径比",
+						"type": "number",
+						"optional": true
+					},
+					"base": {
+						"description": "起始高度",
+						"type": "number",
+						"optional": true
+					},
+					"height": {
+						"description": "外柱高度",
+						"type": "number",
+						"optional": true
+					},
+					"heightRatio": {
+						"description": "内外柱高度比",
+						"type": "number",
+						"optional": true
+					},
+					"id": {
+						"description": "id",
+						"type": "number",
+						"optional": false
+					},
+					"geometry": {
+						"description": "geometry",
+						"type": "object",
+						"optional": false
+					}
+				}
+			}
+		},
+		"events": {
+			"rendered": {
+				"name": "渲染完成",
+				"description": "渲染完成",
+				"type": "any"
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_datamap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/imgextra/i4/O1CN01hrqryd1JvGMylHh0m_!!6000000001090-2-tps-180-180.png"
+	}
+}

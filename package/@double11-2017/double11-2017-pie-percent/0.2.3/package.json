@@ -1,0 +1,468 @@
+{
+	"name": "@double11-2017/double11-2017-pie-percent",
+	"version": "0.2.3",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"chroma-js": "1.2.1",
+		"d3": "3.5.12",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"level": 1,
+		"cn_name": "双11百分比饼图",
+		"icon": "//img.alicdn.com/tfs/TB1YN6qlND1gK0jSZFKXXcJrVXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"regular_pie",
+			"DataV-6:regular_pie"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"description": "值",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"config": {
+			"chart": {
+				"type": "group",
+				"name": "饼图属性",
+				"children": {
+					"_innerRadius": {
+						"type": "number",
+						"name": "内半径",
+						"default": 0.88,
+						"range": [
+							0,
+							1
+						]
+					},
+					"_outerRadius": {
+						"type": "number",
+						"name": "外半径",
+						"default": 0.78,
+						"range": [
+							0,
+							1
+						]
+					},
+					"circleColor": {
+						"type": "color",
+						"name": "外圈颜色",
+						"default": "rgba(255, 255, 255, 0.1)"
+					},
+					"circleSize": {
+						"type": "number",
+						"name": "外圈尺寸",
+						"default": 8,
+						"min": 0,
+						"step": 1
+					}
+				}
+			},
+			"arc": {
+				"type": "group",
+				"name": "扇形配置",
+				"children": {
+					"animationTime": {
+						"type": "number",
+						"name": "动画持续时间(s)",
+						"default": 2
+					},
+					"colorGradient": {
+						"name": "颜色渐变范围",
+						"type": "select",
+						"options": [
+							{
+								"name": "整圆范围",
+								"value": "all"
+							},
+							{
+								"name": "弧形范围",
+								"value": "notAll"
+							}
+						],
+						"default": "notAll"
+					},
+					"colors": {
+						"name": "颜色",
+						"type": "array",
+						"default": [
+							{
+								"pos": 0.5,
+								"color": "rgb(10, 115, 255)"
+							},
+							{
+								"pos": 1,
+								"color": "rgb(121, 218, 255)"
+							}
+						],
+						"child": {
+							"name": "颜色<%= i+1 %>",
+							"type": "object",
+							"child": {
+								"pos": {
+									"name": "位置",
+									"type": "number",
+									"range": [
+										0,
+										1
+									],
+									"default": 1
+								},
+								"color": {
+									"name": "颜色",
+									"type": "color",
+									"default": "#fff"
+								}
+							}
+						}
+					}
+				}
+			},
+			"icon": {
+				"name": "图标",
+				"type": "group",
+				"children": {
+					"src": {
+						"type": "image",
+						"name": "地址",
+						"default": "https://img.alicdn.com/tfs/TB13Tu4ehn1gK0jSZKPXXXvUXXa-140-140.png"
+					},
+					"iconWidth": {
+						"type": "number",
+						"name": "图标宽度",
+						"default": 38
+					},
+					"iconHeight": {
+						"type": "number",
+						"name": "图标高度",
+						"default": 38
+					},
+					"iconTop": {
+						"name": "顶部偏移值",
+						"type": "number",
+						"default": 16
+					},
+					"iconLeft": {
+						"name": "左侧偏移值",
+						"type": "number",
+						"default": 36
+					}
+				}
+			},
+			"title": {
+				"type": "group",
+				"name": "标题文本",
+				"children": {
+					"content": {
+						"type": "text",
+						"name": "文本内容",
+						"default": ""
+					},
+					"style": {
+						"type": "group",
+						"name": "文本样式",
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 20,
+								"max": 200,
+								"step": 1
+							},
+							"color": {
+								"name": "字体颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								],
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							},
+							"titleTop": {
+								"name": "顶部偏移值",
+								"type": "number",
+								"default": 90
+							},
+							"titleLeft": {
+								"name": "左侧偏移值",
+								"type": "number",
+								"default": 0
+							}
+						}
+					}
+				}
+			},
+			"percent": {
+				"type": "group",
+				"name": "中间百分比部分",
+				"children": {
+					"sizePercent": {
+						"type": "number",
+						"name": "外框占比",
+						"default": 0.8,
+						"range": [
+							0,
+							1
+						]
+					},
+					"numberFontSize": {
+						"type": "number",
+						"name": "数字字号",
+						"default": 18
+					},
+					"percentFontSize": {
+						"type": "number",
+						"name": "百分比字号",
+						"default": 16
+					},
+					"marginTop": {
+						"type": "number",
+						"name": "顶部偏移值",
+						"default": 26
+					},
+					"decimal": {
+						"name": "小数位数",
+						"type": "number",
+						"step": 1,
+						"default": 0,
+						"range": [
+							0,
+							2
+						]
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "rgb(144, 160, 174)"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								],
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": 0.8048
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "40",
+			"minHeight": "40",
+			"z-index": 1010
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1qVHrlRr0gK0jSZFnXXbRRXXa-160-116.png"
+	}
+}

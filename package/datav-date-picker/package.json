@@ -1,0 +1,249 @@
+{
+  "name": "datav-date-picker",
+  "version": "0.0.1",
+  "dependencies": {
+    "axios": "0.21.4",
+    "dayjs": "1.10.8",
+    "shortid": "2.2.16",
+    "vue": "3.2.31"
+  },
+  "datav": {
+    "id": "",
+    "alias": "日期选择器",
+    "img": "//files.pengxiaotian.com/com-thum/time-selector.jpg",
+    "name": "VDatePicker",
+    "icon": "v-icon-other",
+    "type": "com",
+    "renameing": false,
+    "selected": true,
+    "locked": false,
+    "hided": false,
+    "hovered": false,
+    "scaling": {
+      "zoom": false,
+      "w": 200,
+      "h": 30,
+      "sx": 1,
+      "sy": 1
+    },
+    "attr": {
+      "x": 0,
+      "y": 0,
+      "w": 200,
+      "h": 40,
+      "deg": 0,
+      "opacity": 1,
+      "filpV": false,
+      "filpH": false
+    },
+    "projectId": 100003,
+    "config": {
+      "type": {
+        "name": "类型",
+        "type": "select",
+        "default": "date",
+        "options":[
+          { "value": "datetime", "label": "日期时间" },
+          { "value": "datetimerange", "label": "日期时间范围" },
+          { "value": "date", "label": "日期" },
+          { "value": "daterange", "label": "日期范围" },
+          { "value": "year", "label": "年份" },
+          { "value": "yearrange", "label": "年份范围" },
+          { "value": "quarter", "label": "季度" },
+          { "value": "quarterrange", "label": "季度范围" },
+          { "value": "month", "label": "月份" },
+          { "value": "monthrange", "label": "月份范围" }
+        ]
+      },
+      "clearable": {
+        "name": "可清除",
+        "type": "boolean",
+        "default": false
+      },
+      "placement": {
+        "name": "面板的弹出位置",
+        "type": "text",
+        "default": "bottom-start"
+      },
+      "fontFamily": {
+        "name": "字体系列",
+        "type": "text",
+        "default": "Microsoft Yahei"
+      },
+      "format": {
+        "name": "格式化",
+        "type": "select",
+        "default": "yyyy-MM-dd",
+        "options":[
+          { "value": "yyyy-MM-dd", "label": "yyyy-MM-dd" },
+          { "value": "GGGG", "label": "GGGG" },
+          { "value": "yyyy", "label": "yyyy" },
+          { "value": "YYYY", "label": "YYYY" },
+          { "value": "RRRR", "label": "RRRR" },
+          { "value": "uuuu", "label": "uuuu" },
+          { "value": "QQQQ", "label": "QQQQ" },
+          { "value": "qqqq", "label": "qqqq" },
+          { "value": "MMMM", "label": "MMMM" },
+          { "value": "LLLL", "label": "LLLL" },
+          { "value": "ww", "label": "ww" },
+          { "value": "II", "label": "II" },
+          { "value": "DD", "label": "DD" },
+          { "value": "EEEE", "label": "EEEE" },
+          { "value": "iiii", "label": "iiii" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" }
+        ]
+      },
+      "valueFormat": {
+        "name": "绑定值的格式",
+        "type": "select",
+        "default": "yyyy-MM-dd",
+        "options":[
+          { "value": "yyyy-MM-dd", "label": "yyyy-MM-dd" },
+          { "value": "GGGG", "label": "GGGG" },
+          { "value": "yyyy", "label": "yyyy" },
+          { "value": "YYYY", "label": "YYYY" },
+          { "value": "RRRR", "label": "RRRR" },
+          { "value": "uuuu", "label": "uuuu" },
+          { "value": "QQQQ", "label": "QQQQ" },
+          { "value": "qqqq", "label": "qqqq" },
+          { "value": "MMMM", "label": "MMMM" },
+          { "value": "LLLL", "label": "LLLL" },
+          { "value": "ww", "label": "ww" },
+          { "value": "II", "label": "II" },
+          { "value": "DD", "label": "DD" },
+          { "value": "EEEE", "label": "EEEE" },
+          { "value": "iiii", "label": "iiii" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" },
+          { "value": "aa", "label": "aa" }
+        ]
+      },
+      "date": {
+        "name": "日期",
+        "type": "text",
+        "default": "2021-07-01"
+      },
+      "input": {
+        "name": "输入框",
+        "type": "group",
+        "children": {
+          "fontSize": {
+            "name": "字体大小",
+            "type": "number",
+            "max":100,
+            "min":0,
+            "default": 18
+          },
+          "bgColor": {
+            "name": "背景色",
+            "type": "color",
+            "default": "#3D3D3D"
+          },
+          "fontColor": {
+            "name": "字体颜色",
+            "type": "color",
+            "default": "#fff"
+          },
+          "separator": {
+            "name": "separator",
+            "type": "text",
+            "default": "-"
+          },
+          "pos": {
+            "name": "pos",
+            "type": "text",
+            "default": "left"
+          },
+          "border": {
+            "name": "边框",
+            "type": "group",
+            "children": {
+              "show": {
+                "name": "显示",
+                "type": "boolean",
+                "default": true
+              },
+              "width": {
+                "name": "宽度",
+                "type": "number",
+                "default": 1
+              },
+              "color": {
+                "name": "颜色",
+                "type": "color",
+                "default": "#ccc"
+              },
+              "radius": {
+                "name": "圆角",
+                "type": "number",
+                "default": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "apis": {
+      "source": {
+        "fields": {
+          "date": {
+            "type": "string",
+            "map": "",
+            "description": "默认日期",
+            "optional": true
+          }
+        },
+        "render": "render",
+        "description": "",
+        "useAutoUpdate": false,
+        "autoUpdate": 1
+      }
+    },
+    "apiData": {
+      "source": {
+        "comId": "DatePicker_rOsKJ6G8g",
+        "id": "0ITIdF5ql6",
+        "type": "static",
+        "pageFilters": [],
+        "config": {
+          "useFilter": false,
+          "data": ""
+        }
+      }
+    },
+    "events": {
+      "changed": {
+        "description": "当日期变化时",
+        "fields": {
+          "date": {
+            "type": "string",
+            "map": "",
+            "description": "默认日期",
+            "optional": true
+          }
+        }
+      }
+    }
+  },
+  "files": [
+    ""
+  ],
+  "main": "./datav-date-picker.umd.js",
+  "module": "./datav-date-picker.es.js",
+  "exports": {
+    ".": {
+      "import": "./datav-date-picker.es.js",
+      "require": "./datav-date-picker.umd.js"
+    }
+  }
+}

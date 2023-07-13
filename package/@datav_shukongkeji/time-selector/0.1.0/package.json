@@ -1,0 +1,307 @@
+{
+	"name": "@datav_shukongkeji/time-selector",
+	"version": "0.1.0",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "时间选择器",
+		"icon": "//wyc-store.oss-cn-shanghai.aliyuncs.com/images/datav/time-selector.jpg",
+		"protocol": 2,
+		"type": [
+			"decorate_timeselector"
+		],
+		"view": {
+			"width": "200",
+			"height": "50",
+			"minWidth": "100",
+			"minHeight": "50"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"date": {
+						"description": "默认时间"
+					}
+				}
+			}
+		},
+		"config": {
+			"chart": {
+				"name": "全局样式",
+				"type": "group",
+				"children": {
+					"font": {
+						"name": "字体",
+						"type": "search",
+						"default": "微软雅黑",
+						"options": [
+							{
+								"name": "微软雅黑",
+								"value": "微软雅黑"
+							},
+							{
+								"name": "宋体",
+								"value": "SimSun"
+							},
+							{
+								"name": "黑体",
+								"value": "SimHei"
+							},
+							{
+								"name": "隶书",
+								"value": "LiSu"
+							},
+							{
+								"name": "幼圆",
+								"value": "YouYuan"
+							},
+							{
+								"name": "火星文",
+								"value": "Apple LiSung Light"
+							},
+							{
+								"name": "tahoma",
+								"value": "tahoma"
+							},
+							{
+								"name": "arial",
+								"value": "arial"
+							},
+							{
+								"name": "sans-serif",
+								"value": "sans-serif"
+							}
+						]
+					},
+					"callbackId": {
+						"name": "回调ID",
+						"type": "text",
+						"default": "id"
+					}
+				}
+			},
+			"input": {
+				"name": "文本框",
+				"type": "group",
+				"children": {
+					"size": {
+						"name": "大小",
+						"type": "group",
+						"children": {
+							"width": {
+								"name": "宽度",
+								"type": "number",
+								"default": 180,
+								"range": [
+									40,
+									1000
+								]
+							},
+							"height": {
+								"name": "高度",
+								"type": "number",
+								"default": 30,
+								"range": [
+									20,
+									100
+								]
+							}
+						}
+					},
+					"border": {
+						"name": "边框",
+						"type": "group",
+						"children": {
+							"width": {
+								"name": "宽度",
+								"type": "number",
+								"default": 1,
+								"range": [
+									1,
+									10
+								]
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#ccc"
+							},
+							"radius": {
+								"name": "圆角",
+								"type": "number",
+								"default": 0
+							}
+						}
+					},
+					"background": {
+						"name": "背景颜色",
+						"type": "color",
+						"default": "#01becc"
+					},
+					"font": {
+						"name": "文字",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"fontSize": {
+								"name": "大小",
+								"type": "number",
+								"default": 18
+							}
+						}
+					},
+					"separator": {
+						"name": "时间分隔符",
+						"type": "select",
+						"default": "-",
+						"options": [
+							{
+								"name": "-",
+								"value": "-"
+							},
+							{
+								"name": "/",
+								"value": "/"
+							},
+							{
+								"name": ".",
+								"value": "."
+							}
+						]
+					},
+					"pos": {
+						"name": "文字位置",
+						"type": "select",
+						"default": "left",
+						"options": [
+							{
+								"name": "居中",
+								"value": "center"
+							},
+							{
+								"name": "居左",
+								"value": "left"
+							},
+							{
+								"name": "居右",
+								"value": "right"
+							}
+						]
+					}
+				}
+			},
+			"calendar": {
+				"name": "日历",
+				"type": "group",
+				"children": {
+					"chart": {
+						"name": "样式",
+						"type": "group",
+						"children": {
+							"font": {
+								"name": "文字",
+								"type": "group",
+								"children": {
+									"color": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#fff"
+									},
+									"fontSize": {
+										"name": "字号",
+										"type": "number",
+										"default": 14
+									}
+								}
+							}
+						}
+					},
+					"background": {
+						"name": "日历背景",
+						"type": "color",
+						"default": "#126973"
+					},
+					"selectBackground": {
+						"name": "选择器背景",
+						"type": "color",
+						"default": "#01becc"
+					},
+					"border": {
+						"name": "外边框",
+						"type": "group",
+						"children": {
+							"width": {
+								"name": "宽度",
+								"type": "number",
+								"default": 1
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#ccc"
+							},
+							"radius": {
+								"name": "圆角",
+								"type": "number",
+								"default": 5
+							}
+						}
+					},
+					"paddingBorder": {
+						"name": "内边框",
+						"type": "group",
+						"children": {
+							"width": {
+								"name": "宽度",
+								"type": "number",
+								"default": 1
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#297d7a"
+							},
+							"padding": {
+								"name": "内边距",
+								"type": "number",
+								"default": 6
+							}
+						}
+					},
+					"select": {
+						"name": "选择器内边距",
+						"type": "group",
+						"children": {
+							"time": {
+								"name": "时间",
+								"type": "number",
+								"default": 2
+							},
+							"today": {
+								"name": "今",
+								"type": "number",
+								"default": 4
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"date": "2017-08-16"
+				}
+			]
+		}
+	}
+}

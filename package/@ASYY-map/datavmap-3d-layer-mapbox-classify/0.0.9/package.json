@@ -1,0 +1,635 @@
+{
+	"name": "datavmap-3d-layer-mapbox-classify",
+	"version": "0.0.9",
+	"description": "基于datav.gl的分类图",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-3d-layer-mapbox-classify.git"
+	},
+	"keywords": [
+		"datav.gl",
+		"mapbox",
+		"classify"
+	],
+	"author": "wandergis",
+	"dependencies": {
+		"eventemitter3": "2.0.3",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "分类层",
+		"icon": "//img.alicdn.com/tfs/TB19R26ApzqK1RjSZFCXXbbxVXa-180-180.png",
+		"protocol": 2,
+		"type": [
+			"datavgl_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavgl"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"apis": {
+			"geojson": {
+				"handler": "render",
+				"description": "地理数据(geojson)",
+				"fields": {}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"visible": {
+				"name": "显示",
+				"type": "hidden",
+				"default": true
+			},
+			"classify-key": {
+				"type": "text",
+				"name": "分类字段",
+				"default": "type"
+			},
+			"geomtype": {
+				"name": "几何类型",
+				"type": "options",
+				"default": "fill",
+				"options": [
+					{
+						"name": "点",
+						"value": "circle"
+					},
+					{
+						"name": "线",
+						"value": "line"
+					},
+					{
+						"name": "面",
+						"value": "fill"
+					}
+				]
+			},
+			"circle-default": {
+				"show": [
+					[
+						"geomtype",
+						"$eq",
+						"circle"
+					]
+				],
+				"type": "group",
+				"name": "点默认配置",
+				"children": {
+					"circle-color": {
+						"name": "点颜色",
+						"type": "color",
+						"default": "rgba(233,45,43,1)"
+					},
+					"circle-radius": {
+						"name": "点半径",
+						"type": "number",
+						"default": 20.2,
+						"range": [
+							0,
+							50
+						],
+						"step": 0.1
+					},
+					"circle-blur": {
+						"type": "number",
+						"name": "点模糊",
+						"default": 0,
+						"step": 0.1,
+						"range": [
+							0,
+							2
+						]
+					},
+					"circle-stroke-color": {
+						"type": "color",
+						"name": "点边线",
+						"default": "#ffffff"
+					},
+					"circle-stroke-width": {
+						"type": "number",
+						"name": "点边宽",
+						"default": 1,
+						"step": 0.1,
+						"range": [
+							0,
+							20
+						]
+					}
+				}
+			},
+			"line-default": {
+				"show": [
+					[
+						"geomtype",
+						"$eq",
+						"line"
+					]
+				],
+				"type": "group",
+				"name": "线默认配置",
+				"children": {
+					"line-color": {
+						"name": "线颜色",
+						"type": "color",
+						"default": "rgba(233,45,43,1)"
+					},
+					"line-width": {
+						"name": "线宽",
+						"type": "number",
+						"default": 4.5,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"line-blur": {
+						"name": "模糊",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"line-dasharray": {
+						"type": "search",
+						"name": "虚线",
+						"default": "4,4,8",
+						"searches": [
+							{
+								"name": "无",
+								"value": ""
+							},
+							{
+								"name": "4,4",
+								"value": "4,4"
+							},
+							{
+								"name": "4,4,8",
+								"value": "4,4,8"
+							},
+							{
+								"name": "8,4",
+								"value": "8,4"
+							}
+						]
+					}
+				}
+			},
+			"fill-default": {
+				"show": [
+					[
+						"geomtype",
+						"$eq",
+						"fill"
+					]
+				],
+				"type": "group",
+				"name": "面默认配置",
+				"children": {
+					"fill-color": {
+						"name": "填充颜色",
+						"type": "color",
+						"default": "rgba(233,45,43,1)"
+					},
+					"fill-outline-color": {
+						"name": "边线颜色",
+						"type": "color",
+						"default": "#f1eeee"
+					}
+				}
+			},
+			"circle": {
+				"show": [
+					[
+						"geomtype",
+						"$eq",
+						"circle"
+					]
+				],
+				"type": "array",
+				"name": "点分类配置",
+				"default": [
+					{
+						"classify-value": "1",
+						"circle-color": "#3be2ac",
+						"circle-radius": 16.1,
+						"circle-blur": 0,
+						"circle-stroke-color": "#ffffff",
+						"circle-stroke-width": 1
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "分类点<%= i+1 %>",
+					"child": {
+						"classify-value": {
+							"type": "text",
+							"name": "分类值",
+							"default": "ok"
+						},
+						"circle-color": {
+							"name": "点颜色",
+							"type": "color",
+							"default": "rgba(233,45,43,1)"
+						},
+						"circle-radius": {
+							"name": "点半径",
+							"type": "number",
+							"default": 1,
+							"range": [
+								0,
+								50
+							],
+							"step": 0.1
+						},
+						"circle-blur": {
+							"type": "number",
+							"name": "点模糊",
+							"default": 0,
+							"step": 0.1,
+							"range": [
+								0,
+								2
+							]
+						},
+						"circle-stroke-color": {
+							"type": "color",
+							"name": "点边线",
+							"default": "#ffffff"
+						},
+						"circle-stroke-width": {
+							"type": "number",
+							"name": "点边宽",
+							"default": 1,
+							"step": 0.1,
+							"range": [
+								0,
+								20
+							]
+						}
+					}
+				}
+			},
+			"line": {
+				"show": [
+					[
+						"geomtype",
+						"$eq",
+						"line"
+					]
+				],
+				"type": "array",
+				"name": "线分类配置",
+				"default": [
+					{
+						"classify-value": "1",
+						"line-color": "#20afd4",
+						"line-width": 2,
+						"line-blur": 1
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "分类线<%= i+1 %>",
+					"child": {
+						"classify-value": {
+							"type": "text",
+							"name": "分类值",
+							"default": "ok"
+						},
+						"line-color": {
+							"name": "线颜色",
+							"type": "color",
+							"default": "rgba(233,45,43,1)"
+						},
+						"line-width": {
+							"name": "线宽",
+							"type": "number",
+							"default": 1,
+							"range": [
+								0,
+								10
+							],
+							"step": 0.1
+						},
+						"line-blur": {
+							"name": "模糊",
+							"type": "number",
+							"default": 1,
+							"range": [
+								0,
+								10
+							],
+							"step": 0.1
+						}
+					}
+				}
+			},
+			"fill": {
+				"show": [
+					[
+						"geomtype",
+						"$eq",
+						"fill"
+					]
+				],
+				"type": "array",
+				"name": "面分类配置",
+				"default": [
+					{
+						"classify-value": "1",
+						"fill-color": "#08a4f3",
+						"fill-outline-color": "#00d3f3"
+					},
+					{
+						"classify-value": "2",
+						"fill-color": "#c11cd6",
+						"fill-outline-color": "#00fffa"
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "分类面<%= i+1 %>",
+					"child": {
+						"classify-value": {
+							"type": "text",
+							"name": "分类值",
+							"default": "ok"
+						},
+						"fill-color": {
+							"name": "填充颜色",
+							"type": "color",
+							"default": "rgba(233,45,43,1)"
+						},
+						"fill-outline-color": {
+							"name": "边线颜色",
+							"type": "color",
+							"default": "rgba(233,45,43,1)"
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"geojson": {
+				"type": "FeatureCollection",
+				"features": [
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 1
+						},
+						"geometry": {
+							"type": "Point",
+							"coordinates": [
+								92.46093749999999,
+								38.685509760012
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 1
+						},
+						"geometry": {
+							"type": "Point",
+							"coordinates": [
+								110.74218749999999,
+								37.64903402157866
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 2
+						},
+						"geometry": {
+							"type": "Point",
+							"coordinates": [
+								109.86328125,
+								28.998531814051795
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 2
+						},
+						"geometry": {
+							"type": "Point",
+							"coordinates": [
+								116.98242187499999,
+								36.527294814546245
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 3
+						},
+						"geometry": {
+							"type": "Point",
+							"coordinates": [
+								104.853515625,
+								33.358061612778876
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 1
+						},
+						"geometry": {
+							"type": "LineString",
+							"coordinates": [
+								[
+									93.251953125,
+									45.336701909968134
+								],
+								[
+									124.45312499999999,
+									46.437856895024204
+								],
+								[
+									124.45312499999999,
+									55.32914440840507
+								]
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 2
+						},
+						"geometry": {
+							"type": "LineString",
+							"coordinates": [
+								[
+									95.185546875,
+									34.88593094075317
+								],
+								[
+									113.73046875,
+									28.459033019728043
+								],
+								[
+									115.31249999999999,
+									40.58058466412761
+								]
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 1
+						},
+						"geometry": {
+							"type": "LineString",
+							"coordinates": [
+								[
+									125.595703125,
+									39.16414104768742
+								],
+								[
+									132.626953125,
+									54.67383096593114
+								]
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 1
+						},
+						"geometry": {
+							"type": "Polygon",
+							"coordinates": [
+								[
+									[
+										97.734375,
+										50.84757295365389
+									],
+									[
+										112.67578124999999,
+										50.84757295365389
+									],
+									[
+										112.67578124999999,
+										58.90464570302001
+									],
+									[
+										97.734375,
+										58.90464570302001
+									],
+									[
+										97.734375,
+										50.84757295365389
+									]
+								]
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 3
+						},
+						"geometry": {
+							"type": "Polygon",
+							"coordinates": [
+								[
+									[
+										75.05859375,
+										27.527758206861886
+									],
+									[
+										99.31640625,
+										27.527758206861886
+									],
+									[
+										99.31640625,
+										46.195042108660154
+									],
+									[
+										75.05859375,
+										46.195042108660154
+									],
+									[
+										75.05859375,
+										27.527758206861886
+									]
+								]
+							]
+						}
+					},
+					{
+						"type": "Feature",
+						"properties": {
+							"type": 2
+						},
+						"geometry": {
+							"type": "Polygon",
+							"coordinates": [
+								[
+									[
+										109.86328125,
+										24.367113562651262
+									],
+									[
+										127.96875,
+										24.367113562651262
+									],
+									[
+										127.96875,
+										36.1733569352216
+									],
+									[
+										109.86328125,
+										36.1733569352216
+									],
+									[
+										109.86328125,
+										24.367113562651262
+									]
+								]
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}

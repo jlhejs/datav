@@ -1,0 +1,185 @@
+{
+	"name": "map2d-layer-image",
+	"version": "0.0.7",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"ldmap": "0.1.39"
+	},
+	"datav": {
+		"cn_name": "背景层",
+		"protocol": 2,
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "图片",
+				"fields": {
+					"url": {
+						"description": "图片url"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"url": ""
+				}
+			]
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"CRSType": {
+				"name": "坐标参考系",
+				"type": "options",
+				"default": "EPSG3857",
+				"options": [
+					{
+						"name": "EPSG3857",
+						"value": "EPSG3857"
+					},
+					{
+						"name": "Simple",
+						"value": "Simple"
+					}
+				]
+			},
+			"options3857": {
+				"show": [
+					[
+						"CRSType",
+						"$eq",
+						"EPSG3857"
+					]
+				],
+				"type": "group",
+				"name": "EPSG3857",
+				"children": {
+					"bboxlbX": {
+						"type": "number",
+						"default": 85,
+						"name": "左下角X",
+						"range": [
+							-180,
+							180
+						],
+						"step": 1
+					},
+					"bboxlbY": {
+						"type": "number",
+						"default": 10,
+						"name": "左下角Y",
+						"range": [
+							-90,
+							90
+						],
+						"step": 1
+					},
+					"bboxrtX": {
+						"type": "number",
+						"default": 140,
+						"name": "右上角X",
+						"range": [
+							-180,
+							180
+						],
+						"step": 1
+					},
+					"bboxrtY": {
+						"type": "number",
+						"default": 45,
+						"name": "右上角Y",
+						"range": [
+							-90,
+							90
+						],
+						"step": 1
+					}
+				}
+			},
+			"optionsSimple": {
+				"show": [
+					[
+						"CRSType",
+						"$eq",
+						"Simple"
+					]
+				],
+				"type": "group",
+				"name": "Simple",
+				"children": {
+					"bboxlbX": {
+						"type": "number",
+						"default": 0,
+						"name": "左下角X",
+						"range": [
+							-200,
+							200
+						],
+						"step": 1
+					},
+					"bboxlbY": {
+						"type": "number",
+						"default": 0,
+						"name": "左下角Y",
+						"range": [
+							-200,
+							200
+						],
+						"step": 1
+					},
+					"bboxrtX": {
+						"type": "number",
+						"default": 100,
+						"name": "右上角X",
+						"range": [
+							-200,
+							200
+						],
+						"step": 1
+					},
+					"bboxrtY": {
+						"type": "number",
+						"default": 100,
+						"name": "右上角Y",
+						"range": [
+							-200,
+							200
+						],
+						"step": 1
+					}
+				}
+			},
+			"bgImageUrl": {
+				"type": "image",
+				"name": "自定义背景",
+				"default": "https://img.alicdn.com/tps/TB1guWTPVXXXXXCaXXXXXXXXXXX-3840-2160.jpg"
+			},
+			"opacity": {
+				"type": "number",
+				"name": "透明",
+				"default": 1,
+				"max": 1,
+				"min": 0,
+				"step": 0.01
+			}
+		},
+		"type": [
+			"map2d-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_leaflet"
+			],
+			"supportNames": [
+				"map_2d*"
+			]
+		}
+	}
+}

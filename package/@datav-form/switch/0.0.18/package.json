@@ -1,0 +1,264 @@
+{
+	"name": "@datav-form/switch",
+	"version": "0.0.18",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "开关",
+		"icon": "//img.alicdn.com/tfs/TB1PTAZmKT2gK0jSZFvXXXnFXXa-368-208.png",
+		"protocol": 2,
+		"level": 2,
+		"type": [
+			"interact",
+			"DataV-6:control_button"
+		],
+		"view": {
+			"width": "80",
+			"height": "32",
+			"minWidth": "1",
+			"minHeight": "1"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"name": "数据接口",
+				"description": "数据接口",
+				"fields": {
+					"onValue": {
+						"description": "打开开关",
+						"type": "string"
+					},
+					"offValue": {
+						"description": "关闭开关",
+						"type": "string"
+					},
+					"state": {
+						"description": "接受数字0或者1作为组件开关状态",
+						"optional": true,
+						"name": "开关状态",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"name": "全局样式",
+				"type": "group",
+				"children": {
+					"defaultStatus": {
+						"name": "默认选中状态",
+						"type": "boolean",
+						"default": true,
+						"description": "优先以数据中的state字段为准。"
+					}
+				}
+			},
+			"switch": {
+				"name": "背景样式",
+				"type": "group",
+				"children": {
+					"border": {
+						"name": "边框样式",
+						"type": "group",
+						"children": {
+							"borderWidth": {
+								"name": "边框宽度",
+								"type": "number",
+								"min": 0,
+								"default": 0
+							},
+							"borderColor": {
+								"name": "边框颜色",
+								"type": "color",
+								"default": "#00a5ff"
+							},
+							"borderRadius": {
+								"name": "边框圆角",
+								"type": "number",
+								"min": 0,
+								"default": 100
+							},
+							"borderStyle": {
+								"name": "线条类型",
+								"type": "select",
+								"default": "solid",
+								"options": [
+									{
+										"name": "实线",
+										"value": "solid"
+									},
+									{
+										"name": "虚线",
+										"value": "dashed"
+									},
+									{
+										"name": "点线",
+										"value": "dotted"
+									},
+									{
+										"name": "双实线",
+										"value": "double"
+									},
+									{
+										"name": "雕刻效果",
+										"value": "groove"
+									},
+									{
+										"name": "浮雕效果",
+										"value": "ridge"
+									},
+									{
+										"name": "陷入效果",
+										"value": "inset"
+									},
+									{
+										"name": "突出效果",
+										"value": "outset"
+									}
+								]
+							}
+						}
+					},
+					"background": {
+						"name": "背景颜色",
+						"type": "group",
+						"children": {
+							"onColor": {
+								"name": "打开颜色",
+								"type": "color",
+								"default": "rgb(10, 115, 255)"
+							},
+							"offColor": {
+								"name": "关闭颜色",
+								"type": "color",
+								"default": "#39414d"
+							}
+						}
+					}
+				}
+			},
+			"dot": {
+				"name": "按钮样式",
+				"type": "group",
+				"children": {
+					"border": {
+						"name": "边框样式",
+						"type": "group",
+						"children": {
+							"borderWidth": {
+								"name": "边框宽度",
+								"type": "number",
+								"min": 0,
+								"default": 1
+							},
+							"borderColor": {
+								"name": "边框颜色",
+								"type": "color",
+								"default": "#ffffff"
+							},
+							"borderRadius": {
+								"name": "边框圆角",
+								"type": "number",
+								"min": 0,
+								"default": 100
+							},
+							"borderStyle": {
+								"name": "线条类型",
+								"type": "select",
+								"default": "solid",
+								"options": [
+									{
+										"name": "实线",
+										"value": "solid"
+									},
+									{
+										"name": "虚线",
+										"value": "dashed"
+									},
+									{
+										"name": "点线",
+										"value": "dotted"
+									},
+									{
+										"name": "双实线",
+										"value": "double"
+									},
+									{
+										"name": "雕刻效果",
+										"value": "groove"
+									},
+									{
+										"name": "浮雕效果",
+										"value": "ridge"
+									},
+									{
+										"name": "陷入效果",
+										"value": "inset"
+									},
+									{
+										"name": "突出效果",
+										"value": "outset"
+									}
+								]
+							}
+						}
+					},
+					"background": {
+						"name": "背景颜色",
+						"type": "color",
+						"default": "#fff"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"onValue": 1,
+					"offValue": 0,
+					"state": 1
+				}
+			]
+		},
+		"events": {
+			"switch-changed": {
+				"name": "当状态变化时",
+				"description": "当状态变化时",
+				"fields": {
+					"value": {
+						"name": "当前状态值",
+						"description": "当前状态值",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"getFieldValue": {
+				"name": "获取当前开关状态",
+				"type": "null"
+			},
+			"setFieldValue": {
+				"name": "设置当前开关状态",
+				"type": "object",
+				"fields": {
+					"value": {
+						"name": "开关状态值",
+						"description": "开关状态值，例如 0 或者 1",
+						"type": "number",
+						"default": 0
+					}
+				}
+			},
+			"resetField": {
+				"name": "清空组件到默认值",
+				"type": "null"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1Cp70mUz1gK0jSZLeXXb9kVXa-160-116.png"
+	}
+}

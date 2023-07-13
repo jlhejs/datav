@@ -1,0 +1,683 @@
+{
+	"name": "ml-event-line",
+	"version": "0.5.10",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"d3": "4.7.1",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "时间轴",
+		"level": 0,
+		"protocol": 2,
+		"type": [
+			"interact",
+			"DataV-6:control_data"
+		],
+		"analysis": {
+			"apis": "source"
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "textLabel.choseStyle",
+					"apiPath": "source.text"
+				},
+				{
+					"configPath": "label.choseStyle",
+					"apiPath": "source.name"
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"name": "数据接口",
+				"description": "数据接口",
+				"fields": {
+					"name": {
+						"description": "事件名",
+						"type": "string"
+					},
+					"text": {
+						"description": "事件补充说明(可选)",
+						"optional": true,
+						"type": "string"
+					},
+					"value": {
+						"description": "事件值",
+						"type": "number"
+					},
+					"width": {
+						"description": "文字宽度(可选)",
+						"optional": true,
+						"type": "number"
+					},
+					"height": {
+						"description": "文字高度(可选)",
+						"optional": true,
+						"type": "number"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"type": "group",
+				"name": "全局样式",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"loop": {
+						"type": "boolean",
+						"name": "轮播",
+						"default": true
+					},
+					"duration": {
+						"type": "number",
+						"name": "间隔时间",
+						"default": 2000
+					},
+					"stopTime": {
+						"type": "number",
+						"name": "停留时间",
+						"default": 2000
+					},
+					"pad": {
+						"name": "左右边距",
+						"type": "number",
+						"default": 20,
+						"step": 0.5
+					}
+				}
+			},
+			"node": {
+				"type": "group",
+				"name": "事件节点",
+				"children": {
+					"category": {
+						"name": "种类",
+						"type": "select",
+						"range": [
+							{
+								"name": "数值型",
+								"value": "defaults"
+							},
+							{
+								"name": "类目型",
+								"value": "category"
+							},
+							{
+								"name": "时间型",
+								"value": "time"
+							}
+						],
+						"default": "time"
+					},
+					"dataFormat": {
+						"name": "数据格式",
+						"type": "text",
+						"default": "%Y",
+						"description": "请参照 %Y/%m/%d %H:%M:%S",
+						"show": [
+							[
+								"category",
+								"$eq",
+								"time"
+							]
+						]
+					},
+					"shape": {
+						"name": "节点形状",
+						"type": "select",
+						"range": [
+							{
+								"name": "菱形",
+								"value": "symbolDiamond"
+							},
+							{
+								"name": "圆形",
+								"value": "symbolCircle"
+							},
+							{
+								"name": "三角形",
+								"value": "symbolTriangle"
+							},
+							{
+								"name": "Y字形",
+								"value": "symbolWye"
+							},
+							{
+								"name": "方形",
+								"value": "symbolSquare"
+							},
+							{
+								"name": "叉",
+								"value": "symbolCross"
+							},
+							{
+								"name": "五角星",
+								"value": "symbolStar"
+							}
+						],
+						"default": "symbolDiamond"
+					},
+					"size": {
+						"name": "节点大小",
+						"type": "number",
+						"default": 64
+					},
+					"defaultStyle": {
+						"name": "默认样式",
+						"type": "group",
+						"children": {
+							"fill": {
+								"name": "节点填充色",
+								"type": "color",
+								"default": "rgb(121, 218, 255)"
+							},
+							"stroke": {
+								"name": "节点边框色",
+								"type": "color",
+								"default": "rgb(121, 218, 255)"
+							},
+							"strokeWidth": {
+								"name": "节点边框粗细",
+								"type": "number",
+								"default": 1
+							}
+						}
+					},
+					"choseStyle": {
+						"name": "选中样式",
+						"type": "group",
+						"children": {
+							"fill": {
+								"name": "节点填充色",
+								"type": "color",
+								"default": "rgb(36, 131, 255)"
+							},
+							"stroke": {
+								"name": "节点边框色",
+								"type": "color",
+								"default": "rgb(36, 131, 255)"
+							},
+							"strokeWidth": {
+								"name": "节点边框粗细",
+								"type": "number",
+								"default": 1
+							}
+						}
+					}
+				}
+			},
+			"label": {
+				"name": "节点标签-下",
+				"type": "group",
+				"children": {
+					"dy": {
+						"name": "上下偏移",
+						"type": "number",
+						"default": 18,
+						"step": 0.1
+					},
+					"rotate": {
+						"name": "旋转角度",
+						"type": "number",
+						"default": 0,
+						"step": 1
+					},
+					"defaultStyle": {
+						"name": "默认样式",
+						"type": "group",
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 5,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgb(144, 160, 174)"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					},
+					"choseStyle": {
+						"name": "选中样式",
+						"type": "group",
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					}
+				}
+			},
+			"textLabel": {
+				"name": "节点标签-上",
+				"type": "group",
+				"children": {
+					"dy": {
+						"name": "上下偏移",
+						"type": "number",
+						"default": -28,
+						"step": 0.1
+					},
+					"rotate": {
+						"name": "旋转角度",
+						"type": "number",
+						"default": 0,
+						"step": 1
+					},
+					"defaultStyle": {
+						"name": "默认样式",
+						"type": "group",
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 5,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgb(144, 160, 174)"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					},
+					"choseStyle": {
+						"name": "选中样式",
+						"type": "group",
+						"children": {
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"min": 10,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#ffffff"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					}
+				}
+			},
+			"background": {
+				"name": "背景",
+				"type": "group",
+				"children": {
+					"colorWidth": {
+						"name": "粗细",
+						"type": "number",
+						"default": 2
+					},
+					"defaultStyle": {
+						"name": "默认样式",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgb(57, 65, 77)"
+							}
+						}
+					},
+					"choseStyle": {
+						"name": "选中样式",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgb(10, 115, 255)"
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "1982年",
+					"value": 1982,
+					"text": "事件1"
+				},
+				{
+					"name": "1992年",
+					"value": 1992,
+					"text": "事件2"
+				},
+				{
+					"name": "2009年",
+					"value": 2009,
+					"text": "事件3"
+				},
+				{
+					"name": "2019年",
+					"value": 2019,
+					"text": "事件4"
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "100",
+			"minWidth": "380",
+			"minHeight": "100",
+			"z-index": 110
+		},
+		"events": {
+			"event-line-changed": {
+				"description": "当前值变化时",
+				"fields": {
+					"value": {
+						"description": "当前值",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"turnTo": {
+				"name": "移动到",
+				"type": "object",
+				"fields": {
+					"value": {
+						"name": "移动到的值",
+						"type": "number",
+						"default": 1982
+					}
+				}
+			},
+			"stop": {
+				"name": "停止轮播",
+				"type": "null"
+			},
+			"startAnimate": {
+				"name": "开始轮播",
+				"type": "null"
+			}
+		},
+		"icon": "//img.alicdn.com/tfs/TB11XYnlUT1gK0jSZFrXXcNCXXa-368-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1inznlQY2gK0jSZFgXXc5OFXa-160-116.png"
+	}
+}

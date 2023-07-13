@@ -1,0 +1,443 @@
+{
+	"name": "area-with-dot",
+	"version": "2.0.0",
+	"dependencies": {
+		"bcore": "~0.0.9",
+		"jquery": "~2.1.4",
+		"lodash": "~4.0.0",
+		"dchart-area-with-line": "~0.0.9"
+	},
+	"main": "index.js",
+	"datav": {
+		"cn_name": "折线区域图",
+		"protocol": 2,
+		"private": true,
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "折线区域图接口",
+				"fields": {
+					"x": {
+						"description": "类目",
+						"type": "string"
+					},
+					"y": {
+						"description": "值",
+						"type": "int"
+					},
+					"s": {
+						"description": "系列(可选)",
+						"type": "text",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"title": {
+				"type": "group",
+				"name": "主标题",
+				"children": {
+					"value": {
+						"type": "text",
+						"default": "主标题",
+						"name": "标题名"
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字号",
+						"range": [
+							10,
+							100
+						],
+						"default": 12
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "#999"
+					}
+				}
+			},
+			"sub-title": {
+				"type": "group",
+				"name": "副标题",
+				"children": {
+					"value": {
+						"type": "text",
+						"default": "副标题",
+						"name": "标题名"
+					},
+					"font-size": {
+						"type": "number",
+						"name": "字号",
+						"range": [
+							10,
+							100
+						],
+						"default": 12
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "#999"
+					}
+				}
+			},
+			"chartOption": {
+				"type": "group",
+				"name": "数据配置",
+				"children": {
+					"increase": {
+						"type": "boolean",
+						"default": false,
+						"name": "是否增量"
+					},
+					"increaseSize": {
+						"type": "number",
+						"default": 6,
+						"name": "增量最大容量"
+					}
+				}
+			},
+			"chart": {
+				"type": "group",
+				"name": "图表",
+				"children": {
+					"margin": {
+						"type": "group",
+						"name": "边距",
+						"children": {
+							"top": {
+								"name": "顶部",
+								"type": "number",
+								"default": 5,
+								"min": 0,
+								"max": 40
+							},
+							"bottom": {
+								"name": "底部",
+								"type": "number",
+								"default": 0,
+								"min": 0,
+								"max": 40
+							},
+							"left": {
+								"name": "左侧",
+								"type": "number",
+								"default": 0,
+								"min": 0,
+								"max": 40
+							},
+							"right": {
+								"name": "右侧",
+								"type": "number",
+								"default": 0,
+								"min": 0,
+								"max": 40
+							}
+						}
+					},
+					"xaxis": {
+						"type": "group",
+						"name": "X轴",
+						"children": {
+							"show": {
+								"type": "boolean",
+								"name": "显示/隐藏",
+								"default": false
+							},
+							"ticks": {
+								"type": "number",
+								"name": "轴上显示文字数量",
+								"default": 5,
+								"range": [
+									0,
+									40
+								],
+								"step": 1
+							},
+							"font-size": {
+								"type": "number",
+								"name": "字号",
+								"min": 12,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"type": "color",
+								"name": "X轴颜色",
+								"default": "#fff"
+							},
+							"dy": {
+								"type": "number",
+								"name": "坐标轴与文字间距离",
+								"default": 12,
+								"range": [
+									-40,
+									40
+								],
+								"step": 1
+							},
+							"assist-line": {
+								"type": "boolean",
+								"name": "辅助线",
+								"default": false
+							}
+						}
+					},
+					"yaxis": {
+						"type": "group",
+						"name": "Y轴",
+						"children": {
+							"show": {
+								"type": "boolean",
+								"name": "是否显示Y轴",
+								"default": true
+							},
+							"font-size": {
+								"type": "number",
+								"name": "字号",
+								"min": 12,
+								"default": 12,
+								"max": 100
+							},
+							"color": {
+								"type": "color",
+								"name": "Y轴颜色",
+								"default": "#fff"
+							},
+							"label": {
+								"type": "text",
+								"name": "单位",
+								"default": ""
+							},
+							"ticks": {
+								"type": "number",
+								"name": "显示指标点数量",
+								"default": 5,
+								"range": [
+									0,
+									40
+								],
+								"step": 1
+							},
+							"tickSize": {
+								"type": "number",
+								"name": "指标点长度",
+								"default": 0,
+								"range": [
+									0,
+									40
+								],
+								"step": 1
+							},
+							"dy": {
+								"type": "number",
+								"name": "文字距辅助线距离",
+								"default": 8,
+								"range": [
+									-40,
+									40
+								]
+							},
+							"assist-line": {
+								"type": "boolean",
+								"name": "辅助线",
+								"default": false
+							}
+						}
+					}
+				}
+			},
+			"default-serie": {
+				"type": "group",
+				"name": "默认系列",
+				"children": {
+					"lineColor": {
+						"name": "折线色",
+						"type": "color",
+						"default": "#fff"
+					},
+					"denominator": {
+						"name": "分母",
+						"type": "number",
+						"default": 1
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "数据系列",
+				"default": [
+					{
+						"serie-value": "1",
+						"serie-name": "系列1",
+						"gradientColor": {
+							"from": "rgba(255,255,255,0.7)",
+							"to": "rgba(255,255,255,0.1)",
+							"orient": "vertical"
+						},
+						"lineColor": "#fff",
+						"denominator": 1
+					},
+					{
+						"serie-value": "2",
+						"serie-name": "系列2",
+						"gradientColor": {
+							"from": "rgba(0,0,0,0.7)",
+							"to": "rgba(0,0,0,0.1)",
+							"orient": "vertical"
+						},
+						"lineColor": "#fff",
+						"denominator": 1
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "系列<%= i + 1%>",
+					"child": {
+						"serie-value": {
+							"type": "text",
+							"name": "系列值",
+							"default": "2"
+						},
+						"serie-name": {
+							"type": "text",
+							"name": "系列名",
+							"default": "系列2"
+						},
+						"gradientColor": {
+							"name": "渐变色",
+							"type": "group",
+							"children": {
+								"from": {
+									"name": "起始色",
+									"type": "color",
+									"default": "rgba(255,255,255,0.7)"
+								},
+								"to": {
+									"name": "结束色",
+									"type": "color",
+									"default": "rgba(255,255,255,0.1)"
+								},
+								"orient": {
+									"type": "hidden",
+									"default": "vertical"
+								}
+							}
+						},
+						"lineColor": {
+							"name": "折线色",
+							"type": "color",
+							"default": "#fff"
+						},
+						"denominator": {
+							"name": "分母",
+							"type": "number",
+							"default": 1
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"x": "09:00",
+					"y": 43,
+					"s": "1"
+				},
+				{
+					"x": "09:00",
+					"y": 32,
+					"s": "2"
+				},
+				{
+					"x": "09:10",
+					"y": 23,
+					"s": "1"
+				},
+				{
+					"x": "09:10",
+					"y": 12,
+					"s": "2"
+				},
+				{
+					"x": "09:20",
+					"y": 53,
+					"s": "1"
+				},
+				{
+					"x": "09:20",
+					"y": 54,
+					"s": "2"
+				},
+				{
+					"x": "09:30",
+					"y": 34,
+					"s": "1"
+				},
+				{
+					"x": "09:30",
+					"y": 55,
+					"s": "2"
+				},
+				{
+					"x": "09:40",
+					"y": 53,
+					"s": "1"
+				},
+				{
+					"x": "09:40",
+					"y": 67,
+					"s": "2"
+				},
+				{
+					"x": "09:50",
+					"y": 63,
+					"s": "1"
+				},
+				{
+					"x": "09:50",
+					"y": 77,
+					"s": "2"
+				},
+				{
+					"x": "10:00",
+					"y": 94,
+					"s": "1"
+				},
+				{
+					"x": "10:00",
+					"y": 78,
+					"s": "2"
+				},
+				{
+					"x": "10:10",
+					"y": 88,
+					"s": "1"
+				},
+				{
+					"x": "10:10",
+					"y": 79,
+					"s": "2"
+				}
+			]
+		},
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"type": [
+			"regular_area"
+		],
+		"icon": {
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/323cc0ca7942c8faf66231456821d4b6.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/323cc0ca7942c8faf66231456821d4b6.png"
+		}
+	}
+}

@@ -1,0 +1,796 @@
+{
+	"name": "bg-box",
+	"version": "2.0.8",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"xss": "^1.0.8"
+	},
+	"datav": {
+		"cn_name": "自定义背景块",
+		"level": 0,
+		"protocol": 2,
+		"supportTheme": true,
+		"apis": {},
+		"config": {
+			"customBorderRadius": {
+				"name": "圆角",
+				"type": "group",
+				"fold": false,
+				"description": "当应用渐变边框或图片边框时，圆角失效",
+				"children": {
+					"type": {
+						"type": "buttonRadio",
+						"name": "圆角控制",
+						"default": "all",
+						"options": [
+							{
+								"label": "整体",
+								"value": "all"
+							},
+							{
+								"label": "自定义",
+								"value": "fourCorners"
+							}
+						]
+					},
+					"all": {
+						"name": "角度",
+						"type": "stepper",
+						"default": 0,
+						"min": 0,
+						"step": 1,
+						"suffix": "px",
+						"showInPanel": {
+							"conditions": [
+								[
+									".type",
+									"$eq",
+									"all"
+								]
+							]
+						}
+					},
+					"fourCorners": {
+						"name": "角度",
+						"type": "suite",
+						"children": {
+							"topLeft": {
+								"type": "stepper",
+								"name": "左上角",
+								"default": 0,
+								"min": 0,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							},
+							"bottomLeft": {
+								"type": "stepper",
+								"name": "左下角",
+								"default": 0,
+								"min": 0,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							},
+							"topRight": {
+								"type": "stepper",
+								"name": "右上角",
+								"default": 0,
+								"min": 0,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							},
+							"bottomRight": {
+								"type": "stepper",
+								"name": "右下角",
+								"default": 0,
+								"min": 0,
+								"step": 1,
+								"suffix": "px",
+								"col": 12
+							}
+						},
+						"showInPanel": {
+							"conditions": [
+								[
+									".type",
+									"$eq",
+									"fourCorners"
+								]
+							]
+						}
+					}
+				}
+			},
+			"fills": {
+				"name": "填充",
+				"type": "tabs",
+				"addable": true,
+				"maxTabs": 5,
+				"defaultViewMode": "column",
+				"columnNoName": true,
+				"fold": false,
+				"default": [
+					{
+						"fillwp": {
+							"fill": {
+								"type": "flat",
+								"value": "#003a8c"
+							},
+							"opacity": 10
+						}
+					}
+				],
+				"template": {
+					"name": "填充<%= i + 1 %>",
+					"children": {
+						"fillwp": {
+							"type": "suite",
+							"name": "填充",
+							"children": {
+								"fill": {
+									"type": "fill",
+									"name": "填充",
+									"components": [
+										"flat",
+										"linearGradient",
+										"image"
+									],
+									"default": {
+										"type": "flat",
+										"value": "#333"
+									},
+									"col": 12
+								},
+								"opacity": {
+									"type": "stepper",
+									"name": "透明度",
+									"default": 100,
+									"suffix": "%",
+									"col": 12
+								}
+							}
+						}
+					}
+				}
+			},
+			"border": {
+				"type": "group",
+				"name": "边框",
+				"fold": false,
+				"children": {
+					"show": {
+						"type": "boolean",
+						"default": true,
+						"name": "显示"
+					},
+					"type": {
+						"type": "buttonRadio",
+						"name": "边框类型",
+						"default": "flat",
+						"options": [
+							{
+								"label": "纯色",
+								"value": "flat"
+							},
+							{
+								"label": "渐变",
+								"value": "linearGradient"
+							},
+							{
+								"label": "图片",
+								"value": "image"
+							}
+						]
+					},
+					"flat": {
+						"type": "line",
+						"name": "边框配置",
+						"showInPanel": [
+							[
+								".type",
+								"$eq",
+								"flat"
+							]
+						],
+						"components": [
+							"width",
+							"style",
+							"color"
+						],
+						"default": {
+							"width": 1,
+							"style": "solid",
+							"color": "#008bff"
+						}
+					},
+					"linearGradient": {
+						"type": "suite",
+						"name": "边框配置",
+						"showInPanel": [
+							[
+								".type",
+								"$eq",
+								"linearGradient"
+							]
+						],
+						"children": {
+							"width": {
+								"type": "stepper",
+								"name": "粗细",
+								"step": 1,
+								"suffix": "px",
+								"min": 0,
+								"col": 12,
+								"default": 2
+							},
+							"color": {
+								"type": "fill",
+								"name": "颜色",
+								"components": [
+									"linearGradient"
+								],
+								"col": 12,
+								"default": {
+									"stops": [
+										{
+											"offset": 0,
+											"color": "#00DEFF"
+										},
+										{
+											"offset": 100,
+											"color": "#008BFF"
+										}
+									],
+									"angle": 135
+								}
+							}
+						}
+					},
+					"imageType": {
+						"type": "buttonRadio",
+						"name": "配置方式",
+						"default": "custom",
+						"showInPanel": [
+							[
+								".type",
+								"$eq",
+								"image"
+							]
+						],
+						"options": [
+							{
+								"label": "快速边框",
+								"value": "preset"
+							},
+							{
+								"label": "自定义边框",
+								"value": "custom"
+							}
+						]
+					},
+					"presetImage": {
+						"type": "imageSelect",
+						"name": "边框配置",
+						"showInPanel": [
+							[
+								".type",
+								"$eq",
+								"image"
+							],
+							[
+								".imageType",
+								"$eq",
+								"preset"
+							]
+						],
+						"range": [
+							{
+								"name": "框38",
+								"value": "box38",
+								"url": "//img.alicdn.com/tfs/TB1diTTxHr1gK0jSZR0XXbP8XXa-736-416.png"
+							},
+							{
+								"name": "框37",
+								"value": "box37",
+								"url": "//img.alicdn.com/tfs/TB1ZlrEB.T1gK0jSZFhXXaAtVXa-736-416.png"
+							},
+							{
+								"name": "框36",
+								"value": "box36",
+								"url": "//img.alicdn.com/tfs/TB1iHnTxNn1gK0jSZKPXXXvUXXa-736-416.png"
+							},
+							{
+								"name": "框35",
+								"value": "box35",
+								"url": "//img.alicdn.com/tfs/TB1bBHRxUz1gK0jSZLeXXb9kVXa-736-416.png"
+							},
+							{
+								"name": "框34",
+								"value": "box34",
+								"url": "//img.alicdn.com/tfs/TB1LcLWxNv1gK0jSZFFXXb0sXXa-736-416.png"
+							},
+							{
+								"name": "框33",
+								"value": "box33",
+								"url": "//img.alicdn.com/tfs/TB1_6DRxFT7gK0jSZFpXXaTkpXa-736-416.png"
+							},
+							{
+								"name": "框32",
+								"value": "box32",
+								"url": "//img.alicdn.com/tfs/TB1VZ6RxFY7gK0jSZKzXXaikpXa-736-416.png"
+							},
+							{
+								"name": "框31",
+								"value": "box31",
+								"url": "//img.alicdn.com/tfs/TB1bsjUxQL0gK0jSZFAXXcA9pXa-736-416.png"
+							},
+							{
+								"name": "框30",
+								"value": "box30",
+								"url": "//img.alicdn.com/tfs/TB1OdrSxFP7gK0jSZFjXXc5aXXa-736-416.png"
+							},
+							{
+								"name": "框29",
+								"value": "box29",
+								"url": "//img.alicdn.com/tfs/TB1yQbSxNz1gK0jSZSgXXavwpXa-736-416.png"
+							},
+							{
+								"name": "框28",
+								"value": "box28",
+								"url": "//img.alicdn.com/tfs/TB1oh6TxHr1gK0jSZFDXXb9yVXa-736-416.png"
+							},
+							{
+								"name": "框27",
+								"value": "box27",
+								"url": "//img.alicdn.com/tfs/TB1qBHRxUz1gK0jSZLeXXb9kVXa-736-416.png"
+							},
+							{
+								"name": "框26",
+								"value": "box26",
+								"url": "//img.alicdn.com/tfs/TB1Nh2WxND1gK0jSZFKXXcJrVXa-736-416.png"
+							},
+							{
+								"name": "框25",
+								"value": "box25",
+								"url": "//img.alicdn.com/tfs/TB16UnBB7P2gK0jSZPxXXacQpXa-736-416.png"
+							},
+							{
+								"name": "框24",
+								"value": "box24",
+								"url": "//img.alicdn.com/tfs/TB1cKPTxQP2gK0jSZPxXXacQpXa-736-416.png"
+							},
+							{
+								"name": "框23",
+								"value": "box23",
+								"url": "//img.alicdn.com/tfs/TB1NYnTxNn1gK0jSZKPXXXvUXXa-736-416.png"
+							},
+							{
+								"name": "框22",
+								"value": "box22",
+								"url": "//img.alicdn.com/tfs/TB1tyrOxGL7gK0jSZFBXXXZZpXa-736-416.png"
+							},
+							{
+								"name": "框21",
+								"value": "box21",
+								"url": "//img.alicdn.com/tfs/TB18zTSxRv0gK0jSZKbXXbK2FXa-736-416.png"
+							},
+							{
+								"name": "框20",
+								"value": "box20",
+								"url": "//img.alicdn.com/tfs/TB1P36VxQL0gK0jSZFxXXXWHVXa-736-416.png"
+							},
+							{
+								"name": "框19",
+								"value": "box19",
+								"url": "//img.alicdn.com/tfs/TB1ON2WxND1gK0jSZFKXXcJrVXa-736-416.png"
+							},
+							{
+								"name": "框18",
+								"value": "box18",
+								"url": "//img.alicdn.com/tps/TB1DjqJMpXXXXclXXXXXXXXXXXX-126-154.png"
+							},
+							{
+								"name": "框17",
+								"value": "box17",
+								"url": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/a7c93134c5e1440c58b1a7a3b675009b.png"
+							},
+							{
+								"name": "框16",
+								"value": "box16",
+								"url": "//img.alicdn.com/tps/TB1zJdKMXXXXXcWXpXXXXXXXXXX-116-115.png"
+							},
+							{
+								"name": "框15",
+								"value": "box15",
+								"url": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/d92a1a8c99a933c0e9ca54865242fcc8.png"
+							},
+							{
+								"name": "框14",
+								"value": "box14",
+								"url": "//img.alicdn.com/tfs/TB1SOJ.QXXXXXbgXXXXXXXXXXXX-689-232.png"
+							},
+							{
+								"name": "框13",
+								"value": "box13",
+								"url": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/3a5463c54764cada51394b4aa81a8c84.png"
+							},
+							{
+								"name": "框12",
+								"value": "box12",
+								"url": "//img.alicdn.com/tfs/TB1PQ4UQXXXXXXjXpXXXXXXXXXX-986-212.png"
+							},
+							{
+								"name": "框11",
+								"value": "box11",
+								"url": "//img.alicdn.com/tfs/TB1uplWQXXXXXXqXFXXXXXXXXXX-492-335.png"
+							},
+							{
+								"name": "框10",
+								"value": "box10",
+								"url": "//img.alicdn.com/tfs/TB16jdqQXXXXXcVaXXXXXXXXXXX-731-407.png"
+							},
+							{
+								"name": "框9",
+								"value": "box9",
+								"url": "//img.alicdn.com/tfs/TB1j9BCQXXXXXa1XFXXXXXXXXXX-524-282.png"
+							},
+							{
+								"name": "框8",
+								"value": "box8",
+								"url": "//img.alicdn.com/tfs/TB1UN4PQXXXXXaHXFXXXXXXXXXX-592-131.png"
+							},
+							{
+								"name": "框7",
+								"value": "box7",
+								"url": "//img.alicdn.com/tfs/TB1EZQ8sAvoK1RjSZFDXXXY3pXa-580-742.png"
+							},
+							{
+								"name": "框6",
+								"value": "box6",
+								"url": "//img.alicdn.com/tfs/TB1Ug0dsNYaK1RjSZFnXXa80pXa-1186-616.png"
+							},
+							{
+								"name": "框5",
+								"value": "box5",
+								"url": "//img.alicdn.com/tfs/TB1Ls76swHqK1RjSZJnXXbNLpXa-1168-686.png"
+							},
+							{
+								"name": "框4",
+								"value": "box4",
+								"url": "//img.alicdn.com/tfs/TB1rNH2tNjaK1RjSZKzXXXVwXXa-1270-840.png"
+							},
+							{
+								"name": "框3",
+								"value": "box3",
+								"url": "//img.alicdn.com/tfs/TB13.FNsSzqK1RjSZFHXXb3CpXa-1390-146.png"
+							},
+							{
+								"name": "框2",
+								"value": "box2",
+								"url": "//img.alicdn.com/tfs/TB1PUJMsMTqK1RjSZPhXXXfOFXa-1310-182.png"
+							},
+							{
+								"name": "框1",
+								"value": "box1",
+								"url": "//img.alicdn.com/tfs/TB1UCBJsRLoK1RjSZFuXXXn0XXa-1540-292.png"
+							}
+						],
+						"default": "box38"
+					},
+					"customImage": {
+						"type": "suite",
+						"name": "边框配置",
+						"showInPanel": [
+							[
+								".type",
+								"$eq",
+								"image"
+							],
+							[
+								".imageType",
+								"$eq",
+								"custom"
+							]
+						],
+						"children": {
+							"source": {
+								"type": "image",
+								"name": "图片",
+								"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/a7c93134c5e1440c58b1a7a3b675009b.png"
+							},
+							"slice": {
+								"type": "text",
+								"name": "切片",
+								"default": "32 37 fill",
+								"col": 12
+							},
+							"width": {
+								"type": "text",
+								"name": "宽度",
+								"default": "32px 37px",
+								"col": 12
+							},
+							"outset": {
+								"type": "text",
+								"name": "外扩",
+								"default": "0",
+								"col": 12
+							},
+							"repeat": {
+								"type": "select",
+								"default": "no-repeat",
+								"options": [
+									{
+										"name": "不重复，拉伸满",
+										"value": "no-repeat"
+									},
+									{
+										"name": "水平和垂直重复",
+										"value": "repeat"
+									},
+									{
+										"name": "水平重复",
+										"value": "repeat-x"
+									},
+									{
+										"name": "垂直重复",
+										"value": "repeat-y"
+									}
+								],
+								"name": "平铺类型",
+								"col": 12
+							}
+						}
+					}
+				}
+			},
+			"filter": {
+				"name": "滤镜",
+				"type": "group",
+				"children": {
+					"blur": {
+						"name": "模糊",
+						"type": "text",
+						"default": "0px"
+					}
+				}
+			},
+			"backdropFilter": {
+				"name": "背景过滤器",
+				"type": "group",
+				"children": {
+					"blur": {
+						"name": "毛玻璃模糊",
+						"type": "text",
+						"default": "0px"
+					}
+				}
+			},
+			"urlConfig": {
+				"name": "超链接配置",
+				"type": "group",
+				"description": "点击图片区域可跳转至设定的超链接",
+				"children": {
+					"url": {
+						"name": "超链接",
+						"type": "string",
+						"default": ""
+					},
+					"ifBlank": {
+						"name": "是否新开窗口",
+						"type": "boolean",
+						"default": false
+					}
+				}
+			},
+			"box1": {
+				"name": "框1",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1UCBJsRLoK1RjSZFuXXXn0XXa-1540-292.png"
+			},
+			"box2": {
+				"name": "框2",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1PUJMsMTqK1RjSZPhXXXfOFXa-1310-182.png"
+			},
+			"box3": {
+				"name": "框3",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB13.FNsSzqK1RjSZFHXXb3CpXa-1390-146.png"
+			},
+			"box4": {
+				"name": "框4",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1rNH2tNjaK1RjSZKzXXXVwXXa-1270-840.png"
+			},
+			"box5": {
+				"name": "框5",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1Ls76swHqK1RjSZJnXXbNLpXa-1168-686.png"
+			},
+			"box6": {
+				"name": "框6",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1Ug0dsNYaK1RjSZFnXXa80pXa-1186-616.png"
+			},
+			"box7": {
+				"name": "框7",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1EZQ8sAvoK1RjSZFDXXXY3pXa-580-742.png"
+			},
+			"box8": {
+				"name": "框8",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1UN4PQXXXXXaHXFXXXXXXXXXX-592-131.png"
+			},
+			"box9": {
+				"name": "框9",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1j9BCQXXXXXa1XFXXXXXXXXXX-524-282.png"
+			},
+			"box10": {
+				"name": "框10",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB16jdqQXXXXXcVaXXXXXXXXXXX-731-407.png"
+			},
+			"box11": {
+				"name": "框11",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1uplWQXXXXXXqXFXXXXXXXXXX-492-335.png"
+			},
+			"box12": {
+				"name": "框12",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1PQ4UQXXXXXXjXpXXXXXXXXXX-986-212.png"
+			},
+			"box13": {
+				"name": "框13",
+				"type": "hidden",
+				"default": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/3a5463c54764cada51394b4aa81a8c84.png"
+			},
+			"box14": {
+				"name": "框14",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1SOJ.QXXXXXbgXXXXXXXXXXXX-689-232.png"
+			},
+			"box15": {
+				"name": "框15",
+				"type": "hidden",
+				"default": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/d92a1a8c99a933c0e9ca54865242fcc8.png"
+			},
+			"box16": {
+				"name": "框16",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tps/TB1zJdKMXXXXXcWXpXXXXXXXXXX-116-115.png"
+			},
+			"box17": {
+				"name": "框17",
+				"type": "hidden",
+				"default": "//datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/a7c93134c5e1440c58b1a7a3b675009b.png"
+			},
+			"box18": {
+				"name": "框18",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tps/TB1DjqJMpXXXXclXXXXXXXXXXXX-126-154.png"
+			},
+			"box19": {
+				"name": "框19",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1aw4_B.Y1gK0jSZFMXXaWcVXa-379-180.png"
+			},
+			"box20": {
+				"name": "框20",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1aHUyxRv0gK0jSZKbXXbK2FXa-379-180.png"
+			},
+			"box21": {
+				"name": "框21",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1ut7GxRr0gK0jSZFnXXbRRXXa-378-180.png"
+			},
+			"box22": {
+				"name": "框22",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1kcIyxUT1gK0jSZFrXXcNCXXa-378-180.png"
+			},
+			"box23": {
+				"name": "框23",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1pr0cXezky14jSZFNXXbENVXa-379-180.png"
+			},
+			"box24": {
+				"name": "框24",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1FyEyxQP2gK0jSZPxXXacQpXa-379-180.png"
+			},
+			"box25": {
+				"name": "框25",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1z2XQXIKfxu4jSZPfXXb3dXXa-379-180.png"
+			},
+			"box26": {
+				"name": "框26",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1wT.BxUY1gK0jSZFCXXcwqXXa-379-180.png"
+			},
+			"box27": {
+				"name": "框27",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1agcAxO_1gK0jSZFqXXcpaXXa-379-180.png"
+			},
+			"box28": {
+				"name": "框28",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB11lQBxQT2gK0jSZPcXXcKkpXa-379-181.png"
+			},
+			"box29": {
+				"name": "框29",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB12oMvxKH2gK0jSZJnXXaT1FXa-379-229.png"
+			},
+			"box30": {
+				"name": "框30",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1By3rxKL2gK0jSZPhXXahvXXa-379-225.png"
+			},
+			"box31": {
+				"name": "框31",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB14A0FvKbviK0jSZFNXXaApXXa-378-223.png"
+			},
+			"box32": {
+				"name": "框32",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1ANf.wkP2gK0jSZPxXXacQpXa-378-223.png"
+			},
+			"box33": {
+				"name": "框33",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1xyG0wQL0gK0jSZFxXXXWHVXa-378-223.png"
+			},
+			"box34": {
+				"name": "框34",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1CFPVwoY1gK0jSZFCXXcwqXXa-378-223.png"
+			},
+			"box35": {
+				"name": "框35",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1r.tqwEH1gK0jSZSyXXXtlpXa-378-223.png"
+			},
+			"box36": {
+				"name": "框36",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1tNw9vVT7gK0jSZFpXXaTkpXa-378-180.png"
+			},
+			"box37": {
+				"name": "框37",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB12LuCwND1gK0jSZFKXXcJrVXa-378-180.png"
+			},
+			"box38": {
+				"name": "框38",
+				"type": "hidden",
+				"default": "//img.alicdn.com/tfs/TB1b2CCwUY1gK0jSZFCXXcwqXXa-380-180.png"
+			}
+		},
+		"api_data": {},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 110
+		},
+		"type": [
+			"material_decorate",
+			"DataV-6:media"
+		],
+		"icon": "//img.alicdn.com/tfs/TB1LPnllFT7gK0jSZFpXXaTkpXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1c0HqlHH1gK0jSZFwXXc7aXXa-334-144.png"
+	}
+}

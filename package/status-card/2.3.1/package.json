@@ -1,0 +1,384 @@
+{
+	"name": "status-card",
+	"version": "2.3.1",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "状态卡片",
+		"level": 0,
+		"protocol": 2,
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"name": {
+						"description": "标题",
+						"optional": true,
+						"type": "string"
+					},
+					"value": {
+						"description": "类型名",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"type": "group",
+				"name": "全局",
+				"children": {
+					"auto": {
+						"type": "boolean",
+						"name": "自动排列",
+						"default": false
+					},
+					"layout": {
+						"name": "布局方式",
+						"type": "buttonRadio",
+						"useFont": true,
+						"default": "rowLayout",
+						"options": [
+							{
+								"value": "rowLayout",
+								"label": "横向布局"
+							},
+							{
+								"value": "colLayout",
+								"label": "纵向布局"
+							}
+						],
+						"showInPanel": {
+							"conditions": [
+								[
+									"global.auto",
+									"$eq",
+									false
+								]
+							]
+						}
+					},
+					"rowNum": {
+						"type": "number",
+						"name": "每行个数",
+						"default": 1,
+						"step": 1,
+						"showInPanel": {
+							"conditions": [
+								[
+									"global.layout",
+									"$eq",
+									"rowLayout"
+								],
+								[
+									"global.auto",
+									"$eq",
+									false
+								]
+							],
+							"logicalType": "$and"
+						}
+					},
+					"col": {
+						"name": "每列个数",
+						"type": "suite",
+						"children": {
+							"colNumData": {
+								"type": "stepper",
+								"name": "每列数据个数",
+								"default": 5,
+								"min": 1,
+								"step": 1,
+								"col": 24
+							}
+						},
+						"showInPanel": {
+							"conditions": [
+								[
+									"global.layout",
+									"$eq",
+									"colLayout"
+								],
+								[
+									"global.auto",
+									"$eq",
+									false
+								]
+							],
+							"logicalType": "$and"
+						}
+					}
+				}
+			},
+			"margin": {
+				"type": "group",
+				"name": "间距",
+				"children": {
+					"right": {
+						"type": "number",
+						"name": "横向",
+						"default": 10,
+						"range": [
+							0,
+							100
+						],
+						"step": 1
+					},
+					"bottom": {
+						"type": "number",
+						"name": "竖向",
+						"default": 30,
+						"range": [
+							0,
+							100
+						],
+						"step": 1
+					}
+				}
+			},
+			"textStyle": {
+				"type": "group",
+				"name": "文本样式",
+				"children": {
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字号",
+						"min": 10,
+						"default": 12,
+						"max": 100,
+						"step": 1
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"searches": [
+							"normal",
+							"bold",
+							"bolder",
+							"light",
+							"lighter",
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700,
+							800,
+							900
+						],
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					}
+				}
+			},
+			"statusList": {
+				"type": "array",
+				"name": "状态种类",
+				"default": [
+					{
+						"statusName": "1",
+						"color": "rgb(10, 115, 255)"
+					},
+					{
+						"statusName": "2",
+						"color": "rgb(61, 171, 255)"
+					},
+					{
+						"statusName": "3",
+						"color": "#79daff"
+					},
+					{
+						"statusName": "4",
+						"color": "#a3f6ff"
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "状态<%= i + 1 %>",
+					"child": {
+						"statusName": {
+							"type": "text",
+							"name": "状态类型名",
+							"default": "",
+							"description": "状态类型需要与数据匹配"
+						},
+						"color": {
+							"type": "color",
+							"name": "状态圆点颜色",
+							"default": "#FFFFFF"
+						}
+					}
+				}
+			},
+			"dotStyle": {
+				"name": "圆点样式",
+				"type": "group",
+				"children": {
+					"position": {
+						"name": "位置",
+						"type": "select",
+						"options": [
+							{
+								"name": "在前",
+								"value": "front"
+							},
+							{
+								"name": "在后",
+								"value": "after"
+							}
+						],
+						"default": "front"
+					},
+					"radius": {
+						"name": "圆角大小",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.1
+					},
+					"rotate": {
+						"name": "旋转角度",
+						"type": "number",
+						"default": 0,
+						"suffix": "°",
+						"step": 5
+					},
+					"marginRight": {
+						"name": "间距",
+						"type": "number",
+						"default": 0,
+						"suffix": "px",
+						"step": 1,
+						"description": "文字到状态点的间距"
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"name": "支持 JSON 格式",
+					"value": "1"
+				},
+				[
+					"支持数组格式",
+					"2"
+				],
+				[
+					"AAA",
+					"3"
+				],
+				[
+					"BBB",
+					"4"
+				]
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"icon": "//img.alicdn.com/tfs/TB1_CjllKT2gK0jSZFvXXXnFXXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1N_HqlHj1gK0jSZFOXXc7GpXa-160-116.png"
+	}
+}

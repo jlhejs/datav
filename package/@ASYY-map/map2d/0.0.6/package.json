@@ -1,0 +1,98 @@
+{
+	"name": "map2d",
+	"version": "0.0.6",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"ldmap": "0.0.72"
+	},
+	"datav": {
+		"private": true,
+		"cn_name": "2d地图",
+		"protocol": 2,
+		"type": [
+			"map_plate"
+		],
+		"view": {
+			"width": "1300",
+			"height": "700",
+			"minWidth": "200",
+			"minHeight": "200"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"value": {
+						"description": "值说明"
+					}
+				}
+			}
+		},
+		"config": {
+			"zoom": {
+				"type": "number",
+				"default": 2,
+				"min": 2,
+				"max": 20,
+				"step": 1
+			},
+			"center": {
+				"type": "group",
+				"fold": true,
+				"children": {
+					"lat": {
+						"type": "number",
+						"default": -9.5,
+						"min": -90,
+						"max": 90,
+						"step": 0.1
+					},
+					"lng": {
+						"type": "number",
+						"default": 71,
+						"min": -180,
+						"max": 180,
+						"step": 0.1
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": 1
+				}
+			]
+		},
+		"coms": {
+			"type": "coms",
+			"name": "地图图层",
+			"default": "map2d-tilelayer",
+			"children": [
+				{
+					"comId": "map2d-tilelayer",
+					"id": "1"
+				},
+				{
+					"comId": "map2d-scatter",
+					"id": "2"
+				},
+				{
+					"comId": "map2d-flyingline",
+					"id": "3"
+				},
+				{
+					"comId": "map2d-shapes",
+					"id": "4"
+				}
+			],
+			"options": [
+				"map2d-tilelayer",
+				"map2d-scatter",
+				"map2d-flyingline",
+				"map2d-shapes"
+			]
+		}
+	}
+}

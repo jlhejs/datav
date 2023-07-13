@@ -1,0 +1,78 @@
+{
+	"name": "full-screen",
+	"version": "0.1.15",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"screenfull": "3.3.3"
+	},
+	"datav": {
+		"cn_name": "全屏切换",
+		"icon": "//img.alicdn.com/tfs/TB1omLolO_1gK0jSZFqXXcpaXXa-368-208.png",
+		"protocol": 2,
+		"level": 0,
+		"type": [
+			"interact",
+			"DataV-6:control_button"
+		],
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "20",
+			"minHeight": "20"
+		},
+		"apis": {},
+		"config": {
+			"request": {
+				"name": "全屏显示",
+				"type": "image",
+				"default": "https://img.alicdn.com/tfs/TB1WmSuaKSSBuNjy0FlXXbBpVXa-200-200.png"
+			},
+			"exit": {
+				"name": "退出全屏",
+				"type": "image",
+				"default": "https://img.alicdn.com/tfs/TB1qS1uaKSSBuNjy0FlXXbBpVXa-200-200.png"
+			},
+			"backgroundColor": {
+				"name": "背景颜色",
+				"type": "color",
+				"default": "rgba(255, 255, 255, 0.2)"
+			},
+			"borderRadius": {
+				"name": "圆角",
+				"type": "text",
+				"default": "50%"
+			},
+			"alwaysShow": {
+				"name": "始终显示图片背景",
+				"type": "boolean",
+				"default": false
+			}
+		},
+		"api_data": {},
+		"events": {
+			"entered": {
+				"name": "当进入全屏幕时",
+				"description": "当进入全屏幕时",
+				"type": "null"
+			},
+			"exited": {
+				"name": "当退出全屏幕时",
+				"description": "当退出全屏幕时",
+				"type": "null"
+			}
+		},
+		"publicHandler": {
+			"enter": {
+				"name": "进入全屏幕",
+				"type": "null"
+			},
+			"exit": {
+				"name": "退出全屏幕",
+				"type": "null"
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1pvnmlRv0gK0jSZKbXXbK2FXa-332-144.png"
+	}
+}

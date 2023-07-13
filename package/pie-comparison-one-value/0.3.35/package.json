@@ -1,0 +1,516 @@
+{
+	"name": "pie-comparison-one-value",
+	"version": "0.3.35",
+	"dependencies": {
+		"bcore": "0.0.22",
+		"dchart-pie-crossover-one-value": "0.4.7",
+		"jquery": "2.1.4",
+		"lodash": "4.17.11"
+	},
+	"datav": {
+		"cn_name": "目标占比饼图",
+		"level": 0,
+		"protocol": 2,
+		"type": [
+			"regular_pie",
+			"DataV-6:regular_pie"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "目标占比饼图接口",
+				"fields": {
+					"aims": {
+						"description": "目标,预期",
+						"type": "number"
+					},
+					"actual": {
+						"description": "实际",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"config": {
+			"container": {
+				"type": "group",
+				"name": "容器",
+				"children": {
+					"padding": {
+						"default": 0,
+						"type": "number",
+						"name": "内边距"
+					}
+				}
+			},
+			"labels": {
+				"name": "文本",
+				"type": "group",
+				"children": {
+					"show": {
+						"default": false
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "search",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"微软雅黑": "Microsoft Yahei"
+							},
+							{
+								"宋体": "SimSun"
+							},
+							{
+								"黑体": "SimHei"
+							},
+							{
+								"隶书": "LiSu"
+							},
+							{
+								"幼圆": "YouYuan"
+							},
+							"tahoma",
+							"arial",
+							"sans-serif"
+						],
+						"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+					},
+					"color": {
+						"name": "字体颜色",
+						"type": "color",
+						"default": "rgb(144, 160, 174)"
+					},
+					"aimsLabel": {
+						"name": "目标文案",
+						"type": "text",
+						"default": ""
+					},
+					"actualLabel": {
+						"name": "当前进度文案",
+						"type": "text",
+						"default": ""
+					},
+					"fontSize": {
+						"default": 12,
+						"type": "number",
+						"name": "字号",
+						"range": [
+							12,
+							100
+						]
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					}
+				}
+			},
+			"chart": {
+				"name": "图表",
+				"type": "group",
+				"children": {
+					"innerRadius": {
+						"name": "内半径",
+						"type": "number",
+						"default": 0.95,
+						"range": [
+							0,
+							1
+						],
+						"suffix": "%"
+					},
+					"outerRadius": {
+						"name": "外半径",
+						"type": "number",
+						"default": 0.97,
+						"range": [
+							0,
+							1
+						],
+						"suffix": "%"
+					},
+					"_progressColor": {
+						"name": "进度环颜色",
+						"type": "multicolor",
+						"default": {
+							"style": "single",
+							"value": "rgb(10, 115, 255)"
+						}
+					},
+					"bgProgressColor": {
+						"name": "目标环颜色",
+						"type": "color",
+						"default": "rgba(57, 65, 77, 0)"
+					},
+					"excessColor": {
+						"name": "越界环颜色",
+						"type": "multicolor",
+						"default": {
+							"style": "single",
+							"value": "rgba(205, 22, 22, 0)"
+						}
+					},
+					"color4": {
+						"name": "内环颜色",
+						"type": "color",
+						"default": "rgba(255, 255, 255, 0.1)"
+					},
+					"color5": {
+						"name": "环内斜线颜色",
+						"type": "color",
+						"default": "rgba(255,255,255,0.1)"
+					},
+					"color6": {
+						"name": "环内指标颜色",
+						"type": "color",
+						"default": "rgb(144, 160, 174)"
+					},
+					"font-size": {
+						"default": 20,
+						"type": "number",
+						"name": "字号",
+						"range": [
+							12,
+							100
+						]
+					},
+					"fontWeight": {
+						"name": "字体粗细",
+						"type": "select",
+						"default": "normal",
+						"options": [
+							{
+								"name": "Normal",
+								"value": "normal"
+							},
+							{
+								"name": "Bold",
+								"value": "bold"
+							},
+							{
+								"name": "Bolder",
+								"value": "bolder"
+							},
+							{
+								"name": "Lighter",
+								"value": "lighter"
+							},
+							{
+								"name": "100",
+								"value": "100"
+							},
+							{
+								"name": "200",
+								"value": "200"
+							},
+							{
+								"name": "300",
+								"value": "300"
+							},
+							{
+								"name": "400",
+								"value": "400"
+							},
+							{
+								"name": "500",
+								"value": "500"
+							},
+							{
+								"name": "600",
+								"value": "600"
+							},
+							{
+								"name": "700",
+								"value": "700"
+							},
+							{
+								"name": "800",
+								"value": "800"
+							},
+							{
+								"name": "900",
+								"value": "900"
+							}
+						]
+					},
+					"border": {
+						"type": "number",
+						"name": "圆圈粗细",
+						"default": 8
+					},
+					"margin": {
+						"name": "边距",
+						"type": "group",
+						"children": {
+							"top": {
+								"name": "上边距",
+								"type": "number",
+								"default": 0
+							},
+							"bottom": {
+								"name": "下边距",
+								"type": "number",
+								"default": 0
+							}
+						}
+					},
+					"rounding": {
+						"type": "boolean",
+						"name": "自动小数位数",
+						"default": false
+					},
+					"decimal": {
+						"type": "number",
+						"name": "小数点位数",
+						"default": 2,
+						"range": [
+							0,
+							10
+						],
+						"step": 1,
+						"show": [
+							[
+								"rounding",
+								"$eq",
+								false
+							]
+						]
+					}
+				}
+			},
+			"animation": {
+				"name": "动画",
+				"type": "group",
+				"fold": true,
+				"children": {
+					"show": {
+						"name": "开启",
+						"type": "boolean",
+						"default": true
+					},
+					"animationDuration": {
+						"name": "初始动画时长",
+						"type": "number",
+						"step": 1,
+						"default": 1000
+					},
+					"animationEasing": {
+						"name": "缓动效果",
+						"type": "search",
+						"options": [
+							{
+								"name": "linear",
+								"value": "linear"
+							},
+							{
+								"name": "quadraticIn",
+								"value": "quadraticIn"
+							},
+							{
+								"name": "quadraticOut",
+								"value": "quadraticOut"
+							},
+							{
+								"name": "quadraticInOut",
+								"value": "quadraticInOut"
+							},
+							{
+								"name": "cubicIn",
+								"value": "cubicIn"
+							},
+							{
+								"name": "cubicOut",
+								"value": "cubicOut"
+							},
+							{
+								"name": "cubicInOut",
+								"value": "cubicInOut"
+							},
+							{
+								"name": "quarticIn",
+								"value": "quarticIn"
+							},
+							{
+								"name": "quarticOut",
+								"value": "quarticOut"
+							},
+							{
+								"name": "quarticInOut",
+								"value": "quarticInOut"
+							},
+							{
+								"name": "quinticIn",
+								"value": "quinticIn"
+							},
+							{
+								"name": "quinticOut",
+								"value": "quinticOut"
+							},
+							{
+								"name": "quinticInOut",
+								"value": "quinticInOut"
+							},
+							{
+								"name": "sinusoidalIn",
+								"value": "sinusoidalIn"
+							},
+							{
+								"name": "sinusoidalOut",
+								"value": "sinusoidalOut"
+							},
+							{
+								"name": "sinusoidalInOut",
+								"value": "sinusoidalInOut"
+							},
+							{
+								"name": "exponentialIn",
+								"value": "exponentialIn"
+							},
+							{
+								"name": "exponentialOut",
+								"value": "exponentialOut"
+							},
+							{
+								"name": "exponentialInOut",
+								"value": "exponentialInOut"
+							},
+							{
+								"name": "circularIn",
+								"value": "circularIn"
+							},
+							{
+								"name": "circularOut",
+								"value": "circularOut"
+							},
+							{
+								"name": "circularInOut",
+								"value": "circularInOut"
+							},
+							{
+								"name": "elasticIn",
+								"value": "elasticIn"
+							},
+							{
+								"name": "elasticOut",
+								"value": "elasticOut"
+							},
+							{
+								"name": "elasticInOut",
+								"value": "elasticInOut"
+							},
+							{
+								"name": "backIn",
+								"value": "backIn"
+							},
+							{
+								"name": "backOut",
+								"value": "backOut"
+							},
+							{
+								"name": "backInOut",
+								"value": "backInOut"
+							},
+							{
+								"name": "bounceIn",
+								"value": "bounceIn"
+							},
+							{
+								"name": "bounceOut",
+								"value": "bounceOut"
+							},
+							{
+								"name": "bounceInOut",
+								"value": "bounceInOut"
+							}
+						],
+						"default": "cubicInOut"
+					},
+					"animationDurationUpdate": {
+						"name": "更新动画时长",
+						"type": "number",
+						"default": 300,
+						"step": 1
+					},
+					"animationUpdateFromPrevious": {
+						"name": "更新时是否从之前位置开始",
+						"type": "boolean",
+						"default": true
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"aims": 10000,
+					"actual": 7000
+				}
+			]
+		},
+		"icon": "//img.alicdn.com/tfs/TB1euQ5mHj1gK0jSZFOXXc7GpXa-368-208.png",
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB14Y71mNn1gK0jSZKPXXXvUXXa-160-116.png"
+	}
+}

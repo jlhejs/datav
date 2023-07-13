@@ -1,0 +1,60 @@
+{
+	"name": "rtsp-video",
+	"version": "0.0.1",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "~4.6.1"
+	},
+	"datav": {
+		"private": true,
+		"cn_name": "rtsp视频播放",
+		"icon": {
+			"100x65": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/1e29dfc4b4be25420cd53aa21f0eeece.png",
+			"55x55": "https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/1e29dfc4b4be25420cd53aa21f0eeece.png"
+		},
+		"protocol": 2,
+		"type": [
+			"figure_monitor"
+		],
+		"view": {
+			"width": "400",
+			"height": "200",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 1010
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "rtsp格式视频",
+				"fields": {
+					"url": {
+						"description": "视频 HTTP 地址",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"src": {
+				"type": "text",
+				"name": "视频地址",
+				"default": "",
+				"description": "rtsp 格式视频地址，支持以数据的形式传入，详见数据面板"
+			},
+			"empty": {
+				"type": "text",
+				"default": "请输入视频播放地址, 推荐 mp4 格式视频地址",
+				"name": "空视频文案"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"url": ""
+				}
+			]
+		}
+	}
+}

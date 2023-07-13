@@ -1,0 +1,609 @@
+{
+	"name": "guston-3d-layer-light",
+	"version": "0.0.5",
+	"description": "light layer of guston",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/guston-3d-layer-light.git"
+	},
+	"keywords": [
+		"guston",
+		"light"
+	],
+	"author": "lushan",
+	"dependencies": {
+		"bcore": "0.0.21",
+		"chroma-js": "1.3.4",
+		"safely-merge": "1.0.0"
+	},
+	"datav": {
+		"cn_name": "灯光",
+		"icon": {},
+		"protocol": 2,
+		"type": [
+			"datav_guston_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"datav_guston"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"apis": {
+			"location": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"x": {
+						"description": "x"
+					},
+					"y": {
+						"description": "y"
+					},
+					"z": {
+						"description": "z"
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"visible": {
+				"name": "是否显示",
+				"type": "boolean",
+				"default": true,
+				"options": [
+					false,
+					true
+				]
+			},
+			"indicatorVisible": {
+				"name": "显示位置",
+				"type": "boolean",
+				"default": false,
+				"options": [
+					false,
+					true
+				]
+			},
+			"lightType": {
+				"name": "灯光类型",
+				"type": "options",
+				"default": "Directional",
+				"options": [
+					{
+						"name": "平行光",
+						"value": "Directional"
+					},
+					{
+						"name": "点光源",
+						"value": "Point"
+					},
+					{
+						"name": "聚光灯",
+						"value": "Spot"
+					}
+				]
+			},
+			"directionalLightConfig": {
+				"show": [
+					[
+						"lightType",
+						"$eq",
+						"Directional"
+					]
+				],
+				"type": "group",
+				"name": "平行光设置",
+				"children": {
+					"intensity": {
+						"name": "强度",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"castShadow": {
+						"name": "启用阴影",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"enableShadowHelper": {
+						"name": "阴影助手",
+						"type": "boolean",
+						"show": [
+							[
+								"castShadow",
+								"$eq",
+								true
+							]
+						],
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"shadow": {
+						"type": "group",
+						"name": "阴影设置",
+						"show": [
+							[
+								"castShadow",
+								"$eq",
+								true
+							]
+						],
+						"children": {
+							"bias": {
+								"name": "偏移",
+								"type": "number",
+								"default": -0.00095,
+								"range": [
+									-0.01,
+									0.01
+								],
+								"step": 0.00001
+							},
+							"cameraNear": {
+								"name": "相机近截距",
+								"type": "number",
+								"default": 1,
+								"range": [
+									-500,
+									500
+								],
+								"step": 1
+							},
+							"cameraFar": {
+								"name": "相机远截距",
+								"type": "number",
+								"default": 1000,
+								"range": [
+									10,
+									5000
+								],
+								"step": 1
+							},
+							"cameraRight": {
+								"name": "相机右截距",
+								"type": "number",
+								"default": 400,
+								"range": [
+									10,
+									5000
+								],
+								"step": 1
+							},
+							"cameraLeft": {
+								"name": "相机左截距",
+								"type": "number",
+								"default": -400,
+								"range": [
+									-5000,
+									-10
+								],
+								"step": 1
+							},
+							"cameraTop": {
+								"name": "相机上截距",
+								"type": "number",
+								"default": 400,
+								"range": [
+									10,
+									5000
+								],
+								"step": 1
+							},
+							"cameraBottom": {
+								"name": "相机下截距",
+								"type": "number",
+								"default": -400,
+								"range": [
+									-5000,
+									-10
+								],
+								"step": 1
+							},
+							"mapSizeWidth": {
+								"name": "阴影宽度",
+								"type": "number",
+								"default": 1024,
+								"range": [
+									128,
+									4096
+								],
+								"step": 128
+							},
+							"mapSizeHeight": {
+								"name": "阴影高度",
+								"type": "number",
+								"default": 1024,
+								"range": [
+									128,
+									4096
+								],
+								"step": 128
+							}
+						}
+					},
+					"target": {
+						"name": "焦点位置",
+						"type": "group",
+						"children": {
+							"x": {
+								"type": "number",
+								"name": "tx",
+								"default": 0,
+								"range": [
+									-2000,
+									2000
+								],
+								"step": 1
+							},
+							"y": {
+								"type": "number",
+								"name": "ty",
+								"default": 0,
+								"range": [
+									-2000,
+									2000
+								],
+								"step": 1
+							},
+							"z": {
+								"type": "number",
+								"name": "tz",
+								"default": 0,
+								"range": [
+									-2000,
+									2000
+								],
+								"step": 1
+							}
+						}
+					}
+				}
+			},
+			"pointLightConfig": {
+				"show": [
+					[
+						"lightType",
+						"$eq",
+						"Point"
+					]
+				],
+				"type": "group",
+				"name": "点光源设置",
+				"children": {
+					"intensity": {
+						"name": "强度",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"distance": {
+						"name": "光距",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							10000
+						],
+						"step": 10
+					},
+					"decay": {
+						"name": "衰减",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.1,
+							10
+						],
+						"step": 0.1
+					}
+				}
+			},
+			"spotLightConfig": {
+				"show": [
+					[
+						"lightType",
+						"$eq",
+						"Spot"
+					]
+				],
+				"type": "group",
+				"name": "聚光灯设置",
+				"children": {
+					"intensity": {
+						"name": "强度",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0,
+							10
+						],
+						"step": 0.1
+					},
+					"color": {
+						"name": "颜色",
+						"type": "color",
+						"default": "#ffffff"
+					},
+					"distance": {
+						"name": "光距",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							10000
+						],
+						"step": 10
+					},
+					"angle": {
+						"name": "角度",
+						"type": "number",
+						"default": 60,
+						"range": [
+							0,
+							90
+						],
+						"step": 0.001
+					},
+					"penumbra": {
+						"name": "penumbra",
+						"type": "number",
+						"default": 0,
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01
+					},
+					"decay": {
+						"name": "衰减",
+						"type": "number",
+						"default": 1,
+						"range": [
+							0.1,
+							10
+						],
+						"step": 0.01
+					},
+					"castShadow": {
+						"name": "启用阴影",
+						"type": "boolean",
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"enableShadowHelper": {
+						"name": "阴影助手",
+						"type": "boolean",
+						"show": [
+							[
+								"castShadow",
+								"$eq",
+								true
+							]
+						],
+						"default": false,
+						"options": [
+							false,
+							true
+						]
+					},
+					"shadow": {
+						"type": "group",
+						"name": "阴影设置",
+						"show": [
+							[
+								"castShadow",
+								"$eq",
+								true
+							]
+						],
+						"children": {
+							"bias": {
+								"name": "偏移",
+								"type": "number",
+								"default": -0.00095,
+								"range": [
+									-0.01,
+									0.01
+								],
+								"step": 0.00001
+							},
+							"radius": {
+								"name": "阴影半径比率",
+								"type": "number",
+								"default": 1,
+								"range": [
+									0.5,
+									2
+								],
+								"step": 0.05
+							},
+							"cameraNear": {
+								"name": "相机近截距",
+								"type": "number",
+								"default": 1,
+								"range": [
+									-500,
+									500
+								],
+								"step": 1
+							},
+							"cameraFar": {
+								"name": "相机远截距",
+								"type": "number",
+								"default": 1000,
+								"range": [
+									10,
+									5000
+								],
+								"step": 1
+							},
+							"mapSizeWidth": {
+								"name": "阴影宽度",
+								"type": "number",
+								"default": 1024,
+								"range": [
+									128,
+									4096
+								],
+								"step": 128
+							},
+							"mapSizeHeight": {
+								"name": "阴影高度",
+								"type": "number",
+								"default": 1024,
+								"range": [
+									128,
+									4096
+								],
+								"step": 128
+							}
+						}
+					},
+					"target": {
+						"name": "焦点位置",
+						"type": "group",
+						"children": {
+							"x": {
+								"type": "number",
+								"name": "tx",
+								"default": 0,
+								"range": [
+									-2000,
+									2000
+								],
+								"step": 1
+							},
+							"y": {
+								"type": "number",
+								"name": "ty",
+								"default": 0,
+								"range": [
+									-2000,
+									2000
+								],
+								"step": 1
+							},
+							"z": {
+								"type": "number",
+								"name": "tz",
+								"default": 0,
+								"range": [
+									-2000,
+									2000
+								],
+								"step": 1
+							}
+						}
+					}
+				}
+			},
+			"position": {
+				"type": "group",
+				"name": "位置",
+				"fold": false,
+				"children": {
+					"x": {
+						"type": "number",
+						"name": "x",
+						"default": 100,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 1
+					},
+					"y": {
+						"type": "number",
+						"name": "y",
+						"default": 50,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 1
+					},
+					"z": {
+						"type": "number",
+						"name": "z",
+						"default": 70,
+						"range": [
+							-2000,
+							2000
+						],
+						"step": 1
+					}
+				}
+			}
+		},
+		"api_data": {
+			"location": [
+				{
+					"x": 10,
+					"y": 10,
+					"z": 10
+				},
+				{
+					"x": 0,
+					"y": 10,
+					"z": 10
+				},
+				{
+					"x": -10,
+					"y": 10,
+					"z": 10
+				},
+				{
+					"x": 0,
+					"y": 10,
+					"z": 10
+				},
+				{
+					"x": 10,
+					"y": 10,
+					"z": 10
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,1160 @@
+{
+	"name": "datavmap-canvas2d-markercluster",
+	"version": "2.0.37",
+	"description": "点聚合组件",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-canvas2d-markercluster.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww (yunyi.zww@alibaba-inc.com)",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"chroma-js": "1.3.3",
+		"rbush": "3.0.0",
+		"geojson-flatten": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "点聚合层",
+		"level": 0,
+		"protocol": 2,
+		"icon": "https://img.alicdn.com/tfs/TB1pJBhtCf2gK0jSZFPXXXsopXa-180-180.png",
+		"type": [
+			"datavmap-canvas2d_subcoms_canvas-layer"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavmap-canvas2d"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"events": {
+			"click": {
+				"description": "当点击点时",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					}
+				}
+			},
+			"mouseover": {
+				"description": "当鼠标移入时",
+				"fields": {
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"apis": {
+			"dataSource": {
+				"description": "数据接口",
+				"handler": "render",
+				"fields": {
+					"type": {
+						"description": "数据分类",
+						"type": "string",
+						"optional": true
+					},
+					"name": {
+						"description": "名称",
+						"type": "string",
+						"optional": true
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number"
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number"
+					},
+					"value": {
+						"description": "值",
+						"type": "number",
+						"optional": true
+					},
+					"info": {
+						"description": "弹窗内容",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"zoomRange": {
+				"name": "可见级别",
+				"type": "slider",
+				"mode": "double",
+				"default": [
+					0,
+					20
+				],
+				"min": 0,
+				"max": 22,
+				"step": 0.1
+			},
+			"markerclusterStyle": {
+				"fold": false,
+				"type": "group",
+				"name": "聚合样式",
+				"children": {
+					"vectorType": {
+						"name": "聚合图形",
+						"type": "iconRadio",
+						"default": "circle",
+						"options": [
+							{
+								"label": "圆形",
+								"value": "circle",
+								"src": "circle"
+							},
+							{
+								"label": "六边形",
+								"value": "hexagon",
+								"src": "hexagon"
+							}
+						]
+					},
+					"isSizeMapping": {
+						"type": "boolean",
+						"name": "半径映射",
+						"default": false
+					},
+					"size": {
+						"showInPanel": [
+							[
+								".isSizeMapping",
+								"$eq",
+								false
+							]
+						],
+						"type": "number",
+						"name": "半径",
+						"caption": "范围 [5, 100]",
+						"default": 16,
+						"range": [
+							5,
+							100
+						],
+						"step": 1,
+						"suffix": "px"
+					},
+					"sizeMapping": {
+						"showInPanel": [
+							[
+								".isSizeMapping",
+								"$eq",
+								true
+							]
+						],
+						"name": "半径范围",
+						"type": "slider",
+						"mode": "double",
+						"caption": "范围 [5, 100]",
+						"default": [
+							8,
+							25
+						],
+						"min": 5,
+						"max": 100,
+						"step": 1,
+						"suffix": "px"
+					},
+					"fill": {
+						"type": "suite",
+						"name": "填充颜色",
+						"children": {
+							"minFillColor": {
+								"default": "#286cff",
+								"name": "最小值",
+								"type": "color"
+							},
+							"maxFillColor": {
+								"default": "#6520cc",
+								"name": "最大值",
+								"type": "color"
+							}
+						}
+					},
+					"stroke": {
+						"type": "suite",
+						"name": "边线样式",
+						"children": {
+							"color": {
+								"default": "rgba(255, 255, 255, 0.08)",
+								"name": "颜色",
+								"type": "color"
+							},
+							"weight": {
+								"type": "number",
+								"name": "粗细",
+								"caption": "粗细 [0, 100]",
+								"default": 10,
+								"range": [
+									0,
+									100
+								],
+								"step": 0.1,
+								"suffix": "px"
+							}
+						}
+					},
+					"textStyle": {
+						"type": "font",
+						"name": "文本样式",
+						"fold": false,
+						"children": {
+							"fontFamily": {
+								"type": "search",
+								"name": "字体",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 12,
+								"range": [
+									12,
+									100
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"type": "search",
+								"name": "粗细",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					}
+				}
+			},
+			"defaultIconStyle": {
+				"type": "group",
+				"name": "默认图标",
+				"fold": true,
+				"children": {
+					"type": {
+						"type": "hidden",
+						"name": "默认配置",
+						"default": "default"
+					},
+					"iconUrl": {
+						"type": "image",
+						"name": "图片路径",
+						"default": "https://img.alicdn.com/tfs/TB1WEaEtkY2gK0jSZFgXXc5OFXa-80-80.png"
+					},
+					"iconSize": {
+						"type": "suite",
+						"name": "图片尺寸",
+						"children": {
+							"width": {
+								"type": "number",
+								"name": "宽度",
+								"caption": "宽度 [0, 400]",
+								"default": 26,
+								"range": [
+									0,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"height": {
+								"type": "number",
+								"name": "高度",
+								"caption": "高度 [0, 400]",
+								"default": 26,
+								"range": [
+									0,
+									400
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					},
+					"position": {
+						"name": "相对位置",
+						"type": "iconRadio",
+						"optionCol": 6,
+						"default": "bottom",
+						"options": [
+							{
+								"label": "底部",
+								"value": "bottom",
+								"src": "position-bottom"
+							},
+							{
+								"label": "中心",
+								"value": "center",
+								"src": "position-center"
+							}
+						]
+					},
+					"offset": {
+						"type": "suite",
+						"name": "偏移量",
+						"children": {
+							"x": {
+								"type": "number",
+								"name": "水平方向",
+								"caption": "水平方向 [-100, 100]",
+								"default": 0,
+								"range": [
+									-100,
+									100
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"y": {
+								"type": "number",
+								"name": "垂直方向",
+								"caption": "垂直方向 [-100, 100]",
+								"default": 0,
+								"range": [
+									-100,
+									100
+								],
+								"step": 1,
+								"suffix": "px"
+							}
+						}
+					}
+				}
+			},
+			"series": {
+				"type": "array",
+				"name": "系列配置",
+				"fold": true,
+				"default": [],
+				"child": {
+					"type": "object",
+					"name": "类型<%= i+1 %>",
+					"child": {
+						"type": {
+							"type": "text",
+							"name": "类型过滤值",
+							"default": "1"
+						},
+						"iconUrl": {
+							"type": "image",
+							"name": "图片路径",
+							"default": "https://img.alicdn.com/tfs/TB1u94apQP2gK0jSZPxXXacQpXa-200-200.png"
+						},
+						"iconSize": {
+							"type": "suite",
+							"name": "图片尺寸",
+							"children": {
+								"width": {
+									"type": "number",
+									"name": "宽度",
+									"caption": "宽度 [0, 400]",
+									"default": 26,
+									"range": [
+										0,
+										400
+									],
+									"step": 1,
+									"suffix": "px"
+								},
+								"height": {
+									"type": "number",
+									"name": "高度",
+									"caption": "高度 [0, 400]",
+									"default": 26,
+									"range": [
+										0,
+										400
+									],
+									"step": 1,
+									"suffix": "px"
+								}
+							}
+						},
+						"position": {
+							"name": "相对位置",
+							"type": "iconRadio",
+							"optionCol": 6,
+							"default": "bottom",
+							"options": [
+								{
+									"label": "底部",
+									"value": "bottom",
+									"src": "position-bottom"
+								},
+								{
+									"label": "中心",
+									"value": "center",
+									"src": "position-center"
+								}
+							]
+						},
+						"offset": {
+							"type": "suite",
+							"name": "偏移量",
+							"children": {
+								"x": {
+									"type": "number",
+									"name": "水平方向",
+									"caption": "水平方向 [-100, 100]",
+									"default": 0,
+									"range": [
+										-100,
+										100
+									],
+									"step": 1,
+									"suffix": "px"
+								},
+								"y": {
+									"type": "number",
+									"name": "垂直方向",
+									"caption": "垂直方向 [-100, 100]",
+									"default": 0,
+									"range": [
+										-100,
+										100
+									],
+									"step": 1,
+									"suffix": "px"
+								}
+							}
+						}
+					}
+				}
+			},
+			"popupStyle": {
+				"type": "group",
+				"name": "弹框",
+				"description": "弹窗功能需先设置info字段！",
+				"fold": true,
+				"children": {
+					"show": {
+						"type": "boolean",
+						"name": "显示",
+						"default": true
+					},
+					"infoField": {
+						"type": "boolean",
+						"name": "info字段",
+						"description": "请设置info字段作为弹窗内容，info支持配置html标签；如不选，则兼容name和value作为弹窗内容！",
+						"default": false
+					},
+					"eventType": {
+						"name": "事件类型",
+						"type": "radio",
+						"optionCol": 12,
+						"default": "click",
+						"options": [
+							{
+								"value": "click",
+								"label": "点击"
+							},
+							{
+								"value": "mouseover",
+								"label": "鼠标移入"
+							}
+						]
+					},
+					"styleType": {
+						"show": [
+							[
+								"show",
+								"$eq",
+								true
+							]
+						],
+						"name": "配置选项",
+						"type": "buttonRadio",
+						"default": "parent",
+						"options": [
+							{
+								"value": "parent",
+								"label": "父容器默认"
+							},
+							{
+								"value": "custom",
+								"label": "自定义配置"
+							}
+						]
+					},
+					"textStyle": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "font",
+						"name": "文本样式",
+						"fold": false,
+						"children": {
+							"fontFamily": {
+								"type": "search",
+								"name": "字体",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 12,
+								"range": [
+									12,
+									100
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"type": "search",
+								"name": "粗细",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					},
+					"lineHeight": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "number",
+						"name": "行高比例",
+						"caption": "范围 [0.5, 5]",
+						"default": 1.4,
+						"range": [
+							0.5,
+							5
+						],
+						"step": 0.1
+					},
+					"borderRadius": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "圆角半径",
+						"type": "number",
+						"caption": "范围 [0, 20]",
+						"default": 5,
+						"range": [
+							0,
+							20
+						],
+						"step": 1,
+						"suffix": "px"
+					},
+					"margin": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "外边距",
+						"type": "margin",
+						"default": {
+							"top": 10,
+							"right": 20,
+							"bottom": 10,
+							"left": 20
+						}
+					},
+					"backgroundColor": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"name": "背景色",
+						"type": "color",
+						"default": "rgba(6, 75, 199, 0.8)"
+					},
+					"closeBtn": {
+						"showInPanel": [
+							[
+								".styleType",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "suite",
+						"name": "关闭按钮",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"size": {
+								"name": "大小",
+								"type": "number",
+								"caption": "大小 [12, 60]",
+								"default": 12,
+								"range": [
+									12,
+									60
+								],
+								"step": 1,
+								"suffix": "px"
+							},
+							"top": {
+								"name": "顶部距离",
+								"type": "number",
+								"caption": "顶部距离 [0, 100]",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							},
+							"right": {
+								"name": "右侧距离",
+								"type": "number",
+								"caption": "右侧距离 [0, 100]",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							}
+						}
+					}
+				}
+			},
+			"interactive": {
+				"type": "group",
+				"name": "交互配置",
+				"fold": true,
+				"children": {
+					"isHover": {
+						"type": "suite",
+						"name": "悬停样式",
+						"enableHide": true,
+						"default": {
+							"show": true,
+							"fillColor": "rgba(0,192,255,0.6)",
+							"hoverScale": 1.5
+						},
+						"children": {
+							"fillColor": {
+								"type": "color",
+								"name": "填充颜色",
+								"default": "rgba(0,192,255,0.6)"
+							},
+							"hoverScale": {
+								"type": "number",
+								"name": "悬停缩放比",
+								"caption": "悬停缩放比 [1, 2]",
+								"default": 1.5,
+								"range": [
+									1,
+									2
+								],
+								"step": 0.1
+							}
+						}
+					},
+					"zoomPad": {
+						"type": "number",
+						"name": "点击聚焦",
+						"caption": "聚焦范围比 [2, 10]",
+						"default": 5,
+						"range": [
+							2,
+							10
+						],
+						"step": 0.1
+					}
+				}
+			}
+		},
+		"api_data": {
+			"dataSource": [
+				{
+					"type": 1,
+					"lng": 102.2212,
+					"lat": 31.8998,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 120.079,
+					"lat": 28.6542,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 114.207,
+					"lat": 24.0554,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 122.5059,
+					"lat": 40.634,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 114.3073,
+					"lat": 25.6879,
+					"value": 1
+				},
+				{
+					"type": 2,
+					"lng": 110.6911,
+					"lat": 34.6948,
+					"value": 15
+				},
+				{
+					"type": 1,
+					"lng": 117.3409,
+					"lat": 23.9505,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 110.2144,
+					"lat": 28.2145,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 116.2584,
+					"lat": 37.6866,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 111.6456,
+					"lat": 29.4432,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 87.6177,
+					"lat": 43.7928,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 119.0305,
+					"lat": 33.5807,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 118.1108,
+					"lat": 39.563,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 114.0101,
+					"lat": 41.8993,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 114.0812,
+					"lat": 30.3096,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 113.3014,
+					"lat": 40.0905,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 102.5089,
+					"lat": 28.6396,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 114.4932,
+					"lat": 29.6045,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 112.1723,
+					"lat": 29.4145,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 110.365,
+					"lat": 21.2749,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 115.0327,
+					"lat": 24.7743,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 130.2362,
+					"lat": 47.2529,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 100.233,
+					"lat": 26.8721,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 118.2489,
+					"lat": 37.4934,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 113.8238,
+					"lat": 36.0634,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 104.2002,
+					"lat": 31.3431,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 113.1635,
+					"lat": 40.4375,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 90.2127,
+					"lat": 42.8655,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 129.3114,
+					"lat": 47.4794,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 104.6308,
+					"lat": 28.7602,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 119.9065,
+					"lat": 42.287,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 122.302,
+					"lat": 29.9456,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 124.0456,
+					"lat": 42.5421,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 107.5135,
+					"lat": 26.7025,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 107.7223,
+					"lat": 31.355,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 117.3632,
+					"lat": 32.9397,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 124.383,
+					"lat": 40.1243,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 117.5625,
+					"lat": 32.8671,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 108.9266,
+					"lat": 34.2134,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 104.7417,
+					"lat": 31.464,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 99.1671,
+					"lat": 25.1118,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 116.7228,
+					"lat": 32.7054,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 113.0501,
+					"lat": 36.5329,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 111.6263,
+					"lat": 26.2233,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 119.421,
+					"lat": 32.3932,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 113.259,
+					"lat": 38.7257,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 104.1944,
+					"lat": 24.041,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 114.6845,
+					"lat": 37.13,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 103.3896,
+					"lat": 35.6638,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 112.2514,
+					"lat": 36.146,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 130.3618,
+					"lat": 46.8096,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 108.4491,
+					"lat": 22.1328,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 94.6928,
+					"lat": 43.252,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 107.7966,
+					"lat": 34.6777,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 117.0215,
+					"lat": 30.0966,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 89.525,
+					"lat": 46.9931,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 113.4713,
+					"lat": 34.1544,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 117.4207,
+					"lat": 25.2916,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 104.0557,
+					"lat": 30.6676,
+					"value": 1
+				},
+				{
+					"type": 1,
+					"lng": 129.4359,
+					"lat": 47.413,
+					"value": 1
+				}
+			]
+		}
+	}
+}

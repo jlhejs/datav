@@ -1,0 +1,314 @@
+{
+	"name": "timer",
+	"version": "2.0.15",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "时间器",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB1HuzmlQL0gK0jSZFtXXXQCXXa-370-208.png",
+		"protocol": 2,
+		"type": [
+			"text_label",
+			"DataV-6:info"
+		],
+		"view": {
+			"width": "300",
+			"height": "56",
+			"minWidth": "160",
+			"minHeight": "30",
+			"z-index": 110
+		},
+		"apis": {},
+		"config": {
+			"icon": {
+				"type": "group",
+				"name": "图标样式",
+				"enableHide": true,
+				"children": {
+					"show": {
+						"default": true
+					},
+					"size": {
+						"type": "number",
+						"name": "大小",
+						"range": [
+							0,
+							100
+						],
+						"default": 1.2,
+						"step": 1
+					},
+					"color": {
+						"type": "color",
+						"name": "颜色",
+						"default": "rgb(121, 218, 255)"
+					},
+					"marginRight": {
+						"type": "number",
+						"name": "边距",
+						"default": 6,
+						"range": [
+							0,
+							100
+						],
+						"step": 1
+					}
+				}
+			},
+			"time": {
+				"type": "group",
+				"name": "时间器",
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"default": 18,
+								"range": [
+									10,
+									100
+								]
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								],
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							}
+						}
+					},
+					"format": {
+						"type": "text",
+						"name": "格式化",
+						"default": "yyyy-MM-dd HH:mm:ss",
+						"description": "如：hh:mm:ss为12小时制的格式"
+					},
+					"duration": {
+						"type": "number",
+						"name": "间隔时间(ms)",
+						"default": 1000
+					},
+					"stopTime": {
+						"type": "text",
+						"name": "停住时间",
+						"description": "表示停住的时间日期的字符串",
+						"default": ""
+					},
+					"stopShowTime": {
+						"type": "text",
+						"name": "停住显示时间",
+						"description": "当设置了「停住时间」且停住时间有效时，表示停住时所显示的字符串",
+						"default": ""
+					},
+					"horizontal": {
+						"name": "水平对齐",
+						"type": "buttonRadio",
+						"options": [
+							{
+								"name": "左对齐",
+								"value": "flex-start"
+							},
+							{
+								"name": "居中对齐",
+								"value": "center"
+							},
+							{
+								"name": "右对齐",
+								"value": "flex-end"
+							}
+						],
+						"default": "center"
+					},
+					"vertical": {
+						"name": "垂直对齐",
+						"type": "buttonRadio",
+						"options": [
+							{
+								"name": "顶对齐",
+								"value": "flex-start"
+							},
+							{
+								"name": "居中对齐",
+								"value": "center"
+							},
+							{
+								"name": "底对齐",
+								"value": "flex-end"
+							}
+						],
+						"default": "center"
+					}
+				}
+			},
+			"event": {
+				"name": "回调配置",
+				"type": "group",
+				"children": {
+					"timer": {
+						"name": "定时回调设置",
+						"type": "group",
+						"children": {
+							"show": {
+								"name": "开启",
+								"type": "boolean",
+								"default": false
+							},
+							"interval": {
+								"name": "回调抛出间隔(ms)",
+								"type": "number",
+								"default": 3000,
+								"min": 500
+							}
+						}
+					},
+					"pointer": {
+						"name": "定点回调设置",
+						"type": "group",
+						"children": {
+							"show": {
+								"name": "开启",
+								"type": "boolean",
+								"default": false
+							},
+							"time": {
+								"name": "定点抛出时间",
+								"type": "text",
+								"description": "表示一个需包含日期的时间字符串，该字符串应该能被 Date.parse() 方法正确识别。",
+								"default": "2019-05-24 10:41:21"
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {},
+		"events": {
+			"time-changed": {
+				"description": "当时间变化时",
+				"fields": {
+					"time": {
+						"description": "当前时间",
+						"type": "string"
+					}
+				}
+			},
+			"time-up": {
+				"description": "当时间到设置时间时",
+				"fields": {
+					"time": {
+						"description": "当前时间",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1Kue_nbj1gK0jSZFOXXc7GpXa-160-116.png"
+	}
+}

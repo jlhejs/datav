@@ -1,0 +1,82 @@
+{
+	"name": "rtmp-player",
+	"version": "1.2.13",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "RTMP 视频流播放器",
+		"protocol": 2,
+		"level": 1,
+		"type": [
+			"media_video",
+			"DataV-6:media"
+		],
+		"icon": "//img.alicdn.com/tfs/TB1E3LrlRr0gK0jSZFnXXbRRXXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1IhfqlUY1gK0jSZFCXXcwqXXa-334-144.png",
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"analysis": {
+			"apis": "source"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"source": {
+						"description": "视频流地址",
+						"optional": true,
+						"type": "string"
+					},
+					"type": {
+						"description": "视频流类型",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"source": {
+				"name": "视频流地址",
+				"type": "string",
+				"default": "",
+				"dataField": "source"
+			},
+			"sourceType": {
+				"name": "视频流类型",
+				"type": "select",
+				"default": "rtmp/mp4",
+				"options": [
+					"rtmp/mp4",
+					"rtmp/flv"
+				],
+				"dataField": "type"
+			},
+			"muted": {
+				"name": "静音",
+				"type": "boolean",
+				"default": false
+			},
+			"swf": {
+				"type": "hidden",
+				"default": "https://datav.oss-cn-hangzhou.aliyuncs.com/datavmap-data/video-js.swf"
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"source": "",
+					"type": ""
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,1690 @@
+{
+	"name": "@datav-city-pro-v2/datav-city-pro",
+	"version": "2.2.18",
+	"dependencies": {
+		"@ali/datav-vangogh": "2.2.10",
+		"@turf/boolean-contains": "6.3.0",
+		"@turf/kinks": "6.3.0",
+		"@turf/line-intersect": "6.3.0",
+		"@turf/line-split": "6.3.0",
+		"d3": "5.16.0",
+		"eventemitter3": "3.0.0",
+		"leaflet": "1.6.0",
+		"lodash": "4.17.21",
+		"polygon-clipping": "0.15.3",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "三维城市构建器",
+		"private": true,
+		"protocol": 2,
+		"level": 2,
+		"icon": "//img.alicdn.com/tfs/TB1rmlolkcx_u4jSZFlXXXnUFXa-368-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1QWFzZoz1gK0jSZLeXXb9kVXa-332-144.png",
+		"hooks": {
+			"editBeforeAdd": true,
+			"editBeforeAddChild": true,
+			"editBeforePublish": true
+		},
+		"env": {
+			"enable": true,
+			"options": [
+				"publish",
+				"preview",
+				"editor"
+			]
+		},
+		"platform": "pc",
+		"supportSceneEditor": true,
+		"type": [
+			"map_3d_city_pro_v2",
+			"DataV-6:map"
+		],
+		"children": {
+			"default": [],
+			"supportTypes": [
+				"map_3d_city_pro_subcoms_v2"
+			],
+			"supportNames": []
+		},
+		"category": [
+			{
+				"name": "基底组件",
+				"type": "map_3d_city_pro_citybase_subcoms"
+			},
+			{
+				"name": "数据图元组件",
+				"type": "map_3d_city_pro_datamap_subcoms"
+			},
+			{
+				"name": "三维模型",
+				"type": "map_3d_city_pro_model3d_subcoms"
+			},
+			{
+				"name": "栅格瓦片",
+				"type": "map_3d_city_pro_rastertile_subcoms",
+				"quantityLimit": 4
+			},
+			{
+				"name": "地形瓦片",
+				"type": "map_3d_city_pro_terraintile_subcoms",
+				"quantityLimit": 1
+			},
+			{
+				"name": "三维瓦片",
+				"type": "map_3d_city_pro_tile3d_subcoms"
+			}
+		],
+		"view": {
+			"width": "1920",
+			"height": "1080",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"config": {
+			"showLoadingInfo": {
+				"name": "载入提示",
+				"type": "boolean",
+				"default": true,
+				"description": "用于在发布页提示场景的载入状态"
+			},
+			"loadingImg": {
+				"name": "载入图片",
+				"type": "hidden",
+				"default": "https://img.alicdn.com/imgextra/i3/O1CN01yNBPKw1WB5XwLVTvg_!!6000000002749-2-tps-1404-720.png"
+			},
+			"selectedArea": {
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": {}
+			},
+			"sceneManager": {
+				"type": "sceneManager",
+				"dataField": "sceneEditor",
+				"default": {
+					"defaultSceneId": "scene1",
+					"scenes": [
+						{
+							"sceneId": "scene1",
+							"sceneName": "场景1",
+							"config": {
+								"camera": {
+									"fov": 60,
+									"position": {
+										"lng": 120.1655229,
+										"lat": 30.25045109,
+										"altitude": 595
+									},
+									"rotation": {
+										"tilt": 89,
+										"pan": 1
+									}
+								},
+								"assets": {
+									"globalEnvMap": "night",
+									"assets": [
+										{
+											"_label": "风格1",
+											"name": "风格1",
+											"key": "night",
+											"url": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-HDR-Sunset.hdr",
+											"properties": 1,
+											"rotate": 0
+										},
+										{
+											"_label": "风格2",
+											"name": "风格2",
+											"key": "day",
+											"url": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-HDR-T_Day_C_3.HDR",
+											"properties": 0.6,
+											"rotate": 0
+										},
+										{
+											"_label": "自定义",
+											"name": "自定义",
+											"key": "custom",
+											"url": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-HDR-T_Day_C_3.HDR",
+											"properties": 0.6,
+											"rotate": 0
+										}
+									]
+								},
+								"basic": {
+									"outputEncoding": "sRGBEncoding",
+									"isPhysicallyCorrect": true,
+									"isShadowMap": true,
+									"clearColor": "rgba(0,0,0,1.0)",
+									"toneMapping": {
+										"tmType": "ACESFilmicToneMapping",
+										"exposure": 1.2
+									},
+									"fogColor": "#fff",
+									"fogDensity": 0
+								},
+								"globe": {
+									"visible": true,
+									"tileLOD": "balance",
+									"atmosphere": {
+										"sky": {
+											"enabled": true,
+											"aerialPerspectiveIntensity": 0.83,
+											"sunLightPower": 37.29,
+											"curlMapUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-CURL.png",
+											"weatherMapUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-WHR.png",
+											"highFreqNoiseDataUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-HFN.bin",
+											"lowFregNoiseDataUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-LFN.bin",
+											"backgroundMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-BKG.jpeg"
+										}
+									},
+									"pbrSurfaceMap": {
+										"baseColor": "#fff",
+										"baseColorMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-DIF.jpg",
+										"cloudMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-CLOUD.jpeg",
+										"metalness": 1,
+										"metalnessMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-METAL.png",
+										"roughness": 0.6,
+										"roughnessMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-ROUGH.png",
+										"emissive": "#fff",
+										"emissiveMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-EMIS.jpeg",
+										"bumpScale": 50000,
+										"bumpMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-BUMP.jpeg"
+									}
+								},
+								"postprocessing": {
+									"postprocessing": {
+										"screenPercentage": 1,
+										"antialiasType": "fxaa",
+										"taa": {
+											"lumaDiffThreshold": 0,
+											"blendingFactor": 0.95,
+											"clampedScale": 1
+										},
+										"ssao": {
+											"enabled": false,
+											"bias": 0.5187,
+											"intensity": 1.85,
+											"sharpness": 20.63,
+											"radius": 39.375,
+											"blurSize": 32
+										},
+										"ssr": {
+											"enabled": false,
+											"maxStep": 50,
+											"maxRayDistance": 100,
+											"strideMagnifyScalar": 1,
+											"blurSize": 10,
+											"blueNoiseMapUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-PostProcessing-SSR-BN.png",
+											"ggxLutMapUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-PostProcessing-SSR-GGXLUT.png"
+										},
+										"bloom": {
+											"enabled": false,
+											"mode": 1,
+											"threshold": 0.5,
+											"knee": 0.8,
+											"scatter": 0.7,
+											"intensity": 0.2
+										},
+										"filmic": {
+											"colorGrading": {
+												"exposure": 0.2,
+												"contrast": 1.5,
+												"hueShift": 0,
+												"saturation": 10,
+												"colorFilter": "#fff1de"
+											}
+										}
+									}
+								}
+							},
+							"defaultTimelineId": "timeline0",
+							"timelines": [
+								{
+									"id": "timeline0",
+									"name": "分镜0",
+									"frameCount": 450,
+									"autoplay": false,
+									"isLoop": false,
+									"pathMode": "Bezire",
+									"attrUniforms": {
+										"globe_light": {
+											"enable": true
+										},
+										"postprocessing_postprocessing_bokeh": {
+											"enable": false
+										}
+									},
+									"keyframes": [
+										{
+											"id": 0,
+											"name": "第0帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.1655229,
+														"lat": 30.25045109,
+														"altitude": 595
+													},
+													"rotation": {
+														"tilt": 14.3,
+														"pan": -160
+													}
+												},
+												"solar": {
+													"time": "2019-02-26 07:15:00"
+												},
+												"globe_light": {
+													"color": "#ffffff",
+													"intensity": 6
+												},
+												"postprocessing_postprocessing_bokeh": {
+													"bokehRadius": 1,
+													"aperture": 10,
+													"focalDistance": 10,
+													"focalSize": 0.05
+												}
+											}
+										},
+										{
+											"id": 150,
+											"name": "第150帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.14785766601562,
+														"lat": 30.24433135986328,
+														"altitude": 10000
+													},
+													"rotation": {
+														"tilt": 89,
+														"pan": 1
+													}
+												}
+											}
+										},
+										{
+											"id": 300,
+											"name": "第300帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.11455535888672,
+														"lat": 30.23540496826172,
+														"altitude": 10000
+													},
+													"rotation": {
+														"tilt": 89,
+														"pan": 1
+													}
+												}
+											}
+										},
+										{
+											"id": 450,
+											"name": "第450帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.11764526367188,
+														"lat": 30.25634765625,
+														"altitude": 5000
+													},
+													"rotation": {
+														"tilt": 89,
+														"pan": 1
+													}
+												}
+											}
+										}
+									]
+								},
+								{
+									"id": "timeline1",
+									"name": "分镜1",
+									"frameCount": 300,
+									"autoplay": false,
+									"isLoop": false,
+									"pathMode": "Linear",
+									"attrUniforms": {
+										"globe_light": {
+											"enable": true
+										},
+										"postprocessing_postprocessing_bokeh": {
+											"enable": false
+										}
+									},
+									"keyframes": [
+										{
+											"id": 0,
+											"name": "第0帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.15918731689453,
+														"lat": 30.257720947265625,
+														"altitude": 5000
+													},
+													"rotation": {
+														"tilt": 89,
+														"pan": 1
+													}
+												},
+												"solar": {
+													"time": "2019-02-26 17:15:00"
+												},
+												"globe_light": {
+													"color": "#ffffff",
+													"intensity": 6
+												},
+												"postprocessing_postprocessing_bokeh": {
+													"bokehRadius": 1,
+													"aperture": 10,
+													"focalDistance": 10,
+													"focalSize": 0.05
+												}
+											}
+										}
+									]
+								}
+							]
+						},
+						{
+							"sceneId": "scene2",
+							"sceneName": "场景2",
+							"config": {
+								"camera": {
+									"fov": 60,
+									"position": {
+										"lng": 120.13352394104005,
+										"lat": 30.26614700786203,
+										"altitude": 10000
+									},
+									"rotation": {
+										"tilt": 89,
+										"pan": 1
+									}
+								},
+								"assets": {
+									"globalEnvMap": "night",
+									"assets": [
+										{
+											"_label": "风格1",
+											"name": "风格1",
+											"key": "night",
+											"url": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-HDR-Sunset.hdr",
+											"properties": 1,
+											"rotate": 0
+										},
+										{
+											"_label": "风格2",
+											"name": "风格2",
+											"key": "day",
+											"url": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-HDR-T_Day_C_3.HDR",
+											"properties": 0.31,
+											"rotate": 0
+										}
+									]
+								},
+								"basic": {
+									"outputEncoding": "sRGBEncoding",
+									"isPhysicallyCorrect": true,
+									"isShadowMap": true,
+									"clearColor": "rgba(0,0,0,1.0)",
+									"toneMapping": {
+										"tmType": "ACESFilmicToneMapping",
+										"exposure": 1.2
+									},
+									"fogColor": "#fff",
+									"fogDensity": 0
+								},
+								"globe": {
+									"visible": true,
+									"tileLOD": "balance",
+									"atmosphere": {
+										"sky": {
+											"enabled": true,
+											"aerialPerspectiveIntensity": 0.83,
+											"sunLightPower": 37.29,
+											"curlMapUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-CURL.png",
+											"weatherMapUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-WHR.png",
+											"highFreqNoiseDataUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-HFN.bin",
+											"lowFregNoiseDataUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-LFN.bin",
+											"backgroundMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-BKG.jpeg"
+										}
+									},
+									"pbrSurfaceMap": {
+										"baseColor": "#fff",
+										"baseColorMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-DIF.jpg",
+										"cloudMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-CLOUD.jpeg",
+										"metalness": 1,
+										"metalnessMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-METAL.png",
+										"roughness": 0.6,
+										"roughnessMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-ROUGH.png",
+										"emissive": "#fff",
+										"emissiveMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-EMIS.jpeg",
+										"bumpScale": 50000,
+										"bumpMap": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-BUMP.jpeg"
+									}
+								},
+								"postprocessing": {
+									"postprocessing": {
+										"screenPercentage": 1,
+										"antialiasType": "fxaa",
+										"taa": {
+											"lumaDiffThreshold": 0,
+											"blendingFactor": 0.95,
+											"clampedScale": 1
+										},
+										"ssao": {
+											"enabled": false,
+											"bias": 0.5187,
+											"intensity": 1.85,
+											"sharpness": 20.63,
+											"radius": 39.375,
+											"blurSize": 32
+										},
+										"ssr": {
+											"enabled": false,
+											"maxStep": 50,
+											"maxRayDistance": 100,
+											"strideMagnifyScalar": 1,
+											"blurSize": 10,
+											"blueNoiseMapUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-PostProcessing-SSR-BN.png",
+											"ggxLutMapUrl": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-PostProcessing-SSR-GGXLUT.png"
+										},
+										"bloom": {
+											"enabled": false,
+											"mode": 1,
+											"threshold": 0.5,
+											"knee": 0.8,
+											"scatter": 0.7,
+											"intensity": 0.2
+										},
+										"filmic": {
+											"colorGrading": {
+												"exposure": 0,
+												"contrast": 0,
+												"hueShift": 0,
+												"saturation": 0,
+												"colorFilter": "#fff"
+											}
+										}
+									}
+								}
+							},
+							"defaultTimelineId": "timeline0",
+							"timelines": [
+								{
+									"id": "timeline0",
+									"name": "分镜0",
+									"frameCount": 450,
+									"autoplay": false,
+									"isLoop": false,
+									"pathMode": "Linear",
+									"attrUniforms": {
+										"globe_light": {
+											"enable": true
+										},
+										"postprocessing_postprocessing_bokeh": {
+											"enable": false
+										}
+									},
+									"keyframes": [
+										{
+											"id": 0,
+											"name": "第0帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.15918731689453,
+														"lat": 30.257720947265625,
+														"altitude": 5000
+													},
+													"rotation": {
+														"tilt": 89,
+														"pan": 1
+													}
+												},
+												"solar": {
+													"time": "2019-02-26 17:15:00"
+												},
+												"globe_light": {
+													"color": "#ffffff",
+													"intensity": 6
+												},
+												"postprocessing_postprocessing_bokeh": {
+													"bokehRadius": 1,
+													"aperture": 10,
+													"focalDistance": 10,
+													"focalSize": 0.05
+												}
+											}
+										},
+										{
+											"id": 150,
+											"name": "第150帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.14785766601562,
+														"lat": 30.24433135986328,
+														"altitude": 10000
+													},
+													"rotation": {
+														"tilt": 89,
+														"pan": 1
+													}
+												}
+											}
+										},
+										{
+											"id": 300,
+											"name": "第300帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.11455535888672,
+														"lat": 30.23540496826172,
+														"altitude": 10000
+													},
+													"rotation": {
+														"tilt": 89,
+														"pan": 1
+													}
+												}
+											}
+										},
+										{
+											"id": 450,
+											"name": "第450帧",
+											"easingType": "easeIn",
+											"enableEmit": true,
+											"attributes": {
+												"camera": {
+													"fov": 60,
+													"position": {
+														"lng": 120.11764526367188,
+														"lat": 30.25634765625,
+														"altitude": 5000
+													},
+													"rotation": {
+														"tilt": 89,
+														"pan": 1
+													}
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				"sceneConfig": {
+					"camera": {
+						"type": "hidden",
+						"name": "相机",
+						"default": {
+							"fov": 60,
+							"position": {
+								"lng": 120.15360832214355,
+								"lat": 30.26040165569161,
+								"altitude": 5000
+							},
+							"rotation": {
+								"tilt": 89,
+								"pan": 1
+							}
+						}
+					},
+					"options": {
+						"type": "menu",
+						"children": {
+							"assets": {
+								"name": "资源配置",
+								"type": "group",
+								"valuePath": "assets",
+								"children": {
+									"globalEnvMap": {
+										"name": "当前环境贴图",
+										"type": "select",
+										"default": "night",
+										"options": [
+											{
+												"value": "night",
+												"label": "风格1"
+											},
+											{
+												"value": "day",
+												"label": "风格2"
+											},
+											{
+												"value": "custom",
+												"label": "自定义"
+											}
+										]
+									},
+									"assets": {
+										"name": "资源设置",
+										"type": "tabs",
+										"minTabs": 3,
+										"maxTabs": 3,
+										"addable": false,
+										"fold": false,
+										"default": [
+											{
+												"key": "night",
+												"_label": "风格1",
+												"name": "风格1",
+												"url": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-HDR-Sunset.hdr",
+												"properties": 1,
+												"rotate": 0
+											},
+											{
+												"key": "day",
+												"_label": "风格2",
+												"name": "风格2",
+												"url": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-HDR-T_Day_C_3.HDR",
+												"properties": 0.31,
+												"rotate": 0
+											},
+											{
+												"key": "custom",
+												"_label": "自定义",
+												"name": "自定义",
+												"url": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-HDR-T_Day_C_3.HDR",
+												"properties": 0.31,
+												"rotate": 0
+											}
+										],
+										"template": {
+											"name": "资源<%= i + 1%>",
+											"children": {
+												"name": {
+													"type": "text",
+													"name": "资源名"
+												},
+												"url": {
+													"type": "image",
+													"name": "资源链接",
+													"isHdr": true
+												},
+												"properties": {
+													"name": "属性",
+													"type": "slider",
+													"step": 0.01,
+													"min": 0,
+													"max": 1,
+													"showRange": true
+												},
+												"rotate": {
+													"name": "旋转",
+													"type": "slider",
+													"step": 0.2,
+													"min": 0,
+													"max": 360,
+													"showRange": true
+												}
+											}
+										}
+									}
+								}
+							},
+							"basic": {
+								"name": "基础配置",
+								"type": "group",
+								"showInPanel": false,
+								"valuePath": "basic",
+								"children": {
+									"outputEncoding": {
+										"type": "hidden",
+										"name": "输出",
+										"default": "sRGBEncoding"
+									},
+									"isPhysicallyCorrect": {
+										"type": "hidden",
+										"name": "物理校正",
+										"default": true
+									},
+									"isShadowMap": {
+										"type": "hidden",
+										"name": "阴影",
+										"default": true
+									},
+									"clearColor": {
+										"type": "fill",
+										"name": "清空色",
+										"default": "rgba(0,0,0,1.0)"
+									},
+									"toneMapping": {
+										"type": "suite",
+										"name": "色调映射",
+										"children": {
+											"tmType": {
+												"name": "色调映射类型",
+												"type": "hidden",
+												"default": "ACESFilmicToneMapping"
+											},
+											"exposure": {
+												"name": "曝光度",
+												"type": "slider",
+												"min": 0,
+												"max": 10,
+												"step": 0.01,
+												"default": 1
+											}
+										}
+									},
+									"fogColor": {
+										"name": "雾颜色",
+										"type": "color",
+										"default": "RGBA(255, 255, 255, 1.00)"
+									},
+									"fogDensity": {
+										"name": "雾强度",
+										"type": "slider",
+										"min": 0,
+										"max": 5,
+										"step": 0.0001,
+										"default": 0
+									}
+								}
+							},
+							"globe": {
+								"name": "球体配置",
+								"type": "group",
+								"valuePath": "globe",
+								"children": {
+									"visible": {
+										"name": "球体开关",
+										"type": "switch",
+										"default": true,
+										"statusText": true
+									},
+									"tileLOD": {
+										"name": "球体细分",
+										"type": "select",
+										"default": "balance",
+										"options": [
+											{
+												"name": "性能模式",
+												"value": "performance"
+											},
+											{
+												"name": "平衡模式",
+												"value": "balance"
+											},
+											{
+												"name": "质量模式",
+												"value": "quality"
+											}
+										]
+									},
+									"light": {
+										"name": "日光",
+										"type": "hidden",
+										"children": {
+											"color": {
+												"name": "颜色",
+												"type": "color",
+												"default": "#ffffff"
+											},
+											"intensity": {
+												"type": "slider",
+												"name": "强度",
+												"min": 0,
+												"max": 100,
+												"step": 0.001,
+												"default": 6
+											}
+										}
+									},
+									"atmosphere": {
+										"name": "大气层",
+										"type": "group",
+										"children": {
+											"sky": {
+												"name": "天空",
+												"type": "suite",
+												"children": {
+													"enabled": {
+														"name": "开关",
+														"type": "switch",
+														"default": true,
+														"statusText": true
+													},
+													"aerialPerspectiveIntensity": {
+														"type": "slider",
+														"name": "空中透视强度",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"default": 0.83
+													},
+													"sunLightPower": {
+														"type": "slider",
+														"name": "大气散射强度",
+														"min": 0,
+														"max": 100,
+														"step": 0.01,
+														"default": 37.29
+													},
+													"backgroundMap": {
+														"type": "image",
+														"name": "背景贴图",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-BKG.jpeg"
+													},
+													"curlMapUrl": {
+														"type": "hidden",
+														"name": "curl噪声贴图",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-CURL.png"
+													},
+													"weatherMapUrl": {
+														"type": "hidden",
+														"name": "天气贴图",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-WHR.png"
+													},
+													"highFreqNoiseDataUrl": {
+														"type": "hidden",
+														"name": "高频噪声数据",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-HFN.bin"
+													},
+													"lowFregNoiseDataUrl": {
+														"type": "hidden",
+														"name": "低频噪声数据",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-SKY-LFN.bin"
+													}
+												}
+											}
+										}
+									},
+									"pbrSurfaceMap": {
+										"type": "group",
+										"name": "球体默认材质",
+										"children": {
+											"baseColor": {
+												"name": "颜色",
+												"type": "color",
+												"default": "#fff"
+											},
+											"baseColorMap": {
+												"type": "image",
+												"name": "颜色贴图",
+												"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-DIF.jpg"
+											},
+											"cloudMap": {
+												"type": "hidden",
+												"name": "云层贴图",
+												"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-CLOUD.jpeg"
+											},
+											"metalness": {
+												"type": "slider",
+												"name": "金属度",
+												"min": 0,
+												"max": 1,
+												"step": 0.01,
+												"default": 1
+											},
+											"metalnessMap": {
+												"type": "image",
+												"name": "金属度贴图",
+												"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-METAL.png"
+											},
+											"roughness": {
+												"type": "slider",
+												"name": "粗糙度",
+												"min": 0,
+												"max": 1,
+												"step": 0.01,
+												"default": 0.6
+											},
+											"roughnessMap": {
+												"type": "image",
+												"name": "粗糙度贴图",
+												"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-ROUGH.png"
+											},
+											"emissive": {
+												"name": "发光颜色",
+												"type": "color",
+												"default": "#fff"
+											},
+											"emissiveMap": {
+												"type": "image",
+												"name": "发光贴图",
+												"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-EMIS.jpeg"
+											},
+											"bumpScale": {
+												"type": "slider",
+												"name": "凹凸度",
+												"min": 0,
+												"max": 1000000,
+												"step": 1,
+												"default": 50000
+											},
+											"bumpMap": {
+												"type": "image",
+												"name": "凹凸贴图",
+												"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-Globe-BUMP.jpeg"
+											}
+										}
+									}
+								}
+							},
+							"postprocessing": {
+								"name": "后期配置",
+								"type": "group",
+								"valuePath": "postprocessing",
+								"children": {
+									"postprocessing": {
+										"name": "后处理",
+										"type": "group",
+										"children": {
+											"screenPercentage": {
+												"type": "slider",
+												"name": "屏幕百分比",
+												"default": 1,
+												"min": 0.25,
+												"max": 2,
+												"step": 0.01
+											},
+											"antialiasType": {
+												"name": "抗锯齿类型",
+												"type": "select",
+												"default": "fxaa",
+												"options": [
+													{
+														"name": "taa",
+														"value": "taa"
+													},
+													{
+														"name": "fxaa",
+														"value": "fxaa"
+													}
+												]
+											},
+											"taa": {
+												"showInPanel": [
+													[
+														".antialiasType",
+														"$eq",
+														"taa"
+													]
+												],
+												"name": "taa抗锯齿",
+												"type": "group",
+												"children": {
+													"lumaDiffThreshold": {
+														"type": "slider",
+														"name": "亮度变化阈值",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"default": 0
+													},
+													"blendingFactor": {
+														"type": "slider",
+														"name": "时域混合系数",
+														"min": 0,
+														"max": 0.999,
+														"step": 0.001,
+														"default": 0.95
+													},
+													"clampedScale": {
+														"type": "slider",
+														"name": "颜色范围缩放系数",
+														"min": 0.75,
+														"max": 10,
+														"step": 0.01,
+														"default": 1
+													}
+												}
+											},
+											"ssao": {
+												"name": "AO阴影",
+												"type": "suite",
+												"children": {
+													"enabled": {
+														"name": "开关",
+														"type": "switch",
+														"default": false,
+														"statusText": true
+													},
+													"bias": {
+														"type": "slider",
+														"name": "偏移",
+														"min": 0,
+														"max": 1,
+														"step": 0.0001,
+														"default": 0.5187
+													},
+													"intensity": {
+														"type": "slider",
+														"name": "AO强度",
+														"min": 0,
+														"max": 10,
+														"step": 0.01,
+														"default": 1.85
+													},
+													"sharpness": {
+														"type": "slider",
+														"name": "锐利度",
+														"min": 0.01,
+														"max": 100,
+														"step": 0.01,
+														"default": 20.63
+													},
+													"radius": {
+														"type": "slider",
+														"name": "AO半径",
+														"min": 0,
+														"max": 100,
+														"step": 0.001,
+														"default": 39.375
+													},
+													"blurSize": {
+														"type": "slider",
+														"name": "模糊强度",
+														"min": 0,
+														"max": 32,
+														"step": 2,
+														"default": 32
+													}
+												}
+											},
+											"ssr": {
+												"name": "屏幕空间反射",
+												"type": "suite",
+												"children": {
+													"enabled": {
+														"name": "开关",
+														"type": "switch",
+														"default": false,
+														"statusText": true
+													},
+													"maxStep": {
+														"type": "slider",
+														"name": "光线步进次数",
+														"min": 0,
+														"max": 200,
+														"step": 1,
+														"default": 50
+													},
+													"maxRayDistance": {
+														"type": "slider",
+														"name": "光线步进范围",
+														"min": 0,
+														"max": 100,
+														"step": 0.01,
+														"default": 100
+													},
+													"strideMagnifyScalar": {
+														"type": "slider",
+														"name": "光线步长系数",
+														"min": 0,
+														"max": 10,
+														"step": 0.01,
+														"default": 1
+													},
+													"blurSize": {
+														"type": "slider",
+														"name": "模糊度",
+														"min": 0,
+														"max": 32,
+														"step": 1,
+														"default": 10
+													},
+													"blueNoiseMapUrl": {
+														"name": "噪声贴图",
+														"type": "hidden",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-PostProcessing-SSR-BN.png"
+													},
+													"ggxLutMapUrl": {
+														"name": "ggx贴图",
+														"type": "hidden",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1642992170802_cityprov2-PostProcessing-SSR-GGXLUT.png"
+													}
+												}
+											},
+											"bloom": {
+												"name": "辉光",
+												"type": "suite",
+												"children": {
+													"enabled": {
+														"name": "开关",
+														"type": "switch",
+														"default": false,
+														"statusText": true
+													},
+													"mode": {
+														"type": "slider",
+														"name": "模式",
+														"default": 1,
+														"min": 0,
+														"max": 1,
+														"step": 1
+													},
+													"threshold": {
+														"type": "slider",
+														"name": "亮度阈值",
+														"default": 0.5,
+														"min": 0,
+														"max": 1,
+														"step": 0.5
+													},
+													"knee": {
+														"type": "slider",
+														"name": "平滑度",
+														"default": 0.5,
+														"min": 0,
+														"max": 1,
+														"step": 0.8
+													},
+													"scatter": {
+														"type": "slider",
+														"name": "散射系数",
+														"default": 0.7,
+														"min": 0.05,
+														"max": 0.95,
+														"step": 0.7
+													},
+													"intensity": {
+														"type": "slider",
+														"name": "强度",
+														"default": 0.2,
+														"min": 0,
+														"max": 10,
+														"step": 0.2
+													}
+												}
+											},
+											"filmic": {
+												"name": "画质调整",
+												"type": "group",
+												"children": {
+													"colorGrading": {
+														"name": "颜色分级",
+														"type": "group",
+														"children": {
+															"exposure": {
+																"type": "slider",
+																"name": "曝光度",
+																"default": 0.2,
+																"min": 0,
+																"max": 2,
+																"step": 1
+															},
+															"contrast": {
+																"type": "slider",
+																"name": "对比度",
+																"default": 1.5,
+																"min": -100,
+																"max": 100,
+																"step": 1
+															},
+															"hueShift": {
+																"type": "slider",
+																"name": "色调",
+																"default": 0,
+																"min": -180,
+																"max": 180,
+																"step": 2
+															},
+															"saturation": {
+																"type": "slider",
+																"name": "饱和度",
+																"default": 10,
+																"min": -100,
+																"max": 100,
+																"step": 1
+															},
+															"colorFilter": {
+																"name": "颜色滤镜",
+																"type": "fill",
+																"default": "#fff1de"
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"keyframeConfig": {
+			"camera": {
+				"type": "group",
+				"name": "相机",
+				"children": {
+					"position_rotation": {
+						"type": "group",
+						"name": "相机位置及旋转",
+						"combination": true,
+						"children": {
+							"lng": {
+								"type": "slider",
+								"name": "经度",
+								"min": -180,
+								"max": 180,
+								"default": 120.1655229,
+								"valuePath": "camera.position.lng"
+							},
+							"lat": {
+								"type": "slider",
+								"name": "纬度",
+								"min": -90,
+								"max": 90,
+								"default": 30.25045109,
+								"valuePath": "camera.position.lat"
+							},
+							"altitude": {
+								"type": "slider",
+								"name": "高度",
+								"min": 0.1,
+								"max": 50000000,
+								"default": 595,
+								"valuePath": "camera.position.altitude"
+							},
+							"tilt": {
+								"name": "倾斜",
+								"type": "slider",
+								"suffix": "度",
+								"min": 0,
+								"max": 89,
+								"default": 14.3,
+								"valuePath": "camera.rotation.tilt"
+							},
+							"pan": {
+								"name": "平移",
+								"type": "slider",
+								"suffix": "度",
+								"min": -180,
+								"max": 180,
+								"default": -160,
+								"valuePath": "camera.rotation.pan"
+							}
+						}
+					},
+					"positionBezireCtrls": {
+						"type": "hidden",
+						"name": "相机位置贝塞尔控制点",
+						"default": {}
+					},
+					"fov": {
+						"name": "视角",
+						"type": "slider",
+						"min": 10,
+						"max": 80,
+						"suffix": "度",
+						"default": 60
+					}
+				}
+			},
+			"solar": {
+				"type": "group",
+				"name": "时间系统",
+				"children": {
+					"time": {
+						"type": "datePicker",
+						"name": "时间",
+						"showTime": true,
+						"formart": "YYYY-MM-DD HH:mm:ss",
+						"default": "2019-02-26 07:15:00"
+					}
+				}
+			},
+			"globe_light": {
+				"type": "group",
+				"name": "日光",
+				"enableHide": true,
+				"showAlias": "enable",
+				"default": {
+					"enable": true
+				},
+				"children": {
+					"color": {
+						"type": "fill",
+						"name": "日光颜色",
+						"default": "#ffffff"
+					},
+					"intensity": {
+						"type": "slider",
+						"name": "日光强度",
+						"min": 0,
+						"max": 100,
+						"step": 0.001,
+						"default": 6
+					}
+				}
+			},
+			"postprocessing_postprocessing_bokeh": {
+				"type": "group",
+				"name": "镜头虚化",
+				"enableHide": true,
+				"showAlias": "enable",
+				"default": {
+					"enable": false
+				},
+				"children": {
+					"bokehRadius": {
+						"type": "slider",
+						"name": "模糊度",
+						"default": 1,
+						"min": 1,
+						"max": 8,
+						"step": 0.01
+					},
+					"aperture": {
+						"type": "slider",
+						"name": "光圈",
+						"default": 10,
+						"min": 0,
+						"max": 100,
+						"step": 0.01
+					},
+					"focalDistance": {
+						"type": "slider",
+						"name": "焦距",
+						"default": 10,
+						"min": 0,
+						"max": 1000000,
+						"step": 0.01
+					},
+					"focalSize": {
+						"type": "slider",
+						"name": "焦点",
+						"default": 0.05,
+						"min": 0,
+						"max": 1,
+						"step": 0.01
+					}
+				}
+			}
+		},
+		"events": {
+			"scene.init": {
+				"name": "场景加载完成时",
+				"description": "场景加载完成时",
+				"type": "null"
+			},
+			"anchorViewVaried": {
+				"name": "定位锚点屏幕位置改变时",
+				"description": "定位锚点屏幕位置改变时",
+				"type": "null",
+				"fields": {
+					"x": {
+						"name": "横坐标值",
+						"description": "屏幕空间横坐标值",
+						"type": "number"
+					},
+					"y": {
+						"name": "纵坐标值",
+						"description": "屏幕空间纵坐标值",
+						"type": "number"
+					},
+					"id": {
+						"name": "id",
+						"description": "定位锚点作用对象id",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			},
+			"play": {
+				"name": "播放当前场景动画",
+				"description": "播放当前场景动画",
+				"type": "object",
+				"fields": {}
+			},
+			"pause": {
+				"name": "暂停当前场景动画",
+				"description": "暂停当前场景动画",
+				"type": "object",
+				"fields": {}
+			},
+			"stop": {
+				"name": "停止当前场景动画",
+				"description": "停止当前场景动画",
+				"type": "object",
+				"fields": {}
+			},
+			"flyTo": {
+				"name": "改变相机位置和旋转",
+				"description": "平滑改变相机位置和旋转角度",
+				"type": "object",
+				"fields": {
+					"position": {
+						"name": "相机位置",
+						"description": "新的相机位置",
+						"type": "object",
+						"optional": true,
+						"children": {
+							"lng": {
+								"name": "经度",
+								"description": "相机位置经度",
+								"type": "number"
+							},
+							"lat": {
+								"name": "纬度",
+								"description": "相机位置纬度",
+								"type": "number"
+							},
+							"altitude": {
+								"name": "高程",
+								"description": "相机位置高程",
+								"type": "number"
+							}
+						}
+					},
+					"rotation": {
+						"name": "相机旋转",
+						"description": "新的相机旋转角度",
+						"type": "object",
+						"optional": true,
+						"children": {
+							"tilt": {
+								"name": "倾斜",
+								"description": "相机倾斜角度",
+								"type": "number",
+								"default": 89
+							},
+							"pan": {
+								"name": "平移",
+								"description": "相机平移角度",
+								"type": "number",
+								"default": 1
+							}
+						}
+					},
+					"duration": {
+						"name": "过渡时长",
+						"description": "相机平滑过渡的时间ms",
+						"type": "number",
+						"optional": true,
+						"default": 1000
+					},
+					"easeType": {
+						"name": "缓动函数类型",
+						"description": "缓动函数类型，linear easeInQuad easeOutQuad easeInOutQuad等",
+						"type": "string",
+						"optional": true,
+						"default": "linear"
+					}
+				}
+			},
+			"setAnchorFlag": {
+				"name": "开关屏幕定位锚点",
+				"description": "开关屏幕定位锚点",
+				"type": "object",
+				"fields": {
+					"flag": {
+						"name": "是否需要屏幕定位锚点",
+						"description": "是否需要屏幕定位锚点",
+						"type": "boolean"
+					}
+				}
+			},
+			"addAnchors": {
+				"name": "添加屏幕定位锚点",
+				"description": "添加屏幕定位锚点",
+				"type": "object",
+				"fields": {
+					"anchors": {
+						"name": "定位锚点",
+						"description": "三维空间定位锚点坐标值与关联id",
+						"type": "array",
+						"children": {
+							"lng": {
+								"name": "经度",
+								"description": "经度",
+								"type": "number"
+							},
+							"lat": {
+								"name": "纬度",
+								"description": "纬度",
+								"type": "number"
+							},
+							"altitude": {
+								"name": "高程",
+								"description": "高程",
+								"type": "number"
+							},
+							"id": {
+								"name": "id",
+								"description": "锚点作用对象id",
+								"type": "string"
+							}
+						}
+					},
+					"needClear": {
+						"name": "是否清除已有锚点",
+						"description": "是否清除已有锚点",
+						"type": "boolean",
+						"default": true
+					}
+				}
+			},
+			"focus": {
+				"name": "聚焦",
+				"description": "将相机聚焦到指定的位置",
+				"type": "object",
+				"fields": {
+					"data": {
+						"name": "聚焦位置数据",
+						"description": "位置数据，为三种形式之一：center中心点；lng、lat、altitude表示的点；GeoJSON表示的点",
+						"type": "object",
+						"children": {
+							"lng": {
+								"name": "经度",
+								"description": "相机位置经度",
+								"type": "number",
+								"optional": true
+							},
+							"lat": {
+								"name": "纬度",
+								"description": "相机位置纬度",
+								"type": "number",
+								"optional": true
+							},
+							"altitude": {
+								"name": "高程",
+								"description": "相机位置高程",
+								"type": "number",
+								"optional": true
+							}
+						}
+					},
+					"rotation": {
+						"name": "相机旋转",
+						"description": "聚焦处相机旋转角度",
+						"type": "object",
+						"optional": true,
+						"children": {
+							"tilt": {
+								"name": "倾斜",
+								"description": "聚焦处相机倾斜角度",
+								"type": "number",
+								"optional": true,
+								"default": 89
+							},
+							"pan": {
+								"name": "平移",
+								"description": "聚焦处相机平移角度",
+								"type": "number",
+								"optional": true,
+								"default": 1
+							}
+						}
+					},
+					"duration": {
+						"name": "过渡时长",
+						"description": "相机从当前位置移到聚焦处的时间ms",
+						"type": "number",
+						"optional": true,
+						"default": 2000
+					},
+					"easeType": {
+						"name": "缓动函数类型",
+						"description": "缓动函数类型，linear easeInQuad easeOutQuad easeInOutQuad等",
+						"type": "string",
+						"optional": true,
+						"default": "linear"
+					},
+					"altitudeOffset": {
+						"name": "高程偏移",
+						"description": "相机位置相对聚焦处的高程偏移",
+						"type": "number",
+						"optional": true,
+						"default": 600
+					}
+				}
+			}
+		},
+		"apis": {},
+		"api_data": {}
+	},
+	"devDependencies": {
+		"babel-eslint": "^10.0.1",
+		"eslint": "^5.16.0",
+		"eslint-config-airbnb-base": "^13.1.0",
+		"eslint-config-prettier": "^4.2.0",
+		"eslint-plugin-babel": "^5.3.0",
+		"eslint-plugin-import": "^2.17.2",
+		"eslint-plugin-prettier": "^3.1.0",
+		"prettier": "^1.17.1"
+	}
+}

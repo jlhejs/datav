@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initialScale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+
+        let camelizeRE = /-(\w)/g;
+        function camelize(str) {
+            return str.replace(camelizeRE, function (_, c) {
+                return c ? c.toUpperCase() : '';
+            })
+        }
+        const translate = {
+            "title": "标题",
+            "counter": "内容",
+            "global": "全局",
+            "fontFamily": "字体",
+            "size": "大小",
+            "width": "宽度",
+            "height": "高度",
+            "border": "边框",
+            "margin": "外边距",
+            "padding": "内边距",
+            "group": "组",
+            "fontColor": "字体颜色",
+            "bgColor": "背景色",
+            "select": "选择",
+            "time": "时间",
+            "date": "日期",
+            "today": "今天",
+            "input": "输入框",
+            "top": "顶部",
+            "bottom": "底部",
+            "left": "左侧",
+            "right": "右侧",
+            "radius": "圆角",
+            "background": "背景",
+            "show": "显示",
+            "type": "类型",
+
+            "min": "背景",
+            "max": "背景",
+            "rotate": "背景",
+            "offset": "背景",
+            "align": "背景",
+            "tooltip": "背景",
+            "rotate": "背景",
+            "rotate": "背景",
+            "rotate": "背景",
+
+
+            "color": "颜色",
+            "fontWeight": "字体粗细",
+            "textAlign": "文本对齐",
+            "textDecoration": "文本修饰",
+            "textIndent": "文本缩进",
+            "textTransform": "文本转换",
+            "textStyle": "文字样式",
+            "textColor": "文本颜色",
+            "direction": "文本方向",
+            "letterSpacing": "字符间距",
+            "lineHeight": "行高",
+            "textAlign": "对齐文本",
+            "textDecoration": "文本修饰",
+            "textIndent": "文本的首行",
+            "textShadow": "文本阴影",
+            "textTransform": "控制元素中的字母",
+            "unicodeBidi": "文本重写 ",
+            "verticalAlign": "垂直对齐",
+            "whiteSpace": "空白处理",
+            "wordSpacing": "字间距",
+            "font": "字体",
+            "fontFamily": "字体系列",
+            "fontSize": "字体大小",
+            "fontStyle": "字体样式",
+            "fontVariant": "以小型大写字体或者正常字体显示文本",
+            "fontWeight": "字体的粗细",
+            "margin": "margin",
+            "marginBottom": "下外边距",
+            "marginLeft": "左外边距。",
+            "marginRight": "右外边距",
+            "marginTop": "上外边距。",
+            "padding": "padding",
+            "paddingBottom": "底部填充",
+            "paddingLeft": "左部填充",
+            "paddingTight": "右部填充",
+            "paddingTop": "顶部填充",
+            "borderRadius": "圆角",
+            "borderShadow": "盒阴影",
+            "borderImage": "边框图片",
+            "borderRadius": "文字样式",
+            "borderRadius": "文字样式"
+        }
+
+
+        var config = {
+    "renderer": "canvas",
+    "legend": {
+        "show": true,
+        "width": "auto",
+        "height": "auto",
+        "orient": "horizontal",
+        "align": "auto",
+        "padding": 5,
+        "itemGap": 10,
+        "itemWidth": 25,
+        "itemHeight": 14,
+        "selectedMode": true,
+        "inactiveColor": "#ccc",
+        "textStyle": {
+            "color": "rgba(255,255,255,0.8)",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+            "fontFamily": "Microsoft Yahei",
+            "fontSize": 10
+        },
+        "backgroundColor": {
+            "style": "single",
+            "value": "rgba(0,0,0,0)"
+        },
+        "borderColor": {
+            "style": "single",
+            "value": "#ccc"
+        },
+        "borderWidth": 0,
+        "x": "center"
+    },
+    "grid": {
+        "show": true,
+        "left": "3%",
+        "top": "12%",
+        "right": "5%",
+        "bottom": "0%",
+        "width": "auto",
+        "height": "auto",
+        "containLabel": true,
+        "backgroundColor": {
+            "style": "single",
+            "value": "rgba(0,0,0,0)"
+        },
+        "borderColor": {
+            "style": "single",
+            "value": "#ccc"
+        },
+        "borderWidth": 0
+    },
+    "xAxis": {
+        "show": true,
+        "offset": 0,
+        "_name": "",
+        "nameLocation": "end",
+        "nameTextStyle": {
+            "color": "rgba(0,0,0,0)",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+            "fontFamily": "Microsoft Yahei",
+            "fontSize": 10
+        },
+        "nameGap": 15,
+        "nameRotate": 0,
+        "inverse": false,
+        "boundaryGap": true,
+        "min": "dataMin",
+        "max": "dataMax",
+        "scale": false,
+        "splitNumber": 5,
+        "minInterval": 0,
+        "logBase": 10,
+        "axisLine": {
+            "show": false,
+            "onZero": true,
+            "lineStyle": {
+                "color": {
+                    "style": "single",
+                    "value": "rgba(255,255,255,0.8)"
+                },
+                "width": 1,
+                "type": "solid",
+                "opacity": 1
+            }
+        },
+        "axisTick": {
+            "show": false,
+            "alignWithLabel": false,
+            "interval": 0,
+            "inside": false,
+            "length": 5,
+            "lineStyle": {
+                "color": {
+                    "style": "single",
+                    "value": "rgba(255,255,255,0.8)"
+                },
+                "width": 1,
+                "type": "solid",
+                "opacity": 1
+            }
+        },
+        "axisLabel": {
+            "show": true,
+            "interval": 0,
+            "inside": false,
+            "rotate": 0,
+            "margin": 18,
+            "showMinLabel": null,
+            "showMaxLabel": null,
+            "textStyle": {
+                "color": "rgb(144, 160, 174)",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "fontFamily": "Microsoft Yahei",
+                "fontSize": 12,
+                "align": "",
+                "baseline": "bottom"
+            }
+        },
+        "splitLine": {
+            "show": true,
+            "interval": 0,
+            "lineStyle": {
+                "width": 1,
+                "type": "solid",
+                "opacity": 0.1
+            }
+        },
+        "splitArea": {
+            "interval": 0,
+            "show": false,
+            "areaStyle": {
+                "opacity": 1
+            }
+        },
+        "axisPointer": {
+            "show": true,
+            "type": "shadow",
+            "snap": false,
+            "value": 0,
+            "status": false,
+            "label": {
+                "show": false,
+                "precision": 0,
+                "margin": 3,
+                "textStyle": {
+                    "color": "#ffffff",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                    "fontFamily": "Microsoft Yahei",
+                    "fontSize": 10
+                },
+                "backgroundColor": "#000",
+                "borderColor": "rgba(0,0,0,0)",
+                "borderWidth": 0
+            },
+            "lineStyle": {
+                "color": {
+                    "style": "single",
+                    "value": "#000"
+                },
+                "width": 1,
+                "type": "solid",
+                "opacity": 1
+            },
+            "shadowStyle": {
+                "color": {
+                    "style": "single",
+                    "value": "rgba(150,150,150,0.3)"
+                },
+                "opacity": 1
+            },
+            "handle": {
+                "show": false,
+                "size": 45,
+                "margin": 50,
+                "color": "#333",
+                "throttle": 40
+            }
+        }
+    },
+    "yAxis": {
+        "show": true,
+        "offset": 0,
+        "type": "value",
+        "_name": "",
+        "nameLocation": "end",
+        "nameTextStyle": {
+            "color": "rgba(0,0,0,0)",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+            "fontFamily": "Microsoft Yahei",
+            "fontSize": 10
+        },
+        "nameGap": 15,
+        "nameRotate": 0,
+        "inverse": false,
+        "boundaryGap": true,
+        "min": "0",
+        "max": "dataMax",
+        "scale": false,
+        "splitNumber": 5,
+        "minInterval": 0,
+        "interval": 64,
+        "logBase": 10,
+        "axisLine": {
+            "show": false,
+            "onZero": true,
+            "lineStyle": {
+                "color": {
+                    "style": "single",
+                    "value": "rgba(255,255,255,0.8)"
+                },
+                "width": 1,
+                "type": "solid",
+                "opacity": 1
+            }
+        },
+        "axisTick": {
+            "show": false,
+            "alignWithLabel": false,
+            "interval": 0,
+            "inside": false,
+            "length": 5,
+            "lineStyle": {
+                "color": {
+                    "style": "single",
+                    "value": "rgba(255,255,255,0.8)"
+                },
+                "width": 1,
+                "type": "solid",
+                "opacity": 1
+            }
+        },
+        "axisLabel": {
+            "show": true,
+            "interval": 0,
+            "inside": false,
+            "rotate": 0,
+            "margin": 8,
+            "showMinLabel": null,
+            "showMaxLabel": null,
+            "textStyle": {
+                "color": "rgb(144, 160, 174)",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+                "fontFamily": "Microsoft Yahei",
+                "fontSize": 12,
+                "align": "",
+                "baseline": "bottom"
+            }
+        },
+        "splitLine": {
+            "show": true,
+            "interval": 0,
+            "lineStyle": {
+                "width": 1,
+                "type": "solid",
+                "opacity": 0.1
+            }
+        },
+        "splitArea": {
+            "interval": 0,
+            "show": false,
+            "areaStyle": {
+                "opacity": 1
+            }
+        },
+        "axisPointer": {
+            "show": false,
+            "type": "line",
+            "snap": false,
+            "label": {
+                "show": false,
+                "precision": 0,
+                "margin": 3,
+                "textStyle": {
+                    "color": "#ffffff",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                    "fontFamily": "Microsoft Yahei",
+                    "fontSize": 10
+                },
+                "backgroundColor": "#000",
+                "borderColor": "rgba(0,0,0,0)",
+                "borderWidth": 0
+            },
+            "lineStyle": {
+                "color": {
+                    "style": "single",
+                    "value": "#000"
+                },
+                "width": 1,
+                "type": "solid",
+                "opacity": 1
+            },
+            "shadowStyle": {
+                "color": {
+                    "style": "single",
+                    "value": "rgba(150,150,150,0.3)"
+                },
+                "opacity": 1
+            },
+            "triggerTooltip": true,
+            "value": 0,
+            "status": false,
+            "handle": {
+                "show": false,
+                "size": 45,
+                "margin": 50,
+                "color": "#333",
+                "throttle": 40
+            }
+        }
+    },
+    "tooltip": {
+        "show": true,
+        "trigger": "axis",
+        "triggerOn": "mousemove",
+        "backgroundColor": {
+            "style": "single",
+            "value": "rgba(50,50,50,0.7)"
+        },
+        "borderColor": {
+            "style": "single",
+            "value": "#333"
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "textStyle": {
+            "color": "#ffffff",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+            "fontFamily": "Microsoft Yahei",
+            "fontSize": 12
+        }
+    },
+    "series": [
+        {
+            "name": "直接访问",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "",
+            "barWidth": "12%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "rgb(255, 255, 255)"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#5bffb0"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "auto",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": true,
+            "_active": false
+        },
+        {
+            "name": "邮件营销",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "广告",
+            "barWidth": "20%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "#bdfdff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#006cff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "auto",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": false,
+            "_active": false
+        },
+        {
+            "name": "联盟广告",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "广告",
+            "barWidth": "20%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "#a3f6ff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#00c2ff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "auto",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": false,
+            "_active": false
+        },
+        {
+            "name": "视频广告",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "广告",
+            "barWidth": "30%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "#70deff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#dceb00"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "auto",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": false,
+            "_active": false
+        },
+        {
+            "name": "百度",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "搜索引擎",
+            "barWidth": "15%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "#0a73ff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#5bffb0"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "auto",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": false,
+            "_active": false
+        },
+        {
+            "name": "谷歌",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "搜索引擎",
+            "barWidth": "50%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "#57cdff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#dceb00"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "auto",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": false,
+            "_active": false
+        },
+        {
+            "name": "搜索引擎",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "",
+            "barWidth": "15%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "#2483ff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#00c2ff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "rgb(255, 255, 255)",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": false,
+            "_active": true
+        },
+        {
+            "name": "必应",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "搜索引擎",
+            "barWidth": "50%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "#3dabff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#dceb00"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "auto",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": false,
+            "_active": false
+        },
+        {
+            "name": "其他",
+            "legendHoverLink": true,
+            "coordinateSystem": "cartesian2d",
+            "stack": "搜索引擎",
+            "barWidth": "50%",
+            "barGap": "30%",
+            "barCategoryGap": "20%",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                },
+                "emphasis": {
+                    "show": false,
+                    "position": "inside",
+                    "textStyle": {
+                        "color": "#000",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                        "fontFamily": "sans-serif",
+                        "fontSize": 10
+                    }
+                }
+            },
+            "itemStyle": {
+                "normal": {
+                    "color": {
+                        "style": "single",
+                        "value": "#0066ed"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "barBorderRadius": 0,
+                    "opacity": 1
+                },
+                "emphasis": {
+                    "color": {
+                        "style": "single",
+                        "value": "#00c2ff"
+                    },
+                    "borderColor": {
+                        "style": "single",
+                        "value": "#000"
+                    },
+                    "borderWidth": 0,
+                    "borderType": "solid",
+                    "opacity": 1
+                }
+            },
+            "_markLine": {
+                "show": false,
+                "color": "auto",
+                "type": "dashed"
+            },
+            "type": "bar",
+            "barMinHeight": 0,
+            "silent": false,
+            "_active": false
+        }
+    ],
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut"
+}
+
+
+
+        function formatConfig(data) {
+            for (const key in data) {
+                const element = data[key];
+                console.log(key)
+                if(element === null){
+                    data[key] = ''
+                }else if ((element).constructor === Object) {
+                    if (element.style && element.value) {
+                        data[key] = element.value
+                    } else {
+                        formatConfig(element)
+                    }
+                }
+            }
+            return data
+
+        }
+        config = formatConfig(config)
+
+        function isValidColor(strColor) {
+            var s = new Option().style;
+            s.color = strColor;
+
+            // return 'false' if color wasn't assigned
+            return s.color == strColor.toLowerCase();
+        }
+        function configToSetting(config) {
+            for (const key in config) {
+                if (Object.hasOwnProperty.call(config, key)) {
+                    const element = config[key];
+                    if (element.constructor === Number) {
+                        config[key] = { "name": `${translate[key] || key}`, "type": "number", "default": element }
+                    } else if (element.constructor === Boolean) {
+                        config[key] = { "name": `${translate[key] || key}`, "type": "boolean", "default": element }
+                    } else if (element.constructor === String) {
+                        if (isValidColor(element)) {
+                            config[key] = { "name": `${translate[key] || key}`, "type": "color", "default": element }
+                        } else {
+                            config[key] = { "name": `${translate[key] || key}`, "type": "text", "default": element }
+                        }
+                    } else if (element.constructor === Array) {
+                        if (element.length) {
+                            config[key] = {
+                                "name": `${translate[key] || key}`, "type": "array", "default": JSON.parse(JSON.stringify(element)), child: {
+                                    "name": "系列<%=i+1%>",
+                                    "type": "object",
+                                    "child": element[0]
+                                }
+                            }
+
+
+                            configToSetting(config[key].child.child)
+                        }
+                    } else if (element.constructor === Function) {
+                        console.log(element, key)
+                    } else if (element.constructor === Object) {
+                        config[key] = { "name": `${translate[key] || key}`, "type": "group", "children": element }
+                        configToSetting(config[key].children)
+                    } else {
+                        console.log('error', key)
+                    }
+                }
+            }
+
+        }
+        configToSetting(config)
+        console.log(JSON.stringify(config))
+    </script>
+</body>
+
+</html>

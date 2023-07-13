@@ -1,0 +1,1710 @@
+{
+	"name": "datav-2dmap-flyingline",
+	"version": "3.0.21",
+	"description": "飞线层",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datav-2dmap-flyingline.git"
+	},
+	"keywords": [
+		"datav",
+		"flyingline"
+	],
+	"author": "yunyi.zww",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "飞线层",
+		"level": 0,
+		"icon": "https://img.alicdn.com/imgextra/i1/O1CN01WwzufG27lOdZ3YrKl_!!6000000007837-2-tps-360-360.png",
+		"protocol": 2,
+		"type": [
+			"datav-2dmap-v3_subcoms_centerlayer",
+			"DataV-6:analysis"
+		],
+		"analysis": {
+			"apis": "dataSource"
+		},
+		"parent": {
+			"supportTypes": [
+				"map_datav-2dmap-v3"
+			],
+			"supportNames": []
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"defaultActive": "graph",
+				"children": {
+					"general": {
+						"name": "通用",
+						"type": "group",
+						"fold": false,
+						"children": {
+							"zoomRange": {
+								"name": "可见级别",
+								"type": "slider",
+								"description": "级别表示地图的缩放层级，子组件在设置范围内将显示，范围外将隐藏。",
+								"caption": "范围 [0, 22]",
+								"mode": "double",
+								"default": [
+									0,
+									18
+								],
+								"min": 0,
+								"max": 22,
+								"step": 0.1,
+								"suffix": "级"
+							},
+							"opacity": {
+								"name": "不透明度",
+								"type": "number",
+								"caption": "范围 [0, 100]",
+								"default": 100,
+								"range": [
+									0,
+									100
+								],
+								"step": 1,
+								"suffix": "%"
+							}
+						}
+					},
+					"graph": {
+						"type": "group",
+						"name": "图形",
+						"children": {
+							"flyinglineStyle": {
+								"fold": false,
+								"type": "group",
+								"name": "飞线样式",
+								"children": {
+									"lineShape": {
+										"name": "飞线线型",
+										"type": "lineSelect",
+										"options": [
+											{
+												"label": "线型1",
+												"value": "线型1",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN01E8qtGj1ooAKftYnux_!!6000000005271-2-tps-300-44.png"
+											},
+											{
+												"label": "线型2",
+												"value": "线型2",
+												"src": "https://img.alicdn.com/imgextra/i1/O1CN01Gz2l0o1c477M6AB2j_!!6000000003546-2-tps-300-44.png"
+											},
+											{
+												"label": "线型3",
+												"value": "线型3",
+												"src": "https://img.alicdn.com/imgextra/i3/O1CN011iYjC31xkLZSwpwp2_!!6000000006481-2-tps-300-44.png"
+											},
+											{
+												"label": "线型4",
+												"value": "线型4",
+												"src": "https://img.alicdn.com/imgextra/i4/O1CN01RxvkUA27p3o1IiOVT_!!6000000007845-2-tps-300-44.png"
+											},
+											{
+												"label": "线型5",
+												"value": "线型5",
+												"src": "https://img.alicdn.com/imgextra/i2/O1CN01VNLJnl1fuH4giu24w_!!6000000004066-2-tps-300-44.png"
+											}
+										],
+										"default": "线型1"
+									},
+									"colorMapping": {
+										"name": "飞线颜色",
+										"type": "colorMapping",
+										"fixedComponents": [
+											"flat"
+										],
+										"scaleTypes": [
+											"ordinal",
+											"threshold"
+										],
+										"default": {
+											"mapping": false,
+											"fixed": "#91d5ff",
+											"scale": {
+												"type": "ordinal",
+												"scheme": "cat-1",
+												"custom": false,
+												"range": [
+													"#12939A",
+													"#DDB27C",
+													"#88572C",
+													"#FF991F",
+													"#F15C17"
+												],
+												"domain": []
+											}
+										}
+									},
+									"step": {
+										"type": "number",
+										"name": "飞线长度",
+										"caption": "范围 [10, 100]",
+										"default": 80,
+										"range": [
+											10,
+											100
+										],
+										"step": 1
+									},
+									"lineWidth": {
+										"type": "number",
+										"name": "飞线粗细",
+										"caption": "范围 [0, 20]",
+										"default": 2,
+										"range": [
+											0,
+											20
+										],
+										"step": 0.1,
+										"suffix": "px"
+									},
+									"height": {
+										"type": "number",
+										"name": "飞线弧度",
+										"caption": "范围 [0, 1]",
+										"default": 0.25,
+										"range": [
+											0,
+											1
+										],
+										"step": 0.1
+									},
+									"outSpeed": {
+										"type": "number",
+										"name": "飞线频率",
+										"caption": "范围 [1, 10]",
+										"default": 1,
+										"range": [
+											1,
+											10
+										],
+										"step": 1
+									},
+									"ptsN": {
+										"type": "hidden",
+										"name": "路径点数",
+										"caption": "范围 [10, 200]",
+										"default": 100,
+										"range": [
+											10,
+											200
+										],
+										"step": 1
+									}
+								}
+							},
+							"flareStyle": {
+								"type": "group",
+								"name": "线头样式",
+								"fold": false,
+								"enableHide": true,
+								"default": {
+									"show": true
+								},
+								"children": {
+									"lineHeadType": {
+										"name": "线头类型",
+										"type": "buttonRadio",
+										"default": "flare",
+										"options": [
+											{
+												"value": "flare",
+												"label": "矢量"
+											},
+											{
+												"value": "image",
+												"label": "图标"
+											}
+										]
+									},
+									"flareMarkerSelect": {
+										"showInPanel": [
+											[
+												".lineHeadType",
+												"$eq",
+												"flare"
+											]
+										],
+										"type": "markerSelect",
+										"name": "矢量形状",
+										"schemes": [
+											{
+												"id": "耀斑",
+												"name": "耀斑",
+												"scheme": [
+													{
+														"label": "耀斑",
+														"value": "耀斑",
+														"src": "https://img.alicdn.com/imgextra/i1/O1CN01pO5by71WxB27XKF3M_!!6000000002854-2-tps-100-100.png"
+													}
+												]
+											}
+										],
+										"default": "耀斑"
+									},
+									"flareSize": {
+										"showInPanel": [
+											[
+												".lineHeadType",
+												"$eq",
+												"flare"
+											]
+										],
+										"type": "suite",
+										"name": "矢量尺寸",
+										"children": {
+											"width": {
+												"type": "number",
+												"name": "长度",
+												"caption": "长度 [0, 40]",
+												"default": 20,
+												"range": [
+													0,
+													40
+												],
+												"step": 1,
+												"suffix": "px"
+											},
+											"height": {
+												"type": "number",
+												"name": "宽度",
+												"caption": "宽度 [0, 40]",
+												"default": 2,
+												"range": [
+													0,
+													40
+												],
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									},
+									"markerSelect": {
+										"showInPanel": [
+											[
+												".lineHeadType",
+												"$eq",
+												"image"
+											]
+										],
+										"type": "markerSelect",
+										"name": "图标形状",
+										"withUploader": true,
+										"schemes": [
+											{
+												"id": "箭头",
+												"name": "箭头",
+												"scheme": [
+													{
+														"label": "指向1",
+														"value": "https://img.alicdn.com/imgextra/i1/O1CN01EDfPbZ1wPuHJwpxqi_!!6000000006301-2-tps-100-100.png",
+														"src": "https://img.alicdn.com/imgextra/i1/O1CN01jwnZLx1V30r3E9d4B_!!6000000002596-2-tps-48-48.png"
+													},
+													{
+														"label": "指向2",
+														"value": "https://img.alicdn.com/imgextra/i4/O1CN01Wuu5Bh1xhbCEAe24S_!!6000000006475-2-tps-100-100.png",
+														"src": "https://img.alicdn.com/imgextra/i1/O1CN01iYzoVm1GLagW99hg3_!!6000000000606-2-tps-48-48.png"
+													},
+													{
+														"label": "指向3",
+														"value": "https://img.alicdn.com/imgextra/i3/O1CN011oNmDk1Ti7AWUnaBJ_!!6000000002415-2-tps-100-100.png",
+														"src": "https://img.alicdn.com/imgextra/i4/O1CN01pdy8Bp1lGKDiskYf8_!!6000000004791-2-tps-48-48.png"
+													},
+													{
+														"label": "台风",
+														"value": "https://img.alicdn.com/imgextra/i4/O1CN017NtcNE1F5jM1ZDOXi_!!6000000000436-2-tps-100-100.png",
+														"src": "https://img.alicdn.com/imgextra/i2/O1CN01y9Ihmz21ikeeZGAUG_!!6000000007019-2-tps-48-48.png"
+													},
+													{
+														"label": "雷",
+														"value": "https://img.alicdn.com/imgextra/i2/O1CN01MnnDZs1vysuZWm4Uf_!!6000000006242-2-tps-100-100.png",
+														"src": "https://img.alicdn.com/imgextra/i2/O1CN01Xt87aF1iAsfMh2G6x_!!6000000004373-2-tps-48-48.png"
+													},
+													{
+														"label": "飞机",
+														"value": "https://img.alicdn.com/imgextra/i3/O1CN01Ho8PeK1jOuPZaWe7k_!!6000000004539-2-tps-100-100.png",
+														"src": "https://img.alicdn.com/imgextra/i4/O1CN01jJZDgg29RowK58Kc0_!!6000000008065-2-tps-48-48.png"
+													}
+												]
+											}
+										],
+										"default": "https://img.alicdn.com/imgextra/i3/O1CN011oNmDk1Ti7AWUnaBJ_!!6000000002415-2-tps-100-100.png"
+									},
+									"iconSize": {
+										"showInPanel": [
+											[
+												".lineHeadType",
+												"$eq",
+												"image"
+											]
+										],
+										"type": "suite",
+										"name": "图标尺寸",
+										"children": {
+											"width": {
+												"type": "number",
+												"name": "宽度",
+												"caption": "宽度 [0, 100]",
+												"default": 20,
+												"range": [
+													0,
+													100
+												],
+												"step": 1,
+												"suffix": "px"
+											},
+											"height": {
+												"type": "number",
+												"name": "高度",
+												"caption": "高度 [0, 100]",
+												"default": 20,
+												"range": [
+													0,
+													100
+												],
+												"step": 1,
+												"suffix": "px"
+											}
+										}
+									},
+									"iconAngle": {
+										"showInPanel": [
+											[
+												".lineHeadType",
+												"$eq",
+												"image"
+											]
+										],
+										"name": "图标方向",
+										"type": "radio",
+										"default": "line",
+										"optionCol": 12,
+										"options": [
+											{
+												"value": "line",
+												"label": "沿线方向"
+											},
+											{
+												"value": "noline",
+												"label": "固定方向"
+											}
+										]
+									},
+									"size": {
+										"type": "hidden",
+										"name": "图标尺寸",
+										"caption": "范围 [0.5, 20]",
+										"default": 1,
+										"range": [
+											0.5,
+											20
+										],
+										"step": 0.1,
+										"suffix": "px"
+									}
+								}
+							},
+							"circleStyle": {
+								"type": "group",
+								"name": "落点气泡",
+								"fold": false,
+								"enableHide": true,
+								"default": {
+									"show": true
+								},
+								"children": {
+									"circleMarker": {
+										"type": "markerSelect",
+										"name": "气泡形状",
+										"schemes": [
+											{
+												"id": "气泡",
+												"name": "气泡",
+												"scheme": [
+													{
+														"label": "样式一",
+														"value": "样式一",
+														"src": "https://img.alicdn.com/imgextra/i4/O1CN01T99JCg1VU2DVg1sJY_!!6000000002655-2-tps-48-48.png"
+													},
+													{
+														"label": "样式二",
+														"value": "样式二",
+														"src": "https://img.alicdn.com/imgextra/i4/O1CN01oSDSbe28rddxkflBj_!!6000000007986-2-tps-48-48.png"
+													},
+													{
+														"label": "样式三",
+														"value": "样式三",
+														"src": "https://img.alicdn.com/imgextra/i3/O1CN01psqIPE1Cyk4V7caJw_!!6000000000150-2-tps-48-48.png"
+													},
+													{
+														"label": "样式四",
+														"value": "样式四",
+														"src": "https://img.alicdn.com/imgextra/i2/O1CN01xOpgSz1KaU1BbtlWC_!!6000000001180-2-tps-48-48.png"
+													},
+													{
+														"label": "样式五",
+														"value": "样式五",
+														"src": "https://img.alicdn.com/imgextra/i2/O1CN0190a88325CvaeGUg5d_!!6000000007491-2-tps-48-48.png"
+													},
+													{
+														"label": "样式六",
+														"value": "样式六",
+														"src": "https://img.alicdn.com/imgextra/i3/O1CN01ycSz6P248WA17ZG6f_!!6000000007346-2-tps-48-48.png"
+													},
+													{
+														"label": "样式七",
+														"value": "样式七",
+														"src": "https://img.alicdn.com/imgextra/i4/O1CN01ivni7a1mCUVpVHbnN_!!6000000004918-2-tps-48-48.png"
+													},
+													{
+														"label": "样式八",
+														"value": "样式八",
+														"src": "https://img.alicdn.com/imgextra/i1/O1CN01GLAICJ1vwavKiPNh2_!!6000000006237-2-tps-48-48.png"
+													},
+													{
+														"label": "样式九",
+														"value": "样式九",
+														"src": "https://img.alicdn.com/imgextra/i3/O1CN01ruXqG024I8Te1METH_!!6000000007367-2-tps-48-48.png"
+													},
+													{
+														"label": "样式十",
+														"value": "样式十",
+														"src": "https://img.alicdn.com/imgextra/i2/O1CN01FOCwXi1mEmUflV4tl_!!6000000004923-2-tps-48-48.png"
+													}
+												]
+											}
+										],
+										"default": "样式二"
+									},
+									"radius": {
+										"type": "number",
+										"name": "气泡半径",
+										"caption": "范围 [10, 100]",
+										"default": 20,
+										"range": [
+											10,
+											100
+										],
+										"step": 1,
+										"suffix": "px"
+									},
+									"color": {
+										"type": "color",
+										"name": "气泡颜色",
+										"default": "rgba(232, 232, 232, 0.82)"
+									}
+								}
+							}
+						}
+					},
+					"animation": {
+						"name": "动效",
+						"children": {
+							"flyingline": {
+								"type": "suite",
+								"name": "飞线动效",
+								"children": {
+									"speed": {
+										"type": "number",
+										"name": "飞线速率",
+										"caption": "飞线速率 [1, 5]",
+										"default": 1,
+										"range": [
+											1,
+											5
+										],
+										"step": 0.1
+									}
+								}
+							},
+							"circle": {
+								"type": "suite",
+								"name": "气泡动效",
+								"children": {
+									"speed": {
+										"type": "number",
+										"name": "气泡速率",
+										"caption": "气泡速率 [0.5, 5]",
+										"default": 1,
+										"range": [
+											0.5,
+											5
+										],
+										"step": 0.1
+									}
+								}
+							}
+						}
+					},
+					"condition": {
+						"type": "group",
+						"name": "条件",
+						"children": {
+							"condition": {
+								"name": "条件样式",
+								"type": "tabs",
+								"fold": false,
+								"description": "",
+								"default": [
+									{
+										"rules": {
+											"title": "条件名称",
+											"enabled": false,
+											"operator": "AND",
+											"expressions": [
+												{
+													"operator": "AND",
+													"expressions": [
+														[
+															"value",
+															"gt",
+															6
+														]
+													]
+												}
+											]
+										},
+										"graph": {}
+									}
+								],
+								"template": {
+									"name": "样式<%= i + 1%>",
+									"children": {
+										"rules": {
+											"type": "logicalTree",
+											"default": {
+												"title": "条件名称",
+												"enabled": false,
+												"operator": "OR",
+												"expressions": []
+											},
+											"relationalExprDefault": [
+												"value",
+												"gt",
+												3
+											]
+										},
+										"graph": {
+											"showInPanel": [
+												[
+													".rules.enabled",
+													"$eq",
+													true
+												]
+											],
+											"type": "group",
+											"name": "图形",
+											"fold": false,
+											"enableHide": true,
+											"default": {
+												"show": true
+											},
+											"children": {
+												"flyinglineStyle": {
+													"name": "飞线样式",
+													"type": "group",
+													"fold": true,
+													"enableHide": true,
+													"default": {
+														"show": true
+													},
+													"children": {
+														"lineShape": {
+															"name": "飞线线型",
+															"type": "lineSelect",
+															"options": [
+																{
+																	"label": "线型1",
+																	"value": "线型1",
+																	"src": "https://img.alicdn.com/imgextra/i2/O1CN01E8qtGj1ooAKftYnux_!!6000000005271-2-tps-300-44.png"
+																},
+																{
+																	"label": "线型2",
+																	"value": "线型2",
+																	"src": "https://img.alicdn.com/imgextra/i1/O1CN01Gz2l0o1c477M6AB2j_!!6000000003546-2-tps-300-44.png"
+																},
+																{
+																	"label": "线型3",
+																	"value": "线型3",
+																	"src": "https://img.alicdn.com/imgextra/i3/O1CN011iYjC31xkLZSwpwp2_!!6000000006481-2-tps-300-44.png"
+																},
+																{
+																	"label": "线型4",
+																	"value": "线型4",
+																	"src": "https://img.alicdn.com/imgextra/i4/O1CN01RxvkUA27p3o1IiOVT_!!6000000007845-2-tps-300-44.png"
+																},
+																{
+																	"label": "线型5",
+																	"value": "线型5",
+																	"src": "https://img.alicdn.com/imgextra/i2/O1CN01VNLJnl1fuH4giu24w_!!6000000004066-2-tps-300-44.png"
+																}
+															],
+															"default": "线型1"
+														},
+														"weight": {
+															"type": "number",
+															"name": "飞线粗细",
+															"caption": "范围 [0, 20]",
+															"default": 3,
+															"range": [
+																0,
+																20
+															],
+															"step": 0.1,
+															"suffix": "px"
+														},
+														"color": {
+															"type": "color",
+															"name": "飞线颜色",
+															"default": "#0eff90"
+														}
+													}
+												},
+												"flareStyle": {
+													"type": "group",
+													"name": "线头样式",
+													"fold": true,
+													"enableHide": true,
+													"default": {
+														"show": true
+													},
+													"children": {
+														"lineHeadType": {
+															"name": "线头类型",
+															"type": "buttonRadio",
+															"default": "flare",
+															"options": [
+																{
+																	"value": "flare",
+																	"label": "矢量"
+																},
+																{
+																	"value": "image",
+																	"label": "图标"
+																}
+															]
+														},
+														"flareMarkerSelect": {
+															"showInPanel": [
+																[
+																	".lineHeadType",
+																	"$eq",
+																	"flare"
+																]
+															],
+															"type": "markerSelect",
+															"name": "矢量形状",
+															"schemes": [
+																{
+																	"id": "形状",
+																	"name": "形状",
+																	"scheme": [
+																		{
+																			"label": "耀斑",
+																			"value": "耀斑",
+																			"src": "https://img.alicdn.com/imgextra/i1/O1CN01pO5by71WxB27XKF3M_!!6000000002854-2-tps-100-100.png"
+																		}
+																	]
+																}
+															],
+															"default": "耀斑"
+														},
+														"flareSize": {
+															"showInPanel": [
+																[
+																	".lineHeadType",
+																	"$eq",
+																	"flare"
+																]
+															],
+															"type": "suite",
+															"name": "矢量尺寸",
+															"children": {
+																"width": {
+																	"type": "number",
+																	"name": "长度",
+																	"caption": "长度 [0, 40]",
+																	"default": 10,
+																	"range": [
+																		0,
+																		40
+																	],
+																	"step": 1,
+																	"suffix": "px"
+																},
+																"height": {
+																	"type": "number",
+																	"name": "宽度",
+																	"caption": "宽度 [0, 40]",
+																	"default": 5,
+																	"range": [
+																		0,
+																		40
+																	],
+																	"step": 1,
+																	"suffix": "px"
+																}
+															}
+														},
+														"markerSelect": {
+															"showInPanel": [
+																[
+																	".lineHeadType",
+																	"$eq",
+																	"image"
+																]
+															],
+															"type": "markerSelect",
+															"name": "图标形状",
+															"withUploader": true,
+															"schemes": [
+																{
+																	"id": "箭头",
+																	"name": "箭头",
+																	"scheme": [
+																		{
+																			"label": "指向1",
+																			"value": "https://img.alicdn.com/imgextra/i1/O1CN01EDfPbZ1wPuHJwpxqi_!!6000000006301-2-tps-100-100.png",
+																			"src": "https://img.alicdn.com/imgextra/i1/O1CN01jwnZLx1V30r3E9d4B_!!6000000002596-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "指向2",
+																			"value": "https://img.alicdn.com/imgextra/i4/O1CN01Wuu5Bh1xhbCEAe24S_!!6000000006475-2-tps-100-100.png",
+																			"src": "https://img.alicdn.com/imgextra/i1/O1CN01iYzoVm1GLagW99hg3_!!6000000000606-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "指向3",
+																			"value": "https://img.alicdn.com/imgextra/i3/O1CN011oNmDk1Ti7AWUnaBJ_!!6000000002415-2-tps-100-100.png",
+																			"src": "https://img.alicdn.com/imgextra/i4/O1CN01pdy8Bp1lGKDiskYf8_!!6000000004791-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "台风",
+																			"value": "https://img.alicdn.com/imgextra/i4/O1CN017NtcNE1F5jM1ZDOXi_!!6000000000436-2-tps-100-100.png",
+																			"src": "https://img.alicdn.com/imgextra/i2/O1CN01y9Ihmz21ikeeZGAUG_!!6000000007019-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "雷",
+																			"value": "https://img.alicdn.com/imgextra/i2/O1CN01MnnDZs1vysuZWm4Uf_!!6000000006242-2-tps-100-100.png",
+																			"src": "https://img.alicdn.com/imgextra/i2/O1CN01Xt87aF1iAsfMh2G6x_!!6000000004373-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "飞机",
+																			"value": "https://img.alicdn.com/imgextra/i3/O1CN01Ho8PeK1jOuPZaWe7k_!!6000000004539-2-tps-100-100.png",
+																			"src": "https://img.alicdn.com/imgextra/i4/O1CN01jJZDgg29RowK58Kc0_!!6000000008065-2-tps-48-48.png"
+																		}
+																	]
+																}
+															],
+															"default": "https://img.alicdn.com/imgextra/i3/O1CN011oNmDk1Ti7AWUnaBJ_!!6000000002415-2-tps-100-100.png"
+														},
+														"iconSize": {
+															"showInPanel": [
+																[
+																	".lineHeadType",
+																	"$eq",
+																	"image"
+																]
+															],
+															"type": "suite",
+															"name": "图标尺寸",
+															"children": {
+																"width": {
+																	"type": "number",
+																	"name": "宽度",
+																	"caption": "宽度 [0, 100]",
+																	"default": 20,
+																	"range": [
+																		0,
+																		100
+																	],
+																	"step": 1,
+																	"suffix": "px"
+																},
+																"height": {
+																	"type": "number",
+																	"name": "高度",
+																	"caption": "高度 [0, 100]",
+																	"default": 20,
+																	"range": [
+																		0,
+																		100
+																	],
+																	"step": 1,
+																	"suffix": "px"
+																}
+															}
+														},
+														"iconAngle": {
+															"showInPanel": [
+																[
+																	".lineHeadType",
+																	"$eq",
+																	"image"
+																]
+															],
+															"name": "图标方向",
+															"type": "radio",
+															"default": "line",
+															"optionCol": 12,
+															"options": [
+																{
+																	"value": "line",
+																	"label": "沿线方向"
+																},
+																{
+																	"value": "noline",
+																	"label": "固定方向"
+																}
+															]
+														},
+														"size": {
+															"type": "hidden",
+															"name": "图标尺寸",
+															"caption": "范围 [0.5, 20]",
+															"default": 1,
+															"range": [
+																0.5,
+																20
+															],
+															"step": 0.1,
+															"suffix": "px"
+														},
+														"color": {
+															"type": "color",
+															"name": "线头颜色",
+															"default": "#0eff90"
+														}
+													}
+												},
+												"circleStyle": {
+													"type": "group",
+													"name": "落点气泡",
+													"fold": true,
+													"enableHide": true,
+													"default": {
+														"show": true
+													},
+													"children": {
+														"circleMarker": {
+															"type": "markerSelect",
+															"name": "气泡形状",
+															"schemes": [
+																{
+																	"id": "气泡",
+																	"name": "气泡",
+																	"scheme": [
+																		{
+																			"label": "样式一",
+																			"value": "样式一",
+																			"src": "https://img.alicdn.com/imgextra/i4/O1CN01T99JCg1VU2DVg1sJY_!!6000000002655-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式二",
+																			"value": "样式二",
+																			"src": "https://img.alicdn.com/imgextra/i4/O1CN01oSDSbe28rddxkflBj_!!6000000007986-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式三",
+																			"value": "样式三",
+																			"src": "https://img.alicdn.com/imgextra/i3/O1CN01psqIPE1Cyk4V7caJw_!!6000000000150-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式四",
+																			"value": "样式四",
+																			"src": "https://img.alicdn.com/imgextra/i2/O1CN01xOpgSz1KaU1BbtlWC_!!6000000001180-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式五",
+																			"value": "样式五",
+																			"src": "https://img.alicdn.com/imgextra/i2/O1CN0190a88325CvaeGUg5d_!!6000000007491-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式六",
+																			"value": "样式六",
+																			"src": "https://img.alicdn.com/imgextra/i3/O1CN01ycSz6P248WA17ZG6f_!!6000000007346-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式七",
+																			"value": "样式七",
+																			"src": "https://img.alicdn.com/imgextra/i4/O1CN01ivni7a1mCUVpVHbnN_!!6000000004918-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式八",
+																			"value": "样式八",
+																			"src": "https://img.alicdn.com/imgextra/i1/O1CN01GLAICJ1vwavKiPNh2_!!6000000006237-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式九",
+																			"value": "样式九",
+																			"src": "https://img.alicdn.com/imgextra/i3/O1CN01ruXqG024I8Te1METH_!!6000000007367-2-tps-48-48.png"
+																		},
+																		{
+																			"label": "样式十",
+																			"value": "样式十",
+																			"src": "https://img.alicdn.com/imgextra/i2/O1CN01FOCwXi1mEmUflV4tl_!!6000000004923-2-tps-48-48.png"
+																		}
+																	]
+																}
+															],
+															"default": "样式一"
+														},
+														"radius": {
+															"type": "number",
+															"caption": "气泡半径 [10, 100]",
+															"default": 30,
+															"range": [
+																10,
+																100
+															],
+															"step": 1,
+															"suffix": "px"
+														},
+														"color": {
+															"type": "color",
+															"caption": "气泡颜色",
+															"default": "rgba(45, 215, 76, 0.73)"
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"relation": {
+			"visualMapping": [
+				{
+					"configPath": "options.graph.flyinglineStyle.colorMapping",
+					"apiPath": "dataSource.colorField"
+				}
+			],
+			"conditionalStyle": [
+				{
+					"configPath": "options.condition.condition",
+					"ruleKey": "rules"
+				}
+			]
+		},
+		"apis": {
+			"dataSource": {
+				"handler": "render",
+				"description": "数据接口",
+				"format": "geo_lineString",
+				"fields": {
+					"geometry": {
+						"description": "坐标数据",
+						"type": "object",
+						"optional": false
+					},
+					"name": {
+						"description": "名称",
+						"type": "string",
+						"optional": true
+					},
+					"value": {
+						"description": "值",
+						"type": "number",
+						"optional": true
+					},
+					"id": {
+						"description": "唯一标识",
+						"type": "string",
+						"optional": true
+					},
+					"colorField": {
+						"description": "颜色映射字段",
+						"type": "string",
+						"optional": true
+					}
+				}
+			}
+		},
+		"api_data": {
+			"dataSource": [
+				{
+					"id": 1,
+					"name": "安徽省 -> 湖北省",
+					"value": 1,
+					"sizeField": 5,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								114.298572,
+								30.584355
+							]
+						]
+					}
+				},
+				{
+					"id": 2,
+					"name": "安徽省 -> 北京市",
+					"value": 2,
+					"sizeField": 2,
+					"colorField": 2,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								116.405285,
+								39.904989
+							]
+						]
+					}
+				},
+				{
+					"id": 3,
+					"name": "安徽省 -> 天津市",
+					"value": 3,
+					"sizeField": 1,
+					"colorField": 2,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								117.190182,
+								39.125596
+							]
+						]
+					}
+				},
+				{
+					"id": 4,
+					"name": "安徽省 -> 河北省",
+					"value": 4,
+					"sizeField": 2,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								114.502461,
+								38.045474
+							]
+						]
+					}
+				},
+				{
+					"id": 5,
+					"name": "安徽省 -> 山西省",
+					"value": 5,
+					"sizeField": 5,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								112.549248,
+								37.857014
+							]
+						]
+					}
+				},
+				{
+					"id": 6,
+					"name": "安徽省 -> 内蒙古自治区",
+					"value": 6,
+					"sizeField": 5,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								111.670801,
+								40.818311
+							]
+						]
+					}
+				},
+				{
+					"id": 7,
+					"name": "安徽省 -> 辽宁省",
+					"value": 7,
+					"sizeField": 5,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								123.429096,
+								41.796767
+							]
+						]
+					}
+				},
+				{
+					"id": 8,
+					"name": "安徽省 -> 吉林省",
+					"value": 8,
+					"sizeField": 1,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								125.3245,
+								43.886841
+							]
+						]
+					}
+				},
+				{
+					"id": 9,
+					"name": "安徽省 -> 黑龙江省",
+					"value": 9,
+					"sizeField": 3,
+					"colorField": 2,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								126.642464,
+								45.756967
+							]
+						]
+					}
+				},
+				{
+					"id": 10,
+					"name": "安徽省 -> 上海市",
+					"value": 10,
+					"sizeField": 4,
+					"colorField": 1,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								121.472644,
+								31.231706
+							]
+						]
+					}
+				},
+				{
+					"id": 11,
+					"name": "安徽省 -> 江苏省",
+					"value": 11,
+					"sizeField": 3,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								118.767413,
+								32.041544
+							]
+						]
+					}
+				},
+				{
+					"id": 12,
+					"name": "安徽省 -> 浙江省",
+					"value": 12,
+					"sizeField": 5,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								120.153576,
+								30.287459
+							]
+						]
+					}
+				},
+				{
+					"id": 13,
+					"name": "安徽省 -> 福建省",
+					"value": 13,
+					"sizeField": 4,
+					"colorField": 2,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								119.306239,
+								26.075302
+							]
+						]
+					}
+				},
+				{
+					"id": 14,
+					"name": "安徽省 -> 江西省",
+					"value": 14,
+					"sizeField": 2,
+					"colorField": 4,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								115.892151,
+								28.676493
+							]
+						]
+					}
+				},
+				{
+					"id": 15,
+					"name": "安徽省 -> 山东省",
+					"value": 15,
+					"sizeField": 4,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								117.000923,
+								36.675807
+							]
+						]
+					}
+				},
+				{
+					"id": 16,
+					"name": "安徽省 -> 河南省",
+					"value": 16,
+					"sizeField": 5,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								113.665412,
+								34.757975
+							]
+						]
+					}
+				},
+				{
+					"id": 17,
+					"name": "安徽省 -> 湖南省",
+					"value": 17,
+					"sizeField": 2,
+					"colorField": 4,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								112.982279,
+								28.19409
+							]
+						]
+					}
+				},
+				{
+					"id": 18,
+					"name": "安徽省 -> 广东省",
+					"value": 18,
+					"sizeField": 5,
+					"colorField": 2,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								113.280637,
+								23.125178
+							]
+						]
+					}
+				},
+				{
+					"id": 19,
+					"name": "安徽省 -> 广西壮族自治区",
+					"value": 19,
+					"sizeField": 1,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								108.320004,
+								22.82402
+							]
+						]
+					}
+				},
+				{
+					"id": 20,
+					"name": "安徽省 -> 海南省",
+					"value": 20,
+					"sizeField": 5,
+					"colorField": 1,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								110.33119,
+								20.031971
+							]
+						]
+					}
+				},
+				{
+					"id": 21,
+					"name": "安徽省 -> 重庆市",
+					"value": 21,
+					"sizeField": 5,
+					"colorField": 1,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								106.504962,
+								29.533155
+							]
+						]
+					}
+				},
+				{
+					"id": 22,
+					"name": "安徽省 -> 四川省",
+					"value": 22,
+					"sizeField": 3,
+					"colorField": 2,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								104.065735,
+								30.659462
+							]
+						]
+					}
+				},
+				{
+					"id": 23,
+					"name": "安徽省 -> 贵州省",
+					"value": 23,
+					"sizeField": 2,
+					"colorField": 2,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								106.713478,
+								26.578343
+							]
+						]
+					}
+				},
+				{
+					"id": 24,
+					"name": "安徽省 -> 云南省",
+					"value": 24,
+					"sizeField": 4,
+					"colorField": 1,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								102.712251,
+								25.040609
+							]
+						]
+					}
+				},
+				{
+					"id": 25,
+					"name": "安徽省 -> 西藏自治区",
+					"value": 25,
+					"sizeField": 3,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								91.132212,
+								29.660361
+							]
+						]
+					}
+				},
+				{
+					"id": 26,
+					"name": "安徽省 -> 陕西省",
+					"value": 26,
+					"sizeField": 1,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								108.948024,
+								34.263161
+							]
+						]
+					}
+				},
+				{
+					"id": 27,
+					"name": "安徽省 -> 甘肃省",
+					"value": 27,
+					"sizeField": 1,
+					"colorField": 2,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								103.823557,
+								36.058039
+							]
+						]
+					}
+				},
+				{
+					"id": 28,
+					"name": "安徽省 -> 青海省",
+					"value": 28,
+					"sizeField": 3,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								101.778916,
+								36.623178
+							]
+						]
+					}
+				},
+				{
+					"id": 29,
+					"name": "安徽省 -> 宁夏回族自治区",
+					"value": 29,
+					"sizeField": 5,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								106.278179,
+								38.46637
+							]
+						]
+					}
+				},
+				{
+					"id": 30,
+					"name": "安徽省 -> 新疆维吾尔自治区",
+					"value": 30,
+					"sizeField": 5,
+					"colorField": 1,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								87.617733,
+								43.792818
+							]
+						]
+					}
+				},
+				{
+					"id": 31,
+					"name": "安徽省 -> 台湾省",
+					"value": 31,
+					"sizeField": 2,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								121.509062,
+								25.044332
+							]
+						]
+					}
+				},
+				{
+					"id": 32,
+					"name": "安徽省 -> 香港特别行政区",
+					"value": 32,
+					"sizeField": 5,
+					"colorField": 3,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								114.173355,
+								22.320048
+							]
+						]
+					}
+				},
+				{
+					"id": 33,
+					"name": "安徽省 -> 澳门特别行政区",
+					"value": 33,
+					"sizeField": 4,
+					"colorField": 5,
+					"geometry": {
+						"type": "LineString",
+						"coordinates": [
+							[
+								117.283042,
+								31.86119
+							],
+							[
+								113.54909,
+								22.198951
+							]
+						]
+					}
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,306 @@
+{
+	"name": "datav-engine-sprite-text",
+	"version": "0.0.14",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "文字标记",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"depthTest": {
+				"name": "深度检测",
+				"type": "boolean",
+				"default": true
+			},
+			"isSceneGroup": {
+				"name": "场景分组",
+				"type": "boolean",
+				"default": false
+			},
+			"sceneName": {
+				"show": [
+					[
+						"isSceneGroup",
+						"$eq",
+						true
+					]
+				],
+				"description": "删除内容即可自定义添加场景",
+				"type": "search",
+				"name": "场景名",
+				"default": "",
+				"searches": [
+					{
+						"name": "主场景",
+						"value": "main"
+					},
+					{
+						"name": "场景一",
+						"value": "scene1"
+					},
+					{
+						"name": "场景二",
+						"value": "scene2"
+					},
+					{
+						"name": "场景三",
+						"value": "scene3"
+					},
+					{
+						"name": "场景四",
+						"value": "scene4"
+					},
+					{
+						"name": "场景五",
+						"value": "scene5"
+					}
+				]
+			},
+			"icon": {
+				"type": "group",
+				"name": "图标",
+				"children": {
+					"size": {
+						"type": "group",
+						"name": "尺寸",
+						"children": {
+							"width": {
+								"type": "number",
+								"name": "宽度",
+								"default": 60,
+								"range": [
+									0,
+									200
+								],
+								"step": 1
+							},
+							"height": {
+								"type": "number",
+								"name": "高度",
+								"default": 60,
+								"range": [
+									0,
+									200
+								],
+								"step": 1
+							}
+						}
+					},
+					"background": {
+						"type": "group",
+						"name": "背景",
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "rgba(0, 0, 0, 0.7)"
+							}
+						}
+					},
+					"outline": {
+						"type": "group",
+						"name": "边框",
+						"children": {
+							"width": {
+								"type": "number",
+								"name": "宽度",
+								"default": 3,
+								"range": [
+									0,
+									10
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FF0036"
+							}
+						}
+					}
+				}
+			},
+			"title": {
+				"type": "group",
+				"name": "标题",
+				"children": {
+					"font": {
+						"type": "group",
+						"name": "字体",
+						"children": {
+							"size": {
+								"type": "number",
+								"name": "大小",
+								"default": 24,
+								"range": [
+									1,
+									128
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#fff"
+							},
+							"weight": {
+								"type": "number",
+								"name": "粗细",
+								"default": 300,
+								"range": [
+									100,
+									900
+								],
+								"step": 100
+							}
+						}
+					},
+					"rect": {
+						"type": "group",
+						"name": "方块",
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FF0036"
+							}
+						}
+					}
+				}
+			},
+			"content": {
+				"type": "group",
+				"name": "内容",
+				"children": {
+					"font": {
+						"type": "group",
+						"name": "字体",
+						"children": {
+							"size": {
+								"type": "number",
+								"name": "大小",
+								"default": 32,
+								"range": [
+									1,
+									128
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#fff"
+							},
+							"weight": {
+								"type": "number",
+								"name": "粗细",
+								"default": 400,
+								"range": [
+									100,
+									900
+								],
+								"step": 100
+							}
+						}
+					},
+					"background": {
+						"type": "group",
+						"name": "背景",
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#000000"
+							}
+						}
+					},
+					"outline": {
+						"type": "group",
+						"name": "边框",
+						"children": {
+							"width": {
+								"type": "number",
+								"name": "宽度",
+								"default": 4,
+								"range": [
+									0,
+									10
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FF0036"
+							}
+						}
+					},
+					"shadow": {
+						"type": "group",
+						"name": "阴影",
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FF0036"
+							}
+						}
+					}
+				}
+			},
+			"size": {
+				"type": "number",
+				"name": "大小",
+				"default": 1,
+				"range": [
+					0,
+					50
+				],
+				"step": 0.01
+			}
+		},
+		"api_data": {
+			"marker": [
+				{
+					"pos": {
+						"x": 120.17468112895,
+						"y": 30.257,
+						"z": 0
+					},
+					"title": "E 106.57  N 29.55",
+					"text": "大同路",
+					"iconUrl": "https://img.alicdn.com/tfs/TB1ILO5GHGYBuNjy0FoXXciBFXa-58-42.png"
+				}
+			]
+		},
+		"apis": {
+			"marker": {
+				"handler": "setData",
+				"description": "文字标签数据",
+				"fields": {}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1J9T7AxTpK1RjSZFMXXbG_VXa-180-180.png"
+	}
+}

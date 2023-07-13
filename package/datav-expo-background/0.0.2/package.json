@@ -1,0 +1,130 @@
+{
+	"name": "datav-expo-background",
+	"version": "0.0.2",
+	"main": "index.js",
+	"dependencies": {
+		"chroma-js": "1.3.4",
+		"safely-merge": "1.0.1",
+		"eventemitter3": "2.0.3"
+	},
+	"datav": {
+		"cn_name": "背景层",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"width": {
+				"name": "宽度",
+				"type": "number",
+				"range": [
+					10,
+					1000
+				],
+				"step": 0.01,
+				"default": 362
+			},
+			"height": {
+				"name": "高度",
+				"type": "number",
+				"range": [
+					10,
+					1000
+				],
+				"step": 0.01,
+				"default": 285
+			},
+			"textureUrl": {
+				"type": "image",
+				"name": "自定义贴图",
+				"default": ""
+			},
+			"opacity": {
+				"name": "透明度",
+				"type": "number",
+				"range": [
+					0,
+					1
+				],
+				"step": 0.01,
+				"default": 1
+			},
+			"color": {
+				"name": "颜色",
+				"type": "color",
+				"default": "rgb(0,255,0)"
+			},
+			"offsetX": {
+				"name": "X轴偏移",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.01,
+				"default": 0
+			},
+			"offsetY": {
+				"name": "Y轴偏移",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.01,
+				"default": -65
+			},
+			"offsetZ": {
+				"name": "Z轴偏移",
+				"type": "number",
+				"range": [
+					-1000,
+					1000
+				],
+				"step": 0.01,
+				"default": 0
+			},
+			"rotationX": {
+				"name": "X轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.01,
+				"default": -0.5
+			},
+			"rotationY": {
+				"name": "Y轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.01,
+				"default": 0
+			},
+			"rotationZ": {
+				"name": "Z轴旋转",
+				"type": "number",
+				"range": [
+					-1,
+					1
+				],
+				"step": 0.01,
+				"default": -0.5
+			}
+		},
+		"api_data": {},
+		"apis": {},
+		"type": [
+			"map_3d_conference_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_conference"
+			],
+			"supportNames": []
+		},
+		"icon": ""
+	}
+}

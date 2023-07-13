@@ -1,0 +1,266 @@
+{
+	"name": "pie-percent",
+	"version": "1.2.13",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"chroma-js": "1.2.1",
+		"d3": "3.5.12",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "单值百分比饼图",
+		"level": 0,
+		"icon": "//img.alicdn.com/tfs/TB1N.gZmKT2gK0jSZFvXXXnFXXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"regular_pie",
+			"DataV-6:regular_pie"
+		],
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "单值百分比饼图接口",
+				"fields": {
+					"value": {
+						"description": "值"
+					}
+				}
+			}
+		},
+		"config": {
+			"chart": {
+				"type": "group",
+				"name": "饼图属性",
+				"children": {
+					"_innerRadius": {
+						"type": "number",
+						"name": "内半径",
+						"default": 0.77,
+						"range": [
+							0,
+							1
+						]
+					},
+					"_outerRadius": {
+						"type": "number",
+						"name": "外半径",
+						"default": 0.88,
+						"range": [
+							0,
+							1
+						]
+					},
+					"color": {
+						"type": "color",
+						"name": "饼图填充底色",
+						"default": "#333333"
+					}
+				}
+			},
+			"arc": {
+				"type": "group",
+				"name": "扇形配置",
+				"children": {
+					"startColor": {
+						"type": "color",
+						"name": "起点色值",
+						"default": "rgb(10, 115, 255)"
+					},
+					"endColor": {
+						"type": "color",
+						"name": "末端色值",
+						"default": "rgb(121, 218, 255)"
+					},
+					"animationTime": {
+						"type": "number",
+						"name": "动画持续时间",
+						"default": 2000
+					}
+				}
+			},
+			"percent": {
+				"type": "group",
+				"name": "中间百分比部分",
+				"handler": "updatePercent",
+				"children": {
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "rgb(144, 160, 174)"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								],
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						}
+					},
+					"sizePercent": {
+						"type": "number",
+						"name": "外框占比",
+						"default": 0.74,
+						"range": [
+							0,
+							1
+						]
+					},
+					"numberFontSize": {
+						"type": "number",
+						"name": "数字字号",
+						"default": 24
+					},
+					"decimal": {
+						"name": "小数点位数",
+						"type": "number",
+						"default": 0
+					},
+					"percentSymbol": {
+						"name": "百分比符号",
+						"type": "text",
+						"default": "%"
+					},
+					"percentFontSize": {
+						"type": "number",
+						"name": "百分比字号",
+						"default": 16
+					},
+					"percentPosition": {
+						"name": "百分比位置",
+						"type": "select",
+						"options": [
+							{
+								"name": "前置",
+								"value": "front"
+							},
+							{
+								"name": "后置",
+								"value": "end"
+							}
+						],
+						"default": "end"
+					},
+					"percentMargin": {
+						"name": "百分比偏移值",
+						"type": "number",
+						"default": 0
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": 0.832
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "40",
+			"minHeight": "40",
+			"z-index": 1010
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1ToMVmGL7gK0jSZFBXXXZZpXa-160-116.png"
+	}
+}

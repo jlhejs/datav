@@ -1,0 +1,623 @@
+{
+	"name": "key-value-table",
+	"version": "1.2.11",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "键值表格",
+		"protocol": 2,
+		"level": 0,
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"label": {
+						"description": "标签内容",
+						"optional": true,
+						"type": "string"
+					},
+					"value": {
+						"description": "值",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"table": {
+				"type": "group",
+				"name": "表格",
+				"children": {
+					"isResponsive": {
+						"type": "boolean",
+						"name": "自适应",
+						"default": true
+					},
+					"borderLine": {
+						"type": "group",
+						"name": "边框线",
+						"children": {
+							"lineWidth": {
+								"type": "number",
+								"name": "线条粗细",
+								"default": 0,
+								"min": 0,
+								"max": 50,
+								"step": 1
+							},
+							"lineColor": {
+								"type": "color",
+								"name": "线条颜色",
+								"default": "rgb(121, 218, 255)"
+							}
+						}
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							}
+						}
+					}
+				}
+			},
+			"tableCell": {
+				"type": "group",
+				"name": "单元格",
+				"children": {
+					"padding": {
+						"type": "group",
+						"name": "间距",
+						"children": {
+							"lr": {
+								"name": "左右间距",
+								"type": "number",
+								"default": 12,
+								"range": [
+									0,
+									50
+								],
+								"step": 1
+							},
+							"tb": {
+								"type": "number",
+								"name": "上下间距",
+								"range": [
+									0,
+									50
+								],
+								"default": 9,
+								"step": 1
+							}
+						}
+					}
+				}
+			},
+			"tableHead": {
+				"type": "group",
+				"name": "表头",
+				"children": {
+					"ifShow": {
+						"type": "boolean",
+						"name": "首行为表头",
+						"default": true
+					},
+					"textStyle": {
+						"type": "group",
+						"name": "文本样式",
+						"fold": true,
+						"children": {
+							"color": {
+								"type": "color",
+								"name": "字体颜色",
+								"default": "#ffffff"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"range": [
+									0,
+									100
+								],
+								"default": 12,
+								"min": 0,
+								"max": 50,
+								"step": 1
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								],
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								]
+							}
+						},
+						"show": [
+							[
+								"ifShow",
+								"$eq",
+								true
+							]
+						]
+					},
+					"backgroundColor": {
+						"type": "color",
+						"name": "背景颜色",
+						"default": "#0062e3",
+						"show": [
+							[
+								"ifShow",
+								"$eq",
+								true
+							]
+						]
+					}
+				}
+			},
+			"column": {
+				"type": "group",
+				"name": "列",
+				"children": {
+					"firstColumnWidth": {
+						"type": "number",
+						"name": "宽度百分比%",
+						"default": 48,
+						"min": 0,
+						"max": 100,
+						"step": 1
+					},
+					"splitLine": {
+						"type": "group",
+						"name": "分割线",
+						"children": {
+							"lineWidth": {
+								"type": "number",
+								"name": "线条粗细",
+								"default": 0,
+								"min": 0,
+								"max": 50,
+								"step": 1
+							},
+							"lineColor": {
+								"type": "color",
+								"name": "线条颜色",
+								"default": "rgba(61, 171, 255, 0.75)"
+							}
+						}
+					},
+					"firstColumn": {
+						"type": "group",
+						"name": "第一列",
+						"children": {
+							"textStyle": {
+								"type": "group",
+								"name": "文本样式",
+								"fold": true,
+								"children": {
+									"color": {
+										"type": "color",
+										"name": "字体颜色",
+										"default": "rgb(255, 255, 255)"
+									},
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"range": [
+											0,
+											100
+										],
+										"default": 12,
+										"step": 1
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"searches": [
+											"normal",
+											"bold",
+											"bolder",
+											"lighter",
+											100,
+											200,
+											300,
+											400,
+											500,
+											600,
+											700,
+											800,
+											900
+										],
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									}
+								}
+							},
+							"backgroundColor": {
+								"type": "color",
+								"name": "背景颜色",
+								"default": "rgba(10, 39, 50, 0)"
+							},
+							"textAlign": {
+								"name": "对齐方式",
+								"type": "options",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "left"
+									},
+									{
+										"name": "右对齐",
+										"value": "right"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									}
+								],
+								"default": "left"
+							}
+						}
+					},
+					"secondColumn": {
+						"type": "group",
+						"name": "第二列",
+						"children": {
+							"textStyle": {
+								"type": "group",
+								"name": "文本样式",
+								"fold": true,
+								"children": {
+									"color": {
+										"type": "color",
+										"name": "字体颜色",
+										"default": "rgb(255, 255, 255)"
+									},
+									"fontSize": {
+										"type": "number",
+										"name": "字号",
+										"range": [
+											0,
+											100
+										],
+										"default": 12,
+										"step": 1
+									},
+									"fontWeight": {
+										"name": "字体粗细",
+										"type": "select",
+										"default": "normal",
+										"searches": [
+											"normal",
+											"bold",
+											"bolder",
+											"lighter",
+											100,
+											200,
+											300,
+											400,
+											500,
+											600,
+											700,
+											800,
+											900
+										],
+										"options": [
+											{
+												"name": "Normal",
+												"value": "normal"
+											},
+											{
+												"name": "Bold",
+												"value": "bold"
+											},
+											{
+												"name": "Bolder",
+												"value": "bolder"
+											},
+											{
+												"name": "Lighter",
+												"value": "lighter"
+											},
+											{
+												"name": "100",
+												"value": "100"
+											},
+											{
+												"name": "200",
+												"value": "200"
+											},
+											{
+												"name": "300",
+												"value": "300"
+											},
+											{
+												"name": "400",
+												"value": "400"
+											},
+											{
+												"name": "500",
+												"value": "500"
+											},
+											{
+												"name": "600",
+												"value": "600"
+											},
+											{
+												"name": "700",
+												"value": "700"
+											},
+											{
+												"name": "800",
+												"value": "800"
+											},
+											{
+												"name": "900",
+												"value": "900"
+											}
+										]
+									}
+								}
+							},
+							"backgroundColor": {
+								"type": "color",
+								"name": "背景颜色",
+								"default": "rgba(10, 39, 50, 0)"
+							},
+							"textAlign": {
+								"name": "对齐方式",
+								"type": "options",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "left"
+									},
+									{
+										"name": "右对齐",
+										"value": "right"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									}
+								],
+								"default": "left"
+							}
+						}
+					}
+				}
+			},
+			"row": {
+				"type": "group",
+				"name": "行",
+				"children": {
+					"splitLine": {
+						"type": "group",
+						"name": "分割线",
+						"children": {
+							"lineWidth": {
+								"type": "number",
+								"name": "线条粗细",
+								"default": 1,
+								"min": 0,
+								"max": 50,
+								"step": 1
+							},
+							"lineColor": {
+								"type": "color",
+								"name": "线条颜色",
+								"default": "rgb(10, 115, 255)"
+							}
+						}
+					},
+					"ifOddEven": {
+						"type": "boolean",
+						"name": "是否区分奇偶行",
+						"default": true
+					},
+					"oddBgColor": {
+						"type": "color",
+						"name": "奇数行背景色",
+						"default": "rgb(36, 131, 255)",
+						"show": [
+							[
+								"ifOddEven",
+								"$eq",
+								true
+							]
+						]
+					},
+					"evenBgColor": {
+						"type": "color",
+						"name": "偶数行背景色",
+						"default": "rgb(10, 115, 255)",
+						"show": [
+							[
+								"ifOddEven",
+								"$eq",
+								true
+							]
+						]
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"label": "支持两种数据格式",
+					"value": "这是第一种"
+				},
+				{
+					"key0": "value0",
+					"key1": "value1",
+					"key2": "value2",
+					"key3": "value3"
+				}
+			]
+		},
+		"view": {
+			"width": "300",
+			"height": "180",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 1010
+		},
+		"type": [
+			"text_table",
+			"DataV-6:table"
+		],
+		"icon": "//img.alicdn.com/tfs/TB1Yp7Sk1bviK0jSZFNXXaApXXa-370-208.png",
+		"thumbnail": "//img.alicdn.com/tfs/TB1HY_nlHr1gK0jSZR0XXbP8XXa-332-144.png"
+	}
+}

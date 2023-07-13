@@ -1,0 +1,197 @@
+{
+	"name": "datavmap-2d-layer-tile",
+	"version": "0.2.17",
+	"description": "基于datav-map的底图组件",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-2d-layer-tile.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "youyan.wm",
+	"dependencies": {
+		"bcore": "0.0.21"
+	},
+	"datav": {
+		"cn_name": "底图层",
+		"level": 0,
+		"icon": "https://img.alicdn.com/tfs/TB1jH6_AwHqK1RjSZFEXXcGMXXa-180-180.png",
+		"protocol": 2,
+		"type": [
+			"datavmap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavmap"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			}
+		},
+		"apis": {},
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"maskColor": {
+				"name": "蒙版颜色",
+				"type": "color",
+				"default": "rgba(0,0,0,0)"
+			},
+			"opacity": {
+				"name": "透明度",
+				"type": "number",
+				"range": [
+					0,
+					1
+				],
+				"step": 0.1,
+				"default": 1
+			},
+			"url": {
+				"description": "删除内容即可下拉选择预定义的地图或者填写自定义的瓦片地址",
+				"name": "瓦片",
+				"type": "search",
+				"default": "",
+				"searches": [
+					{
+						"name": "高德电子地图",
+						"value": "NormalAMap"
+					},
+					{
+						"name": "高德卫星图",
+						"value": "SatelliteAMap"
+					}
+				]
+			},
+			"isAutoRefresh": {
+				"description": "高德热力、腾讯实时路况需开启此选项自动刷新最新的瓦片数据",
+				"name": "自动刷新",
+				"type": "boolean",
+				"default": false
+			},
+			"refreshTime": {
+				"show": [
+					[
+						"isAutoRefresh",
+						"$eq",
+						true
+					]
+				],
+				"description": "刷新时间间隔(分钟)",
+				"name": "刷新间隔",
+				"type": "number",
+				"min": 1,
+				"max": 100,
+				"default": 10
+			},
+			"isFilter": {
+				"name": "滤镜",
+				"type": "boolean",
+				"default": false
+			},
+			"filter": {
+				"show": [
+					[
+						"isFilter",
+						"$eq",
+						true
+					]
+				],
+				"type": "group",
+				"name": "滤镜选项",
+				"children": {
+					"brightness": {
+						"name": "亮度",
+						"type": "number",
+						"range": [
+							0,
+							10
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"contrast": {
+						"name": "对比度",
+						"type": "number",
+						"range": [
+							0,
+							5
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"grayscale": {
+						"name": "灰度",
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"default": 0
+					},
+					"hueRotate": {
+						"name": "色相",
+						"type": "number",
+						"range": [
+							0,
+							360
+						],
+						"step": 0.01,
+						"default": 0
+					},
+					"invert": {
+						"name": "反转",
+						"type": "number",
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"default": 0
+					},
+					"saturate": {
+						"name": "饱和度",
+						"type": "number",
+						"range": [
+							0,
+							10
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"sepia": {
+						"name": "墨度",
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"default": 0
+					}
+				}
+			}
+		},
+		"api_data": {}
+	}
+}

@@ -1,0 +1,833 @@
+{
+	"name": "@datav-form/interact-button",
+	"version": "0.0.21",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1",
+		"xss": "1.0.3"
+	},
+	"datav": {
+		"cn_name": "按钮",
+		"icon": "//img.alicdn.com/tfs/TB1ww.ZmFT7gK0jSZFpXXaTkpXa-368-208.png",
+		"protocol": 2,
+		"level": 1,
+		"type": [
+			"interact",
+			"DataV-6:control_button"
+		],
+		"view": {
+			"width": "300",
+			"height": "40",
+			"minWidth": "1",
+			"minHeight": "1"
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"description": "值",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"config": {
+			"global": {
+				"name": "全局样式",
+				"type": "group",
+				"children": {
+					"bottonContent": {
+						"name": "文字内容",
+						"type": "text",
+						"default": "Button",
+						"dataField": "value"
+					}
+				}
+			},
+			"normal": {
+				"name": "普通样式",
+				"type": "group",
+				"children": {
+					"border": {
+						"name": "边框样式",
+						"type": "group",
+						"children": {
+							"borderWidth": {
+								"name": "边框宽度",
+								"type": "number",
+								"min": 0,
+								"default": 0
+							},
+							"borderColor": {
+								"name": "边框颜色",
+								"type": "color",
+								"default": "#00a5ff"
+							},
+							"borderRadius": {
+								"name": "边框圆角",
+								"type": "number",
+								"min": 0,
+								"default": 0
+							},
+							"borderStyle": {
+								"name": "线条类型",
+								"type": "select",
+								"default": "solid",
+								"options": [
+									{
+										"name": "实线",
+										"value": "solid"
+									},
+									{
+										"name": "虚线",
+										"value": "dashed"
+									},
+									{
+										"name": "点线",
+										"value": "dotted"
+									},
+									{
+										"name": "双实线",
+										"value": "double"
+									},
+									{
+										"name": "雕刻效果",
+										"value": "groove"
+									},
+									{
+										"name": "浮雕效果",
+										"value": "ridge"
+									},
+									{
+										"name": "陷入效果",
+										"value": "inset"
+									},
+									{
+										"name": "突出效果",
+										"value": "outset"
+									}
+								]
+							}
+						}
+					},
+					"background": {
+						"name": "背景样式",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "背景颜色",
+								"type": "color",
+								"default": "rgb(10, 115, 255)"
+							},
+							"img": {
+								"name": "背景图片",
+								"type": "image",
+								"default": ""
+							},
+							"repeat": {
+								"name": "背景图片重复",
+								"type": "boolean",
+								"default": false
+							},
+							"size": {
+								"name": "背景图尺寸",
+								"type": "search",
+								"options": [
+									{
+										"name": "cover",
+										"value": "cover"
+									},
+									{
+										"name": "contain",
+										"value": "contain"
+									},
+									{
+										"name": "auto",
+										"value": "auto auto"
+									}
+								],
+								"default": "auto auto"
+							}
+						}
+					},
+					"textStyle": {
+						"name": "文字样式",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"fontStyle": {
+								"name": "字体样式",
+								"type": "select",
+								"options": [
+									{
+										"name": "normal",
+										"value": "normal"
+									},
+									{
+										"name": "italic",
+										"value": "italic"
+									},
+									{
+										"name": "oblique",
+										"value": "oblique"
+									}
+								],
+								"default": "normal"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								],
+								"default": "normal"
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"step": 1,
+								"default": 14
+							},
+							"textAlign": {
+								"name": "文字对齐方式",
+								"type": "options",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "left"
+									},
+									{
+										"name": "右对齐",
+										"value": "right"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									}
+								],
+								"default": "center"
+							}
+						}
+					}
+				}
+			},
+			"emphasis": {
+				"name": "点击样式",
+				"type": "group",
+				"children": {
+					"border": {
+						"name": "边框样式",
+						"type": "group",
+						"children": {
+							"borderWidth": {
+								"name": "边框宽度",
+								"type": "number",
+								"min": 0,
+								"default": 0
+							},
+							"borderColor": {
+								"name": "边框颜色",
+								"type": "color",
+								"default": "#00a5ff"
+							},
+							"borderRadius": {
+								"name": "边框圆角",
+								"type": "number",
+								"min": 0,
+								"default": 0
+							},
+							"borderStyle": {
+								"name": "线条类型",
+								"type": "select",
+								"default": "solid",
+								"options": [
+									{
+										"name": "实线",
+										"value": "solid"
+									},
+									{
+										"name": "虚线",
+										"value": "dashed"
+									},
+									{
+										"name": "点线",
+										"value": "dotted"
+									},
+									{
+										"name": "双实线",
+										"value": "double"
+									},
+									{
+										"name": "雕刻效果",
+										"value": "groove"
+									},
+									{
+										"name": "浮雕效果",
+										"value": "ridge"
+									},
+									{
+										"name": "陷入效果",
+										"value": "inset"
+									},
+									{
+										"name": "突出效果",
+										"value": "outset"
+									}
+								]
+							}
+						}
+					},
+					"background": {
+						"name": "背景样式",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "背景颜色",
+								"type": "color",
+								"default": "rgb(36, 131, 255)"
+							},
+							"img": {
+								"name": "背景图片",
+								"type": "image",
+								"default": ""
+							},
+							"repeat": {
+								"name": "背景图片重复",
+								"type": "boolean",
+								"default": false
+							},
+							"size": {
+								"name": "背景图尺寸",
+								"type": "search",
+								"options": [
+									{
+										"name": "cover",
+										"value": "cover"
+									},
+									{
+										"name": "contain",
+										"value": "contain"
+									},
+									{
+										"name": "auto",
+										"value": "auto auto"
+									}
+								],
+								"default": "auto auto"
+							}
+						}
+					},
+					"textStyle": {
+						"name": "文字样式",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"fontStyle": {
+								"name": "字体样式",
+								"type": "select",
+								"options": [
+									{
+										"name": "normal",
+										"value": "normal"
+									},
+									{
+										"name": "italic",
+										"value": "italic"
+									},
+									{
+										"name": "oblique",
+										"value": "oblique"
+									}
+								],
+								"default": "normal"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								],
+								"default": "bold"
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"step": 1,
+								"default": 16
+							},
+							"textAlign": {
+								"name": "文字对齐方式",
+								"type": "options",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "left"
+									},
+									{
+										"name": "右对齐",
+										"value": "right"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									}
+								],
+								"default": "center"
+							}
+						}
+					}
+				}
+			},
+			"hover": {
+				"name": "悬停样式",
+				"type": "group",
+				"children": {
+					"border": {
+						"name": "边框样式",
+						"type": "group",
+						"children": {
+							"borderWidth": {
+								"name": "边框宽度",
+								"type": "number",
+								"min": 0,
+								"default": 0
+							},
+							"borderColor": {
+								"name": "边框颜色",
+								"type": "color",
+								"default": "#00a5ff"
+							},
+							"borderRadius": {
+								"name": "边框圆角",
+								"type": "number",
+								"min": 0,
+								"default": 0
+							},
+							"borderStyle": {
+								"name": "线条类型",
+								"type": "select",
+								"default": "solid",
+								"options": [
+									{
+										"name": "实线",
+										"value": "solid"
+									},
+									{
+										"name": "虚线",
+										"value": "dashed"
+									},
+									{
+										"name": "点线",
+										"value": "dotted"
+									},
+									{
+										"name": "双实线",
+										"value": "double"
+									},
+									{
+										"name": "雕刻效果",
+										"value": "groove"
+									},
+									{
+										"name": "浮雕效果",
+										"value": "ridge"
+									},
+									{
+										"name": "陷入效果",
+										"value": "inset"
+									},
+									{
+										"name": "突出效果",
+										"value": "outset"
+									}
+								]
+							}
+						}
+					},
+					"background": {
+						"name": "背景样式",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "背景颜色",
+								"type": "color",
+								"default": "rgb(61, 171, 255)"
+							},
+							"img": {
+								"name": "背景图片",
+								"type": "image",
+								"default": ""
+							},
+							"repeat": {
+								"name": "背景图片重复",
+								"type": "boolean",
+								"default": false
+							},
+							"size": {
+								"name": "背景图尺寸",
+								"type": "search",
+								"options": [
+									{
+										"name": "cover",
+										"value": "cover"
+									},
+									{
+										"name": "contain",
+										"value": "contain"
+									},
+									{
+										"name": "auto",
+										"value": "auto auto"
+									}
+								],
+								"default": "auto auto"
+							}
+						}
+					},
+					"textStyle": {
+						"name": "文字样式",
+						"type": "group",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "#fff"
+							},
+							"fontStyle": {
+								"name": "字体样式",
+								"type": "select",
+								"options": [
+									{
+										"name": "normal",
+										"value": "normal"
+									},
+									{
+										"name": "italic",
+										"value": "italic"
+									},
+									{
+										"name": "oblique",
+										"value": "oblique"
+									}
+								],
+								"default": "normal"
+							},
+							"fontWeight": {
+								"name": "字体粗细",
+								"type": "select",
+								"options": [
+									{
+										"name": "Normal",
+										"value": "normal"
+									},
+									{
+										"name": "Bold",
+										"value": "bold"
+									},
+									{
+										"name": "Bolder",
+										"value": "bolder"
+									},
+									{
+										"name": "Lighter",
+										"value": "lighter"
+									},
+									{
+										"name": "100",
+										"value": "100"
+									},
+									{
+										"name": "200",
+										"value": "200"
+									},
+									{
+										"name": "300",
+										"value": "300"
+									},
+									{
+										"name": "400",
+										"value": "400"
+									},
+									{
+										"name": "500",
+										"value": "500"
+									},
+									{
+										"name": "600",
+										"value": "600"
+									},
+									{
+										"name": "700",
+										"value": "700"
+									},
+									{
+										"name": "800",
+										"value": "800"
+									},
+									{
+										"name": "900",
+										"value": "900"
+									}
+								],
+								"default": "bold"
+							},
+							"fontFamily": {
+								"name": "字体",
+								"type": "search",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"name": "字号",
+								"type": "number",
+								"step": 1,
+								"default": 16
+							},
+							"textAlign": {
+								"name": "文字对齐方式",
+								"type": "options",
+								"options": [
+									{
+										"name": "左对齐",
+										"value": "left"
+									},
+									{
+										"name": "右对齐",
+										"value": "right"
+									},
+									{
+										"name": "居中对齐",
+										"value": "center"
+									}
+								],
+								"default": "center"
+							}
+						}
+					}
+				}
+			},
+			"urlConfig": {
+				"name": "超链接配置",
+				"type": "group",
+				"description": "点击按钮可跳转至设定的超链接",
+				"dataField": true,
+				"children": {
+					"url": {
+						"name": "超链接",
+						"type": "string",
+						"default": ""
+					},
+					"ifBlank": {
+						"name": "是否新开窗口",
+						"type": "boolean",
+						"default": false
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value": "值"
+				}
+			]
+		},
+		"events": {
+			"button-clicked": {
+				"description": "点击按钮时",
+				"fields": {
+					"value": {
+						"description": "值",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"thumbnail": "//img.alicdn.com/tfs/TB1jcM0mND1gK0jSZFsXXbldVXa-160-116.png"
+	}
+}

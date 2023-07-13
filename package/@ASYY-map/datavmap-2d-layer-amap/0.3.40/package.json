@@ -1,0 +1,262 @@
+{
+	"name": "datavmap-2d-layer-amap",
+	"version": "0.3.40",
+	"description": "高德在线地图（含室内地图）作为地图底图层接入组件",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo pass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-2d-layer-amap.git"
+	},
+	"keywords": [
+		"datav",
+		"map",
+		"subcoms"
+	],
+	"author": "yunyi.zww",
+	"dependencies": {
+		"eventemitter3": "3.0.0",
+		"safely-merge": "1.0.1",
+		"chroma-js": "1.3.3",
+		"polylabel": "1.0.2"
+	},
+	"datav": {
+		"cn_name": "高德在线底图",
+		"icon": "https://img.alicdn.com/tfs/TB1lG.fAxjaK1RjSZFAXXbdLFXa-180-180.png",
+		"level": 1,
+		"protocol": 2,
+		"type": [
+			"datavmap_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_datavmap"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "800",
+			"height": "600",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"events": {
+			"global_var": {
+				"description": "室内地图楼层被点击触发",
+				"fields": {
+					"indoormapFloor": {
+						"description": "室内地图楼层号"
+					}
+				}
+			}
+		},
+		"apis": {},
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"mapKey": {
+				"type": "text",
+				"name": "高德地图Key",
+				"default": "",
+				"description": "通过高德开放平台-控制台-应用管理-我的应用申请key：http://lbs.amap.com/dev/key/app"
+			},
+			"isCustom": {
+				"type": "boolean",
+				"name": "自定义样式",
+				"default": false
+			},
+			"standardStyleTemplate": {
+				"show": [
+					[
+						"isCustom",
+						"$eq",
+						false
+					]
+				],
+				"name": "标准样式模板",
+				"type": "search",
+				"default": "blue",
+				"range": [
+					{
+						"标准": "normal"
+					},
+					{
+						"幻影黑": "dark"
+					},
+					{
+						"靛青蓝": "blue"
+					},
+					{
+						"极夜蓝": "darkblue"
+					},
+					{
+						"雅士灰": "grey"
+					},
+					{
+						"月光银": "light"
+					},
+					{
+						"草色青": "fresh"
+					},
+					{
+						"涂鸦": "graffiti"
+					},
+					{
+						"远山黛": "whitesmoke"
+					},
+					{
+						"马卡龙": "macaron"
+					},
+					{
+						"酱籽": "wine"
+					}
+				],
+				"description": ""
+			},
+			"customMapStyle": {
+				"show": [
+					[
+						"isCustom",
+						"$eq",
+						true
+					]
+				],
+				"type": "text",
+				"name": "地图样式 ID",
+				"default": "",
+				"description": "前往创建自定义地图样式：http://lbs.amap.com/dev/mapstyle/index"
+			},
+			"amapFeatures": {
+				"type": "group",
+				"name": "设置地图显示内容",
+				"fold": false,
+				"children": {
+					"bg": {
+						"name": "背景",
+						"type": "boolean",
+						"default": "true"
+					},
+					"road": {
+						"name": "道路",
+						"type": "boolean",
+						"default": "true"
+					},
+					"building": {
+						"name": "建筑物",
+						"type": "boolean",
+						"default": "true"
+					},
+					"point": {
+						"name": "标注",
+						"type": "boolean",
+						"default": "true"
+					}
+				}
+			},
+			"isTraffic": {
+				"name": "路况",
+				"type": "boolean",
+				"default": false
+			},
+			"isFilter": {
+				"name": "滤镜",
+				"type": "boolean",
+				"default": false
+			},
+			"filter": {
+				"show": [
+					[
+						"isFilter",
+						"$eq",
+						true
+					]
+				],
+				"type": "group",
+				"name": "滤镜选项",
+				"children": {
+					"brightness": {
+						"name": "亮度",
+						"type": "number",
+						"range": [
+							0,
+							10
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"contrast": {
+						"name": "对比度",
+						"type": "number",
+						"range": [
+							0,
+							5
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"grayscale": {
+						"name": "灰度",
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"default": 0
+					},
+					"hueRotate": {
+						"name": "色相",
+						"type": "number",
+						"range": [
+							0,
+							360
+						],
+						"step": 0.01,
+						"default": 0
+					},
+					"invert": {
+						"name": "反转",
+						"type": "number",
+						"step": 0.01,
+						"range": [
+							0,
+							1
+						],
+						"default": 160
+					},
+					"saturate": {
+						"name": "饱和度",
+						"type": "number",
+						"range": [
+							0,
+							10
+						],
+						"step": 0.01,
+						"default": 1
+					},
+					"sepia": {
+						"name": "墨度",
+						"type": "number",
+						"range": [
+							0,
+							1
+						],
+						"step": 0.01,
+						"default": 0
+					}
+				}
+			}
+		},
+		"api_data": {}
+	}
+}

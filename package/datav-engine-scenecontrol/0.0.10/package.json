@@ -1,0 +1,218 @@
+{
+	"name": "datav-engine-scenecontrol",
+	"version": "0.0.10",
+	"main": "index.js",
+	"dependencies": {
+		"async": "2.5.0",
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "场景管理器",
+		"protocol": 2,
+		"config": {
+			"handler": "updateOptions",
+			"fold": true,
+			"isWork": {
+				"name": "启用",
+				"type": "boolean",
+				"default": false
+			},
+			"duration": {
+				"type": "number",
+				"name": "持续时间",
+				"default": 3000,
+				"range": [
+					0,
+					30000
+				],
+				"step": 1
+			},
+			"delay": {
+				"type": "number",
+				"name": "延迟时间",
+				"default": 3000,
+				"range": [
+					0,
+					30000
+				],
+				"step": 1
+			},
+			"endCallbackId": {
+				"type": "text",
+				"name": "回调 ID(结束)",
+				"default": ""
+			}
+		},
+		"events": {
+			"scene-control-start": {
+				"description": "场景开始",
+				"type": "any",
+				"fields": {}
+			},
+			"scene-control-end": {
+				"description": "场景结束",
+				"type": "any",
+				"fields": {}
+			}
+		},
+		"api_data": {
+			"scenecontrol": [
+				{
+					"duration": 5000,
+					"distance": 5,
+					"path": [
+						[
+							121.4819,
+							31.2164,
+							15
+						],
+						[
+							121.4827,
+							31.2223,
+							5
+						],
+						[
+							121.4885,
+							31.2231,
+							5
+						]
+					],
+					"info": {
+						"antialiasType": "SMAA",
+						"crossfade": {
+							"enabled": false,
+							"preCameraName": "main",
+							"postCameraName": "main",
+							"preSceneName": "main",
+							"postSceneName": "main",
+							"delay": 10,
+							"duration": 5
+						},
+						"ssr": {
+							"enabled": false,
+							"maxIteration": 20,
+							"maxRayDistance": 500,
+							"strideMagnitude": 1,
+							"glossiness": 0.6,
+							"blurSize": 2
+						},
+						"ssao": {
+							"enabled": false,
+							"intensity": 1,
+							"radius": 1,
+							"blurSize": 4
+						},
+						"dof": {
+							"enabled": false,
+							"nearDist": 10,
+							"farDist": 50,
+							"focusRange": 0,
+							"blurRatio": 1
+						},
+						"motionBlur": {
+							"enabled": false,
+							"blurSize": 16,
+							"intensity": 0.125
+						},
+						"bloom": {
+							"enabled": false,
+							"resolutionScale": 1,
+							"intensity": 1,
+							"distinction": 0.5
+						}
+					}
+				},
+				{
+					"duration": 5000,
+					"distance": 5,
+					"direction": "back",
+					"path": [
+						[
+							121.491,
+							31.22,
+							5
+						],
+						[
+							121.491,
+							31.2181,
+							5
+						]
+					],
+					"info": {
+						"antialiasType": "SMAA",
+						"crossfade": {
+							"preCameraName": "main",
+							"postCameraName": "main",
+							"preSceneName": "main",
+							"postSceneName": "scene1",
+							"enabled": false,
+							"delay": 10,
+							"duration": 5
+						},
+						"ssr": {
+							"enabled": false,
+							"maxIteration": 20,
+							"maxRayDistance": 500,
+							"strideMagnitude": 1,
+							"glossiness": 0.6,
+							"blurSize": 2
+						},
+						"ssao": {
+							"enabled": false,
+							"intensity": 1,
+							"radius": 1,
+							"blurSize": 4
+						},
+						"dof": {
+							"enabled": false,
+							"nearDist": 10,
+							"farDist": 50,
+							"focusRange": 0,
+							"blurRatio": 1
+						},
+						"motionBlur": {
+							"enabled": false,
+							"blurSize": 16,
+							"intensity": 0.125
+						},
+						"bloom": {
+							"enabled": false,
+							"resolutionScale": 1,
+							"intensity": 1,
+							"distinction": 0.5
+						}
+					}
+				}
+			]
+		},
+		"apis": {
+			"scenecontrol": {
+				"handler": "setData",
+				"description": "场景管理器",
+				"fields": {
+					"path": {
+						"description": "位置点"
+					},
+					"duration": {
+						"description": "持续时间",
+						"optional": true
+					},
+					"delay": {
+						"description": "延迟时间",
+						"optional": true
+					}
+				}
+			}
+		},
+		"type": [
+			"map_3d_engine_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_engine"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1BuT8AwHqK1RjSZJnXXbNLpXa-180-180.png"
+	}
+}

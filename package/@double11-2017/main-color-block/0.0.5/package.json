@@ -1,0 +1,45 @@
+{
+	"name": "@double11-2017/main-color-block",
+	"version": "0.0.5",
+	"dependencies": {
+		"bcore": "0.0.9",
+		"jquery": "2.1.4",
+		"lodash": "4.6.1"
+	},
+	"datav": {
+		"cn_name": "色块",
+		"protocol": 2,
+		"apis": {},
+		"level": 0,
+		"config": {
+			"background": {
+				"name": "色块背景",
+				"type": "fill",
+				"components": [
+					"flat",
+					"linearGradient"
+				],
+				"default": "#319cff"
+			},
+			"filter": {
+				"name": "滤镜效果",
+				"type": "text",
+				"description": "用来设置色块的可视效果，如：模糊与饱和度",
+				"default": ""
+			}
+		},
+		"api_data": {},
+		"view": {
+			"width": "200",
+			"height": "1",
+			"minWidth": "0",
+			"minHeight": "0",
+			"z-index": 110
+		},
+		"type": [
+			"material",
+			"DataV-6:media"
+		],
+		"icon": "//gw.alicdn.com/tfs/TB1UWHidMMPMeJjy1XbXXcwxVXa-280-210.png"
+	}
+}

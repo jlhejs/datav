@@ -1,0 +1,273 @@
+{
+	"name": "map3d-earth-donut",
+	"version": "0.0.10",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "wandergis <763393390@qq.com> (https://wandergis.com)",
+	"datav": {
+		"cn_name": "甜甜圈层",
+		"level": 1,
+		"protocol": 2,
+		"config": {
+			"fold": true,
+			"handler": "updateOptions",
+			"minRadius": {
+				"type": "number",
+				"name": "最小半径",
+				"default": 3,
+				"step": 0.1,
+				"range": [
+					0,
+					100
+				]
+			},
+			"maxRadius": {
+				"type": "number",
+				"name": "最大半径",
+				"default": 10,
+				"step": 0.1,
+				"range": [
+					0,
+					100
+				]
+			},
+			"donutSize": {
+				"type": "number",
+				"name": "甜甜圈大小",
+				"default": 3,
+				"step": 0.1,
+				"range": [
+					0,
+					50
+				]
+			},
+			"outerCircleColor": {
+				"type": "color",
+				"name": "外圈颜色",
+				"default": "rgba(202,188,176,0.8)"
+			},
+			"innerCircleRenderType": {
+				"name": "内圈渲染方式",
+				"type": "options",
+				"default": "singleColor",
+				"options": [
+					{
+						"name": "渐变",
+						"value": "linearColor"
+					},
+					{
+						"name": "单色",
+						"value": "singleColor"
+					}
+				]
+			},
+			"innerCircleColor": {
+				"show": [
+					[
+						"innerCircleRenderType",
+						"$eq",
+						"singleColor"
+					]
+				],
+				"type": "color",
+				"name": "内圈颜色",
+				"default": "rgba(212,20,159,0.8)"
+			},
+			"startInnerCircleColor": {
+				"show": [
+					[
+						"innerCircleRenderType",
+						"$eq",
+						"linearColor"
+					]
+				],
+				"name": "开始颜色",
+				"type": "color",
+				"default": "#58F613"
+			},
+			"endInnerCircleColor": {
+				"show": [
+					[
+						"innerCircleRenderType",
+						"$eq",
+						"linearColor"
+					]
+				],
+				"name": "结束颜色",
+				"type": "color",
+				"default": "#FF4800"
+			},
+			"tip": {
+				"type": "group",
+				"fold": false,
+				"name": "提示框配置",
+				"children": {
+					"background": {
+						"type": "color",
+						"name": "背景颜色",
+						"default": "rgba(0,0,0,0.8)"
+					},
+					"fontFamily": {
+						"name": "字体",
+						"type": "options",
+						"default": "Microsoft Yahei",
+						"range": [
+							{
+								"name": "微软雅黑",
+								"value": "Microsoft Yahei"
+							},
+							{
+								"name": "方正楷体",
+								"value": "fangzheng kaiti"
+							}
+						]
+					},
+					"fontColor": {
+						"type": "color",
+						"name": "字体颜色",
+						"default": "#fff"
+					},
+					"fontSize": {
+						"type": "number",
+						"name": "字体大小",
+						"default": "14",
+						"step": 1,
+						"range": [
+							12,
+							100
+						]
+					}
+				}
+			},
+			"donutSeries": {
+				"type": "array",
+				"name": "系列配置",
+				"default": [
+					{
+						"field": "field1",
+						"color": "#eee"
+					},
+					{
+						"field": "field2",
+						"color": "rgba(212,100,10,0.8)"
+					},
+					{
+						"field": "other",
+						"color": "rgba(39,97,179,0.8)"
+					}
+				],
+				"child": {
+					"type": "object",
+					"name": "散点类<%= i+1 %>",
+					"child": {
+						"field": {
+							"type": "text",
+							"name": "字段名称",
+							"default": "field1"
+						},
+						"color": {
+							"type": "color",
+							"name": "颜色",
+							"default": "rgba(212,100,10,0.8)"
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"lat": 30,
+					"lng": 120,
+					"inner": 10,
+					"outer": 196,
+					"tip": "测试标题<br>测试内容",
+					"donut": {
+						"field1": 164,
+						"field2": 3,
+						"other": 47
+					}
+				},
+				{
+					"lat": 20,
+					"lng": 122,
+					"inner": 100,
+					"outer": 300,
+					"tip": "测试标题2<br>测试内容2",
+					"donut": {
+						"field1": 18,
+						"field2": 56,
+						"other": 47
+					}
+				}
+			]
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"lat": {
+						"description": "纬度"
+					},
+					"lng": {
+						"description": "经度"
+					},
+					"inner": {
+						"description": "内圈值"
+					},
+					"outer": {
+						"description": "外圈值"
+					},
+					"donut": {
+						"description": "环状图数据"
+					}
+				}
+			}
+		},
+		"events": {
+			"donut-on-click": {
+				"description": "甜甜圈被点击触发",
+				"fields": {
+					"lng": {
+						"description": "经度"
+					},
+					"lat": {
+						"description": "纬度"
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map3d-earth-subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_earth"
+			],
+			"supportNames": [
+				"map_3d*"
+			]
+		},
+		"icon": "https://img.alicdn.com/tfs/TB1cjY3ANTpK1RjSZFMXXbG_VXa-180-180.png"
+	},
+	"dependencies": {
+		"d3": "3.5.12",
+		"d3-collection": "1.0.4",
+		"d3-selection": "1.3.0",
+		"eventemitter3": "3.1.0",
+		"safely-merge": "1.0.1"
+	}
+}

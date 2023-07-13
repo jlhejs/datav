@@ -1,0 +1,681 @@
+{
+	"name": "datavmap-canvas2d",
+	"version": "2.3.16",
+	"description": "基础平面地图父组件",
+	"main": "index.js",
+	"scripts": {
+		"build-geoman": "node script/build.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.alibaba-inc.com:datav-coms/datavmap-canvas2d.git"
+	},
+	"keywords": [
+		"datav",
+		"map"
+	],
+	"author": "yunyi.zww",
+	"devDependencies": {},
+	"dependencies": {
+		"@amap/amap-jsapi-loader": "^1.0.1",
+		"@geoman-io/leaflet-geoman-free": "^2.5.0",
+		"chroma-js": "1.3.3",
+		"eventemitter3": "3.0.0",
+		"jquery": "2.1.4",
+		"leaflet": "1.6.0",
+		"lodash.clonedeep": "^4.5.0",
+		"lodash.mergewith": "^4.6.0",
+		"lodash.throttle": "4.1.1",
+		"polylabel": "1.0.2",
+		"proj4leaflet": "1.0.2",
+		"safely-merge": "1.0.1"
+	},
+	"datav": {
+		"cn_name": "基础平面地图",
+		"private": true,
+		"level": 0,
+		"thumbnail": "//img.alicdn.com/tfs/TB1gI30mND1gK0jSZFsXXbldVXa-332-144.png",
+		"icon": "//img.alicdn.com/tfs/TB17332mQY2gK0jSZFgXXc5OFXa-368-208.png",
+		"protocol": 2,
+		"type": [
+			"map_datavmap-canvas2d",
+			"DataV-6:map"
+		],
+		"layerOrder": [
+			"datavmap-canvas2d_subcoms_topinfo",
+			"datavmap-canvas2d_subcoms_canvas-layer",
+			"datavmap-canvas2d_subcoms_basemap"
+		],
+		"children": {
+			"default": [
+				"datavmap-canvas2d-area",
+				"datavmap-canvas2d-amap"
+			],
+			"supportTypes": [
+				"datavmap-canvas2d_subcoms"
+			],
+			"supportNames": []
+		},
+		"view": {
+			"width": "1200",
+			"height": "800",
+			"minWidth": "200",
+			"minHeight": "100",
+			"z-index": 10
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示"
+			},
+			"hide": {
+				"description": "隐藏"
+			},
+			"setView": {
+				"description": "设置视图",
+				"fields": {
+					"zoom": {
+						"name": "缩放级别",
+						"default": 4.5,
+						"description": "需要在设置的缩放级别范围内",
+						"type": "number",
+						"optional": true
+					},
+					"lng": {
+						"name": "经度",
+						"default": 108,
+						"description": "范围：[-180, 180]",
+						"type": "number"
+					},
+					"lat": {
+						"name": "纬度",
+						"default": 38,
+						"description": "范围：[-90, 90]",
+						"type": "number"
+					}
+				}
+			},
+			"setZoom": {
+				"description": "设置缩放级别",
+				"fields": {
+					"zoom": {
+						"name": "缩放级别",
+						"default": 4.5,
+						"description": "",
+						"type": "number"
+					}
+				}
+			},
+			"setZoomRange": {
+				"description": "设置缩放范围",
+				"fields": {
+					"range": {
+						"name": "缩放范围",
+						"default": [
+							3,
+							18
+						],
+						"description": "[最小级别, 最大级别]",
+						"type": "array"
+					}
+				}
+			},
+			"setMaxBounds": {
+				"description": "设置最大视图范围",
+				"fields": {
+					"bounds": {
+						"name": "坐标范围",
+						"default": [
+							[
+								0,
+								72
+							],
+							[
+								53,
+								138
+							]
+						],
+						"description": "[[最小纬度, 最小经度], [最大纬度, 最大经度]]",
+						"type": "array"
+					}
+				}
+			},
+			"flyTo": {
+				"description": "飞行到指定位置",
+				"fields": {
+					"zoom": {
+						"name": "缩放级别",
+						"default": 4.5,
+						"description": "需要在设置的缩放级别范围内",
+						"type": "number",
+						"optional": true
+					},
+					"lng": {
+						"name": "经度",
+						"default": 108,
+						"description": "范围：[-180, 180]",
+						"type": "number"
+					},
+					"lat": {
+						"name": "纬度",
+						"default": 38,
+						"description": "范围：[-90, 90]",
+						"type": "number"
+					},
+					"duration": {
+						"name": "时间间隔",
+						"default": 0.25,
+						"description": "单位：秒",
+						"type": "number",
+						"optional": true
+					}
+				}
+			},
+			"flyToBounds": {
+				"description": "飞行到指定范围",
+				"fields": {
+					"bounds": {
+						"name": "坐标范围",
+						"default": [
+							[
+								0,
+								72
+							],
+							[
+								53,
+								138
+							]
+						],
+						"description": "[[最小纬度, 最小经度], [最大纬度, 最大经度]]",
+						"type": "array"
+					},
+					"duration": {
+						"name": "时间间隔",
+						"default": 0.25,
+						"description": "单位：秒",
+						"type": "number",
+						"optional": true
+					}
+				}
+			}
+		},
+		"events": {
+			"map-move": {
+				"description": "地图移动时",
+				"fields": {
+					"type": {
+						"name": "类型",
+						"default": "",
+						"description": "mouse：鼠标操作；setView：设置视图；updateOptions：修改样式；setZoom：设置缩放级别；flyTo：飞行到指定位置；flyToBounds：飞行到指定范围；",
+						"type": "string"
+					},
+					"zoom": {
+						"name": "缩放级别",
+						"default": "",
+						"description": "",
+						"type": "number"
+					},
+					"lng": {
+						"name": "经度",
+						"default": "",
+						"description": "范围：[-180, 180]",
+						"type": "number"
+					},
+					"lat": {
+						"name": "纬度",
+						"default": "",
+						"description": "范围：[-90, 90]",
+						"type": "number"
+					}
+				}
+			},
+			"map-moveend": {
+				"description": "地图移动结束",
+				"fields": {
+					"type": {
+						"name": "类型",
+						"default": "",
+						"description": "mouse：鼠标操作；setView：设置视图；updateOptions：修改样式；setZoom：设置缩放级别；flyTo：飞行到指定位置；flyToBounds：飞行到指定范围；",
+						"type": "string"
+					},
+					"zoom": {
+						"name": "缩放级别",
+						"default": "",
+						"description": "",
+						"type": "number"
+					},
+					"lng": {
+						"name": "经度",
+						"default": "",
+						"description": "范围：[-180, 180]",
+						"type": "number"
+					},
+					"lat": {
+						"name": "纬度",
+						"default": "",
+						"description": "范围：[-90, 90]",
+						"type": "number"
+					}
+				}
+			}
+		},
+		"apis": {
+			"dataSource": {
+				"description": "数据接口",
+				"handler": "render",
+				"fields": {
+					"zoom": {
+						"description": "缩放级别",
+						"type": "number",
+						"optional": true
+					},
+					"lng": {
+						"description": "经度",
+						"type": "number",
+						"optional": true
+					},
+					"lat": {
+						"description": "纬度",
+						"type": "number",
+						"optional": true
+					}
+				}
+			}
+		},
+		"config": {
+			"handler": "updateOptions",
+			"steplessZooming": {
+				"type": "boolean",
+				"name": "无极缩放",
+				"default": true,
+				"description": "开启该功能，地图缩放效果更平滑；关闭该功能，地图缩放性能更高"
+			},
+			"highPerformance": {
+				"type": "boolean",
+				"name": "高清渲染",
+				"default": false,
+				"description": "retina屏可以开启此功能以获得超高分辨率适配，但是会性能会下降，根据机器配置酌情开启"
+			},
+			"mapOptions": {
+				"fold": false,
+				"type": "group",
+				"name": "全局设置",
+				"children": {
+					"background": {
+						"type": "color",
+						"default": "rgba(0,0,0,0)",
+						"name": "地图背景"
+					},
+					"zoom": {
+						"type": "suite",
+						"name": "地图缩放",
+						"description": "缩放级别控制父容器只能在缩放范围内操作；默认级别设置父容器默认显示级别，需要设置在缩放范围内",
+						"children": {
+							"zoomRange": {
+								"name": "缩放范围",
+								"type": "slider",
+								"mode": "double",
+								"caption": "缩放范围 [0, 20]",
+								"default": [
+									0,
+									18
+								],
+								"min": 0,
+								"max": 20,
+								"step": 0.1
+							},
+							"defaultZoom": {
+								"type": "number",
+								"name": "默认级别",
+								"caption": "默认级别 [0, 20]",
+								"default": 4.5,
+								"range": [
+									0,
+									20
+								],
+								"step": 0.1
+							}
+						}
+					},
+					"center": {
+						"type": "suite",
+						"name": "地图中心",
+						"children": {
+							"lng": {
+								"type": "number",
+								"name": "经度",
+								"caption": "经度 [-180, 180]",
+								"default": 108,
+								"range": [
+									-180,
+									180
+								],
+								"step": 0.0001
+							},
+							"lat": {
+								"type": "number",
+								"name": "纬度",
+								"caption": "纬度 [-90, 90]",
+								"default": 38,
+								"range": [
+									-90,
+									90
+								],
+								"step": 0.0001
+							}
+						}
+					},
+					"coordinateSystem": {
+						"name": "坐标系",
+						"type": "buttonRadio",
+						"default": "normal",
+						"options": [
+							{
+								"value": "normal",
+								"label": "通用坐标"
+							},
+							{
+								"value": "custom",
+								"label": "自定义"
+							}
+						]
+					},
+					"normal": {
+						"showInPanel": [
+							[
+								".coordinateSystem",
+								"$eq",
+								"normal"
+							]
+						],
+						"type": "radio",
+						"name": "通用坐标",
+						"description": "默认：EPSG3857；切换后，底图层对应的瓦片url需要重新设置",
+						"default": "EPSG3857",
+						"optionCol": 24,
+						"options": [
+							{
+								"label": "EPSG3857",
+								"value": "EPSG3857"
+							},
+							{
+								"label": "EPSG3395",
+								"value": "EPSG3395"
+							},
+							{
+								"label": "EPSG4326",
+								"value": "EPSG4326"
+							},
+							{
+								"label": "BD09",
+								"value": "BD09"
+							}
+						]
+					},
+					"custom": {
+						"showInPanel": [
+							[
+								".coordinateSystem",
+								"$eq",
+								"custom"
+							]
+						],
+						"type": "suite",
+						"name": "自定义",
+						"description": "",
+						"children": {
+							"epsg": {
+								"name": "EPSG",
+								"type": "text",
+								"default": ""
+							},
+							"proj": {
+								"name": "proj参数",
+								"type": "text",
+								"default": ""
+							},
+							"originX": {
+								"name": "经度原点",
+								"type": "text",
+								"default": 0
+							},
+							"originY": {
+								"name": "纬度原点",
+								"type": "text",
+								"default": 0
+							},
+							"resolutions": {
+								"name": "分辨率",
+								"type": "text",
+								"default": ""
+							}
+						}
+					},
+					"scaleControl": {
+						"type": "suite",
+						"name": "比例尺控件",
+						"enableHide": true,
+						"default": {
+							"show": false
+						},
+						"children": {
+							"fontColor": {
+								"type": "color",
+								"default": "#fff",
+								"name": "字体颜色"
+							},
+							"borderColor": {
+								"type": "color",
+								"default": "#777",
+								"name": "边框颜色"
+							},
+							"offsetX": {
+								"type": "number",
+								"name": "水平偏移",
+								"caption": "水平偏移 [0, 100]",
+								"default": 5,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							},
+							"offsetY": {
+								"type": "number",
+								"name": "垂直偏移",
+								"caption": "垂直偏移 [0, 100]",
+								"default": 25,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							}
+						}
+					}
+				}
+			},
+			"popupStyle": {
+				"type": "group",
+				"name": "弹框配置",
+				"fold": true,
+				"children": {
+					"textStyle": {
+						"type": "font",
+						"name": "文本样式",
+						"fold": false,
+						"children": {
+							"fontFamily": {
+								"type": "search",
+								"name": "字体",
+								"default": "Microsoft Yahei",
+								"range": [
+									{
+										"微软雅黑": "Microsoft Yahei"
+									},
+									{
+										"宋体": "SimSun"
+									},
+									{
+										"黑体": "SimHei"
+									},
+									{
+										"隶书": "LiSu"
+									},
+									{
+										"幼圆": "YouYuan"
+									},
+									"tahoma",
+									"arial",
+									"sans-serif"
+								],
+								"description": "请选择您系统有的字体,如果您系统无此字体,标题将会显示默认字体"
+							},
+							"fontSize": {
+								"type": "number",
+								"name": "字号",
+								"default": 12,
+								"range": [
+									12,
+									100
+								],
+								"step": 1
+							},
+							"color": {
+								"type": "color",
+								"name": "颜色",
+								"default": "#FFFFFF"
+							},
+							"fontWeight": {
+								"type": "search",
+								"name": "粗细",
+								"default": "normal",
+								"searches": [
+									"normal",
+									"bold",
+									"bolder",
+									"lighter",
+									100,
+									200,
+									300,
+									400,
+									500,
+									600,
+									700,
+									800,
+									900
+								]
+							}
+						}
+					},
+					"lineHeight": {
+						"type": "number",
+						"name": "行高比例",
+						"caption": "范围 [0.5, 5]",
+						"default": 1.4,
+						"range": [
+							0.5,
+							5
+						],
+						"step": 0.1
+					},
+					"borderRadius": {
+						"name": "圆角半径",
+						"type": "number",
+						"caption": "范围 [0, 20]",
+						"default": 5,
+						"range": [
+							0,
+							20
+						],
+						"step": 1
+					},
+					"margin": {
+						"type": "margin",
+						"name": "外边距",
+						"default": {
+							"top": 10,
+							"right": 20,
+							"bottom": 10,
+							"left": 20
+						}
+					},
+					"backgroundColor": {
+						"name": "背景色",
+						"type": "color",
+						"default": "rgba(6, 75, 199, 0.8)"
+					},
+					"closeBtn": {
+						"type": "suite",
+						"name": "关闭按钮",
+						"children": {
+							"color": {
+								"name": "颜色",
+								"type": "color",
+								"default": "rgba(255, 255, 255, 0)"
+							},
+							"size": {
+								"name": "大小",
+								"type": "number",
+								"caption": "大小 [0, 100]",
+								"default": 16,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							},
+							"top": {
+								"name": "顶部距离",
+								"type": "number",
+								"caption": "顶部距离 [0, 100]",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							},
+							"right": {
+								"name": "右侧距离",
+								"type": "number",
+								"caption": "右侧距离 [0, 100]",
+								"default": 0,
+								"range": [
+									0,
+									100
+								],
+								"step": 1
+							}
+						}
+					}
+				}
+			},
+			"interactive": {
+				"type": "group",
+				"name": "交互配置",
+				"fold": true,
+				"children": {
+					"dragging": {
+						"type": "boolean",
+						"name": "开启拖拽",
+						"default": true
+					},
+					"scrollWheelZoom": {
+						"type": "boolean",
+						"name": "开启缩放",
+						"default": true
+					},
+					"isInteractive": {
+						"type": "boolean",
+						"name": "地图交互",
+						"default": true
+					}
+				}
+			}
+		},
+		"api_data": {
+			"dataSource": []
+		}
+	}
+}

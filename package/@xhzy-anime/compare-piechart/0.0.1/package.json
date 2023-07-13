@@ -1,0 +1,215 @@
+{
+	"name": "@xhzy-anime/compare-piechart",
+	"version": "0.0.1",
+	"dependencies": {
+		"bcore": "0.0.18",
+		"jquery": "^3.3.1",
+		"lodash": "^4.17.11",
+		"vizz": "0.2.30"
+	},
+	"datav": {
+		"cn_name": "时间轴对比饼图",
+		"icon": "//resource.datav.aliyun.com/cube/com/@xhzy-anime/compare-piechart/0.0.1/icons/cover.png",
+		"protocol": 2,
+		"type": [
+			"regular_pie"
+		],
+		"supportTheme": true,
+		"view": {
+			"width": 800,
+			"height": 800,
+			"minWidth": 200,
+			"minHeight": 200
+		},
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "接口描述",
+				"fields": {
+					"value1": {
+						"description": "值1"
+					},
+					"value2": {
+						"description": "值2"
+					}
+				}
+			}
+		},
+		"config": {
+			"options": {
+				"type": "menu",
+				"children": {
+					"chart": {
+						"name": "图表",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"label": {
+								"name": "类目标签",
+								"type": "group",
+								"children": {
+									"text": {
+										"name": "文本",
+										"type": "font",
+										"components": [
+											"fontFamily",
+											"fontSize",
+											"fontWeight"
+										],
+										"default": {
+											"fontSize": 42,
+											"fontWeight": "normal"
+										}
+									}
+								}
+							},
+							"number": {
+								"name": "数值标签",
+								"type": "group",
+								"children": {
+									"text": {
+										"name": "文本",
+										"type": "font",
+										"default": {
+											"fontSize": 42,
+											"fontWeight": "normal",
+											"color": "#EEB24E"
+										}
+									}
+								}
+							}
+						}
+					},
+					"series": {
+						"name": "系列",
+						"type": "menuChild",
+						"mode": "multiple",
+						"children": {
+							"series1": {
+								"name": "系列1",
+								"type": "group",
+								"children": {
+									"label": {
+										"hasVisibility": "true",
+										"visible": "true",
+										"type": "text",
+										"name": "名称",
+										"default": "名称1"
+									},
+									"color": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#8F1D5B"
+									},
+									"radius": {
+										"name": "半径",
+										"type": "number",
+										"default": 40,
+										"min": 0,
+										"max": 50,
+										"step": 1,
+										"suffix": "%"
+									}
+								}
+							},
+							"series2": {
+								"name": "系列2",
+								"type": "group",
+								"children": {
+									"label": {
+										"hasVisibility": "true",
+										"visible": "true",
+										"type": "text",
+										"name": "名称2",
+										"default": "名称2"
+									},
+									"color": {
+										"name": "颜色",
+										"type": "color",
+										"default": "#4A0E62"
+									},
+									"radius": {
+										"name": "半径",
+										"type": "number",
+										"default": 35,
+										"min": 0,
+										"max": 50,
+										"step": 1,
+										"suffix": "%"
+									}
+								}
+							}
+						}
+					},
+					"others": {
+						"name": "其它",
+						"type": "menuChild",
+						"mode": "single",
+						"children": {
+							"animation": {
+								"name": "动画",
+								"type": "group",
+								"children": {
+									"animationDuration": {
+										"name": "动画时间",
+										"type": "number",
+										"default": 10,
+										"min": 0,
+										"suffix": "s"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"api_data": {
+			"source": [
+				{
+					"value1": 70,
+					"value2": 50
+				},
+				{
+					"value1": 30,
+					"value2": 80
+				},
+				{
+					"value1": 70,
+					"value2": 40
+				},
+				{
+					"value1": 20,
+					"value2": 80
+				},
+				{
+					"value1": 90,
+					"value2": 10
+				},
+				{
+					"value1": 40,
+					"value2": 60
+				},
+				{
+					"value1": 80,
+					"value2": 40
+				}
+			]
+		},
+		"events": {
+			"finish": {
+				"name": "动画结束",
+				"type": "object",
+				"description": "动画结束事件",
+				"fields": {
+					"data": {
+						"type": "array",
+						"name": "数据",
+						"optional": true,
+						"description": "数据"
+					}
+				}
+			}
+		}
+	}
+}

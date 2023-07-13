@@ -1,0 +1,1529 @@
+{
+	"name": "@datav-city-pro-v2/datav-engine-building-level-two",
+	"version": "2.1.1",
+	"main": "index.js",
+	"dependencies": {
+		"eventemitter3": "3.0.0"
+	},
+	"datav": {
+		"cn_name": "建筑L1",
+		"protocol": 2,
+		"supportTheme": false,
+		"level": 2,
+		"cityBaseLevel": 1,
+		"hooks": {
+			"editBeforeModify": true,
+			"editBeforePublish": true
+		},
+		"view": {
+			"width": "1600",
+			"height": "900",
+			"minWidth": "200",
+			"minHeight": "100"
+		},
+		"env": {
+			"enable": true,
+			"options": [
+				"publish",
+				"preview",
+				"editor"
+			]
+		},
+		"config": {
+			"sceneId": {
+				"name": "已分配场景",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": [
+					"scene1"
+				]
+			},
+			"selectedArea": {
+				"name": "当前区域",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": {}
+			},
+			"dataParams": {
+				"name": "数据参数",
+				"type": "hidden",
+				"dataField": "sceneEditor",
+				"default": {}
+			},
+			"options": {
+				"type": "menu",
+				"children": {
+					"general": {
+						"type": "group",
+						"name": "通用",
+						"children": {
+							"shadow": {
+								"type": "group",
+								"name": "阴影",
+								"children": {
+									"castShadow": {
+										"name": "发射阴影",
+										"type": "switch",
+										"default": true,
+										"statusText": true
+									},
+									"receiveShadow": {
+										"name": "接收阴影",
+										"type": "hidden",
+										"default": true,
+										"statusText": true
+									}
+								}
+							},
+							"light": {
+								"type": "group",
+								"name": "光效",
+								"children": {
+									"envMapIntensityFactor": {
+										"name": "环境贴图强度系数",
+										"type": "hidden",
+										"min": 0,
+										"max": 1,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": true,
+										"default": 1
+									},
+									"emissiveIntensity": {
+										"name": "发光强度系数",
+										"type": "slider",
+										"min": 0,
+										"max": 1,
+										"step": 0.1,
+										"precision": 0.1,
+										"showRange": true,
+										"default": 1
+									}
+								}
+							}
+						}
+					},
+					"graphic": {
+						"type": "group",
+						"name": "图形",
+						"children": {
+							"buildingTypeA": {
+								"name": "矮楼",
+								"type": "group",
+								"children": {
+									"styleA": {
+										"name": "样式A",
+										"type": "group",
+										"children": {
+											"matS": {
+												"name": "侧面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 5
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 5
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_S-DIF.png"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.75
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_S-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.61
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_S-METAL.png"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_S-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.97
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_S-AO.png"
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_S-EMIS.png"
+													}
+												}
+											},
+											"matR": {
+												"name": "顶面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#bfbfbf"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_R-DIF.png"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.91
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_R-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_R-METAL.png"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_R-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_R-AO.png"
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#000"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-L_0_R-EMIS.png"
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"buildingTypeB": {
+								"name": "中楼",
+								"type": "group",
+								"children": {
+									"styleA": {
+										"name": "样式A",
+										"type": "group",
+										"children": {
+											"matS": {
+												"name": "侧面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 3
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#e1e1e1"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_S-DIF.png"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.87
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_S-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.31
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_S-METAL.png"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": ""
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": ""
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_S-EMIS.png"
+													}
+												}
+											},
+											"matR": {
+												"name": "顶面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_R-DIF.png"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_R-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.19
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_R-METAL.png"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_R-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": ""
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_0_R-EMIS.png"
+													}
+												}
+											}
+										}
+									},
+									"styleB": {
+										"name": "样式B",
+										"type": "group",
+										"children": {
+											"matS": {
+												"name": "侧面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 4
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 4
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#cfdce9"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_1_S-DIF.png"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_1_S-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.12
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_1_S-METAL.png"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_1_S-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_1_S-AO.png"
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#000"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_1_S-EMIS.png"
+													}
+												}
+											},
+											"matR": {
+												"name": "顶面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_1_R-DIF.png"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.91
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_1_R-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": ""
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": ""
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": ""
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#7d7d7d"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": ""
+													}
+												}
+											}
+										}
+									},
+									"styleC": {
+										"name": "样式C",
+										"type": "group",
+										"children": {
+											"matS": {
+												"name": "侧面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 5
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 3
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_S-DIF.png"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_S-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_S-METAL.png"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_S-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_S-AO.png"
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_S-EMIS.png"
+													}
+												}
+											},
+											"matR": {
+												"name": "顶面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_R-DIF.png"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.79
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_R-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_R-METAL.png"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_R-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": ""
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#ffffff"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-M_2_R-EMIS.png"
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"buildingTypeC": {
+								"name": "高楼",
+								"type": "group",
+								"children": {
+									"styleA": {
+										"name": "样式A",
+										"type": "group",
+										"children": {
+											"matS": {
+												"name": "侧面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 2
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#a0a1a1"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_S-DIF.jpeg"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_S-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": ""
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_S-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_S-AO.png"
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#dbdbdb"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_S-EMIS.png"
+													}
+												}
+											},
+											"matR": {
+												"name": "顶面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 1
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#918e8b"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_R-DIF.jpeg"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": ""
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.25
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_R-METAL.jpeg"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_R-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_R-AO.jpeg"
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#000"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_0_R-EMIS.png"
+													}
+												}
+											}
+										}
+									},
+									"styleB": {
+										"name": "样式B",
+										"type": "group",
+										"children": {
+											"matS": {
+												"name": "侧面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 2
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 2
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#918c82"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_S-DIF.jpeg"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_S-ROUGH.png"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.08
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": ""
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_S-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_S-AO.png"
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#858585"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_S-EMIS.png"
+													}
+												}
+											},
+											"matR": {
+												"name": "顶面",
+												"type": "group",
+												"children": {
+													"uvScale": {
+														"name": "UV平铺值",
+														"type": "group",
+														"children": {
+															"x": {
+																"name": "x",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 5
+															},
+															"y": {
+																"name": "y",
+																"type": "slider",
+																"min": 0,
+																"max": 100,
+																"step": 0.01,
+																"precision": 0.01,
+																"showRange": true,
+																"default": 5
+															}
+														}
+													},
+													"color": {
+														"name": "基础颜色",
+														"type": "fill",
+														"default": "#797d80"
+													},
+													"map": {
+														"name": "基础颜色贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_R-DIF.jpeg"
+													},
+													"roughness": {
+														"name": "粗糙度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 1
+													},
+													"roughnessMap": {
+														"name": "粗糙度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_R-ROUGH.jpeg"
+													},
+													"metalness": {
+														"name": "金属度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0.2
+													},
+													"metalnessMap": {
+														"name": "金属度贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_R-METAL.jpeg"
+													},
+													"normalMap": {
+														"name": "法线贴图",
+														"type": "image",
+														"default": "https://cdn-upload.datav.aliyun.com/upload/download/1655953257449_cityprov2-BuildingL1-Tex-H_1_R-NORM.png"
+													},
+													"aoMapIntensity": {
+														"name": "环境遮蔽贴图强度",
+														"type": "slider",
+														"min": 0,
+														"max": 1,
+														"step": 0.01,
+														"precision": 0.01,
+														"showRange": true,
+														"default": 0
+													},
+													"aoMap": {
+														"name": "环境遮蔽贴图",
+														"type": "image",
+														"default": ""
+													},
+													"emissive": {
+														"name": "发光颜色",
+														"type": "fill",
+														"default": "#000000"
+													},
+													"emissiveMap": {
+														"name": "发光贴图",
+														"type": "image",
+														"default": ""
+													}
+												}
+											}
+										}
+									}
+								}
+							},
+							"vtbuffer": {
+								"name": "打包资源",
+								"type": "group",
+								"showInPanel": false,
+								"children": {
+									"resExp": {
+										"name": "分辨率指数",
+										"type": "slider",
+										"min": 0,
+										"max": 4,
+										"step": 1,
+										"precision": 1,
+										"showRange": true,
+										"default": 1
+									},
+									"styleNum": {
+										"name": "材质球数",
+										"type": "slider",
+										"min": 1,
+										"max": 100,
+										"step": 1,
+										"precision": 1,
+										"showRange": true,
+										"default": 12
+									},
+									"url": {
+										"name": "链接",
+										"type": "text",
+										"default": ""
+									}
+								}
+							}
+						}
+					},
+					"interaction": {
+						"type": "group",
+						"name": "交互",
+						"children": {
+							"enableInteractive": {
+								"name": "点击交互",
+								"type": "switch",
+								"default": false,
+								"statusText": false
+							}
+						}
+					}
+				}
+			}
+		},
+		"keyframeConfig": {
+			"emissiveIntensity": {
+				"name": "发光强度系数",
+				"type": "slider",
+				"min": 0,
+				"max": 1,
+				"step": 0.1,
+				"precision": 0.1,
+				"showRange": true,
+				"default": 1
+			}
+		},
+		"api_data": {
+			"data": {
+				"url": ""
+			}
+		},
+		"apis": {
+			"data": {
+				"handler": "setData",
+				"errorHandler": "errorRender",
+				"description": "数据接口",
+				"hidden": true,
+				"format": "geo_building",
+				"fields": {}
+			}
+		},
+		"events": {
+			"rendered": {
+				"name": "渲染完成",
+				"description": "渲染完成",
+				"type": "any"
+			},
+			"leftClick": {
+				"name": "左键点击",
+				"description": "左键点击",
+				"type": "object",
+				"fields": {
+					"clickPosition": {
+						"name": "点击位置",
+						"description": "点击位置屏幕坐标",
+						"type": "object",
+						"children": {
+							"x": {
+								"name": "x坐标",
+								"description": "点击位置x坐标",
+								"type": "number",
+								"default": 0
+							},
+							"y": {
+								"name": "y坐标",
+								"description": "点击位置y坐标",
+								"type": "number",
+								"default": 0
+							}
+						}
+					},
+					"data": {
+						"name": "data",
+						"description": "data",
+						"type": "Object",
+						"optional": true
+					},
+					"geo": {
+						"name": "点击地理坐标",
+						"description": "点击地理坐标",
+						"type": "Array",
+						"optional": true
+					}
+				}
+			}
+		},
+		"publicHandler": {
+			"show": {
+				"description": "显示组件"
+			},
+			"hide": {
+				"description": "隐藏组件"
+			}
+		},
+		"type": [
+			"map_3d_city_pro_subcoms_v2",
+			"map_3d_city_pro_citybase_subcoms"
+		],
+		"parent": {
+			"supportTypes": [
+				"map_3d_city_pro_v2"
+			],
+			"supportNames": []
+		},
+		"icon": "https://img.alicdn.com/imgextra/i1/O1CN01VTMLQL1TuwJzrUHaw_!!6000000002443-2-tps-360-360.png"
+	}
+}
