@@ -5,25 +5,25 @@
     :locale="zhCN"
     :date-locale="dateZhCN"
   >
-  <div class="g-layout is-vertical edit-container">
-    <div class="g-header">
-      <header-toolbar />
-    </div>
-    <div id="edit-main-wp" class="g-layout edit-main-wp">
-      <layer-panel />
-      <components-panel />
-      <filter-manager-drawer />
-      <div class="g-layout edit-main">
-        <toolbox-panel />
-        <g-loading :spinning="loading">
-          <canvas-main />
-        </g-loading>
-        <footer-toolbar />
+    <div class="g-layout is-vertical edit-container">
+      <div class="g-header">
+        <header-toolbar />
       </div>
-      <config-panel />
+      <div id="edit-main-wp" class="g-layout edit-main-wp">
+        <layer-panel />
+        <components-panel />
+        <filter-manager-drawer />
+        <div class="g-layout edit-main">
+          <toolbox-panel />
+          <g-loading :spinning="loading">
+            <canvas-main />
+          </g-loading>
+          <footer-toolbar />
+        </div>
+        <config-panel />
+      </div>
     </div>
-  </div>
-  <editor-context-menu />
+    <editor-context-menu />
   </n-config-provider>
 </template>
 
