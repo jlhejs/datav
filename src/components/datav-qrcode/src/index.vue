@@ -13,7 +13,7 @@
 import { computed, toRef, onUpdated,onMounted, ref,watch } from 'vue'
 import { useApiStore, useDataCenter, getFieldMap } from 'datav-vue'
 import QRCode from 'qrcodejs2-fixes'
-console.log(QRCode)
+
 const props = defineProps({
   com: {
     type: Object,
