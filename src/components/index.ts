@@ -13,13 +13,13 @@ import VMainImg from './media/main-img'
 import DatavBasicBar from './bar/basic-bar'
 import DatavBarCapsule from './datav-bar-capsule'
 import DatavBarHoriCapsule from './datav-bar-hori-capsule'
-import DatavQrcode from './datav-qrcode'
+// import DatavQrcode from './datav-qrcode'
 import VFullScreen from './button/full-screen'
 
 import VWordCloud from './chart/word-cloud'
 
 import VBasicLine from './line/basic-line'
-
+const DatavQrcode = ()=>import('./datav-qrcode')
 const components = [
   VMainTitle,
   VMarquee,

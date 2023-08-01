@@ -94,6 +94,7 @@ export const setComponentData = async (
   }
 
   if (isError) {
+    debugger
     window.$message.error(res.message)
   }
 

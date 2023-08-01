@@ -201,28 +201,24 @@
         }
       }
     },
-    "apis": {
-      "source": {
-        "fields": {
-          "x": {
-            "type": "string",
-            "map": "",
-            "description": "类目",
-            "optional": false
-          },
-          "y": {
-            "type": "string",
-            "map": "",
-            "description": "值",
-            "optional": false
-          }
-        },
-        "render": "render",
-        "description": "基本柱状图接口",
-        "useAutoUpdate": false,
-        "autoUpdate": 1
-      }
-    },
+		"apis": {
+			"source": {
+				"handler": "render",
+				"description": "数据接口",
+				"fields": {
+					"value": {
+						"description": "值",
+						"optional": true,
+						"type": "string | number"
+					},
+					"url": {
+						"description": "超链接地址",
+						"optional": true,
+						"type": "string"
+					}
+				}
+			}
+		},
     "apiData": {
       "source": {
         "type": "static",

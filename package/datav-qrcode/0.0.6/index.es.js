@@ -919,6 +919,7 @@ var _export_sfc = (sfc, props) => {
 };
 const _hoisted_1 = { class: "datav-wrapper" };
 const _hoisted_2 = ["id"];
+const _hoisted_3 = /* @__PURE__ */ createElementVNode("div", { class: "img-box" }, null, -1);
 const _sfc_main = defineComponent({
   __name: "index",
   props: {
@@ -946,24 +947,31 @@ const _sfc_main = defineComponent({
       var _a;
       return (_a = dv_data.value[dv_field.value.title]) != null ? _a : config.value.text;
     });
-    const renderQrcode = function() {
-      new QRCode(qrcodeId.value, {
+    var qrcode2 = null;
+    const render = () => {
+      destroy();
+      console.log("render");
+      qrcode2 = new QRCode(qrcodeId.value, {
         text: text.value,
         width: attr.value.w,
         height: attr.value.h,
-        colorDark: "#000000",
-        colorLight: "#ffffff"
+        colorDark: config.value.color.colorDark,
+        colorLight: config.value.color.colorLight
       });
     };
-    watch(() => config, () => {
-      if (qrcodeRef.value) {
-        renderQrcode();
-      }
-    });
+    const destroy = function() {
+      qrcode2 && qrcode2.clear();
+      qrcodeRef.value.innerHTML = "";
+    };
+    watch(() => [config, props.com.attr.w, props.com.attr.h], () => {
+      console.log(config);
+      render();
+    }, { deep: true });
     onUpdated(() => {
     });
     onMounted(() => {
-      renderQrcode();
+      console.log("onMounted");
+      render();
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", _hoisted_1, [
@@ -973,7 +981,8 @@ const _sfc_main = defineComponent({
           ref: qrcodeRef,
           class: "qrcode",
           title: "12345"
-        }, null, 8, _hoisted_2)
+        }, null, 8, _hoisted_2),
+        _hoisted_3
       ]);
     };
   }

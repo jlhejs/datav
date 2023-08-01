@@ -7,7 +7,7 @@
     }"
   >
     <a target="_blank" href="javascript:;">
-      <img class="datav-logo" :src="`${cdn}/datav/datav-loading.gif`">
+      <img class="datav-logo" :src="`${cdn}/datav/datav-loading.gif`" />
     </a>
   </div>
   <div class="datav-layout" :style="{ visibility: loading ? 'hidden' : 'visible' }">
@@ -17,7 +17,7 @@
       target="_blank"
       class="datav-watermark"
     >
-      <img :src="LOGO">
+      <img :src="LOGO" />
     </a>
     <div class="scene">
       <datav-com v-for="com in coms" :key="com.id" :com="com" />

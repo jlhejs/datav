@@ -6,6 +6,7 @@
       class="qrcode"
       title="12345"
     ></div>
+    <div class="img-box"></div>
   </div>
 </template>
 
@@ -36,24 +37,32 @@ const attr = toRef(props.com, 'attr')
 const text = computed(() => {
   return dv_data.value[dv_field.value.title] ?? config.value.text
 })
-const renderQrcode = function() {
-  new QRCode(qrcodeId.value, {
+
+var qrcode = null
+const render = () => {
+  destroy()
+  console.log('render')
+  qrcode = new QRCode(qrcodeId.value, {
     text: text.value,
     width: attr.value.w,
     height: attr.value.h,
-    colorDark : '#000000',
-    colorLight : '#ffffff',
+    colorDark : config.value.color.colorDark,
+    colorLight : config.value.color.colorLight,
   })
 }
-
-watch(() => config, () => {
-  console.log(11111111111111)
-  renderQrcode()
-})
+const destroy = function(){
+  qrcode&&qrcode.clear()
+  qrcodeRef.value.innerHTML = ''
+}
+watch(() => [config,props.com.attr.w,props.com.attr.h], () => {
+  console.log(config)
+  render()
+},{ deep:true })
 onUpdated(() => {
 })
 onMounted(() => {
-  renderQrcode()
+  console.log('onMounted')
+  render()
 })
 
 </script>

@@ -79,6 +79,7 @@ export abstract class DatavComponent {
 
   abstract apis: Partial<ApiConfigMap>
   abstract apiData: Partial<ApiDataConfigMap>
+  abstract apiData: Partial<ApiDataConfigMap>
 
   /**
    * 事件

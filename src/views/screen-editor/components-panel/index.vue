@@ -140,6 +140,7 @@ export default defineComponent({
 
     const toAddCom = async (com: DatavComponent) => {
       await modulesStore.loadModulesName(com.name,com.version)
+      debugger
       const newCom = modulesStore.getDefaultConfigVlaue(com.name)
       const { name } = newCom
       try{
@@ -147,8 +148,8 @@ export default defineComponent({
 
         newCom.id = generateId(name)
         newCom.projectId = editorStore.screen.id
-        newCom.attr.x = Math.floor((editorStore.pageConfig.width - newCom.attr.w) / 2)
-        newCom.attr.y = Math.floor((editorStore.pageConfig.height - newCom.attr.h) / 2)
+        newCom.attr.x = Math.floor((editorStore.pageConfig.width - newCom?.attr?.w||newCom.view.width) / 2)
+        newCom.attr.y = Math.floor((editorStore.pageConfig.height - newCom?.attr?.h||newCom.view.height) / 2)
         comStore.select(newCom.id)
 
         toolbarStore.removeLoading()

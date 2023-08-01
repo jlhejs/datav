@@ -83,7 +83,7 @@ export default defineComponent({
 
     // 监听选中的加载package.json
     watch(() => comStore.selectedCom, newValue => {
-      if(newValue)modulesStore.loadModulesName(comStore.selectedCom.name,comStore.selectedCom.version)
+      if(newValue) modulesStore.loadModulesName(comStore.selectedCom.name,comStore.selectedCom.version)
     })
     provide(comInjectionKey, com)
     provide(configInjectionKey, config)

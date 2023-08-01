@@ -273,7 +273,7 @@
         "pageFilters": [],
         "config": {
           "useFilter": false,
-          "data": "[{\"text\":\"http://www.aliyun.com\"}]"
+          "data": "[]"
         }
       }
     }

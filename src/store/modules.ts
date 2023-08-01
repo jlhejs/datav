@@ -31,7 +31,8 @@ export const useModulesStore = defineStore('modules', {
     async loadModulesByName (name='', version='0.0.1', isPackage = true){
       if(this.modulesHash[name]) return
       // todo
-      if(process.env.NODE_ENV ){
+      const dev = process.env.NODE_ENV
+      if(dev!= 'development'){
         const subPath = isPackage?'package':'npm'
         const url  = `${resourceUrl}/${subPath}/${name}/${version}/index.umd.js`
         try {
@@ -65,7 +66,7 @@ export const useModulesStore = defineStore('modules', {
     },
     async loadModulesName (name,version) {
       // 获取package.json
-      const {dependencies = {} } = await this.loadModulesPackageByName(name,version)
+      const { dependencies = {} } = await this.loadModulesPackageByName(name,version)
       // 加载依赖
       // for (const key in dependencies) {
       //   if (Object.prototype.hasOwnProperty.call(dependencies, key)) {
@@ -89,13 +90,22 @@ export const useModulesStore = defineStore('modules', {
       }
     },
     getDefaultConfigVlaue(name) {
+      debugger
       const key = `${name}_package.json`
       const modules:IModules = this.modulesHash[key]
       if (this.modulesHash[key]) {
-        const config = cloneDeep(this.modulesHash[key].exports.datav)
-        config.version = this.modulesHash[key].exports.version
-        config.config = getValue(config.config)
-        return config
+        const datav = cloneDeep(this.modulesHash[key].exports.datav)
+        datav.version = this.modulesHash[key].exports.version
+        datav.config = getValue(datav.config)
+        if(datav.view){
+          datav.attr={
+            w: datav.view.width,
+            h: datav.view.height,
+            ...datav.attr,
+          }
+          delete datav.view
+        }
+        return datav
       }
       return this[key]
     },
