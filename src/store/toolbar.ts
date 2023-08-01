@@ -111,6 +111,7 @@ export const useToolbarStore = defineStore('toolbar', {
       this.filter.show = value
     },
     addLoading() {
+      debugger
       this.loading = this.loading + 1
     },
     removeLoading() {

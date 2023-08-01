@@ -90,7 +90,6 @@ export const useModulesStore = defineStore('modules', {
       }
     },
     getDefaultConfigVlaue(name) {
-      debugger
       const key = `${name}_package.json`
       const modules:IModules = this.modulesHash[key]
       if (this.modulesHash[key]) {

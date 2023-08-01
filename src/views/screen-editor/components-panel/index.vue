@@ -140,7 +140,6 @@ export default defineComponent({
 
     const toAddCom = async (com: DatavComponent) => {
       await modulesStore.loadModulesName(com.name,com.version)
-      debugger
       const newCom = modulesStore.getDefaultConfigVlaue(com.name)
       const { name } = newCom
       try{
