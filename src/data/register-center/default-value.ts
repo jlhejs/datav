@@ -576,7 +576,7 @@ export const getDefaultValueForMenu = function (config: BaseConfigTypeForMenu):a
 }
 
 export const getDefaultValueForMenuChild = function (config: BaseConfigTypeForMenuChildrenSingle|BaseConfigTypeForMenuChildrenMultiple){
-  const { type = '', mode='', children = {}  } = config
+  const { type = '', mode='multiple', children = {}  } = config
   const value = {}
   if(mode === 'single'){
     forIn(children,(element: any,key:string)=>{
@@ -633,6 +633,7 @@ export const getDefaultValue =  function (config: any){
   else if(config.type === baseConfigType.Menu) return getDefaultValueForMenu(config)
   else if(config.type === baseConfigType.MenuChild) return getDefaultValueForMenuChild(config)
   else if(config.type === baseConfigType.Object) return getDefaultValueForObject(config.children)
+  else return getDefaultValueForObject(config.children)
 
   return config.default
 }
